@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 500" width="100%" height="100%">
+  <!-- Outer Rounded Container Frame -->
+  <rect width="750" height="500" rx="28" fill="#F0F9FF"/>
+
+  <!-- Large Central Workstation Desk -->
+  <rect x="120" y="240" width="510" height="190" rx="20" fill="#FFFFFF" stroke="#0284C7" stroke-width="4"/>
+
+  <!-- Desktop Monitor on Desk -->
+  <rect x="260" y="140" width="230" height="130" rx="12" fill="#FFFFFF" stroke="#0ED3DD" stroke-width="3"/>
+  <rect x="275" y="155" width="200" height="100" rx="6" fill="#F8FAFC"/>
+  <rect x="350" y="270" width="50" height="25" fill="#E2E8F0"/>
+
+  <!-- Analytics & Code lines on Monitor -->
+  <rect x="290" y="170" width="100" height="12" rx="3" fill="#0284C7"/>
+  <rect x="290" y="190" width="150" height="8" rx="2" fill="#0ED3DD"/>
+  <rect x="290" y="205" width="120" height="8" rx="2" fill="#10B981"/>
+  <rect x="290" y="220" width="140" height="8" rx="2" fill="#F59E0B"/>
+
+  <!-- Team Member 1 (Standing Woman in Yellow Shirt leaning over desk) -->
+  <g transform="translate(100, 100)">
+    <!-- Hair -->
+    <path d="M40,20 Q65,10 70,35 Q70,70 40,70 Z" fill="#7C2D12"/>
+    <circle cx="45" cy="40" r="18" fill="#D29985"/>
+    <!-- Yellow Shirt -->
+    <path d="M20,70 Q45,55 70,70 L85,190 L10,190 Z" fill="#F59E0B"/>
+  </g>
+
+  <!-- Team Member 2 (Man in Light Shirt Pointing at Screen) -->
+  <g transform="translate(480, 110)">
+    <circle cx="45" cy="35" r="18" fill="#334155"/>
+    <!-- Head -->
+    <circle cx="45" cy="40" r="16" fill="#D29985"/>
+    <!-- Light Shirt -->
+    <path d="M20,70 Q45,55 70,70 L85,180 L10,180 Z" fill="#E2E8F0" stroke="#0284C7" stroke-width="2"/>
+    <!-- Arm Pointing Left to Screen -->
+    <path d="M20,80 L-50,110 L-45,125 L20,100 Z" fill="#E2E8F0"/>
+  </g>
+
+  <!-- Team Member 3 (Woman on Right sitting with Laptop) -->
+  <g transform="translate(610, 220)">
+    <circle cx="35" cy="35" r="16" fill="#334155"/>
+    <path d="M15,65 Q35,50 55,65 L65,160 L5,160 Z" fill="#0284C7"/>
+  </g>
+
+  <!-- Laptops, Coffee Cups & Notebooks on Desk -->
+  <rect x="160" y="320" width="70" height="45" rx="4" fill="#94A3B8"/>
+  <rect x="520" y="330" width="70" height="45" rx="4" fill="#94A3B8"/>
+  <circle cx="420" cy="340" r="10" fill="#EF4444"/>
+  <circle cx="260" cy="350" r="8" fill="#F59E0B"/>
+</svg>

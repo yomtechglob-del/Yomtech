@@ -1,0 +1,862 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  Cpu, LayoutGrid, Monitor, GraduationCap, Video, ShieldCheck, Smartphone,
+  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check
+} from 'lucide-react';
+import { HeroCanvas } from '../../components/common/HeroCanvas';
+
+// Real high quality visual image assets for each service card
+import erpImg from '../../assets/services/erp.png';
+import crmImg from '../../assets/services/crm.png';
+import sfaImg from '../../assets/services/sfa.png';
+import wmsImg from '../../assets/services/wms.png';
+import securityImg from '../../assets/services/security.png';
+import mobileImg from '../../assets/services/mobile.png';
+import webImg from '../../assets/services/web.png';
+import customImg from '../../assets/services/custom.png';
+import documentaryImg from '../../assets/services/documentary.png';
+import cybersecurityImg from '../../assets/services/cybersecurity.png';
+import cloudImg from '../../assets/services/cloud.png';
+import coachingImg from '../../assets/services/coaching.png';
+import educationImg from '../../assets/services/education.png';
+
+// Premium 3-pillar composite hero images
+import pillarITImg from '../../assets/services/pillar_it_solutions.png';
+import pillarSoftwareImg from '../../assets/services/pillar_software_dev.png';
+import pillarEducationImg from '../../assets/services/pillar_education_training.png';
+
+const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+export const ServicesPage = () => {
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialCategory = searchParams.get('category') || 'all';
+
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+  const [activeHighlightId, setActiveHighlightId] = useState(null);
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+
+  useEffect(() => {
+
+    const cat = searchParams.get('category');
+    if (cat) {
+      setSelectedCategory(cat);
+    }
+    
+    // Smooth scroll to exact service ID from hash or query param
+    const hash = window.location.hash.replace('#', '');
+    const serviceParam = searchParams.get('service');
+    const targetId = hash || serviceParam;
+
+    if (targetId) {
+      // Find if target belongs to a specific category
+      if (['erp-software-solutions', 'crm-software-solutions', 'sfa-software-solutions', 'wms-software-solutions', 'surveillance-security-integration'].includes(targetId)) {
+        setSelectedCategory('IT Solutions');
+      } else if (['mobile-app-development', 'web-app-development', 'custom-software-development'].includes(targetId)) {
+        setSelectedCategory('Software Development');
+      } else if (['tech-based-documentaries', 'cybersecurity-it-consulting', 'cloud-services-deployment', 'tech-coaching-mentorship', 'online-tech-education'].includes(targetId)) {
+        setSelectedCategory('Education & Training');
+      }
+
+      setActiveHighlightId(targetId);
+      setTimeout(() => {
+        const element = document.getElementById(targetId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 350);
+    }
+  }, [searchParams]);
+
+  const handleCategoryFilter = (cat) => {
+    setSelectedCategory(cat);
+    if (cat === 'all') {
+      setSearchParams({});
+    } else {
+      setSearchParams({ category: cat });
+    }
+  };
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (newsletterEmail) {
+      setNewsletterSuccess(true);
+      setNewsletterEmail('');
+      setTimeout(() => setNewsletterSuccess(false), 4000);
+    }
+  };
+
+  // 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
+  const quickServices = [
+    { title: 'ERP Software Solution', icon: Cpu, img: erpImg },
+    { title: 'WMS Software Solution', icon: LayoutGrid, img: wmsImg },
+    { title: 'SFA Software Solution', icon: Monitor, img: sfaImg },
+    { title: 'Online Tech Education', icon: GraduationCap, img: educationImg },
+    { title: 'Tech Documentary', icon: Video, img: documentaryImg },
+    { title: 'Cybersecurity & IT Consulting', icon: ShieldCheck, img: cybersecurityImg },
+    { title: 'Mobile App Development', icon: Smartphone, img: mobileImg },
+    { title: 'Web App Development', icon: Globe, img: webImg },
+    { title: 'Build Custom Software', icon: Code, img: customImg },
+    { title: 'Give Tech Related Coach', icon: UserCheck, img: coachingImg },
+    { title: 'Cloud Service & Deployment', icon: Cloud, img: cloudImg },
+    { title: 'Surveillance & Security', icon: Camera, img: securityImg }
+  ];
+
+  // Solutions Sections with Real Images (Matching Screenshots 2, 3, 4, 5, 6)
+  const serviceCategories = [
+    {
+      categoryTitle: 'IT Solutions',
+      items: [
+        {
+          title: 'ERP Software Solutions',
+          desc: 'Our Enterprise Resource Planning (ERP) solutions help businesses centralize data, automate workflows, and improve efficiency. From finance and HR to supply chain and procurement, ERP systems enable seamless integration between departments and provide real-time insights for smarter decision-making.',
+          image: erpImg,
+          layout: 'right-image'
+        },
+        {
+          title: 'CRM Software Solutions',
+          desc: 'Our Customer Relationship Management (CRM) software enhances customer engagement by helping you track leads, monitor customer interactions, and streamline sales processes. With advanced analytics and reporting, you can personalize customer experiences and build long-lasting partnerships.',
+          image: crmImg,
+          layout: 'left-image'
+        },
+        {
+          title: 'SFA Software Solutions',
+          desc: 'Sales Force Automation (SFA) solutions empower your sales team with tools to manage prospects, automate repetitive tasks, and optimize territory management. Gain deeper visibility into performance metrics and close deals faster with data-driven strategies.',
+          image: sfaImg,
+          layout: 'right-image'
+        },
+        {
+          title: 'WMS Software Solutions',
+          desc: 'Our Warehouse Management Systems (WMS) help optimize inventory control, improve order accuracy, and automate logistics. With barcode scanning, real-time tracking, and integration with ERP systems, you can achieve a smarter and more efficient supply chain.',
+          image: wmsImg,
+          layout: 'left-image'
+        },
+        {
+          title: 'Surveillance & Security Integration',
+          desc: 'We provide advanced surveillance and security solutions, including IP & CCTV camera systems, real-time monitoring, motion detection, and automated alerts. Our services integrate seamlessly with existing IT infrastructure to ensure maximum protection of assets, property, and people.',
+          image: securityImg,
+          layout: 'right-image'
+        }
+      ]
+    },
+    {
+      categoryTitle: 'Software Development',
+      items: [
+        {
+          title: 'Mobile App Development',
+          desc: 'We design and develop user-friendly mobile applications for Android and iOS. Our apps are built with modern frameworks, ensuring high performance, scalability, and seamless integration with third-party services.',
+          image: mobileImg,
+          layout: 'left-image'
+        },
+        {
+          title: 'Web App Development',
+          desc: 'Our web application development services focus on creating secure, scalable, and responsive applications. Whether it’s an e-commerce platform, enterprise portal, or custom solution, we ensure high performance and excellent user experience.',
+          image: webImg,
+          layout: 'right-image'
+        },
+        {
+          title: 'Custom Software Development',
+          desc: 'We build tailor-made software solutions designed to solve unique business challenges. From initial planning and UI/UX design to deployment and support, we deliver software that aligns perfectly with your goals.',
+          image: customImg,
+          layout: 'left-image'
+        }
+      ]
+    },
+    {
+      categoryTitle: 'Education & Training',
+      items: [
+        {
+          title: 'Tech-Based Documentaries',
+          desc: 'We produce educational tech-based documentaries that simplify complex concepts and highlight industry trends. These resources help organizations, schools, and individuals stay informed about technological advancements.',
+          image: documentaryImg,
+          layout: 'right-image'
+        },
+        {
+          title: 'Cybersecurity & IT Consulting',
+          desc: 'Our cybersecurity and IT consulting services provide businesses with expert guidance on securing systems, managing risk, and implementing best practices. We help organizations strengthen their digital defenses and comply with industry standards.',
+          image: cybersecurityImg,
+          layout: 'left-image'
+        },
+        {
+          title: 'Cloud Services & Deployment',
+          desc: 'We offer end-to-end cloud migration, hosting, and deployment services to help organizations move their workloads securely and efficiently. From multi-cloud to hybrid cloud, we ensure scalability, cost-efficiency, and maximum uptime.',
+          image: cloudImg,
+          layout: 'right-image'
+        },
+        {
+          title: 'Tech Coaching & Mentorship',
+          desc: 'Our coaching programs provide personalized mentorship in programming, software development, cybersecurity, and emerging technologies. We help students and professionals upskill and grow in their careers.',
+          image: coachingImg,
+          layout: 'left-image'
+        },
+        {
+          title: 'Online Tech Education',
+          desc: 'We deliver interactive online tech education covering software engineering, fullstack development, AI, and cloud computing. Learners gain hands-on experience with projects designed for real-world scenarios.',
+          image: educationImg,
+          layout: 'right-image'
+        }
+      ]
+    }
+  ];
+
+  const handleContactClick = (serviceTitle) => {
+    navigate('/contact', { state: { inquiryType: 'B2B_SOFTWARE', prefillService: serviceTitle } });
+  };
+
+  return (
+    <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden">
+      {/* 1. HERO HEADER SECTION — side-by-side layout */}
+      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient">
+        {/* Architectural Vector Lines & Tech Grid Background */}
+        <HeroCanvas />
+
+        {/* Top-Left to Top-Right Architectural Drawn Line Border Overlay */}
+        <svg className="absolute top-0 left-0 w-full h-[550px] pointer-events-none z-20 overflow-visible" preserveAspectRatio="none">
+          <path
+            d="M 0 340 Q 300 160 900 0"
+            fill="none"
+            stroke="url(#services-top-left-arch-gradient)"
+            strokeWidth="3.5"
+            className="opacity-80 drop-shadow-[0_0_12px_rgba(255,80,0,0.7)]"
+          />
+          <defs>
+            <linearGradient id="services-top-left-arch-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#FF5000" />
+              <stop offset="50%" stopColor="#0ED3DD" />
+              <stop offset="100%" stopColor="#1DA1F2" />
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Left-Mid Ambient Fiery Orange Flare */}
+        <div className="absolute top-20 left-32 w-[650px] h-[650px] bg-gradient-to-br from-[#FF5000]/50 via-[#0ED3DD]/30 to-transparent blur-[150px] rounded-full pointer-events-none" />
+
+        {/* Center Vivid Cyan Glow */}
+        <div className="absolute top-1/3 left-1/3 w-[600px] h-[450px] bg-[#0ED3DD]/40 blur-[120px] rounded-full pointer-events-none" />
+
+        {/* Right Royal Electric Blue Atmospheric Spotlight */}
+        <div className="absolute top-1/2 -translate-y-1/2 right-0 lg:right-8 w-[720px] h-[720px] bg-gradient-to-tr from-[#1DA1F2]/60 via-[#1D4ED8]/45 to-[#3B82F6]/50 blur-[160px] rounded-full pointer-events-none animate-pulse" />
+
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* LEFT — Text block */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-7"
+          >
+            <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-black/30 backdrop-blur-xl border border-[#0ED3DD]/50 text-[#0ED3DD] text-xs font-black tracking-widest uppercase shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 transition-all">
+              <div className="w-5.5 h-5.5 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
+              </div>
+              <span className="whitespace-nowrap">ENTERPRISE SOLUTIONS &amp; TALENT</span>
+            </div>
+
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
+              Our <span className="bg-gradient-to-r from-amber-300 via-emerald-300 to-[#0ED3DD] bg-clip-text text-transparent drop-shadow-md">Services</span>
+            </h1>
+            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-xl">
+              We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps—engineered for real-world impact.
+            </p>
+
+            {/* Quick stat pills - Advanced Glassmorphic Interactive Badges with generous padding */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-cyan-400/50 text-white font-black text-xs xl:text-sm shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 hover:shadow-[0_0_30px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300">
+                <div className="w-6 h-6 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
+                </div>
+                <div className="flex items-center gap-1.5 whitespace-nowrap">
+                  <span className="text-[#0ED3DD] font-black text-sm">13+</span>
+                  <span className="text-white font-extrabold">Total Services</span>
+                </div>
+              </div>
+
+              <button
+                onClick={() => {
+                  handleCategoryFilter('IT Solutions');
+                  setTimeout(() => {
+                    const el = document.getElementById('it-solutions');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }}
+                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-sky-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-sky-300 hover:bg-sky-500/25 hover:shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                <div className="w-6.5 h-6.5 rounded-full bg-sky-400/25 border border-sky-400/60 flex items-center justify-center text-sky-300 group-hover:scale-110 transition-transform shrink-0">
+                  <Cpu size={14} />
+                </div>
+                <span className="text-sky-100 font-extrabold whitespace-nowrap">IT Solutions</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  handleCategoryFilter('Software Development');
+                  setTimeout(() => {
+                    const el = document.getElementById('software-development');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }}
+                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-violet-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-violet-300 hover:bg-violet-500/25 hover:shadow-[0_0_30px_rgba(167,139,250,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                <div className="w-6.5 h-6.5 rounded-full bg-violet-400/25 border border-violet-400/60 flex items-center justify-center text-violet-300 group-hover:scale-110 transition-transform shrink-0">
+                  <Code size={14} />
+                </div>
+                <span className="text-violet-100 font-extrabold whitespace-nowrap">Software Dev</span>
+              </button>
+
+              <button
+                onClick={() => {
+                  handleCategoryFilter('Education & Training');
+                  setTimeout(() => {
+                    const el = document.getElementById('education-training');
+                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }, 100);
+                }}
+                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-emerald-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-emerald-300 hover:bg-emerald-500/25 hover:shadow-[0_0_30px_rgba(52,211,153,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
+              >
+                <div className="w-6.5 h-6.5 rounded-full bg-emerald-400/25 border border-emerald-400/60 flex items-center justify-center text-emerald-300 group-hover:scale-110 transition-transform shrink-0">
+                  <GraduationCap size={14} />
+                </div>
+                <span className="text-emerald-100 font-extrabold whitespace-nowrap">Education & Training</span>
+              </button>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-3">
+              <a
+                href="#explore-our-services"
+                className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3"
+              >
+                <span>Explore 3 Core Pillars</span>
+                <ArrowRight size={18} />
+              </a>
+
+              <button
+                onClick={() => navigate('/contact')}
+                className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-black text-sm backdrop-blur-md hover:scale-105 transition-all duration-300"
+              >
+                Consult Our Engineers
+              </button>
+            </div>
+          </motion.div>
+
+          {/* RIGHT — Staggered overlapping pillar image cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="relative flex items-center justify-center h-[420px] lg:h-[480px]"
+          >
+            {/* Card 1 — IT Solutions: back-left */}
+            <motion.div
+              initial={{ opacity: 0, x: -40, rotate: -4 }}
+              animate={{ opacity: 1, x: 0, rotate: -6 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ rotate: -3, scale: 1.04, zIndex: 30 }}
+              onClick={() => { handleCategoryFilter('IT Solutions'); setTimeout(() => { const el = document.getElementById('it-solutions'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
+              className="absolute cursor-pointer"
+              style={{ left: '0%', top: '5%', width: '62%', zIndex: 10 }}
+            >
+              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] border-2 border-blue-400/50 group">
+                <img src={pillarITImg} alt="IT Solutions" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+                {/* Label badge */}
+                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-blue-300/40 shadow-lg">
+                  <span className="text-base">⚡</span>
+                  <div>
+                    <p className="text-white text-xs font-black leading-none">IT Solutions</p>
+                    <p className="text-blue-200 text-[9px] font-medium leading-none mt-0.5">ERP · CRM · WMS · SFA</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 2 — Software Development: center-top, on top */}
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              whileHover={{ y: -6, scale: 1.05, zIndex: 30 }}
+              onClick={() => { handleCategoryFilter('Software Development'); setTimeout(() => { const el = document.getElementById('software-development'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
+              className="absolute cursor-pointer"
+              style={{ left: '22%', top: '0%', width: '62%', zIndex: 20 }}
+            >
+              <div className="rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(124,58,237,0.5)] border-2 border-violet-400/60 group">
+                <img src={pillarSoftwareImg} alt="Software Development" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-violet-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-violet-300/40 shadow-lg">
+                  <span className="text-base">💻</span>
+                  <div>
+                    <p className="text-white text-xs font-black leading-none">Software Dev</p>
+                    <p className="text-violet-200 text-[9px] font-medium leading-none mt-0.5">Mobile · Web · Custom</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Card 3 — Education & Training: back-right */}
+            <motion.div
+              initial={{ opacity: 0, x: 40, rotate: 4 }}
+              animate={{ opacity: 1, x: 0, rotate: 6 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              whileHover={{ rotate: 3, scale: 1.04, zIndex: 30 }}
+              onClick={() => { handleCategoryFilter('Education & Training'); setTimeout(() => { const el = document.getElementById('education-training'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
+              className="absolute cursor-pointer"
+              style={{ right: '0%', bottom: '0%', width: '62%', zIndex: 10 }}
+            >
+              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(16,185,129,0.4)] border-2 border-emerald-400/50 group">
+                <img src={pillarEducationImg} alt="Education & Training" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-emerald-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-emerald-300/40 shadow-lg">
+                  <span className="text-base">🎓</span>
+                  <div>
+                    <p className="text-white text-xs font-black leading-none">Education & Training</p>
+                    <p className="text-emerald-200 text-[9px] font-medium leading-none mt-0.5">Cloud · Coaching · E-Learning</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+
+        </div>
+      </section>
+
+      {/* 2. THREE PILLARS — ULTIMATE PREMIUM */}
+      <section id="explore-our-services" className="py-32 relative text-slate-900 overflow-hidden"
+        style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, #e0f2fe 0%, #f8fafc 55%, #ecfdf5 100%)' }}>
+
+        {/* Dot-grid pattern */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.035]"
+          style={{ backgroundImage: 'radial-gradient(circle, #0284C7 1.2px, transparent 1.2px)', backgroundSize: '30px 30px' }} />
+
+        {/* Ambient orbs */}
+        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-200/25 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-emerald-200/25 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-200/15 rounded-full blur-[100px] pointer-events-none" />
+
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
+
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55 }}
+            className="text-center mb-4 pt-4"
+          >
+            <div className="inline-flex items-center gap-2.5 text-[11px] font-extrabold uppercase tracking-[0.2em] text-[#0284C7] px-5 py-2.5 rounded-full bg-white/90 backdrop-blur-sm border border-sky-200 shadow-md mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#0ED3DD] animate-pulse" />
+              EXPLORE DETAILED CAPABILITIES
+            </div>
+            <h2 className="text-5xl md:text-6xl font-black font-display text-slate-900 leading-tight mb-4">
+              Three Pillars of{' '}
+              <span className="relative inline-block">
+                <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Innovation</span>
+                <motion.span
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.4 }}
+                  className="absolute -bottom-1.5 left-0 right-0 h-1 bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] rounded-full origin-left block"
+                />
+              </span>
+            </h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+              Everything we build falls under three core domains — each meticulously engineered for real-world enterprise impact.
+            </p>
+          </motion.div>
+
+          {/* Stats Ticker */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex items-center justify-center gap-3 mb-14 flex-wrap"
+          >
+            {[
+              { value: '13+', label: 'Total Services', color: 'text-sky-600', bg: 'bg-sky-50 border-sky-200' },
+              { value: '3', label: 'Core Pillars', color: 'text-violet-600', bg: 'bg-violet-50 border-violet-200' },
+              { value: '500+', label: 'Projects Delivered', color: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-200' },
+              { value: '100%', label: 'Client Focused', color: 'text-amber-600', bg: 'bg-amber-50 border-amber-200' },
+            ].map((stat, idx) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, scale: 0.85 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.3 + idx * 0.07 }}
+                className={`flex items-center gap-2.5 px-5 py-2.5 rounded-2xl border ${stat.bg} shadow-sm`}
+              >
+                <span className={`text-xl font-black ${stat.color}`}>{stat.value}</span>
+                <span className="text-xs font-semibold text-slate-500">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Pillar Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
+            {[
+              {
+                num: '01', featured: false,
+                title: 'IT Solutions',
+                subtitle: 'Enterprise Infrastructure',
+                image: pillarITImg,
+                Icon: Cpu,
+                iconBg: 'from-[#0EA5E9] to-[#0ED3DD]',
+                iconGlowColor: 'rgba(14,211,221,0.45)',
+                topBar: 'from-[#0EA5E9] to-[#0ED3DD]',
+                bloom: 'from-sky-100/80 via-cyan-50/40',
+                numColor: 'text-sky-100/70',
+                count: 5, countBg: 'bg-sky-50 text-sky-800 border-sky-200',
+                desc: 'Enterprise-grade systems that automate and interconnect every operational layer of your business.',
+                exploreColor: 'text-[#0284C7]', exploreBg: 'bg-sky-50 border-sky-200',
+                ctaBtnHover: 'group-hover:bg-gradient-to-r group-hover:from-[#0EA5E9] group-hover:to-[#0ED3DD] group-hover:text-white group-hover:border-transparent group-hover:shadow-md group-hover:shadow-sky-500/20',
+                arrowColor: '#0284C7',
+                arrowCircleHover: 'group-hover:bg-[#0284C7] group-hover:border-[#0284C7] group-hover:text-white group-hover:shadow-md group-hover:shadow-sky-500/30',
+                hoverBorder: 'hover:border-[#0EA5E9]/60 hover:shadow-[0_16px_40px_rgba(14,165,233,0.15)]',
+                titleHover: 'group-hover:text-[#0284C7]',
+                id: 'it-solutions',
+                services: [
+                  { label: 'ERP Software Solutions', icon: '🏢' },
+                  { label: 'CRM Management Platform', icon: '🤝' },
+                  { label: 'WMS Warehouse System', icon: '🏭' },
+                  { label: 'SFA Field Automation', icon: '📊' },
+                  { label: 'Security & Surveillance', icon: '🔒' },
+                ],
+              },
+              {
+                num: '02', featured: true,
+                title: 'Software Development',
+                subtitle: 'Digital Product Engineering',
+                image: pillarSoftwareImg,
+                Icon: Code,
+                iconBg: 'from-[#8B5CF6] to-[#A855F7]',
+                iconGlowColor: 'rgba(168,85,247,0.45)',
+                topBar: 'from-[#7C3AED] to-[#C084FC]',
+                bloom: 'from-violet-100/80 via-purple-50/40',
+                numColor: 'text-violet-100/70',
+                count: 3, countBg: 'bg-violet-50 text-violet-800 border-violet-200',
+                desc: 'Custom-built, production-ready digital products for mobile, web, and enterprise — scalable from day one.',
+                exploreColor: 'text-[#7C3AED]', exploreBg: 'bg-violet-50 border-violet-200',
+                ctaBtnHover: 'group-hover:bg-gradient-to-r group-hover:from-[#7C3AED] group-hover:to-[#C084FC] group-hover:text-white group-hover:border-transparent group-hover:shadow-md group-hover:shadow-violet-500/20',
+                arrowColor: '#7C3AED',
+                arrowCircleHover: 'group-hover:bg-[#7C3AED] group-hover:border-[#7C3AED] group-hover:text-white group-hover:shadow-md group-hover:shadow-violet-500/30',
+                hoverBorder: 'hover:border-[#7C3AED]/60 hover:shadow-[0_16px_40px_rgba(124,58,237,0.15)]',
+                titleHover: 'group-hover:text-[#7C3AED]',
+                id: 'software-development',
+                services: [
+                  { label: 'Mobile App Development', icon: '📱' },
+                  { label: 'Web App Development', icon: '🌐' },
+                  { label: 'Custom Software Build', icon: '⚙️' },
+                ],
+              },
+              {
+                num: '03', featured: false,
+                title: 'Education & Training',
+                subtitle: 'Tech Learning Ecosystem',
+                image: pillarEducationImg,
+                Icon: GraduationCap,
+                iconBg: 'from-[#059669] to-[#34D399]',
+                iconGlowColor: 'rgba(52,211,153,0.45)',
+                topBar: 'from-[#059669] to-[#34D399]',
+                bloom: 'from-emerald-100/80 via-teal-50/40',
+                numColor: 'text-emerald-100/70',
+                count: 5, countBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
+                desc: 'From cinematic tech documentaries to live bootcamps — empowering the next generation of tech leaders.',
+                exploreColor: 'text-[#059669]', exploreBg: 'bg-emerald-50 border-emerald-200',
+                ctaBtnHover: 'group-hover:bg-gradient-to-r group-hover:from-[#059669] group-hover:to-[#34D399] group-hover:text-white group-hover:border-transparent group-hover:shadow-md group-hover:shadow-emerald-500/20',
+                arrowColor: '#059669',
+                arrowCircleHover: 'group-hover:bg-[#059669] group-hover:border-[#059669] group-hover:text-white group-hover:shadow-md group-hover:shadow-emerald-500/30',
+                hoverBorder: 'hover:border-[#059669]/60 hover:shadow-[0_16px_40px_rgba(5,150,105,0.15)]',
+                titleHover: 'group-hover:text-[#059669]',
+                id: 'education-training',
+                services: [
+                  { label: 'Tech-Based Documentaries', icon: '🎬' },
+                  { label: 'Cybersecurity Consulting', icon: '🛡️' },
+                  { label: 'Cloud Deployment', icon: '☁️' },
+                  { label: 'Tech Coaching & Mentorship', icon: '🎯' },
+                  { label: 'Online Tech Education', icon: '💡' },
+                ],
+              },
+            ].map((cat, i) => (
+              <motion.div
+                key={cat.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55, delay: i * 0.13 }}
+                className="relative"
+              >
+                {/* Featured ribbon */}
+                {cat.featured && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 px-5 py-1.5 rounded-full bg-gradient-to-r from-[#7C3AED] to-[#C084FC] text-white text-[10px] font-black tracking-widest uppercase shadow-lg shadow-violet-400/30 whitespace-nowrap">
+                    ⭐ Most Popular
+                  </div>
+                )}
+
+                <motion.button
+                  onClick={() => {
+                    handleCategoryFilter(cat.title);
+                    setTimeout(() => {
+                      const el = document.getElementById(cat.id);
+                      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100);
+                  }}
+                  whileHover={{ y: -8, scale: 1.015 }}
+                  whileTap={{ scale: 0.98 }}
+                  className={`group relative w-full h-full text-left rounded-[2rem] overflow-hidden flex flex-col cursor-pointer transition-all duration-400 bg-white ${cat.hoverBorder}
+                    ${cat.featured
+                      ? 'shadow-[0_8px_32px_rgba(124,58,237,0.18)] border-2 border-violet-300/60'
+                      : 'shadow-[0_4px_24px_rgba(0,0,0,0.06)] border border-slate-200/90'
+                    }`}
+                >
+                  {/* Top gradient accent bar */}
+                  <div className={`h-1.5 w-full bg-gradient-to-r ${cat.topBar}`} />
+
+                  <div className="p-7 pb-7 relative flex-1 flex flex-col justify-between">
+                    {/* Background bloom */}
+                    <div className={`absolute top-0 right-0 w-52 h-52 bg-gradient-to-bl ${cat.bloom} to-transparent rounded-bl-[9rem] opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
+
+                    {/* Watermark number */}
+                    <span className={`absolute bottom-3 right-4 text-[6.5rem] font-black ${cat.numColor} pointer-events-none select-none transition-all duration-500 group-hover:scale-105`} style={{ lineHeight: 1 }}>
+                      {cat.num}
+                    </span>
+
+                    <div>
+                      {/* Icon + Count badge row */}
+                      <div className="flex items-center justify-between mb-5 relative z-10">
+                        <div
+                          className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.iconBg} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-400 shadow-md`}
+                          style={{ boxShadow: `0 8px 24px ${cat.iconGlowColor}` }}
+                        >
+                          <cat.Icon size={26} className="text-white" strokeWidth={2} />
+                        </div>
+                        <span className={`text-[10px] font-black tracking-[0.15em] uppercase px-3.5 py-1.5 rounded-full border ${cat.countBg} shadow-xs`}>
+                          {cat.count} Capabilities
+                        </span>
+                      </div>
+
+                      {/* Visual Image Showcase Banner */}
+                      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-5 border border-slate-200/80 shadow-md group-hover:shadow-lg transition-all duration-500">
+                        <img
+                          src={cat.image}
+                          alt={`${cat.title} Pillar Visual`}
+                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity" />
+                      </div>
+
+                      {/* Title block */}
+                      <div className="relative z-10 mb-5 space-y-1">
+                        <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">{cat.subtitle}</p>
+                        <h3 className={`text-[1.4rem] font-black text-slate-900 leading-snug transition-colors duration-300 ${cat.titleHover}`}>
+                          {cat.title}
+                        </h3>
+                        <p className="text-sm text-slate-600 leading-relaxed font-normal pt-1">
+                          {cat.desc}
+                        </p>
+                      </div>
+
+                      {/* Service Checklist */}
+                      <div className="relative z-10 space-y-2.5 mb-6">
+                        {cat.services.map((s, si) => (
+                          <motion.div
+                            key={s.label}
+                            initial={{ opacity: 0, x: -10 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.3, delay: 0.4 + si * 0.06 }}
+                            className="flex items-center gap-2.5 px-2 py-1 -mx-2 rounded-xl group-hover:bg-slate-50/90 transition-colors"
+                          >
+                            <span
+                              className="w-4.5 h-4.5 rounded-full flex items-center justify-center flex-shrink-0 text-[10px] font-black text-white shadow-xs"
+                              style={{ background: `linear-gradient(135deg, ${cat.arrowColor}, ${cat.arrowColor}CC)` }}
+                            >
+                              ✓
+                            </span>
+                            <span className="text-xs text-slate-700 font-semibold">{s.icon} {s.label}</span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      {/* Domain coverage bar */}
+                      <div className="relative z-10 mb-6">
+                        <div className="flex justify-between items-center mb-1.5">
+                          <span className="text-[9px] font-extrabold uppercase tracking-widest text-slate-400">Domain Coverage</span>
+                          <span className="text-[9px] font-black" style={{ color: cat.arrowColor }}>{Math.round((cat.count / 5) * 100)}%</span>
+                        </div>
+                        <div className="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            whileInView={{ width: `${(cat.count / 5) * 100}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1.1, delay: 0.5 + i * 0.1, ease: 'easeOut' }}
+                            className={`h-full rounded-full bg-gradient-to-r ${cat.topBar}`}
+                          />
+                        </div>
+                      </div>
+
+                      {/* Bottom CTA Action Row */}
+                      <div className="flex items-center justify-between pt-4 border-t border-slate-100 relative z-10">
+                        <div className={`inline-flex items-center gap-2 px-4.5 py-2.5 rounded-full border text-xs font-black tracking-widest uppercase transition-all duration-300 ${cat.exploreBg} ${cat.exploreColor} ${cat.ctaBtnHover}`}>
+                          <cat.Icon size={13} strokeWidth={2.5} />
+                          <span>EXPLORE ALL</span>
+                        </div>
+                        <div className={`w-10 h-10 rounded-full border border-slate-200 bg-white flex items-center justify-center shadow-xs transition-all duration-300 ${cat.arrowCircleHover}`}>
+                          <ArrowRight size={16} className="text-slate-400 group-hover:text-white group-hover:translate-x-0.5 transition-all" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Subtle glass shimmer effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none z-20" />
+                  </div>
+                </motion.button>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Bottom Summary Bar */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-14 p-5 rounded-2xl bg-white/80 backdrop-blur-sm border border-slate-200/80 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] flex items-center justify-center shadow-md flex-shrink-0">
+                <Cpu size={18} className="text-white" />
+              </div>
+              <div>
+                <p className="font-black text-slate-900 text-sm">13 Total Services Across 3 Pillars</p>
+                <p className="text-xs text-slate-500 font-medium">Click any card above to jump directly to that capability section</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              {[{ t: 'IT Solutions', id: 'it-solutions', c: 'bg-sky-400' }, { t: 'Software Development', id: 'software-development', c: 'bg-violet-400' }, { t: 'Education & Training', id: 'education-training', c: 'bg-emerald-400' }].map(p => (
+                <button key={p.t} onClick={() => { handleCategoryFilter(p.t); setTimeout(() => { const el = document.getElementById(p.id); if(el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }, 100); }}
+                  className={`w-3 h-3 rounded-full ${p.c} hover:scale-150 transition-transform shadow-sm`} title={p.t} />
+              ))}
+            </div>
+          </motion.div>
+
+          {serviceCategories.map((catGroup) => (
+            <div key={catGroup.categoryTitle} id={slugify(catGroup.categoryTitle)} className="space-y-20 pt-4">
+              <div className="text-center">
+                <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 inline-block border-b-4 border-[#0284C7] pb-3">
+                  {catGroup.categoryTitle}
+                </h2>
+              </div>
+
+              <div className="space-y-14">
+                {catGroup.items.map((item) => {
+                  const isLeftImage = item.layout === 'left-image';
+                  return (
+                    <motion.div
+                      key={item.title}
+                      id={slugify(item.title)}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                      className="py-4 group relative overflow-hidden"
+                    >
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
+                        {/* Real Image Side */}
+                        <div className={`lg:col-span-7 flex justify-center ${isLeftImage ? 'lg:order-1' : 'lg:order-2'}`}>
+                          <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl group-hover:scale-[1.02] transition-transform duration-500">
+                            <img
+                              src={item.image}
+                              alt={`${item.title} Illustration`}
+                              className="w-full h-full object-cover object-center"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity" />
+                          </div>
+                        </div>
+
+                        {/* Text & Action Side */}
+                        <div className={`lg:col-span-5 space-y-6 ${isLeftImage ? 'lg:order-2' : 'lg:order-1'}`}>
+                          <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-sky-100 border border-sky-300 inline-block shadow-sm">
+                            {catGroup.categoryTitle}
+                          </span>
+
+                          <h3 className="text-3xl md:text-4xl font-black font-display text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight">
+                            {item.title}
+                          </h3>
+
+                          <p className="text-slate-700 text-sm md:text-base leading-relaxed font-normal">
+                            {item.desc}
+                          </p>
+
+                          <div className="pt-3">
+                            <button
+                              onClick={() => handleContactClick(item.title)}
+                              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-xl shadow-sky-500/25 hover:scale-105 transition-all duration-300"
+                            >
+                              <span>For More Contact us</span>
+                              <ArrowRight size={18} />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 3. SUBSCRIBE TO OUR NEWSLETTER SECTION (White-Gray Theme) */}
+      <section className="py-24 bg-[#E2E8F0] relative text-slate-900">
+        <div className="max-w-2xl mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-white border border-slate-300 p-8 sm:p-12 rounded-3xl text-center space-y-6 shadow-2xl relative overflow-hidden text-slate-900"
+          >
+            <div className="space-y-2">
+              <h3 className="text-2xl md:text-3xl font-extrabold font-display text-slate-900">
+                Subscribe to Our Newsletter
+              </h3>
+              <p className="text-xs md:text-sm text-slate-600">
+                Get the latest tech updates, tutorials, and engineering insights straight to your inbox.
+              </p>
+            </div>
+
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+              <div className="relative w-full">
+                <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
+                <input
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] transition-all"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-bold text-xs md:text-sm shrink-0 shadow-lg shadow-sky-500/20 transition-all"
+              >
+                Subscribe
+              </button>
+            </form>
+            {newsletterSuccess && (
+              <div className="text-xs font-semibold text-[#0284C7] animate-pulse">
+                ✓ Thank you for subscribing!
+              </div>
+            )}
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+};

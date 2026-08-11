@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  background-color: #F8FAFC !important;
+  color: #0F172A;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dark Glass Panel Utilities */
+.glass-panel {
+  background: linear-gradient(135deg, rgba(19, 28, 53, 0.95), rgba(10, 14, 26, 0.95));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.glass-nav {
+  background: rgba(21, 21, 21, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+/* Gradient Text Utilities (White Enterprise Theme) */
+.text-gradient {
+  background: linear-gradient(135deg, #0F172A 0%, #1E90FF 60%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-blue {
+  background: linear-gradient(135deg, #1E90FF 0%, #0EA5E9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #8B5CF6 0%, #1E90FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle Card Glow */
+.border-glow {
+  position: relative;
+}
+
+.border-glow::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  background: linear-gradient(90deg, #FFFFFF, #FFFFFF, #FFFFFF);
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.border-glow:hover::after {
+  opacity: 1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0ED3DD;
+}
+
+/* Selection */
+::selection {
+  background: rgba(30, 144, 255, 0.15);
+  color: #1E90FF;
+}
+
+/* Hero Section Vibrant 3-Color Diagonal Background (Fiery Orange -> Neon Cyan -> Electric Blue) */
+.hero-cyan-gradient {
+  background: radial-gradient(circle at 15% 20%, rgba(255, 80, 0, 0.75) 0%, transparent 55%),
+              radial-gradient(circle at 50% 50%, rgba(14, 211, 221, 0.65) 0%, transparent 60%),
+              radial-gradient(circle at 85% 80%, rgba(29, 161, 242, 0.75) 0%, transparent 55%),
+              linear-gradient(135deg, #FF5000 0%, #FF5000 28%, #0ED3DD 55%, #1DA1F2 100%);
+}

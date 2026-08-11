@@ -1,0 +1,63 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { Navbar } from './components/common/Navbar';
+import { Footer } from './components/common/Footer';
+import { ThreeDBackground } from './components/common/ThreeDBackground';
+import { HomePage } from './pages/public/HomePage';
+import { ServicesPage } from './pages/public/ServicesPage';
+import { AcademyPage } from './pages/public/AcademyPage';
+import { AboutPage } from './pages/public/AboutPage';
+import { ContactPage } from './pages/public/ContactPage';
+import { AdminLoginPage } from './pages/admin/AdminLoginPage';
+import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
+
+const PublicLayout = () => {
+  return (
+    <div className="flex flex-col min-h-screen bg-[#151515] text-white selection:bg-[#1DA1F2]/30 selection:text-[#0ED3DD] relative">
+      {/* 3D Interactive Background Layer */}
+      <ThreeDBackground />
+
+      {/* Fixed Top Header */}
+      <Navbar />
+      
+      {/* Page Content with seamless dark hero alignment under navbar */}
+      <main className="flex-grow pt-0 relative z-10">
+        <Outlet />
+      </main>
+
+      {/* Main Footer */}
+      <Footer />
+    </div>
+  );
+};
+
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        {/* Public Website Routes */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/academy" element={<AcademyPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Route>
+
+        {/* Dedicated Admin Portal Routes */}
+        <Route path="/admin/login" element={
+          <div className="relative min-h-screen bg-[#151515] text-white">
+            <ThreeDBackground />
+            <div className="relative z-10"><AdminLoginPage /></div>
+          </div>
+        } />
+        <Route path="/admin/dashboard" element={
+          <div className="relative min-h-screen bg-[#151515] text-white">
+            <ThreeDBackground />
+            <div className="relative z-10"><AdminDashboardPage /></div>
+          </div>
+        } />
+      </Routes>
+    </Router>
+  );
+}

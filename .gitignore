@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Production build outputs
+dist/
+**/dist/
+build/
+**/build/
+
+# Large archive files & zips
+*.zip
+*.tar.gz
+*.tgz
+server.zip
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# SQLite databases
+*.db
+*.db-journal
+dev.db
+dev.db-journal
+server/prisma/*.db
+server/prisma/*.db-journal
+
+# IDE & Editor config
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS metadata
+Thumbs.db
