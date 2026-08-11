@@ -17,9 +17,9 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-gradient-to-r from-[#033059] via-[#0E1633] to-[#044C80] border-t border-cyan-400/30 text-slate-100 pt-20 pb-12 relative overflow-hidden">
+    <footer className="bg-gradient-to-r from-[#0084C8] via-[#0072B8] to-[#0084C8] border-t-2 border-white text-white pt-20 pb-12 relative overflow-hidden shadow-2xl">
       {/* Background Decorative Ambient Flares */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#0ED3DD]/15 via-[#1DA1F2]/10 to-transparent blur-[160px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyan-300/20 blur-[160px] pointer-events-none" />
 
       <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10">
         {/* Brand & About Column (Spans 2 cols on lg) */}

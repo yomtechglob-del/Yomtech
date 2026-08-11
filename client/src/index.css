@@ -5,34 +5,46 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-html, body, #root {
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
   margin: 0;
   padding: 0;
   background-color: #F8FAFC !important;
   color: #0F172A;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Dark Glass Panel Utilities */
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* White & Luminous Glass Panel Utilities */
 .glass-panel {
-  background: linear-gradient(135deg, rgba(19, 28, 53, 0.95), rgba(10, 14, 26, 0.95));
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(59, 130, 246, 0.35);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(29, 161, 242, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .glass-nav {
-  background: rgba(21, 21, 21, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(29, 161, 242, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* Gradient Text Utilities (White Enterprise Theme) */
@@ -102,10 +114,7 @@ html, body, #root {
   color: #1E90FF;
 }
 
-/* Hero Section Vibrant 3-Color Diagonal Background (Fiery Orange -> Neon Cyan -> Electric Blue) */
+/* Hero Section Opaque 100% Solid Vibrant Gradient (Fiery Orange -> Sapphire Blue -> Neon Cyan -> Electric Blue) */
 .hero-cyan-gradient {
-  background: radial-gradient(circle at 15% 20%, rgba(255, 80, 0, 0.75) 0%, transparent 55%),
-              radial-gradient(circle at 50% 50%, rgba(14, 211, 221, 0.65) 0%, transparent 60%),
-              radial-gradient(circle at 85% 80%, rgba(29, 161, 242, 0.75) 0%, transparent 55%),
-              linear-gradient(135deg, #FF5000 0%, #FF5000 28%, #0ED3DD 55%, #1DA1F2 100%);
+  background: linear-gradient(135deg, #FF5000 0%, #FF5000 24%, #0084C8 55%, #0ED3DD 78%, #1DA1F2 100%) !important;
 }

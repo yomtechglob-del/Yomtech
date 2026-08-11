@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+/** @type {import('tailwind-css').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
@@ -8,17 +8,17 @@ export default {
           blue: "#1DA1F2",        // Electric Blue Accent
           hover: "#0ED3DD",       // Cyan Hover Accent
           cyan: "#0ED3DD",        // Neon Cyan Accent
-          navy: "#FFFFFF",        // White Headings/Text
+          navy: "#071A2B",        // High-Contrast Deep Navy Text
           purple: "#8B5CF6",      // Purple Accent
-          white: "#FFFFFF",       // White Text
-          muted: "#94A3B8",       // Muted Slate Text
-          bg: "#151515",          // Solid #151515 Dark Base Canvas
-          secondaryBg: "#0B1120", // Deep Blue-Dark Secondary Canvas
-          card: "#0E162B",        // 3D Glassmorphic Card Container
-          darkCard: "#0A0E1A",    // Deep Dark Card Container
-          border: "rgba(59, 130, 246, 0.35)",
+          white: "#FFFFFF",       // Pure White
+          muted: "#475569",       // Muted Slate Text
+          bg: "#EAF6FF",          // Light Sapphire Base Canvas (NO BLACK)
+          secondaryBg: "#E0F2FE", // Soft Sky Secondary Canvas
+          card: "#FFFFFF",        // White Glass Card Container
+          darkCard: "#FFFFFF",    // White Card Container
+          border: "rgba(29, 161, 242, 0.35)",
           glassBorder: "rgba(14, 211, 221, 0.4)",
-          glass: "rgba(19, 28, 53, 0.95)"
+          glass: "rgba(255, 255, 255, 0.95)"
         }
       },
       fontFamily: {

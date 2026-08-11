@@ -19,6 +19,8 @@ import wmsImg from '../../assets/hero icons/wms.png';
 
 export const Globe3DCard = () => {
   const canvasRef = useRef(null);
+  const planetRefs = useRef([]);
+  const activeHoverIndexRef = useRef(null);
   const [activeHoverIndex, setActiveHoverIndex] = useState(null);
 
   // List of 13 service icons rotating in 100% synchronized coordination with equal fixed distances (360° / 13)
@@ -428,79 +430,75 @@ export const Globe3DCard = () => {
         }
       }
 
-      // 5. Render Electric Blue 3D Network Arcs
-      arcConnections.forEach(([fromIdx, toIdx], arcIdx) => {
-        const hubA = globalHubs[fromIdx];
-        const hubB = globalHubs[toIdx];
+      // 5. Draw Arcing Interconnect Flight Beams
+      const arcs = [
+        { from: { lat: 0.65, lon: -1.3 }, to: { lat: 0.89, lon: 0.2 } },
+        { from: { lat: 0.89, lon: 0.2 }, to: { lat: 0.48, lon: 1.35 } },
+        { from: { lat: 0.48, lon: 1.35 }, to: { lat: -0.4, lon: 2.4 } },
+        { from: { lat: -0.4, lon: 2.4 }, to: { lat: -0.58, lon: -1.0 } },
+        { from: { lat: -0.58, lon: -1.0 }, to: { lat: 0.65, lon: -1.3 } }
+      ];
 
-        const getSphere3D = (lat, lon, rMult = 1.0) => {
-          const phi = ((90 - lat) * Math.PI) / 180;
-          const theta = ((lon + 180) * Math.PI) / 180;
-          const r = sphereRadius * rMult;
-          return {
-            x: r * Math.sin(phi) * Math.cos(theta),
-            y: -r * Math.cos(phi),
-            z: r * Math.sin(phi) * Math.sin(theta)
-          };
+      arcs.forEach((arc, arcIdx) => {
+        const p1 = {
+          x: sphereRadius * Math.cos(arc.from.lat) * Math.sin(arc.from.lon),
+          y: sphereRadius * Math.sin(arc.from.lat),
+          z: sphereRadius * Math.cos(arc.from.lat) * Math.cos(arc.from.lon)
+        };
+        const p2 = {
+          x: sphereRadius * Math.cos(arc.to.lat) * Math.sin(arc.to.lon),
+          y: sphereRadius * Math.sin(arc.to.lat),
+          z: sphereRadius * Math.cos(arc.to.lat) * Math.cos(arc.to.lon)
         };
 
-        const posA = getSphere3D(hubA.lat, hubA.lon);
-        const posB = getSphere3D(hubB.lat, hubB.lon);
-
-        const midX = (posA.x + posB.x) * 0.5;
-        const midY = (posA.y + posB.y) * 0.5;
-        const midZ = (posA.z + posB.z) * 0.5;
-        const dist = Math.hypot(posA.x - posB.x, posA.y - posB.y, posA.z - posB.z);
-        const elevation = 1.0 + Math.min(0.45, (dist / sphereRadius) * 0.35);
-
-        const ctrl = {
-          x: midX * elevation,
-          y: midY * elevation,
-          z: midZ * elevation
+        const r1 = {
+          x: p1.x * cosY - p1.z * sinY,
+          y: p1.y * cosX - (p1.z * cosY + p1.x * sinY) * sinX,
+          z: (p1.z * cosY + p1.x * sinY) * cosX + p1.y * sinX
+        };
+        const r2 = {
+          x: p2.x * cosY - p2.z * sinY,
+          y: p2.y * cosX - (p2.z * cosY + p2.x * sinY) * sinX,
+          z: (p2.z * cosY + p2.x * sinY) * cosX + p2.y * sinX
         };
 
-        const arcSteps = 16;
-        const arcPoints = [];
-        for (let t = 0; t <= 1; t += 1 / arcSteps) {
-          const invT = 1 - t;
-          const bx = invT * invT * posA.x + 2 * invT * t * ctrl.x + t * t * posB.x;
-          const by = invT * invT * posA.y + 2 * invT * t * ctrl.y + t * t * posB.y;
-          const bz = invT * invT * posA.z + 2 * invT * t * ctrl.z + t * t * posB.z;
-          arcPoints.push(project3D(bx, by, bz));
-        }
-
-        const avgZ = (arcPoints[0].z + arcPoints[arcPoints.length - 1].z) / 2;
-        if (avgZ > -sphereRadius * 0.4) {
+        if (r1.z > -sphereRadius * 0.2 || r2.z > -sphereRadius * 0.2) {
           ctx.save();
           ctx.beginPath();
-          ctx.moveTo(arcPoints[0].x, arcPoints[0].y);
-          for (let s = 1; s < arcPoints.length; s++) {
-            ctx.lineTo(arcPoints[s].x, arcPoints[s].y);
+          const arcSteps = 24;
+          for (let s = 0; s <= arcSteps; s++) {
+            const t = s / arcSteps;
+            const lat = arc.from.lat + (arc.to.lat - arc.from.lat) * t;
+            const lon = arc.from.lon + (arc.to.lon - arc.from.lon) * t;
+            const heightBoost = Math.sin(t * Math.PI) * (sphereRadius * 0.35);
+            const rCurrent = sphereRadius + heightBoost;
+
+            const ax0 = rCurrent * Math.cos(lat) * Math.sin(lon);
+            const ay0 = rCurrent * Math.sin(lat);
+            const az0 = rCurrent * Math.cos(lat) * Math.cos(lon);
+
+            const ax1 = ax0 * cosY - az0 * sinY;
+            const az1 = az0 * cosY + ax0 * sinY;
+            const ay2 = ay0 * cosX - az1 * sinX;
+
+            const px = cx + ax1;
+            const py = cy + ay2;
+
+            if (s === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
           }
+
+          const avgZ = (r1.z + r2.z) / 2;
           const lineAlpha = Math.max(0.2, (avgZ + sphereRadius) / (sphereRadius * 2));
           ctx.strokeStyle = `rgba(37, 99, 235, ${lineAlpha * 0.75})`;
           ctx.lineWidth = 1.5;
           ctx.setLineDash([3, 4]);
           ctx.stroke();
-
-          // Photon packet traveling along arc
-          const tProgress = (pulseTime * 0.6 + arcIdx * 0.2) % 1.0;
-          const pulseIdx = Math.floor(tProgress * arcSteps);
-          if (pulseIdx >= 0 && pulseIdx < arcPoints.length) {
-            const pPt = arcPoints[pulseIdx];
-            ctx.beginPath();
-            ctx.arc(pPt.x, pPt.y, 2.8 * pPt.scale, 0, Math.PI * 2);
-            ctx.fillStyle = '#FFFFFF';
-            ctx.shadowColor = '#3B82F6';
-            ctx.shadowBlur = 10;
-            ctx.fill();
-          }
           ctx.restore();
         }
       });
 
-      // 6. Calculate 3D Orbital Positions for 13 Planet Icons
-      const newPositions = planetIcons.map((planet, idx) => {
+      planetIcons.forEach((planet, idx) => {
         angles[idx] += planet.speed;
         const curAngle = angles[idx];
         const r = (planet.orbitRadius / 300) * sphereRadius * 1.15;
@@ -517,21 +515,20 @@ export const Globe3DCard = () => {
         const depthZ = rotZ;
 
         const scale = 0.75 + ((depthZ + r) / (r * 2)) * 0.45;
-        const opacity = 0.45 + ((depthZ + r) / (r * 2)) * 0.55;
+        const opacity = Math.max(0.3, 0.45 + ((depthZ + r) / (r * 2)) * 0.55);
         const zIndex = Math.round(depthZ + 300);
 
-        return {
-          ...planet,
-          x: posX,
-          y: posY,
-          scale,
-          opacity,
-          zIndex,
-          isFront: depthZ > 0
-        };
+        const el = planetRefs.current[idx];
+        if (el) {
+          const isHovered = activeHoverIndexRef.current === idx;
+          const finalScale = isHovered ? scale * 1.35 : scale;
+          el.style.left = `${posX}px`;
+          el.style.top = `${posY}px`;
+          el.style.transform = `translate(-50%, -50%) scale(${finalScale})`;
+          el.style.opacity = opacity;
+          el.style.zIndex = zIndex;
+        }
       });
-
-      setPlanetPositions(newPositions);
 
       animationId = requestAnimationFrame(render);
     };
@@ -548,9 +545,6 @@ export const Globe3DCard = () => {
   const isDraggingRef = useRef(false);
   const lastMousePosRef = useRef({ x: 0, y: 0 });
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
     lastMousePosRef.current = { x: e.clientX, y: e.clientY };
@@ -561,7 +555,6 @@ export const Globe3DCard = () => {
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
     mouseRef.current = { x, y };
-    setMousePos({ x, y });
 
     if (isDraggingRef.current) {
       const dx = e.clientX - lastMousePosRef.current.x;
@@ -597,32 +590,24 @@ export const Globe3DCard = () => {
 
   return (
     <div className="relative w-full max-w-[620px] aspect-square flex items-center justify-center p-4">
-      {/* Main 3D Metallic Bezel Ring Widget */}
       <div 
-        className="relative z-10 w-full h-full rounded-full bg-gradient-to-br from-[#020617]/95 via-[#040B1D]/98 to-[#06122E]/95 border-[10px] border-slate-600/90 shadow-[0_0_60px_rgba(56,189,248,0.7),0_0_120px_rgba(37,99,235,0.8),0_30px_90px_rgba(0,0,0,0.95)] p-5 relative overflow-hidden flex flex-col items-center justify-center group hover:border-[#3B82F6] transition-all duration-700 cursor-grab active:cursor-grabbing select-none"
+        className="relative z-10 w-full h-full rounded-full bg-gradient-to-br from-[#0284C7]/95 via-[#0072B8]/98 to-[#0F172A]/95 border-[10px] border-white shadow-[0_0_60px_rgba(56,189,248,0.7),0_0_120px_rgba(37,99,235,0.8),0_30px_90px_rgba(0,114,184,0.6)] p-5 relative overflow-hidden flex flex-col items-center justify-center group hover:border-cyan-300 transition-all duration-700 cursor-grab active:cursor-grabbing select-none touch-pan-y"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => {
-          setIsHovered(false);
           isDraggingRef.current = false;
           mouseRef.current = { x: 0, y: 0 };
-          setMousePos({ x: 0, y: 0 });
         }}
       >
-        {/* Metallic Bezel Outer Rim Light Beam */}
         <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-sky-400/50 via-blue-600/60 to-purple-600/40 blur-xl opacity-90 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-        {/* 3D Canvas Background Wireframe Globe */}
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-95" />
 
-        {/* CENTER: Ultra 3D Coin Logo Emblem & Slow Rotating Circular Letter Path */}
         <div className="relative z-30 flex items-center justify-center mb-3 pointer-events-none">
-          {/* Rotating Circular Typography Text Ring around 3D Logo (Slower Graceful Rotation) */}
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
@@ -642,38 +627,35 @@ export const Globe3DCard = () => {
             </svg>
           </motion.div>
 
-          {/* Real 3D Coin Badge Logo Emblem with Intense Outward Glow */}
           <motion.div
             animate={{ scale: [1, 1.06, 1], rotate: [0, 4, 0, -4, 0] }}
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
             className="relative z-10 w-28 h-28 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-sky-400 via-blue-600 to-slate-900 border-[4px] border-white p-1.5 shadow-[0_0_40px_rgba(56,189,248,0.95),0_0_80px_rgba(37,99,235,0.85),inset_0_3px_8px_rgba(255,255,255,0.7)] flex items-center justify-center overflow-hidden"
           >
-            {/* Glossy 3D Highlight Sheen Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/35 to-transparent pointer-events-none" />
             <img src={logoImg} alt="Yomtech Global 3D Logo Emblem" className="w-full h-full object-cover rounded-full shadow-2xl relative z-10" />
           </motion.div>
         </div>
 
-        {/* Orbiting 3D Planetary Icon Badges */}
-        {planetPositions.map((planet, idx) => (
+        {planetIcons.map((planet, idx) => (
           <div
             key={planet.title}
+            ref={(el) => (planetRefs.current[idx] = el)}
             style={{
               position: 'absolute',
-              left: `${planet.x}px`,
-              top: `${planet.y}px`,
-              transform: `translate(-50%, -50%) scale(${activeHoverIndex === idx ? planet.scale * 1.35 : planet.scale})`,
-              opacity: planet.opacity,
-              zIndex: planet.zIndex,
-              transition: 'transform 0.15s ease-out, opacity 0.15s ease-out'
+              left: '0px',
+              top: '0px',
+              transform: 'translate(-50%, -50%) scale(1)',
+              opacity: 0,
+              zIndex: 10,
+              willChange: 'transform, opacity'
             }}
-            onMouseEnter={() => setActiveHoverIndex(idx)}
-            onMouseLeave={() => setActiveHoverIndex(null)}
+            onMouseEnter={() => { activeHoverIndexRef.current = idx; }}
+            onMouseLeave={() => { activeHoverIndexRef.current = null; }}
             className="cursor-pointer group pointer-events-auto"
           >
             <div className="relative flex flex-col items-center">
-              <div className="relative w-11 h-11 sm:w-12 sm:h-12 md:w-13 md:h-13 rounded-full bg-gradient-to-br from-[#131C35] via-[#0E162B] to-[#0A0E1A] border-[2.5px] border-white p-0.5 shadow-[0_0_20px_rgba(255,255,255,0.9),0_0_35px_rgba(14,211,221,0.65)] backdrop-blur-md transition-all flex items-center justify-center overflow-hidden group-hover:scale-125 group-hover:shadow-[0_0_35px_rgba(255,255,255,1),0_0_50px_rgba(14,211,221,0.9)]">
-                {/* Glossy Reflection Sheen Overlay */}
+              <div className="relative w-11 h-11 sm:w-12 sm:h-12 md:w-13 md:h-13 rounded-full bg-gradient-to-br from-[#0084C8] via-[#0072B8] to-[#1DA1F2] border-[2.5px] border-white p-0.5 shadow-[0_0_20px_rgba(255,255,255,0.9),0_0_35px_rgba(14,211,221,0.65)] backdrop-blur-md transition-all flex items-center justify-center overflow-hidden group-hover:scale-125 group-hover:shadow-[0_0_35px_rgba(255,255,255,1),0_0_50px_rgba(14,211,221,0.9)]">
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/35 to-transparent pointer-events-none rounded-full z-20" />
                 <img
                   src={planet.img}
@@ -682,7 +664,7 @@ export const Globe3DCard = () => {
                 />
               </div>
 
-              <div className="absolute top-full mt-1.5 px-3 py-1.5 rounded-xl bg-[#070C1A]/95 border border-[#0ED3DD]/60 text-white text-[11px] font-black whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl pointer-events-none">
+              <div className="absolute top-full mt-1.5 px-3 py-1.5 rounded-xl bg-[#0072B8] border border-white text-white text-[11px] font-black whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity shadow-xl pointer-events-none">
                 {planet.title}
               </div>
             </div>

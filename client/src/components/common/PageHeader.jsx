@@ -6,36 +6,7 @@ import { HeroCanvas } from './HeroCanvas';
 
 export const PageHeader = ({ title, highlight, subtitle, badge, breadcrumbs, children }) => {
   return (
-    <div className="relative pt-52 sm:pt-60 md:pt-64 pb-28 md:pb-36 overflow-hidden hero-cyan-gradient text-white">
-      {/* Architectural Vector Lines & Tech Grid Background */}
-      <HeroCanvas />
-
-      {/* Top-Left to Top-Right Architectural Drawn Line Border Overlay */}
-      <svg className="absolute top-0 left-0 w-full h-[550px] pointer-events-none z-20 overflow-visible" preserveAspectRatio="none">
-        <path
-          d="M 0 340 Q 300 160 900 0"
-          fill="none"
-          stroke="url(#pageheader-top-left-arch-gradient)"
-          strokeWidth="3.5"
-          className="opacity-80 drop-shadow-[0_0_12px_rgba(255,80,0,0.7)]"
-        />
-        <defs>
-          <linearGradient id="pageheader-top-left-arch-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF5000" />
-            <stop offset="50%" stopColor="#0ED3DD" />
-            <stop offset="100%" stopColor="#1DA1F2" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      {/* Left-Mid Ambient Fiery Orange Flare */}
-      <div className="absolute top-20 left-32 w-[650px] h-[650px] bg-gradient-to-br from-[#FF5000]/50 via-[#0ED3DD]/30 to-transparent blur-[150px] rounded-full pointer-events-none" />
-
-      {/* Center Vivid Cyan Glow */}
-      <div className="absolute top-1/3 left-1/3 w-[600px] h-[450px] bg-[#0ED3DD]/40 blur-[120px] rounded-full pointer-events-none" />
-
-      {/* Right Royal Electric Blue Atmospheric Spotlight */}
-      <div className="absolute top-1/2 -translate-y-1/2 right-0 lg:right-8 w-[720px] h-[720px] bg-gradient-to-tr from-[#1DA1F2]/60 via-[#1D4ED8]/45 to-[#3B82F6]/50 blur-[160px] rounded-full pointer-events-none animate-pulse" />
+    <div className="relative pt-52 sm:pt-60 md:pt-64 pb-28 md:pb-36 overflow-hidden bg-gradient-to-br from-[#0284C7] via-[#0072B8] to-[#1DA1F2] text-white">
 
 
       <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10 text-center">
