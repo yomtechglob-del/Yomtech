@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, ShieldCheck, Cpu, Layers, Wrench, CheckCircle2 } from 'lucide-react';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../assets/logo.png';
 
 export const ServicesScalableTechnology = () => {
   const principles = [

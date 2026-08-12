@@ -18,7 +18,7 @@ const PublicLayout = () => {
       <Navbar />
       
       {/* Page Content */}
-      <main className="flex-grow pt-0 relative z-10">
+      <main className="flex-grow pt-0">
         <Outlet />
       </main>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, Phone, ArrowRight, ChevronDown, LayoutGrid, Cpu, Code, GraduationCap, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../assets/logo.png';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,41 +26,41 @@ export const Navbar = () => {
   ];
 
   const serviceCategories = [
-    { 
-      name: 'All Services', 
-      path: '/services#explore-our-services', 
-      targetId: 'explore-our-services', 
-      desc: 'Browse full capabilities & enterprise solutions', 
+    {
+      name: 'All Services',
+      path: '/services#explore-our-services',
+      targetId: 'explore-our-services',
+      desc: 'Browse full capabilities & enterprise solutions',
       icon: LayoutGrid,
       badge: 'Full Suite',
       gradient: 'from-[#0ED3DD] via-cyan-400 to-[#1DA1F2]',
       glowColor: 'group-hover:shadow-[0_0_25px_rgba(14,211,221,0.8)]'
     },
-    { 
-      name: 'IT Solutions', 
-      path: '/services#it-solutions', 
-      targetId: 'it-solutions', 
-      desc: 'ERP, CRM, WMS & Security Systems', 
+    {
+      name: 'IT Solutions',
+      path: '/services#it-solutions',
+      targetId: 'it-solutions',
+      desc: 'ERP, CRM, WMS & Security Systems',
       icon: Cpu,
       badge: 'Enterprise',
       gradient: 'from-emerald-400 to-[#0ED3DD]',
       glowColor: 'group-hover:shadow-[0_0_25px_rgba(52,211,153,0.8)]'
     },
-    { 
-      name: 'Software Development', 
-      path: '/services#software-development', 
-      targetId: 'software-development', 
-      desc: 'Custom Web, Mobile Apps & Platforms', 
+    {
+      name: 'Software Development',
+      path: '/services#software-development',
+      targetId: 'software-development',
+      desc: 'Custom Web, Mobile Apps & Platforms',
       icon: Code,
       badge: 'Custom Code',
       gradient: 'from-[#1DA1F2] to-cyan-300',
       glowColor: 'group-hover:shadow-[0_0_25px_rgba(29,161,242,0.8)]'
     },
-    { 
-      name: 'Education & Training', 
-      path: '/services#education-training', 
-      targetId: 'education-training', 
-      desc: 'Cybersecurity, Cloud & Professional Coaching', 
+    {
+      name: 'Education & Training',
+      path: '/services#education-training',
+      targetId: 'education-training',
+      desc: 'Cybersecurity, Cloud & Professional Coaching',
       icon: GraduationCap,
       badge: 'WabiSkills',
       gradient: 'from-amber-400 to-[#0ED3DD]',
@@ -83,16 +83,15 @@ export const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 py-3 sm:py-3.5 md:py-3.5 hero-cyan-gradient border-b border-white/10 ${
-      scrolled
-        ? 'shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md'
+    <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 py-3 sm:py-3.5 md:py-3.5 hero-cyan-gradient border-b border-white/10 ${scrolled
+        ? 'shadow-[0_8px_32px_rgba(0,0,0,0.35)]'
         : 'shadow-xl'
-    }`}>
+      }`}>
       <div className="max-w-[1380px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between">
-        
+
         {/* Left Brand Logo Section */}
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="flex items-center justify-center bg-white p-2 sm:p-2.5 rounded-xl border border-white/90 shadow-[0_4px_15px_rgba(0,0,0,0.15)] group shrink-0 mr-3 lg:mr-5 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-all duration-300"
         >
           <img
@@ -117,11 +116,10 @@ export const Navbar = () => {
                 >
                   <Link
                     to="/services"
-                    className={`relative text-sm xl:text-base font-extrabold tracking-tight transition-all duration-300 px-3 py-1.5 flex items-center gap-1.5 ${
-                      isActive
+                    className={`relative text-sm xl:text-base font-extrabold tracking-tight transition-all duration-300 px-3 py-1.5 flex items-center gap-1.5 ${isActive
                         ? 'text-[#0ED3DD] drop-shadow-[0_0_12px_rgba(14,211,221,0.6)] font-black'
                         : 'text-white/90 hover:text-[#0ED3DD]'
-                    }`}
+                      }`}
                   >
                     <span>{link.name}</span>
                     <ChevronDown size={16} className={`text-cyan-300 transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-white' : ''}`} />
@@ -165,13 +163,13 @@ export const Navbar = () => {
                                   <span className="text-sm font-black text-white tracking-tight group-hover:text-cyan-200 transition-colors">
                                     {cat.name}
                                   </span>
-                                  
+
                                   {/* Glass Technology Badge */}
                                   <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20 border border-white/40 text-white group-hover:bg-white group-hover:text-[#042B24] transition-all">
                                     {cat.badge}
                                   </span>
                                 </div>
-                                
+
                                 <span className="text-xs font-medium text-white/85 leading-relaxed mt-1 group-hover:text-white">
                                   {cat.desc}
                                 </span>
@@ -216,11 +214,10 @@ export const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative text-sm xl:text-base font-extrabold tracking-tight transition-all duration-300 px-3 py-1.5 flex items-center gap-1.5 ${
-                  isActive
+                className={`relative text-sm xl:text-base font-extrabold tracking-tight transition-all duration-300 px-3 py-1.5 flex items-center gap-1.5 ${isActive
                     ? 'text-[#0ED3DD] drop-shadow-[0_0_12px_rgba(14,211,221,0.6)] font-black'
                     : 'text-white/90 hover:text-[#0ED3DD]'
-                }`}
+                  }`}
               >
                 <span>{link.name}</span>
               </Link>
@@ -230,7 +227,7 @@ export const Navbar = () => {
 
         {/* Right Section: Advanced Phone Capsule + CTA Button */}
         <div className="hidden md:flex items-center gap-3 lg:gap-4 ml-3 lg:ml-5 shrink-0">
-          
+
           {/* Advanced Glassmorphic Phone Button */}
           <a
             href="tel:+251977666699"
@@ -287,11 +284,10 @@ export const Navbar = () => {
                   key={link.name}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`py-3 px-5 rounded-2xl font-black text-lg transition-all ${
-                    location.pathname === link.path
+                  className={`py-3 px-5 rounded-2xl font-black text-lg transition-all ${location.pathname === link.path
                       ? 'bg-white/25 text-white border border-white/40 shadow-md'
                       : 'text-white/80 hover:text-white hover:bg-white/10'
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>

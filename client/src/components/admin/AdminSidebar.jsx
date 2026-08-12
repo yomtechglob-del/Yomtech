@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { LayoutDashboard, Users, LogOut, Shield, ExternalLink, Globe } from 'lucide-react';
 import { logoutAdminApi } from '../../services/api';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../assets/logo.png';
 
 export const AdminSidebar = ({ user }) => {
   const navigate = useNavigate();

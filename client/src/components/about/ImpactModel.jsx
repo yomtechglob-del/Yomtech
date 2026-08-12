@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Briefcase, Cpu, Users, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../assets/logo.png';
 
 export const ImpactModel = () => {
   const [activePillar, setActivePillar] = useState(1);

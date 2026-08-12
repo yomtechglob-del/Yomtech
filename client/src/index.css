@@ -114,7 +114,145 @@ body {
   color: #1E90FF;
 }
 
-/* Hero Section Opaque 100% Solid Vibrant Gradient (Fiery Orange -> Sapphire Blue -> Neon Cyan -> Electric Blue) */
+/* ============================================================
+   SCROLL PERFORMANCE — replaces framer-motion whileInView jank
+   ============================================================ */
+
+/* Sections fade in using CSS only — zero JS on scroll thread */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger children inside a revealed parent */
+.reveal-children>* {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.reveal-children.visible>*:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.0s;
+}
+
+.reveal-children.visible>*:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.07s;
+}
+
+.reveal-children.visible>*:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.14s;
+}
+
+.reveal-children.visible>*:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.21s;
+}
+
+.reveal-children.visible>*:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.28s;
+}
+
+.reveal-children.visible>*:nth-child(6) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+.reveal-children.visible>*:nth-child(7) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.42s;
+}
+
+.reveal-children.visible>*:nth-child(8) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.49s;
+}
+
+/* Touch — never block vertical scroll anywhere on the page */
+.hero-scroll-fix,
+.hero-scroll-fix * {
+  touch-action: pan-y !important;
+}
+
+/* Decorative blur glows: isolated GPU layer so they never repaint during scroll */
+.glow-layer {
+  will-change: opacity;
+  pointer-events: none;
+}
+
+/* Hero Section & Header Matching Gradient */
 .hero-cyan-gradient {
-  background: linear-gradient(135deg, #FF5000 0%, #FF5000 24%, #0084C8 55%, #0ED3DD 78%, #1DA1F2 100%) !important;
+  background: linear-gradient(135deg, #0284C7 0%, #0072B8 50%, #1DA1F2 100%) !important;
+}
+
+/* Globe 3D Card Static CSS Animations */
+@keyframes globeSpinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes emblemPulseSlow {
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.06) rotate(4deg);
+  }
+}
+
+.animate-spin-globe {
+  animation: globeSpinSlow 16s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-emblem-pulse {
+  animation: emblemPulseSlow 4.5s ease-in-out infinite;
 }

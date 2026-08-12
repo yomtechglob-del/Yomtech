@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Code2, Users2, Network, TrendingUp, Sparkles } from 'lucide-react';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../assets/logo.png';
 
 export const AcademyEcosystem = () => {
   const [activeNode, setActiveNode] = useState(0);
