@@ -5,34 +5,46 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
-html, body, #root {
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body {
   margin: 0;
   padding: 0;
   background-color: #F8FAFC !important;
   color: #0F172A;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  width: 100%;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Dark Glass Panel Utilities */
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* White & Luminous Glass Panel Utilities */
 .glass-panel {
-  background: linear-gradient(135deg, rgba(19, 28, 53, 0.95), rgba(10, 14, 26, 0.95));
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(59, 130, 246, 0.35);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(29, 161, 242, 0.35);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
 .glass-nav {
-  background: rgba(21, 21, 21, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  border-bottom: 1px solid rgba(29, 161, 242, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* Gradient Text Utilities (White Enterprise Theme) */
@@ -102,10 +114,145 @@ html, body, #root {
   color: #1E90FF;
 }
 
-/* Hero Section Vibrant 3-Color Diagonal Background (Fiery Orange -> Neon Cyan -> Electric Blue) */
+/* ============================================================
+   SCROLL PERFORMANCE — replaces framer-motion whileInView jank
+   ============================================================ */
+
+/* Sections fade in using CSS only — zero JS on scroll thread */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Stagger children inside a revealed parent */
+.reveal-children>* {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.reveal-children.visible>*:nth-child(1) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.0s;
+}
+
+.reveal-children.visible>*:nth-child(2) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.07s;
+}
+
+.reveal-children.visible>*:nth-child(3) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.14s;
+}
+
+.reveal-children.visible>*:nth-child(4) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.21s;
+}
+
+.reveal-children.visible>*:nth-child(5) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.28s;
+}
+
+.reveal-children.visible>*:nth-child(6) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+.reveal-children.visible>*:nth-child(7) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.42s;
+}
+
+.reveal-children.visible>*:nth-child(8) {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.49s;
+}
+
+/* Touch — never block vertical scroll anywhere on the page */
+.hero-scroll-fix,
+.hero-scroll-fix * {
+  touch-action: pan-y !important;
+}
+
+/* Decorative blur glows: isolated GPU layer so they never repaint during scroll */
+.glow-layer {
+  will-change: opacity;
+  pointer-events: none;
+}
+
+/* Hero Section & Header Matching Gradient */
 .hero-cyan-gradient {
-  background: radial-gradient(circle at 15% 20%, rgba(255, 80, 0, 0.75) 0%, transparent 55%),
-              radial-gradient(circle at 50% 50%, rgba(14, 211, 221, 0.65) 0%, transparent 60%),
-              radial-gradient(circle at 85% 80%, rgba(29, 161, 242, 0.75) 0%, transparent 55%),
-              linear-gradient(135deg, #FF5000 0%, #FF5000 28%, #0ED3DD 55%, #1DA1F2 100%);
+  background: linear-gradient(135deg, #0284C7 0%, #0072B8 50%, #1DA1F2 100%) !important;
+}
+
+/* Globe 3D Card Static CSS Animations */
+@keyframes globeSpinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes emblemPulseSlow {
+
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.06) rotate(4deg);
+  }
+}
+
+.animate-spin-globe {
+  animation: globeSpinSlow 16s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-emblem-pulse {
+  animation: emblemPulseSlow 4.5s ease-in-out infinite;
 }

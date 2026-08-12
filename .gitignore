@@ -1,46 +1,94 @@
-# Dependencies
+# ==============================================================================
+# YomTech Platform — Root Comprehensive .gitignore
+# ==============================================================================
+
+# 1. Dependencies & Package Managers
 node_modules/
 **/node_modules/
+.pnpm-store/
+.yarn/cache/
+.yarn/unplugged/
+.yarn/build-state.yml
 
-# Production build outputs
+# 2. Production & Build Outputs
 dist/
 **/dist/
 build/
 **/build/
+out/
+**/out/
+.next/
+.out/
 
-# Large archive files & zips
-*.zip
-*.tar.gz
-*.tgz
-server.zip
-
-# Environment variables & secrets
+# 3. Environment Variables & Secrets
 .env
 .env.local
+.env.development
+.env.test
+.env.production
 .env.*.local
 *.env
+!.env.example
 
-# SQLite databases
+# 4. Databases & Storage (SQLite / Prisma)
 *.db
 *.db-journal
+*.sqlite
+*.sqlite3
 dev.db
 dev.db-journal
 server/prisma/*.db
 server/prisma/*.db-journal
 
-# IDE & Editor config
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-
-# Logs
-logs
+# 5. Logs & Diagnostics
+logs/
+**/logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
 
-# OS metadata
+# 6. Caches & Temporary Files
+.cache/
+**/ .cache/
+.vite/
+**/ .vite/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+
+# 7. Archives & Compressed Packages
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+*.7z
+server.zip
+
+# 8. Testing & Coverage Reports
+coverage/
+**/coverage/
+.nyc_output/
+
+# 9. IDE, Editors & Tooling
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 10. Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
+Desktop.ini

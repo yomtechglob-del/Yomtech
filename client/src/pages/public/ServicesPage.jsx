@@ -27,6 +27,12 @@ import pillarITImg from '../../assets/services/pillar_it_solutions.png';
 import pillarSoftwareImg from '../../assets/services/pillar_software_dev.png';
 import pillarEducationImg from '../../assets/services/pillar_education_training.png';
 
+// 4 New Enterprise Strategy Sections
+import { ServicesEngineeringApproach } from '../../components/services/ServicesEngineeringApproach';
+import { ServicesChallengeToImpact } from '../../components/services/ServicesChallengeToImpact';
+import { ServicesScalableTechnology } from '../../components/services/ServicesScalableTechnology';
+import { ServicesPartnershipModel } from '../../components/services/ServicesPartnershipModel';
+
 const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 export const ServicesPage = () => {
@@ -207,39 +213,9 @@ export const ServicesPage = () => {
   };
 
   return (
-    <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden">
+    <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
       {/* 1. HERO HEADER SECTION — side-by-side layout */}
-      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient">
-        {/* Architectural Vector Lines & Tech Grid Background */}
-        <HeroCanvas />
-
-        {/* Top-Left to Top-Right Architectural Drawn Line Border Overlay */}
-        <svg className="absolute top-0 left-0 w-full h-[550px] pointer-events-none z-20 overflow-visible" preserveAspectRatio="none">
-          <path
-            d="M 0 340 Q 300 160 900 0"
-            fill="none"
-            stroke="url(#services-top-left-arch-gradient)"
-            strokeWidth="3.5"
-            className="opacity-80 drop-shadow-[0_0_12px_rgba(255,80,0,0.7)]"
-          />
-          <defs>
-            <linearGradient id="services-top-left-arch-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#FF5000" />
-              <stop offset="50%" stopColor="#0ED3DD" />
-              <stop offset="100%" stopColor="#1DA1F2" />
-            </linearGradient>
-          </defs>
-        </svg>
-
-        {/* Left-Mid Ambient Fiery Orange Flare */}
-        <div className="absolute top-20 left-32 w-[650px] h-[650px] bg-gradient-to-br from-[#FF5000]/50 via-[#0ED3DD]/30 to-transparent blur-[150px] rounded-full pointer-events-none" />
-
-        {/* Center Vivid Cyan Glow */}
-        <div className="absolute top-1/3 left-1/3 w-[600px] h-[450px] bg-[#0ED3DD]/40 blur-[120px] rounded-full pointer-events-none" />
-
-        {/* Right Royal Electric Blue Atmospheric Spotlight */}
-        <div className="absolute top-1/2 -translate-y-1/2 right-0 lg:right-8 w-[720px] h-[720px] bg-gradient-to-tr from-[#1DA1F2]/60 via-[#1D4ED8]/45 to-[#3B82F6]/50 blur-[160px] rounded-full pointer-events-none animate-pulse" />
-
+      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden bg-gradient-to-br from-[#0284C7] via-[#0072B8] to-[#1DA1F2] text-white">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* LEFT — Text block */}
@@ -811,6 +787,18 @@ export const ServicesPage = () => {
           ))}
         </div>
       </section>
+
+      {/* NEW SECTION 01: ENGINEERING APPROACH */}
+      <ServicesEngineeringApproach />
+
+      {/* NEW SECTION 02: FROM CHALLENGE TO IMPACT */}
+      <ServicesChallengeToImpact />
+
+      {/* NEW SECTION 03: SCALABLE TECHNOLOGY */}
+      <ServicesScalableTechnology />
+
+      {/* NEW SECTION 04: PARTNERSHIP MODEL */}
+      <ServicesPartnershipModel />
 
       {/* 3. SUBSCRIBE TO OUR NEWSLETTER SECTION (White-Gray Theme) */}
       <section className="py-24 bg-[#E2E8F0] relative text-slate-900">

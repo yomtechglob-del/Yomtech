@@ -226,13 +226,13 @@ export const AboutPage = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
 
             {/* Floating Glass Badge Top Right */}
-            <div className="absolute top-4 right-4 px-4 py-2 rounded-xl bg-slate-900/80 backdrop-blur-md border border-sky-400/40 text-white text-xs font-black flex items-center gap-2 shadow-lg">
+            <div className="absolute top-4 right-4 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-xl border border-white/40 text-white text-xs font-black flex items-center gap-2 shadow-lg">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
               <span>Full-Stack Platform</span>
             </div>
 
             {/* Floating Glass Badge Bottom Left */}
-            <div className="absolute bottom-4 left-4 px-4 py-2 rounded-xl bg-slate-900/80 backdrop-blur-md border border-slate-700 text-slate-200 text-xs font-bold shadow-lg">
+            <div className="absolute bottom-4 left-4 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-xl border border-white/40 text-white text-xs font-bold shadow-lg">
               🏢 Addis Ababa, Ethiopia
             </div>
           </div>
@@ -691,8 +691,8 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      {/* 3. ENGINEERING ROADMAP SECTION (Distinct Deep Royal Theme) */}
-      <section className="py-24 w-full bg-gradient-to-b from-[#1C0D45] via-[#2A1568] to-[#1E0E4A] relative text-white">
+      {/* 3. ENGINEERING ROADMAP SECTION (Distinct Premier Light Luxury Theme - No Hero, No Dark Black) */}
+      <section className="py-24 w-full bg-gradient-to-b from-[#F8FAFC] via-[#F0F9FF] to-[#E0F2FE] relative text-slate-900 border-y border-sky-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-20">
           <EngineeringApproach />
         </div>

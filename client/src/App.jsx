@@ -13,15 +13,12 @@ import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
 
 const PublicLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen bg-[#151515] text-white selection:bg-[#1DA1F2]/30 selection:text-[#0ED3DD] relative">
-      {/* 3D Interactive Background Layer */}
-      <ThreeDBackground />
-
+    <div className="flex flex-col min-h-screen bg-[#F8FAFC] text-[#071A2B] relative">
       {/* Fixed Top Header */}
       <Navbar />
       
-      {/* Page Content with seamless dark hero alignment under navbar */}
-      <main className="flex-grow pt-0 relative z-10">
+      {/* Page Content */}
+      <main className="flex-grow pt-0">
         <Outlet />
       </main>
 

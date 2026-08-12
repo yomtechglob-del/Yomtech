@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginAdminApi, checkAuthApi } from '../../services/api';
 import { Lock, Mail, ArrowLeft, ShieldCheck, AlertCircle } from 'lucide-react';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../assets/logo.png';
 
 export const AdminLoginPage = () => {
   const [email, setEmail] = useState('');
