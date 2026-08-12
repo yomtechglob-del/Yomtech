@@ -87,7 +87,7 @@ export const HomePage = () => {
       category: 'Analytics'
     }
   ];
-
+//this is a comment
   const impactNumbers = [
     { stat: '2K+', label: 'Learners Empowered' },
     { stat: '25+', label: 'Business Solutions Deployed' },
