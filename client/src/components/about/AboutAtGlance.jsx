@@ -1,250 +1,389 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Calendar, Layers, Cpu, Users, ArrowUpRight, Sparkles, ShieldCheck, Zap, Globe, Award } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { 
+  Building2, Globe, Cpu, Users, ShieldCheck, 
+  Zap, Award, Calendar, Layers, Activity, ArrowRight, Sparkles
+} from 'lucide-react';
+
+const BENTO_CARDS = [
+  {
+    id: 'c1',
+    category: 'ESTABLISHED HERITAGE',
+    icon: Calendar,
+    type: 'stat',
+    title: '2015',
+    badge: '10+ YEARS',
+    subtitle: 'Founded & Pioneered',
+    description: 'Over a decade of software engineering excellence, digital transformation, and talent development.',
+    footerLeft: 'Continuous Innovation',
+    footerRight: '100% Proven Impact',
+    theme: {
+      accent: 'text-blue-500',
+      bgLight: 'bg-blue-50',
+      borderLight: 'border-blue-100',
+      gradient: 'from-blue-400 to-cyan-400',
+      glow: 'rgba(56, 189, 248, 0.15)'
+    },
+    delay: 0.1
+  },
+  {
+    id: 'c2',
+    category: 'FOCUS',
+    icon: Layers,
+    type: 'standard',
+    title: 'Enterprise',
+    subtitle: 'Technology Platform & ERP',
+    description: 'Custom ERP, WMS, SFA & cloud systems built for enterprise scale.',
+    theme: {
+      accent: 'text-indigo-500',
+      bgLight: 'bg-indigo-50',
+      borderLight: 'border-indigo-100',
+      gradient: 'from-indigo-400 to-blue-500',
+      glow: 'rgba(99, 102, 241, 0.15)'
+    },
+    delay: 0.2
+  },
+  {
+    id: 'c3',
+    category: 'CAPABILITY',
+    icon: Cpu,
+    type: 'standard',
+    title: 'AI + Cloud',
+    subtitle: 'Engineering Systems',
+    description: 'Deep Machine Learning, Intelligent Automation & AWS/Azure.',
+    theme: {
+      accent: 'text-emerald-500',
+      bgLight: 'bg-emerald-50',
+      borderLight: 'border-emerald-100',
+      gradient: 'from-emerald-400 to-teal-400',
+      glow: 'rgba(16, 185, 129, 0.15)'
+    },
+    delay: 0.3
+  },
+  {
+    id: 'c4',
+    category: 'DUAL MODEL',
+    icon: Users,
+    type: 'dual',
+    title: 'Software + Talent',
+    description: 'Connecting robust software engineering with market-ready tech talent development.',
+    badges: [
+      { text: 'Enterprise Solutions', icon: Zap, color: 'text-blue-500', bg: 'bg-blue-50', border: 'border-blue-100' },
+      { text: 'Tech Mentorship', icon: Award, color: 'text-amber-500', bg: 'bg-amber-50', border: 'border-amber-100' }
+    ],
+    theme: {
+      accent: 'text-violet-500',
+      bgLight: 'bg-violet-50',
+      borderLight: 'border-violet-100',
+      gradient: 'from-violet-400 to-purple-500',
+      glow: 'rgba(139, 92, 246, 0.15)'
+    },
+    delay: 0.4
+  }
+];
+
+const FeaturePill = ({ icon: Icon, text }) => (
+  <div className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/80 backdrop-blur-md border border-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(14,165,233,0.1)] hover:-translate-y-0.5 transition-all duration-300 group cursor-default">
+    <div className="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center border border-slate-100 group-hover:bg-cyan-50 group-hover:border-cyan-100 transition-colors">
+      <Icon className="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-500 transition-colors" />
+    </div>
+    <span className="text-xs font-bold text-slate-700 group-hover:text-slate-900">{text}</span>
+  </div>
+);
+
+const BentoCard = ({ card, activeCard, setActiveCard }) => {
+  const cardRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const isActive = activeCard === card.id;
+  const isDimmed = activeCard !== null && activeCard !== card.id;
+  const Icon = card.icon;
+
+  const handleMouseMove = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+  };
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setActiveCard(card.id)}
+      onMouseLeave={() => setActiveCard(null)}
+      className={`relative group flex flex-col rounded-[2rem] bg-white border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer h-full min-h-[280px]
+        ${isActive ? `border-transparent z-20 shadow-[0_25px_60px_rgba(0,0,0,0.08)]` : 'border-slate-100 shadow-[0_10px_35px_rgba(0,0,0,0.04)] z-10'}
+        ${isDimmed ? 'opacity-40 scale-[0.97] blur-[1px]' : 'opacity-100 blur-0 scale-100'}
+      `}
+      style={{
+        transform: isActive 
+          ? `perspective(1000px) rotateX(${(mousePos.y - 150) / -30}deg) rotateY(${(mousePos.x - 150) / 30}deg) scale3d(1.02, 1.02, 1.02)`
+          : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+        boxShadow: isActive 
+          ? `0 30px 60px -12px ${card.theme.glow}, 0 0 0 1.5px rgba(255,255,255,1) inset` 
+          : '0 10px 30px -10px rgba(0,0,0,0.05), 0 0 0 1px rgba(255,255,255,0.6) inset',
+        animation: `fade-in-up 0.8s ease-out ${card.delay}s both`
+      }}
+    >
+      {/* Dynamic Inner Cursor Spotlight (Refraction Effect) */}
+      <div 
+        className="absolute inset-0 z-0 transition-opacity duration-300 pointer-events-none rounded-[2rem] overflow-hidden"
+        style={{ opacity: isActive ? 1 : 0 }}
+      >
+        <div 
+          className="absolute w-[400px] h-[400px] rounded-full blur-[50px] transition-transform duration-75 ease-out mix-blend-multiply"
+          style={{
+            background: card.theme.glow,
+            transform: `translate(${mousePos.x - 200}px, ${mousePos.y - 200}px)`,
+          }}
+        />
+      </div>
+
+      {/* Animated Gradient Border Reveal */}
+      <div 
+        className={`absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[2rem] bg-gradient-to-br ${card.theme.gradient} p-[2px]`}
+        style={{ WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor' }}
+      >
+        <div className="w-full h-full bg-transparent rounded-[calc(2rem-2px)]" />
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-10 flex flex-col h-full p-7 md:p-8">
+        
+        {/* Header Row */}
+        <div className="flex justify-between items-start mb-6">
+          <span className={`px-3.5 py-1.5 rounded-full ${card.theme.bgLight} border ${card.theme.borderLight} ${card.theme.accent} text-[9px] font-black uppercase tracking-[0.2em] shadow-sm group-hover:bg-white transition-colors duration-300`}>
+            {card.category}
+          </span>
+          
+          <div className={`w-10 h-10 rounded-xl bg-white border border-slate-100 shadow-sm flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 relative overflow-hidden`}>
+            <div className={`absolute inset-0 bg-gradient-to-br ${card.theme.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`} />
+            <Icon className={`w-4 h-4 ${card.theme.accent} relative z-10`} strokeWidth={2} />
+          </div>
+        </div>
+
+        {/* Dynamic Body Content based on type */}
+        <div className="flex-1 flex flex-col">
+          
+          {card.type === 'stat' && (
+            <>
+              <div className="flex items-end gap-3 mb-2">
+                <h3 className="text-6xl font-black text-slate-900 tracking-tighter leading-none relative group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 transition-all duration-500">
+                  {card.title}
+                </h3>
+                <span className="mb-1.5 px-2 py-1 rounded-md bg-amber-100/50 text-amber-700 text-[10px] font-bold uppercase tracking-wider border border-amber-200/50">
+                  {card.badge}
+                </span>
+              </div>
+              <h4 className={`text-sm font-extrabold mb-3 ${card.theme.accent}`}>{card.subtitle}</h4>
+              <p className="text-sm text-slate-500 leading-relaxed font-medium mb-6 group-hover:text-slate-600 transition-colors">
+                {card.description}
+              </p>
+              
+              <div className="mt-auto">
+                <div className="flex justify-between text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2">
+                  <span>{card.footerLeft}</span>
+                  <span className={card.theme.accent}>{card.footerRight}</span>
+                </div>
+                {/* Laser Progress Bar */}
+                <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden relative">
+                  <div className={`absolute top-0 left-0 h-full w-[15%] bg-slate-300 rounded-full transition-all duration-1000 ease-out group-hover:w-full group-hover:bg-gradient-to-r group-hover:${card.theme.gradient}`} />
+                </div>
+              </div>
+            </>
+          )}
+
+          {card.type === 'standard' && (
+            <>
+              <h3 className="text-2xl lg:text-3xl font-black text-slate-900 mb-2 tracking-tight group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-slate-900 group-hover:to-slate-600 transition-all duration-300">
+                {card.title}
+              </h3>
+              <h4 className="text-xs font-semibold text-slate-400 mb-4">{card.subtitle}</h4>
+              <p className="text-sm text-slate-500 leading-relaxed font-medium group-hover:text-slate-600 transition-colors">
+                {card.description}
+              </p>
+              
+              {/* Laser Progress Bar (Standard) */}
+              <div className="mt-auto pt-6">
+                <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden relative">
+                  <div className={`absolute top-0 left-0 h-full w-[15%] bg-slate-300 rounded-full transition-all duration-1000 ease-out group-hover:w-full group-hover:bg-gradient-to-r group-hover:${card.theme.gradient}`} />
+                </div>
+              </div>
+            </>
+          )}
+
+          {card.type === 'dual' && (
+            <>
+              <h3 className="text-2xl lg:text-3xl font-black text-slate-900 mb-4 tracking-tight flex items-center gap-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-slate-900 group-hover:to-slate-600 transition-all duration-300">
+                {card.title} <ArrowRight className={`w-5 h-5 ${card.theme.accent} transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300`} />
+              </h3>
+              <p className="text-sm text-slate-500 leading-relaxed font-medium mb-6 group-hover:text-slate-600 transition-colors">
+                {card.description}
+              </p>
+              
+              <div className="mt-auto pt-4 flex flex-wrap gap-2">
+                {card.badges.map((b, i) => (
+                  <div key={i} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg ${b.bg} border ${b.border} shadow-sm group-hover:bg-white transition-colors duration-300`}>
+                    <b.icon className={`w-3.5 h-3.5 ${b.color}`} />
+                    <span className={`text-[10px] font-bold ${b.color}`}>{b.text}</span>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Laser Progress Bar (Dual) */}
+              <div className="mt-6">
+                <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden relative">
+                  <div className={`absolute top-0 left-0 h-full w-[15%] bg-slate-300 rounded-full transition-all duration-1000 ease-out group-hover:w-full group-hover:bg-gradient-to-r group-hover:${card.theme.gradient}`} />
+                </div>
+              </div>
+            </>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const AboutAtGlance = () => {
+  const [activeCard, setActiveCard] = useState(null);
+
   return (
-    <section className="py-28 w-full bg-gradient-to-b from-slate-50 via-cyan-50/40 to-slate-50 relative text-slate-900 overflow-hidden border-b border-slate-200/80">
-      {/* Dynamic Floating Ambient Light Orbs */}
-      <div className="absolute top-1/4 left-1/6 w-[600px] h-[600px] bg-gradient-to-br from-cyan-200/30 via-sky-100/20 to-transparent rounded-full blur-[140px] pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/6 w-[700px] h-[700px] bg-gradient-to-tl from-sky-200/25 via-cyan-100/20 to-transparent rounded-full blur-[160px] pointer-events-none" />
-
-      {/* Subtle Matrix Grid */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.04]"
-        style={{ backgroundImage: 'radial-gradient(circle, #0284C7 1.2px, transparent 1.2px)', backgroundSize: '28px 28px' }} />
-
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
+    <section className="relative min-h-screen py-20 lg:py-32 bg-white overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-cyan-900 flex items-center border-b border-slate-200/80">
+      
+      {/* Ambient Pearl & Ice Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
+        <div 
+          className="absolute inset-0 opacity-[0.35]" 
+          style={{ 
+            backgroundImage: 'radial-gradient(rgba(148,163,184,0.25) 1px, transparent 1px)', 
+            backgroundSize: '32px 32px',
+            maskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%)',
+            WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%)'
+          }}
+        />
         
-        {/* Asymmetric Dashboard Header Composition */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* LEFT: Eyebrow + Premium Gradient Heading + Description */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-5 space-y-7"
-          >
-            <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-cyan-100/80 border border-cyan-300 text-[#0284C7] text-xs font-black tracking-widest uppercase shadow-sm transition-all">
-              <div className="w-5.5 h-5.5 rounded-full bg-[#0284C7]/20 border border-[#0284C7]/40 flex items-center justify-center shrink-0">
-                <Sparkles size={13} className="text-[#0284C7] animate-spin" />
-              </div>
-              <span className="whitespace-nowrap">YOMTECH GLOBAL / AT A GLANCE</span>
-            </div>
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-200/30 blur-[130px] mix-blend-multiply animate-float-slow" />
+        <div className="absolute bottom-[-10%] right-[-5%] w-[60vw] h-[60vw] rounded-full bg-blue-200/30 blur-[140px] mix-blend-multiply animate-float-slower" style={{ animationDelay: '-3s' }} />
+        <div className="absolute top-[30%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-indigo-100/40 blur-[120px] mix-blend-multiply animate-pulse-slow" />
+      </div>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 leading-[1.12] tracking-tight">
-              Technology Built Around{' '}
-              <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">
-                People, Systems &amp; Possibility
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          
+          {/* LEFT COLUMN: Story & Typography */}
+          <div className="lg:col-span-5 flex flex-col justify-center animate-fade-in-right pr-0 lg:pr-8">
+            
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/70 backdrop-blur-md border border-cyan-100 shadow-[0_4px_20px_-4px_rgba(6,182,212,0.15)] mb-8 w-max group cursor-default">
+              <Globe className="w-4 h-4 text-cyan-500 animate-[spin_8s_linear_infinite]" />
+              <span className="text-[10px] font-black tracking-[0.25em] uppercase text-cyan-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-500 transition-all duration-300">
+                YomTech Global / At a Glance
+              </span>
+            </div>
+            
+            <h2 className="text-4xl sm:text-5xl lg:text-[3.5rem] font-black text-slate-900 mb-8 tracking-tight leading-[1.05]">
+              Technology Built Around <br />
+              <span className="relative inline-block mt-2 pb-2">
+                <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#0ea5e9,45%,#6366f1,55%,#0ea5e9)] bg-[length:200%_auto] animate-shimmer">
+                  People, Systems & Possibility
+                </span>
+                <svg className="absolute w-full h-4 -bottom-1 left-0 text-cyan-200/60" viewBox="0 0 200 12" fill="none" preserveAspectRatio="none">
+                  <path d="M2 10.0001C50.6667 3.33342 154 -6.39992 198 10.0001" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>
+                </svg>
               </span>
             </h2>
-
-            <p className="text-slate-600 text-base font-medium leading-relaxed">
+            
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed mb-10 max-w-xl">
               We operate as an integrated technology powerhouse—engineering enterprise-grade cloud software while cultivating top-tier tech talent for modern organizations worldwide.
             </p>
 
-            {/* Micro Feature Badges */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <div className="group relative flex items-center gap-3 px-7 py-3 rounded-full bg-white border border-slate-200 text-slate-900 font-black text-xs shadow-md hover:border-cyan-300 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                <div className="w-6 h-6 rounded-full bg-cyan-50 border border-cyan-200 flex items-center justify-center text-[#0284C7] group-hover:scale-110 transition-transform shrink-0">
-                  <ShieldCheck size={14} />
-                </div>
-                <span className="text-slate-800 font-extrabold whitespace-nowrap">Enterprise Quality</span>
-              </div>
-
-              <div className="group relative flex items-center gap-3 px-7 py-3 rounded-full bg-white border border-slate-200 text-slate-900 font-black text-xs shadow-md hover:border-amber-300 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                <div className="w-6 h-6 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 group-hover:scale-110 transition-transform shrink-0">
-                  <Zap size={14} />
-                </div>
-                <span className="text-slate-800 font-extrabold whitespace-nowrap">High Performance</span>
-              </div>
-
-              <div className="group relative flex items-center gap-3 px-7 py-3 rounded-full bg-white border border-slate-200 text-slate-900 font-black text-xs shadow-md hover:border-emerald-300 hover:shadow-lg hover:scale-105 transition-all duration-300">
-                <div className="w-6 h-6 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform shrink-0">
-                  <Globe size={14} />
-                </div>
-                <span className="text-slate-800 font-extrabold whitespace-nowrap">Global Talent</span>
-              </div>
+            <div className="flex flex-wrap gap-4 mb-12">
+              <FeaturePill icon={ShieldCheck} text="Enterprise Quality" />
+              <FeaturePill icon={Zap} text="High Performance" />
+              <FeaturePill icon={Globe} text="Global Talent" />
             </div>
 
-            <div className="pt-2 flex items-center gap-3 text-xs font-black text-[#0284C7]">
-              <span>INTELLIGENCE DASHBOARD PROFILE</span>
-              <span className="w-14 h-[2.5px] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] rounded-full" />
+            <div className="flex items-center gap-4">
+              <span className="text-[10px] font-black text-cyan-600 uppercase tracking-[0.25em]">Intelligence Dashboard Profile</span>
+              <div className="flex-1 h-px bg-slate-200 relative overflow-hidden">
+                 <div className="absolute top-0 left-0 h-full w-1/3 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-laser-scan" />
+              </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* RIGHT: Ultra-Premium Light Metric Cards */}
-          <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-12 gap-6 relative">
-            
-            {/* FEATURE CARD 1: ESTABLISHED HERITAGE */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.015 }}
-              transition={{ duration: 0.4 }}
-              className="md:col-span-7 p-[1.5px] rounded-[2rem] bg-gradient-to-br from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-xl hover:shadow-2xl transition-all duration-300 group"
-            >
-              <div className="bg-white rounded-[1.9rem] p-8 space-y-6 relative overflow-hidden h-full flex flex-col justify-between text-slate-900">
-                <div className="flex items-center justify-between relative z-10">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 shadow-xs">
-                    ESTABLISHED HERITAGE
-                  </span>
-                  <div className="p-3 rounded-2xl bg-cyan-50 border border-cyan-200 text-[#0284C7] shadow-sm group-hover:scale-110 transition-all duration-300">
-                    <Calendar size={22} strokeWidth={2.5} />
-                  </div>
-                </div>
-
-                <div className="space-y-1 relative z-10">
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-5xl sm:text-6xl font-black font-display text-slate-900 tracking-tight">
-                      2015
-                    </span>
-                    <span className="px-2.5 py-1 rounded-lg bg-amber-100/90 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-wider">
-                      10+ YEARS
-                    </span>
-                  </div>
-                  <div className="text-lg font-black text-[#0284C7] font-display">
-                    Founded &amp; Pioneered
-                  </div>
-                </div>
-
-                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed relative z-10">
-                  Over a decade of software engineering excellence, digital transformation, and talent development.
-                </p>
-
-                <div className="relative z-10 space-y-1.5">
-                  <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden p-[1px] border border-slate-200">
-                    <div className="h-full w-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] rounded-full animate-pulse" />
-                  </div>
-                  <div className="flex items-center justify-between text-[10px] font-bold text-slate-500">
-                    <span>Continuous Innovation</span>
-                    <span className="text-[#0284C7]">100% Proven Impact</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* FEATURE CARD 2: ENTERPRISE FOCUS */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.015 }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="md:col-span-5 p-[1.5px] rounded-[2rem] bg-gradient-to-br from-[#0284C7] via-cyan-400 to-[#1DA1F2] shadow-xl hover:shadow-2xl transition-all duration-300 group"
-            >
-              <div className="bg-white rounded-[1.9rem] p-7 space-y-5 relative overflow-hidden h-full flex flex-col justify-between text-slate-900">
-                <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-[#0284C7] px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200">
-                    FOCUS
-                  </span>
-                  <div className="p-2.5 rounded-2xl bg-cyan-50 text-[#0284C7] border border-cyan-200 group-hover:scale-110 transition-transform">
-                    <Layers size={20} strokeWidth={2.5} />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="text-2xl sm:text-3xl font-black font-display text-slate-900">
-                    Enterprise
-                  </div>
-                  <div className="text-xs font-bold text-slate-500">
-                    Technology Platform &amp; ERP
-                  </div>
-                </div>
-
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Custom ERP, WMS, SFA &amp; cloud systems built for enterprise scale.
-                </p>
-
-                <div className="h-1.5 w-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] rounded-full" />
-              </div>
-            </motion.div>
-
-            {/* FEATURE CARD 3: AI + CLOUD CAPABILITY */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.015 }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="md:col-span-5 p-[1.5px] rounded-[2rem] bg-gradient-to-br from-emerald-400 via-[#0ED3DD] to-cyan-500 shadow-xl hover:shadow-2xl transition-all duration-300 group"
-            >
-              <div className="bg-white rounded-[1.9rem] p-7 space-y-5 relative overflow-hidden h-full flex flex-col justify-between text-slate-900">
-                <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-emerald-700 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200">
-                    CAPABILITY
-                  </span>
-                  <div className="p-2.5 rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200 group-hover:scale-110 transition-transform">
-                    <Cpu size={20} strokeWidth={2.5} />
-                  </div>
-                </div>
-
-                <div className="space-y-1">
-                  <div className="text-2xl sm:text-3xl font-black font-display text-slate-900">
-                    AI + Cloud
-                  </div>
-                  <div className="text-xs font-bold text-slate-500">
-                    Engineering Systems
-                  </div>
-                </div>
-
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Deep Machine Learning, Intelligent Automation &amp; AWS/Azure.
-                </p>
-
-                <div className="h-1.5 w-full bg-gradient-to-r from-emerald-400 to-[#0ED3DD] rounded-full" />
-              </div>
-            </motion.div>
-
-            {/* FEATURE CARD 4: DUAL MODEL - SOFTWARE + TALENT */}
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -8, scale: 1.015 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="md:col-span-7 p-[1.5px] rounded-[2rem] bg-gradient-to-br from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-xl hover:shadow-2xl transition-all duration-300 group"
-            >
-              <div className="bg-white rounded-[1.9rem] p-7 space-y-5 relative overflow-hidden h-full flex flex-col justify-between text-slate-900">
-                <div className="flex items-center justify-between">
-                  <span className="text-[9px] font-black uppercase tracking-widest text-[#0284C7] px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 shadow-xs">
-                    DUAL MODEL
-                  </span>
-                  <div className="p-2.5 rounded-2xl bg-cyan-50 text-[#0284C7] border border-cyan-200 shadow-sm group-hover:scale-110 transition-transform">
-                    <Users size={20} strokeWidth={2.5} />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <div className="text-2xl sm:text-3xl font-black font-display text-slate-900 flex items-center gap-2.5">
-                    <span>Software + Talent</span>
-                    <ArrowUpRight size={22} className="text-[#0284C7] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </div>
-                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
-                    Connecting robust software engineering with market-ready tech talent development.
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 rounded-lg bg-cyan-50 border border-cyan-200 text-[10px] font-extrabold text-[#0284C7]">
-                    ⚡ Enterprise Solutions
-                  </span>
-                  <span className="px-3 py-1 rounded-lg bg-amber-50 border border-amber-200 text-[10px] font-extrabold text-amber-800">
-                    🎓 Tech Mentorship
-                  </span>
-                </div>
-
-                <div className="h-1.5 w-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] rounded-full" />
-              </div>
-            </motion.div>
-
+          {/* RIGHT COLUMN: Advanced Bento Grid */}
+          <div 
+            className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 relative z-20"
+            onMouseLeave={() => setActiveCard(null)}
+          >
+            {BENTO_CARDS.map((card) => (
+              <BentoCard 
+                key={card.id} 
+                card={card} 
+                activeCard={activeCard} 
+                setActiveCard={setActiveCard} 
+              />
+            ))}
           </div>
 
         </div>
-
       </div>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes float-slow {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(30px, -40px) scale(1.05); }
+        }
+        .animate-float-slow {
+          animation: float-slow 18s ease-in-out infinite;
+        }
+
+        @keyframes float-slower {
+          0%, 100% { transform: translate(0px, 0px) scale(1); }
+          50% { transform: translate(-30px, 40px) scale(0.95); }
+        }
+        .animate-float-slower {
+          animation: float-slower 24s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.4; transform: scale(1); }
+          50% { opacity: 0.7; transform: scale(1.1); }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+          0% { background-position: -200% center; }
+          100% { background-position: 200% center; }
+        }
+        .animate-shimmer {
+          animation: shimmer 6s linear infinite;
+        }
+
+        @keyframes laser-scan {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(300%); }
+        }
+        .animate-laser-scan {
+          animation: laser-scan 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes fade-in-up {
+          0% { opacity: 0; transform: translateY(40px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fade-in-right {
+          0% { opacity: 0; transform: translateX(-40px); }
+          100% { opacity: 1; transform: translateX(0); }
+        }
+        .animate-fade-in-right {
+          animation: fade-in-right 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+      `}} />
     </section>
   );
 };
+
+export default AboutAtGlance;

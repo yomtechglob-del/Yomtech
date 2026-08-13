@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Cpu, LayoutGrid, Monitor, GraduationCap, Video, ShieldCheck, Smartphone,
-  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check
+  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles
 } from 'lucide-react';
 import { HeroCanvas } from '../../components/common/HeroCanvas';
 
@@ -720,71 +720,246 @@ export const ServicesPage = () => {
             </div>
           </motion.div>
 
-          {serviceCategories.map((catGroup) => (
-            <div key={catGroup.categoryTitle} id={slugify(catGroup.categoryTitle)} className="space-y-20 pt-4">
-              <div className="text-center">
-                <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 inline-block border-b-4 border-[#0284C7] pb-3">
-                  {catGroup.categoryTitle}
-                </h2>
-              </div>
+          {serviceCategories.map((catGroup) => {
+            const pathD = (() => {
+              const count = catGroup.items.length;
+              if (!count) return '';
+              const firstIsLeft = catGroup.items[0].layout === 'left-image';
+              
+              // SVG Double-Line Laser Track runs inside the channel between Inner (-inset-3.5) & Outer (-inset-8.5) Dashed Borders (at -inset-6)
+              const H = 200 + 260 * count;
+              const headerTopY = parseFloat(((27 / H) * 100).toFixed(1));
+              const headerBottomY = parseFloat(((133 / H) * 100).toFixed(1));
+              const headerMidY = parseFloat(((headerTopY + headerBottomY) / 2).toFixed(1));
+              
+              const startY = headerBottomY + 5;
+              const step = (100 - startY - 4) / count;
+              const points = catGroup.items.map((item, i) => {
+                const y = (startY + step * (i + 0.5)).toFixed(1);
+                const x = item.layout === 'left-image' ? 40 : 60;
+                return `${x} ${y}`;
+              });
+              
+              // Custom tailored Concentric Pill SVG Loop centered inside the two dashed borders
+              const title = catGroup.categoryTitle;
+              let leftX = 35.5;
+              let rightX = 64.5;
+              
+              if (title === 'Software Development') {
+                leftX = 30.0;
+                rightX = 70.0;
+              } else if (title === 'Education & Training') {
+                leftX = 31.5;
+                rightX = 68.5;
+              }
+              
+              // Exact Semicircular Pill Cap Radius (capR = half of pill height for 100% smooth arc curvature)
+              const capR = parseFloat(((headerBottomY - headerTopY) / 2).toFixed(2));
+              const topFlatR = parseFloat((rightX - capR).toFixed(2));
+              const topFlatL = parseFloat((leftX + capR).toFixed(2));
+              
+              const headerLoop = `M 50 ${headerTopY} L ${topFlatR} ${headerTopY} Q ${rightX} ${headerTopY} ${rightX} ${headerMidY} Q ${rightX} ${headerBottomY} ${topFlatR} ${headerBottomY} L ${topFlatL} ${headerBottomY} Q ${leftX} ${headerBottomY} ${leftX} ${headerMidY} Q ${leftX} ${headerTopY} ${topFlatL} ${headerTopY} L 50 ${headerTopY}`;
+              const startX = firstIsLeft ? leftX : rightX;
+              
+              return `${headerLoop} M ${startX} ${headerBottomY} L ${points.join(' L ')} L 50 100`;
+            })();
 
-              <div className="space-y-14">
-                {catGroup.items.map((item) => {
-                  const isLeftImage = item.layout === 'left-image';
-                  return (
-                    <motion.div
-                      key={item.title}
-                      id={slugify(item.title)}
-                      initial={{ opacity: 0, y: 30 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
-                      className="py-4 group relative overflow-hidden"
-                    >
-                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
-                        {/* Real Image Side */}
-                        <div className={`lg:col-span-7 flex justify-center ${isLeftImage ? 'lg:order-1' : 'lg:order-2'}`}>
-                          <div className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl group-hover:scale-[1.02] transition-transform duration-500">
-                            <img
-                              src={item.image}
-                              alt={`${item.title} Illustration`}
-                              className="w-full h-full object-cover object-center"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent opacity-40 group-hover:opacity-10 transition-opacity" />
+            return (
+              <div key={catGroup.categoryTitle} id={slugify(catGroup.categoryTitle)} className="space-y-24 pt-12 relative w-full">
+                
+                {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
+                <svg 
+                  className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" 
+                  viewBox="0 0 100 100" 
+                  preserveAspectRatio="none"
+                >
+                  <defs>
+                    <linearGradient id={`neonZigzag_${slugify(catGroup.categoryTitle)}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#0284c7" />
+                      <stop offset="50%" stopColor="#06b6d4" />
+                      <stop offset="100%" stopColor="#3b82f6" />
+                    </linearGradient>
+                    <filter id={`neonBlur_${slugify(catGroup.categoryTitle)}`} x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="0.8" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  {/* Faint Ambient Background Glow Track */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
+                    strokeWidth="9"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.15"
+                    filter={`url(#neonBlur_${slugify(catGroup.categoryTitle)})`}
+                    vectorEffect="non-scaling-stroke"
+                  />
+
+                  {/* Double Line Track - Outer Rail Base */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
+                    strokeWidth="5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+
+                  {/* Double Line Track - Inner Core Gap (Creating 2 Parallel Lines) */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+
+                  {/* Double Line Track - Dashed Outer Stream */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
+                    strokeWidth="1.5"
+                    strokeDasharray="6 6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    vectorEffect="non-scaling-stroke"
+                  />
+
+                  {/* Double Line Track - Dynamic Traveling White Laser Dashes */}
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="#ffffff"
+                    strokeWidth="1.2"
+                    strokeDasharray="4 10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="animate-zigzag-dash"
+                    vectorEffect="non-scaling-stroke"
+                  />
+                </svg>
+
+                {/* Category Header */}
+                <div className="text-center mb-20 flex flex-col items-center relative z-10">
+                  <div className="relative inline-block group cursor-default">
+                    {/* OUTER DASHED BORDER - Perfectly Concentric Scaled-Up Duplicate */}
+                    <div className="absolute -inset-8 rounded-[3.25rem] border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
+
+                    {/* INNER DASHED BORDER - Master Geometry */}
+                    <div className="absolute -inset-4 rounded-[2.5rem] border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
+                    
+                    {/* Ethereal Glow */}
+                    <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
+
+                    <div className="relative px-10 py-4.5 rounded-[2rem] bg-white/95 backdrop-blur-2xl border-2 border-sky-100 shadow-[0_15px_40px_rgba(2,132,199,0.12)] flex items-center justify-center">
+                      <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-none">
+                        {catGroup.categoryTitle}
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ZIG-ZAG CONTENT CONTAINER */}
+                <div className="relative w-full">
+
+                  {catGroup.items.map((item, itemIdx) => {
+                    const isLeftImage = item.layout === 'left-image';
+                    return (
+                      <motion.div
+                        key={item.title}
+                        id={slugify(item.title)}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className={`flex flex-col lg:flex-row ${isLeftImage ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-between items-center relative z-10 w-full mb-36 last:mb-0`}
+                      >
+                        {/* TEXT CONTENT CARD */}
+                        <div className="w-full lg:w-[40%] perspective-1000">
+                          <div className="relative w-full rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-slate-200/90 shadow-[0_10px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.1)] transition-all duration-500 p-8 md:p-12 cursor-pointer group">
+                            
+                            <div className="flex items-center gap-3 mb-6">
+                              <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-sky-100 border border-sky-300 shadow-xs">
+                                {catGroup.categoryTitle} • STEP 0{itemIdx + 1}
+                              </span>
+                            </div>
+
+                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight mb-4">
+                              {item.title}
+                            </h3>
+
+                            <p className="text-slate-600 text-base leading-relaxed font-medium mb-8">
+                              {item.desc}
+                            </p>
+
+                            <div>
+                              <button
+                                onClick={() => handleContactClick(item.title)}
+                                className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-lg shadow-sky-500/20 hover:scale-105 transition-all duration-300"
+                              >
+                                <span>For More Contact us</span>
+                                <ArrowRight size={16} />
+                              </button>
+                            </div>
                           </div>
                         </div>
 
-                        {/* Text & Action Side */}
-                        <div className={`lg:col-span-5 space-y-6 ${isLeftImage ? 'lg:order-2' : 'lg:order-1'}`}>
-                          <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-sky-100 border border-sky-300 inline-block shadow-sm">
-                            {catGroup.categoryTitle}
-                          </span>
+                        {/* IMAGE SHOWCASE CONTAINER (Decreased Compact Size) */}
+                        <div className={`w-full lg:w-[40%] h-full flex items-center ${isLeftImage ? 'justify-end' : 'justify-start'} relative`}>
+                          {/* Animated Glow Behind Image */}
+                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full bg-sky-400/20 blur-[80px] opacity-30 animate-pulse-slow pointer-events-none" />
 
-                          <h3 className="text-3xl md:text-4xl font-black font-display text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight">
-                            {item.title}
-                          </h3>
+                          {/* Image Wrapper (Compact Max Width) */}
+                          <div className="relative w-full max-w-md aspect-[4/3] rounded-[2rem] bg-white/90 backdrop-blur-md border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.06)] p-4 md:p-6 hover:scale-[1.02] transition-transform duration-500 group">
+                            {/* Inner Image Frame */}
+                            <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-50 relative flex items-center justify-center p-3 md:p-4">
+                              <img
+                                src={item.image}
+                                alt={`${item.title} Illustration`}
+                                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                            </div>
 
-                          <p className="text-slate-700 text-sm md:text-base leading-relaxed font-normal">
-                            {item.desc}
-                          </p>
+                            {/* Step Node Badge anchored directly to inner border of Image Wrapper */}
+                            <div className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isLeftImage ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}>
+                              <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125">
+                                
+                                {/* Rotating Angle Ring over Node Icon */}
+                                <div className="absolute -inset-2.5 rounded-full border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
+                                
+                                <Cpu className="w-6 h-6 text-white relative z-10" strokeWidth={2.2} />
+                                
+                                {/* Mini Step Number Badge (Matching Reference Screenshot) */}
+                                <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-md text-[11px] font-black flex items-center justify-center">
+                                  <span className="w-full h-full rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center">
+                                    {itemIdx + 1}
+                                  </span>
+                                </span>
+                              </div>
+                            </div>
 
-                          <div className="pt-3">
-                            <button
-                              onClick={() => handleContactClick(item.title)}
-                              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-xl shadow-sky-500/25 hover:scale-105 transition-all duration-300"
-                            >
-                              <span>For More Contact us</span>
-                              <ArrowRight size={18} />
-                            </button>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+
+                      </motion.div>
+                    );
+                  })}
+                </div>
+
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 

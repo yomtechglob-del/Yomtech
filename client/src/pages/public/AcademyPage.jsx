@@ -25,17 +25,7 @@ import academyBootcampImg from '../../assets/academy/wabiskills_bootcamp.png';
 
 export const AcademyPage = () => {
   const navigate = useNavigate();
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
   const [activeCourseTab, setActiveCourseTab] = useState('ALL');
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (!newsletterEmail) return;
-    setNewsletterSuccess(true);
-    setNewsletterEmail('');
-    setTimeout(() => setNewsletterSuccess(false), 4000);
-  };
 
   const handleEnrollClick = (courseTitle) => {
     navigate('/contact', { state: { inquiryType: 'ACADEMY_ENROLLMENT', prefillService: courseTitle } });
@@ -329,65 +319,56 @@ export const AcademyPage = () => {
         </div>
       </section>
 
-      {/* NEW SECTION 01: LEARNING JOURNEY */}
-      <LearningJourney />
-
-      {/* 2. EXPLORE OUR EDUCATIONAL SERVICES SECTION — REDESIGNED MASTERPIECE SHOWCASE */}
-      <section id="educational-courses" className="py-32 w-full bg-gradient-to-b from-[#E0F2FE] via-[#BAE6FD]/60 to-[#E0F2FE] relative text-slate-900 overflow-hidden border-b border-sky-200/80">
-        {/* Layered Floating Glow Orbs */}
-        <div className="absolute top-1/4 left-1/5 w-[650px] h-[650px] bg-gradient-to-br from-cyan-200/40 via-sky-100/30 to-transparent rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/5 w-[550px] h-[550px] bg-gradient-to-tl from-indigo-100/40 via-sky-200/30 to-transparent rounded-full blur-[130px] pointer-events-none" />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
+      {/* NEW SECTION 01:      {/* 2. EXPLORE OUR EDUCATIONAL SERVICES SECTION — UPGRADED PREMIER DESIGNS & STYLES */}
+      <section id="educational-courses" className="pt-20 pb-28 relative bg-gradient-to-b from-[#dff1ff] to-[#aeddfa] border-b border-sky-200/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
-          {/* Section Header */}
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-sky-100/90 backdrop-blur-xl border border-sky-300 text-[#0072B8] text-xs font-black tracking-widest uppercase shadow-sm">
-              <Sparkles size={14} className="text-[#0284C7] animate-pulse" />
-              <span>🚀 EXPLORE ACADEMY BOOTCAMPS</span>
+          {/* Header */}
+          <div className="text-center max-w-4xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-white text-sky-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
+              <Sparkles size={14} className="text-[#0ea5e9] animate-pulse" />
+              <span>Upgraded to Premier Designs &amp; Styles for Advanced Customers</span>
             </div>
-
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Educational <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Courses &amp; Bootcamps</span>
+            
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
+              Educational <span className="text-[#38bdf8]">Courses &amp;</span><br />
+              <span className="text-[#38bdf8]">Bootcamps</span>
             </h2>
-
-            <p className="text-slate-700 text-base sm:text-lg font-medium leading-relaxed">
+            
+            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
               Industry-driven bootcamps designed to transform ambitious learners into lead engineers, AI specialists, product designers, and data strategists.
             </p>
 
-            {/* Interactive Category Filter Tabs */}
-            <div className="pt-4 flex items-center justify-center flex-wrap gap-2.5">
-              <div className="p-1.5 rounded-full bg-white/90 backdrop-blur-2xl border border-sky-200/90 shadow-md inline-flex flex-wrap items-center justify-center gap-1.5">
-                {[
-                  { id: 'ALL', label: 'All Bootcamps (4)', icon: Layers },
-                  { id: 'FULLSTACK', label: '💻 Full Stack', icon: Monitor },
-                  { id: 'AI', label: '🧠 AI & ML', icon: Cpu },
-                  { id: 'DESIGN', label: '🎨 UI/UX Design', icon: Layout },
-                  { id: 'DATA', label: '📊 Data Analytics', icon: BarChart }
-                ].map(tab => {
-                  const TabIcon = tab.icon;
-                  const isActive = activeCourseTab === tab.id;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveCourseTab(tab.id)}
-                      className={`px-6 py-3 rounded-full text-xs font-black transition-all duration-300 flex items-center gap-2 whitespace-nowrap cursor-pointer ${
-                        isActive
-                          ? 'bg-[#0284C7] text-white shadow-lg scale-105'
-                          : 'text-slate-700 hover:bg-sky-100/70'
-                      }`}
-                    >
-                      <TabIcon size={14} className={isActive ? 'text-white' : 'text-[#0284C7]'} />
-                      <span>{tab.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
+            {/* Premium Category Filter Pills */}
+            <div className="flex flex-wrap justify-center gap-1.5 mt-10 bg-white/40 backdrop-blur-md p-1.5 rounded-full border border-white/60 inline-flex shadow-sm">
+              {[
+                { id: 'ALL', label: 'All Bootcamps (4)', icon: Layers },
+                { id: 'FULLSTACK', label: 'Full Stack', icon: Monitor },
+                { id: 'AI', label: 'AI & ML', icon: Cpu },
+                { id: 'DESIGN', label: 'UI/UX Design', icon: Layout },
+                { id: 'DATA', label: 'Data Analytics', icon: BarChart }
+              ].map(tab => {
+                const TabIcon = tab.icon;
+                const isActive = activeCourseTab === tab.id;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveCourseTab(tab.id)}
+                    className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                      isActive
+                        ? 'bg-[#0ea5e9] text-white shadow-md hover:bg-[#0284c7]'
+                        : 'bg-transparent text-slate-600 hover:bg-white hover:shadow-sm'
+                    }`}
+                  >
+                    <TabIcon size={14} className={isActive ? 'text-white' : 'text-slate-400'} />
+                    <span>{tab.label}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
-          {/* Masterpiece Course Cards Stack */}
-          <div className="space-y-16">
+          <div className="space-y-12 max-w-6xl mx-auto">
             <AnimatePresence mode="wait">
               {filteredCourses.map((course) => {
                 const isLeftImage = course.layout === 'left-image';
@@ -395,117 +376,256 @@ export const AcademyPage = () => {
                 return (
                   <motion.div
                     key={course.id}
-                    initial={{ opacity: 0, y: 35 }}
+                    initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
-                    className="p-[2.5px] rounded-[3rem] bg-gradient-to-br from-white/70 via-cyan-300/40 to-sky-400/30 hover:from-amber-300 hover:via-[#0ED3DD] hover:to-[#1DA1F2] transition-all duration-500 shadow-2xl hover:shadow-[0_35px_80px_rgba(14,211,221,0.35)] hover:-translate-y-2 group"
+                    className="bg-white rounded-[2.5rem] p-6 sm:p-8 flex flex-col lg:flex-row gap-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] hover:shadow-[0_30px_60px_-15px_rgba(14,165,233,0.15)] transition-all duration-500 border border-white group"
                   >
-                    <div className="bg-white/95 backdrop-blur-2xl rounded-[2.9rem] p-7 sm:p-10 lg:p-12 text-slate-900 border border-white shadow-xl relative overflow-hidden">
+                    
+                    {/* Mockup Side */}
+                    <div className={`w-full lg:w-[45%] flex flex-col gap-4 ${isLeftImage ? 'order-1' : 'order-1 lg:order-2'}`}>
                       
-                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-                        
-                        {/* Interactive Visual Illustration Side */}
-                        <div className={`lg:col-span-6 flex flex-col items-center justify-center relative ${isLeftImage ? 'lg:order-1' : 'lg:order-2'}`}>
-                          
-                          {/* Visual Component */}
-                          <div className="w-full relative z-10">
-                            <CourseTechIllustration type={course.visualType} />
+                      {/* Interactive Visual Canvas / Mockup Box */}
+                      {course.id === 'fullstack' && (
+                        <div className="w-full aspect-[4/3.2] bg-[#0f172a] rounded-3xl overflow-hidden relative flex border-[8px] border-slate-50 shadow-[0_0_40px_rgba(14,165,233,0.15)] group-hover:shadow-[0_0_50px_rgba(14,165,233,0.25)] transition-shadow duration-500">
+                          {/* Mobile Mockup */}
+                          <div className="w-[34%] h-[88%] bg-[#1e293b] absolute bottom-0 left-5 rounded-t-2xl border-x border-t border-slate-700 flex flex-col shadow-[10px_0_30px_rgba(0,0,0,0.5)] z-20 transition-transform duration-500 group-hover:-translate-y-2">
+                            <div className="h-6 w-full border-b border-slate-700 flex justify-center items-center">
+                              <div className="w-1/3 h-1 bg-slate-600 rounded-full" />
+                            </div>
+                            <div className="flex-1 p-3 flex flex-col gap-2.5">
+                              <div className="w-full h-8 bg-[#0ea5e9]/20 rounded border border-[#0ea5e9]/30 flex items-center px-2.5">
+                                <span className="text-[10px] text-[#38bdf8] font-bold">App Dashboard</span>
+                              </div>
+                              <div className="grid grid-cols-2 gap-1.5">
+                                <div className="h-10 bg-slate-700 rounded-lg" />
+                                <div className="h-10 bg-slate-700 rounded-lg" />
+                              </div>
+                              <div className="flex-1 bg-slate-700/60 rounded-lg" />
+                            </div>
                           </div>
 
-                          {/* Quick Stats Micro Bar Under Visual */}
-                          <div className="mt-4 w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5 relative z-10">
-                            <div className="bg-sky-50/90 border border-sky-200/80 rounded-2xl p-2.5 text-center shadow-xs">
-                              <span className="text-[10px] font-black uppercase text-slate-500 block">Duration</span>
-                              <span className="text-xs font-black text-[#0284C7]">{course.duration}</span>
+                          {/* Code Editor Mockup */}
+                          <div className="w-[62%] h-[64%] bg-[#020617] absolute top-1/2 -translate-y-1/2 right-4 rounded-xl border border-slate-800 flex flex-col shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-10 transition-transform duration-500 group-hover:translate-x-2">
+                            <div className="h-7 bg-[#0f172a] border-b border-slate-800 flex items-center px-3 gap-1.5">
+                              <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444]" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-[#eab308]" />
+                              <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
                             </div>
-                            <div className="bg-sky-50/90 border border-sky-200/80 rounded-2xl p-2.5 text-center shadow-xs">
-                              <span className="text-[10px] font-black uppercase text-slate-500 block">Format</span>
-                              <span className="text-xs font-black text-slate-900">{course.format.split('+')[0]}</span>
+                            <div className="p-4 font-mono text-[10px] text-slate-300 leading-relaxed">
+                              <span className="text-[#c084fc]">const</span> <span class="text-[#60a5fa]">app</span> = <span className="text-[#fcd34d]">express</span>();<br />
+                              <span className="text-[#60a5fa]">app</span>.<span className="text-[#34d399]">use</span>(cors());<br />
+                              <span className="text-[#60a5fa]">app</span>.<span className="text-[#34d399]">get</span>(<span className="text-[#fcd34d]">'/api'</span>, (req, res) =&gt; &#123;<br />
+                              &nbsp;&nbsp;res.<span className="text-[#34d399]">json</span>(&#123; status: <span className="text-[#fcd34d]">'success'</span> &#125;);<br />
+                              &#125;);<span className="animate-pulse font-bold text-[#38bdf8]">_</span>
                             </div>
-                            <div className="bg-sky-50/90 border border-sky-200/80 rounded-2xl p-2.5 text-center shadow-xs">
-                              <span className="text-[10px] font-black uppercase text-slate-500 block">Projects</span>
-                              <span className="text-xs font-black text-emerald-700">{course.projectsCount}</span>
-                            </div>
-                            <div className="bg-sky-50/90 border border-sky-200/80 rounded-2xl p-2.5 text-center shadow-xs">
-                              <span className="text-[10px] font-black uppercase text-slate-500 block">Rating</span>
-                              <span className="text-xs font-black text-amber-700">{course.rating.split(' ')[0]}</span>
-                            </div>
+                          </div>
+
+                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
+                            React &bull; Node &bull; React Native
                           </div>
                         </div>
+                      )}
 
-                        {/* Detailed Content & Action Side */}
-                        <div className={`lg:col-span-6 space-y-6 ${isLeftImage ? 'lg:order-2' : 'lg:order-1'}`}>
+                      {course.id === 'ai' && (
+                        <div className="w-full aspect-[4/3.2] bg-[#09090b] rounded-3xl overflow-hidden relative flex items-center justify-center border-[8px] border-slate-50 shadow-[0_0_40px_rgba(139,92,246,0.15)] group-hover:shadow-[0_0_50px_rgba(139,92,246,0.25)] transition-shadow duration-500">
+                          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#312e81] via-[#09090b] to-[#09090b]" />
                           
-                          {/* Top Badges Row */}
-                          <div className="flex flex-wrap items-center justify-between gap-3">
-                            <div className="flex items-center gap-2">
-                              <span className="text-[10px] font-black uppercase tracking-widest text-[#0072B8] px-4 py-1.5 rounded-full bg-sky-100 border border-sky-300 shadow-xs">
-                                Educational Bootcamp
-                              </span>
-                              <span className={`text-[10px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full border shadow-xs ${course.badgeColor}`}>
-                                {course.badge}
-                              </span>
-                            </div>
+                          <div className="w-full h-full relative flex items-center justify-center z-10">
+                            <svg className="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M50 50 L150 50 L150 150 L50 150 Z" fill="none" stroke="#8b5cf6" strokeWidth="0.5" strokeDasharray="2 4" />
+                              <path d="M100 20 L180 100 L100 180 L20 100 Z" fill="none" stroke="#06b6d4" strokeWidth="0.5" strokeDasharray="2 4" />
+                              <line x1="50" y1="50" x2="150" y2="150" stroke="#f472b6" strokeWidth="1" opacity="0.5" />
+                              <line x1="150" y1="50" x2="50" y2="150" stroke="#f472b6" strokeWidth="1" opacity="0.5" />
+                            </svg>
 
-                            <span className="text-[10px] font-black text-emerald-800 uppercase tracking-wider px-3.5 py-1 rounded-full bg-emerald-100/90 border border-emerald-300 flex items-center gap-1.5">
-                              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                              Open Enrollment
-                            </span>
-                          </div>
-
-                          {/* Course Title */}
-                          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight tracking-tight">
-                            {course.title}
-                          </h3>
-
-                          {/* Description */}
-                          <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-semibold">
-                            {course.desc}
-                          </p>
-
-                          {/* Capability Micro Tags */}
-                          {course.tags && (
-                            <div className="space-y-2 pt-2 border-t border-sky-200/80">
-                              <span className="text-[11px] font-black uppercase tracking-wider text-slate-500 block">
-                                Key Skills &amp; Technology Stack:
-                              </span>
-                              <div className="flex flex-wrap gap-2">
-                                {course.tags.map((tag, tIdx) => (
-                                  <span key={tIdx} className="text-xs font-bold px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-slate-900 flex items-center gap-1.5 shadow-xs hover:bg-sky-100 transition-all">
-                                    <CheckCircle2 size={14} className="text-emerald-600 shrink-0" />
-                                    <span>{tag}</span>
-                                  </span>
-                                ))}
+                            <div className="absolute top-[25%] left-[25%] w-3 h-3 rounded-full bg-[#22d3ee] shadow-[0_0_20px_#22d3ee] animate-pulse" />
+                            <div className="absolute bottom-[25%] right-[25%] w-3 h-3 rounded-full bg-[#a855f7] shadow-[0_0_20px_#a855f7] animate-pulse" />
+                            <div className="absolute top-[25%] right-[25%] w-2 h-2 rounded-full bg-[#f472b6] shadow-[0_0_15px_#f472b6]" />
+                            <div className="absolute bottom-[25%] left-[25%] w-2 h-2 rounded-full bg-[#34d399] shadow-[0_0_15px_#34d399]" />
+                            
+                            <div className="absolute w-[72%] bg-[#18181b]/90 border border-slate-700/50 rounded-xl backdrop-blur-md p-4 shadow-[0_20px_40px_rgba(0,0,0,0.8)] z-20 transition-transform duration-500 group-hover:scale-105">
+                              <div className="flex gap-1.5 mb-2.5 border-b border-slate-700 pb-2">
+                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
+                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
+                              </div>
+                              <div className="font-mono text-[10px] text-indigo-300 leading-relaxed">
+                                &gt; import torch<br />
+                                &gt; model = NeuralNet()<br />
+                                &gt; model.train(epochs=100)<br />
+                                <span className="text-[#34d399] mt-1.5 block">&gt; Epoch 100/100: Accuracy: 99.8%</span>
+                                &gt; <span className="animate-pulse font-bold text-white">_</span>
                               </div>
                             </div>
-                          )}
-
-                          {/* Action Buttons Row */}
-                          <div className="pt-4 flex flex-wrap items-center gap-4">
-                            <motion.button
-                              whileHover={{ scale: 1.05 }}
-                              whileTap={{ scale: 0.96 }}
-                              onClick={() => handleEnrollClick(course.title)}
-                              className="px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-300 flex items-center gap-3 cursor-pointer group/btn"
-                            >
-                              <span>Enroll / Apply Now</span>
-                              <ArrowRight size={18} className="group-hover/btn:translate-x-1.5 transition-transform duration-300" />
-                            </motion.button>
-
-                            <a
-                              href="https://wabiskills.com/"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-7 py-4 rounded-full bg-slate-100 hover:bg-sky-50 border border-sky-200 text-slate-800 font-black text-xs uppercase tracking-wider transition-all flex items-center gap-2 cursor-pointer"
-                            >
-                              <span>View Syllabus ↗</span>
-                            </a>
+                          </div>
+                          
+                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
+                            AI Neural Models &bull; PyTorch
                           </div>
                         </div>
+                      )}
 
+                      {course.id === 'uiux' && (
+                        <div className="w-full aspect-[4/3.2] bg-[#1e1e1e] rounded-3xl overflow-hidden relative flex border-[8px] border-slate-50 shadow-[0_0_40px_rgba(236,72,153,0.15)] group-hover:shadow-[0_0_50px_rgba(236,72,153,0.25)] transition-shadow duration-500">
+                          <div className="w-[22%] h-full bg-[#2c2c2c] border-r border-[#3a3a3a] p-3 flex flex-col gap-2.5 z-20">
+                            <div className="flex items-center gap-1.5 mb-1">
+                              <div className="w-2 h-2 rounded-full bg-[#ff5f56]" />
+                              <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
+                              <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
+                            </div>
+                            <div className="w-full h-2 bg-[#4a4a4a] rounded-sm" />
+                            <div className="w-3/4 h-2 bg-[#4a4a4a] rounded-sm" />
+                            <div className="w-full h-2 bg-[#4a4a4a] rounded-sm mt-2" />
+                            <div className="w-1/2 h-2 bg-[#4a4a4a] rounded-sm" />
+                          </div>
+                          
+                          <div className="flex-1 bg-[#1e1e1e] relative p-4 flex items-center justify-center overflow-hidden">
+                            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
+                            <div className="flex gap-4 transition-transform duration-500 group-hover:scale-105 relative z-10 w-full h-full items-center justify-center">
+                              <div className="w-[45%] h-[85%] bg-[#0b0c10] rounded-xl shadow-2xl border border-[#2f3542] p-3 flex flex-col gap-2.5 relative overflow-hidden">
+                                <div className="w-full h-4 bg-[#2f3542] rounded-md" />
+                                <div className="flex-1 bg-pink-500/20 rounded-md border border-pink-500/40" />
+                                <div className="w-full h-8 bg-cyan-500/20 rounded-md border border-cyan-500/40" />
+                              </div>
+                              <div className="w-[45%] h-[85%] bg-[#0b0c10] rounded-xl shadow-2xl border border-[#2f3542] p-3 flex flex-col gap-2.5 relative">
+                                <div className="absolute -inset-1 border-[1.5px] border-[#0ea5e9] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                  <div className="absolute -top-3 -left-1 bg-[#0ea5e9] text-white text-[8px] font-bold px-1 rounded-sm">Component</div>
+                                </div>
+                                <div className="flex gap-2 h-8">
+                                  <div className="w-8 bg-[#2f3542] rounded-full" />
+                                  <div className="flex-1 bg-[#2f3542] rounded-md" />
+                                </div>
+                                <div className="flex-1 bg-[#2f3542] rounded-md" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
+                            Figma &bull; Design Tokens &bull; Prototyping
+                          </div>
+                        </div>
+                      )}
+
+                      {course.id === 'data' && (
+                        <div className="w-full aspect-[4/3.2] bg-[#020617] rounded-3xl overflow-hidden relative flex border-[8px] border-slate-50 shadow-[0_0_40px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_50px_rgba(56,189,248,0.25)] transition-shadow duration-500 p-5 flex-col">
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] to-[#020617] z-0" />
+                          
+                          <div className="flex-1 w-full bg-[#1e293b] rounded-2xl border border-slate-700/50 p-3.5 shadow-2xl flex flex-col gap-3 relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
+                            <div className="w-1/2 h-2.5 bg-slate-600 rounded-md" />
+                            
+                            <div className="flex gap-2.5 h-16">
+                              <div className="flex-1 bg-[#0ea5e9]/10 border border-[#0ea5e9]/20 rounded-lg flex items-end p-2.5 gap-1.5 overflow-hidden">
+                                <div className="w-full bg-[#0ea5e9] h-[30%] rounded-t-sm group-hover:h-[60%] transition-all duration-500" />
+                                <div className="w-full bg-[#38bdf8] h-[50%] rounded-t-sm group-hover:h-[80%] transition-all duration-500 delay-75" />
+                                <div className="w-full bg-[#7dd3fc] h-[90%] rounded-t-sm group-hover:h-[40%] transition-all duration-500 delay-100" />
+                                <div className="w-full bg-[#0284c7] h-[60%] rounded-t-sm group-hover:h-[95%] transition-all duration-500 delay-150" />
+                              </div>
+                              <div className="w-16 bg-[#0f172a] rounded-lg border border-slate-700 flex flex-col justify-center items-center gap-1">
+                                <div className="text-[#34d399] font-bold text-sm">+24%</div>
+                                <div className="w-6 h-1 bg-slate-700 rounded-full" />
+                              </div>
+                            </div>
+                            
+                            <div className="flex-1 bg-[#0f172a] rounded-lg border border-slate-700/50 p-2.5 font-mono text-[9px] text-[#34d399] leading-relaxed overflow-hidden">
+                              <span className="text-[#c084fc]">SELECT</span> user_id, count(*)<br />
+                              <span className="text-[#c084fc]">FROM</span> activity_log<br />
+                              <span className="text-[#c084fc]">GROUP BY</span> user_id;
+                            </div>
+                          </div>
+
+                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
+                            Data Engine &bull; Python &bull; SQL
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Integrated Stats Grid */}
+                      <div className="grid grid-cols-4 gap-1 bg-slate-50/80 rounded-2xl p-1.5 border border-slate-100">
+                        <div className="text-center p-2">
+                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Duration</p>
+                          <p className="text-sm font-bold text-[#0ea5e9]">{course.duration}</p>
+                        </div>
+                        <div className="text-center p-2 border-l border-slate-200/60">
+                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Format</p>
+                          <p className="text-sm font-bold text-slate-700">{course.format.split('+')[0]}</p>
+                        </div>
+                        <div className="text-center p-2 border-l border-slate-200/60">
+                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Projects</p>
+                          <p className="text-sm font-bold text-slate-700">{course.projectsCount}</p>
+                        </div>
+                        <div className="text-center p-2 border-l border-slate-200/60">
+                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Rating</p>
+                          <p className="text-sm font-bold text-amber-500">{course.rating.split(' ')[0]}</p>
+                        </div>
                       </div>
+
                     </div>
+
+                    {/* Content Side */}
+                    <div className={`w-full lg:w-[55%] flex flex-col justify-center py-2 ${isLeftImage ? 'lg:pl-6 order-2' : 'lg:pr-6 order-2 lg:order-1'}`}>
+                      
+                      {/* Badges Row */}
+                      <div className="flex flex-wrap items-center gap-2 mb-5">
+                        <span className="px-3.5 py-1 rounded-full bg-sky-50 text-[#0ea5e9] text-[10px] font-extrabold uppercase tracking-widest border border-sky-100">
+                          Educational Bootcamp
+                        </span>
+                        <span className={`px-3.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest border ${course.badgeColor}`}>
+                          {course.badge}
+                        </span>
+                        <span className="px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-extrabold uppercase tracking-widest border border-emerald-100 ml-auto hidden sm:block">
+                          Open Enrollment
+                        </span>
+                      </div>
+
+                      {/* Course Title */}
+                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 leading-tight tracking-tight">
+                        {course.title}
+                      </h3>
+
+                      {/* Course Description */}
+                      <p className="text-base text-slate-500 mb-8 leading-relaxed font-medium">
+                        {course.desc}
+                      </p>
+
+                      {/* Technology Stack Pills */}
+                      <div className="mb-8">
+                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Key Skills &amp; Technology Stack:</p>
+                        <div className="flex flex-wrap gap-2.5">
+                          {course.tags.map((tag, tIdx) => (
+                            <span key={tIdx} className="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold flex items-center gap-2 bg-white shadow-sm hover:shadow-md transition-shadow">
+                              <CheckCircle2 size={15} className="text-[#0ea5e9]" />
+                              <span>{tag}</span>
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap items-center gap-4 mt-auto">
+                        <motion.button
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
+                          onClick={() => handleEnrollClick(course.title)}
+                          className="px-8 py-3.5 rounded-full bg-[#0ea5e9] text-white text-sm font-bold shadow-lg shadow-[#0ea5e9]/30 hover:bg-[#0284c7] transition-all flex items-center gap-2 cursor-pointer"
+                        >
+                          <span>Enroll / Apply Now</span>
+                          <ArrowRight size={16} />
+                        </motion.button>
+
+                        <a
+                          href="https://wabiskills.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-8 py-3.5 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-bold hover:border-[#0ea5e9] hover:text-[#0284c7] transition-all flex items-center gap-2 shadow-sm cursor-pointer"
+                        >
+                          <span>View Syllabus ↗</span>
+                        </a>
+                      </div>
+
+                    </div>
+
                   </motion.div>
                 );
               })}
@@ -534,60 +654,6 @@ export const AcademyPage = () => {
 
       {/* NEW SECTION 13: GLOBAL LEARNING VISION */}
       <GlobalLearningVision />
-
-      {/* 3. SUBSCRIBE TO OUR NEWSLETTER SECTION */}
-      <section className="py-28 w-full bg-gradient-to-b from-[#FBF4C0] via-[#F5EBA8] to-[#FBF4C0] relative text-slate-900 overflow-hidden border-t border-yellow-300/60">
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="p-[1.5px] rounded-[2.8rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-2xl"
-          >
-            <div className="bg-white/95 rounded-[2.7rem] p-8 sm:p-12 text-center space-y-6 shadow-inner relative overflow-hidden border border-amber-200/60">
-              <div className="space-y-2">
-                <span className="text-[10px] font-black uppercase tracking-[0.25em] text-amber-900 px-4 py-1.5 rounded-full bg-amber-100/90 border border-amber-300 inline-block shadow-sm">
-                  📫 STAY UPDATED
-                </span>
-                <h3 className="text-2xl md:text-4xl font-black font-display text-slate-900">
-                  Subscribe to Our <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Newsletter</span>
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-xl mx-auto">
-                  Get the latest tech updates, course releases, and engineering insights straight to your inbox.
-                </p>
-              </div>
-
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row items-center gap-3 max-w-lg mx-auto pt-2">
-                <div className="relative w-full">
-                  <Mail size={18} className="absolute left-4 top-4 text-[#0284C7]" />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Enter your email address"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    className="w-full bg-slate-50 border-2 border-cyan-200 rounded-full pl-11 pr-5 py-3.5 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20 transition-all font-medium"
-                  />
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.96 }}
-                  type="submit"
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shrink-0 shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-300 cursor-pointer"
-                >
-                  Subscribe
-                </motion.button>
-              </form>
-
-              {newsletterSuccess && (
-                <div className="text-xs font-black text-[#0284C7] animate-pulse">
-                  ✓ Thank you for subscribing! We'll keep you posted.
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* NEW SECTION 14: ACADEMY CTA */}
       <AcademyCTA />
