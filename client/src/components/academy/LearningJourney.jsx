@@ -5,7 +5,7 @@ import {
   BookOpen,
   Terminal,
   Code2,
-  Users2,
+  Users,
   TrendingUp,
   CheckCircle2,
   Sparkles,
@@ -18,11 +18,23 @@ import {
   Check,
   ChevronRight,
   ShieldCheck,
-  Star
+  Star,
+  GraduationCap,
+  Briefcase,
+  Rocket,
+  GitPullRequest,
+  Cpu
 } from 'lucide-react';
 
+import imgWabiSkills from '../../assets/academy/wabiskills.jpg';
+import imgBootcamp from '../../assets/academy/wabiskills_bootcamp.png';
+import imgCourses from '../../assets/academy/wabiskills_courses.png';
+import imgFullstack from '../../assets/academy/fullstack_card.png';
+import imgAi from '../../assets/academy/ai_card.png';
+import imgUiUx from '../../assets/academy/uiux_card.png';
+
 export const LearningJourney = () => {
-  const [viewMode, setViewMode] = useState('SPOTLIGHT'); // 'SPOTLIGHT' | 'GRID'
+  const [viewMode, setViewMode] = useState('TIMELINE'); // 'TIMELINE' | 'SPOTLIGHT' | 'GRID'
   const [activeStageIdx, setActiveStageIdx] = useState(0);
   const [expandedGridCard, setExpandedGridCard] = useState(null);
 
@@ -30,61 +42,44 @@ export const LearningJourney = () => {
     {
       num: '01',
       key: 'DISCOVER',
-      title: 'Discover Potential',
-      subtitle: 'Career Mapping & Core Engineering Fundamentals',
-      desc: 'Explore software engineering specializations, technology radar trends, version control workflows, and algorithmic problem-solving mindsets.',
-      icon: Compass,
-      gradient: 'from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]',
-      brandColor: '#0284C7',
-      badgeBg: 'bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white',
-      pillBorder: 'border-[#0284C7]/40 bg-sky-50 text-[#0284C7]',
+      title: 'TVET-Aligned Curriculum',
+      subtitle: 'Official Standards & Software Engineering Core',
+      desc: 'Our modules are built on official technical and vocational standards to ensure professional validation, engineering mastery, and long-term career success.',
+      icon: GraduationCap,
+      image: imgWabiSkills,
+      gradient: 'from-amber-400 via-orange-500 to-amber-600',
+      brandColor: '#F59E0B',
+      badgeBg: 'bg-amber-100/90 text-amber-950 border-amber-300',
+      nodeBorder: 'border-amber-400/80 shadow-amber-500/20',
+      pillBorder: 'border-amber-300 bg-amber-50 text-amber-900',
+      accentBar: 'bg-gradient-to-r from-amber-400 to-orange-500',
       milestoneCode: 'MILESTONE CODE 01',
       highlights: [
+        'TVET-aligned official vocational engineering standards',
         'Career path exploration (Full-Stack, AI, Mobile)',
         'Git & GitHub collaboration & workflow standards',
-        'Command line mastery & developer environment setup',
-        'Algorithmic problem-solving mindsets & logic design'
+        'Command line mastery & developer environment setup'
       ],
       deliverable: 'Configured Dev Environment & Engineering Roadmap',
       techPills: ['Git & GitHub', 'VS Code', 'CLI Mastery', 'System Architecture'],
       duration: 'Weeks 1 - 2',
-      terminalCmd: 'yomtech --init-stage 01 --track discover'
+      terminalCmd: 'yomtech --init-stage 01 --track tvet-curriculum'
     },
     {
       num: '02',
-      key: 'LEARN',
-      title: 'Structured Learning',
-      subtitle: 'Deep Concepts & Production Architecture Patterns',
-      desc: 'Master production-grade frontend & backend concepts, data structures, state management architecture, and RESTful API design principles.',
-      icon: BookOpen,
-      gradient: 'from-[#0284C7] via-[#1DA1F2] to-indigo-600',
-      brandColor: '#1DA1F2',
-      badgeBg: 'bg-gradient-to-r from-[#0284C7] to-indigo-600 text-white',
-      pillBorder: 'border-sky-300 bg-sky-50 text-sky-900',
-      milestoneCode: 'MILESTONE CODE 02',
-      highlights: [
-        'Modern component architecture & state management',
-        'RESTful API design & async data pipelines',
-        'Relational & NoSQL database modeling',
-        'Clean code principles & design patterns'
-      ],
-      deliverable: 'Full Stack Architecture Blueprint & Technical Spec',
-      techPills: ['React / Next.js', 'Node.js', 'PostgreSQL', 'System Design'],
-      duration: 'Weeks 3 - 6',
-      terminalCmd: 'yomtech --compile-architecture --pattern clean'
-    },
-    {
-      num: '03',
       key: 'PRACTICE',
-      title: 'Hands-On Labs',
-      subtitle: 'Interactive Drills & Live Code Workshops',
-      desc: 'Apply knowledge through guided coding exercises, real-time code challenges, peer pairing, and interactive lab sessions.',
-      icon: Terminal,
-      gradient: 'from-[#0ED3DD] via-teal-500 to-emerald-500',
-      brandColor: '#0ED3DD',
-      badgeBg: 'bg-gradient-to-r from-[#0ED3DD] to-emerald-500 text-white',
-      pillBorder: 'border-teal-300 bg-teal-50 text-teal-900',
-      milestoneCode: 'MILESTONE CODE 03',
+      title: 'State-of-the-Art Practical Labs',
+      subtitle: 'Realistic Simulation & Deep Muscle Memory',
+      desc: 'Train using realistic simulation labs, nursery sandboxes, and live repository environments to build instant muscle memory and direct software experience.',
+      icon: Cpu,
+      image: imgBootcamp,
+      gradient: 'from-emerald-400 via-teal-500 to-emerald-600',
+      brandColor: '#10B981',
+      badgeBg: 'bg-emerald-100/90 text-emerald-950 border-emerald-300',
+      nodeBorder: 'border-emerald-400/80 shadow-emerald-500/20',
+      pillBorder: 'border-emerald-300 bg-emerald-50 text-emerald-900',
+      accentBar: 'bg-gradient-to-r from-emerald-400 to-teal-500',
+      milestoneCode: 'MILESTONE CODE 02',
       highlights: [
         'Interactive coding lab challenges & algorithms',
         'Pair programming & live refactoring drills',
@@ -93,77 +88,112 @@ export const LearningJourney = () => {
       ],
       deliverable: '10+ Verified Lab Submissions & Suite Tests',
       techPills: ['TypeScript', 'Jest / Vitest', 'Docker Labs', 'Live Pair Code'],
-      duration: 'Weeks 7 - 9',
+      duration: 'Weeks 3 - 6',
       terminalCmd: 'yomtech --run-labs --coverage 100%'
     },
     {
-      num: '04',
-      key: 'BUILD',
-      title: 'Real-World Projects',
-      subtitle: 'Production Applications & Cloud Microservices',
-      desc: 'Engineer end-to-end web applications, secure backend microservices, responsive user interfaces, and automated cloud deployments.',
-      icon: Code2,
-      gradient: 'from-[#0284C7] via-cyan-500 to-[#1DA1F2]',
-      brandColor: '#0284C7',
-      badgeBg: 'bg-gradient-to-r from-[#0284C7] to-cyan-600 text-white',
-      pillBorder: 'border-cyan-300 bg-cyan-50 text-cyan-900',
-      milestoneCode: 'MILESTONE CODE 04',
-      highlights: [
-        'Full-stack web application development',
-        'OAuth authentication & role-based access control',
-        'CI/CD pipeline automation & cloud hosting',
-        'Database indexing & API performance optimization'
-      ],
-      deliverable: 'Deployed Production Full-Stack Application',
-      techPills: ['Next.js App', 'Express / Nest API', 'MongoDB / Postgres', 'Vercel / AWS'],
-      duration: 'Weeks 10 - 14',
-      terminalCmd: 'yomtech --deploy production --env cloud'
-    },
-    {
-      num: '05',
+      num: '03',
       key: 'MENTOR',
-      title: 'Expert Guidance',
-      subtitle: '1-on-1 Senior Engineering Review & Code Polish',
-      desc: 'Refine your software craftsmanship with direct 1-on-1 code reviews and technical feedback from experienced lead engineers.',
-      icon: Users2,
-      gradient: 'from-indigo-600 via-[#0284C7] to-[#0ED3DD]',
+      title: 'Experienced Professional Mentors',
+      subtitle: 'Direct Lead Engineering Guidance & Clinical Expertise',
+      desc: 'Learn directly under professional lead software engineers, pediatric technical trainers, and senior architects with clinical enterprise expertise.',
+      icon: Users,
+      image: imgCourses,
+      gradient: 'from-indigo-500 via-purple-500 to-indigo-700',
       brandColor: '#6366F1',
-      badgeBg: 'bg-gradient-to-r from-indigo-600 to-[#0ED3DD] text-white',
+      badgeBg: 'bg-indigo-100/90 text-indigo-950 border-indigo-300',
+      nodeBorder: 'border-indigo-400/80 shadow-indigo-500/20',
       pillBorder: 'border-indigo-300 bg-indigo-50 text-indigo-900',
-      milestoneCode: 'MILESTONE CODE 05',
+      accentBar: 'bg-gradient-to-r from-indigo-500 to-purple-600',
+      milestoneCode: 'MILESTONE CODE 03',
       highlights: [
         'Line-by-line senior engineering code reviews',
         'Architectural refactoring recommendations',
         'Security & performance vulnerability audits',
-        'Industry best-practice alignment'
+        'Industry best-practice alignment & 1-on-1 coaching'
       ],
       deliverable: 'Production Code Review Certification',
       techPills: ['Code Audit', 'Performance Tuning', 'Clean Architecture', 'Security'],
-      duration: 'Weeks 15 - 16',
+      duration: 'Weeks 7 - 9',
       terminalCmd: 'yomtech --code-review --senior-mentor'
+    },
+    {
+      num: '04',
+      key: 'RESOURCE',
+      title: 'Comprehensive Resource Center',
+      subtitle: 'Architecture Charts & Enterprise Blueprint Templates',
+      desc: 'Access clear study guides, system developmental charts, pediatric menus, tech specifications, and first-aid code templates during training.',
+      icon: BookOpen,
+      image: imgFullstack,
+      gradient: 'from-pink-500 via-rose-500 to-pink-700',
+      brandColor: '#EC4899',
+      badgeBg: 'bg-pink-100/90 text-pink-950 border-pink-300',
+      nodeBorder: 'border-pink-400/80 shadow-pink-500/20',
+      pillBorder: 'border-pink-300 bg-pink-50 text-pink-900',
+      accentBar: 'bg-gradient-to-r from-pink-500 to-rose-500',
+      milestoneCode: 'MILESTONE CODE 04',
+      highlights: [
+        'Full-stack architecture blueprints & system specs',
+        'OAuth authentication & role-based access control',
+        'CI/CD pipeline automation & cloud hosting',
+        'Database indexing & API performance optimization'
+      ],
+      deliverable: 'Full Stack Blueprint & Comprehensive Spec',
+      techPills: ['Next.js App', 'Express / Nest API', 'MongoDB / Postgres', 'AWS Cloud'],
+      duration: 'Weeks 10 - 13',
+      terminalCmd: 'yomtech --deploy production --env cloud'
+    },
+    {
+      num: '05',
+      key: 'NETWORK',
+      title: 'Job Connection Network',
+      subtitle: 'Verified Enterprise Placements & Global Remote Teams',
+      desc: 'We actively assist certified graduates in finding secure, verified placements with top-tier technology companies and caring enterprise partners.',
+      icon: Briefcase,
+      image: imgAi,
+      gradient: 'from-orange-400 via-amber-500 to-orange-600',
+      brandColor: '#F97316',
+      badgeBg: 'bg-orange-100/90 text-orange-950 border-orange-300',
+      nodeBorder: 'border-orange-400/80 shadow-orange-500/20',
+      pillBorder: 'border-orange-300 bg-orange-50 text-orange-900',
+      accentBar: 'bg-gradient-to-r from-orange-400 to-amber-500',
+      milestoneCode: 'MILESTONE CODE 05',
+      highlights: [
+        'High-impact engineering portfolio creation',
+        'System design & live coding interview preparation',
+        'Direct hiring partner introductions & verified placements',
+        'Global remote team integration support'
+      ],
+      deliverable: 'Verified Placement & Enterprise Handoff',
+      techPills: ['Portfolio Site', 'Interview Prep', 'Direct Hiring', 'Career Match'],
+      duration: 'Weeks 14 - 16',
+      terminalCmd: 'yomtech --accelerate-career --connect-network'
     },
     {
       num: '06',
       key: 'GROW',
-      title: 'Career Acceleration',
-      subtitle: 'Production Portfolio Polish & Market Readiness',
-      desc: 'Build a standout production portfolio, master technical interviews, showcase open-source contributions, and scale your trajectory.',
-      icon: TrendingUp,
-      gradient: 'from-[#0284C7] via-[#0ED3DD] to-emerald-500',
-      brandColor: '#10B981',
-      badgeBg: 'bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-emerald-500 text-white',
-      pillBorder: 'border-emerald-300 bg-emerald-50 text-emerald-900',
+      title: 'Continuous Autonomy & Growth',
+      subtitle: 'Production Portfolio Polish & Market Leadership',
+      desc: 'Build a standout production portfolio, master high-scale architecture, contribute to enterprise software repos, and scale your career trajectory.',
+      icon: Rocket,
+      image: imgUiUx,
+      gradient: 'from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]',
+      brandColor: '#0284C7',
+      badgeBg: 'bg-sky-100/90 text-sky-950 border-sky-300',
+      nodeBorder: 'border-sky-400/80 shadow-sky-500/20',
+      pillBorder: 'border-sky-300 bg-sky-50 text-sky-900',
+      accentBar: 'bg-gradient-to-r from-[#0284C7] to-[#0ED3DD]',
       milestoneCode: 'MILESTONE CODE 06',
       highlights: [
-        'High-impact engineering portfolio creation',
-        'System design & live coding interview preparation',
-        'Resume & LinkedIn technical profile optimization',
-        'Direct hiring partner introductions'
+        'Enterprise open-source contribution mastery',
+        'Senior developer mentoring leadership',
+        'Production system scaling & SLA monitoring',
+        'Long-term engineering autonomy'
       ],
-      deliverable: 'Job-Ready Engineering Portfolio & Career Launch Pack',
-      techPills: ['Portfolio Site', 'Interview Prep', 'Open Source', 'Career Launch'],
+      deliverable: 'Job-Ready Engineering Portfolio & Autonomy Pack',
+      techPills: ['Open Source', 'Tech Leadership', 'SLA Scaling', 'Autonomy'],
       duration: 'Ongoing Autonomy',
-      terminalCmd: 'yomtech --accelerate-career --launch-portfolio'
+      terminalCmd: 'yomtech --launch-portfolio --scale-growth'
     }
   ];
 
@@ -183,22 +213,22 @@ export const LearningJourney = () => {
   };
 
   return (
-    <section className="py-28 sm:py-36 w-full bg-[#EAF6FF] relative text-slate-900 overflow-hidden border-b border-sky-200/80">
+    <section className="py-24 sm:py-36 w-full bg-[#FAFCFF] relative text-slate-900 overflow-hidden border-b border-sky-200/80 font-sans">
       {/* Ambient Soft Glow Halos */}
-      <div className="absolute top-1/6 left-1/4 w-[750px] h-[750px] bg-gradient-to-br from-sky-200/50 via-cyan-100/40 to-transparent rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/5 right-1/4 w-[650px] h-[650px] bg-gradient-to-tl from-blue-200/40 via-sky-100/30 to-transparent rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/6 left-1/4 w-[750px] h-[750px] bg-gradient-to-br from-amber-100/40 via-sky-100/40 to-transparent rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/5 right-1/4 w-[650px] h-[650px] bg-gradient-to-tl from-emerald-100/40 via-indigo-100/30 to-transparent rounded-full blur-[140px] pointer-events-none" />
       
-      {/* Background Matrix Pattern */}
+      {/* Background Matrix Dot Pattern */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-[0.07]"
-        style={{ backgroundImage: 'radial-gradient(circle, #0284C7 1.5px, transparent 1.5px)', backgroundSize: '32px 32px' }} 
+        className="absolute inset-0 pointer-events-none opacity-[0.05]"
+        style={{ backgroundImage: 'radial-gradient(circle, #0284C7 1.5px, transparent 1.5px)', backgroundSize: '36px 36px' }} 
       />
 
-      <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-16 space-y-14 relative z-10">
+      <div className="max-w-[1720px] mx-auto px-4 sm:px-8 lg:px-16 space-y-16 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-sky-100 border border-sky-300 text-[#0072B8] text-xs font-black tracking-widest uppercase shadow-sm">
+        <div className="text-center space-y-4 max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-sky-100/80 border border-sky-300 text-[#0072B8] text-xs font-black tracking-widest uppercase shadow-sm">
             <div className="w-5.5 h-5.5 rounded-full bg-sky-200 border border-sky-400 flex items-center justify-center shrink-0">
               <Sparkles size={13} className="text-[#0072B8] animate-spin" />
             </div>
@@ -206,16 +236,28 @@ export const LearningJourney = () => {
           </div>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black font-display text-slate-900 tracking-tight leading-tight">
-            Your Journey From <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Learning to Building</span>
+            Your Journey From <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 bg-clip-text text-transparent">Learning to Building</span>
           </h2>
 
-          <p className="text-slate-700 text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto">
-            A progressive engineering roadmap designed to turn technical ambition into enterprise-ready software craftsmanship.
+          <p className="text-slate-700 text-base sm:text-lg font-medium leading-relaxed max-w-3xl mx-auto">
+            We deliver premium, TVET-aligned software training for future engineers through structured practical labs, senior mentorship, and verified career connections.
           </p>
 
-          {/* Premier Mode Switcher */}
+          {/* Mode Switcher */}
           <div className="pt-4 flex items-center justify-center gap-3">
             <div className="p-1.5 rounded-full bg-white/90 backdrop-blur-xl border border-sky-200/90 shadow-lg shadow-sky-500/10 inline-flex items-center gap-1">
+              <button
+                onClick={() => setViewMode('TIMELINE')}
+                className={`px-7 py-3 rounded-full text-xs font-black transition-all duration-300 flex items-center gap-2.5 whitespace-nowrap cursor-pointer ${
+                  viewMode === 'TIMELINE'
+                    ? 'bg-gradient-to-r from-[#0284C7] to-[#1DA1F2] text-white font-black shadow-lg shadow-sky-500/30 scale-105'
+                    : 'text-slate-700 hover:bg-sky-100/70'
+                }`}
+              >
+                <GitPullRequest className="w-4 h-4" />
+                <span>Winding Pathway</span>
+              </button>
+
               <button
                 onClick={() => setViewMode('SPOTLIGHT')}
                 className={`px-7 py-3 rounded-full text-xs font-black transition-all duration-300 flex items-center gap-2.5 whitespace-nowrap cursor-pointer ${
@@ -227,6 +269,7 @@ export const LearningJourney = () => {
                 <SlidersHorizontal className="w-4 h-4" />
                 <span>Interactive Spotlight</span>
               </button>
+
               <button
                 onClick={() => setViewMode('GRID')}
                 className={`px-7 py-3 rounded-full text-xs font-black transition-all duration-300 flex items-center gap-2.5 whitespace-nowrap cursor-pointer ${
@@ -243,11 +286,11 @@ export const LearningJourney = () => {
         </div>
 
         {/* Premier Horizontal Stage Stepper Rail (01 -> 06) */}
-        <div className="p-[2px] rounded-[2.2rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-xl shadow-sky-500/10">
+        <div className="p-[2px] rounded-[2.2rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 shadow-xl shadow-sky-500/10">
           <div className="w-full bg-white/95 backdrop-blur-2xl rounded-[2.1rem] p-3 sm:p-4 border border-sky-200/80">
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 relative">
               {stages.map((stg, idx) => {
-                const isSelected = activeStageIdx === idx && viewMode === 'SPOTLIGHT';
+                const isSelected = activeStageIdx === idx;
                 const Icon = stg.icon;
 
                 return (
@@ -255,11 +298,10 @@ export const LearningJourney = () => {
                     key={stg.key}
                     onClick={() => {
                       setActiveStageIdx(idx);
-                      setViewMode('SPOTLIGHT');
                     }}
-                    className={`relative flex flex-col items-center justify-center px-6 py-3.5 rounded-2xl transition-all duration-300 cursor-pointer group ${
+                    className={`relative flex flex-col items-center justify-center px-4 py-3 rounded-2xl transition-all duration-300 cursor-pointer group ${
                       isSelected
-                        ? `bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white shadow-xl shadow-cyan-500/30 scale-105 ring-2 ring-sky-300`
+                        ? `bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 text-white shadow-xl shadow-cyan-500/30 scale-105 ring-2 ring-sky-300`
                         : 'bg-sky-50/80 hover:bg-white text-slate-800 border border-sky-200/80 hover:border-[#0284C7]/50 shadow-xs'
                     }`}
                   >
@@ -269,7 +311,7 @@ export const LearningJourney = () => {
                       </span>
                       <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-[#0284C7]'}`} />
                     </div>
-                    <span className={`text-xs font-black tracking-widest uppercase mt-1 whitespace-nowrap ${isSelected ? 'text-white' : 'text-slate-900'}`}>
+                    <span className={`text-[11px] font-black tracking-wider uppercase mt-1 truncate max-w-full ${isSelected ? 'text-white' : 'text-slate-900'}`}>
                       {stg.key}
                     </span>
                   </button>
@@ -281,9 +323,279 @@ export const LearningJourney = () => {
 
         {/* MAIN VIEW CONTENT AREA */}
         <AnimatePresence mode="wait">
-          {viewMode === 'SPOTLIGHT' ? (
+          {viewMode === 'TIMELINE' ? (
             /* ========================================================================= */
-            /* MODE A: PREMIER INTERACTIVE SPOTLIGHT SHOWCASE (Cockpit Layout)           */
+            /* MODE A: PREMIER WINDING TIMELINE PATHWAY (EXACT LINE PASS THROUGH ICONS)   */
+            /* ========================================================================= */
+            <motion.div
+              key="timeline-zigzag-view"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -25 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full max-w-6xl mx-auto py-10"
+            >
+              {/* DESKTOP SVG CONNECTING DUAL-TRACK DASHED LINE THAT PASSES EXACTLY THROUGH THE ICON NODES */}
+              <div className="absolute inset-0 pointer-events-none hidden md:block z-10">
+                <svg
+                  className="w-full h-full"
+                  viewBox="0 0 1000 1000"
+                  preserveAspectRatio="none"
+                  fill="none"
+                >
+                  <defs>
+                    <linearGradient id="timelinePassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stopColor="#F59E0B" />
+                      <stop offset="20%" stopColor="#10B981" />
+                      <stop offset="40%" stopColor="#6366F1" />
+                      <stop offset="60%" stopColor="#EC4899" />
+                      <stop offset="80%" stopColor="#F97316" />
+                      <stop offset="100%" stopColor="#0284C7" />
+                    </linearGradient>
+
+                    <filter id="nodeGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="6" result="blur" />
+                      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                  </defs>
+
+                  {/* Outer Ambient Glow Tube */}
+                  <path
+                    d="M 580 80 L 420 240 L 580 410 L 420 580 L 580 740 L 420 910"
+                    stroke="url(#timelinePassGrad)"
+                    strokeWidth="10"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.3"
+                    filter="url(#nodeGlowFilter)"
+                  />
+
+                  {/* Base Colored Line Track (Like reference screenshot) */}
+                  <path
+                    d="M 580 80 L 420 240 L 580 410 L 420 580 L 580 740 L 420 910"
+                    stroke="url(#timelinePassGrad)"
+                    strokeWidth="6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.95"
+                  />
+
+                  {/* Inner White Dashed Core Track (Exact pattern from reference screenshot) */}
+                  <path
+                    d="M 580 80 L 420 240 L 580 410 L 420 580 L 580 740 L 420 910"
+                    stroke="#FFFFFF"
+                    strokeWidth="2.5"
+                    strokeDasharray="6 6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    opacity="0.95"
+                  />
+                </svg>
+              </div>
+
+              {/* MOBILE VERTICAL CENTER DUAL LINE */}
+              <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-amber-400 via-purple-500 to-sky-500 rounded-full md:hidden z-10 opacity-80" />
+
+              {/* STAGES LIST CONTAINER */}
+              <div className="space-y-20 md:space-y-32 relative z-20">
+                {stages.map((stg, idx) => {
+                  const Icon = stg.icon;
+                  const isEven = idx % 2 === 0; // Even index: Card Left, Content Right. Odd: Content Left, Card Right.
+
+                  return (
+                    <motion.div
+                      key={stg.key}
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-80px' }}
+                      transition={{ duration: 0.6, delay: idx * 0.1 }}
+                      className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+                    >
+                      {/* ========================================================= */}
+                      {/* CENTRAL ICON NODE BADGE (MATCHING REFERENCE SCREENSHOT)    */}
+                      {/* ========================================================= */}
+                      <div 
+                        className={`absolute z-30 hidden md:flex items-center justify-center transition-transform duration-500 hover:scale-125 cursor-pointer
+                          ${isEven ? 'left-[58%]' : 'left-[42%]'} top-1/2 -translate-x-1/2 -translate-y-1/2`}
+                        onClick={() => {
+                          setActiveStageIdx(idx);
+                          setViewMode('SPOTLIGHT');
+                        }}
+                      >
+                        {/* Outer Dashed Circle Ring (Exactly like screenshot!) */}
+                        <div className={`relative w-20 h-20 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/60 backdrop-blur-xs flex items-center justify-center shadow-xl transition-all duration-500 group`}>
+                          
+                          {/* Inner Gradient Solid Circle Disk */}
+                          <div className={`w-13 h-13 rounded-full bg-gradient-to-br ${stg.gradient} text-white flex items-center justify-center shadow-md border-2 border-white relative`}>
+                            <Icon className="w-6 h-6 stroke-[2.2]" />
+                            
+                            {/* Top-Right Step Number Badge (e.g. 1, 2, 3, 4, 5, 6 - Exact reference!) */}
+                            <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 border-2 border-white text-white font-black text-[10px] flex items-center justify-center shadow-md">
+                              {idx + 1}
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      {/* MOBILE NODE BADGE (CENTERED ON MOBILE LINE) */}
+                      <div className="flex md:hidden justify-center z-30 my-2">
+                        <div className={`relative w-16 h-16 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/80 backdrop-blur-xs flex items-center justify-center shadow-lg`}>
+                          <div className={`w-11 h-11 rounded-full bg-gradient-to-br ${stg.gradient} text-white flex items-center justify-center shadow-md border-2 border-white relative`}>
+                            <Icon className="w-5 h-5 stroke-[2.2]" />
+                            <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 border-2 border-white text-white font-black text-[9px] flex items-center justify-center shadow-sm">
+                              {idx + 1}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      {/* ========================================================= */}
+                      {/* COLUMN 1: LEFT SIDE (Either Image Card or Content Details) */}
+                      {/* ========================================================= */}
+                      <div className={`md:col-span-5 ${isEven ? 'order-1 md:pr-4' : 'order-2 md:order-1 md:pl-4'}`}>
+                        {isEven ? (
+                          /* EVEN INDEX: ORGANIC CURVED IMAGE CARD ON LEFT */
+                          <div className="relative group cursor-pointer" onClick={() => setActiveStageIdx(idx)}>
+                            {/* Ambient Glow behind frame */}
+                            <div className={`absolute -inset-2 rounded-[3rem] bg-gradient-to-br ${stg.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                            
+                            {/* Wavy Organic Image Container */}
+                            <div 
+                              className="relative overflow-hidden border-4 border-white shadow-2xl transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                              style={{ borderRadius: '50px 35px 65px 40px / 40px 60px 45px 55px' }}
+                            >
+                              <img 
+                                src={stg.image} 
+                                alt={stg.title}
+                                className="w-full h-[280px] sm:h-[340px] object-cover transition-transform duration-700 group-hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80" />
+                              
+                              {/* Bottom Floating Badge on Image */}
+                              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest backdrop-blur-md shadow-md`}>
+                                  STAGE {stg.num}
+                                </span>
+                                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-xs font-black">
+                                  {stg.duration}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          /* ODD INDEX: TEXT CONTENT DETAILS ON LEFT */
+                          <div className="space-y-4 text-left p-6 sm:p-8 rounded-[2.5rem] bg-white/80 backdrop-blur-xl border border-sky-200/80 shadow-xl hover:border-sky-300 transition-all">
+                            <div className="flex items-center gap-3">
+                              <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest shadow-xs`}>
+                                STAGE {stg.num} • {stg.key}
+                              </span>
+                              <span className="text-xs font-black text-[#0072B8] font-mono">
+                                {stg.milestoneCode}
+                              </span>
+                            </div>
+
+                            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display tracking-tight leading-tight">
+                              {stg.title}
+                            </h3>
+
+                            <p className="text-slate-600 text-sm font-semibold leading-relaxed">
+                              {stg.desc}
+                            </p>
+
+                            {/* Underline Accent Line */}
+                            <div className={`w-14 h-1.5 rounded-full ${stg.accentBar}`} />
+
+                            <div className="pt-2 flex flex-wrap gap-2">
+                              {stg.techPills.map((tech, tIdx) => (
+                                <span key={tIdx} className="text-xs font-extrabold px-3.5 py-1.5 rounded-full bg-sky-50 text-[#0284C7] border border-sky-200">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      {/* SPACER COLUMN IN CENTER (COL 6) TO GIVE NODE BREATHING ROOM */}
+                      <div className="hidden md:block md:col-span-2" />
+
+                      {/* ========================================================= */}
+                      {/* COLUMN 2: RIGHT SIDE (Either Content Details or Image Card) */}
+                      {/* ========================================================= */}
+                      <div className={`md:col-span-5 ${isEven ? 'order-2 md:pl-4' : 'order-1 md:order-2 md:pr-4'}`}>
+                        {isEven ? (
+                          /* EVEN INDEX: TEXT CONTENT DETAILS ON RIGHT */
+                          <div className="space-y-4 text-left p-6 sm:p-8 rounded-[2.5rem] bg-white/80 backdrop-blur-xl border border-sky-200/80 shadow-xl hover:border-sky-300 transition-all">
+                            <div className="flex items-center gap-3">
+                              <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest shadow-xs`}>
+                                STAGE {stg.num} • {stg.key}
+                              </span>
+                              <span className="text-xs font-black text-[#0072B8] font-mono">
+                                {stg.milestoneCode}
+                              </span>
+                            </div>
+
+                            <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display tracking-tight leading-tight">
+                              {stg.title}
+                            </h3>
+
+                            <p className="text-slate-600 text-sm font-semibold leading-relaxed">
+                              {stg.desc}
+                            </p>
+
+                            {/* Underline Accent Line */}
+                            <div className={`w-14 h-1.5 rounded-full ${stg.accentBar}`} />
+
+                            <div className="pt-2 flex flex-wrap gap-2">
+                              {stg.techPills.map((tech, tIdx) => (
+                                <span key={tIdx} className="text-xs font-extrabold px-3.5 py-1.5 rounded-full bg-sky-50 text-[#0284C7] border border-sky-200">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
+                        ) : (
+                          /* ODD INDEX: ORGANIC CURVED IMAGE CARD ON RIGHT */
+                          <div className="relative group cursor-pointer" onClick={() => setActiveStageIdx(idx)}>
+                            {/* Ambient Glow behind frame */}
+                            <div className={`absolute -inset-2 rounded-[3rem] bg-gradient-to-br ${stg.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                            
+                            {/* Wavy Organic Image Container */}
+                            <div 
+                              className="relative overflow-hidden border-4 border-white shadow-2xl transition-all duration-700 ease-out group-hover:scale-[1.03]"
+                              style={{ borderRadius: '40px 60px 45px 55px / 55px 40px 60px 45px' }}
+                            >
+                              <img 
+                                src={stg.image} 
+                                alt={stg.title}
+                                className="w-full h-[280px] sm:h-[340px] object-cover transition-transform duration-700 group-hover:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80" />
+                              
+                              {/* Bottom Floating Badge on Image */}
+                              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
+                                <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest backdrop-blur-md shadow-md`}>
+                                  STAGE {stg.num}
+                                </span>
+                                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-xs font-black">
+                                  {stg.duration}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          ) : viewMode === 'SPOTLIGHT' ? (
+            /* ========================================================================= */
+            /* MODE B: PREMIER INTERACTIVE SPOTLIGHT SHOWCASE (Cockpit Layout)           */
             /* ========================================================================= */
             <motion.div
               key={`spotlight-${activeStageIdx}`}
@@ -294,7 +606,7 @@ export const LearningJourney = () => {
               className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
             >
               {/* LEFT COLUMN: Stage Overview & Objectives (Col 1-7) - Luminous Cockpit */}
-              <div className="lg:col-span-7 p-[2px] rounded-[2.5rem] bg-gradient-to-br from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-2xl shadow-sky-500/15">
+              <div className="lg:col-span-7 p-[2px] rounded-[2.5rem] bg-gradient-to-br from-[#0284C7] via-[#0ED3DD] to-indigo-600 shadow-2xl shadow-sky-500/15">
                 <div className="bg-white/95 backdrop-blur-2xl rounded-[2.4rem] p-7 sm:p-10 lg:p-11 h-full flex flex-col justify-between space-y-7 relative overflow-hidden text-left text-slate-900 border border-white shadow-xl">
                   
                   <div className="space-y-6">
@@ -412,20 +724,7 @@ export const LearningJourney = () => {
                       </div>
                     </div>
 
-                    {/* Code File Tabs */}
-                    <div className="flex items-center gap-2 text-[11px] font-mono relative z-10 border-b border-sky-200/80 pb-2">
-                      <span className="px-3.5 py-1 rounded-t-lg bg-sky-100 text-[#0072B8] border-t border-x border-sky-300 font-black flex items-center gap-1.5">
-                        <span className="text-amber-500">⚡</span> terminal.sh
-                      </span>
-                      <span className="px-3.5 py-1 text-slate-500 hover:text-slate-900 font-bold transition-colors cursor-pointer">
-                        stage_config.json
-                      </span>
-                      <span className="px-3.5 py-1 text-slate-500 hover:text-slate-900 font-bold transition-colors cursor-pointer">
-                        env_status.log
-                      </span>
-                    </div>
-
-                    {/* Console Code Content Body — Light Sky Glass */}
+                    {/* Console Code Content Body */}
                     <div className="space-y-3 text-xs bg-gradient-to-br from-sky-50/90 via-cyan-50/50 to-blue-50/70 p-5 rounded-2xl border border-sky-200/90 font-mono text-slate-900 shadow-xs relative z-10">
                       
                       {/* Command prompt line */}
@@ -435,7 +734,7 @@ export const LearningJourney = () => {
                         <span className="text-slate-900 font-bold">$ {activeStage.terminalCmd}</span>
                       </div>
 
-                      {/* Output Stream with Line Numbers */}
+                      {/* Output Stream */}
                       <div className="space-y-2 pt-1">
                         <div className="flex items-start gap-3">
                           <span className="text-slate-400 font-bold select-none w-4 text-right">01</span>
@@ -522,7 +821,7 @@ export const LearningJourney = () => {
             </motion.div>
           ) : (
             /* ========================================================================= */
-            /* MODE B: PREMIER ROADMAP GRID (3x2 3D Gradient Stroke Cards)               */
+            /* MODE C: PREMIER ROADMAP GRID (3x2 3D Gradient Stroke Cards)               */
             /* ========================================================================= */
             <motion.div
               key="grid-view"
@@ -635,7 +934,7 @@ export const LearningJourney = () => {
         </AnimatePresence>
 
         {/* Premier Bottom Achievement Banner */}
-        <div className="p-[2px] rounded-[3rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-2xl">
+        <div className="p-[2px] rounded-[3rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 shadow-2xl">
           <div className="bg-white/95 backdrop-blur-2xl rounded-[2.9rem] p-8 sm:p-12 md:p-14 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden text-slate-900 border border-white shadow-xl">
             <div className="space-y-3 z-10 max-w-2xl">
               <div className="inline-flex items-center gap-3 text-[#0072B8] text-xs font-black uppercase tracking-widest bg-sky-50 px-7 py-3 rounded-full border border-sky-300 shadow-sm">
@@ -643,7 +942,7 @@ export const LearningJourney = () => {
                 <span>Premier Engineering Standard</span>
               </div>
               <h4 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display tracking-tight text-slate-900 leading-tight">
-                Ready to Build <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Production-Grade Applications?</span>
+                Ready to Build <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 bg-clip-text text-transparent">Production-Grade Applications?</span>
               </h4>
               <p className="text-slate-600 text-xs sm:text-sm font-semibold leading-relaxed">
                 Master the full software development lifecycle with hands-on projects, 1-on-1 mentorship, and a job-ready engineering portfolio.
@@ -652,14 +951,13 @@ export const LearningJourney = () => {
 
             <a
               href="/contact"
-              className="shrink-0 px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 hover:scale-105 transition-all duration-300 z-10 flex items-center gap-3 whitespace-nowrap cursor-pointer"
+              className="shrink-0 px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 hover:scale-105 transition-all duration-300 z-10 flex items-center gap-3 whitespace-nowrap cursor-pointer"
             >
               <span>Start Learning Journey</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
         </div>
-
       </div>
     </section>
   );

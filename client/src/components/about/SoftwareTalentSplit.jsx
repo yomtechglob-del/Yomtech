@@ -146,7 +146,10 @@ export const SoftwareTalentSplit = () => {
 
           {/* CENTER: Visual Bridge Nucleus Badge with Official YomTech Logo */}
           <div className="lg:col-span-2 flex flex-col items-center justify-center py-4 lg:py-0 relative z-20">
-            <div className="p-6 sm:p-7 rounded-[2rem] bg-white border-2 border-cyan-400/90 text-slate-900 text-center shadow-2xl space-y-3 relative overflow-hidden group hover:border-[#0284C7] hover:scale-105 transition-all duration-300">
+            {/* Glowing Vertical Spine Behind Center Badge */}
+            <div className="hidden lg:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-[#0284C7]/20 via-[#0ED3DD] to-[#1DA1F2]/20 rounded-full shadow-[0_0_12px_rgba(14,211,221,0.6)] z-0 pointer-events-none" />
+
+            <div className="p-6 sm:p-7 rounded-[2rem] bg-white border-2 border-cyan-400/90 text-slate-900 text-center shadow-2xl space-y-3 relative overflow-hidden group hover:border-[#0284C7] hover:scale-105 transition-all duration-300 z-10">
               <div className="absolute inset-0 bg-gradient-to-b from-cyan-50/60 via-white to-sky-50/60 opacity-90 pointer-events-none" />
 
               <div className="relative z-10 space-y-2.5">
