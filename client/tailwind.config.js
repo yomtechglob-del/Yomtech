@@ -22,8 +22,11 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'Inter', 'Outfit', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Plus Jakarta Sans"', 'Outfit', 'Inter', 'sans-serif']
+        sans: ['"Roboto"', '"Outfit"', '"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Roboto"', '"Outfit"', '"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        roboto: ['"Roboto"', 'sans-serif'],
+        outfit: ['"Outfit"', 'sans-serif'],
+        sora: ['"Sora"', '"Outfit"', 'sans-serif']
       },
       boxShadow: {
         'dodger-glow': '0 4px 20px rgba(30, 144, 255, 0.25)',

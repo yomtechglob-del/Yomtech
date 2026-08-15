@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Cpu, Users, Lightbulb, Award, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logos/logo.png';
 
 export const TechnologyPurpose = () => {
   const [activeNode, setActiveNode] = useState(3);

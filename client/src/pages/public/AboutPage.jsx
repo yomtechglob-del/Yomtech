@@ -12,6 +12,16 @@ import consultingTeamImg from '../../assets/about/consulting_team.jpg';
 import teamDiscussionImg from '../../assets/about/team_discussion.jpg';
 import aboutHeroImg from '../../assets/about/hero.svg';
 
+// Custom River Flowing Background Assets
+import ermiTwoImg from '../../assets/ermi-two.jpg';
+import erminOneImg from '../../assets/ermin-one.jpg';
+
+// Ecosystem Logo Assets
+import logoEmblem from '../../assets/logos/logo.png';
+import wabiSkillsLogo from '../../assets/logos/wabi skills logo.png';
+import wabiJobsLogo from '../../assets/logos/wabijobs-logo.png';
+import yomnexLogo from '../../assets/logos/yomnex-logo.png';
+
 // High resolution visual images for capability cards
 import educationImg from '../../assets/services/education.png';
 import customImg from '../../assets/services/custom.png';
@@ -20,18 +30,52 @@ import cloudImg from '../../assets/services/cloud.png';
 
 // Enterprise Premium About Us Components
 import { AboutAtGlance } from '../../components/about/AboutAtGlance';
-import { HowWeThink } from '../../components/about/HowWeThink';
-import { EngineeringApproach } from '../../components/about/EngineeringApproach';
-import { SoftwareTalentSplit } from '../../components/about/SoftwareTalentSplit';
-import { ImpactModel } from '../../components/about/ImpactModel';
-import { WhyModelDifferent } from '../../components/about/WhyModelDifferent';
-import { TechnologyPurpose } from '../../components/about/TechnologyPurpose';
 import { CoreFoundations } from '../../components/about/CoreFoundations';
-import { AboutEcosystem } from '../../components/about/AboutEcosystem';
+import { CompanyGallery } from '../../components/about/CompanyGallery';
+import { CompanyProfileDetails } from '../../components/about/CompanyProfileDetails';
 import { AboutFinalCTA } from '../../components/about/AboutFinalCTA';
 
 export const AboutPage = () => {
   const navigate = useNavigate();
+
+  const ECOSYSTEM_LOGOS = [
+    {
+      id: 'yomtech',
+      name: 'YomTech Global',
+      tagline: 'Enterprise Software & Tech Talent Core',
+      logo: logoEmblem,
+      badge: 'Parent Core',
+      badgeBg: 'bg-cyan-500/20 text-cyan-200 border-cyan-400/40',
+      boxStyle: 'from-cyan-950/80 via-slate-900/90 to-sky-950/80 border-cyan-400/50 hover:border-cyan-300'
+    },
+    {
+      id: 'wabiskills',
+      name: 'WabiSkills Academy',
+      tagline: 'Practical Hands-on Bootcamps & Mentorship',
+      logo: wabiSkillsLogo,
+      badge: 'Tech Academy',
+      badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40',
+      boxStyle: 'from-emerald-950/80 via-slate-900/90 to-teal-950/80 border-emerald-400/50 hover:border-emerald-300'
+    },
+    {
+      id: 'wabijobs',
+      name: 'WabiJobs Platform',
+      tagline: 'Talent Engineering & Career Ecosystem',
+      logo: wabiJobsLogo,
+      badge: 'Talent Network',
+      badgeBg: 'bg-amber-500/20 text-amber-300 border-amber-400/40',
+      boxStyle: 'from-slate-900/90 via-sky-950/80 to-slate-950/90 border-sky-400/50 hover:border-sky-300'
+    },
+    {
+      id: 'yomnex',
+      name: 'Yomnex ERP System',
+      tagline: 'Enterprise ERP & WMS Solutions',
+      logo: yomnexLogo,
+      badge: 'ERP Platform',
+      badgeBg: 'bg-indigo-500/20 text-indigo-300 border-indigo-400/40',
+      boxStyle: 'from-indigo-950/80 via-slate-900/90 to-slate-950/90 border-indigo-400/50 hover:border-indigo-300'
+    }
+  ];
 
   const approachCards = [
     {
@@ -70,25 +114,122 @@ export const AboutPage = () => {
     <div className="bg-white text-slate-900 min-h-screen relative overflow-hidden font-sans">
       
       {/* ========================================================
-          1. HERO SECTION (Inspired by Reference Banner Layout)
+          1. HERO SECTION (Left Text + Right 4-Logo Ecosystem Showcase Grid)
       ======================================================== */}
-      <section className="w-full pt-44 sm:pt-48 md:pt-52 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-sky-300/40">
+      <section className="w-full pt-44 sm:pt-48 md:pt-52 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
         
-        {/* Luminous Glow Flares */}
-        <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-emerald-400/25 via-cyan-500/20 to-transparent blur-[140px] rounded-full pointer-events-none" />
-        <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-sky-300/20 blur-[130px] rounded-full pointer-events-none" />
+        {/* Borderless Flowing Background Image Layer 1 (ermi-two.jpg - Left/Center) */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+          <img 
+            src={ermiTwoImg} 
+            alt="Flowing Background Layer 1" 
+            className="w-full h-full object-cover object-left-top origin-top-left opacity-55 mix-blend-overlay animate-river-flow-1 border-0"
+          />
+        </div>
+
+        {/* Borderless Flowing Background Image Layer 2 (ermin-one.jpg - Positioned to the Right) */}
+        <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden z-0">
+          <img 
+            src={erminOneImg} 
+            alt="Flowing Background Layer 2 Right" 
+            className="w-full h-full object-cover object-right-top origin-top-right opacity-60 mix-blend-soft-light animate-river-flow-2 border-0"
+          />
+        </div>
+
+        {/* Dark Cyan Gradient Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/85 via-[#0077B6]/70 to-[#00B4D8]/80 pointer-events-none z-0" />
+
+        {/* Glowing Luminous Cyan Flares */}
+        <div className="absolute -top-40 left-[-10%] w-[800px] h-[600px] bg-gradient-to-r from-[#48cae4]/35 via-[#0077b6]/25 to-transparent blur-[140px] rounded-full pointer-events-none z-0" />
+        <div className="absolute top-1/3 right-[-5%] w-[700px] h-[700px] bg-[#90e0ef]/20 blur-[150px] rounded-full pointer-events-none z-0" />
+        <div className="absolute -bottom-20 left-1/3 w-[500px] h-[300px] bg-[#00b4d8]/25 blur-[120px] rounded-full pointer-events-none" />
+
+        {/* Full-Hero Height Glowing Curved SVG Path Lines (Starts at Bottom Hero Border, Terminates on Top Hero Borders/Corners) */}
+        <svg 
+          className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible" 
+          preserveAspectRatio="none"
+          viewBox="0 0 1000 600" 
+          fill="none" 
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient id="heroLaserGrad1" x1="0%" y1="100%" x2="0%" y2="0%">
+              <stop offset="0%" stopColor="#00b4d8" stopOpacity="0.1" />
+              <stop offset="45%" stopColor="#48cae4" stopOpacity="0.85" />
+              <stop offset="88%" stopColor="#90e0ef" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#90e0ef" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="heroLaserGrad2" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#0077b6" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#00b4d8" stopOpacity="0.9" />
+              <stop offset="88%" stopColor="#38bdf8" stopOpacity="0.9" />
+              <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+            </linearGradient>
+            <filter id="heroGlowFlares" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="6" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Left Track (Behind Column 1: YomTech -> WabiJobs): Starts at Bottom Border (710, 600) with Decreased Margin, Terminates at Top Right (955, 14) */}
+          <path 
+            d="M 710 600 C 690 380, 790 160, 955 14" 
+            stroke="#00b4d8" 
+            strokeWidth="7" 
+            strokeLinecap="round"
+            opacity="0.3"
+            filter="url(#heroGlowFlares)"
+          />
+          <path 
+            d="M 710 600 C 690 380, 790 160, 955 14" 
+            stroke="url(#heroLaserGrad1)" 
+            strokeWidth="4" 
+            strokeLinecap="round"
+            filter="url(#heroGlowFlares)"
+            className="animate-pulse"
+          />
+
+          {/* Right Track (Behind Column 2: WabiSkills -> Yomnex): Starts at Bottom Border (790, 600) with Decreased Margin, Terminates at Right Border (1000, 110) */}
+          <path 
+            d="M 790 600 C 780 380, 890 200, 1000 110" 
+            stroke="#38bdf8" 
+            strokeWidth="8" 
+            strokeLinecap="round"
+            opacity="0.35"
+            filter="url(#heroGlowFlares)"
+          />
+          <path 
+            d="M 790 600 C 780 380, 890 200, 1000 110" 
+            stroke="url(#heroLaserGrad2)" 
+            strokeWidth="4.5" 
+            strokeLinecap="round"
+            filter="url(#heroGlowFlares)"
+          />
+
+          {/* Top-Right Corner Border Energy Beacon Node for Track 1 */}
+          <circle cx="955" cy="14" r="8" fill="#90e0ef" filter="url(#heroGlowFlares)" className="animate-ping" />
+          <circle cx="955" cy="14" r="5" fill="#ffffff" />
+
+          {/* Right Side Border Energy Beacon Node for Track 2 (Positioned Directly ON Right Edge Border) */}
+          <circle cx="996" cy="110" r="9" fill="#38bdf8" filter="url(#heroGlowFlares)" className="animate-ping" />
+          <circle cx="996" cy="110" r="5.5" fill="#90e0ef" filter="url(#heroGlowFlares)" />
+          <circle cx="996" cy="110" r="3" fill="#ffffff" />
+        </svg>
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           
-          {/* Left Hero Content */}
+          {/* Left Hero Content (Start/Left Aligned) */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-7"
+            className="lg:col-span-7 space-y-7 text-left items-start flex flex-col"
           >
             {/* Top Rating Badge */}
-            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white text-xs font-black shadow-lg">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white text-xs font-black shadow-lg">
               <div className="flex items-center gap-1 text-amber-300">
                 <span className="font-extrabold text-sm mr-1 text-white">4.9</span>
                 {[...Array(5)].map((_, i) => (
@@ -100,25 +241,25 @@ export const AboutPage = () => {
             </div>
 
             {/* Main Headline */}
-            <div className="space-y-2 font-display font-black tracking-tight leading-[1.08]">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] text-white">
-                WELCOME TO <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#0ED3DD] to-amber-200">
-                  YOMTECH GLOBAL
+            <div className="space-y-3 font-roboto font-black tracking-tight leading-[1.08]">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] text-white font-roboto font-extrabold">
+                Welcome to <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#90e0ef] via-[#48cae4] to-cyan-200 font-roboto">
+                  YomTech Global
                 </span> <br />
-                INNOVATIVE TECH SOLUTIONS
+                Innovative Tech Solutions
               </h1>
             </div>
 
-            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-2xl">
-              At YomeTech Global, we empower businesses, innovators, and learners to thrive in the digital era. From enterprise software to cloud solutions and world-class training, we don’t just deliver technology—we help you create the future.
+            <p className="text-cyan-50 text-base md:text-lg leading-relaxed font-normal max-w-2xl font-sans">
+              At YomTech Global, we empower businesses, innovators, and learners to thrive in the digital era. From enterprise software to cloud solutions and world-class training, we don’t just deliver technology—we help you create the future.
             </p>
 
             {/* Dual CTA Buttons Row */}
             <div className="flex flex-wrap items-center gap-5 pt-3">
               <button
                 onClick={() => navigate('/services')}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3 group"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#00b4d8] via-[#0077b6] to-[#023e8a] hover:from-[#90e0ef] hover:to-[#0077b6] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3 group border border-cyan-300/40"
               >
                 <span>Explore Our Services</span>
                 <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -141,274 +282,114 @@ export const AboutPage = () => {
             </div>
           </motion.div>
 
-          {/* Right Hero Image Showcase (Inspired by Reference Visual) */}
+          {/* Right Hero: 2 Vertical Floating Logo Columns (Matching Exact User Red Line Drawn Channels) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-5 flex justify-center relative"
+            className="lg:col-span-5 flex justify-center lg:justify-end relative py-2 w-full min-h-[400px]"
           >
-            <div className="relative w-full max-w-lg aspect-[4/3.5] rounded-[2.5rem] overflow-hidden border-2 border-cyan-300/40 shadow-[0_25px_60px_rgba(14,211,221,0.3)] group hover:border-[#0ED3DD] transition-all duration-500 bg-white/5 backdrop-blur-md">
-              <img
-                src={heroTeamImg || aboutHeroImg}
-                alt="YomTech Global Leadership"
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+            {/* Luminous Glowing Light Halo */}
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/35 via-sky-300/30 to-blue-600/25 rounded-full blur-[100px] pointer-events-none" />
 
-              {/* Floating Glass Badge Top Right */}
-              <div className="absolute top-4 right-4 px-4 py-2 rounded-2xl bg-white/25 backdrop-blur-xl border border-white/40 text-white text-xs font-black flex items-center gap-2 shadow-lg">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                <span>Enterprise &amp; Talent Core</span>
-              </div>
-
-              {/* Floating Glass Badge Bottom Left */}
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between p-3.5 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 text-white shadow-lg">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-cyan-400/30 border border-cyan-300 flex items-center justify-center text-cyan-200">
-                    <Building2 size={16} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-black">YomTech Global</p>
-                    <p className="text-[10px] text-cyan-200 font-medium">Addis Ababa, Ethiopia · Global Delivery</p>
-                  </div>
+            {/* Compact Bezier Curved Stream Container: All 5 emblems listed with tight, crisp spacing strictly IN BETWEEN the curves of the two glowing laser track lines */}
+            <div className="relative w-full max-w-md sm:max-w-lg h-[420px] sm:h-[450px] p-2 z-10">
+              
+              {/* 1. YomTech Global (Top Emblem - Clean logo icon without text badge) */}
+              <motion.div
+                animate={{ y: [-3, 3, -3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute top-[0%] left-[72%] sm:left-[76%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => navigate('/services')}
+              >
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-cyan-300 transition-all duration-300">
+                  <img 
+                    src={logoEmblem} 
+                    alt="YomTech Global" 
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                  />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 border-2 border-slate-900 shadow-md animate-pulse" />
                 </div>
-                <span className="text-[10px] font-mono font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-400/30 border border-emerald-300 text-emerald-200">
-                  Est. 2015
-                </span>
-              </div>
+              </motion.div>
+
+              {/* 2. WabiSkills Academy (Upper Middle Emblem - Clean logo icon without text badge) */}
+              <motion.div
+                animate={{ y: [3, -3, 3] }}
+                transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut', delay: 0.1 }}
+                className="absolute top-[21%] left-[56%] sm:left-[60%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => navigate('/academy')}
+              >
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-emerald-300 transition-all duration-300">
+                  <img 
+                    src={wabiSkillsLogo} 
+                    alt="WabiSkills Academy" 
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                  />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                </div>
+              </motion.div>
+
+              {/* 3. Ermi Studio Showcase Emblem (Centerpiece CEO Emblem - Prominently sized strictly inside the two laser lines) */}
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], y: [-2, 2, -2] }}
+                transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+                className="absolute top-[40%] left-[39%] sm:left-[43%] flex flex-col items-center group cursor-pointer z-30 -translate-x-1/2"
+                onClick={() => navigate('/about')}
+              >
+                <div className="relative w-18 h-18 sm:w-21 sm:h-21 rounded-[1.8rem] bg-white/95 backdrop-blur-xl border-3 border-cyan-300 shadow-[0_20px_55px_rgba(0,180,216,0.8)] p-0.5 flex items-center justify-center overflow-hidden group-hover:scale-110 group-hover:border-white transition-all duration-300">
+                  <img 
+                    src={ermiTwoImg} 
+                    alt="Ermi CEO Central Showcase" 
+                    className="w-full h-full object-cover object-top rounded-[1.5rem] group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+                  <span className="absolute top-1 right-1 z-20 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-950 shadow-md animate-ping" />
+                  <span className="absolute top-1 right-1 z-20 w-3 h-3 rounded-full bg-white border-2 border-cyan-400" />
+                </div>
+                <div className="mt-0.5 px-2.5 py-0.5 rounded-full bg-cyan-500 text-slate-950 text-[9px] sm:text-[10px] font-black font-display tracking-wider shadow-xl border border-white group-hover:bg-white group-hover:text-cyan-900 transition-colors">
+                  CEO
+                </div>
+              </motion.div>
+
+              {/* 4. WabiJobs Platform (Lower Middle Emblem - Increased margin from Ermi CEO) */}
+              <motion.div
+                animate={{ y: [-4, 2, -4] }}
+                transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+                className="absolute top-[65%] left-[32%] sm:left-[36%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => navigate('/services')}
+              >
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-amber-300 transition-all duration-300">
+                  <img 
+                    src={wabiJobsLogo} 
+                    alt="WabiJobs" 
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                  />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                </div>
+              </motion.div>
+
+              {/* 5. Yomnex ERP System (Bottom Emblem - Increased margin from WabiJobs) */}
+              <motion.div
+                animate={{ y: [2, -4, 2] }}
+                transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
+                className="absolute top-[86%] left-[26%] sm:left-[30%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => navigate('/services')}
+              >
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-indigo-300 transition-all duration-300">
+                  <img 
+                    src={yomnexLogo} 
+                    alt="Yomnex ERP" 
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                  />
+                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-indigo-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                </div>
+              </motion.div>
+
             </div>
           </motion.div>
         </div>
       </section>
 
-
-      {/* ========================================================
-          2. ESSENTIAL FEATURES SECTION (What We Build & Teach)
-      ======================================================== */}
-      <section className="py-24 lg:py-32 w-full bg-white relative text-slate-900 border-b border-slate-200/80">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16">
-          
-          {/* Header Row: Left Title + Right Narrative (Matching Reference) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-            <div className="lg:col-span-7 space-y-3">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-                <span>✻</span>
-                <span>What We Build &amp; Teach</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
-                Innovative solutions for <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]">
-                  a better digital tomorrow
-                </span>
-              </h2>
-            </div>
-            <div className="lg:col-span-5">
-              <p className="text-slate-500 text-base sm:text-lg font-medium leading-relaxed font-sans">
-                From responsive web apps and high-performance mobile solutions to enterprise ERP systems and IT consulting, we equip companies and learners with future-ready technology.
-              </p>
-            </div>
-          </div>
-
-          {/* 3 Large Rounded Approach Cards (Matching Reference Card Styles) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {approachCards.map((card, idx) => {
-              const IconComp = card.icon;
-              return (
-                <motion.div
-                  key={idx}
-                  whileHover={{ y: -8, scale: 1.015 }}
-                  transition={{ duration: 0.3 }}
-                  className={`rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 cursor-pointer min-h-[380px] ${card.bg}`}
-                >
-                  <div className="space-y-6">
-                    {/* Icon Box */}
-                    <div className="flex items-center justify-between">
-                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-md ${card.iconBox}`}>
-                        <IconComp size={30} strokeWidth={2} />
-                      </div>
-                      <span className="text-[10px] font-mono font-black uppercase tracking-widest px-3 py-1 rounded-full border bg-white/60 backdrop-blur-sm shadow-xs">
-                        {card.accentTag}
-                      </span>
-                    </div>
-
-                    {/* Title + Desc */}
-                    <div className="space-y-3">
-                      <h3 className="text-xl sm:text-2xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
-                        {card.title}
-                      </h3>
-                      <p className="text-sm leading-relaxed font-medium text-slate-500 font-sans">
-                        {card.desc}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Pill CTA Button */}
-                  <div className="pt-8">
-                    <button
-                      onClick={() => navigate(card.link)}
-                      className={`px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-all duration-300 shadow-md ${card.btnStyle}`}
-                    >
-                      <span>Explore More</span>
-                      <ChevronRight size={15} strokeWidth={3} />
-                    </button>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-
-      {/* ========================================================
-          3. WHO WE ARE & COMPREHENSIVE SOLUTIONS (Our Impact in Numbers)
-      ======================================================== */}
-      <section className="py-24 lg:py-32 w-full bg-gradient-to-b from-[#f8fafc] via-[#f0f9ff] to-white relative text-slate-900 border-b border-slate-200/80">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
-          
-          {/* Left Asymmetric Photo & Metric Grid (Matching Reference Image Grid) */}
-          <div className="lg:col-span-6 space-y-6">
-            
-            {/* Top Large Photo */}
-            <div className="relative rounded-[2.5rem] overflow-hidden border-2 border-slate-200 shadow-xl aspect-[16/10] group">
-              <img
-                src={consultingTeamImg || educationImg}
-                alt="YomTech Global Software Team"
-                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
-              <div className="absolute top-4 left-4 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-xs font-black border border-slate-200 shadow-sm flex items-center gap-2">
-                <Sparkles size={13} className="text-cyan-500" />
-                <span>Enterprise Consulting &amp; Training</span>
-              </div>
-            </div>
-
-            {/* Bottom 2-Column Split: Metric Card + Secondary Photo */}
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-stretch">
-              
-              {/* Metric Card (Official Impact Numbers: 2K+ Learners & 25+ Solutions) */}
-              <div className="sm:col-span-5 rounded-[2.2rem] bg-gradient-to-br from-[#a7f3d0] via-[#6ee7b7] to-[#34d399] p-6 sm:p-7 flex flex-col justify-between border border-emerald-300 shadow-lg text-slate-950">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-10 h-10 rounded-full bg-emerald-950 text-white flex items-center justify-center shadow-md">
-                    <Check size={20} strokeWidth={3} />
-                  </div>
-                  <span className="text-[9px] font-mono font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-950/15 border border-emerald-950/20 text-emerald-950">
-                    Est. 2015
-                  </span>
-                </div>
-                <div>
-                  <h4 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-slate-950 mb-1">
-                    2K+
-                  </h4>
-                  <p className="text-xs sm:text-sm font-bold text-emerald-950 leading-snug">
-                    Learners Empowered &amp; 25+ Business Solutions Deployed
-                  </p>
-                </div>
-              </div>
-
-              {/* Secondary Photo */}
-              <div className="sm:col-span-7 rounded-[2.2rem] overflow-hidden border-2 border-slate-200 shadow-lg aspect-[4/3] relative group">
-                <img
-                  src={teamDiscussionImg || coachingImg}
-                  alt="Collaborative Tech Team"
-                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 px-3 py-1 rounded-xl bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-black border border-slate-200 shadow-sm">
-                  ⚡ 7+ Global Partnerships
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* Right Content Column (Matching Reference Layout) */}
-          <div className="lg:col-span-6 space-y-8">
-            
-            {/* Header */}
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-                <span>✻</span>
-                <span>Who We Are</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
-                Empowering innovation, <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]">
-                  technology &amp; talent
-                </span>
-              </h2>
-              <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium font-sans">
-                YomeTech Global is a forward-thinking technology company founded in 2015. We specialize in building innovative digital solutions and offering world-class training that bridges the gap between theory and real-world application.
-              </p>
-            </div>
-
-            {/* CTA Button + Leadership Avatar Chip Row (Matching Reference) */}
-            <div className="flex flex-wrap items-center gap-6 pt-2">
-              <button
-                onClick={() => navigate('/contact')}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#86efac] via-[#4ade80] to-[#22c55e] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2.5"
-              >
-                <span>Get Started With Us</span>
-                <ChevronRight size={16} strokeWidth={3} />
-              </button>
-
-              <div className="flex items-center gap-3.5 py-1 px-3 rounded-full bg-slate-50 border border-slate-200 shadow-xs">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center font-black text-sm shadow-md">
-                  YG
-                </div>
-                <div>
-                  <p className="text-xs font-black text-slate-900">YomTech Global</p>
-                  <p className="text-[10px] text-slate-500 font-semibold">Addis Ababa · contact@yometechglobal.org</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Bottom 2-Card Stats Row (Real Impact: 25+ Solutions & Core Stack) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
-              
-              {/* Rating & Impact Card */}
-              <div className="p-6 rounded-[2rem] bg-white border border-slate-200 shadow-md flex flex-col justify-between">
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-1 text-amber-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={15} fill="currentColor" />
-                    ))}
-                  </div>
-                  <span className="text-[9px] font-mono font-extrabold uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    7+ Partnerships
-                  </span>
-                </div>
-                <div className="space-y-1">
-                  <h4 className="text-3xl font-black font-display text-slate-900">
-                    25+ <span className="text-base text-slate-400 font-semibold">Solutions</span>
-                  </h4>
-                  <p className="text-xs font-bold text-slate-600 leading-snug">
-                    Deployed across ERP, WMS, Cloud &amp; AI Automations
-                  </p>
-                </div>
-              </div>
-
-              {/* Expertise Stack Cloud Card */}
-              <div className="p-6 rounded-[2rem] bg-[#f8fafc] border border-slate-200 shadow-md space-y-3">
-                <p className="text-xs font-black uppercase tracking-wider text-slate-900">
-                  Our Core Expertise
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {['REACT', 'NODE.JS', 'PYTHON', 'AI / ML', 'AWS & AZURE', 'DEVOPS'].map((skill, sIdx) => (
-                    <span key={sIdx} className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 shadow-xs">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
 
 
       {/* ========================================================
@@ -417,46 +398,23 @@ export const AboutPage = () => {
       <AboutAtGlance />
 
       {/* ========================================================
-          5. CORE FOUNDATIONS (Mission, Vision, Values Matrix in Pure White)
+          5. CORE FOUNDATIONS (Mission, Vision, Values Matrix)
       ======================================================== */}
       <CoreFoundations />
 
       {/* ========================================================
-          6. SOFTWARE + TALENT DUAL ECOSYSTEM
+          5.1. PAN-AFRICAN INNOVATION & TEAM GALLERY (Asymmetric Masonry Grid)
       ======================================================== */}
-      <SoftwareTalentSplit />
+      <CompanyGallery />
 
       {/* ========================================================
-          8. PARADIGM COMPARISON: WHY OUR MODEL IS DIFFERENT
+          6. OFFICIAL COMPANY PROFILE & INSTITUTIONAL CREDENTIALS
+          (CEO Message, Org Structure, Platforms, Methodology, Partners, Legal & Certifications)
       ======================================================== */}
-      <WhyModelDifferent />
+      <CompanyProfileDetails />
 
       {/* ========================================================
-          9. ENGINEERING APPROACH & ROADMAP
-      ======================================================== */}
-      <section className="py-24 w-full bg-gradient-to-b from-[#F8FAFC] via-[#F0F9FF] to-[#E0F2FE] relative text-slate-900 border-y border-sky-200/80">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-20">
-          <EngineeringApproach />
-        </div>
-      </section>
-
-      {/* ========================================================
-          10. HOW WE THINK (Philosophy & Mindset)
-      ======================================================== */}
-      <HowWeThink />
-
-      {/* ========================================================
-          11. OUR IMPACT MODEL
-      ======================================================== */}
-      <ImpactModel />
-
-      {/* ========================================================
-          12. TECHNOLOGY WITH PURPOSE
-      ======================================================== */}
-      <TechnologyPurpose />
-
-      {/* ========================================================
-          13. FINAL CALL TO ACTION
+          7. FINAL CALL TO ACTION
       ======================================================== */}
       <AboutFinalCTA />
 

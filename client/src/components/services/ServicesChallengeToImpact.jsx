@@ -116,7 +116,7 @@ export const ServicesChallengeToImpact = () => {
                           {item.stage}
                         </span>
                         <div className={`relative w-11 h-11 rounded-xl border flex items-center justify-center shadow-xs ${item.accent} group-hover:scale-110 transition-transform`}>
-                          <div className="absolute -inset-1 rounded-xl border border-dashed border-purple-400/50 animate-spin-slow pointer-events-none" />
+                          <div className="absolute -inset-1 rounded-xl border border-solid border-purple-400/40 animate-pulse-slow pointer-events-none" />
                           <IconComp size={20} className="relative z-10" />
                         </div>
                       </div>

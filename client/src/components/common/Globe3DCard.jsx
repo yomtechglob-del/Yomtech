@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logos/logo.png';
 
 // Import all 13 hero icon images from client/src/assets/hero icons/
 import cloudImg from '../../assets/hero icons/cloud.png';

@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight, Layers, Sparkles, CheckCircle2, ShieldCheck, Zap } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logos/logo.png';
 
 export const AboutFinalCTA = () => {
   const navigate = useNavigate();

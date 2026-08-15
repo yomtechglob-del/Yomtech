@@ -112,7 +112,7 @@ export const ServicesPartnershipModel = () => {
                           PILLAR {pillar.num}
                         </span>
                         <div className="relative w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 text-[#1DA1F3] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-                          <div className="absolute -inset-1 rounded-xl border border-dashed border-amber-400/50 animate-spin-slow pointer-events-none" />
+                          <div className="absolute -inset-1 rounded-xl border border-solid border-amber-400/40 animate-pulse-slow pointer-events-none" />
                           <IconComp size={20} className="relative z-10" />
                         </div>
                       </div>

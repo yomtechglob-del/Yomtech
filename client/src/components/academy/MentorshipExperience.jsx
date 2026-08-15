@@ -232,7 +232,7 @@ export const MentorshipExperience = () => {
           
           {/* Animated Connection Lines (Desktop) */}
           <div className="hidden lg:block absolute top-1/2 left-[10%] right-[10%] h-px -translate-y-1/2 z-0">
-             <div className="absolute inset-0 border-t-2 border-dashed border-slate-200" />
+             <div className="absolute inset-0 border-t-2 border-solid border-slate-200/80" />
              
              <div className="absolute top-[-1px] left-0 w-[50%] h-[2px] overflow-hidden">
                 <div className="w-full h-full bg-gradient-to-r from-transparent via-cyan-400 to-amber-400 animate-data-stream-right opacity-70" />

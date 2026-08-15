@@ -139,7 +139,7 @@ export const HomeHowWeWork = () => {
                           </div>
 
                           <div className={`relative w-12 h-12 rounded-2xl bg-gradient-to-br ${stage.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300`}>
-                            <div className="absolute -inset-1.5 rounded-2xl border-2 border-dashed border-cyan-400/60 animate-spin-slow pointer-events-none" />
+                            <div className="absolute -inset-1.5 rounded-2xl border-2 border-solid border-cyan-400/30 animate-pulse-slow pointer-events-none" />
                             <IconComp size={22} className="relative z-10" />
                           </div>
                         </div>

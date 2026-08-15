@@ -222,7 +222,7 @@ export const CareerReadiness = () => {
           
           {/* Decorative Connecting Track Line (Desktop) */}
           <div className="hidden lg:block absolute top-1/2 left-[5%] right-[5%] h-px -translate-y-1/2 z-0">
-             <div className="absolute inset-0 border-t-2 border-dashed border-slate-200/60" />
+             <div className="absolute inset-0 border-t-2 border-solid border-slate-200/80" />
              <div className="absolute top-[-1px] left-0 w-full h-[2px] overflow-hidden">
                 <div className="w-1/3 h-full bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-data-stream opacity-70" />
              </div>

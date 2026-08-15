@@ -1018,9 +1018,9 @@ export const ServicesPage = () => {
                 {/* Category Header */}
                 <div className="text-center mb-20 flex flex-col items-center relative z-10">
                   <div className="relative inline-block group cursor-default">
-                    {/* DASHED BORDER - Cleanly styled inside the two lines */}
+                    {/* SOLID GLOW BORDER - Cleanly styled inside the two lines */}
                     <div
-                      className={`absolute -inset-2 border-2 border-dashed animate-spin-slow pointer-events-none ${catGroup.themeColor === 'violet' ? 'rounded-[2.25rem]' : 'rounded-full'}`}
+                      className={`absolute -inset-2 border-2 border-solid animate-pulse-slow pointer-events-none opacity-40 ${catGroup.themeColor === 'violet' ? 'rounded-[2.25rem]' : 'rounded-full'}`}
                       style={{
                         borderColor: catGroup.themeColor === 'violet'
                           ? `${themeColors.primary}B3`
@@ -1028,7 +1028,7 @@ export const ServicesPage = () => {
                       }}
                     />
                     <div
-                      className={`absolute inset-1 border border-dashed animate-spin-slow pointer-events-none ${catGroup.themeColor === 'violet' ? 'rounded-[1.75rem]' : 'rounded-full'}`}
+                      className={`absolute inset-1 border border-solid animate-pulse-slow pointer-events-none opacity-30 ${catGroup.themeColor === 'violet' ? 'rounded-[1.75rem]' : 'rounded-full'}`}
                       style={{
                         borderColor: catGroup.themeColor === 'violet'
                           ? `${themeColors.secondary}99`
@@ -1117,7 +1117,7 @@ export const ServicesPage = () => {
                               <div className="relative w-14 h-14 rounded-full border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
                                 
                                 {/* Rotating Angle Ring over Node Icon */}
-                                <div className="absolute -inset-2.5 rounded-full border-2 border-dashed animate-spin-slow pointer-events-none" style={{ borderColor: `${themeColors.primary}CC` }} />
+                                <div className="absolute -inset-2.5 rounded-full border-2 border-solid animate-pulse-slow pointer-events-none opacity-40" style={{ borderColor: `${themeColors.primary}CC` }} />
                                 
                                 {(() => {
                                   const ItemNodeIcon = item.icon || Cpu;

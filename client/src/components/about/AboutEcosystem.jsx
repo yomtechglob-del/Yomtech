@@ -4,7 +4,7 @@ import {
   Sparkles, Globe, Cpu, Award, ArrowRight, CheckCircle2, X, 
   BookOpen, Layers, ShieldCheck, Zap, Users, GraduationCap
 } from 'lucide-react';
-import yomtechLogo from '../../assets/logo.png';
+import yomtechLogo from '../../assets/logos/logo.png';
 
 // 6 Core Values matching exact User Image Content & Rotating Geometry
 const ECOSYSTEM_HEXAGONS = [

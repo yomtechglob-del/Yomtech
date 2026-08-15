@@ -133,7 +133,7 @@ export const ServicesEngineeringApproach = () => {
                           {stage.num}
                         </div>
                         <div className="relative w-11 h-11 rounded-2xl bg-[#0ED3DD]/10 border border-[#0ED3DD]/40 text-[#0ED3DD] flex items-center justify-center group-hover:bg-[#1DA1F3] group-hover:text-white transition-all duration-300 shadow-sm">
-                          <div className="absolute -inset-1.5 rounded-2xl border border-dashed border-[#1DA1F3]/50 animate-spin-slow pointer-events-none" />
+                          <div className="absolute -inset-1.5 rounded-2xl border border-solid border-[#1DA1F3]/40 animate-pulse-slow pointer-events-none" />
                           <IconComp size={20} className="relative z-10" />
                         </div>
                       </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300..900;1,300..900&family=Sora:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,14 +6,14 @@
 
 :root {
   color-scheme: light;
-  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   width: 100%;
-  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 body {
@@ -21,7 +21,7 @@ body {
   padding: 0;
   background-color: #F8FAFC !important;
   color: #0F172A;
-  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   width: 100%;
   -webkit-font-smoothing: antialiased;
@@ -30,22 +30,22 @@ body {
 
 @layer base {
   *, ::before, ::after {
-    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
+    font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
   }
 
   p {
-    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     line-height: 1.625;
   }
 
   button, input, select, textarea {
-    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Roboto', 'Outfit', 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   }
 }
 
@@ -243,9 +243,58 @@ body {
   pointer-events: none;
 }
 
-/* Hero Section & Header Matching Gradient */
+/* Hero Section & Header Matching Gradient (Matching User Cyan Banner Reference) */
 .hero-cyan-gradient {
-  background: linear-gradient(135deg, #0284C7 0%, #0072B8 50%, #1DA1F2 100%) !important;
+  background: linear-gradient(135deg, #00B4D8 0%, #0077B6 45%, #03045E 100%) !important;
+}
+
+/* Water River Flowing Animations for Background Images */
+@keyframes riverFlow1 {
+  0% {
+    transform: scale(1.01) translate(0%, 0%) rotate(0deg);
+    opacity: 0.6;
+  }
+  33% {
+    transform: scale(1.05) translate(-2%, 1%) rotate(0.5deg);
+    opacity: 0.75;
+  }
+  66% {
+    transform: scale(1.03) translate(1.5%, 2%) rotate(-0.5deg);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.01) translate(0%, 0%) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes riverFlow2 {
+  0% {
+    transform: scale(1.03) translate(2%, 1%) rotate(-0.5deg);
+    opacity: 0.5;
+  }
+  33% {
+    transform: scale(1.01) translate(-1.5%, 2%) rotate(0deg);
+    opacity: 0.7;
+  }
+  66% {
+    transform: scale(1.06) translate(-2%, 0.5%) rotate(0.8deg);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.03) translate(2%, 1%) rotate(-0.5deg);
+    opacity: 0.5;
+  }
+}
+
+.animate-river-flow-1 {
+  animation: riverFlow1 22s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.animate-river-flow-2 {
+  animation: riverFlow2 28s ease-in-out infinite alternate;
+  will-change: transform, opacity;
 }
 
 /* Globe 3D Card Static CSS Animations */
@@ -303,19 +352,19 @@ body {
   z-index: 1;
 }
 
-/* Dashed inner line (the "stitch") */
+/* Solid inner line (clean, professional double rail) */
 .section-track-border::after {
   content: '';
   position: absolute;
   inset: 14px;
-  border: 2px dashed #38BDF8;
+  border: 1.5px solid #38BDF8;
   border-radius: 2.2rem;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
-/* Variant: only top arc (for bottom-open sections like the reference image) */
+/* Variant: only top arc */
 .section-track-border-top::before {
   content: '';
   position: absolute;
@@ -323,7 +372,6 @@ body {
   left: 6px;
   right: 6px;
   bottom: -2px;
-  /* bleeds off the bottom edge = open arc */
   border: 2px solid #1DA1F2;
   border-bottom: none;
   border-radius: 2.5rem 2.5rem 0 0;
@@ -338,12 +386,12 @@ body {
   left: 14px;
   right: 14px;
   bottom: -2px;
-  border: 2px dashed #38BDF8;
+  border: 1.5px solid #38BDF8;
   border-bottom: none;
   border-radius: 2.2rem 2.2rem 0 0;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* Variant: only bottom arc (open top) */
@@ -368,12 +416,12 @@ body {
   left: 14px;
   right: 14px;
   bottom: 14px;
-  border: 2px dashed #38BDF8;
+  border: 1.5px solid #38BDF8;
   border-top: none;
   border-radius: 0 0 2.2rem 2.2rem;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* Light-sky-blue tint background used by bordered sections */
@@ -396,11 +444,11 @@ body {
   content: '';
   position: absolute;
   inset: 14px;
-  border: 2px dashed #C4B5FD;
+  border: 1.5px solid #C4B5FD;
   border-radius: 2.2rem;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* Amber variant — for warm/amber section backgrounds */
@@ -418,11 +466,11 @@ body {
   content: '';
   position: absolute;
   inset: 14px;
-  border: 2px dashed #FCD34D;
+  border: 1.5px solid #FCD34D;
   border-radius: 2.2rem;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* Emerald variant — for green/emerald section backgrounds */
@@ -440,11 +488,11 @@ body {
   content: '';
   position: absolute;
   inset: 14px;
-  border: 2px dashed #34D399;
+  border: 1.5px solid #34D399;
   border-radius: 2.2rem;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* Slate variant — for neutral/slate section backgrounds */
@@ -462,11 +510,11 @@ body {
   content: '';
   position: absolute;
   inset: 14px;
-  border: 2px dashed #CBD5E1;
+  border: 1.5px solid #CBD5E1;
   border-radius: 2.2rem;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
 /* ============================================================

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Cpu, Cloud, ShieldCheck, GraduationCap, Network, Sparkles, Activity } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logos/logo.png';
 
 export const HomeEcosystem = () => {
   const pillars = [

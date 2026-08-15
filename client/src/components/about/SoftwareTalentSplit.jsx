@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, GraduationCap, Zap, ArrowUpRight, CheckCircle2, ShieldCheck, Code, Layers, Sparkles, TrendingUp, Award, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logos/logo.png';
 import wabiLogoImg from '../../assets/academy/wabiskills-logo.jpg';
 
 export const SoftwareTalentSplit = () => {

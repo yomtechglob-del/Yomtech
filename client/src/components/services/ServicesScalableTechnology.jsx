@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { TrendingUp, ShieldCheck, Cpu, Layers, Wrench, CheckCircle2 } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/logos/logo.png';
 
 export const ServicesScalableTechnology = () => {
   const principles = [
@@ -99,7 +99,7 @@ export const ServicesScalableTechnology = () => {
                         PRINCIPLE {p.num}
                       </span>
                       <div className="relative w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-[#0ED3DD] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
-                        <div className="absolute -inset-1 rounded-xl border border-dashed border-[#0ED3DD]/60 animate-spin-slow pointer-events-none" />
+                        <div className="absolute -inset-1 rounded-xl border border-solid border-[#0ED3DD]/40 animate-pulse-slow pointer-events-none" />
                         <IconComp size={20} className="relative z-10" />
                       </div>
                     </div>
