@@ -196,7 +196,7 @@ export const AboutPage = () => {
                 <span>✻</span>
                 <span>What We Build &amp; Teach</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
                 Innovative solutions for <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]">
                   a better digital tomorrow
@@ -204,7 +204,7 @@ export const AboutPage = () => {
               </h2>
             </div>
             <div className="lg:col-span-5">
-              <p className="text-slate-600 text-sm sm:text-base font-semibold leading-relaxed">
+              <p className="text-slate-500 text-base sm:text-lg font-medium leading-relaxed font-sans">
                 From responsive web apps and high-performance mobile solutions to enterprise ERP systems and IT consulting, we equip companies and learners with future-ready technology.
               </p>
             </div>
@@ -227,17 +227,17 @@ export const AboutPage = () => {
                       <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-md ${card.iconBox}`}>
                         <IconComp size={30} strokeWidth={2} />
                       </div>
-                      <span className="text-[10px] font-mono font-extrabold uppercase tracking-widest px-3 py-1 rounded-full border bg-white/60 backdrop-blur-sm shadow-xs">
+                      <span className="text-[10px] font-mono font-black uppercase tracking-widest px-3 py-1 rounded-full border bg-white/60 backdrop-blur-sm shadow-xs">
                         {card.accentTag}
                       </span>
                     </div>
 
                     {/* Title + Desc */}
                     <div className="space-y-3">
-                      <h3 className="text-2xl sm:text-3xl font-black font-display tracking-tight leading-snug">
+                      <h3 className="text-xl sm:text-2xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
                         {card.title}
                       </h3>
-                      <p className="text-sm sm:text-base leading-relaxed font-semibold opacity-90">
+                      <p className="text-sm leading-relaxed font-medium text-slate-500 font-sans">
                         {card.desc}
                       </p>
                     </div>
@@ -298,10 +298,10 @@ export const AboutPage = () => {
                   </span>
                 </div>
                 <div>
-                  <h4 className="text-3xl sm:text-4xl font-black font-display tracking-tight text-slate-950 mb-1">
+                  <h4 className="text-3xl sm:text-4xl font-extrabold font-display tracking-tight text-slate-950 mb-1">
                     2K+
                   </h4>
-                  <p className="text-xs sm:text-sm font-extrabold text-emerald-950 leading-snug">
+                  <p className="text-xs sm:text-sm font-bold text-emerald-950 leading-snug">
                     Learners Empowered &amp; 25+ Business Solutions Deployed
                   </p>
                 </div>
@@ -332,13 +332,13 @@ export const AboutPage = () => {
                 <span>✻</span>
                 <span>Who We Are</span>
               </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-slate-900 tracking-tight leading-tight">
                 Empowering innovation, <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]">
                   technology &amp; talent
                 </span>
               </h2>
-              <p className="text-slate-600 text-base leading-relaxed font-semibold">
+              <p className="text-slate-500 text-base sm:text-lg leading-relaxed font-medium font-sans">
                 YomeTech Global is a forward-thinking technology company founded in 2015. We specialize in building innovative digital solutions and offering world-class training that bridges the gap between theory and real-world application.
               </p>
             </div>

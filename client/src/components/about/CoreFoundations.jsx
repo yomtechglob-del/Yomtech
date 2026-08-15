@@ -214,20 +214,13 @@ const CenterHexagon = ({ hoveredNode }) => (
 );
 
 const FluidBackground = () => (
-  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-white">
-    <div className="absolute inset-0 bg-[#ffffff]" />
-    
-    <div className="absolute -top-20 left-1/4 w-[600px] h-[600px] bg-cyan-100/30 rounded-full blur-[140px] pointer-events-none" />
-    <div className="absolute top-1/3 right-10 w-[500px] h-[500px] bg-blue-100/25 rounded-full blur-[130px] pointer-events-none" />
-    <div className="absolute bottom-10 left-1/3 w-[550px] h-[550px] bg-sky-100/30 rounded-full blur-[140px] pointer-events-none" />
-
+  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#F4F9FF]">
+    {/* Dotted Grid Mesh Texture Matching User Screenshots */}
     <div 
-      className="absolute inset-0 opacity-[0.2]" 
-      style={{ 
-        backgroundImage: 'radial-gradient(rgba(14,165,233,0.25) 1px, transparent 1px)', 
-        backgroundSize: '36px 36px',
-        maskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 40%, transparent 100%)',
-        WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 50%, black 40%, transparent 100%)'
+      className="absolute inset-0 opacity-[0.5] pointer-events-none"
+      style={{
+        backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+        backgroundSize: '24px 24px',
       }}
     />
   </div>
@@ -347,16 +340,16 @@ export const CoreFoundations = () => {
   const activeTab = FOUNDATION_TABS.find(t => t.id === activeTabId);
 
   return (
-    <section className="relative min-h-screen py-24 lg:py-32 overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-cyan-900 flex flex-col items-center bg-white border-b border-slate-200/80">
+    <section className="relative min-h-screen py-24 lg:py-32 overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-cyan-900 flex flex-col items-center bg-[#F4F9FF]">
       
       <FluidBackground />
 
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-24">
         
         {/* ========================================================
-            EXECUTIVE VISION, MISSION & VALUES SHOWCASE (Reference Design)
+            EXECUTIVE VISION, MISSION & VALUES SHOWCASE
         ======================================================== */}
-        <div className="p-8 sm:p-12 lg:p-16 rounded-[3rem] bg-gradient-to-b from-white via-sky-50/40 to-white border-2 border-sky-200/70 shadow-2xl space-y-20 relative overflow-hidden">
+        <div className="space-y-20 relative">
           
           {/* Subtle Ambient Watermark */}
           <div className="absolute top-10 right-10 text-[180px] font-black text-slate-900/[0.02] select-none pointer-events-none font-display">
@@ -369,20 +362,20 @@ export const CoreFoundations = () => {
             {/* Left Content */}
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-block relative">
-                <div className="px-8 py-3 bg-[#0284C7] text-white text-2xl sm:text-3xl font-black font-display rounded-xl shadow-lg tracking-wide uppercase flex items-center gap-3">
+                <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
                   <Eye className="w-6 h-6 text-cyan-200" />
-                  <span>Vision</span>
+                  <span>VISION</span>
                 </div>
                 <div className="absolute -bottom-2 left-4 w-4 h-2 bg-[#0369a1] rounded-b-sm transform skew-x-12" />
               </div>
 
-              <h3 className="text-2xl sm:text-3xl lg:text-[2.2rem] font-bold text-slate-900 leading-snug tracking-tight">
+              <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
                 To become a leading{' '}
-                <span className="text-[#0284C7] font-black underline decoration-cyan-400 decoration-wavy decoration-2">
+                <span className="text-[#0284C7] font-bold">
                   Pan-African technology powerhouse
                 </span>{' '}
                 driving innovation, digital transformation, and economic empowerment.
-              </h3>
+              </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
                 <span className="px-4 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold flex items-center gap-1.5">
@@ -456,23 +449,23 @@ export const CoreFoundations = () => {
             {/* Right Content */}
             <div className="lg:col-span-6 space-y-6 order-1 lg:order-2">
               <div className="inline-block relative">
-                <div className="px-8 py-3 bg-[#0284C7] text-white text-2xl sm:text-3xl font-black font-display rounded-xl shadow-lg tracking-wide uppercase flex items-center gap-3">
+                <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
                   <Target className="w-6 h-6 text-cyan-200" />
-                  <span>Mission</span>
+                  <span>MISSION</span>
                 </div>
                 <div className="absolute -bottom-2 left-4 w-4 h-2 bg-[#0369a1] rounded-b-sm transform skew-x-12" />
               </div>
 
-              <h3 className="text-2xl sm:text-3xl lg:text-[2.2rem] font-bold text-slate-900 leading-snug tracking-tight">
+              <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
                 To equip organizations and individuals with{' '}
-                <span className="text-[#0284C7] font-black underline decoration-cyan-400 decoration-wavy decoration-2">
+                <span className="text-[#0284C7] font-bold">
                   cutting-edge technology solutions
                 </span>{' '}
                 and practical, industry-relevant skills that create{' '}
-                <span className="text-[#059669] font-black">
+                <span className="text-[#059669] font-bold">
                   measurable impact.
                 </span>
-              </h3>
+              </p>
 
               <div className="flex flex-wrap gap-3 pt-2">
                 <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold flex items-center gap-1.5">
@@ -492,104 +485,6 @@ export const CoreFoundations = () => {
             INTERACTIVE ECOSYSTEM & ACADEMY PILLARS (Honeycomb Cluster)
         ======================================================== */}
         <AboutEcosystem />
-
-        {/* ========================================================
-            INTERACTIVE FOUNDATIONS MATRIX (Mission, Vision, Values)
-        ======================================================== */}
-        <div className="space-y-16">
-          {/* Header Section */}
-          <div className="text-center max-w-3xl mx-auto flex flex-col items-center">
-            <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white/90 backdrop-blur-xl border border-cyan-200 shadow-sm mb-6 cursor-default group hover:bg-white hover:border-cyan-300 transition-all duration-300">
-              <div className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
-              <span className="text-[10px] font-black tracking-[0.25em] uppercase text-cyan-800 transition-colors">
-                Deep Interactive Matrix
-              </span>
-            </div>
-            
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight leading-[1.1] font-display">
-              Core Pillars Governing{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600">
-                Our Engineering Ecosystem
-              </span>
-            </h2>
-            
-            <p className="text-base md:text-lg text-slate-600 font-medium max-w-2xl leading-relaxed">
-              Explore the detailed objectives governing YomTech Global's enterprise software engineering and WabiSkills talent academy.
-            </p>
-          </div>
-
-          {/* Main Content Split */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-            
-            {/* LEFT: 3D Fluid Venn Diagram Selector */}
-            <div className="lg:col-span-5 flex flex-col items-center justify-center relative min-h-[450px]">
-              <div className="relative w-[320px] h-[320px] md:w-[400px] md:h-[400px]">
-                
-                {FOUNDATION_TABS.map((tab, idx) => {
-                  const isActive = activeTabId === tab.id;
-                  
-                  let positionClasses = '';
-                  if (tab.id === 'mission') positionClasses = 'top-0 left-0 md:left-4';
-                  if (tab.id === 'vision') positionClasses = 'top-0 right-0 md:right-4';
-                  if (tab.id === 'values') positionClasses = 'bottom-0 left-1/2 -translate-x-1/2';
-
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => setActiveTabId(tab.id)}
-                      className={`absolute w-44 h-44 md:w-56 md:h-56 rounded-full flex flex-col items-center justify-center transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden group cursor-pointer
-                        ${positionClasses}
-                        ${isActive ? `scale-110 z-30 ${tab.theme.glow} bg-white border-3 ${tab.theme.activeBorder} backdrop-blur-xl shadow-2xl` : 'scale-100 z-10 bg-white/80 border-2 border-slate-200/90 backdrop-blur-md hover:bg-white hover:border-cyan-300 hover:scale-105 shadow-lg'}
-                      `}
-                      style={{ animation: `float-fluid 6s ease-in-out infinite alternate ${idx * 2}s` }}
-                    >
-                      <div className={`absolute inset-0 bg-gradient-to-br ${tab.theme.gradient} opacity-0 transition-opacity duration-700 ${isActive ? 'opacity-10' : 'group-hover:opacity-5'}`} />
-                      
-                      <div className={`absolute inset-0 rounded-full border border-slate-200/60 scale-[0.8] transition-transform duration-700 ${isActive ? 'scale-[0.9]' : ''}`} />
-                      <div className={`absolute inset-0 rounded-full border border-slate-200/60 scale-[0.6] transition-transform duration-700 ${isActive ? 'scale-[0.7]' : ''}`} />
-
-                      <div className="relative z-10 flex flex-col items-center">
-                        <tab.icon className={`w-8 h-8 md:w-10 md:h-10 mb-3 transition-all duration-500 ${isActive ? `${tab.theme.accent}` : 'text-slate-400 group-hover:text-slate-700'}`} strokeWidth={isActive ? 2.2 : 1.8} />
-                        <span className={`text-sm md:text-base font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isActive ? 'text-slate-900' : 'text-slate-500 group-hover:text-slate-900'}`}>
-                          {tab.id}
-                        </span>
-                        
-                        <div className={`mt-3 flex items-center gap-2 px-3 py-1 rounded-full border transition-all duration-500 ${isActive ? `${tab.theme.badgeBg} shadow-xs font-black` : 'bg-slate-100 text-slate-400 border-slate-200 opacity-0 group-hover:opacity-100'}`}>
-                          <div className={`w-1.5 h-1.5 rounded-full ${isActive ? 'bg-current animate-pulse' : 'bg-slate-400'}`} />
-                          <span className="text-[8px] font-black uppercase tracking-widest">
-                            {isActive ? 'Active' : 'Select'}
-                          </span>
-                        </div>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Mobile Horizontal Navigation */}
-              <div className="flex flex-wrap justify-center gap-3 mt-16 z-20">
-                {FOUNDATION_TABS.map((tab) => (
-                  <button
-                    key={`nav-${tab.id}`}
-                    onClick={() => setActiveTabId(tab.id)}
-                    className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 border cursor-pointer
-                      ${activeTabId === tab.id ? `${tab.theme.badgeBg} shadow-md` : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50 hover:text-slate-900'}
-                    `}
-                  >
-                    <div className={`w-2 h-2 rounded-full ${activeTabId === tab.id ? 'bg-current animate-ping' : 'bg-slate-400'}`} />
-                    {tab.id}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* RIGHT: Magnetic Glassmorphism Content Panel */}
-            <div className="lg:col-span-7 relative z-20">
-              <MagneticGlassCard activeTab={activeTab} />
-            </div>
-
-          </div>
-        </div>
 
       </div>
 
