@@ -249,7 +249,7 @@ export const AboutEcosystem = () => {
   const [selectedHex, setSelectedHex] = useState(null);
 
   return (
-    <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden font-sans w-full">
+    <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 border-b border-slate-200/80 relative overflow-hidden font-sans">
       
       {/* Dotted Grid Mesh Texture Matching User Screenshot */}
       <div 
