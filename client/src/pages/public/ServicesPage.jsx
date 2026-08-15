@@ -399,7 +399,7 @@ export const ServicesPage = () => {
               Our <span className="bg-gradient-to-r from-amber-300 via-emerald-300 to-[#0ED3DD] bg-clip-text text-transparent drop-shadow-md">Services</span>
             </h1>
             <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-xl">
-              We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps—engineered for real-world impact.
+              We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps, engineered for real-world impact.
             </p>
 
             {/* Quick stat pills - Advanced Glassmorphic Interactive Badges with generous padding */}
@@ -591,7 +591,7 @@ export const ServicesPage = () => {
               </span>
             </h2>
             <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
-              Everything we build falls under three core domains — each meticulously engineered for real-world enterprise impact.
+              Everything we build falls under three core domains, each meticulously engineered for real-world enterprise impact.
             </p>
           </motion.div>
 
@@ -666,7 +666,7 @@ export const ServicesPage = () => {
                 bloom: 'from-violet-100/80 via-purple-50/40',
                 numColor: 'text-violet-100/70',
                 count: 3, countBg: 'bg-violet-50 text-violet-800 border-violet-200',
-                desc: 'Custom-built, production-ready digital products for mobile, web, and enterprise — scalable from day one.',
+                desc: 'Custom-built, production-ready digital products for mobile, web, and enterprise, scalable from day one.',
                 exploreColor: 'text-[#7C3AED]', exploreBg: 'bg-violet-50 border-violet-200',
                 ctaBtnHover: 'group-hover:bg-gradient-to-r group-hover:from-[#7C3AED] group-hover:to-[#C084FC] group-hover:text-white group-hover:border-transparent group-hover:shadow-md group-hover:shadow-violet-500/20',
                 arrowColor: '#7C3AED',
@@ -692,7 +692,7 @@ export const ServicesPage = () => {
                 bloom: 'from-emerald-100/80 via-teal-50/40',
                 numColor: 'text-emerald-100/70',
                 count: 5, countBg: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-                desc: 'From cinematic tech documentaries to live bootcamps — empowering the next generation of tech leaders.',
+                desc: 'From cinematic tech documentaries to live bootcamps, empowering the next generation of tech leaders.',
                 exploreColor: 'text-[#059669]', exploreBg: 'bg-emerald-50 border-emerald-200',
                 ctaBtnHover: 'group-hover:bg-gradient-to-r group-hover:from-[#059669] group-hover:to-[#34D399] group-hover:text-white group-hover:border-transparent group-hover:shadow-md group-hover:shadow-emerald-500/20',
                 arrowColor: '#059669',

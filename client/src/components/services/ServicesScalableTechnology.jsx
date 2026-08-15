@@ -68,7 +68,7 @@ export const ServicesScalableTechnology = () => {
           </h2>
           
           <p className="text-[#334155] text-sm sm:text-base md:text-lg font-medium leading-relaxed">
-            We engineer technology with future growth in mind—creating foundations that can adapt to changing users, business requirements, technologies, and digital opportunities.
+            We engineer technology with future growth in mind, creating foundations that can adapt to changing users, business requirements, technologies, and digital opportunities.
           </p>
         </div>
 

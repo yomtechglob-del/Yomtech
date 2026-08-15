@@ -252,7 +252,7 @@ export const AboutPage = () => {
             </div>
 
             <p className="text-cyan-50 text-base md:text-lg leading-relaxed font-normal max-w-2xl font-sans">
-              At YomTech Global, we empower businesses, innovators, and learners to thrive in the digital era. From enterprise software to cloud solutions and world-class training, we don’t just deliver technology—we help you create the future.
+              At YomTech Global, we empower businesses, innovators, and learners to thrive in the digital era. From enterprise software to cloud solutions and world-class training, we don’t just deliver technology, helping you create the future.
             </p>
 
             {/* Dual CTA Buttons Row */}

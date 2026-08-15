@@ -481,8 +481,8 @@ export const LearningJourney = () => {
                           setViewMode('SPOTLIGHT');
                         }}
                       >
-                        {/* Outer Dashed Circle Ring (Exactly like screenshot!) */}
-                        <div className={`relative w-20 h-20 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/70 backdrop-blur-xs flex items-center justify-center shadow-xl transition-all duration-500 group`}>
+                        {/* Outer Solid Circle Ring */}
+                        <div className={`relative w-20 h-20 rounded-full border-2 border-solid ${stg.nodeBorder} bg-white/70 backdrop-blur-xs flex items-center justify-center shadow-xl transition-all duration-500 group`}>
                           
                           {/* Inner Gradient Solid Circle Disk */}
                           <div className={`w-13 h-13 rounded-full bg-gradient-to-br ${stg.gradient} text-white flex items-center justify-center shadow-md border-2 border-white relative`}>
@@ -499,7 +499,7 @@ export const LearningJourney = () => {
 
                       {/* MOBILE NODE BADGE (CENTERED ON MOBILE LINE) */}
                       <div className="flex md:hidden justify-center z-30 my-2">
-                        <div className={`relative w-16 h-16 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/80 backdrop-blur-xs flex items-center justify-center shadow-lg`}>
+                        <div className={`relative w-16 h-16 rounded-full border-2 border-solid ${stg.nodeBorder} bg-white/80 backdrop-blur-xs flex items-center justify-center shadow-lg`}>
                           <div className={`w-11 h-11 rounded-full bg-gradient-to-br ${stg.gradient} text-white flex items-center justify-center shadow-md border-2 border-white relative`}>
                             <Icon className="w-5 h-5 stroke-[2.2]" />
                             <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 border-2 border-white text-white font-black text-[9px] flex items-center justify-center shadow-sm">

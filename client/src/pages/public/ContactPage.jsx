@@ -115,7 +115,7 @@ export const ContactPage = () => {
       category: '🎓 ACADEMY BOOTCAMPS',
       topic: 'Academy',
       q: 'What is the format of WabiSkills Academy bootcamps?',
-      a: 'Bootcamps are delivered in flexible hybrid models—featuring live online interactive lectures, hands-on project labs, real-world repository builds, and 1-on-1 mentorship.'
+      a: 'Bootcamps are delivered in flexible hybrid models featuring live online interactive lectures, hands-on project labs, real-world repository builds, and 1-on-1 mentorship.'
     },
     {
       category: '📍 HEADQUARTERS LOCATION',

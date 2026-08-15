@@ -148,7 +148,7 @@ export const AcademyPage = () => {
               <div className="w-5.5 h-5.5 rounded-full bg-white/30 border border-white/60 flex items-center justify-center shrink-0">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
               </div>
-              <span className="whitespace-nowrap">GLOBAL TECH ACADEMY — POWERED BY YOMTECH</span>
+              <span className="whitespace-nowrap">GLOBAL TECH ACADEMY | POWERED BY YOMTECH</span>
             </div>
 
             <div className="space-y-3 font-display font-black tracking-tight leading-[1.1]">

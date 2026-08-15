@@ -55,7 +55,7 @@ export const ServicesPartnershipModel = () => {
           </h2>
           
           <p className="text-[#475569] text-sm sm:text-base md:text-lg font-medium leading-relaxed">
-            YomTech Global aims to build meaningful technology relationships—working alongside organizations, teams, and ambitious individuals to understand challenges, create solutions, develop capabilities, and support continuous growth.
+            YomTech Global aims to build meaningful technology relationships, working alongside organizations, teams, and ambitious individuals to understand challenges, create solutions, develop capabilities, and support continuous growth.
           </p>
         </div>
 
