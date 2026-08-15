@@ -40,7 +40,7 @@ export const HomeBuiltForTheFuture = () => {
   const timelineSteps = ['TODAY', 'LEARN', 'BUILD', 'IMPROVE', 'TOMORROW'];
 
   return (
-    <section className="home-section py-24 sm:py-32 w-full bg-gradient-to-b from-[#F0F7FF] via-[#E6F3FF] to-[#F0F7FF] relative isolate text-slate-700 overflow-hidden border-t border-sky-200/80">
+    <section className="home-section py-24 sm:py-32 w-full section-track-bg relative isolate text-slate-700 overflow-hidden border-t border-sky-200/80 section-track-border">
       {/* Subtle Light Dot Grid Background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.05]"
@@ -117,7 +117,7 @@ export const HomeBuiltForTheFuture = () => {
                         <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-gradient-to-r from-sky-50 to-cyan-50 text-[#0072B8] border border-sky-200/80 shadow-xs">
                           PILLAR {p.num}
                         </span>
-                        
+
                         <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
                           <IconComp size={22} />
                         </div>

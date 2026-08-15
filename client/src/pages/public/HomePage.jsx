@@ -203,7 +203,7 @@ export const HomePage = () => {
       <HomeEcosystem />
 
       {/* 3. WHAT WE BUILD & TEACH SECTION */}
-      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#CFE0B6] via-[#C0D6A7] to-[#B3CA98] text-slate-900 border-y border-emerald-700/20">
+      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#CFE0B6] via-[#C0D6A7] to-[#B3CA98] text-slate-900 border-y border-emerald-700/20 section-track-border section-track-border-emerald">
         <div className="absolute inset-0 bg-[radial-gradient(#059669_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none" />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
@@ -258,7 +258,7 @@ export const HomePage = () => {
       <HomeHowWeWork />
 
       {/* 4. OUR IMPACT IN NUMBERS SECTION */}
-      <section className="home-section w-full relative py-24 bg-gradient-to-br from-[#4C1D95] via-[#5B21B6] to-[#6D28D9] text-white border-y border-purple-400/40">
+      <section className="home-section w-full relative py-24 bg-gradient-to-br from-[#4C1D95] via-[#5B21B6] to-[#6D28D9] text-white border-y border-purple-400/40 section-track-border section-track-border-purple">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16">
           <div ref={impactHeaderRef} className="reveal text-center space-y-4">
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/20 border border-white/40 text-white text-xs font-black tracking-widest uppercase shadow-sm">
@@ -283,7 +283,7 @@ export const HomePage = () => {
       </section>
 
       {/* 5. VOICES OF OUR COMMUNITY SECTION */}
-      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#F8FAFC] via-[#F0F9FF] to-[#E0F2FE] text-slate-900 border-y border-sky-200/80">
+      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#F8FAFC] via-[#F0F9FF] to-[#E0F2FE] text-slate-900 border-y border-sky-200/80 section-track-border">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16">
           <div ref={testimonialsRef} className="reveal text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-100 border border-sky-300 text-[#0284C7] text-xs font-black tracking-widest uppercase shadow-sm">
@@ -318,7 +318,7 @@ export const HomePage = () => {
       <HomeBusinessAndTalent />
 
       {/* 6. READY TO TRANSFORM WITH TECHNOLOGY? CTA SECTION */}
-      <section className="home-section w-full relative py-24 bg-gradient-to-br from-[#FFF7ED] via-[#FFEDD5] to-[#FED7AA] text-slate-900 border-y border-amber-300/60">
+      <section className="home-section w-full relative py-24 bg-gradient-to-br from-[#FFF7ED] via-[#FFEDD5] to-[#FED7AA] text-slate-900 border-y border-amber-300/60 section-track-border section-track-border-amber">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <div ref={ctaRef} className="reveal bg-white border-2 border-amber-200 rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden shadow-2xl space-y-8 text-slate-900">
             <div className="absolute -top-20 -left-20 w-64 h-64 bg-amber-200/40 blur-[100px] rounded-full pointer-events-none glow-layer" />
@@ -349,7 +349,7 @@ export const HomePage = () => {
       <HomeBuiltForTheFuture />
 
       {/* 7. SUBSCRIBE TO OUR NEWSLETTER SECTION */}
-      <section className="home-section w-full relative py-20 bg-[#E2E8F0] border-t border-slate-300 text-slate-900">
+      <section className="home-section w-full relative py-20 bg-[#E2E8F0] border-t border-slate-300 text-slate-900 section-track-border section-track-border-slate">
         <div className="max-w-2xl mx-auto px-6">
           <div ref={newsletterRef} className="reveal bg-white border border-slate-300 p-8 sm:p-12 rounded-3xl text-center space-y-6 shadow-2xl overflow-hidden text-slate-900">
             <div className="space-y-2">

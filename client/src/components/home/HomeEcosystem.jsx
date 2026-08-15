@@ -52,7 +52,7 @@ export const HomeEcosystem = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 w-full bg-gradient-to-b from-[#F0F7FF] via-[#E6F3FF] to-[#F0F7FF] relative isolate text-slate-700 overflow-hidden border-y border-sky-200/80 home-section">
+    <section className="py-24 sm:py-32 w-full section-track-bg relative isolate text-slate-700 overflow-hidden border-y border-sky-200/80 home-section section-track-border">
       {/* Light Technical Dot Matrix Background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.05]"
@@ -90,12 +90,12 @@ export const HomeEcosystem = () => {
 
         {/* Central Ecosystem Hub & Pillars */}
         <div className="relative py-6">
-          
+
           {/* Central YomTech Core Emblem Nucleus */}
           <div className="flex justify-center mb-14 relative z-20">
             <div className="relative p-[2.5px] rounded-full bg-gradient-to-r from-[#0072B8] via-[#0284C7] to-[#0ED3DD] shadow-[0_10px_35px_rgba(2,132,199,0.2)] group">
               <div className="absolute -inset-1 rounded-full bg-cyan-400/20 blur-md animate-pulse pointer-events-none" />
-              
+
               <div className="relative bg-white rounded-full px-8 py-4 flex items-center gap-4 border border-white text-[#071A2B] shadow-xl">
                 <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-[#0072B8] shrink-0 shadow-sm">
                   <img src={logoImg} alt="YomTech Global Nucleus" className="w-full h-full object-cover" />
@@ -126,10 +126,10 @@ export const HomeEcosystem = () => {
                 <div key={p.num} className="group relative">
                   {/* Outer Multi-Gradient Border Container */}
                   <div className="p-[2px] rounded-[2.3rem] bg-gradient-to-b from-sky-300/80 via-sky-200/40 to-cyan-300/60 hover:from-[#0072B8] hover:via-[#0284C7] hover:to-[#0ED3DD] transition-all duration-500 shadow-[0_10px_35px_rgba(2,132,199,0.07)] hover:shadow-[0_22px_55px_rgba(2,132,199,0.22)] hover:-translate-y-2.5 h-full">
-                    
+
                     {/* Inner Pure White Glass Body */}
                     <div className="bg-white/95 backdrop-blur-2xl rounded-[2.15rem] p-7 space-y-6 h-full flex flex-col justify-between relative overflow-hidden">
-                      
+
                       {/* Hover Ambient Corner Light Flare */}
                       <div className="absolute -top-12 -right-12 w-32 h-32 bg-cyan-200/40 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
@@ -142,7 +142,7 @@ export const HomeEcosystem = () => {
                           <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-gradient-to-r from-sky-50 to-cyan-50 text-[#0072B8] border border-sky-200/80 shadow-xs">
                             PILLAR {p.num}
                           </span>
-                          
+
                           <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${p.gradient} text-white flex items-center justify-center shadow-lg ${p.glow} group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
                             <IconComp size={22} />
                           </div>

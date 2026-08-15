@@ -22,6 +22,7 @@ import { AcademyCTA } from '../../components/academy/AcademyCTA';
 import academyHeroImg from '../../assets/academy/wabiskills.jpg';
 import academyCoursesImg from '../../assets/academy/wabiskills_courses.png';
 import academyBootcampImg from '../../assets/academy/wabiskills_bootcamp.png';
+import logoImg from '../../assets/academy/wabiskills-logo.jpg';
 
 export const AcademyPage = () => {
   const navigate = useNavigate();
@@ -230,8 +231,11 @@ export const AcademyPage = () => {
                 href="https://wabiskills.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-9 py-4 rounded-full bg-white/10 hover:bg-white/20 border-2 border-[#0ED3DD]/80 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md shadow-md transition-all duration-300 flex items-center gap-2"
+                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border-2 border-[#0ED3DD]/80 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md shadow-md transition-all duration-300 flex items-center gap-3"
               >
+                <div className="w-6 h-6 rounded-full overflow-hidden border border-cyan-300 bg-white p-0.5 shrink-0">
+                  <img src={logoImg} alt="WabiSkills" className="w-full h-full object-contain rounded-full" />
+                </div>
                 <span>Visit WabiSkills.com ↗</span>
               </motion.a>
             </div>
@@ -319,7 +323,10 @@ export const AcademyPage = () => {
         </div>
       </section>
 
-      {/* NEW SECTION 01:      {/* 2. EXPLORE OUR EDUCATIONAL SERVICES SECTION — UPGRADED PREMIER DESIGNS & STYLES */}
+      {/* 02. GLOBAL INTEGRATION & HIGH-TECH ECOSYSTEM — FIRST VISUAL ATTRACTION */}
+      <AcademyEcosystem />
+
+      {/* 03. FLAGSHIP EDUCATIONAL COURSES & BOOTCAMPS CATALOG */}
       <section id="educational-courses" className="pt-20 pb-28 relative bg-gradient-to-b from-[#dff1ff] to-[#aeddfa] border-b border-sky-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
@@ -414,7 +421,7 @@ export const AcademyPage = () => {
                               <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
                             </div>
                             <div className="p-4 font-mono text-[10px] text-slate-300 leading-relaxed">
-                              <span className="text-[#c084fc]">const</span> <span class="text-[#60a5fa]">app</span> = <span className="text-[#fcd34d]">express</span>();<br />
+                              <span className="text-[#c084fc]">const</span> <span className="text-[#60a5fa]">app</span> = <span className="text-[#fcd34d]">express</span>();<br />
                               <span className="text-[#60a5fa]">app</span>.<span className="text-[#34d399]">use</span>(cors());<br />
                               <span className="text-[#60a5fa]">app</span>.<span className="text-[#34d399]">get</span>(<span className="text-[#fcd34d]">'/api'</span>, (req, res) =&gt; &#123;<br />
                               &nbsp;&nbsp;res.<span className="text-[#34d399]">json</span>(&#123; status: <span className="text-[#fcd34d]">'success'</span> &#125;);<br />
@@ -634,28 +641,25 @@ export const AcademyPage = () => {
         </div>
       </section>
 
-      {/* NEW SECTION 02: LEARNING MODEL */}
+      {/* 04. FOUR-PILLAR ECOSYSTEM (LEARNING MODEL) */}
       <LearningModel />
 
-      {/* NEW SECTION 03: FROM CLASSROOM TO REAL WORLD */}
+      {/* 05. PRACTICAL APPLICATION (CLASSROOM TO REAL WORLD) */}
       <ClassroomToRealWorld />
 
-      {/* NEW SECTION 07: MENTORSHIP EXPERIENCE */}
+      {/* 06. 1-ON-1 GUIDANCE & SENIOR MENTORSHIP */}
       <MentorshipExperience />
 
-      {/* NEW SECTION 08: CAREER READINESS */}
+      {/* 07. TECHNICAL PROGRESSION & CAREER ROADMAP */}
       <CareerReadiness />
 
-      {/* NEW SECTION 11: ACADEMY ECOSYSTEM */}
-      <AcademyEcosystem />
-
-      {/* NEW SECTION 12: WHY PRACTICAL LEARNING MATTERS */}
+      {/* 08. EDITORIAL PHILOSOPHY (WHY PRACTICAL LEARNING MATTERS) */}
       <PracticalLearning />
 
-      {/* NEW SECTION 13: GLOBAL LEARNING VISION */}
+      {/* 09. GLOBAL VISION (LEARNING WITHOUT BORDERS) */}
       <GlobalLearningVision />
 
-      {/* NEW SECTION 14: ACADEMY CTA */}
+      {/* 10. FINAL CONVERSION CTA (START YOUR LEARNING JOURNEY) */}
       <AcademyCTA />
     </div>
   );

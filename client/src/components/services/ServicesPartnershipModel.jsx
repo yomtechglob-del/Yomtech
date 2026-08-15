@@ -60,29 +60,62 @@ export const ServicesPartnershipModel = () => {
         </div>
 
         {/* Circular Partnership Relationship Process */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 relative">
-          {pillars.map((pillar, idx) => {
-            const IconComp = pillar.icon;
-            return (
-              <motion.div
-                key={pillar.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.1 }}
-                className="group relative"
-              >
-                <div className="bg-white rounded-[2rem] p-8 space-y-6 h-full flex flex-col justify-between border border-amber-200/70 shadow-[0_8px_30px_rgba(217,119,6,0.04)] hover:shadow-[0_16px_40px_rgba(217,119,6,0.12)] hover:border-[#1DA1F3]/50 transition-all duration-300 relative overflow-hidden">
-                  
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-[#FFF7E6] text-amber-800 border border-amber-300">
-                        PILLAR {pillar.num}
-                      </span>
-                      <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-[#1DA1F3] flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <IconComp size={20} />
+        <div className="relative">
+          {/* Animated SVG Zigzag Beam */}
+          <svg className="hidden lg:block absolute top-[50px] left-0 right-0 w-full h-[50px] pointer-events-none z-0 overflow-visible" viewBox="0 0 1000 50" preserveAspectRatio="none">
+            {/* Base glow track */}
+            <path
+              d="M 195 25 L 445 45 L 695 5 L 945 25"
+              fill="none"
+              stroke="#D97706"
+              strokeWidth="3"
+              strokeDasharray="6 6"
+              opacity="0.35"
+            />
+            {/* Flowing dashed stream */}
+            <path
+              d="M 195 25 L 445 45 L 695 5 L 945 25"
+              fill="none"
+              stroke="#0ED3DD"
+              strokeWidth="2"
+              strokeDasharray="8 8"
+              className="animate-zigzag-dash"
+            />
+            {/* Fast traveling laser particles */}
+            <path
+              d="M 195 25 L 445 45 L 695 5 L 945 25"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="1.5"
+              strokeDasharray="4 20"
+              className="animate-zigzag-laser"
+            />
+          </svg>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 relative z-10">
+            {pillars.map((pillar, idx) => {
+              const IconComp = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.title}
+                  initial={{ opacity: 0, y: 25 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: idx * 0.1 }}
+                  className="group relative"
+                >
+                  <div className="bg-white rounded-[2rem] p-8 space-y-6 h-full flex flex-col justify-between border border-amber-200/70 shadow-[0_8px_30px_rgba(217,119,6,0.04)] hover:shadow-[0_16px_40px_rgba(217,119,6,0.12)] hover:border-[#1DA1F3]/50 transition-all duration-300 relative overflow-hidden">
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-[#FFF7E6] text-amber-800 border border-amber-300">
+                          PILLAR {pillar.num}
+                        </span>
+                        <div className="relative w-11 h-11 rounded-xl bg-amber-50 border border-amber-200 text-[#1DA1F3] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
+                          <div className="absolute -inset-1 rounded-xl border border-dashed border-amber-400/50 animate-spin-slow pointer-events-none" />
+                          <IconComp size={20} className="relative z-10" />
+                        </div>
                       </div>
-                    </div>
 
                     <div className="space-y-1">
                       <h3 className="text-xl font-black font-display text-[#071A2B] group-hover:text-[#1DA1F3] transition-colors">
@@ -110,8 +143,9 @@ export const ServicesPartnershipModel = () => {
             );
           })}
         </div>
-
       </div>
-    </section>
-  );
+
+    </div>
+  </section>
+);
 };

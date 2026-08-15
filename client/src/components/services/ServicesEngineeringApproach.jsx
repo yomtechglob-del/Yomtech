@@ -65,9 +65,49 @@ export const ServicesEngineeringApproach = () => {
 
         {/* Process Pipeline */}
         <div className="relative">
-          {/* Connecting Line - Desktop Only */}
-          <div className="hidden lg:block absolute top-[75px] left-[10%] right-[10%] h-1 bg-[#1DA1F3]/20 z-0 rounded-full" />
-          <div className="hidden lg:block absolute top-[75px] left-[10%] right-[10%] h-1 bg-gradient-to-r from-[#1DA1F3] via-[#0ED3DD] to-[#1DA1F3] z-0 rounded-full shadow-[0_0_12px_rgba(29,161,243,0.5)]" />
+          {/* Animated Neon SVG ZigZag Track - Desktop Only */}
+          <svg className="hidden lg:block absolute top-[55px] left-0 right-0 w-full h-[60px] pointer-events-none z-0 overflow-visible" viewBox="0 0 1000 60" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="engApproachGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#1DA1F3" />
+                <stop offset="50%" stopColor="#0ED3DD" />
+                <stop offset="100%" stopColor="#1DA1F3" />
+              </linearGradient>
+            </defs>
+
+            {/* Glowing Base ZigZag Path */}
+            <path
+              d="M 195 30 L 445 10 L 695 50 L 945 30"
+              fill="none"
+              stroke="url(#engApproachGradient)"
+              strokeWidth="4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="opacity-40"
+            />
+            {/* Flowing dashed stream */}
+            <path
+              d="M 195 30 L 445 10 L 695 50 L 945 30"
+              fill="none"
+              stroke="#0ED3DD"
+              strokeWidth="2"
+              strokeDasharray="8 8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-zigzag-dash"
+            />
+            {/* Fast traveling laser particles */}
+            <path
+              d="M 195 30 L 445 10 L 695 50 L 945 30"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="1.5"
+              strokeDasharray="4 20"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="animate-zigzag-laser"
+            />
+          </svg>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
             {stages.map((stage, idx) => {
@@ -92,8 +132,9 @@ export const ServicesEngineeringApproach = () => {
                         <div className="w-12 h-12 rounded-2xl bg-[#EAF6FF] border border-[#1DA1F3]/30 text-[#1DA1F3] font-black text-sm flex items-center justify-center shadow-inner group-hover:scale-110 group-hover:bg-[#1DA1F3] group-hover:text-white transition-all duration-300">
                           {stage.num}
                         </div>
-                        <div className="w-10 h-10 rounded-xl bg-[#0ED3DD]/10 border border-[#0ED3DD]/30 text-[#0ED3DD] flex items-center justify-center group-hover:rotate-6 transition-transform">
-                          <IconComp size={20} />
+                        <div className="relative w-11 h-11 rounded-2xl bg-[#0ED3DD]/10 border border-[#0ED3DD]/40 text-[#0ED3DD] flex items-center justify-center group-hover:bg-[#1DA1F3] group-hover:text-white transition-all duration-300 shadow-sm">
+                          <div className="absolute -inset-1.5 rounded-2xl border border-dashed border-[#1DA1F3]/50 animate-spin-slow pointer-events-none" />
+                          <IconComp size={20} className="relative z-10" />
                         </div>
                       </div>
 

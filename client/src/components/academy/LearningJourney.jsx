@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Compass,
@@ -38,6 +38,11 @@ export const LearningJourney = () => {
   const [activeStageIdx, setActiveStageIdx] = useState(0);
   const [expandedGridCard, setExpandedGridCard] = useState(null);
 
+  // Refs for dynamic millimeter-precise SVG line path calculation
+  const timelineContainerRef = useRef(null);
+  const nodeRefs = useRef([]);
+  const [linePathD, setLinePathD] = useState('');
+
   const stages = [
     {
       num: '01',
@@ -47,12 +52,12 @@ export const LearningJourney = () => {
       desc: 'Our modules are built on official technical and vocational standards to ensure professional validation, engineering mastery, and long-term career success.',
       icon: GraduationCap,
       image: imgWabiSkills,
-      gradient: 'from-amber-400 via-orange-500 to-amber-600',
-      brandColor: '#F59E0B',
-      badgeBg: 'bg-amber-100/90 text-amber-950 border-amber-300',
-      nodeBorder: 'border-amber-400/80 shadow-amber-500/20',
-      pillBorder: 'border-amber-300 bg-amber-50 text-amber-900',
-      accentBar: 'bg-gradient-to-r from-amber-400 to-orange-500',
+      gradient: 'from-sky-400 via-cyan-500 to-blue-600',
+      brandColor: '#06B6D4',
+      badgeBg: 'bg-cyan-100/90 text-cyan-950 border-cyan-300',
+      nodeBorder: 'border-cyan-400/90 shadow-cyan-500/20',
+      pillBorder: 'border-cyan-300 bg-cyan-50 text-cyan-900',
+      accentBar: 'bg-gradient-to-r from-cyan-400 to-blue-500',
       milestoneCode: 'MILESTONE CODE 01',
       highlights: [
         'TVET-aligned official vocational engineering standards',
@@ -76,7 +81,7 @@ export const LearningJourney = () => {
       gradient: 'from-emerald-400 via-teal-500 to-emerald-600',
       brandColor: '#10B981',
       badgeBg: 'bg-emerald-100/90 text-emerald-950 border-emerald-300',
-      nodeBorder: 'border-emerald-400/80 shadow-emerald-500/20',
+      nodeBorder: 'border-emerald-400/90 shadow-emerald-500/20',
       pillBorder: 'border-emerald-300 bg-emerald-50 text-emerald-900',
       accentBar: 'bg-gradient-to-r from-emerald-400 to-teal-500',
       milestoneCode: 'MILESTONE CODE 02',
@@ -99,12 +104,12 @@ export const LearningJourney = () => {
       desc: 'Learn directly under professional lead software engineers, pediatric technical trainers, and senior architects with clinical enterprise expertise.',
       icon: Users,
       image: imgCourses,
-      gradient: 'from-indigo-500 via-purple-500 to-indigo-700',
-      brandColor: '#6366F1',
-      badgeBg: 'bg-indigo-100/90 text-indigo-950 border-indigo-300',
-      nodeBorder: 'border-indigo-400/80 shadow-indigo-500/20',
-      pillBorder: 'border-indigo-300 bg-indigo-50 text-indigo-900',
-      accentBar: 'bg-gradient-to-r from-indigo-500 to-purple-600',
+      gradient: 'from-cyan-400 via-blue-500 to-indigo-600',
+      brandColor: '#0284C7',
+      badgeBg: 'bg-sky-100/90 text-sky-950 border-sky-300',
+      nodeBorder: 'border-sky-400/90 shadow-sky-500/20',
+      pillBorder: 'border-sky-300 bg-sky-50 text-sky-900',
+      accentBar: 'bg-gradient-to-r from-sky-400 to-indigo-500',
       milestoneCode: 'MILESTONE CODE 03',
       highlights: [
         'Line-by-line senior engineering code reviews',
@@ -128,7 +133,7 @@ export const LearningJourney = () => {
       gradient: 'from-pink-500 via-rose-500 to-pink-700',
       brandColor: '#EC4899',
       badgeBg: 'bg-pink-100/90 text-pink-950 border-pink-300',
-      nodeBorder: 'border-pink-400/80 shadow-pink-500/20',
+      nodeBorder: 'border-pink-400/90 shadow-pink-500/20',
       pillBorder: 'border-pink-300 bg-pink-50 text-pink-900',
       accentBar: 'bg-gradient-to-r from-pink-500 to-rose-500',
       milestoneCode: 'MILESTONE CODE 04',
@@ -154,7 +159,7 @@ export const LearningJourney = () => {
       gradient: 'from-orange-400 via-amber-500 to-orange-600',
       brandColor: '#F97316',
       badgeBg: 'bg-orange-100/90 text-orange-950 border-orange-300',
-      nodeBorder: 'border-orange-400/80 shadow-orange-500/20',
+      nodeBorder: 'border-orange-400/90 shadow-orange-500/20',
       pillBorder: 'border-orange-300 bg-orange-50 text-orange-900',
       accentBar: 'bg-gradient-to-r from-orange-400 to-amber-500',
       milestoneCode: 'MILESTONE CODE 05',
@@ -177,10 +182,10 @@ export const LearningJourney = () => {
       desc: 'Build a standout production portfolio, master high-scale architecture, contribute to enterprise software repos, and scale your career trajectory.',
       icon: Rocket,
       image: imgUiUx,
-      gradient: 'from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]',
+      gradient: 'from-[#0284C7] via-[#0ED3DD] to-indigo-600',
       brandColor: '#0284C7',
       badgeBg: 'bg-sky-100/90 text-sky-950 border-sky-300',
-      nodeBorder: 'border-sky-400/80 shadow-sky-500/20',
+      nodeBorder: 'border-sky-400/90 shadow-sky-500/20',
       pillBorder: 'border-sky-300 bg-sky-50 text-sky-900',
       accentBar: 'bg-gradient-to-r from-[#0284C7] to-[#0ED3DD]',
       milestoneCode: 'MILESTONE CODE 06',
@@ -196,6 +201,57 @@ export const LearningJourney = () => {
       terminalCmd: 'yomtech --launch-portfolio --scale-growth'
     }
   ];
+
+  // Dynamic layout calculation: Measure exact (x, y) center of node elements relative to container
+  useLayoutEffect(() => {
+    if (viewMode !== 'TIMELINE') return;
+
+    const recalculateLinePath = () => {
+      if (!timelineContainerRef.current) return;
+      const containerRect = timelineContainerRef.current.getBoundingClientRect();
+      if (containerRect.width === 0 || containerRect.height === 0) return;
+
+      const points = nodeRefs.current
+        .map((el) => {
+          if (!el) return null;
+          const rect = el.getBoundingClientRect();
+          return {
+            x: rect.left + rect.width / 2 - containerRect.left,
+            y: rect.top + rect.height / 2 - containerRect.top
+          };
+        })
+        .filter(Boolean);
+
+      if (points.length < 2) return;
+
+      // Construct SVG path L coords passing EXACTLY through center point of every node
+      const pathD = points.reduce((acc, pt, i) => {
+        return i === 0 ? `M ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}` : `${acc} L ${pt.x.toFixed(1)} ${pt.y.toFixed(1)}`;
+      }, '');
+
+      setLinePathD(pathD);
+    };
+
+    recalculateLinePath();
+
+    // ResizeObserver for dynamic layout shifts & screen resizes
+    const observer = new ResizeObserver(recalculateLinePath);
+    if (timelineContainerRef.current) {
+      observer.observe(timelineContainerRef.current);
+    }
+    window.addEventListener('resize', recalculateLinePath);
+
+    // Timeout fallback for post-image load shifts
+    const t1 = setTimeout(recalculateLinePath, 150);
+    const t2 = setTimeout(recalculateLinePath, 500);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', recalculateLinePath);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [viewMode]);
 
   const activeStage = stages[activeStageIdx];
   const ActiveIcon = activeStage.icon;
@@ -215,7 +271,7 @@ export const LearningJourney = () => {
   return (
     <section className="py-24 sm:py-36 w-full bg-[#FAFCFF] relative text-slate-900 overflow-hidden border-b border-sky-200/80 font-sans">
       {/* Ambient Soft Glow Halos */}
-      <div className="absolute top-1/6 left-1/4 w-[750px] h-[750px] bg-gradient-to-br from-amber-100/40 via-sky-100/40 to-transparent rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/6 left-1/4 w-[750px] h-[750px] bg-gradient-to-br from-cyan-100/40 via-sky-100/40 to-transparent rounded-full blur-[150px] pointer-events-none" />
       <div className="absolute bottom-1/5 right-1/4 w-[650px] h-[650px] bg-gradient-to-tl from-emerald-100/40 via-indigo-100/30 to-transparent rounded-full blur-[140px] pointer-events-none" />
       
       {/* Background Matrix Dot Pattern */}
@@ -285,7 +341,7 @@ export const LearningJourney = () => {
           </div>
         </div>
 
-        {/* Premier Horizontal Stage Stepper Rail (01 -> 06) */}
+        {/* Stepper Rail */}
         <div className="p-[2px] rounded-[2.2rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 shadow-xl shadow-sky-500/10">
           <div className="w-full bg-white/95 backdrop-blur-2xl rounded-[2.1rem] p-3 sm:p-4 border border-sky-200/80">
             <div className="grid grid-cols-3 sm:grid-cols-6 gap-3 relative">
@@ -325,32 +381,28 @@ export const LearningJourney = () => {
         <AnimatePresence mode="wait">
           {viewMode === 'TIMELINE' ? (
             /* ========================================================================= */
-            /* MODE A: PREMIER WINDING TIMELINE PATHWAY (EXACT LINE PASS THROUGH ICONS)   */
+            /* MODE A: PREMIER WINDING TIMELINE PATHWAY (DYNAMIC PASS THROUGH ICONS)     */
             /* ========================================================================= */
             <motion.div
               key="timeline-zigzag-view"
+              ref={timelineContainerRef}
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -25 }}
               transition={{ duration: 0.5 }}
               className="relative w-full max-w-6xl mx-auto py-10"
             >
-              {/* DESKTOP SVG CONNECTING DUAL-TRACK DASHED LINE THAT PASSES EXACTLY THROUGH THE ICON NODES */}
+              {/* DYNAMIC SVG CONNECTING DUAL-TRACK LINE THAT PASSES EXACTLY THROUGH NODE CENTERS */}
               <div className="absolute inset-0 pointer-events-none hidden md:block z-10">
-                <svg
-                  className="w-full h-full"
-                  viewBox="0 0 1000 1000"
-                  preserveAspectRatio="none"
-                  fill="none"
-                >
+                <svg className="w-full h-full" fill="none">
                   <defs>
                     <linearGradient id="timelinePassGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#F59E0B" />
+                      <stop offset="0%" stopColor="#06B6D4" />
                       <stop offset="20%" stopColor="#10B981" />
-                      <stop offset="40%" stopColor="#6366F1" />
+                      <stop offset="40%" stopColor="#0284C7" />
                       <stop offset="60%" stopColor="#EC4899" />
                       <stop offset="80%" stopColor="#F97316" />
-                      <stop offset="100%" stopColor="#0284C7" />
+                      <stop offset="100%" stopColor="#6366F1" />
                     </linearGradient>
 
                     <filter id="nodeGlowFilter" x="-20%" y="-20%" width="140%" height="140%">
@@ -359,42 +411,48 @@ export const LearningJourney = () => {
                     </filter>
                   </defs>
 
-                  {/* Outer Ambient Glow Tube */}
-                  <path
-                    d="M 580 80 L 420 240 L 580 410 L 420 580 L 580 740 L 420 910"
-                    stroke="url(#timelinePassGrad)"
-                    strokeWidth="10"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0.3"
-                    filter="url(#nodeGlowFilter)"
-                  />
+                  {/* 1. Outer Ambient Glow Tube */}
+                  {linePathD && (
+                    <path
+                      d={linePathD}
+                      stroke="url(#timelinePassGrad)"
+                      strokeWidth="10"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.35"
+                      filter="url(#nodeGlowFilter)"
+                    />
+                  )}
 
-                  {/* Base Colored Line Track (Like reference screenshot) */}
-                  <path
-                    d="M 580 80 L 420 240 L 580 410 L 420 580 L 580 740 L 420 910"
-                    stroke="url(#timelinePassGrad)"
-                    strokeWidth="6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0.95"
-                  />
+                  {/* 2. Base Colored Track (Cyan/Blue track matching reference image) */}
+                  {linePathD && (
+                    <path
+                      d={linePathD}
+                      stroke="url(#timelinePassGrad)"
+                      strokeWidth="6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.95"
+                    />
+                  )}
 
-                  {/* Inner White Dashed Core Track (Exact pattern from reference screenshot) */}
-                  <path
-                    d="M 580 80 L 420 240 L 580 410 L 420 580 L 580 740 L 420 910"
-                    stroke="#FFFFFF"
-                    strokeWidth="2.5"
-                    strokeDasharray="6 6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0.95"
-                  />
+                  {/* 3. Inner White Dashed Core Track (Exact pattern from reference screenshot) */}
+                  {linePathD && (
+                    <path
+                      d={linePathD}
+                      stroke="#FFFFFF"
+                      strokeWidth="2.5"
+                      strokeDasharray="6 6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.95"
+                    />
+                  )}
                 </svg>
               </div>
 
               {/* MOBILE VERTICAL CENTER DUAL LINE */}
-              <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-amber-400 via-purple-500 to-sky-500 rounded-full md:hidden z-10 opacity-80" />
+              <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-purple-500 to-sky-500 rounded-full md:hidden z-10 opacity-80" />
 
               {/* STAGES LIST CONTAINER */}
               <div className="space-y-20 md:space-y-32 relative z-20">
@@ -412,9 +470,10 @@ export const LearningJourney = () => {
                       className="relative grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
                     >
                       {/* ========================================================= */}
-                      {/* CENTRAL ICON NODE BADGE (MATCHING REFERENCE SCREENSHOT)    */}
+                      {/* CENTRAL ICON NODE BADGE (ANCHORED & MEASURED DYNAMICALLY)  */}
                       {/* ========================================================= */}
                       <div 
+                        ref={(el) => (nodeRefs.current[idx] = el)}
                         className={`absolute z-30 hidden md:flex items-center justify-center transition-transform duration-500 hover:scale-125 cursor-pointer
                           ${isEven ? 'left-[58%]' : 'left-[42%]'} top-1/2 -translate-x-1/2 -translate-y-1/2`}
                         onClick={() => {
@@ -423,14 +482,14 @@ export const LearningJourney = () => {
                         }}
                       >
                         {/* Outer Dashed Circle Ring (Exactly like screenshot!) */}
-                        <div className={`relative w-20 h-20 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/60 backdrop-blur-xs flex items-center justify-center shadow-xl transition-all duration-500 group`}>
+                        <div className={`relative w-20 h-20 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/70 backdrop-blur-xs flex items-center justify-center shadow-xl transition-all duration-500 group`}>
                           
                           {/* Inner Gradient Solid Circle Disk */}
                           <div className={`w-13 h-13 rounded-full bg-gradient-to-br ${stg.gradient} text-white flex items-center justify-center shadow-md border-2 border-white relative`}>
                             <Icon className="w-6 h-6 stroke-[2.2]" />
                             
                             {/* Top-Right Step Number Badge (e.g. 1, 2, 3, 4, 5, 6 - Exact reference!) */}
-                            <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 border-2 border-white text-white font-black text-[10px] flex items-center justify-center shadow-md">
+                            <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 border-2 border-white text-white font-black text-[10px] flex items-center justify-center shadow-md">
                               {idx + 1}
                             </div>
                           </div>
@@ -443,50 +502,53 @@ export const LearningJourney = () => {
                         <div className={`relative w-16 h-16 rounded-full border-2 border-dashed ${stg.nodeBorder} bg-white/80 backdrop-blur-xs flex items-center justify-center shadow-lg`}>
                           <div className={`w-11 h-11 rounded-full bg-gradient-to-br ${stg.gradient} text-white flex items-center justify-center shadow-md border-2 border-white relative`}>
                             <Icon className="w-5 h-5 stroke-[2.2]" />
-                            <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 border-2 border-white text-white font-black text-[9px] flex items-center justify-center shadow-sm">
+                            <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 border-2 border-white text-white font-black text-[9px] flex items-center justify-center shadow-sm">
                               {idx + 1}
                             </div>
                           </div>
                         </div>
                       </div>
 
-
                       {/* ========================================================= */}
                       {/* COLUMN 1: LEFT SIDE (Either Image Card or Content Details) */}
                       {/* ========================================================= */}
                       <div className={`md:col-span-5 ${isEven ? 'order-1 md:pr-4' : 'order-2 md:order-1 md:pl-4'}`}>
                         {isEven ? (
-                          /* EVEN INDEX: ORGANIC CURVED IMAGE CARD ON LEFT */
+                          /* EVEN INDEX: ORGANIC CURVED DOUBLE-SHELL IMAGE CARD ON LEFT */
                           <div className="relative group cursor-pointer" onClick={() => setActiveStageIdx(idx)}>
-                            {/* Ambient Glow behind frame */}
-                            <div className={`absolute -inset-2 rounded-[3rem] bg-gradient-to-br ${stg.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                            {/* Ambient Soft Color Glow behind frame */}
+                            <div className={`absolute -inset-3 rounded-[3.5rem] bg-gradient-to-br ${stg.gradient} opacity-20 blur-2xl group-hover:opacity-35 transition-opacity duration-500`} />
                             
-                            {/* Wavy Organic Image Container */}
-                            <div 
-                              className="relative overflow-hidden border-4 border-white shadow-2xl transition-all duration-700 ease-out group-hover:scale-[1.03]"
-                              style={{ borderRadius: '50px 35px 65px 40px / 40px 60px 45px 55px' }}
-                            >
-                              <img 
-                                src={stg.image} 
-                                alt={stg.title}
-                                className="w-full h-[280px] sm:h-[340px] object-cover transition-transform duration-700 group-hover:scale-110"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80" />
+                            {/* White Outer Card Shell (Like Image 1) */}
+                            <div className="relative p-4 sm:p-5 rounded-[2.8rem] bg-white border border-slate-100/90 shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all duration-700 ease-out group-hover:scale-[1.02] group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
                               
-                              {/* Bottom Floating Badge on Image */}
-                              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                                <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest backdrop-blur-md shadow-md`}>
-                                  STAGE {stg.num}
-                                </span>
-                                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-xs font-black">
-                                  {stg.duration}
-                                </span>
+                              {/* Inner Image Container (Organic Wavy Frame like Image 2) */}
+                              <div 
+                                className={`relative overflow-hidden border-4 ${stg.nodeBorder} bg-slate-50 flex items-center justify-center shadow-inner`}
+                                style={{ borderRadius: '45px 30px 55px 35px / 35px 50px 40px 60px' }}
+                              >
+                                <img 
+                                  src={stg.image} 
+                                  alt={stg.title}
+                                  className="w-full h-[270px] sm:h-[320px] object-cover transition-transform duration-700 group-hover:scale-108"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-75" />
+                                
+                                {/* Bottom Floating Badge on Image */}
+                                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
+                                  <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest backdrop-blur-md shadow-md`}>
+                                    STAGE {stg.num}
+                                  </span>
+                                  <span className="px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-slate-900 text-xs font-black shadow-xs">
+                                    {stg.duration}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         ) : (
                           /* ODD INDEX: TEXT CONTENT DETAILS ON LEFT */
-                          <div className="space-y-4 text-left p-6 sm:p-8 rounded-[2.5rem] bg-white/80 backdrop-blur-xl border border-sky-200/80 shadow-xl hover:border-sky-300 transition-all">
+                          <div className="space-y-4 text-left p-6 sm:p-8 rounded-[2.8rem] bg-white/90 backdrop-blur-xl border border-sky-200/80 shadow-xl hover:border-sky-300 transition-all">
                             <div className="flex items-center gap-3">
                               <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest shadow-xs`}>
                                 STAGE {stg.num} • {stg.key}
@@ -527,7 +589,7 @@ export const LearningJourney = () => {
                       <div className={`md:col-span-5 ${isEven ? 'order-2 md:pl-4' : 'order-1 md:order-2 md:pr-4'}`}>
                         {isEven ? (
                           /* EVEN INDEX: TEXT CONTENT DETAILS ON RIGHT */
-                          <div className="space-y-4 text-left p-6 sm:p-8 rounded-[2.5rem] bg-white/80 backdrop-blur-xl border border-sky-200/80 shadow-xl hover:border-sky-300 transition-all">
+                          <div className="space-y-4 text-left p-6 sm:p-8 rounded-[2.8rem] bg-white/90 backdrop-blur-xl border border-sky-200/80 shadow-xl hover:border-sky-300 transition-all">
                             <div className="flex items-center gap-3">
                               <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest shadow-xs`}>
                                 STAGE {stg.num} • {stg.key}
@@ -557,36 +619,41 @@ export const LearningJourney = () => {
                             </div>
                           </div>
                         ) : (
-                          /* ODD INDEX: ORGANIC CURVED IMAGE CARD ON RIGHT */
+                          /* ODD INDEX: ORGANIC CURVED DOUBLE-SHELL IMAGE CARD ON RIGHT */
                           <div className="relative group cursor-pointer" onClick={() => setActiveStageIdx(idx)}>
-                            {/* Ambient Glow behind frame */}
-                            <div className={`absolute -inset-2 rounded-[3rem] bg-gradient-to-br ${stg.gradient} opacity-20 blur-xl group-hover:opacity-40 transition-opacity duration-500`} />
+                            {/* Ambient Soft Color Glow behind frame */}
+                            <div className={`absolute -inset-3 rounded-[3.5rem] bg-gradient-to-br ${stg.gradient} opacity-20 blur-2xl group-hover:opacity-35 transition-opacity duration-500`} />
                             
-                            {/* Wavy Organic Image Container */}
-                            <div 
-                              className="relative overflow-hidden border-4 border-white shadow-2xl transition-all duration-700 ease-out group-hover:scale-[1.03]"
-                              style={{ borderRadius: '40px 60px 45px 55px / 55px 40px 60px 45px' }}
-                            >
-                              <img 
-                                src={stg.image} 
-                                alt={stg.title}
-                                className="w-full h-[280px] sm:h-[340px] object-cover transition-transform duration-700 group-hover:scale-110"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80" />
+                            {/* White Outer Card Shell (Like Image 1) */}
+                            <div className="relative p-4 sm:p-5 rounded-[2.8rem] bg-white border border-slate-100/90 shadow-[0_20px_50px_rgba(0,0,0,0.06)] transition-all duration-700 ease-out group-hover:scale-[1.02] group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.12)]">
                               
-                              {/* Bottom Floating Badge on Image */}
-                              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
-                                <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest backdrop-blur-md shadow-md`}>
-                                  STAGE {stg.num}
-                                </span>
-                                <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-xs font-black">
-                                  {stg.duration}
-                                </span>
+                              {/* Inner Image Container (Organic Wavy Frame like Image 2) */}
+                              <div 
+                                className={`relative overflow-hidden border-4 ${stg.nodeBorder} bg-slate-50 flex items-center justify-center shadow-inner`}
+                                style={{ borderRadius: '35px 50px 40px 60px / 45px 30px 55px 35px' }}
+                              >
+                                <img 
+                                  src={stg.image} 
+                                  alt={stg.title}
+                                  className="w-full h-[270px] sm:h-[320px] object-cover transition-transform duration-700 group-hover:scale-108"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-75" />
+                                
+                                {/* Bottom Floating Badge on Image */}
+                                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between z-10">
+                                  <span className={`px-4 py-1.5 rounded-full ${stg.badgeBg} text-[10px] font-black uppercase tracking-widest backdrop-blur-md shadow-md`}>
+                                    STAGE {stg.num}
+                                  </span>
+                                  <span className="px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-slate-900 text-xs font-black shadow-xs">
+                                    {stg.duration}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
                         )}
                       </div>
+
 
                     </motion.div>
                   );
@@ -595,6 +662,7 @@ export const LearningJourney = () => {
             </motion.div>
           ) : viewMode === 'SPOTLIGHT' ? (
             /* ========================================================================= */
+
             /* MODE B: PREMIER INTERACTIVE SPOTLIGHT SHOWCASE (Cockpit Layout)           */
             /* ========================================================================= */
             <motion.div

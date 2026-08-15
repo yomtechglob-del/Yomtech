@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { BookOpen, Terminal, Layers, Users, Zap, Atom, ArrowRight } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/academy/wabiskills-logo.jpg';
 
 const PILLARS = [
   {
@@ -231,8 +231,8 @@ export const LearningModel = () => {
 
           {/* Main Button Surface */}
           <div className="relative bg-white/80 backdrop-blur-xl border border-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_10px_40px_-10px_rgba(139,92,246,0.2)] hover:shadow-[0_20px_50px_-10px_rgba(6,182,212,0.3)] hover:-translate-y-1 transition-all duration-500">
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-violet-50 to-cyan-50 border border-slate-100 flex items-center justify-center relative overflow-hidden">
-              <img src={logoImg} alt="WabiSkills" className="w-full h-full object-cover rounded-full" />
+            <div className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center relative overflow-hidden p-0.5">
+              <img src={logoImg} alt="WabiSkills" className="w-full h-full object-contain rounded-full" />
             </div>
             <span className="text-xs sm:text-sm font-black tracking-[0.2em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-900 group-hover:from-violet-600 group-hover:to-cyan-600 transition-all duration-300">
               WabiSkills Central Nucleus

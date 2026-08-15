@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { ThreeDBackground } from './components/common/ThreeDBackground';
@@ -37,8 +37,10 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/academy" element={<AcademyPage />} />
+          <Route path="/cacademy" element={<Navigate to="/academy" replace />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
 
         {/* Dedicated Admin Portal Routes */}

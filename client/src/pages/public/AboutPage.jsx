@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import {
-  Cpu, Monitor, LayoutGrid, Globe, Eye, Target, Heart, Mail, CheckCircle2, Sparkles, ArrowRight
+  Cpu, Monitor, LayoutGrid, Globe, Eye, Target, Heart, Mail, CheckCircle2, Sparkles, 
+  ArrowRight, Phone, Star, TrendingUp, Briefcase, Handshake, ChevronRight, Layers, Award, ShieldCheck, Check, Building2
 } from 'lucide-react';
-import { HeroCanvas } from '../../components/common/HeroCanvas';
 
-// Dedicated vector SVG image assets matching exact user design screenshots
+// Dedicated visual assets matching exact user design references
+import heroTeamImg from '../../assets/about/hero_team.jpg';
+import consultingTeamImg from '../../assets/about/consulting_team.jpg';
+import teamDiscussionImg from '../../assets/about/team_discussion.jpg';
 import aboutHeroImg from '../../assets/about/hero.svg';
-import aboutCompanyImg from '../../assets/about/company.svg';
-import aboutExpertiseImg from '../../assets/about/expertise.svg';
-import aboutTeamImg from '../../assets/about/team.svg';
 
 // High resolution visual images for capability cards
 import educationImg from '../../assets/services/education.png';
@@ -18,7 +18,7 @@ import customImg from '../../assets/services/custom.png';
 import coachingImg from '../../assets/services/coaching.png';
 import cloudImg from '../../assets/services/cloud.png';
 
-// 12 New Enterprise Premium About Us Components
+// Enterprise Premium About Us Components
 import { AboutAtGlance } from '../../components/about/AboutAtGlance';
 import { HowWeThink } from '../../components/about/HowWeThink';
 import { EngineeringApproach } from '../../components/about/EngineeringApproach';
@@ -32,236 +32,226 @@ import { AboutFinalCTA } from '../../components/about/AboutFinalCTA';
 
 export const AboutPage = () => {
   const navigate = useNavigate();
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (newsletterEmail) {
-      setNewsletterSuccess(true);
-      setNewsletterEmail('');
-      setTimeout(() => setNewsletterSuccess(false), 4000);
-    }
-  };
-
-  const bulletPoints = [
+  const approachCards = [
     {
-      icon: Cpu,
-      title: 'Tech Academy & Training',
-      badge: 'MENTORSHIP',
-      image: educationImg,
-      topBar: 'from-[#0EA5E9] to-[#0ED3DD]',
-      iconBg: 'from-[#0EA5E9] to-[#0ED3DD]',
-      num: '01',
-      shadowColor: 'hover:shadow-[0_16px_35px_rgba(14,165,233,0.15)] hover:border-sky-300',
-      titleColor: 'group-hover:text-[#0284C7]',
-      badgeColor: 'bg-sky-50 text-[#0284C7] border-sky-200',
-      text: 'We provide online training and mentorship in AI, UI/UX, Fullstack Development, and Data Analytics — helping learners gain industry-ready skills.'
+      icon: Briefcase,
+      title: 'ERP, CRM & WMS Solutions',
+      desc: 'We design and implement enterprise-grade ERP, CRM, and WMS systems that streamline business operations, improve decision-making, and enhance customer engagement.',
+      bg: 'bg-white text-slate-900 border border-slate-200/90 shadow-lg hover:shadow-2xl hover:border-cyan-300',
+      iconBox: 'bg-slate-50 border border-slate-200 text-[#0284C7]',
+      btnStyle: 'bg-slate-100 text-slate-800 hover:bg-cyan-500 hover:text-white',
+      link: '/services',
+      accentTag: 'Enterprise Systems'
     },
     {
-      icon: Monitor,
-      title: 'Enterprise Software Build',
-      badge: 'SOLUTIONS',
-      image: customImg,
-      topBar: 'from-[#7C3AED] to-[#A855F7]',
-      iconBg: 'from-[#7C3AED] to-[#A855F7]',
-      num: '02',
-      shadowColor: 'hover:shadow-[0_16px_35px_rgba(124,58,237,0.15)] hover:border-violet-300',
-      titleColor: 'group-hover:text-[#7C3AED]',
-      badgeColor: 'bg-violet-50 text-violet-700 border-violet-200',
-      text: 'We deliver custom software solutions, cloud integration, and IT consulting to businesses, enabling them to innovate and scale faster.'
+      icon: TrendingUp,
+      title: 'Custom Software & Apps',
+      desc: 'From responsive web apps to high-performance mobile apps, we build tailored software solutions that meet your exact business needs and scale with your growth.',
+      bg: 'bg-gradient-to-br from-[#a7f3d0] via-[#6ee7b7] to-[#34d399] text-slate-950 border border-emerald-300 shadow-xl hover:shadow-2xl',
+      iconBox: 'bg-white/90 border border-emerald-400 text-emerald-800',
+      btnStyle: 'bg-emerald-950 text-white hover:bg-white hover:text-emerald-950',
+      link: '/services',
+      accentTag: 'Web & Mobile'
     },
     {
-      icon: LayoutGrid,
-      title: 'Hands-on Project Labs',
-      badge: 'PRACTICAL',
-      image: coachingImg,
-      topBar: 'from-[#059669] to-[#34D399]',
-      iconBg: 'from-[#059669] to-[#34D399]',
-      num: '03',
-      shadowColor: 'hover:shadow-[0_16px_35px_rgba(5,150,105,0.15)] hover:border-emerald-300',
-      titleColor: 'group-hover:text-[#059669]',
-      badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      text: 'Hands-on workshops, real-world repository projects, and 1-on-1 coaching ensure practical experience for both individuals and teams.'
-    },
-    {
-      icon: Globe,
-      title: 'Global Tech Network',
-      badge: 'COLLABORATION',
-      image: cloudImg,
-      topBar: 'from-[#D97706] to-[#F59E0B]',
-      iconBg: 'from-[#D97706] to-[#F59E0B]',
-      num: '04',
-      shadowColor: 'hover:shadow-[0_16px_35px_rgba(217,119,6,0.15)] hover:border-amber-300',
-      titleColor: 'group-hover:text-amber-600',
-      badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
-      text: 'We collaborate globally, building long-lasting partnerships with enterprise organizations and ambitious learners to shape the digital future.'
+      icon: Handshake,
+      title: 'Cloud Services & DevOps',
+      desc: 'We provide cloud migration, hosting, and deployment services that enable secure, scalable, and cost-effective business operations in the cloud.',
+      bg: 'bg-gradient-to-br from-[#0c4a6e] via-[#0369a1] to-[#0284c7] text-white border border-sky-400 shadow-xl hover:shadow-2xl',
+      iconBox: 'bg-white/10 border border-white/20 text-cyan-200',
+      btnStyle: 'bg-white text-slate-950 hover:bg-cyan-300 hover:text-slate-950',
+      link: '/services',
+      accentTag: 'Cloud & Security'
     }
   ];
 
   return (
-    <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden">
-      {/* Luminous Arc Spotlight Flare */}
-      <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-emerald-500/30 via-amber-600/20 to-transparent blur-[130px] rounded-[50%] pointer-events-none" />
-      <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[750px] h-[260px] bg-emerald-300/20 blur-[75px] rounded-[50%] pointer-events-none" />
+    <div className="bg-white text-slate-900 min-h-screen relative overflow-hidden font-sans">
+      
+      {/* ========================================================
+          1. HERO SECTION (Inspired by Reference Banner Layout)
+      ======================================================== */}
+      <section className="w-full pt-44 sm:pt-48 md:pt-52 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-sky-300/40">
+        
+        {/* Luminous Glow Flares */}
+        <div className="absolute -top-36 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-emerald-400/25 via-cyan-500/20 to-transparent blur-[140px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/4 right-[-10%] w-[600px] h-[600px] bg-sky-300/20 blur-[130px] rounded-full pointer-events-none" />
 
-      {/* 1. HERO SECTION */}
-      <section className="w-full pt-52 sm:pt-60 md:pt-64 pb-28 md:pb-36 relative z-10 hero-cyan-gradient">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-        {/* Left Content */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          className="lg:col-span-7 space-y-7"
-        >
-          <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-black/30 backdrop-blur-xl border border-[#0ED3DD]/50 text-[#0ED3DD] text-xs font-black tracking-widest uppercase shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 transition-all">
-            <div className="w-5.5 h-5.5 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
-            </div>
-            <span className="whitespace-nowrap">WHO WE ARE — ESTABLISHED 2015</span>
-          </div>
-
-          <div className="space-y-3 font-display font-black tracking-tight leading-[1.1]">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white">
-              Pioneering Enterprise Software <br />
-              <span className="bg-gradient-to-r from-white via-amber-200 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.3)]">
-                &amp; Tech Talent Engineering
-              </span>
-            </h1>
-          </div>
-
-          <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-2xl">
-            YomTech Global is a premiere software development and talent engineering platform. We architect scalable digital enterprise systems while cultivating top-tier tech professionals.
-          </p>
-
-          {/* Action Buttons & Metric Chips */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
-            <button
-              onClick={() => navigate('/services')}
-              className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-xl shadow-sky-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3"
-            >
-              <span>Explore Our Capabilities</span>
-              <ArrowRight size={18} />
-            </button>
-
-            <button
-              onClick={() => navigate('/contact')}
-              className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-black text-sm backdrop-blur-md hover:scale-105 transition-all duration-300"
-            >
-              Contact Our Engineers
-            </button>
-          </div>
-        </motion.div>
-
-        {/* Right Hero Image Showcase */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="lg:col-span-5 flex justify-center relative"
-        >
-          <div className="relative w-full max-w-lg aspect-[4/3] rounded-[2.5rem] overflow-hidden border-2 border-sky-400/40 shadow-[0_0_60px_rgba(14,211,221,0.25)] group hover:border-[#0ED3DD] transition-all duration-500">
-            <img
-              src={aboutHeroImg}
-              alt="About YomTech Global"
-              className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-
-            {/* Floating Glass Badge Top Right */}
-            <div className="absolute top-4 right-4 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-xl border border-white/40 text-white text-xs font-black flex items-center gap-2 shadow-lg">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span>Full-Stack Platform</span>
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
+          
+          {/* Left Hero Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 space-y-7"
+          >
+            {/* Top Rating Badge */}
+            <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white text-xs font-black shadow-lg">
+              <div className="flex items-center gap-1 text-amber-300">
+                <span className="font-extrabold text-sm mr-1 text-white">4.9</span>
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={13} fill="currentColor" />
+                ))}
+              </div>
+              <span className="text-white/40">|</span>
+              <span className="text-cyan-200 font-bold uppercase tracking-widest text-[11px]">2K+ Learners &amp; 25+ Solutions</span>
             </div>
 
-            {/* Floating Glass Badge Bottom Left */}
-            <div className="absolute bottom-4 left-4 px-4 py-2 rounded-xl bg-white/20 backdrop-blur-xl border border-white/40 text-white text-xs font-bold shadow-lg">
-              🏢 Addis Ababa, Ethiopia
+            {/* Main Headline */}
+            <div className="space-y-2 font-display font-black tracking-tight leading-[1.08]">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] text-white">
+                WELCOME TO <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-[#0ED3DD] to-amber-200">
+                  YOMTECH GLOBAL
+                </span> <br />
+                INNOVATIVE TECH SOLUTIONS
+              </h1>
             </div>
-          </div>
-        </motion.div>
+
+            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-2xl">
+              At YomeTech Global, we empower businesses, innovators, and learners to thrive in the digital era. From enterprise software to cloud solutions and world-class training, we don’t just deliver technology—we help you create the future.
+            </p>
+
+            {/* Dual CTA Buttons Row */}
+            <div className="flex flex-wrap items-center gap-5 pt-3">
+              <button
+                onClick={() => navigate('/services')}
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3 group"
+              >
+                <span>Explore Our Services</span>
+                <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                  <ArrowRight size={14} />
+                </div>
+              </button>
+
+              <a
+                href="tel:+251977666699"
+                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-3.5 shadow-md"
+              >
+                <div className="w-8 h-8 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center shadow-md">
+                  <Phone size={15} />
+                </div>
+                <div className="text-left">
+                  <p className="text-[9px] text-cyan-200 font-bold uppercase tracking-wider">Direct Line</p>
+                  <p className="text-xs font-black text-white">+251 (977) 666-699</p>
+                </div>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Right Hero Image Showcase (Inspired by Reference Visual) */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-5 flex justify-center relative"
+          >
+            <div className="relative w-full max-w-lg aspect-[4/3.5] rounded-[2.5rem] overflow-hidden border-2 border-cyan-300/40 shadow-[0_25px_60px_rgba(14,211,221,0.3)] group hover:border-[#0ED3DD] transition-all duration-500 bg-white/5 backdrop-blur-md">
+              <img
+                src={heroTeamImg || aboutHeroImg}
+                alt="YomTech Global Leadership"
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+
+              {/* Floating Glass Badge Top Right */}
+              <div className="absolute top-4 right-4 px-4 py-2 rounded-2xl bg-white/25 backdrop-blur-xl border border-white/40 text-white text-xs font-black flex items-center gap-2 shadow-lg">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
+                <span>Enterprise &amp; Talent Core</span>
+              </div>
+
+              {/* Floating Glass Badge Bottom Left */}
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between p-3.5 rounded-2xl bg-white/20 backdrop-blur-xl border border-white/30 text-white shadow-lg">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-cyan-400/30 border border-cyan-300 flex items-center justify-center text-cyan-200">
+                    <Building2 size={16} />
+                  </div>
+                  <div>
+                    <p className="text-xs font-black">YomTech Global</p>
+                    <p className="text-[10px] text-cyan-200 font-medium">Addis Ababa, Ethiopia · Global Delivery</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-mono font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-400/30 border border-emerald-300 text-emerald-200">
+                  Est. 2015
+                </span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* NEW SECTION 1: YOMTECH GLOBAL AT A GLANCE */}
-      <AboutAtGlance />
 
-      {/* NEW SECTION 2: HOW WE THINK */}
-      <HowWeThink />
-
-      {/* 1. CORE FOUNDATIONS: MISSION, VISION & VALUES */}
-      <CoreFoundations />
-
-      {/* 2. CORPORATE OVERVIEW & ECOSYSTEM ZIG-ZAG BLOCKS */}
-      <AboutEcosystem />
-
-      {/* WHAT MAKES US DIFFERENT — 4 Feature Cards */}
-      <section className="py-20 w-full bg-white relative text-slate-900 border-b border-slate-200/80">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-10">
-          <div className="text-center space-y-3">
-            <span className="text-[11px] font-black uppercase tracking-[0.2em] text-cyan-700 px-4.5 py-2 rounded-full bg-cyan-50 border border-cyan-200 inline-block shadow-sm">
-              ⚡ WHY CHOOSE YOMTECH GLOBAL
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900">
-              What Makes Us <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Different</span>
-            </h2>
-            <p className="text-slate-600 text-base max-w-2xl mx-auto font-semibold">
-              We combine enterprise software engineering with hands-on talent development for real-world impact.
-            </p>
+      {/* ========================================================
+          2. ESSENTIAL FEATURES SECTION (What We Build & Teach)
+      ======================================================== */}
+      <section className="py-24 lg:py-32 w-full bg-white relative text-slate-900 border-b border-slate-200/80">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16">
+          
+          {/* Header Row: Left Title + Right Narrative (Matching Reference) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+            <div className="lg:col-span-7 space-y-3">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+                <span>✻</span>
+                <span>What We Build &amp; Teach</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Innovative solutions for <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]">
+                  a better digital tomorrow
+                </span>
+              </h2>
+            </div>
+            <div className="lg:col-span-5">
+              <p className="text-slate-600 text-sm sm:text-base font-semibold leading-relaxed">
+                From responsive web apps and high-performance mobile solutions to enterprise ERP systems and IT consulting, we equip companies and learners with future-ready technology.
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
-            {bulletPoints.map((bp, idx) => {
-              const IconComp = bp.icon;
+          {/* 3 Large Rounded Approach Cards (Matching Reference Card Styles) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {approachCards.map((card, idx) => {
+              const IconComp = card.icon;
               return (
                 <motion.div
                   key={idx}
                   whileHover={{ y: -8, scale: 1.015 }}
                   transition={{ duration: 0.3 }}
-                  className="p-[1.5px] rounded-[2.2rem] bg-gradient-to-br from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-xl hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+                  className={`rounded-[2.5rem] p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 cursor-pointer min-h-[380px] ${card.bg}`}
                 >
-                  <div className="bg-white rounded-[2.1rem] p-7 space-y-5 h-full flex flex-col justify-between relative overflow-hidden text-slate-900 border border-slate-100">
-                    
-                    {/* Watermark number */}
-                    <span className="absolute bottom-2 right-4 text-[5.5rem] font-black text-[#0284C7]/10 pointer-events-none select-none group-hover:text-[#0284C7]/20 transition-colors" style={{ lineHeight: 1 }}>
-                      {bp.num}
-                    </span>
-
-                    <div className="relative z-10 space-y-5">
-                      {/* Top Row: Icon + Badge */}
-                      <div className="flex items-center justify-between">
-                        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${bp.iconBg} text-white flex items-center justify-center shrink-0 shadow-md group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
-                          <IconComp size={26} strokeWidth={2} />
-                        </div>
-                        <span className="text-[9px] font-black tracking-widest uppercase px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-800 shadow-sm">
-                          {bp.badge}
-                        </span>
+                  <div className="space-y-6">
+                    {/* Icon Box */}
+                    <div className="flex items-center justify-between">
+                      <div className={`w-16 h-16 rounded-2xl flex items-center justify-center shadow-md ${card.iconBox}`}>
+                        <IconComp size={30} strokeWidth={2} />
                       </div>
-
-                      {/* Image Showcase Banner */}
-                      <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border border-slate-200 shadow-md group-hover:shadow-lg transition-all duration-300">
-                        <img
-                          src={bp.image}
-                          alt={bp.title}
-                          className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent opacity-60 group-hover:opacity-20 transition-opacity" />
-                      </div>
-
-                      {/* Title + Desc */}
-                      <div className="space-y-2">
-                        <h3 className="text-lg font-black text-slate-900 font-display transition-colors group-hover:text-[#0284C7]">
-                          {bp.title}
-                        </h3>
-                        <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-medium">
-                          {bp.text}
-                        </p>
-                      </div>
+                      <span className="text-[10px] font-mono font-extrabold uppercase tracking-widest px-3 py-1 rounded-full border bg-white/60 backdrop-blur-sm shadow-xs">
+                        {card.accentTag}
+                      </span>
                     </div>
 
-                    {/* Shimmer effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 pointer-events-none" />
+                    {/* Title + Desc */}
+                    <div className="space-y-3">
+                      <h3 className="text-2xl sm:text-3xl font-black font-display tracking-tight leading-snug">
+                        {card.title}
+                      </h3>
+                      <p className="text-sm sm:text-base leading-relaxed font-semibold opacity-90">
+                        {card.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Pill CTA Button */}
+                  <div className="pt-8">
+                    <button
+                      onClick={() => navigate(card.link)}
+                      className={`px-7 py-3 rounded-full text-xs font-black uppercase tracking-wider flex items-center gap-2.5 transition-all duration-300 shadow-md ${card.btnStyle}`}
+                    >
+                      <span>Explore More</span>
+                      <ChevronRight size={15} strokeWidth={3} />
+                    </button>
                   </div>
                 </motion.div>
               );
@@ -270,27 +260,208 @@ export const AboutPage = () => {
         </div>
       </section>
 
-      {/* PARADIGM COMPARISON: WHY OUR MODEL IS DIFFERENT */}
+
+      {/* ========================================================
+          3. WHO WE ARE & COMPREHENSIVE SOLUTIONS (Our Impact in Numbers)
+      ======================================================== */}
+      <section className="py-24 lg:py-32 w-full bg-gradient-to-b from-[#f8fafc] via-[#f0f9ff] to-white relative text-slate-900 border-b border-slate-200/80">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-14 lg:gap-16 items-center">
+          
+          {/* Left Asymmetric Photo & Metric Grid (Matching Reference Image Grid) */}
+          <div className="lg:col-span-6 space-y-6">
+            
+            {/* Top Large Photo */}
+            <div className="relative rounded-[2.5rem] overflow-hidden border-2 border-slate-200 shadow-xl aspect-[16/10] group">
+              <img
+                src={consultingTeamImg || educationImg}
+                alt="YomTech Global Software Team"
+                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent" />
+              <div className="absolute top-4 left-4 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md text-slate-900 text-xs font-black border border-slate-200 shadow-sm flex items-center gap-2">
+                <Sparkles size={13} className="text-cyan-500" />
+                <span>Enterprise Consulting &amp; Training</span>
+              </div>
+            </div>
+
+            {/* Bottom 2-Column Split: Metric Card + Secondary Photo */}
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-stretch">
+              
+              {/* Metric Card (Official Impact Numbers: 2K+ Learners & 25+ Solutions) */}
+              <div className="sm:col-span-5 rounded-[2.2rem] bg-gradient-to-br from-[#a7f3d0] via-[#6ee7b7] to-[#34d399] p-6 sm:p-7 flex flex-col justify-between border border-emerald-300 shadow-lg text-slate-950">
+                <div className="flex items-center justify-between mb-4">
+                  <div className="w-10 h-10 rounded-full bg-emerald-950 text-white flex items-center justify-center shadow-md">
+                    <Check size={20} strokeWidth={3} />
+                  </div>
+                  <span className="text-[9px] font-mono font-extrabold uppercase px-2.5 py-1 rounded-full bg-emerald-950/15 border border-emerald-950/20 text-emerald-950">
+                    Est. 2015
+                  </span>
+                </div>
+                <div>
+                  <h4 className="text-3xl sm:text-4xl font-black font-display tracking-tight text-slate-950 mb-1">
+                    2K+
+                  </h4>
+                  <p className="text-xs sm:text-sm font-extrabold text-emerald-950 leading-snug">
+                    Learners Empowered &amp; 25+ Business Solutions Deployed
+                  </p>
+                </div>
+              </div>
+
+              {/* Secondary Photo */}
+              <div className="sm:col-span-7 rounded-[2.2rem] overflow-hidden border-2 border-slate-200 shadow-lg aspect-[4/3] relative group">
+                <img
+                  src={teamDiscussionImg || coachingImg}
+                  alt="Collaborative Tech Team"
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/30 via-transparent to-transparent" />
+                <div className="absolute bottom-3 left-3 px-3 py-1 rounded-xl bg-white/90 backdrop-blur-md text-slate-900 text-[10px] font-black border border-slate-200 shadow-sm">
+                  ⚡ 7+ Global Partnerships
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          {/* Right Content Column (Matching Reference Layout) */}
+          <div className="lg:col-span-6 space-y-8">
+            
+            {/* Header */}
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+                <span>✻</span>
+                <span>Who We Are</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Empowering innovation, <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2]">
+                  technology &amp; talent
+                </span>
+              </h2>
+              <p className="text-slate-600 text-base leading-relaxed font-semibold">
+                YomeTech Global is a forward-thinking technology company founded in 2015. We specialize in building innovative digital solutions and offering world-class training that bridges the gap between theory and real-world application.
+              </p>
+            </div>
+
+            {/* CTA Button + Leadership Avatar Chip Row (Matching Reference) */}
+            <div className="flex flex-wrap items-center gap-6 pt-2">
+              <button
+                onClick={() => navigate('/contact')}
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#86efac] via-[#4ade80] to-[#22c55e] text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2.5"
+              >
+                <span>Get Started With Us</span>
+                <ChevronRight size={16} strokeWidth={3} />
+              </button>
+
+              <div className="flex items-center gap-3.5 py-1 px-3 rounded-full bg-slate-50 border border-slate-200 shadow-xs">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center font-black text-sm shadow-md">
+                  YG
+                </div>
+                <div>
+                  <p className="text-xs font-black text-slate-900">YomTech Global</p>
+                  <p className="text-[10px] text-slate-500 font-semibold">Addis Ababa · contact@yometechglobal.org</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom 2-Card Stats Row (Real Impact: 25+ Solutions & Core Stack) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 pt-4">
+              
+              {/* Rating & Impact Card */}
+              <div className="p-6 rounded-[2rem] bg-white border border-slate-200 shadow-md flex flex-col justify-between">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={15} fill="currentColor" />
+                    ))}
+                  </div>
+                  <span className="text-[9px] font-mono font-extrabold uppercase px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    7+ Partnerships
+                  </span>
+                </div>
+                <div className="space-y-1">
+                  <h4 className="text-3xl font-black font-display text-slate-900">
+                    25+ <span className="text-base text-slate-400 font-semibold">Solutions</span>
+                  </h4>
+                  <p className="text-xs font-bold text-slate-600 leading-snug">
+                    Deployed across ERP, WMS, Cloud &amp; AI Automations
+                  </p>
+                </div>
+              </div>
+
+              {/* Expertise Stack Cloud Card */}
+              <div className="p-6 rounded-[2rem] bg-[#f8fafc] border border-slate-200 shadow-md space-y-3">
+                <p className="text-xs font-black uppercase tracking-wider text-slate-900">
+                  Our Core Expertise
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {['REACT', 'NODE.JS', 'PYTHON', 'AI / ML', 'AWS & AZURE', 'DEVOPS'].map((skill, sIdx) => (
+                    <span key={sIdx} className="text-[10px] font-extrabold uppercase px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-slate-700 shadow-xs">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ========================================================
+          4. YOMTECH GLOBAL AT A GLANCE (Heritage, Stats, Footprint)
+      ======================================================== */}
+      <AboutAtGlance />
+
+      {/* ========================================================
+          5. CORE FOUNDATIONS (Mission, Vision, Values Matrix in Pure White)
+      ======================================================== */}
+      <CoreFoundations />
+
+      {/* ========================================================
+          6. SOFTWARE + TALENT DUAL ECOSYSTEM
+      ======================================================== */}
+      <SoftwareTalentSplit />
+
+      {/* ========================================================
+          8. PARADIGM COMPARISON: WHY OUR MODEL IS DIFFERENT
+      ======================================================== */}
       <WhyModelDifferent />
 
-      {/* 3. ENGINEERING ROADMAP SECTION (Distinct Premier Light Luxury Theme - No Hero, No Dark Black) */}
+      {/* ========================================================
+          9. ENGINEERING APPROACH & ROADMAP
+      ======================================================== */}
       <section className="py-24 w-full bg-gradient-to-b from-[#F8FAFC] via-[#F0F9FF] to-[#E0F2FE] relative text-slate-900 border-y border-sky-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-20">
           <EngineeringApproach />
         </div>
       </section>
 
-      {/* NEW SECTION 5: SOFTWARE + TALENT */}
-      <SoftwareTalentSplit />
+      {/* ========================================================
+          10. HOW WE THINK (Philosophy & Mindset)
+      ======================================================== */}
+      <HowWeThink />
 
-      {/* NEW SECTION 7: OUR IMPACT MODEL */}
+      {/* ========================================================
+          11. OUR IMPACT MODEL
+      ======================================================== */}
       <ImpactModel />
 
-      {/* NEW SECTION 11: TECHNOLOGY WITH PURPOSE */}
+      {/* ========================================================
+          12. TECHNOLOGY WITH PURPOSE
+      ======================================================== */}
       <TechnologyPurpose />
 
-      {/* NEW SECTION 12: FINAL CALL TO ACTION */}
+      {/* ========================================================
+          13. FINAL CALL TO ACTION
+      ======================================================== */}
       <AboutFinalCTA />
+
     </div>
   );
 };
+
+export default AboutPage;

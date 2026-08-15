@@ -46,7 +46,7 @@ export const HomeHowWeWork = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 w-full bg-[#F8FAFC] relative isolate text-slate-700 overflow-hidden border-y border-slate-200 home-section">
+    <section className="py-24 sm:py-32 w-full section-track-bg relative isolate text-slate-700 overflow-hidden border-y border-slate-200 home-section section-track-border">
       {/* Background Subtle Accent Pattern */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
@@ -83,8 +83,36 @@ export const HomeHowWeWork = () => {
 
         {/* 5-Stage Process Pipeline */}
         <div className="relative">
-          {/* Connecting Line Beam */}
-          <div className="hidden lg:block absolute top-[85px] left-[8%] right-[8%] h-1 bg-gradient-to-r from-sky-200 via-cyan-400 to-sky-200 z-0 rounded-full shadow-[0_0_15px_rgba(56,189,248,0.4)]" />
+          {/* Animated SVG ZigZag Track - Desktop Only */}
+          <svg className="hidden lg:block absolute top-[55px] left-0 right-0 w-full h-[60px] pointer-events-none z-0 overflow-visible" viewBox="0 0 1000 60" preserveAspectRatio="none">
+            {/* Base glow track */}
+            <path
+              d="M 100 30 L 300 10 L 500 50 L 700 10 L 900 30"
+              fill="none"
+              stroke="#0284C7"
+              strokeWidth="3.5"
+              strokeDasharray="6 6"
+              opacity="0.35"
+            />
+            {/* Flowing dashed stream */}
+            <path
+              d="M 100 30 L 300 10 L 500 50 L 700 10 L 900 30"
+              fill="none"
+              stroke="#0ED3DD"
+              strokeWidth="2"
+              strokeDasharray="8 8"
+              className="animate-zigzag-dash"
+            />
+            {/* Fast traveling laser particles */}
+            <path
+              d="M 100 30 L 300 10 L 500 50 L 700 10 L 900 30"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="1.5"
+              strokeDasharray="4 20"
+              className="animate-zigzag-laser"
+            />
+          </svg>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 relative z-10">
             {stages.map((stage, idx) => {
@@ -109,9 +137,10 @@ export const HomeHowWeWork = () => {
                           <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#071A2B] to-[#0F2942] text-cyan-400 font-black text-sm flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
                             {stage.num}
                           </div>
-                          
-                          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${stage.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300`}>
-                            <IconComp size={22} />
+
+                          <div className={`relative w-12 h-12 rounded-2xl bg-gradient-to-br ${stage.gradient} text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-all duration-300`}>
+                            <div className="absolute -inset-1.5 rounded-2xl border-2 border-dashed border-cyan-400/60 animate-spin-slow pointer-events-none" />
+                            <IconComp size={22} className="relative z-10" />
                           </div>
                         </div>
 

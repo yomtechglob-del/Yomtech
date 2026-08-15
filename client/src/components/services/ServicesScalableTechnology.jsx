@@ -98,8 +98,9 @@ export const ServicesScalableTechnology = () => {
                       <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-[#EAFBF4] text-[#0ED3DD] border border-emerald-300">
                         PRINCIPLE {p.num}
                       </span>
-                      <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-[#0ED3DD] flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <IconComp size={20} />
+                      <div className="relative w-11 h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-[#0ED3DD] flex items-center justify-center group-hover:scale-110 transition-transform shadow-xs">
+                        <div className="absolute -inset-1 rounded-xl border border-dashed border-[#0ED3DD]/60 animate-spin-slow pointer-events-none" />
+                        <IconComp size={20} className="relative z-10" />
                       </div>
                     </div>
 

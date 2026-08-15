@@ -22,8 +22,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['Outfit', 'Inter', 'sans-serif']
+        sans: ['"Plus Jakarta Sans"', 'Inter', 'Outfit', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Plus Jakarta Sans"', 'Outfit', 'Inter', 'sans-serif']
       },
       boxShadow: {
         'dodger-glow': '0 4px 20px rgba(30, 144, 255, 0.25)',
@@ -34,7 +34,10 @@ export default {
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'glow': 'glow 3s ease-in-out infinite alternate'
+        'glow': 'glow 3s ease-in-out infinite alternate',
+        'border-spin': 'border-spin 3s linear infinite',
+        'border-spin-slow': 'border-spin 6s linear infinite',
+        'dash-flow': 'dash-flow 1.8s linear infinite',
       },
       keyframes: {
         float: {
@@ -44,6 +47,14 @@ export default {
         glow: {
           '0%': { boxShadow: '0 0 15px rgba(30, 144, 255, 0.15)' },
           '100%': { boxShadow: '0 0 30px rgba(56, 189, 248, 0.3)' }
+        },
+        'border-spin': {
+          '0%': { '--border-angle': '0deg' },
+          '100%': { '--border-angle': '360deg' }
+        },
+        'dash-flow': {
+          '0%': { strokeDashoffset: '200' },
+          '100%': { strokeDashoffset: '0' }
         }
       }
     }

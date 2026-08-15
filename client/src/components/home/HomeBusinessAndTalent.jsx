@@ -22,7 +22,7 @@ export const HomeBusinessAndTalent = () => {
   ];
 
   return (
-    <section className="py-24 sm:py-32 w-full bg-gradient-to-b from-[#F8FAFC] via-[#F1F5F9] to-[#F8FAFC] relative isolate text-slate-700 overflow-hidden border-y border-slate-200 home-section">
+    <section className="py-24 sm:py-32 w-full section-track-bg relative isolate text-slate-700 overflow-hidden border-y border-slate-200 home-section section-track-border">
       {/* Background Subtle Grid Pattern */}
       <div
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
@@ -60,9 +60,9 @@ export const HomeBusinessAndTalent = () => {
           {/* PANEL A: FOR BUSINESSES */}
           <div className="lg:col-span-6 group relative">
             <div className="p-[2.5px] rounded-[2.6rem] bg-gradient-to-b from-sky-300/80 via-cyan-300/40 to-blue-300/60 hover:from-[#0072B8] hover:via-[#0284C7] hover:to-[#0ED3DD] transition-all duration-500 shadow-[0_10px_35px_rgba(2,132,199,0.07)] hover:shadow-[0_22px_55px_rgba(2,132,199,0.22)] hover:-translate-y-2.5 h-full">
-              
+
               <div className="bg-white/95 backdrop-blur-2xl rounded-[2.45rem] p-8 sm:p-12 flex flex-col justify-between space-y-8 relative overflow-hidden h-full">
-                
+
                 {/* Top Accent Line */}
                 <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0072B8] via-[#0284C7] to-[#0ED3DD]" />
 
@@ -71,7 +71,7 @@ export const HomeBusinessAndTalent = () => {
                     <span className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full bg-gradient-to-r from-sky-50 to-cyan-50 text-[#0072B8] border border-sky-200/80 shadow-xs">
                       FOR BUSINESSES
                     </span>
-                    
+
                     <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-[#0072B8] via-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center shadow-lg shadow-sky-500/25 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                       <Building2 size={24} />
                     </div>
@@ -114,9 +114,9 @@ export const HomeBusinessAndTalent = () => {
           {/* PANEL B: FOR TECHNOLOGY TALENT */}
           <div className="lg:col-span-6 group relative">
             <div className="p-[2.5px] rounded-[2.6rem] bg-gradient-to-b from-purple-300/80 via-indigo-300/40 to-blue-300/60 hover:from-purple-600 hover:via-indigo-600 hover:to-blue-600 transition-all duration-500 shadow-[0_10px_35px_rgba(124,58,237,0.07)] hover:shadow-[0_22px_55px_rgba(124,58,237,0.22)] hover:-translate-y-2.5 h-full">
-              
+
               <div className="bg-white/95 backdrop-blur-2xl rounded-[2.45rem] p-8 sm:p-12 flex flex-col justify-between space-y-8 relative overflow-hidden h-full">
-                
+
                 {/* Top Accent Line */}
                 <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600" />
 
@@ -125,7 +125,7 @@ export const HomeBusinessAndTalent = () => {
                     <span className="text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-indigo-50 text-purple-700 border border-purple-200/80 shadow-xs">
                       FOR TECHNOLOGY TALENT
                     </span>
-                    
+
                     <div className="w-13 h-13 rounded-2xl bg-gradient-to-br from-purple-600 via-indigo-600 to-blue-600 text-white flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
                       <GraduationCap size={24} />
                     </div>

@@ -1,414 +1,451 @@
-import React, { useState, useRef } from 'react';
-import { Globe, Rocket, Cpu, Users, ArrowRight, Sparkles } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Sparkles, Globe, Cpu, Award, ArrowRight, CheckCircle2, X, 
+  BookOpen, Layers, ShieldCheck, Zap, Users, GraduationCap
+} from 'lucide-react';
+import yomtechLogo from '../../assets/logo.png';
 
-import aboutHeroImg from '../../assets/about/hero.svg';
-import aboutCompanyImg from '../../assets/about/company.svg';
-import aboutExpertiseImg from '../../assets/about/expertise.svg';
-import aboutTeamImg from '../../assets/about/team.svg';
-
-const ABOUT_SECTIONS = [
+// 6 Core Values matching exact User Image Content & Rotating Geometry
+const ECOSYSTEM_HEXAGONS = [
   {
-    id: 's1',
-    title: 'About YomeTech Global',
-    subtitle: 'Empowering Innovation and Technology.',
-    description: 'YomeTech Global is a forward-thinking tech company dedicated to providing online training, business coaching, and hands-on mentorship to help professionals and companies thrive in the digital era. We also develop custom software solutions including ERP, WMS, SFA, mobile/web apps, cloud deployment, and cybersecurity integrations to accelerate growth and efficiency.',
-    icon: Globe,
-    image: aboutHeroImg,
-    imageAlt: 'YomeTech Online Training & Software Solutions',
-    theme: {
-      accent: 'text-blue-500',
-      gradient: 'from-blue-500 to-cyan-400',
-      glow: 'rgba(59, 130, 246, 0.15)'
-    }
+    id: '01',
+    num: '01',
+    title: 'Innovation',
+    subtitle: 'Emerging Tech & Creative Solutions',
+    desc: 'We embrace creativity, emerging technologies, and forward-thinking solutions.',
+    metrics: 'CORE VALUE',
+    color: '#0284c7', // Sky Blue
+    lightBg: 'bg-sky-50/60',
+    borderColor: 'stroke-[#0284c7]',
+    numColor: 'text-[#0284c7]',
+    badgeBg: 'bg-sky-100/80 text-sky-800 border-sky-200',
+    slot: { x: 15, y: -385 }, // Top-Right (01)
+    highlights: [
+      'Embrace emerging software paradigms & AI',
+      'Pioneer forward-thinking enterprise architectures',
+      'Foster creative problem-solving across engineering teams'
+    ]
   },
   {
-    id: 's2',
-    title: 'Our Foundation',
-    subtitle: 'Bridging Theory and Reality.',
-    description: 'YomeTech Global is a forward-thinking technology company founded in 2015. We specialize in building innovative digital solutions and offering world-class training that bridges the gap between theoretical knowledge and real-world application.',
-    icon: Rocket,
-    image: aboutCompanyImg,
-    imageAlt: 'YomeTech Foundation & Company Innovation',
-    theme: {
-      accent: 'text-violet-500',
-      gradient: 'from-violet-500 to-fuchsia-400',
-      glow: 'rgba(139, 92, 246, 0.15)'
-    }
+    id: '02',
+    num: '02',
+    title: 'Intelligence',
+    subtitle: 'Knowledge, Strategy & Deep Logic',
+    desc: 'We solve complex challenges through knowledge, strategy, and innovation.',
+    metrics: 'CORE VALUE',
+    color: '#f97316', // Orange
+    lightBg: 'bg-orange-50/60',
+    borderColor: 'stroke-[#f97316]',
+    numColor: 'text-[#f97316]',
+    badgeBg: 'bg-orange-100/80 text-orange-800 border-orange-200',
+    slot: { x: -255, y: -385 }, // Top-Left (02)
+    highlights: [
+      'Solve high-complexity technical bottlenecks',
+      'Data-driven architectural decision making',
+      'Strategic system design & repository logic'
+    ]
   },
   {
-    id: 's3',
-    title: 'Our Expertise',
-    subtitle: 'Enterprise-Grade Engineering.',
-    description: 'We are experts in React, Node.js, Python, AI/ML, cloud platforms like AWS & Azure, and modern DevOps practices. Whether it is enterprise-grade apps, scalable APIs, or AI-powered automation, we deliver impactful solutions.',
-    icon: Cpu,
-    image: aboutExpertiseImg,
-    imageAlt: 'YomeTech Engineering & Cloud Expertise',
-    theme: {
-      accent: 'text-cyan-500',
-      gradient: 'from-cyan-400 to-blue-500',
-      glow: 'rgba(6, 182, 212, 0.15)'
-    }
+    id: '03',
+    num: '03',
+    title: 'Creativity',
+    subtitle: 'Fresh Ideas & Modern Thinking',
+    desc: 'We approach problems with fresh ideas and innovative thinking.',
+    metrics: 'CORE VALUE',
+    color: '#a855f7', // Purple
+    lightBg: 'bg-purple-50/60',
+    borderColor: 'stroke-[#a855f7]',
+    numColor: 'text-[#a855f7]',
+    badgeBg: 'bg-purple-100/80 text-purple-800 border-purple-200',
+    slot: { x: -390, y: -150 }, // Mid-Left (03)
+    highlights: [
+      'Fresh UI/UX design & modern user flows',
+      'Out-of-the-box system optimization',
+      'Inventive full-stack software craftsmanship'
+    ]
   },
   {
-    id: 's4',
-    title: 'Meet the Team',
-    subtitle: 'Global Innovators.',
-    description: 'Our diverse team of engineers, designers, and strategists brings creativity, expertise, and dedication to every project. Together, we innovate and solve problems for clients and learners across the globe.',
-    icon: Users,
-    image: aboutTeamImg,
-    imageAlt: 'YomeTech Global Team & Engineers',
-    theme: {
-      accent: 'text-emerald-500',
-      gradient: 'from-emerald-400 to-teal-400',
-      glow: 'rgba(16, 185, 129, 0.15)'
-    }
+    id: '04',
+    num: '04',
+    title: 'Continuous Learning',
+    subtitle: 'Growth, Mentorship & Lifelong Study',
+    desc: 'We invest in growth, knowledge, and lifelong learning.',
+    metrics: 'CORE VALUE',
+    color: '#4f46e5', // Indigo
+    lightBg: 'bg-indigo-50/60',
+    borderColor: 'stroke-[#4f46e5]',
+    numColor: 'text-[#4f46e5]',
+    badgeBg: 'bg-indigo-100/80 text-indigo-800 border-indigo-200',
+    slot: { x: -255, y: 85 }, // Bottom-Left (04)
+    highlights: [
+      'Invest in ongoing team technical upskilling',
+      'Practical WabiSkills repository mentorship',
+      'Lifelong engineering growth & adaptation'
+    ]
+  },
+  {
+    id: '05',
+    num: '05',
+    title: 'Client Success',
+    subtitle: 'Partner Impact & Shared Growth',
+    desc: 'Our success is measured by the success of our clients and partners.',
+    metrics: 'CORE VALUE',
+    color: '#eab308', // Gold
+    lightBg: 'bg-amber-50/60',
+    borderColor: 'stroke-[#eab308]',
+    numColor: 'text-[#ca8a04]',
+    badgeBg: 'bg-amber-100/80 text-amber-900 border-amber-200',
+    slot: { x: 15, y: 85 }, // Bottom-Right (05)
+    highlights: [
+      'Measurable business ROI & high performance',
+      'Long-term client partnerships & SLA uptime',
+      'Dedicated technical support & ongoing advisory'
+    ]
+  },
+  {
+    id: '06',
+    num: '06',
+    title: 'Integrity',
+    subtitle: 'Honesty, Transparency & Trust',
+    desc: 'We build trust through honesty, transparency, and accountability.',
+    metrics: 'CORE VALUE',
+    color: '#10b981', // Emerald Green
+    lightBg: 'bg-emerald-50/60',
+    borderColor: 'stroke-[#10b981]',
+    numColor: 'text-[#10b981]',
+    badgeBg: 'bg-emerald-100/80 text-emerald-800 border-emerald-200',
+    slot: { x: 150, y: -150 }, // Mid-Right (06)
+    highlights: [
+      'Transparent code reviews & open communication',
+      'Uncompromising security & data ethics',
+      'Accountable delivery & enterprise trust'
+    ]
   }
 ];
 
-const FeatureBlock = ({ section, index }) => {
-  const isEven = index % 2 === 0;
-  const cardRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-  const Icon = section.icon;
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
-
+// Single Hexagon Vector Card (Point-Top Geometry)
+const EcosystemHexagonCard = ({ hex, isHovered, onHover, onClick }) => {
   return (
-    <div className={`flex flex-col lg:flex-row ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} justify-between items-center relative z-10 w-full mb-48 md:mb-56 lg:mb-64 last:mb-0`}>
-      
-      {/* TEXT CONTENT (Glassmorphism Card) */}
-      <div className="w-full lg:w-[40%] perspective-1000">
-        <div
-          ref={cardRef}
-          onMouseMove={handleMouseMove}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className={`relative w-full rounded-[2.5rem] bg-white/80 backdrop-blur-2xl border transition-all duration-700 ease-out p-8 md:p-12 lg:p-14 cursor-pointer
-            ${isHovered ? 'border-transparent shadow-[0_30px_60px_rgba(0,0,0,0.08)] scale-[1.01]' : 'border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.03)]'}
-          `}
-          style={{
-            transform: isHovered 
-              ? `rotateX(${(mousePos.y - 200) / -30}deg) rotateY(${(mousePos.x - 200) / 30}deg) scale3d(1.02, 1.02, 1.02)`
-              : 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-          }}
+    <div
+      onMouseEnter={() => onHover(hex.id)}
+      onMouseLeave={() => onHover(null)}
+      onClick={() => onClick(hex)}
+      className="relative w-[240px] sm:w-[260px] aspect-[1/1.13] flex items-center justify-center cursor-pointer group select-text transition-all duration-300 hover:scale-105 z-20 drop-shadow-lg hover:drop-shadow-2xl"
+    >
+      {/* SVG Vector Frame */}
+      <svg viewBox="0 0 280 316" className="absolute inset-0 w-full h-full filter drop-shadow-sm pointer-events-none">
+        {/* White Solid Background & Outer Colored Border */}
+        <polygon
+          points="140,8 268,80 268,236 140,308 12,236 12,80"
+          fill="#FFFFFF"
+          stroke={hex.color}
+          strokeWidth={isHovered ? '7.5' : '5.5'}
+          strokeLinejoin="round"
+          className="transition-all duration-300"
+        />
+        {/* Inner Dotted Accent Line */}
+        <polygon
+          points="140,18 258,84 258,232 140,298 22,232 22,84"
+          fill="none"
+          stroke={hex.color}
+          strokeWidth="1.2"
+          strokeDasharray="4 3"
+          opacity={isHovered ? '0.7' : '0.25'}
+          className="transition-opacity duration-300"
+        />
+      </svg>
+
+      {/* Hexagon Content */}
+      <div className="relative z-10 p-5 text-center flex flex-col items-center justify-center h-full max-w-[195px] space-y-1.5 select-text">
+        {/* Bold Colored Number */}
+        <span
+          className="text-3xl sm:text-4xl font-black font-display tracking-tight transition-transform duration-300 group-hover:scale-110 select-text"
+          style={{ color: hex.color }}
         >
-          {/* Dynamic Inner Glow */}
-          <div 
-            className="absolute inset-0 z-0 transition-opacity duration-300 pointer-events-none rounded-[2.5rem] overflow-hidden"
-            style={{ opacity: isHovered ? 1 : 0 }}
-          >
-            <div 
-              className="absolute w-[500px] h-[500px] rounded-full blur-[60px] transition-transform duration-75 ease-out mix-blend-multiply"
-              style={{
-                background: section.theme.glow,
-                transform: `translate(${mousePos.x - 250}px, ${mousePos.y - 250}px)`,
-              }}
-            />
-          </div>
+          {hex.num}
+        </span>
 
-          {/* Animated Border Reveal */}
-          <div 
-            className={`absolute inset-0 z-0 transition-opacity duration-700 pointer-events-none rounded-[2.5rem] bg-gradient-to-br ${section.theme.gradient} p-[1.5px]`}
-            style={{ 
-              opacity: isHovered ? 1 : 0,
-              WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', 
-              WebkitMaskComposite: 'xor' 
-            }}
-          >
-            <div className="w-full h-full bg-transparent rounded-[calc(2.5rem-1.5px)]" />
-          </div>
+        {/* Title */}
+        <h4 className="text-sm sm:text-base font-black text-slate-900 font-display leading-tight group-hover:text-cyan-700 transition-colors select-text">
+          {hex.title}
+        </h4>
 
-          {/* Content */}
-          <div className="relative z-10">
-            {/* Top Badge & Icon */}
-            <div className="flex items-center gap-4 mb-8">
-              <div className={`w-14 h-14 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center relative overflow-hidden transition-transform duration-500 ${isHovered ? 'scale-110 -rotate-6' : ''}`}>
-                 <div className={`absolute inset-0 bg-gradient-to-br ${section.theme.gradient} opacity-0 transition-opacity duration-500 ${isHovered ? 'opacity-10' : ''}`} />
-                 <Icon className={`w-6 h-6 ${section.theme.accent} relative z-10`} strokeWidth={2} />
-              </div>
-              <span className={`px-4 py-1.5 rounded-full bg-white border border-slate-100 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm ${section.theme.accent}`}>
-                Section 0{index + 1}
-              </span>
-            </div>
+        {/* Short Description */}
+        <p className="text-[11px] sm:text-xs leading-snug font-semibold text-slate-600 line-clamp-3 select-text">
+          {hex.desc}
+        </p>
 
-            {/* Typography */}
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-4 tracking-tight leading-[1.1]">
-              <span className={`bg-clip-text text-transparent bg-gradient-to-r ${section.theme.gradient} inline-block transition-transform duration-500 ${isHovered ? 'translate-x-1' : ''}`}>
-                {section.title.split(' ')[0]}
-              </span>
-              {' '}{section.title.split(' ').slice(1).join(' ')}
-            </h2>
-            
-            <h3 className={`text-sm md:text-base font-extrabold mb-6 ${section.theme.accent} tracking-wide`}>
-              {section.subtitle}
-            </h3>
-            
-            <p className="text-base md:text-lg text-slate-600 font-medium leading-relaxed mb-8">
-              {section.description}
-            </p>
-
-            {/* Interactive Button */}
-            <button className="flex items-center gap-2 text-sm font-bold text-slate-800 group/btn outline-none cursor-pointer">
-              <span className="group-hover/btn:text-blue-600 transition-colors">Explore further</span>
-              <div className={`w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center group-hover/btn:bg-blue-50 transition-colors`}>
-                 <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 group-hover/btn:text-blue-600 transition-all" />
-              </div>
-            </button>
-          </div>
+        {/* Metric Pill Badge */}
+        <div className="pt-1">
+          <span className="text-[9px] sm:text-[10px] font-mono font-black uppercase px-2.5 py-1 rounded-full bg-slate-50 border border-slate-200 text-slate-600 group-hover:border-cyan-400 group-hover:bg-cyan-50 transition-colors select-text">
+            {hex.metrics}
+          </span>
         </div>
       </div>
-
-      {/* IMAGE SHOWCASE (Levitating Container - Balanced Compact Size) */}
-      <div className={`w-full lg:w-[40%] h-full flex items-center ${isEven ? 'justify-start' : 'justify-end'} relative`}>
-        {/* Animated Glow Behind Image */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full bg-gradient-to-br ${section.theme.gradient} blur-[80px] opacity-25 animate-pulse-slow`} />
-        
-        {/* Image Wrapper (Balanced Compact Size) */}
-        <div 
-          className="relative w-full max-w-md aspect-[4/3] rounded-[2rem] bg-white/80 backdrop-blur-md border border-white shadow-[0_20px_50px_rgba(0,0,0,0.06)] p-4 md:p-6 animate-float"
-          style={{ animationDelay: `${index * 1.5}s` }}
-        >
-          {/* Inner Image Container */}
-          <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-50 relative group flex items-center justify-center p-4 md:p-6">
-             <img 
-               src={section.image} 
-               alt={section.imageAlt}
-               className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-             />
-             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-          </div>
-
-          {/* Central Node Badge anchored directly to inner border of Image Wrapper */}
-          <div className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isEven ? 'left-0 -translate-x-1/2' : 'right-0 translate-x-1/2'}`}>
-            <div className={`relative w-14 h-14 rounded-full bg-gradient-to-br ${section.theme.gradient} border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 ${isHovered ? 'scale-125 shadow-[0_4px_30px_rgba(0,0,0,0.25)]' : ''}`}>
-              
-              {/* Rotating Angle Ring over Icon */}
-              <div className="absolute -inset-2.5 rounded-full border-2 border-dashed border-sky-400/80 animate-spin-slow pointer-events-none" />
-              
-              <Icon className="w-6 h-6 text-white relative z-10 transition-transform duration-500 group-hover:scale-110" strokeWidth={2.2} />
-              
-              {/* Mini Step Number Badge (Matching Reference Screenshot) */}
-              <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-md text-[11px] font-black flex items-center justify-center">
-                <span className={`w-full h-full rounded-full bg-gradient-to-br ${section.theme.gradient} text-white flex items-center justify-center`}>
-                  {index + 1}
-                </span>
-              </span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
     </div>
   );
 };
 
-export const AboutEcosystem = () => {
-  return (
-    <section className="relative min-h-screen py-24 md:py-32 bg-white overflow-hidden font-sans selection:bg-blue-500/20 selection:text-blue-900 border-b border-slate-200/80">
-      
-      {/* Ethereal Ambient Background */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div 
-          className="absolute inset-0 opacity-[0.25]" 
-          style={{ 
-            backgroundImage: 'linear-gradient(rgba(148,163,184,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.15) 1px, transparent 1px)', 
-            backgroundSize: '48px 48px',
-            maskImage: 'radial-gradient(ellipse 100% 100% at 50% 0%, black 10%, transparent 90%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 100% 100% at 50% 0%, black 10%, transparent 90%)'
-          }}
-        />
-        
-        <div className="absolute top-[-5%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-100/40 blur-[130px] mix-blend-multiply animate-blob" />
-        <div className="absolute top-[40%] right-[-10%] w-[45vw] h-[45vw] rounded-full bg-cyan-100/40 blur-[140px] mix-blend-multiply animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[-10%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-indigo-100/40 blur-[150px] mix-blend-multiply animate-blob animation-delay-4000" />
+// Center Hexagon Anchor (Excellence - Center Core Value from User Image)
+const EcosystemCenterHexagon = ({ logoSrc }) => (
+  <div className="relative w-[220px] sm:w-[240px] aspect-[1/1.13] flex items-center justify-center cursor-pointer group select-text drop-shadow-xl z-10">
+    {/* Subtle Cyan Radiant Pulsing Halo */}
+    <div className="absolute inset-0 rounded-full border-2 border-cyan-400/50 animate-ping opacity-20 pointer-events-none" />
+    <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-400/20 via-sky-300/15 to-blue-500/20 blur-xl pointer-events-none" />
+
+    {/* Center SVG Vector Hexagon */}
+    <svg viewBox="0 0 280 316" className="absolute inset-0 w-full h-full pointer-events-none">
+      <polygon
+        points="140,8 268,80 268,236 140,308 12,236 12,80"
+        fill="#FFFFFF"
+        stroke="#06b6d4"
+        strokeWidth="6.5"
+        strokeLinejoin="round"
+        className="transition-all duration-300 group-hover:stroke-[#0284C7]"
+      />
+      <polygon
+        points="140,18 258,84 258,232 140,298 22,232 22,84"
+        fill="none"
+        stroke="#06b6d4"
+        strokeWidth="1.5"
+        strokeDasharray="4 2"
+        opacity="0.4"
+      />
+    </svg>
+
+    <div className="relative z-10 p-4 text-center flex flex-col items-center justify-center h-full max-w-[180px] space-y-1 select-text">
+      {/* Top Header Text */}
+      <h3 className="text-sm font-black font-display tracking-widest text-cyan-700 uppercase select-text">
+        YOMTECH
+      </h3>
+
+      {/* Main Core Value Title */}
+      <h2 className="text-xl sm:text-2xl font-black font-display text-slate-900 leading-none select-text">
+        Excellence
+      </h2>
+
+      {/* Core Value Description */}
+      <p className="text-[10px] sm:text-[11px] leading-tight font-semibold text-slate-600 line-clamp-3 select-text px-1">
+        We strive for quality and continuous improvement in everything we do.
+      </p>
+
+      {/* Circular Emblem Seal */}
+      <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 via-sky-400 to-blue-600 p-0.5 shadow-md flex items-center justify-center group-hover:scale-105 transition-transform duration-300">
+        <div className="w-full h-full rounded-full bg-white flex items-center justify-center p-0.5 shadow-inner overflow-hidden">
+          <img
+            src={logoSrc || yomtechLogo}
+            alt="YomTech Emblem"
+            className="w-full h-full object-contain p-0.5"
+          />
+        </div>
       </div>
+    </div>
+  </div>
+);
 
-      <div className="max-w-[98rem] mx-auto px-4 sm:px-6 lg:px-10 relative z-10 w-full">
+export const AboutEcosystem = () => {
+  const [hoveredId, setHoveredId] = useState(null);
+  const [selectedHex, setSelectedHex] = useState(null);
+
+  return (
+    <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden font-sans w-full">
+      
+      {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+      <div 
+        className="absolute inset-0 opacity-[0.5] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
+
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
-        {/* Ultra-Visible High-Contrast Neon Zigzag Double Line Track (SVG covering entire section including Header) */}
-        <svg 
-          className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" 
-          viewBox="0 0 100 100" 
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <linearGradient id="neonZigzagGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#3b82f6" />
-              <stop offset="33%" stopColor="#8b5cf6" />
-              <stop offset="66%" stopColor="#06b6d4" />
-              <stop offset="100%" stopColor="#10b981" />
-            </linearGradient>
-            <filter id="neonBlur" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="0.8" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Faint Ambient Background Glow Track */}
-          <path
-            d="M 50 4.0 L 61.0 4.0 Q 64.5 4.0 64.5 6.9 Q 64.5 9.8 61.0 9.8 L 39.0 9.8 Q 35.5 9.8 35.5 6.9 Q 35.5 4.0 39.0 4.0 L 50 4.0 M 64.5 9.8 L 60 23 L 40 45 L 60 67 L 40 89 L 50 100"
-            fill="none"
-            stroke="url(#neonZigzagGlow)"
-            strokeWidth="9"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            opacity="0.15"
-            filter="url(#neonBlur)"
-            vectorEffect="non-scaling-stroke"
-          />
-
-          {/* Double Line Track - Outer Rail Base */}
-          <path
-            d="M 50 4.0 L 61.0 4.0 Q 64.5 4.0 64.5 6.9 Q 64.5 9.8 61.0 9.8 L 39.0 9.8 Q 35.5 9.8 35.5 6.9 Q 35.5 4.0 39.0 4.0 L 50 4.0 M 64.5 9.8 L 60 23 L 40 45 L 60 67 L 40 89 L 50 100"
-            fill="none"
-            stroke="url(#neonZigzagGlow)"
-            strokeWidth="5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-
-          {/* Double Line Track - Inner Core Gap (Creating 2 Parallel Lines) */}
-          <path
-            d="M 50 4.0 L 61.0 4.0 Q 64.5 4.0 64.5 6.9 Q 64.5 9.8 61.0 9.8 L 39.0 9.8 Q 35.5 9.8 35.5 6.9 Q 35.5 4.0 39.0 4.0 L 50 4.0 M 64.5 9.8 L 60 23 L 40 45 L 60 67 L 40 89 L 50 100"
-            fill="none"
-            stroke="#ffffff"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-
-          {/* Double Line Track - Dashed Outer Stream */}
-          <path
-            d="M 50 4.0 L 61.0 4.0 Q 64.5 4.0 64.5 6.9 Q 64.5 9.8 61.0 9.8 L 39.0 9.8 Q 35.5 9.8 35.5 6.9 Q 35.5 4.0 39.0 4.0 L 50 4.0 M 64.5 9.8 L 60 23 L 40 45 L 60 67 L 40 89 L 50 100"
-            fill="none"
-            stroke="url(#neonZigzagGlow)"
-            strokeWidth="1.5"
-            strokeDasharray="6 6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
-
-          {/* Double Line Track - Dynamic Traveling White Laser Dashes */}
-          <path
-            d="M 50 4.0 L 61.0 4.0 Q 64.5 4.0 64.5 6.9 Q 64.5 9.8 61.0 9.8 L 39.0 9.8 Q 35.5 9.8 35.5 6.9 Q 35.5 4.0 39.0 4.0 L 50 4.0 M 64.5 9.8 L 60 23 L 40 45 L 60 67 L 40 89 L 50 100"
-            fill="none"
-            stroke="#ffffff"
-            strokeWidth="1.2"
-            strokeDasharray="4 10"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="animate-zigzag-dash"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
-
-        {/* PAGE HEADER */}
-        <div className="text-center max-w-3xl mx-auto mb-24 flex flex-col items-center relative z-10">
-          <div className="relative inline-block group cursor-default">
-            {/* Rotating dashed angle ring over Category Title Header */}
-            <div className="absolute -inset-4 rounded-[2.5rem] border-2 border-dashed border-blue-400/80 animate-spin-slow pointer-events-none" />
-            
-            {/* Ethereal Glow */}
-            <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600 opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
-
-            <div className="relative px-10 py-6 rounded-[2.5rem] bg-white/95 backdrop-blur-2xl border-2 border-blue-100 shadow-[0_15px_40px_rgba(37,99,235,0.12)] flex flex-col items-center gap-3">
-              <div className="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-blue-50 border border-blue-200">
-                <Sparkles className="w-3.5 h-3.5 text-blue-600 animate-pulse" />
-                <span className="text-[10px] font-black tracking-[0.25em] uppercase text-blue-700">
-                  Corporate Overview & Ecosystem
-                </span>
-              </div>
-              
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-                Innovating the Future of <br className="hidden md:block"/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-indigo-600">
-                  Technology & Learning
-                </span>
-              </h1>
-            </div>
+        {/* Section Header (Our Core Values) */}
+        <div className="text-center max-w-3xl mx-auto space-y-4">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200/90 text-cyan-800 text-xs font-black uppercase tracking-widest shadow-xs">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-500 animate-pulse" />
+            <span>Our Core Values</span>
           </div>
-          
-          <p className="text-base sm:text-lg text-slate-500 font-medium max-w-2xl leading-relaxed mt-6">
-            Discover the heritage, expertise, and global team driving YomeTech Global's mission to bridge the gap between theory and real-world application.
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight font-display">
+            Guiding Principles & <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600">
+              Corporate Values
+            </span>
+          </h2>
+
+          <p className="text-base sm:text-lg text-slate-600 font-semibold leading-relaxed max-w-2xl mx-auto">
+            Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide.
           </p>
         </div>
 
-        {/* ZIG-ZAG CONTENT BLOCKS */}
-        <div className="relative w-full">
-            {ABOUT_SECTIONS.map((section, index) => (
-                <FeatureBlock key={section.id} section={section} index={index} />
-            ))}
+        {/* ========================================================
+            DESKTOP HONEYCOMB CLUSTER (Matching Image 1 Exact Layout)
+        ======================================================== */}
+        <div className="hidden lg:flex relative w-full h-[660px] items-center justify-center overflow-visible">
+
+          {/* Center Hexagon Anchor (Locked 100% Dead Center at Red Dot) */}
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-auto flex items-center justify-center">
+            <EcosystemCenterHexagon logoSrc={yomtechLogo} />
+          </div>
+
+          {/* 6 Surrounding Honeycomb Hexagons (Strict Counter-Clockwise Slot Rotation) */}
+          <div className="absolute inset-0 pointer-events-none">
+            {ECOSYSTEM_HEXAGONS.map((hex, idx) => {
+              const isHovered = hoveredId === hex.id;
+
+              // 6 Established Slot Positions in Counter-Clockwise Order
+              const slotsCCW = [
+                { x: 15, y: -385 },   // Slot 0: Top-Right (01 base)
+                { x: -255, y: -385 }, // Slot 1: Top-Left (02 base)
+                { x: -390, y: -150 }, // Slot 2: Mid-Left (03 base)
+                { x: -255, y: 85 },   // Slot 3: Bottom-Left (04 base)
+                { x: 15, y: 85 },     // Slot 4: Bottom-Right (05 base)
+                { x: 150, y: -150 }   // Slot 5: Mid-Right (06 base)
+              ];
+
+              // Generate exact counter-clockwise path starting from each card's base slot
+              const xPath = [0, 1, 2, 3, 4, 5, 6].map((step) => slotsCCW[(idx + step) % 6].x);
+              const yPath = [0, 1, 2, 3, 4, 5, 6].map((step) => slotsCCW[(idx + step) % 6].y);
+
+              return (
+                <motion.div
+                  key={hex.id}
+                  animate={{
+                    x: xPath,
+                    y: yPath
+                  }}
+                  transition={{
+                    duration: 24, // Smooth 24-second full revolution (4s per slot transition)
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
+                >
+                  <EcosystemHexagonCard
+                    hex={hex}
+                    isHovered={isHovered}
+                    onHover={setHoveredId}
+                    onClick={setSelectedHex}
+                  />
+                </motion.div>
+              );
+            })}
+          </div>
+
+        </div>
+
+        {/* ========================================================
+            MOBILE & TABLET HONEYCOMB GRID VIEW
+        ======================================================== */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden max-w-4xl mx-auto items-center">
+          <div className="sm:col-span-2 md:col-span-3 flex justify-center mb-4">
+            <EcosystemCenterHexagon logoSrc={yomtechLogo} />
+          </div>
+          {ECOSYSTEM_HEXAGONS.map((hex) => (
+            <div key={hex.id} className="flex justify-center">
+              <EcosystemHexagonCard
+                hex={hex}
+                isHovered={hoveredId === hex.id}
+                onHover={setHoveredId}
+                onClick={setSelectedHex}
+              />
+            </div>
+          ))}
         </div>
 
       </div>
 
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 20s infinite alternate ease-in-out;
-        }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
+      {/* ========================================================
+          INTERACTIVE CATEGORY MODAL POPUP
+      ======================================================== */}
+      <AnimatePresence>
+        {selectedHex && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-950/70 backdrop-blur-md"
+            onClick={() => setSelectedHex(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-3xl max-w-xl w-full overflow-hidden shadow-2xl border-2 border-slate-200 relative p-6 sm:p-8 space-y-6"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSelectedHex(null)}
+                className="absolute top-4 right-4 p-2 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors"
+              >
+                <X size={18} />
+              </button>
 
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-15px); }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
+              {/* Modal Header */}
+              <div className="flex items-center gap-4 border-b border-slate-100 pb-5">
+                <span
+                  className="text-4xl font-black font-display"
+                  style={{ color: selectedHex.color }}
+                >
+                  {selectedHex.num}
+                </span>
+                <div>
+                  <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border ${selectedHex.badgeBg}`}>
+                    {selectedHex.metrics}
+                  </span>
+                  <h3 className="text-2xl font-black text-slate-900 font-display mt-1">
+                    {selectedHex.title}
+                  </h3>
+                  <p className="text-xs font-bold text-slate-500">{selectedHex.subtitle}</p>
+                </div>
+              </div>
 
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.25; transform: scale(1) translate(-50%, -50%); }
-          50% { opacity: 0.5; transform: scale(1.1) translate(-50%, -50%); }
-        }
-        .animate-pulse-slow {
-          animation: pulse-slow 8s ease-in-out infinite;
-        }
+              {/* Description */}
+              <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-semibold">
+                {selectedHex.desc}
+              </p>
 
-        @keyframes vertical-laser {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(400%); }
-        }
-        .animate-vertical-laser {
-          animation: vertical-laser 3.5s linear infinite;
-        }
+              {/* Key Modules / Highlights */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-black uppercase tracking-wider text-slate-900 flex items-center gap-2">
+                  <GraduationCap className="w-4 h-4 text-cyan-600" />
+                  <span>Key Curriculum &amp; Solutions Included</span>
+                </h4>
+                <div className="space-y-2">
+                  {selectedHex.highlights.map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-xs sm:text-sm font-semibold text-slate-800"
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
 
-        @keyframes zigzag-dash {
-          0% { stroke-dashoffset: 0; }
-          100% { stroke-dashoffset: -36; }
-        }
-        .animate-zigzag-dash {
-          animation: zigzag-dash 2s linear infinite;
-        }
+              {/* CTA Footer */}
+              <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span className="text-xs font-bold text-slate-400">YomTech Global Platform</span>
+                <button
+                  onClick={() => setSelectedHex(null)}
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-black text-xs uppercase tracking-wider shadow-md hover:scale-105 transition-transform"
+                >
+                  Close Overview
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
-        @keyframes spin-slow {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        .animate-spin-slow {
-          animation: spin-slow 12s linear infinite;
-        }
-      `}} />
     </section>
   );
 };
 
 export default AboutEcosystem;
+
+
+

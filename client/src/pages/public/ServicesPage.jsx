@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
@@ -35,6 +35,79 @@ import { ServicesPartnershipModel } from '../../components/services/ServicesPart
 
 const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
+const CurvedBarrelImageCard = ({ src, alt, themeColor = 'sky' }) => {
+  const gradientId = React.useId ? React.useId().replace(/:/g, '') : `barrelGrad_${Math.random().toString(36).substr(2, 6)}`;
+  const maskId = `barrelMask_${gradientId}`;
+
+  const themeMap = {
+    sky: { from: '#0284C7', via: '#0ED3DD', to: '#38BDF8', glow: 'rgba(14,211,221,0.3)' },
+    amber: { from: '#D97706', via: '#F59E0B', to: '#FCD34D', glow: 'rgba(245,158,11,0.3)' },
+    violet: { from: '#7C3AED', via: '#A855F7', to: '#C084FC', glow: 'rgba(168,85,247,0.3)' },
+    emerald: { from: '#059669', via: '#10B981', to: '#34D399', glow: 'rgba(16,185,129,0.3)' },
+  };
+  const theme = themeMap[themeColor] || themeMap.sky;
+
+  const pathD = "M 40 18 Q 200 30 360 18 Q 382 18 382 40 Q 368 150 382 260 Q 382 282 360 282 Q 200 270 40 282 Q 18 282 18 260 Q 32 150 18 40 Q 18 18 40 18 Z";
+
+  return (
+    <div className="relative w-full aspect-[4/3] group filter drop-shadow-[0_20px_35px_rgba(0,0,0,0.1)] transition-transform duration-500 hover:scale-[1.03]">
+      <svg className="w-full h-full overflow-visible" viewBox="0 0 400 300" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id={gradientId} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor={theme.from} />
+            <stop offset="50%" stopColor={theme.via} />
+            <stop offset="100%" stopColor={theme.to} />
+          </linearGradient>
+
+          <clipPath id={maskId}>
+            <path d={pathD} />
+          </clipPath>
+        </defs>
+
+        {/* Ambient Glow behind image frame */}
+        <path
+          d={pathD}
+          fill="none"
+          stroke={theme.glow}
+          strokeWidth="18"
+          className="blur-lg opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+        />
+
+        {/* Inner Image Clipped to Custom Curved Concave Barrel Shape */}
+        <foreignObject x="0" y="0" width="400" height="300" clipPath={`url(#${maskId})`}>
+          <div className="w-full h-full bg-transparent relative flex items-center justify-center">
+            <img
+              src={src}
+              alt={alt}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 via-transparent to-white/20 opacity-40 pointer-events-none" />
+          </div>
+        </foreignObject>
+
+        {/* Outer Curved Colored Border Frame (Matching Reference Image 2) */}
+        <path
+          d={pathD}
+          fill="none"
+          stroke={`url(#${gradientId})`}
+          strokeWidth="7"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+
+        {/* Inner White Accent Line */}
+        <path
+          d="M 42 21 Q 200 32 358 21 Q 378 21 378 41 Q 365 150 378 259 Q 378 279 358 279 Q 200 268 42 279 Q 22 279 22 259 Q 35 150 22 41 Q 22 21 42 21 Z"
+          fill="none"
+          stroke="#ffffff"
+          strokeWidth="1.8"
+          opacity="0.85"
+        />
+      </svg>
+    </div>
+  );
+};
+
 export const ServicesPage = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,6 +117,13 @@ export const ServicesPage = () => {
   const [activeHighlightId, setActiveHighlightId] = useState(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+
+  // Dynamic real-time DOM coordinate tracking for 100% exact SVG node center alignment
+  const categoryRefs = useRef({});
+  const nodeBadgeRefs = useRef({});
+  const [realPoints, setRealPoints] = useState({});
+  const [realHeaderBounds, setRealHeaderBounds] = useState({});
+  const [realHeaderY, setRealHeaderY] = useState({});
 
   useEffect(() => {
 
@@ -95,7 +175,75 @@ export const ServicesPage = () => {
     }
   };
 
-  // 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
+  const handleContactClick = (serviceTitle) => {
+    navigate('/contact', { state: { inquiryType: 'B2B_SOFTWARE', prefillService: serviceTitle } });
+  };
+
+  const updateRealCoordinates = useCallback(() => {
+    const newPoints = {};
+    const newHeaderBounds = {};
+    const newHeaderY = {};
+
+    serviceCategories.forEach((catGroup) => {
+      const slug = slugify(catGroup.categoryTitle);
+      const catEl = categoryRefs.current[slug];
+      if (!catEl) return;
+      const catRect = catEl.getBoundingClientRect();
+      if (catRect.width === 0 || catRect.height === 0) return;
+
+      // Measure header title pill bounds to wrap SVG loop perfectly around text
+      const headerTitleEl = catEl.querySelector('h2');
+      if (headerTitleEl) {
+        const headerPillEl = headerTitleEl.parentElement;
+        const headerRect = (headerPillEl || headerTitleEl).getBoundingClientRect();
+        const padY = 18;
+        const padX = 48;
+
+        const topY = parseFloat((((headerRect.top - padY - catRect.top) / catRect.height) * 100).toFixed(2));
+        const bottomY = parseFloat((((headerRect.bottom + padY - catRect.top) / catRect.height) * 100).toFixed(2));
+        const leftX = parseFloat((((headerRect.left - padX - catRect.left) / catRect.width) * 100).toFixed(2));
+        const rightX = parseFloat((((headerRect.right + padX - catRect.left) / catRect.width) * 100).toFixed(2));
+        
+        newHeaderY[slug] = bottomY;
+        newHeaderBounds[slug] = { topY, bottomY, leftX, rightX };
+      }
+
+      const points = catGroup.items.map((item, itemIdx) => {
+        const nodeKey = `${slug}_${itemIdx}`;
+        const nodeEl = nodeBadgeRefs.current[nodeKey];
+        if (nodeEl) {
+          const nodeRect = nodeEl.getBoundingClientRect();
+          const centerX = nodeRect.left + nodeRect.width / 2;
+          const centerY = nodeRect.top + nodeRect.height / 2;
+          const xPct = parseFloat((((centerX - catRect.left) / catRect.width) * 100).toFixed(2));
+          const yPct = parseFloat((((centerY - catRect.top) / catRect.height) * 100).toFixed(2));
+          return `${xPct} ${yPct}`;
+        }
+        const H = 160 + 460 * catGroup.items.length;
+        const y = parseFloat(((160 + (itemIdx + 0.5) * 460) / H * 100).toFixed(2));
+        const x = item.layout === 'left-image' ? 44.0 : 56.0;
+        return `${x} ${y}`;
+      });
+
+      newPoints[slug] = points;
+    });
+
+    setRealPoints(newPoints);
+    setRealHeaderBounds(newHeaderBounds);
+    setRealHeaderY(newHeaderY);
+  }, []);
+
+  useEffect(() => {
+    updateRealCoordinates();
+    window.addEventListener('resize', updateRealCoordinates);
+    const timer1 = setTimeout(updateRealCoordinates, 100);
+    const timer2 = setTimeout(updateRealCoordinates, 500);
+    return () => {
+      window.removeEventListener('resize', updateRealCoordinates);
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [updateRealCoordinates, selectedCategory]);// 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
   const quickServices = [
     { title: 'ERP Software Solution', icon: Cpu, img: erpImg },
     { title: 'WMS Software Solution', icon: LayoutGrid, img: wmsImg },
@@ -115,102 +263,117 @@ export const ServicesPage = () => {
   const serviceCategories = [
     {
       categoryTitle: 'IT Solutions',
+      themeColor: 'sky',
+      sectionBg: 'bg-gradient-to-b from-[#EBF5FF] via-[#F0F7FF] to-[#E0F0FE]',
       items: [
         {
           title: 'ERP Software Solutions',
           desc: 'Our Enterprise Resource Planning (ERP) solutions help businesses centralize data, automate workflows, and improve efficiency. From finance and HR to supply chain and procurement, ERP systems enable seamless integration between departments and provide real-time insights for smarter decision-making.',
           image: erpImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: Cpu
         },
         {
           title: 'CRM Software Solutions',
           desc: 'Our Customer Relationship Management (CRM) software enhances customer engagement by helping you track leads, monitor customer interactions, and streamline sales processes. With advanced analytics and reporting, you can personalize customer experiences and build long-lasting partnerships.',
           image: crmImg,
-          layout: 'left-image'
+          layout: 'left-image',
+          icon: UserCheck
         },
         {
           title: 'SFA Software Solutions',
           desc: 'Sales Force Automation (SFA) solutions empower your sales team with tools to manage prospects, automate repetitive tasks, and optimize territory management. Gain deeper visibility into performance metrics and close deals faster with data-driven strategies.',
           image: sfaImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: Monitor
         },
         {
           title: 'WMS Software Solutions',
           desc: 'Our Warehouse Management Systems (WMS) help optimize inventory control, improve order accuracy, and automate logistics. With barcode scanning, real-time tracking, and integration with ERP systems, you can achieve a smarter and more efficient supply chain.',
           image: wmsImg,
-          layout: 'left-image'
+          layout: 'left-image',
+          icon: LayoutGrid
         },
         {
           title: 'Surveillance & Security Integration',
           desc: 'We provide advanced surveillance and security solutions, including IP & CCTV camera systems, real-time monitoring, motion detection, and automated alerts. Our services integrate seamlessly with existing IT infrastructure to ensure maximum protection of assets, property, and people.',
           image: securityImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: Camera
         }
       ]
     },
     {
       categoryTitle: 'Software Development',
+      themeColor: 'violet',
+      sectionBg: 'bg-gradient-to-b from-[#F3F0FF] via-[#F5F2FF] to-[#EAE4FC]',
       items: [
         {
           title: 'Mobile App Development',
           desc: 'We design and develop user-friendly mobile applications for Android and iOS. Our apps are built with modern frameworks, ensuring high performance, scalability, and seamless integration with third-party services.',
           image: mobileImg,
-          layout: 'left-image'
+          layout: 'left-image',
+          icon: Smartphone
         },
         {
           title: 'Web App Development',
           desc: 'Our web application development services focus on creating secure, scalable, and responsive applications. Whether it’s an e-commerce platform, enterprise portal, or custom solution, we ensure high performance and excellent user experience.',
           image: webImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: Globe
         },
         {
           title: 'Custom Software Development',
           desc: 'We build tailor-made software solutions designed to solve unique business challenges. From initial planning and UI/UX design to deployment and support, we deliver software that aligns perfectly with your goals.',
           image: customImg,
-          layout: 'left-image'
+          layout: 'left-image',
+          icon: Code
         }
       ]
     },
     {
       categoryTitle: 'Education & Training',
+      themeColor: 'amber',
+      sectionBg: 'bg-gradient-to-b from-[#ECFDF5] via-[#F0FDF9] to-[#E8FBF2]',
       items: [
         {
           title: 'Tech-Based Documentaries',
           desc: 'We produce educational tech-based documentaries that simplify complex concepts and highlight industry trends. These resources help organizations, schools, and individuals stay informed about technological advancements.',
           image: documentaryImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: Video
         },
         {
           title: 'Cybersecurity & IT Consulting',
           desc: 'Our cybersecurity and IT consulting services provide businesses with expert guidance on securing systems, managing risk, and implementing best practices. We help organizations strengthen their digital defenses and comply with industry standards.',
           image: cybersecurityImg,
-          layout: 'left-image'
+          layout: 'left-image',
+          icon: ShieldCheck
         },
         {
           title: 'Cloud Services & Deployment',
           desc: 'We offer end-to-end cloud migration, hosting, and deployment services to help organizations move their workloads securely and efficiently. From multi-cloud to hybrid cloud, we ensure scalability, cost-efficiency, and maximum uptime.',
           image: cloudImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: Cloud
         },
         {
           title: 'Tech Coaching & Mentorship',
           desc: 'Our coaching programs provide personalized mentorship in programming, software development, cybersecurity, and emerging technologies. We help students and professionals upskill and grow in their careers.',
           image: coachingImg,
-          layout: 'left-image'
+          layout: 'left-image',
+          icon: UserCheck
         },
         {
           title: 'Online Tech Education',
           desc: 'We deliver interactive online tech education covering software engineering, fullstack development, AI, and cloud computing. Learners gain hands-on experience with projects designed for real-world scenarios.',
           image: educationImg,
-          layout: 'right-image'
+          layout: 'right-image',
+          icon: GraduationCap
         }
       ]
     }
   ];
-
-  const handleContactClick = (serviceTitle) => {
-    navigate('/contact', { state: { inquiryType: 'B2B_SOFTWARE', prefillService: serviceTitle } });
-  };
 
   return (
     <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
@@ -398,17 +561,7 @@ export const ServicesPage = () => {
       </section>
 
       {/* 2. THREE PILLARS — ULTIMATE PREMIUM */}
-      <section id="explore-our-services" className="py-32 relative text-slate-900 overflow-hidden"
-        style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 0%, #e0f2fe 0%, #f8fafc 55%, #ecfdf5 100%)' }}>
-
-        {/* Dot-grid pattern */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.035]"
-          style={{ backgroundImage: 'radial-gradient(circle, #0284C7 1.2px, transparent 1.2px)', backgroundSize: '30px 30px' }} />
-
-        {/* Ambient orbs */}
-        <div className="absolute -top-40 -left-40 w-[600px] h-[600px] bg-blue-200/25 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute -bottom-40 -right-40 w-[500px] h-[500px] bg-emerald-200/25 rounded-full blur-[120px] pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-violet-200/15 rounded-full blur-[100px] pointer-events-none" />
+      <section id="explore-our-services" className="pt-32 pb-0 relative text-slate-900 overflow-hidden bg-transparent">
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
 
@@ -720,52 +873,64 @@ export const ServicesPage = () => {
             </div>
           </motion.div>
 
-          {serviceCategories.map((catGroup) => {
-            const pathD = (() => {
-              const count = catGroup.items.length;
-              if (!count) return '';
-              const firstIsLeft = catGroup.items[0].layout === 'left-image';
+        </div>
+      </section>
+
+      {/* CATEGORY DETAIL SECTIONS — Full-Bleed with distinct background colors */}
+      {serviceCategories.map((catGroup) => {
+        const slug = slugify(catGroup.categoryTitle);
+        const pathD = (() => {
+          const count = catGroup.items.length;
+          if (!count) return '';
               
-              // SVG Double-Line Laser Track runs inside the channel between Inner (-inset-3.5) & Outer (-inset-8.5) Dashed Borders (at -inset-6)
-              const H = 200 + 260 * count;
-              const headerTopY = parseFloat(((27 / H) * 100).toFixed(1));
-              const headerBottomY = parseFloat(((133 / H) * 100).toFixed(1));
-              const headerMidY = parseFloat(((headerTopY + headerBottomY) / 2).toFixed(1));
-              
-              const startY = headerBottomY + 5;
-              const step = (100 - startY - 4) / count;
-              const points = catGroup.items.map((item, i) => {
-                const y = (startY + step * (i + 0.5)).toFixed(1);
-                const x = item.layout === 'left-image' ? 40 : 60;
+              const points = realPoints[slug] || catGroup.items.map((item, i) => {
+                const H = 160 + 460 * count;
+                const y = parseFloat(((160 + (i + 0.5) * 460) / H * 100).toFixed(2));
+                const x = item.layout === 'left-image' ? 44.0 : 56.0;
                 return `${x} ${y}`;
               });
               
-              // Custom tailored Concentric Pill SVG Loop centered inside the two dashed borders
-              const title = catGroup.categoryTitle;
-              let leftX = 35.5;
-              let rightX = 64.5;
-              
-              if (title === 'Software Development') {
-                leftX = 30.0;
-                rightX = 70.0;
-              } else if (title === 'Education & Training') {
-                leftX = 31.5;
-                rightX = 68.5;
+              const bounds = realHeaderBounds[slug];
+              let topY, bottomY, leftX, rightX;
+              if (bounds) {
+                topY = bounds.topY;
+                bottomY = bounds.bottomY;
+                leftX = bounds.leftX;
+                rightX = bounds.rightX;
+              } else {
+                const H = 160 + 460 * count;
+                topY = parseFloat(((20 / H) * 100).toFixed(2));
+                bottomY = parseFloat(((145 / H) * 100).toFixed(2));
+                leftX = catGroup.categoryTitle === 'IT Solutions' ? 28.0 : 26.0;
+                rightX = catGroup.categoryTitle === 'IT Solutions' ? 72.0 : 74.0;
               }
-              
-              // Exact Semicircular Pill Cap Radius (capR = half of pill height for 100% smooth arc curvature)
-              const capR = parseFloat(((headerBottomY - headerTopY) / 2).toFixed(2));
+
+              const midY = parseFloat(((topY + bottomY) / 2).toFixed(2));
+              const capR = parseFloat(((bottomY - topY) / 2).toFixed(2));
               const topFlatR = parseFloat((rightX - capR).toFixed(2));
               const topFlatL = parseFloat((leftX + capR).toFixed(2));
-              
-              const headerLoop = `M 50 ${headerTopY} L ${topFlatR} ${headerTopY} Q ${rightX} ${headerTopY} ${rightX} ${headerMidY} Q ${rightX} ${headerBottomY} ${topFlatR} ${headerBottomY} L ${topFlatL} ${headerBottomY} Q ${leftX} ${headerBottomY} ${leftX} ${headerMidY} Q ${leftX} ${headerTopY} ${topFlatL} ${headerTopY} L 50 ${headerTopY}`;
-              const startX = firstIsLeft ? leftX : rightX;
-              
-              return `${headerLoop} M ${startX} ${headerBottomY} L ${points.join(' L ')} L 50 100`;
+
+              const headerLoop = `M 50 ${bottomY} L ${topFlatL} ${bottomY} Q ${leftX} ${bottomY} ${leftX} ${midY} Q ${leftX} ${topY} ${topFlatL} ${topY} L ${topFlatR} ${topY} Q ${rightX} ${topY} ${rightX} ${midY} Q ${rightX} ${bottomY} ${topFlatR} ${bottomY} L 50 ${bottomY}`;
+
+              return `${headerLoop} L ${points.join(' L ')} L 50 100`;
             })();
 
-            return (
-              <div key={catGroup.categoryTitle} id={slugify(catGroup.categoryTitle)} className="space-y-24 pt-12 relative w-full">
+        // Per-category theme colors for zigzag lines, nodes, headers, and UI elements
+        const themeColors = {
+          sky: { primary: '#0284C7', secondary: '#0ED3DD', tertiary: '#38BDF8', pillBorder: 'border-sky-300/70', pillText: 'text-[#0284C7]', hoverText: 'group-hover:text-[#0284C7]', glowBg: 'bg-sky-400/20', shadowColor: 'shadow-sky-500/20', headerBorder: 'border-sky-100', headerShadow: 'shadow-[0_15px_40px_rgba(2,132,199,0.12)]', dashedOuter: 'border-[#0284C7]/70', dashedInner: 'border-[#0ED3DD]/60' },
+          violet: { primary: '#7C3AED', secondary: '#A855F7', tertiary: '#C084FC', pillBorder: 'border-violet-300/70', pillText: 'text-[#7C3AED]', hoverText: 'group-hover:text-[#7C3AED]', glowBg: 'bg-violet-400/20', shadowColor: 'shadow-violet-500/20', headerBorder: 'border-violet-100', headerShadow: 'shadow-[0_15px_40px_rgba(124,58,237,0.12)]', dashedOuter: 'border-[#7C3AED]/70', dashedInner: 'border-[#A855F7]/60' },
+          amber: { primary: '#D97706', secondary: '#F59E0B', tertiary: '#FCD34D', pillBorder: 'border-amber-300/70', pillText: 'text-[#D97706]', hoverText: 'group-hover:text-[#D97706]', glowBg: 'bg-amber-400/20', shadowColor: 'shadow-amber-500/20', headerBorder: 'border-amber-100', headerShadow: 'shadow-[0_15px_40px_rgba(217,119,6,0.12)]', dashedOuter: 'border-[#D97706]/70', dashedInner: 'border-[#F59E0B]/60' },
+          emerald: { primary: '#059669', secondary: '#10B981', tertiary: '#34D399', pillBorder: 'border-emerald-300/70', pillText: 'text-[#059669]', hoverText: 'group-hover:text-[#059669]', glowBg: 'bg-emerald-400/20', shadowColor: 'shadow-emerald-500/20', headerBorder: 'border-emerald-100', headerShadow: 'shadow-[0_15px_40px_rgba(5,150,105,0.12)]', dashedOuter: 'border-[#059669]/70', dashedInner: 'border-[#10B981]/60' },
+        }[catGroup.themeColor] || { primary: '#0284C7', secondary: '#0ED3DD', tertiary: '#38BDF8', pillBorder: 'border-sky-300/70', pillText: 'text-[#0284C7]', hoverText: 'group-hover:text-[#0284C7]', glowBg: 'bg-sky-400/20', shadowColor: 'shadow-sky-500/20', headerBorder: 'border-sky-100', headerShadow: 'shadow-[0_15px_40px_rgba(2,132,199,0.12)]', dashedOuter: 'border-[#0284C7]/70', dashedInner: 'border-[#0ED3DD]/60' };
+
+        return (
+          <div 
+            key={catGroup.categoryTitle} 
+            id={slug} 
+            ref={(el) => (categoryRefs.current[slug] = el)}
+            className={`space-y-0 relative w-full ${catGroup.sectionBg || ''}`}
+          >
+            <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 py-20 space-y-24 relative z-10">
                 
                 {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
                 <svg 
@@ -775,9 +940,9 @@ export const ServicesPage = () => {
                 >
                   <defs>
                     <linearGradient id={`neonZigzag_${slugify(catGroup.categoryTitle)}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor="#0284c7" />
-                      <stop offset="50%" stopColor="#06b6d4" />
-                      <stop offset="100%" stopColor="#3b82f6" />
+                      <stop offset="0%" stopColor={themeColors.primary} />
+                      <stop offset="50%" stopColor={themeColors.secondary} />
+                      <stop offset="100%" stopColor={themeColors.tertiary} />
                     </linearGradient>
                     <filter id={`neonBlur_${slugify(catGroup.categoryTitle)}`} x="-20%" y="-20%" width="140%" height="140%">
                       <feGaussianBlur stdDeviation="0.8" result="blur" />
@@ -823,28 +988,29 @@ export const ServicesPage = () => {
                     vectorEffect="non-scaling-stroke"
                   />
 
-                  {/* Double Line Track - Dashed Outer Stream */}
+                  {/* Double Line Track - Dashed Continuous Flow Stream */}
                   <path
                     d={pathD}
                     fill="none"
                     stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
-                    strokeWidth="1.5"
-                    strokeDasharray="6 6"
+                    strokeWidth="1.6"
+                    strokeDasharray="8 8"
                     strokeLinecap="round"
                     strokeLinejoin="round"
+                    className="animate-zigzag-dash"
                     vectorEffect="non-scaling-stroke"
                   />
 
-                  {/* Double Line Track - Dynamic Traveling White Laser Dashes */}
+                  {/* Double Line Track - Dynamic Fast Traveling Laser Particles */}
                   <path
                     d={pathD}
                     fill="none"
                     stroke="#ffffff"
-                    strokeWidth="1.2"
-                    strokeDasharray="4 10"
+                    strokeWidth="1.5"
+                    strokeDasharray="4 20"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="animate-zigzag-dash"
+                    className="animate-zigzag-laser"
                     vectorEffect="non-scaling-stroke"
                   />
                 </svg>
@@ -852,16 +1018,31 @@ export const ServicesPage = () => {
                 {/* Category Header */}
                 <div className="text-center mb-20 flex flex-col items-center relative z-10">
                   <div className="relative inline-block group cursor-default">
-                    {/* OUTER DASHED BORDER - Perfectly Concentric Scaled-Up Duplicate */}
-                    <div className="absolute -inset-8 rounded-[3.25rem] border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
+                    {/* DASHED BORDER - Cleanly styled inside the two lines */}
+                    <div
+                      className={`absolute -inset-2 border-2 border-dashed animate-spin-slow pointer-events-none ${catGroup.themeColor === 'violet' ? 'rounded-[2.25rem]' : 'rounded-full'}`}
+                      style={{
+                        borderColor: catGroup.themeColor === 'violet'
+                          ? `${themeColors.primary}B3`
+                          : themeColors.primary,
+                      }}
+                    />
+                    <div
+                      className={`absolute inset-1 border border-dashed animate-spin-slow pointer-events-none ${catGroup.themeColor === 'violet' ? 'rounded-[1.75rem]' : 'rounded-full'}`}
+                      style={{
+                        borderColor: catGroup.themeColor === 'violet'
+                          ? `${themeColors.secondary}99`
+                          : themeColors.secondary,
+                      }}
+                    />
 
-                    {/* INNER DASHED BORDER - Master Geometry */}
-                    <div className="absolute -inset-4 rounded-[2.5rem] border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
-                    
                     {/* Ethereal Glow */}
-                    <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
+                    <div
+                      className={`absolute -inset-1 opacity-20 blur-xl group-hover:opacity-40 transition-opacity ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'}`}
+                      style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
+                    />
 
-                    <div className="relative px-10 py-4.5 rounded-[2rem] bg-white/95 backdrop-blur-2xl border-2 border-sky-100 shadow-[0_15px_40px_rgba(2,132,199,0.12)] flex items-center justify-center">
+                    <div className={`relative px-10 py-4.5 bg-white/95 backdrop-blur-2xl border-2 min-w-[520px] flex items-center justify-center ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'} ${themeColors.headerBorder} ${themeColors.headerShadow}`}>
                       <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-none">
                         {catGroup.categoryTitle}
                       </h2>
@@ -884,17 +1065,17 @@ export const ServicesPage = () => {
                         transition={{ duration: 0.5 }}
                         className={`flex flex-col lg:flex-row ${isLeftImage ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-between items-center relative z-10 w-full mb-36 last:mb-0`}
                       >
-                        {/* TEXT CONTENT CARD */}
-                        <div className="w-full lg:w-[40%] perspective-1000">
-                          <div className="relative w-full rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-slate-200/90 shadow-[0_10px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.1)] transition-all duration-500 p-8 md:p-12 cursor-pointer group">
+                        {/* TEXT CONTENT (Frameless Seamless Text directly on Section Body) */}
+                        <div className="w-full lg:w-[44%]">
+                          <div className="relative w-full p-2 sm:p-4 cursor-pointer group">
                             
                             <div className="flex items-center gap-3 mb-6">
-                              <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-sky-100 border border-sky-300 shadow-xs">
+                              <span className={`text-xs font-mono font-extrabold uppercase tracking-widest ${themeColors.pillText} px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border ${themeColors.pillBorder} shadow-xs`}>
                                 {catGroup.categoryTitle} • STEP 0{itemIdx + 1}
                               </span>
                             </div>
 
-                            <h3 className="text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight mb-4">
+                            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 ${themeColors.hoverText} transition-colors leading-tight mb-4`}>
                               {item.title}
                             </h3>
 
@@ -905,7 +1086,8 @@ export const ServicesPage = () => {
                             <div>
                               <button
                                 onClick={() => handleContactClick(item.title)}
-                                className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-lg shadow-sky-500/20 hover:scale-105 transition-all duration-300"
+                                className={`inline-flex items-center gap-3 px-7 py-3 rounded-full text-white font-black text-sm shadow-lg ${themeColors.shadowColor} hover:scale-105 transition-all duration-300`}
+                                style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
                               >
                                 <span>For More Contact us</span>
                                 <ArrowRight size={16} />
@@ -915,40 +1097,41 @@ export const ServicesPage = () => {
                         </div>
 
                         {/* IMAGE SHOWCASE CONTAINER (Decreased Compact Size) */}
-                        <div className={`w-full lg:w-[40%] h-full flex items-center ${isLeftImage ? 'justify-end' : 'justify-start'} relative`}>
+                        <div className={`w-full lg:w-[44%] h-full flex items-center ${isLeftImage ? 'justify-end' : 'justify-start'} relative`}>
                           {/* Animated Glow Behind Image */}
-                          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full bg-sky-400/20 blur-[80px] opacity-30 animate-pulse-slow pointer-events-none" />
+                          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full ${themeColors.glowBg} blur-[80px] opacity-30 animate-pulse-slow pointer-events-none`} />
 
-                          {/* Image Wrapper (Compact Max Width) */}
-                          <div className="relative w-full max-w-md aspect-[4/3] rounded-[2rem] bg-white/90 backdrop-blur-md border border-slate-100 shadow-[0_15px_40px_rgba(0,0,0,0.06)] p-4 md:p-6 hover:scale-[1.02] transition-transform duration-500 group">
-                            {/* Inner Image Frame */}
-                            <div className="w-full h-full rounded-[1.5rem] overflow-hidden bg-slate-50 relative flex items-center justify-center p-3 md:p-4">
-                              <img
-                                src={item.image}
-                                alt={`${item.title} Illustration`}
-                                className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                            </div>
+                          {/* Image Wrapper with Custom Curved Concave Barrel Shape (Matching Reference Screenshot) */}
+                          <div className="relative w-full max-w-md flex items-center justify-center">
+                            <CurvedBarrelImageCard
+                              src={item.image}
+                              alt={`${item.title} Illustration`}
+                              themeColor={catGroup.themeColor || 'sky'}
+                            />
 
                             {/* Step Node Badge anchored directly to inner border of Image Wrapper */}
-                            <div className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isLeftImage ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}>
-                              <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125">
+                            <div 
+                              ref={(el) => (nodeBadgeRefs.current[`${slug}_${itemIdx}`] = el)}
+                              className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isLeftImage ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}
+                            >
+                              <div className="relative w-14 h-14 rounded-full border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
                                 
                                 {/* Rotating Angle Ring over Node Icon */}
-                                <div className="absolute -inset-2.5 rounded-full border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
+                                <div className="absolute -inset-2.5 rounded-full border-2 border-dashed animate-spin-slow pointer-events-none" style={{ borderColor: `${themeColors.primary}CC` }} />
                                 
-                                <Cpu className="w-6 h-6 text-white relative z-10" strokeWidth={2.2} />
+                                {(() => {
+                                  const ItemNodeIcon = item.icon || Cpu;
+                                  return <ItemNodeIcon className="w-6 h-6 text-white relative z-10" strokeWidth={2.2} />;
+                                })()}
                                 
                                 {/* Mini Step Number Badge (Matching Reference Screenshot) */}
                                 <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-md text-[11px] font-black flex items-center justify-center">
-                                  <span className="w-full h-full rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center">
+                                  <span className="w-full h-full rounded-full text-white flex items-center justify-center" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
                                     {itemIdx + 1}
                                   </span>
                                 </span>
                               </div>
                             </div>
-
                           </div>
                         </div>
 
@@ -956,12 +1139,10 @@ export const ServicesPage = () => {
                     );
                   })}
                 </div>
-
               </div>
-            );
-          })}
-        </div>
-      </section>
+          </div>
+        );
+      })}
 
       {/* NEW SECTION 01: ENGINEERING APPROACH */}
       <ServicesEngineeringApproach />

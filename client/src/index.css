@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,12 +6,14 @@
 
 :root {
   color-scheme: light;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   width: 100%;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 body {
@@ -19,10 +21,32 @@ body {
   padding: 0;
   background-color: #F8FAFC !important;
   color: #0F172A;
-  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   width: 100%;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer base {
+  *, ::before, ::after {
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+  }
+
+  p {
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.625;
+  }
+
+  button, input, select, textarea {
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
+  }
 }
 
 #root {
@@ -255,4 +279,240 @@ body {
 
 .animate-emblem-pulse {
   animation: emblemPulseSlow 4.5s ease-in-out infinite;
+}
+
+/* ============================================================
+   SECTION DASHED TRACK BORDER
+   — Two concentric rounded borders: solid outer + dashed inner
+     Matches the "IT Solutions" stitched-badge design language
+   ============================================================ */
+
+/* Wrapper that carries both border lines */
+.section-track-border {
+  position: relative;
+}
+
+/* Solid outer rounded border (the "rail") */
+.section-track-border::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid #1DA1F2;
+  border-radius: 2.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Dashed inner line (the "stitch") */
+.section-track-border::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed #38BDF8;
+  border-radius: 2.2rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* Variant: only top arc (for bottom-open sections like the reference image) */
+.section-track-border-top::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: -2px;
+  /* bleeds off the bottom edge = open arc */
+  border: 2px solid #1DA1F2;
+  border-bottom: none;
+  border-radius: 2.5rem 2.5rem 0 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-track-border-top::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  bottom: -2px;
+  border: 2px dashed #38BDF8;
+  border-bottom: none;
+  border-radius: 2.2rem 2.2rem 0 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* Variant: only bottom arc (open top) */
+.section-track-border-bottom::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 2px solid #1DA1F2;
+  border-top: none;
+  border-radius: 0 0 2.5rem 2.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-track-border-bottom::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  border: 2px dashed #38BDF8;
+  border-top: none;
+  border-radius: 0 0 2.2rem 2.2rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* Light-sky-blue tint background used by bordered sections */
+.section-track-bg {
+  background: linear-gradient(180deg, #EBF5FF 0%, #F0F9FF 50%, #E8F4FD 100%);
+}
+
+/* Purple variant — for dark purple/violet section backgrounds */
+.section-track-border-purple::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid #A78BFA;
+  border-radius: 2.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-track-border-purple::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed #C4B5FD;
+  border-radius: 2.2rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* Amber variant — for warm/amber section backgrounds */
+.section-track-border-amber::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid #F59E0B;
+  border-radius: 2.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-track-border-amber::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed #FCD34D;
+  border-radius: 2.2rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* Emerald variant — for green/emerald section backgrounds */
+.section-track-border-emerald::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid #059669;
+  border-radius: 2.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-track-border-emerald::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed #34D399;
+  border-radius: 2.2rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* Slate variant — for neutral/slate section backgrounds */
+.section-track-border-slate::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px solid #94A3B8;
+  border-radius: 2.5rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-track-border-slate::after {
+  content: '';
+  position: absolute;
+  inset: 14px;
+  border: 2px dashed #CBD5E1;
+  border-radius: 2.2rem;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   SVG ZIGZAG DOUBLE-LINE TRACK FLOW MOVEMENTS
+   — Smooth continuous flow animations starting from top title rounded loop
+   ============================================================ */
+
+@keyframes zigzagFlowForward {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -160;
+  }
+}
+
+@keyframes zigzagLaserPulse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -320;
+  }
+}
+
+@keyframes zigzagGlowPulse {
+  0%, 100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 2px rgba(14,211,221,0.4));
+  }
+  50% {
+    opacity: 0.95;
+    filter: drop-shadow(0 0 10px rgba(14,211,221,0.9));
+  }
+}
+
+.animate-zigzag-dash {
+  animation: zigzagFlowForward 2.5s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-zigzag-laser {
+  animation: zigzagLaserPulse 1.8s linear infinite;
+  will-change: stroke-dashoffset;
+}
+
+.animate-zigzag-glow {
+  animation: zigzagGlowPulse 3s ease-in-out infinite;
 }

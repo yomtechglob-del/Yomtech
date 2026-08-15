@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, Layout, Monitor, BarChart, Cloud, ShieldCheck } from 'lucide-react';
-import logoImg from '../../assets/logo.png';
+import logoImg from '../../assets/academy/wabiskills-logo.jpg';
 
 export const TechnologyEcosystem = () => {
   const [activeDomain, setActiveDomain] = useState(0);
@@ -39,8 +39,8 @@ export const TechnologyEcosystem = () => {
           <div className="flex justify-center">
             <div className="p-1.5 rounded-full bg-gradient-to-r from-[#1DA1F2] via-[#0ED3DD] to-sky-500 shadow-xl group hover:scale-105 transition-transform duration-300">
               <div className="bg-white rounded-full px-8 py-3.5 flex items-center gap-3.5 border border-cyan-200 text-slate-900 shadow-inner">
-                <div className="w-8 h-8 rounded-full overflow-hidden border border-cyan-300 shrink-0">
-                  <img src={logoImg} alt="WabiSkills Core" className="w-full h-full object-cover" />
+                <div className="w-8 h-8 rounded-full overflow-hidden border border-cyan-300 shrink-0 bg-white p-0.5">
+                  <img src={logoImg} alt="WabiSkills Core" className="w-full h-full object-contain rounded-full" />
                 </div>
                 <span className="text-xs font-black uppercase tracking-widest text-[#1DA1F2] font-display">
                   WABISKILLS HUB

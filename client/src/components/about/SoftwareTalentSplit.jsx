@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Cpu, GraduationCap, Zap, ArrowUpRight, CheckCircle2, ShieldCheck, Code, Layers, Sparkles, TrendingUp, Award, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import logoImg from '../../assets/logo.png';
+import wabiLogoImg from '../../assets/academy/wabiskills-logo.jpg';
 
 export const SoftwareTalentSplit = () => {
   const navigate = useNavigate();
@@ -196,7 +197,8 @@ export const SoftwareTalentSplit = () => {
                   <div className="w-14 h-14 rounded-2xl bg-cyan-50 border border-cyan-200 text-[#0284C7] flex items-center justify-center shadow-md">
                     <GraduationCap size={28} />
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1 rounded-full bg-cyan-100/80 text-[#0284C7] border border-cyan-300">
+                  <span className="text-[10px] font-black uppercase tracking-widest px-3.5 py-1 rounded-full bg-cyan-100/80 text-[#0284C7] border border-cyan-300 flex items-center gap-1.5">
+                    <img src={wabiLogoImg} alt="WabiSkills" className="w-4 h-4 rounded-full object-contain bg-white p-0.5" />
                     WABISKILLS ACADEMY
                   </span>
                 </div>
