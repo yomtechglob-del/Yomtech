@@ -260,79 +260,108 @@ export const AboutEcosystem = () => {
         }}
       />
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
-        
-        {/* Section Header (Our Core Values) */}
-        <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200/90 text-cyan-800 text-xs font-black uppercase tracking-widest shadow-xs">
-            <Sparkles className="w-3.5 h-3.5 text-cyan-500 animate-pulse" />
-            <span>Our Core Values</span>
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* Left Column: Section Header */}
+          <div className="lg:col-span-5 space-y-6 text-left flex flex-col items-start">
+            <div className="inline-block relative">
+              <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
+                <Award className="w-6 h-6 text-cyan-200" />
+                <span>VALUES</span>
+              </div>
+              <div className="absolute -bottom-2 left-4 w-4 h-2 bg-[#0369a1] rounded-b-sm transform skew-x-12" />
+            </div>
+
+            <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
+              Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide.
+            </p>
+
+            {/* 7 Core Values Pill Buttons */}
+            <div className="flex flex-wrap gap-2.5 pt-2">
+              <span className="px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <Sparkles className="w-3.5 h-3.5 text-sky-500" />
+                Innovation
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <Cpu className="w-3.5 h-3.5 text-orange-500" />
+                Intelligence
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <Zap className="w-3.5 h-3.5 text-purple-500" />
+                Creativity
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <BookOpen className="w-3.5 h-3.5 text-indigo-500" />
+                Continuous Learning
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <Globe className="w-3.5 h-3.5 text-amber-500" />
+                Client Success
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                Integrity
+              </span>
+              <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                <Award className="w-3.5 h-3.5 text-cyan-500" />
+                Excellence
+              </span>
+            </div>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-tight font-display">
-            Guiding Principles & <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600">
-              Corporate Values
-            </span>
-          </h2>
+          {/* Right Column: Desktop Honeycomb Cluster Shifted to Right */}
+          <div className="lg:col-span-7 hidden lg:flex relative w-full h-[660px] items-center justify-center lg:justify-end overflow-visible">
 
-          <p className="text-base sm:text-lg text-slate-600 font-semibold leading-relaxed max-w-2xl mx-auto">
-            Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide.
-          </p>
-        </div>
+            {/* Center Hexagon Anchor */}
+            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-auto flex items-center justify-center">
+              <EcosystemCenterHexagon logoSrc={yomtechLogo} />
+            </div>
 
-        {/* ========================================================
-            DESKTOP HONEYCOMB CLUSTER (Matching Image 1 Exact Layout)
-        ======================================================== */}
-        <div className="hidden lg:flex relative w-full h-[660px] items-center justify-center overflow-visible">
+            {/* 6 Surrounding Honeycomb Hexagons (Strict Counter-Clockwise Slot Rotation) */}
+            <div className="absolute inset-0 pointer-events-none">
+              {ECOSYSTEM_HEXAGONS.map((hex, idx) => {
+                const isHovered = hoveredId === hex.id;
 
-          {/* Center Hexagon Anchor (Locked 100% Dead Center at Red Dot) */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-30 pointer-events-auto flex items-center justify-center">
-            <EcosystemCenterHexagon logoSrc={yomtechLogo} />
-          </div>
+                // 6 Established Slot Positions in Counter-Clockwise Order
+                const slotsCCW = [
+                  { x: 15, y: -385 },   // Slot 0: Top-Right (01 base)
+                  { x: -255, y: -385 }, // Slot 1: Top-Left (02 base)
+                  { x: -390, y: -150 }, // Slot 2: Mid-Left (03 base)
+                  { x: -255, y: 85 },   // Slot 3: Bottom-Left (04 base)
+                  { x: 15, y: 85 },     // Slot 4: Bottom-Right (05 base)
+                  { x: 150, y: -150 }   // Slot 5: Mid-Right (06 base)
+                ];
 
-          {/* 6 Surrounding Honeycomb Hexagons (Strict Counter-Clockwise Slot Rotation) */}
-          <div className="absolute inset-0 pointer-events-none">
-            {ECOSYSTEM_HEXAGONS.map((hex, idx) => {
-              const isHovered = hoveredId === hex.id;
+                // Generate exact counter-clockwise path starting from each card's base slot
+                const xPath = [0, 1, 2, 3, 4, 5, 6].map((step) => slotsCCW[(idx + step) % 6].x);
+                const yPath = [0, 1, 2, 3, 4, 5, 6].map((step) => slotsCCW[(idx + step) % 6].y);
 
-              // 6 Established Slot Positions in Counter-Clockwise Order
-              const slotsCCW = [
-                { x: 15, y: -385 },   // Slot 0: Top-Right (01 base)
-                { x: -255, y: -385 }, // Slot 1: Top-Left (02 base)
-                { x: -390, y: -150 }, // Slot 2: Mid-Left (03 base)
-                { x: -255, y: 85 },   // Slot 3: Bottom-Left (04 base)
-                { x: 15, y: 85 },     // Slot 4: Bottom-Right (05 base)
-                { x: 150, y: -150 }   // Slot 5: Mid-Right (06 base)
-              ];
+                return (
+                  <motion.div
+                    key={hex.id}
+                    animate={{
+                      x: xPath,
+                      y: yPath
+                    }}
+                    transition={{
+                      duration: 24, // Smooth 24-second full revolution (4s per slot transition)
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
+                  >
+                    <EcosystemHexagonCard
+                      hex={hex}
+                      isHovered={isHovered}
+                      onHover={setHoveredId}
+                      onClick={setSelectedHex}
+                    />
+                  </motion.div>
+                );
+              })}
+            </div>
 
-              // Generate exact counter-clockwise path starting from each card's base slot
-              const xPath = [0, 1, 2, 3, 4, 5, 6].map((step) => slotsCCW[(idx + step) % 6].x);
-              const yPath = [0, 1, 2, 3, 4, 5, 6].map((step) => slotsCCW[(idx + step) % 6].y);
-
-              return (
-                <motion.div
-                  key={hex.id}
-                  animate={{
-                    x: xPath,
-                    y: yPath
-                  }}
-                  transition={{
-                    duration: 24, // Smooth 24-second full revolution (4s per slot transition)
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
-                >
-                  <EcosystemHexagonCard
-                    hex={hex}
-                    isHovered={isHovered}
-                    onHover={setHoveredId}
-                    onClick={setSelectedHex}
-                  />
-                </motion.div>
-              );
-            })}
           </div>
 
         </div>

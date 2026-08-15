@@ -350,6 +350,16 @@ export const CoreFoundations = () => {
             EXECUTIVE VISION, MISSION & VALUES SHOWCASE
         ======================================================== */}
         <div className="space-y-20 relative">
+
+          {/* Divider: Our Core Vision (Above Vision Section) */}
+          <div className="relative flex items-center justify-start py-4 w-full max-w-full px-2 sm:px-6 mx-auto">
+            <div className="w-full h-[4px] bg-gradient-to-r from-[#0284C7] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
+            <div className="absolute left-2 sm:left-6 px-6 py-2 bg-[#F4F9FF] border-[3px] border-[#0284C7] rounded-full text-[#0284C7] text-xs sm:text-sm font-black flex items-center gap-2 shadow-md z-10">
+              <span>◆</span>
+              <span className="uppercase tracking-[0.25em]">Our Core Vision</span>
+              <span>◆</span>
+            </div>
+          </div>
           
           {/* Subtle Ambient Watermark */}
           <div className="absolute top-10 right-10 text-[180px] font-black text-slate-900/[0.02] select-none pointer-events-none font-display">
@@ -357,10 +367,11 @@ export const CoreFoundations = () => {
           </div>
 
           {/* 1. VISION BLOCK (Top: Left Text + Right Pan-African Map Graphic) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* 1. VISION BLOCK (Top: Left Text + Right Hexagon Graphic) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             
-            {/* Left Content */}
-            <div className="lg:col-span-6 space-y-6">
+            {/* Left Content Column */}
+            <div className="lg:col-span-6 space-y-6 text-left flex flex-col items-start">
               <div className="inline-block relative">
                 <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
                   <Eye className="w-6 h-6 text-cyan-200" />
@@ -394,7 +405,7 @@ export const CoreFoundations = () => {
             </div>
 
             {/* Right Graphic: Pan-African Tech Network Image in Hexagon Frame */}
-            <div className="lg:col-span-6 flex justify-center">
+            <div className="lg:col-span-6 flex justify-center lg:justify-end">
               <div 
                 className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-[1/1.13] flex items-center justify-center p-[4px] bg-[#0284C7] shadow-2xl transition-transform duration-500 hover:scale-105 group cursor-pointer"
                 style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
@@ -414,21 +425,21 @@ export const CoreFoundations = () => {
 
           </div>
 
-          {/* Divider */}
-          <div className="relative flex items-center justify-center py-2">
-            <div className="w-full h-[2px] bg-gradient-to-r from-transparent via-[#0284C7]/40 to-transparent" />
-            <div className="absolute px-4 py-1.5 bg-white border border-[#0284C7]/40 rounded-full text-[#0284C7] text-xs font-black flex items-center gap-1.5 shadow-sm">
+          {/* Divider: Our Core Mission (Right Aligned Badge) */}
+          <div className="relative flex items-center justify-end py-4 w-full max-w-full px-2 sm:px-6 mx-auto">
+            <div className="w-full h-[4px] bg-gradient-to-r from-cyan-100/20 via-cyan-400 to-[#0284C7] shadow-sm rounded-full" />
+            <div className="absolute right-2 sm:right-6 px-6 py-2 bg-[#F4F9FF] border-[3px] border-[#0284C7] rounded-full text-[#0284C7] text-xs sm:text-sm font-black flex items-center gap-2 shadow-md z-10">
               <span>◆</span>
-              <span className="text-[10px] tracking-widest uppercase">Fixed Margin Hexagonal Matrix</span>
+              <span className="uppercase tracking-[0.25em]">Our Core Mission</span>
               <span>◆</span>
             </div>
           </div>
 
           {/* 2. MISSION BLOCK (Middle: Left Graphic + Right Text) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             
             {/* Left Graphic: Enterprise Technology & Skills Platform Image in Hexagon Frame */}
-            <div className="lg:col-span-6 flex justify-center order-2 lg:order-1">
+            <div className="lg:col-span-6 flex justify-center lg:justify-start order-2 lg:order-1">
               <div 
                 className="relative w-full max-w-[360px] sm:max-w-[400px] aspect-[1/1.13] flex items-center justify-center p-[4px] bg-[#0284C7] shadow-2xl transition-transform duration-500 hover:scale-105 group cursor-pointer"
                 style={{ clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)' }}
@@ -446,8 +457,8 @@ export const CoreFoundations = () => {
               </div>
             </div>
 
-            {/* Right Content */}
-            <div className="lg:col-span-6 space-y-6 order-1 lg:order-2">
+            {/* Right Content Column */}
+            <div className="lg:col-span-6 space-y-6 order-1 lg:order-2 text-left flex flex-col items-start">
               <div className="inline-block relative">
                 <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
                   <Target className="w-6 h-6 text-cyan-200" />
@@ -477,6 +488,16 @@ export const CoreFoundations = () => {
                   Practical Skills
                 </span>
               </div>
+            </div>
+          </div>
+
+          {/* Divider: Our Core Values */}
+          <div className="relative flex items-center justify-start py-4 w-full max-w-full px-2 sm:px-6 mx-auto">
+            <div className="w-full h-[4px] bg-gradient-to-r from-[#0284C7] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
+            <div className="absolute left-2 sm:left-6 px-6 py-2 bg-[#F4F9FF] border-[3px] border-[#0284C7] rounded-full text-[#0284C7] text-xs sm:text-sm font-black flex items-center gap-2 shadow-md z-10">
+              <span>◆</span>
+              <span className="uppercase tracking-[0.25em]">Our Core Values</span>
+              <span>◆</span>
             </div>
           </div>
         </div>
