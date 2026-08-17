@@ -934,53 +934,57 @@ export const CompanyProfileDetails = () => {
               </div>
             </div>
 
-            {/* Right: Direct Contact & Location Info */}
-            <div className="lg:col-span-5 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 text-white rounded-3xl p-8 border-2 border-slate-800 shadow-xl space-y-6 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-black uppercase tracking-widest border border-cyan-400/30">
-                  <MapPin className="w-4 h-4" />
+            {/* Right: Direct Contact & Location Info (Using Hero Section Background) */}
+            <div className="relative lg:col-span-5 bg-gradient-to-br from-[#03045E] via-[#0077B6] to-[#00B4D8] text-white rounded-3xl p-8 border-2 border-cyan-300/40 shadow-2xl shadow-cyan-900/40 space-y-6 flex flex-col justify-between overflow-hidden">
+              {/* Background Glow Accents matching Hero section */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/25 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-900/40 rounded-full blur-3xl pointer-events-none" />
+
+              <div className="relative z-10 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-cyan-200 text-xs font-black uppercase tracking-widest border border-cyan-300/40 shadow-sm">
+                  <MapPin className="w-4 h-4 text-cyan-300" />
                   <span>Headquarters &amp; Direct Hotline</span>
                 </div>
 
-                <h3 className="text-2xl font-extrabold text-white font-display">
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display tracking-tight drop-shadow-sm">
                   Get in Touch with YomTech Global
                 </h3>
 
-                <p className="text-xs text-slate-300 font-medium leading-relaxed">
+                <p className="text-xs sm:text-sm text-cyan-50 font-medium leading-relaxed opacity-95">
                   Connect with our executive leadership, project delivery teams, or WabiSkills academy leads.
                 </p>
 
                 <div className="space-y-3 pt-2">
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
-                    <Phone className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all shadow-lg group">
+                    <Phone className="w-5 h-5 text-cyan-300 flex-shrink-0 group-hover:scale-110 transition-transform" />
                     <div>
-                      <p className="text-[10px] text-slate-400 uppercase font-bold">Official Telephones:</p>
+                      <p className="text-[10px] text-cyan-200/90 uppercase font-bold tracking-wider">Official Telephones:</p>
                       <p className="text-xs sm:text-sm font-extrabold text-white font-mono">+251 11 668 7546 / +251 97 766 6699</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
-                    <Mail className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all shadow-lg group">
+                    <Mail className="w-5 h-5 text-cyan-300 flex-shrink-0 group-hover:scale-110 transition-transform" />
                     <div>
-                      <p className="text-[10px] text-slate-400 uppercase font-bold">Official Web &amp; Email:</p>
-                      <p className="text-xs sm:text-sm font-extrabold text-cyan-300 font-mono">www.yomtechglobal.org</p>
-                      <p className="text-[11px] text-slate-300 font-mono">ealemayehu3@gmail.com</p>
+                      <p className="text-[10px] text-cyan-200/90 uppercase font-bold tracking-wider">Official Web &amp; Email:</p>
+                      <p className="text-xs sm:text-sm font-extrabold text-cyan-200 font-mono">www.yomtechglobal.org</p>
+                      <p className="text-[11px] text-white/90 font-mono">ealemayehu3@gmail.com</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
-                    <MapPin className="w-5 h-5 text-cyan-400 flex-shrink-0" />
+                  <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-all shadow-lg group">
+                    <MapPin className="w-5 h-5 text-cyan-300 flex-shrink-0 group-hover:scale-110 transition-transform" />
                     <div>
-                      <p className="text-[10px] text-slate-400 uppercase font-bold">Headquarters Address:</p>
+                      <p className="text-[10px] text-cyan-200/90 uppercase font-bold tracking-wider">Headquarters Address:</p>
                       <p className="text-xs font-bold text-white">Megenagna / Kolfe Keraniyo, Addis Ababa, Ethiopia</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-white/10 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+              <div className="relative z-10 pt-4 border-t border-white/20 flex items-center justify-between text-[11px] text-cyan-100 font-mono">
                 <span>© 2025 YomTech Global</span>
-                <span className="text-cyan-400 font-bold">Pan-African Powerhouse</span>
+                <span className="text-amber-300 font-extrabold tracking-wider drop-shadow-sm">Pan-African Powerhouse</span>
               </div>
             </div>
           </div>
