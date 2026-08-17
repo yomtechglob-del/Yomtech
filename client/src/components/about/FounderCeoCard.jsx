@@ -42,12 +42,12 @@ export const FounderCeoCard = ({ className = '' }) => {
           <div className="absolute inset-0 rounded-[2.2rem] bg-[#9A7C67] border-2 border-[#B2947E] shadow-lg transform rotate-6 translate-x-[12px] translate-y-[-4px] group-hover:rotate-8 group-hover:translate-x-[16px] transition-all duration-500 origin-center" />
 
           {/* CARD 3 (Front Main Photo Card - ermi-two.jpg with Advanced Professional Overlays) */}
-          <div className="relative w-full h-full rounded-[2.2rem] shadow-[0_20px_50px_rgba(0,0,0,0.35)] overflow-hidden transform group-hover:scale-[1.02] transition-transform duration-500 z-10 flex flex-col bg-slate-900 border border-slate-700/50">
+          <div className="relative w-full h-full rounded-[2.2rem] shadow-[0_20px_50px_rgba(0,0,0,0.35)] overflow-hidden transform group-hover:scale-[1.08] sm:group-hover:scale-[1.12] transition-transform duration-500 z-10 flex flex-col bg-slate-900 border border-slate-700/50">
             <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden bg-slate-900">
               <img
                 src={ermiTwoImg}
                 alt="Ermias Alemayehu - Founder & CEO"
-                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
+                className="w-full h-full object-cover object-top group-hover:scale-120 sm:group-hover:scale-125 transition-transform duration-700"
               />
 
               {/* Sweeping Light Sheen Effect */}

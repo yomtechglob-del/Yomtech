@@ -239,7 +239,7 @@ export const CompanyProfileDetails = () => {
         {/* ========================================================
             1. FOUNDER & CEO MESSAGE SECTION
         ======================================================== */}
-        <div>
+        <div id="ceo-founder-message" className="scroll-mt-32 sm:scroll-mt-36">
           {/* Section Divider */}
           <div className="relative flex items-center justify-start py-4 w-full max-w-full px-2 sm:px-6 mx-auto mb-10">
             <div className="w-full h-[4px] bg-gradient-to-r from-[#0284C7] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />

@@ -209,14 +209,6 @@ export const AboutPage = () => {
             filter="url(#heroGlowFlares)"
           />
 
-          {/* Top-Right Corner Border Energy Beacon Node for Track 1 */}
-          <circle cx="955" cy="14" r="8" fill="#90e0ef" filter="url(#heroGlowFlares)" className="animate-ping" />
-          <circle cx="955" cy="14" r="5" fill="#ffffff" />
-
-          {/* Right Side Border Energy Beacon Node for Track 2 (Positioned Directly ON Right Edge Border) */}
-          <circle cx="996" cy="110" r="9" fill="#38bdf8" filter="url(#heroGlowFlares)" className="animate-ping" />
-          <circle cx="996" cy="110" r="5.5" fill="#90e0ef" filter="url(#heroGlowFlares)" />
-          <circle cx="996" cy="110" r="3" fill="#ffffff" />
         </svg>
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
@@ -282,7 +274,7 @@ export const AboutPage = () => {
             </div>
           </motion.div>
 
-          {/* Right Hero: 2 Vertical Floating Logo Columns (Matching Exact User Red Line Drawn Channels) */}
+          {/* Right Hero: 2 Vertical Floating Logo Columns (Locked to 1:1 Scaling Container) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -292,96 +284,103 @@ export const AboutPage = () => {
             {/* Luminous Glowing Light Halo */}
             <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/35 via-sky-300/30 to-blue-600/25 rounded-full blur-[100px] pointer-events-none" />
 
-            {/* Compact Bezier Curved Stream Container: All 5 emblems listed with tight, crisp spacing strictly IN BETWEEN the curves of the two glowing laser track lines */}
-            <div className="relative w-full max-w-md sm:max-w-lg h-[420px] sm:h-[450px] p-2 z-10">
+            {/* Container for emblems scaling smoothly during zoom in & zoom out */}
+            <div className="relative w-full max-w-md sm:max-w-lg aspect-[4/4.5] p-2 z-10">
               
-              {/* 1. YomTech Global (Top Emblem - Clean logo icon without text badge) */}
+              {/* 1. YomTech Global (Top Emblem) */}
               <motion.div
                 animate={{ y: [-3, 3, -3] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-[0%] left-[72%] sm:left-[76%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
-                onClick={() => navigate('/services')}
+                className="absolute top-[-4%] left-[86%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => window.open('https://yomtechglobal.org/', '_blank')}
               >
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-cyan-300 transition-all duration-300">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[1.4rem] bg-white/95 backdrop-blur-xl border-3 border-white shadow-[0_12px_32px_rgba(0,180,216,0.5)] p-2 flex items-center justify-center group-hover:scale-125 sm:group-hover:scale-130 group-hover:shadow-[0_22px_50px_rgba(0,180,216,0.85)] group-hover:border-cyan-300 transition-all duration-300">
                   <img 
                     src={logoEmblem} 
                     alt="YomTech Global" 
-                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-120 transition-transform duration-300"
                   />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-cyan-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-900 shadow-md animate-pulse" />
                 </div>
               </motion.div>
 
-              {/* 2. WabiSkills Academy (Upper Middle Emblem - Clean logo icon without text badge) */}
+              {/* 2. WabiSkills Academy (Upper Middle Emblem) */}
               <motion.div
                 animate={{ y: [3, -3, 3] }}
                 transition={{ duration: 4.4, repeat: Infinity, ease: 'easeInOut', delay: 0.1 }}
-                className="absolute top-[21%] left-[56%] sm:left-[60%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
-                onClick={() => navigate('/academy')}
+                className="absolute top-[14%] left-[68%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => window.open('https://wabiskills.com/', '_blank')}
               >
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-emerald-300 transition-all duration-300">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[1.4rem] bg-white/95 backdrop-blur-xl border-3 border-white shadow-[0_12px_32px_rgba(0,180,216,0.5)] p-2 flex items-center justify-center group-hover:scale-125 sm:group-hover:scale-130 group-hover:shadow-[0_22px_50px_rgba(16,185,129,0.85)] group-hover:border-emerald-300 transition-all duration-300">
                   <img 
                     src={wabiSkillsLogo} 
                     alt="WabiSkills Academy" 
-                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-120 transition-transform duration-300"
                   />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 border-2 border-slate-900 shadow-md animate-pulse" />
                 </div>
               </motion.div>
 
-              {/* 3. Ermi Studio Showcase Emblem (Centerpiece CEO Emblem - Prominently sized strictly inside the two laser lines) */}
+              {/* 3. Founder & CEO Central Showcase Emblem (Smooth Scroll to CEO Message Section) */}
               <motion.div
                 animate={{ scale: [1, 1.05, 1], y: [-2, 2, -2] }}
                 transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
-                className="absolute top-[40%] left-[39%] sm:left-[43%] flex flex-col items-center group cursor-pointer z-30 -translate-x-1/2"
-                onClick={() => navigate('/about')}
+                className="absolute top-[37%] left-[38%] flex flex-col items-center group cursor-pointer z-30 -translate-x-1/2"
+                onClick={() => {
+                  const el = document.getElementById('ceo-founder-message');
+                  if (el) {
+                    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  } else {
+                    navigate('/about');
+                  }
+                }}
               >
-                <div className="relative w-18 h-18 sm:w-21 sm:h-21 rounded-[1.8rem] bg-white/95 backdrop-blur-xl border-3 border-cyan-300 shadow-[0_20px_55px_rgba(0,180,216,0.8)] p-0.5 flex items-center justify-center overflow-hidden group-hover:scale-110 group-hover:border-white transition-all duration-300">
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-[2.6rem] bg-white/95 backdrop-blur-xl border-[4px] border-cyan-300 shadow-[0_25px_70px_rgba(0,180,216,0.9)] p-1.5 flex items-center justify-center overflow-hidden group-hover:scale-125 sm:group-hover:scale-135 group-hover:border-white transition-all duration-300">
                   <img 
                     src={ermiTwoImg} 
                     alt="Ermi CEO Central Showcase" 
-                    className="w-full h-full object-cover object-top rounded-[1.5rem] group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover object-top rounded-[2.2rem] group-hover:scale-125 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
-                  <span className="absolute top-1 right-1 z-20 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-950 shadow-md animate-ping" />
-                  <span className="absolute top-1 right-1 z-20 w-3 h-3 rounded-full bg-white border-2 border-cyan-400" />
+                  <span className="absolute top-2 right-2 z-20 w-4 h-4 rounded-full bg-cyan-400 border-2 border-slate-950 shadow-md animate-ping" />
+                  <span className="absolute top-2 right-2 z-20 w-4 h-4 rounded-full bg-white border-2 border-cyan-400" />
                 </div>
-                <div className="mt-0.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#00B4D8] to-[#0284C7] text-white text-[9px] sm:text-[10px] font-black font-display tracking-wider shadow-xl border border-white group-hover:bg-white group-hover:text-[#0284C7] transition-colors whitespace-nowrap">
+                <div className="mt-1.5 px-4 py-1 rounded-full bg-gradient-to-r from-[#00B4D8] to-[#0284C7] text-white text-xs sm:text-sm font-black tracking-wider shadow-xl border border-white group-hover:bg-white group-hover:text-[#0284C7] transition-colors whitespace-nowrap">
                   FOUNDER &amp; CEO
                 </div>
               </motion.div>
 
-              {/* 4. WabiJobs Platform (Lower Middle Emblem - Increased margin from Ermi CEO) */}
+              {/* 4. WabiJobs Platform (Lower Middle Emblem) */}
               <motion.div
                 animate={{ y: [-4, 2, -4] }}
                 transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                className="absolute top-[65%] left-[32%] sm:left-[36%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
-                onClick={() => navigate('/services')}
+                className="absolute top-[74%] left-[30%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                onClick={() => window.open('https://wabijob.com/', '_blank')}
               >
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-amber-300 transition-all duration-300">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[1.4rem] bg-white/95 backdrop-blur-xl border-3 border-white shadow-[0_12px_32px_rgba(0,180,216,0.5)] p-2 flex items-center justify-center group-hover:scale-125 sm:group-hover:scale-130 group-hover:shadow-[0_22px_50px_rgba(245,158,11,0.85)] group-hover:border-amber-300 transition-all duration-300">
                   <img 
                     src={wabiJobsLogo} 
                     alt="WabiJobs" 
-                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-120 transition-transform duration-300"
                   />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-amber-400 border-2 border-slate-900 shadow-md animate-pulse" />
                 </div>
               </motion.div>
 
-              {/* 5. Yomnex ERP System (Bottom Emblem - Increased margin from WabiJobs) */}
+              {/* 5. Yomnex ERP System (Bottom Emblem) */}
               <motion.div
                 animate={{ y: [2, -4, 2] }}
                 transition={{ duration: 4.8, repeat: Infinity, ease: 'easeInOut', delay: 0.4 }}
-                className="absolute top-[86%] left-[26%] sm:left-[30%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
+                className="absolute top-[98%] left-[25%] flex flex-col items-center group cursor-pointer z-20 -translate-x-1/2"
                 onClick={() => navigate('/services')}
               >
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-[1.2rem] bg-white/95 backdrop-blur-xl border-2 border-white shadow-[0_10px_28px_rgba(0,180,216,0.45)] p-1.5 flex items-center justify-center group-hover:scale-110 group-hover:shadow-[0_15px_35px_rgba(0,180,216,0.65)] group-hover:border-indigo-300 transition-all duration-300">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-[1.4rem] bg-white/95 backdrop-blur-xl border-3 border-white shadow-[0_12px_32px_rgba(0,180,216,0.5)] p-2 flex items-center justify-center group-hover:scale-125 sm:group-hover:scale-130 group-hover:shadow-[0_22px_50px_rgba(99,102,241,0.85)] group-hover:border-indigo-300 transition-all duration-300">
                   <img 
                     src={yomnexLogo} 
                     alt="Yomnex ERP" 
-                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-105 transition-transform"
+                    className="max-w-full max-h-full object-contain filter drop-shadow-sm group-hover:scale-120 transition-transform duration-300"
                   />
-                  <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-indigo-400 border-2 border-slate-900 shadow-md animate-pulse" />
+                  <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-indigo-400 border-2 border-slate-900 shadow-md animate-pulse" />
                 </div>
               </motion.div>
 
