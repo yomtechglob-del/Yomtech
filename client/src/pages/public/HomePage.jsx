@@ -71,7 +71,7 @@ export const HomePage = () => {
     { title: 'Tech Education & Coaching', icon: GraduationCap, img: educationImg, category: 'Education' },
     { title: 'CRM & Enterprise Analytics', icon: BarChart, img: crmImg, category: 'Analytics' }
   ];
-
+//this is a comment
   const impactNumbers = [
     { stat: '2K+', label: 'Learners Empowered' },
     { stat: '25+', label: 'Business Solutions Deployed' },
