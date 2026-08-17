@@ -28,11 +28,17 @@ import pillarSoftwareImg from '../../assets/services/pillar_software_dev.png';
 import pillarEducationImg from '../../assets/services/pillar_education_training.png';
 import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
-// 4 New Enterprise Strategy Sections
+// Enterprise Strategy & Capabilities Sections
 import { ServicesEngineeringApproach } from '../../components/services/ServicesEngineeringApproach';
 import { ServicesChallengeToImpact } from '../../components/services/ServicesChallengeToImpact';
 import { ServicesScalableTechnology } from '../../components/services/ServicesScalableTechnology';
 import { ServicesPartnershipModel } from '../../components/services/ServicesPartnershipModel';
+import { ServicesTechStack } from '../../components/services/ServicesTechStack';
+import { ServicesIndustriesServed } from '../../components/services/ServicesIndustriesServed';
+import { ServicesProductsEcosystem } from '../../components/services/ServicesProductsEcosystem';
+import { ServicesDevMethodology } from '../../components/services/ServicesDevMethodology';
+import { ServicesCaseStudies } from '../../components/services/ServicesCaseStudies';
+import { ServicesRequestQuoteCTA } from '../../components/services/ServicesRequestQuoteCTA';
 
 const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
@@ -1149,43 +1155,46 @@ export const ServicesPage = () => {
         );
       })}
 
-      {/* NEW SECTION 01: ENGINEERING APPROACH */}
+      {/* ENTERPRISE STRATEGY & CAPABILITIES SECTIONS */}
       <ServicesEngineeringApproach />
-
-      {/* NEW SECTION 02: FROM CHALLENGE TO IMPACT */}
       <ServicesChallengeToImpact />
-
-      {/* NEW SECTION 03: SCALABLE TECHNOLOGY */}
+      <ServicesTechStack />
+      <ServicesIndustriesServed />
+      <ServicesProductsEcosystem />
+      <ServicesDevMethodology />
+      <ServicesCaseStudies />
       <ServicesScalableTechnology />
-
-      {/* NEW SECTION 04: PARTNERSHIP MODEL */}
       <ServicesPartnershipModel />
+      <ServicesRequestQuoteCTA />
 
-      {/* 3. SUBSCRIBE TO OUR NEWSLETTER SECTION (White-Gray Theme) */}
-      <section className="py-24 bg-[#E2E8F0] relative text-slate-900">
-        <div className="max-w-2xl mx-auto px-6 relative z-10">
+      {/* SUBSCRIBE TO NEWSLETTER SECTION (About Us Clean Theme) */}
+      <section className="py-24 bg-[#F8FAFC] relative text-slate-900 border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white border border-slate-300 p-8 sm:p-12 rounded-3xl text-center space-y-6 shadow-2xl relative overflow-hidden text-slate-900"
+            className="bg-white border border-slate-200/90 p-8 sm:p-14 rounded-[2.5rem] text-center space-y-6 shadow-xl relative overflow-hidden text-slate-900"
           >
             <div className="space-y-2">
-              <h3 className="text-2xl md:text-3xl font-extrabold font-display text-slate-900">
-                Subscribe to Our Newsletter
+              <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 inline-block">
+                NEWSLETTER &amp; UPDATES
+              </span>
+              <h3 className="text-2xl md:text-3xl font-black font-display text-slate-900">
+                Stay Ahead of Digital Transformation
               </h3>
-              <p className="text-xs md:text-sm text-slate-600">
+              <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto font-normal">
                 Get the latest tech updates, tutorials, and engineering insights straight to your inbox.
               </p>
             </div>
 
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row items-center gap-3 pt-2">
+            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row items-center gap-3 pt-2 max-w-xl mx-auto">
               <div className="relative w-full">
                 <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
                 <input
                   type="email"
                   required
-                  placeholder="Enter your email"
+                  placeholder="Enter your work email address"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] transition-all"
@@ -1193,13 +1202,13 @@ export const ServicesPage = () => {
               </div>
               <button
                 type="submit"
-                className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-bold text-xs md:text-sm shrink-0 shadow-lg shadow-sky-500/20 transition-all"
+                className="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-xs md:text-sm shrink-0 shadow-lg shadow-sky-500/20 transition-all cursor-pointer"
               >
                 Subscribe
               </button>
             </form>
             {newsletterSuccess && (
-              <div className="text-xs font-semibold text-[#0284C7] animate-pulse">
+              <div className="text-xs font-bold text-[#0284C7] animate-pulse">
                 ✓ Thank you for subscribing!
               </div>
             )}
