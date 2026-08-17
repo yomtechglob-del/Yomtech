@@ -385,113 +385,113 @@ export const ServicesPage = () => {
 
   return (
     <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
-      {/* 1. HERO HEADER SECTION — side-by-side layout */}
-      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient text-white border-b border-cyan-400/30">
+      {/* 1. HERO HEADER SECTION — Unified with 12 Quick Service Icon Grid */}
+      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-24 relative z-10 overflow-hidden hero-cyan-gradient text-white border-b border-cyan-400/30">
         
         {/* About Us Page Exact Hero Background */}
         <AboutHeroBackground />
 
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-          <div className="space-y-6">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10 space-y-16">
+          {/* Top Title & Subtitle */}
+          <div className="text-center max-w-3xl mx-auto space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
               Our <span className="bg-gradient-to-r from-amber-300 via-emerald-300 to-[#0ED3DD] bg-clip-text text-transparent drop-shadow-md">Services</span>
             </h1>
-            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-xl">
+            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal">
               We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps, engineered for real-world impact.
             </p>
           </div>
-        </div>
-      </section>
 
-      {/* 2. 12 QUICK SERVICE ICON GRID CARDS SECTION */}
-      <section className="py-20 bg-white border-b border-slate-200 relative">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16">
-          <div className="text-center mb-12 space-y-3">
-            <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#0284C7] px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 inline-block shadow-sm">
-              EXPLORE OUR CAPABILITIES
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-black font-display text-slate-900">
-              13+ Total Services Across <span className="text-[#0284C7]">3 Pillars</span>
-            </h2>
+          {/* 12 Quick Service Icon Grid Section integrated directly inside Hero */}
+          <div className="pt-4 space-y-12">
+            <div className="text-center space-y-4">
+              <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#0ED3DD] px-6 py-2 rounded-full bg-white/15 backdrop-blur-md border border-cyan-300/40 inline-block shadow-lg">
+                EXPLORE OUR CAPABILITIES
+              </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight">
+                13+ Total Services Across <span className="text-[#0ED3DD]">3 Pillars</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 justify-items-center">
+              {quickServices.map((service, index) => {
+                const Icon = service.icon;
+                const isHovered = hoveredServiceTitle === service.title;
+                const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
+                return (
+                  <motion.div
+                    key={`${service.title}-${index}`}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: (index % quickServices.length) * 0.04 }}
+                    onClick={() => {
+                      handleCategoryFilter('all');
+                      const targetId = slugify(service.title);
+                      setTimeout(() => {
+                        const el = document.getElementById(targetId);
+                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                      }, 150);
+                    }}
+                    className={`group relative flex min-w-[140px] max-w-[140px] cursor-pointer flex-col items-center text-center transition-all duration-300 ${
+                      isDimmed ? 'blur-[2.5px] opacity-35 scale-[0.97]' : 'blur-0 opacity-100 scale-100'
+                    }`}
+                    onMouseEnter={() => setHoveredServiceTitle(service.title)}
+                    onMouseLeave={() => setHoveredServiceTitle(null)}
+                  >
+                    <div
+                      className="relative z-10 mb-4 flex h-[108px] w-[108px] items-center justify-center rounded-full border-2 transition-all duration-300"
+                      style={{
+                        borderColor: isHovered ? '#38bdf8' : 'rgba(59, 130, 246, 0.95)',
+                        background: isHovered
+                          ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
+                          : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
+                        boxShadow: isHovered
+                          ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
+                          : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)'
+                      }}
+                    >
+                      <div className="absolute inset-2 rounded-full border border-sky-300/35" />
+                      <div className="absolute -bottom-3 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                      <div
+                        className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-105"
+                        style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)' }}
+                      >
+                        <Icon size={24} className="text-white" />
+                      </div>
+                    </div>
+
+                    <div className="relative z-10 px-1">
+                      <h3 className="text-xs sm:text-sm font-semibold leading-snug text-white group-hover:text-[#0ED3DD] transition-colors">
+                        {service.title}
+                      </h3>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Explore Button */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="pt-4 text-center"
+            >
+              <a
+                href="#explore-our-services"
+                className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full text-white font-black text-sm hover:scale-105 transition-all duration-300 shadow-xl"
+                style={{
+                  backgroundColor: '#1DA1F2',
+                  boxShadow: '0 0 25px rgba(29, 161, 242, 0.45)',
+                  border: '2px solid rgba(255, 255, 255, 0.4)'
+                }}
+              >
+                <span>Explore All Services</span>
+                <ArrowRight size={18} />
+              </a>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
-            {quickServices.map((service, index) => {
-              const Icon = service.icon;
-              const isHovered = hoveredServiceTitle === service.title;
-              const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
-              return (
-                <motion.div
-                      key={`${service.title}-${index}`}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: (index % quickServices.length) * 0.04 }}
-                      onClick={() => {
-                        handleCategoryFilter('all');
-                        const targetId = slugify(service.title);
-                        setTimeout(() => {
-                          const el = document.getElementById(targetId);
-                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }, 150);
-                      }}
-                      className={`group relative flex min-w-[132px] max-w-[132px] cursor-pointer flex-col items-center text-center transition-all duration-300 ${
-                        isDimmed ? 'blur-[2.5px] opacity-35 scale-[0.97]' : 'blur-0 opacity-100 scale-100'
-                      }`}
-                      onMouseEnter={() => setHoveredServiceTitle(service.title)}
-                      onMouseLeave={() => setHoveredServiceTitle(null)}
-                    >
-                      <div
-                        className="relative z-10 mb-5 flex h-[108px] w-[108px] items-center justify-center rounded-full border-2 transition-all duration-300"
-                        style={{
-                          borderColor: isHovered ? '#38bdf8' : 'rgba(59, 130, 246, 0.95)',
-                          background: isHovered
-                            ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
-                            : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
-                          boxShadow: isHovered
-                            ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
-                            : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)'
-                        }}
-                      >
-                        <div className="absolute inset-2 rounded-full border border-sky-300/35" />
-                        <div className="absolute -bottom-3 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
-                        <div
-                          className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-105"
-                          style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)' }}
-                        >
-                          <Icon size={24} className="text-white" />
-                        </div>
-                      </div>
-
-                      <div className="relative z-10">
-                        <h3 className="text-sm font-semibold leading-snug text-slate-900">
-                          {service.title}
-                        </h3>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-          {/* Explore Button */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="mt-16 text-center"
-          >
-            <a
-              href="#explore-our-services"
-              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl text-white font-semibold text-sm hover:scale-105 transition-all duration-300"
-              style={{
-                backgroundColor: '#1DA1F2',
-                boxShadow: '0 0 20px rgba(29, 161, 242, 0.35)',
-                border: '2px solid rgba(29, 161, 242, 0.3)'
-              }}
-            >
-              <span>Explore All Services</span>
-              <ArrowRight size={18} />
-            </a>
-          </motion.div>
         </div>
       </section>
 
