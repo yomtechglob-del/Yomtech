@@ -105,7 +105,7 @@ const MagneticNodeCard = ({ node, index }) => {
             : 'rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
         }}
       >
-        {/* Dynamic Inner Spotlight */}
+        
         <div 
           className="absolute inset-0 z-0 transition-opacity duration-300 pointer-events-none"
           style={{
@@ -114,7 +114,7 @@ const MagneticNodeCard = ({ node, index }) => {
           }}
         />
 
-        {/* Content */}
+      
         <div className="relative z-10 flex flex-col items-center h-full">
           {/* Animated Icon Container */}
           <div className="relative mb-6 group-hover:-translate-y-2 transition-transform duration-500">
@@ -125,7 +125,7 @@ const MagneticNodeCard = ({ node, index }) => {
             </div>
           </div>
 
-          {/* Badge */}
+          
           <div className={`px-4 py-1.5 rounded-full ${node.bgLight} border ${node.borderLight} ${node.textLight} text-[10px] font-black uppercase tracking-[0.2em] mb-4 shadow-sm group-hover:bg-white transition-colors duration-300`}>
             {node.isCenter ? (
               <span className="flex items-center gap-1.5">
@@ -180,9 +180,9 @@ export const MentorshipExperience = () => {
   return (
     <section className="relative min-h-screen py-24 md:py-32 bg-[#FDFCF9] overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-cyan-900 border-b border-amber-200/80">
       
-      {/* Ambient Background Layer */}
+      
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Soft Grid Pattern */}
+        
         <div 
           className="absolute inset-0 opacity-[0.3]" 
           style={{ 
@@ -193,7 +193,7 @@ export const MentorshipExperience = () => {
           }}
         />
         
-        {/* Floating Ethereal Orbs */}
+        
         <div className="absolute top-[10%] left-[15%] w-[40vw] h-[40vw] rounded-full bg-amber-200/20 blur-[120px] mix-blend-multiply animate-float-slow" />
         <div className="absolute bottom-[10%] right-[15%] w-[50vw] h-[50vw] rounded-full bg-cyan-200/20 blur-[140px] mix-blend-multiply animate-float-slower" style={{ animationDelay: '-5s' }} />
       </div>
