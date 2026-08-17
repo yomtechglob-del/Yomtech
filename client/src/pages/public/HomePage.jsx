@@ -2,26 +2,16 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Globe3DCard } from '../../components/common/Globe3DCard';
 import {
-  ArrowRight, Cpu, Code, ShieldCheck, Cloud, Bot, Layout, GraduationCap, BarChart,
-  MessageCircle, ArrowUp, ArrowDown, Quote, Mail, Check
+  ArrowRight, Check,
+  MessageCircle, ArrowUp, Quote, Mail
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useReveal } from '../../hooks/useReveal';
 
-// 4 New Essential Home Ecosystem Sections
 import { HomeEcosystem } from '../../components/home/HomeEcosystem';
 import { HomeHowWeWork } from '../../components/home/HomeHowWeWork';
 import { HomeBusinessAndTalent } from '../../components/home/HomeBusinessAndTalent';
 import { HomeBuiltForTheFuture } from '../../components/home/HomeBuiltForTheFuture';
-
-import erpImg from '../../assets/services/erp.png';
-import customImg from '../../assets/services/custom.png';
-import cybersecurityImg from '../../assets/services/cybersecurity.png';
-import cloudImg from '../../assets/services/cloud.png';
-import webImg from '../../assets/services/web.png';
-import mobileImg from '../../assets/services/mobile.png';
-import educationImg from '../../assets/services/education.png';
-import crmImg from '../../assets/services/crm.png';
 
 // Hero entry animations run ONCE on load — not scroll-triggered, so framer-motion is fine here
 const fadeLeft = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };
@@ -34,8 +24,6 @@ export const HomePage = () => {
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   // CSS reveal refs — one IntersectionObserver each, zero scroll-thread JS
-  const buildHeaderRef = useReveal(0.2);
-  const buildGridRef = useReveal(0.1);
   const impactHeaderRef = useReveal(0.3);
   const impactGridRef = useReveal(0.15);
   const testimonialsRef = useReveal(0.2);
@@ -59,17 +47,6 @@ export const HomePage = () => {
     }
   };
 
-  const buildAndTeachServices = [
-    { title: 'ERP, CRM & WMS Solutions', icon: Cpu, img: erpImg, category: 'Enterprise' },
-    { title: 'Custom Software & App Development', icon: Code, img: customImg, category: 'Engineering' },
-    { title: 'Cybersecurity & IT Consulting', icon: ShieldCheck, img: cybersecurityImg, category: 'Security' },
-    { title: 'Cloud Services & Deployment', icon: Cloud, img: cloudImg, category: 'Cloud' },
-    { title: 'Web App Development', icon: Bot, img: webImg, category: 'Intelligence' },
-    { title: 'Mobile App Development', icon: Layout, img: mobileImg, category: 'Design' },
-    { title: 'Tech Education & Coaching', icon: GraduationCap, img: educationImg, category: 'Education' },
-    { title: 'CRM & Enterprise Analytics', icon: BarChart, img: crmImg, category: 'Analytics' }
-  ];
-//this is a comment
   const impactNumbers = [
     { stat: '2K+', label: 'Learners Empowered' },
     { stat: '25+', label: 'Business Solutions Deployed' },
@@ -97,11 +74,9 @@ export const HomePage = () => {
 
   return (
     <div className="bg-[#F8FAFC] text-[#071A2B]">
-
       {/* 1. HERO SECTION */}
       <section className="hero-scroll-fix home-section w-full relative pt-36 sm:pt-44 md:pt-48 pb-20 md:pb-28 hero-cyan-gradient text-white" style={{ touchAction: 'pan-y' }}>
         <div className="max-w-[1720px] mx-auto w-full px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-
           {/* Left Hero Content */}
           <motion.div
             className="lg:col-span-6 space-y-8"
@@ -202,58 +177,6 @@ export const HomePage = () => {
       {/* NEW SECTION 01: OUR TECHNOLOGY ECOSYSTEM */}
       <HomeEcosystem />
 
-      {/* 3. WHAT WE BUILD & TEACH SECTION */}
-      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#CFE0B6] via-[#C0D6A7] to-[#B3CA98] text-slate-900 border-y border-emerald-700/20">
-        <div className="absolute inset-0 bg-[radial-gradient(#059669_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none" />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
-          {/* Section Header */}
-          <div ref={buildHeaderRef} className="reveal text-center mb-16 space-y-4">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-100/90 border border-emerald-300 text-emerald-900 text-xs font-black tracking-widest uppercase shadow-sm">
-              <span>OUR CORE CAPABILITIES</span>
-            </div>
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-display text-slate-900 tracking-tight">
-              What We Build &amp; <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Teach</span>
-            </h2>
-            <p className="text-slate-800 text-base sm:text-lg max-w-2xl mx-auto font-semibold">
-              Comprehensive digital capabilities engineered for enterprise clients and ambitious tech learners.
-            </p>
-          </div>
-
-          {/* Capability Cards */}
-          <div ref={buildGridRef} className="reveal-children grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
-            {buildAndTeachServices.map((item) => {
-              const IconComp = item.icon;
-              return (
-                <div key={item.title} className="group cursor-pointer">
-                  <div className="bg-white border border-emerald-200/90 hover:border-[#0284C7] p-8 sm:p-9 md:p-10 rounded-[2.2rem] shadow-xl hover:shadow-[0_15px_40px_rgba(2,132,199,0.25)] transition-all duration-300 flex flex-col justify-between h-full overflow-hidden text-center items-center space-y-7 text-slate-900 hover:-translate-y-1">
-                    <div className="space-y-6 flex flex-col items-center text-center w-full">
-                      <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#0284C7] via-[#0ED3DD] to-blue-600 p-2 border border-sky-400/80 shadow-[0_0_25px_rgba(2,132,199,0.3)] mx-auto flex items-center justify-center">
-                        <img src={item.img} alt={item.title} className="w-full h-full object-cover rounded-2xl shadow-md" loading="lazy" />
-                      </div>
-                      <div className="space-y-2 text-center w-full px-2">
-                        <span className="text-[10px] font-black tracking-widest text-[#0284C7] uppercase px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 inline-block shadow-sm">
-                          {item.category || 'CAPABILITY'}
-                        </span>
-                        <h3 className="text-lg sm:text-xl md:text-2xl font-black text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight text-center">
-                          {item.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <div className="w-full pt-2">
-                      <Link to="/services" className="w-full py-3.5 px-5 rounded-2xl bg-[#0284C7] hover:bg-[#0072B8] text-white font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2.5 transition-all duration-300 shadow-md border border-sky-300">
-                        <span>Explore Capability</span>
-                        <ArrowRight size={15} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* NEW SECTION 02: HOW WE WORK */}
       <HomeHowWeWork />
 
@@ -283,7 +206,7 @@ export const HomePage = () => {
       </section>
 
       {/* 5. VOICES OF OUR COMMUNITY SECTION */}
-      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#F8FAFC] via-[#F0F9FF] to-[#E0F2FE] text-slate-900 border-y border-sky-200/80">
+      <section className="home-section w-full relative py-28 bg-gradient-to-b from-[#F8FAFC] via-[#d4edfd] to-[#58656e] text-slate-900 border-y border-sky-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16">
           <div ref={testimonialsRef} className="reveal text-center mb-16 space-y-4">
             <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-sky-100 border border-sky-300 text-[#0284C7] text-xs font-black tracking-widest uppercase shadow-sm">
@@ -360,8 +283,11 @@ export const HomePage = () => {
               <div className="relative w-full">
                 <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
                 <input
-                  type="email" required placeholder="Enter your email"
-                  value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)}
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] transition-all"
                 />
               </div>

@@ -3,10 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Cpu, LayoutGrid, Monitor, GraduationCap, Video, ShieldCheck, Smartphone,
-  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles
+  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles, ChevronLeft, ChevronRight
 } from 'lucide-react';
-import { HeroCanvas } from '../../components/common/HeroCanvas';
-
 // Real high quality visual image assets for each service card
 import erpImg from '../../assets/services/erp.png';
 import crmImg from '../../assets/services/crm.png';
@@ -21,6 +19,7 @@ import cybersecurityImg from '../../assets/services/cybersecurity.png';
 import cloudImg from '../../assets/services/cloud.png';
 import coachingImg from '../../assets/services/coaching.png';
 import educationImg from '../../assets/services/education.png';
+import academyBgImg from '../../assets/academy/product/background.png';
 
 // Premium 3-pillar composite hero images
 import pillarITImg from '../../assets/services/pillar_it_solutions.png';
@@ -44,6 +43,7 @@ export const ServicesPage = () => {
   const [activeHighlightId, setActiveHighlightId] = useState(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+  const [hoveredServiceTitle, setHoveredServiceTitle] = useState(null);
 
   useEffect(() => {
 
@@ -51,7 +51,7 @@ export const ServicesPage = () => {
     if (cat) {
       setSelectedCategory(cat);
     }
-    
+
     // Smooth scroll to exact service ID from hash or query param
     const hash = window.location.hash.replace('#', '');
     const serviceParam = searchParams.get('service');
@@ -95,7 +95,6 @@ export const ServicesPage = () => {
     }
   };
 
-  // 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
   const quickServices = [
     { title: 'ERP Software Solution', icon: Cpu, img: erpImg },
     { title: 'WMS Software Solution', icon: LayoutGrid, img: wmsImg },
@@ -111,7 +110,6 @@ export const ServicesPage = () => {
     { title: 'Surveillance & Security', icon: Camera, img: securityImg }
   ];
 
-  // Solutions Sections with Real Images (Matching Screenshots 2, 3, 4, 5, 6)
   const serviceCategories = [
     {
       categoryTitle: 'IT Solutions',
@@ -213,185 +211,177 @@ export const ServicesPage = () => {
   };
 
   return (
-    <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
-      {/* 1. HERO HEADER SECTION — side-by-side layout */}
-      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden bg-gradient-to-br from-[#0284C7] via-[#0072B8] to-[#1DA1F2] text-white">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden" style={{ backgroundColor: '#F8FAFC', color: '#0f172a', minHeight: '100vh' }}>
+      {/* 1. HERO HEADER SECTION */}
+      <section
+        className="w-full pt-32 sm:pt-40 md:pt-48 pb-20 md:pb-28 relative z-10 overflow-hidden"
+        style={{ background: 'linear-gradient(180deg, #edf7ff 0%, #dbeefe 52%, #d8f3ff 100%)' }}
+      >
+        <div className="absolute inset-0">
+          <img
+            src={academyBgImg}
+            alt=""
+            aria-hidden
+            className="w-full h-full object-cover scale-110 opacity-95 blur-[10px]"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.74)_0%,rgba(240,249,255,0.68)_40%,rgba(219,234,254,0.74)_100%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_25%,rgba(255,255,255,0.95),transparent_24%),radial-gradient(circle_at_76%_24%,rgba(14,165,233,0.18),transparent_24%),radial-gradient(circle_at_60%_78%,rgba(59,130,246,0.2),transparent_26%)]" />
+        </div>
 
-          {/* LEFT — Text block */}
+        {/* CSS for infinite smooth marquee and pause on hover */}
+        <style>{`
+          @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+          }
+          .animate-marquee {
+            display: flex;
+            width: max-content;
+            animation: marquee 34s linear infinite;
+          }
+          .carousel-container:hover .animate-marquee {
+            animation-play-state: paused;
+          }
+        `}</style>
+
+        {/* Ambient background glows */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[900px] h-[420px] bg-sky-400/15 blur-[170px] rounded-full" />
+          <div className="absolute bottom-[-12%] left-1/2 -translate-x-1/2 w-[1200px] h-[320px] bg-blue-500/20 blur-[140px] rounded-full" />
+        </div>
+
+        <div className="mx-auto flex flex-col items-center text-center relative z-10 w-full">
+
+          {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-7"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-6 py-2 mb-8 rounded-full backdrop-blur-md border text-[#0284C7] text-xs font-bold tracking-widest uppercase shadow-md"
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.72)', borderColor: 'rgba(56, 189, 248, 0.3)' }}
           >
-            <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-black/30 backdrop-blur-xl border border-[#0ED3DD]/50 text-[#0ED3DD] text-xs font-black tracking-widest uppercase shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 transition-all">
-              <div className="w-5.5 h-5.5 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
-              </div>
-              <span className="whitespace-nowrap">ENTERPRISE SOLUTIONS &amp; TALENT</span>
+            <span className="w-2 h-2 rounded-full bg-[#22d3ee] animate-pulse" />
+            ENTERPRISE SOLUTIONS & TALENT
+          </motion.div>
+
+          {/* Heading */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-5xl sm:text-6xl md:text-7xl font-black font-display tracking-tight text-slate-900 leading-tight mb-6"
+          >
+            Our <span style={{ color: '#0284C7', textShadow: '0 0 20px rgba(56, 189, 248, 0.24)' }}>Services</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base md:text-lg max-w-2xl px-4 leading-relaxed font-normal mb-20"
+            style={{ color: 'rgba(15, 23, 42, 0.78)' }}
+          >
+            We help businesses and individuals leverage cutting-edge technology to solve
+            complex problems and drive real-world impact.
+          </motion.p>
+
+          {/* Moving Service Track */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="relative w-full py-10 max-w-[1500px] mx-auto px-4"
+          >
+            <div className="absolute left-0 right-0 top-[44%] h-[6px] rounded-full bg-gradient-to-r from-transparent via-sky-400/70 to-transparent blur-[1px]" />
+            <div className="absolute left-0 right-0 top-[44%] h-px rounded-full bg-sky-200/80" />
+
+            <div className="pointer-events-none absolute left-0 top-[44%] -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-sky-300/60 bg-white/90 shadow-[0_0_18px_rgba(59,130,246,0.18)]">
+              <ChevronLeft size={22} className="text-[#0284C7]" />
+            </div>
+            <div className="pointer-events-none absolute right-0 top-[44%] -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-sky-300/60 bg-white/90 shadow-[0_0_18px_rgba(59,130,246,0.18)]">
+              <ChevronRight size={22} className="text-[#0284C7]" />
             </div>
 
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
-              Our <span className="bg-gradient-to-r from-amber-300 via-emerald-300 to-[#0ED3DD] bg-clip-text text-transparent drop-shadow-md">Services</span>
-            </h1>
-            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-xl">
-              We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps—engineered for real-world impact.
-            </p>
+            <div className="carousel-container relative overflow-hidden px-12">
+              <div className="animate-marquee items-start gap-10">
+                {[...quickServices, ...quickServices].map((service, index) => {
+                  const Icon = service.icon;
+                  const isHovered = hoveredServiceTitle === service.title;
+                  const isDimmed = hoveredServiceTitle && !isHovered;
 
-            {/* Quick stat pills - Advanced Glassmorphic Interactive Badges with generous padding */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-cyan-400/50 text-white font-black text-xs xl:text-sm shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 hover:shadow-[0_0_30px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300">
-                <div className="w-6 h-6 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
-                </div>
-                <div className="flex items-center gap-1.5 whitespace-nowrap">
-                  <span className="text-[#0ED3DD] font-black text-sm">13+</span>
-                  <span className="text-white font-extrabold">Total Services</span>
-                </div>
+                  return (
+                    <motion.div
+                      key={`${service.title}-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: (index % quickServices.length) * 0.04 }}
+                      onClick={() => {
+                        handleCategoryFilter('all');
+                        const targetId = slugify(service.title);
+                        setTimeout(() => {
+                          const el = document.getElementById(targetId);
+                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 150);
+                      }}
+                      className={`group relative flex min-w-[132px] max-w-[132px] cursor-pointer flex-col items-center text-center transition-all duration-300 ${
+                        isDimmed ? 'blur-[2.5px] opacity-35 scale-[0.97]' : 'blur-0 opacity-100 scale-100'
+                      }`}
+                      onMouseEnter={() => setHoveredServiceTitle(service.title)}
+                      onMouseLeave={() => setHoveredServiceTitle(null)}
+                    >
+                      <div
+                        className="relative z-10 mb-5 flex h-[108px] w-[108px] items-center justify-center rounded-full border-2 transition-all duration-300"
+                        style={{
+                          borderColor: isHovered ? '#38bdf8' : 'rgba(59, 130, 246, 0.95)',
+                          background: isHovered
+                            ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
+                            : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
+                          boxShadow: isHovered
+                            ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
+                            : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)'
+                        }}
+                      >
+                        <div className="absolute inset-2 rounded-full border border-sky-300/35" />
+                        <div className="absolute -bottom-3 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                        <div
+                          className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-105"
+                          style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)' }}
+                        >
+                          <Icon size={24} className="text-white" />
+                        </div>
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-sm font-semibold leading-snug text-slate-900">
+                          {service.title}
+                        </h3>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
-
-              <button
-                onClick={() => {
-                  handleCategoryFilter('IT Solutions');
-                  setTimeout(() => {
-                    const el = document.getElementById('it-solutions');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
-                }}
-                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-sky-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-sky-300 hover:bg-sky-500/25 hover:shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-6.5 h-6.5 rounded-full bg-sky-400/25 border border-sky-400/60 flex items-center justify-center text-sky-300 group-hover:scale-110 transition-transform shrink-0">
-                  <Cpu size={14} />
-                </div>
-                <span className="text-sky-100 font-extrabold whitespace-nowrap">IT Solutions</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  handleCategoryFilter('Software Development');
-                  setTimeout(() => {
-                    const el = document.getElementById('software-development');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
-                }}
-                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-violet-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-violet-300 hover:bg-violet-500/25 hover:shadow-[0_0_30px_rgba(167,139,250,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-6.5 h-6.5 rounded-full bg-violet-400/25 border border-violet-400/60 flex items-center justify-center text-violet-300 group-hover:scale-110 transition-transform shrink-0">
-                  <Code size={14} />
-                </div>
-                <span className="text-violet-100 font-extrabold whitespace-nowrap">Software Dev</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  handleCategoryFilter('Education & Training');
-                  setTimeout(() => {
-                    const el = document.getElementById('education-training');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
-                }}
-                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-emerald-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-emerald-300 hover:bg-emerald-500/25 hover:shadow-[0_0_30px_rgba(52,211,153,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-6.5 h-6.5 rounded-full bg-emerald-400/25 border border-emerald-400/60 flex items-center justify-center text-emerald-300 group-hover:scale-110 transition-transform shrink-0">
-                  <GraduationCap size={14} />
-                </div>
-                <span className="text-emerald-100 font-extrabold whitespace-nowrap">Education & Training</span>
-              </button>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
-              <a
-                href="#explore-our-services"
-                className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3"
-              >
-                <span>Explore 3 Core Pillars</span>
-                <ArrowRight size={18} />
-              </a>
-
-              <button
-                onClick={() => navigate('/contact')}
-                className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-black text-sm backdrop-blur-md hover:scale-105 transition-all duration-300"
-              >
-                Consult Our Engineers
-              </button>
             </div>
           </motion.div>
 
-          {/* RIGHT — Staggered overlapping pillar image cards */}
+          {/* Explore Button */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="relative flex items-center justify-center h-[420px] lg:h-[480px]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-16"
           >
-            {/* Card 1 — IT Solutions: back-left */}
-            <motion.div
-              initial={{ opacity: 0, x: -40, rotate: -4 }}
-              animate={{ opacity: 1, x: 0, rotate: -6 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ rotate: -3, scale: 1.04, zIndex: 30 }}
-              onClick={() => { handleCategoryFilter('IT Solutions'); setTimeout(() => { const el = document.getElementById('it-solutions'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
-              className="absolute cursor-pointer"
-              style={{ left: '0%', top: '5%', width: '62%', zIndex: 10 }}
+            <a
+              href="#explore-our-services"
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl text-white font-semibold text-sm hover:scale-105 transition-all duration-300"
+              style={{
+                backgroundColor: '#1DA1F2',
+                boxShadow: '0 0 20px rgba(29, 161, 242, 0.35)',
+                border: '2px solid rgba(29, 161, 242, 0.3)'
+              }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] border-2 border-blue-400/50 group">
-                <img src={pillarITImg} alt="IT Solutions" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                {/* Label badge */}
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-blue-300/40 shadow-lg">
-                  <span className="text-base">⚡</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">IT Solutions</p>
-                    <p className="text-blue-200 text-[9px] font-medium leading-none mt-0.5">ERP · CRM · WMS · SFA</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 2 — Software Development: center-top, on top */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              whileHover={{ y: -6, scale: 1.05, zIndex: 30 }}
-              onClick={() => { handleCategoryFilter('Software Development'); setTimeout(() => { const el = document.getElementById('software-development'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
-              className="absolute cursor-pointer"
-              style={{ left: '22%', top: '0%', width: '62%', zIndex: 20 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(124,58,237,0.5)] border-2 border-violet-400/60 group">
-                <img src={pillarSoftwareImg} alt="Software Development" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-violet-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-violet-300/40 shadow-lg">
-                  <span className="text-base">💻</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">Software Dev</p>
-                    <p className="text-violet-200 text-[9px] font-medium leading-none mt-0.5">Mobile · Web · Custom</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 3 — Education & Training: back-right */}
-            <motion.div
-              initial={{ opacity: 0, x: 40, rotate: 4 }}
-              animate={{ opacity: 1, x: 0, rotate: 6 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              whileHover={{ rotate: 3, scale: 1.04, zIndex: 30 }}
-              onClick={() => { handleCategoryFilter('Education & Training'); setTimeout(() => { const el = document.getElementById('education-training'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
-              className="absolute cursor-pointer"
-              style={{ right: '0%', bottom: '0%', width: '62%', zIndex: 10 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(16,185,129,0.4)] border-2 border-emerald-400/50 group">
-                <img src={pillarEducationImg} alt="Education & Training" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-emerald-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-emerald-300/40 shadow-lg">
-                  <span className="text-base">🎓</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">Education & Training</p>
-                    <p className="text-emerald-200 text-[9px] font-medium leading-none mt-0.5">Cloud · Coaching · E-Learning</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              <span>Explore All Services</span>
+              <ArrowRight size={18} />
+            </a>
           </motion.div>
 
         </div>
@@ -714,7 +704,7 @@ export const ServicesPage = () => {
             </div>
             <div className="flex items-center gap-2">
               {[{ t: 'IT Solutions', id: 'it-solutions', c: 'bg-sky-400' }, { t: 'Software Development', id: 'software-development', c: 'bg-violet-400' }, { t: 'Education & Training', id: 'education-training', c: 'bg-emerald-400' }].map(p => (
-                <button key={p.t} onClick={() => { handleCategoryFilter(p.t); setTimeout(() => { const el = document.getElementById(p.id); if(el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }, 100); }}
+                <button key={p.t} onClick={() => { handleCategoryFilter(p.t); setTimeout(() => { const el = document.getElementById(p.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
                   className={`w-3 h-3 rounded-full ${p.c} hover:scale-150 transition-transform shadow-sm`} title={p.t} />
               ))}
             </div>
@@ -725,13 +715,13 @@ export const ServicesPage = () => {
               const count = catGroup.items.length;
               if (!count) return '';
               const firstIsLeft = catGroup.items[0].layout === 'left-image';
-              
+
               // SVG Double-Line Laser Track runs inside the channel between Inner (-inset-3.5) & Outer (-inset-8.5) Dashed Borders (at -inset-6)
               const H = 200 + 260 * count;
               const headerTopY = parseFloat(((27 / H) * 100).toFixed(1));
               const headerBottomY = parseFloat(((133 / H) * 100).toFixed(1));
               const headerMidY = parseFloat(((headerTopY + headerBottomY) / 2).toFixed(1));
-              
+
               const startY = headerBottomY + 5;
               const step = (100 - startY - 4) / count;
               const points = catGroup.items.map((item, i) => {
@@ -739,12 +729,12 @@ export const ServicesPage = () => {
                 const x = item.layout === 'left-image' ? 40 : 60;
                 return `${x} ${y}`;
               });
-              
+
               // Custom tailored Concentric Pill SVG Loop centered inside the two dashed borders
               const title = catGroup.categoryTitle;
               let leftX = 35.5;
               let rightX = 64.5;
-              
+
               if (title === 'Software Development') {
                 leftX = 30.0;
                 rightX = 70.0;
@@ -752,25 +742,25 @@ export const ServicesPage = () => {
                 leftX = 31.5;
                 rightX = 68.5;
               }
-              
+
               // Exact Semicircular Pill Cap Radius (capR = half of pill height for 100% smooth arc curvature)
               const capR = parseFloat(((headerBottomY - headerTopY) / 2).toFixed(2));
               const topFlatR = parseFloat((rightX - capR).toFixed(2));
               const topFlatL = parseFloat((leftX + capR).toFixed(2));
-              
+
               const headerLoop = `M 50 ${headerTopY} L ${topFlatR} ${headerTopY} Q ${rightX} ${headerTopY} ${rightX} ${headerMidY} Q ${rightX} ${headerBottomY} ${topFlatR} ${headerBottomY} L ${topFlatL} ${headerBottomY} Q ${leftX} ${headerBottomY} ${leftX} ${headerMidY} Q ${leftX} ${headerTopY} ${topFlatL} ${headerTopY} L 50 ${headerTopY}`;
               const startX = firstIsLeft ? leftX : rightX;
-              
+
               return `${headerLoop} M ${startX} ${headerBottomY} L ${points.join(' L ')} L 50 100`;
             })();
 
             return (
               <div key={catGroup.categoryTitle} id={slugify(catGroup.categoryTitle)} className="space-y-24 pt-12 relative w-full">
-                
+
                 {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
-                <svg 
-                  className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" 
-                  viewBox="0 0 100 100" 
+                <svg
+                  className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
+                  viewBox="0 0 100 100"
                   preserveAspectRatio="none"
                 >
                   <defs>
@@ -857,7 +847,7 @@ export const ServicesPage = () => {
 
                     {/* INNER DASHED BORDER - Master Geometry */}
                     <div className="absolute -inset-4 rounded-[2.5rem] border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
-                    
+
                     {/* Ethereal Glow */}
                     <div className="absolute -inset-1 rounded-[2rem] bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] opacity-20 blur-xl group-hover:opacity-40 transition-opacity" />
 
@@ -887,7 +877,7 @@ export const ServicesPage = () => {
                         {/* TEXT CONTENT CARD */}
                         <div className="w-full lg:w-[40%] perspective-1000">
                           <div className="relative w-full rounded-[2.5rem] bg-white/90 backdrop-blur-2xl border border-slate-200/90 shadow-[0_10px_35px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.1)] transition-all duration-500 p-8 md:p-12 cursor-pointer group">
-                            
+
                             <div className="flex items-center gap-3 mb-6">
                               <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-sky-100 border border-sky-300 shadow-xs">
                                 {catGroup.categoryTitle} • STEP 0{itemIdx + 1}
@@ -934,12 +924,12 @@ export const ServicesPage = () => {
                             {/* Step Node Badge anchored directly to inner border of Image Wrapper */}
                             <div className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isLeftImage ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}>
                               <div className="relative w-14 h-14 rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125">
-                                
+
                                 {/* Rotating Angle Ring over Node Icon */}
                                 <div className="absolute -inset-2.5 rounded-full border-2 border-dashed border-[#0284C7]/80 animate-spin-slow pointer-events-none" />
-                                
+
                                 <Cpu className="w-6 h-6 text-white relative z-10" strokeWidth={2.2} />
-                                
+
                                 {/* Mini Step Number Badge (Matching Reference Screenshot) */}
                                 <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-md text-[11px] font-black flex items-center justify-center">
                                   <span className="w-full h-full rounded-full bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center">
