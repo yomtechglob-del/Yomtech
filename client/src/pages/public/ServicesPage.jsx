@@ -3,10 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Cpu, LayoutGrid, Monitor, GraduationCap, Video, ShieldCheck, Smartphone,
-  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles
+  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles, ChevronLeft, ChevronRight
 } from 'lucide-react';
-import { HeroCanvas } from '../../components/common/HeroCanvas';
-
 // Real high quality visual image assets for each service card
 import erpImg from '../../assets/services/erp.png';
 import crmImg from '../../assets/services/crm.png';
@@ -21,6 +19,7 @@ import cybersecurityImg from '../../assets/services/cybersecurity.png';
 import cloudImg from '../../assets/services/cloud.png';
 import coachingImg from '../../assets/services/coaching.png';
 import educationImg from '../../assets/services/education.png';
+import academyBgImg from '../../assets/academy/product/background.png';
 
 // Premium 3-pillar composite hero images
 import pillarITImg from '../../assets/services/pillar_it_solutions.png';
@@ -124,6 +123,7 @@ export const ServicesPage = () => {
   const [activeHighlightId, setActiveHighlightId] = useState(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
+  const [hoveredServiceTitle, setHoveredServiceTitle] = useState(null);
 
   // Dynamic real-time DOM coordinate tracking for 100% exact SVG node center alignment
   const categoryRefs = useRef({});
@@ -138,7 +138,7 @@ export const ServicesPage = () => {
     if (cat) {
       setSelectedCategory(cat);
     }
-    
+
     // Smooth scroll to exact service ID from hash or query param
     const hash = window.location.hash.replace('#', '');
     const serviceParam = searchParams.get('service');
@@ -250,7 +250,9 @@ export const ServicesPage = () => {
       clearTimeout(timer1);
       clearTimeout(timer2);
     };
-  }, [updateRealCoordinates, selectedCategory]);// 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
+  }, [updateRealCoordinates, selectedCategory]);
+
+  // 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
   const quickServices = [
     { title: 'ERP Software Solution', icon: Cpu, img: erpImg },
     { title: 'WMS Software Solution', icon: LayoutGrid, img: wmsImg },
@@ -266,7 +268,6 @@ export const ServicesPage = () => {
     { title: 'Surveillance & Security', icon: Camera, img: securityImg }
   ];
 
-  // Solutions Sections with Real Images (Matching Screenshots 2, 3, 4, 5, 6)
   const serviceCategories = [
     {
       categoryTitle: 'IT Solutions',
@@ -391,183 +392,104 @@ export const ServicesPage = () => {
         <AboutHeroBackground />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
-
-          {/* LEFT — Text block */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-7"
-          >
-            <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-black/30 backdrop-blur-xl border border-[#0ED3DD]/50 text-[#0ED3DD] text-xs font-black tracking-widest uppercase shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 transition-all">
-              <div className="w-5.5 h-5.5 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
-              </div>
-              <span className="whitespace-nowrap">ENTERPRISE SOLUTIONS &amp; TALENT</span>
-            </div>
-
+          <div className="space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
               Our <span className="bg-gradient-to-r from-amber-300 via-emerald-300 to-[#0ED3DD] bg-clip-text text-transparent drop-shadow-md">Services</span>
             </h1>
             <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-xl">
               We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps, engineered for real-world impact.
             </p>
+          </div>
+        </div>
+      </section>
 
-            {/* Quick stat pills - Advanced Glassmorphic Interactive Badges with generous padding */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-cyan-400/50 text-white font-black text-xs xl:text-sm shadow-[0_6px_25px_rgba(14,211,221,0.25)] hover:border-cyan-300 hover:shadow-[0_0_30px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300">
-                <div className="w-6 h-6 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center shrink-0">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
-                </div>
-                <div className="flex items-center gap-1.5 whitespace-nowrap">
-                  <span className="text-[#0ED3DD] font-black text-sm">13+</span>
-                  <span className="text-white font-extrabold">Total Services</span>
-                </div>
+      {/* 2. 12 QUICK SERVICE ICON GRID CARDS SECTION */}
+      <section className="py-20 bg-white border-b border-slate-200 relative">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16">
+          <div className="text-center mb-12 space-y-3">
+            <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#0284C7] px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 inline-block shadow-sm">
+              EXPLORE OUR CAPABILITIES
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-black font-display text-slate-900">
+              13+ Total Services Across <span className="text-[#0284C7]">3 Pillars</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+            {quickServices.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                      key={`${service.title}-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.5, delay: (index % quickServices.length) * 0.04 }}
+                      onClick={() => {
+                        handleCategoryFilter('all');
+                        const targetId = slugify(service.title);
+                        setTimeout(() => {
+                          const el = document.getElementById(targetId);
+                          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }, 150);
+                      }}
+                      className={`group relative flex min-w-[132px] max-w-[132px] cursor-pointer flex-col items-center text-center transition-all duration-300 ${
+                        isDimmed ? 'blur-[2.5px] opacity-35 scale-[0.97]' : 'blur-0 opacity-100 scale-100'
+                      }`}
+                      onMouseEnter={() => setHoveredServiceTitle(service.title)}
+                      onMouseLeave={() => setHoveredServiceTitle(null)}
+                    >
+                      <div
+                        className="relative z-10 mb-5 flex h-[108px] w-[108px] items-center justify-center rounded-full border-2 transition-all duration-300"
+                        style={{
+                          borderColor: isHovered ? '#38bdf8' : 'rgba(59, 130, 246, 0.95)',
+                          background: isHovered
+                            ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
+                            : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
+                          boxShadow: isHovered
+                            ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
+                            : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)'
+                        }}
+                      >
+                        <div className="absolute inset-2 rounded-full border border-sky-300/35" />
+                        <div className="absolute -bottom-3 left-1/2 h-4 w-4 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                        <div
+                          className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-105"
+                          style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)' }}
+                        >
+                          <Icon size={24} className="text-white" />
+                        </div>
+                      </div>
+
+                      <div className="relative z-10">
+                        <h3 className="text-sm font-semibold leading-snug text-slate-900">
+                          {service.title}
+                        </h3>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
 
-              <button
-                onClick={() => {
-                  handleCategoryFilter('IT Solutions');
-                  setTimeout(() => {
-                    const el = document.getElementById('it-solutions');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
-                }}
-                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-sky-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-sky-300 hover:bg-sky-500/25 hover:shadow-[0_0_30px_rgba(56,189,248,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-6.5 h-6.5 rounded-full bg-sky-400/25 border border-sky-400/60 flex items-center justify-center text-sky-300 group-hover:scale-110 transition-transform shrink-0">
-                  <Cpu size={14} />
-                </div>
-                <span className="text-sky-100 font-extrabold whitespace-nowrap">IT Solutions</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  handleCategoryFilter('Software Development');
-                  setTimeout(() => {
-                    const el = document.getElementById('software-development');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
-                }}
-                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-violet-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-violet-300 hover:bg-violet-500/25 hover:shadow-[0_0_30px_rgba(167,139,250,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-6.5 h-6.5 rounded-full bg-violet-400/25 border border-violet-400/60 flex items-center justify-center text-violet-300 group-hover:scale-110 transition-transform shrink-0">
-                  <Code size={14} />
-                </div>
-                <span className="text-violet-100 font-extrabold whitespace-nowrap">Software Dev</span>
-              </button>
-
-              <button
-                onClick={() => {
-                  handleCategoryFilter('Education & Training');
-                  setTimeout(() => {
-                    const el = document.getElementById('education-training');
-                    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }, 100);
-                }}
-                className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-emerald-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-emerald-300 hover:bg-emerald-500/25 hover:shadow-[0_0_30px_rgba(52,211,153,0.5)] hover:scale-105 transition-all duration-300 cursor-pointer"
-              >
-                <div className="w-6.5 h-6.5 rounded-full bg-emerald-400/25 border border-emerald-400/60 flex items-center justify-center text-emerald-300 group-hover:scale-110 transition-transform shrink-0">
-                  <GraduationCap size={14} />
-                </div>
-                <span className="text-emerald-100 font-extrabold whitespace-nowrap">Education & Training</span>
-              </button>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
-              <a
-                href="#explore-our-services"
-                className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-sm shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3"
-              >
-                <span>Explore 3 Core Pillars</span>
-                <ArrowRight size={18} />
-              </a>
-
-              <button
-                onClick={() => navigate('/contact')}
-                className="px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-black text-sm backdrop-blur-md hover:scale-105 transition-all duration-300"
-              >
-                Consult Our Engineers
-              </button>
-            </div>
-          </motion.div>
-
-          {/* RIGHT — Staggered overlapping pillar image cards */}
+          {/* Explore Button */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="relative flex items-center justify-center h-[420px] lg:h-[480px]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="mt-16 text-center"
           >
-            {/* Card 1 — IT Solutions: back-left */}
-            <motion.div
-              initial={{ opacity: 0, x: -40, rotate: -4 }}
-              animate={{ opacity: 1, x: 0, rotate: -6 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              whileHover={{ rotate: -3, scale: 1.04, zIndex: 30 }}
-              onClick={() => { handleCategoryFilter('IT Solutions'); setTimeout(() => { const el = document.getElementById('it-solutions'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
-              className="absolute cursor-pointer"
-              style={{ left: '0%', top: '5%', width: '62%', zIndex: 10 }}
+            <a
+              href="#explore-our-services"
+              className="inline-flex items-center gap-3 px-8 py-3.5 rounded-xl text-white font-semibold text-sm hover:scale-105 transition-all duration-300"
+              style={{
+                backgroundColor: '#1DA1F2',
+                boxShadow: '0 0 20px rgba(29, 161, 242, 0.35)',
+                border: '2px solid rgba(29, 161, 242, 0.3)'
+              }}
             >
-              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.5)] border-2 border-blue-400/50 group">
-                <img src={pillarITImg} alt="IT Solutions" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                {/* Label badge */}
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-blue-300/40 shadow-lg">
-                  <span className="text-base">⚡</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">IT Solutions</p>
-                    <p className="text-blue-200 text-[9px] font-medium leading-none mt-0.5">ERP · CRM · WMS · SFA</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 2 — Software Development: center-top, on top */}
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35 }}
-              whileHover={{ y: -6, scale: 1.05, zIndex: 30 }}
-              onClick={() => { handleCategoryFilter('Software Development'); setTimeout(() => { const el = document.getElementById('software-development'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
-              className="absolute cursor-pointer"
-              style={{ left: '22%', top: '0%', width: '62%', zIndex: 20 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(124,58,237,0.5)] border-2 border-violet-400/60 group">
-                <img src={pillarSoftwareImg} alt="Software Development" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-violet-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-violet-300/40 shadow-lg">
-                  <span className="text-base">💻</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">Software Dev</p>
-                    <p className="text-violet-200 text-[9px] font-medium leading-none mt-0.5">Mobile · Web · Custom</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Card 3 — Education & Training: back-right */}
-            <motion.div
-              initial={{ opacity: 0, x: 40, rotate: 4 }}
-              animate={{ opacity: 1, x: 0, rotate: 6 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              whileHover={{ rotate: 3, scale: 1.04, zIndex: 30 }}
-              onClick={() => { handleCategoryFilter('Education & Training'); setTimeout(() => { const el = document.getElementById('education-training'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
-              className="absolute cursor-pointer"
-              style={{ right: '0%', bottom: '0%', width: '62%', zIndex: 10 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(16,185,129,0.4)] border-2 border-emerald-400/50 group">
-                <img src={pillarEducationImg} alt="Education & Training" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-emerald-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-emerald-300/40 shadow-lg">
-                  <span className="text-base">🎓</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">Education & Training</p>
-                    <p className="text-emerald-200 text-[9px] font-medium leading-none mt-0.5">Cloud · Coaching · E-Learning</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              <span>Explore All Services</span>
+              <ArrowRight size={18} />
+            </a>
           </motion.div>
-
         </div>
       </section>
 
@@ -878,12 +800,11 @@ export const ServicesPage = () => {
             </div>
             <div className="flex items-center gap-2">
               {[{ t: 'IT Solutions', id: 'it-solutions', c: 'bg-sky-400' }, { t: 'Software Development', id: 'software-development', c: 'bg-violet-400' }, { t: 'Education & Training', id: 'education-training', c: 'bg-emerald-400' }].map(p => (
-                <button key={p.t} onClick={() => { handleCategoryFilter(p.t); setTimeout(() => { const el = document.getElementById(p.id); if(el) el.scrollIntoView({ behavior:'smooth', block:'start' }); }, 100); }}
+                <button key={p.t} onClick={() => { handleCategoryFilter(p.t); setTimeout(() => { const el = document.getElementById(p.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100); }}
                   className={`w-3 h-3 rounded-full ${p.c} hover:scale-150 transition-transform shadow-sm`} title={p.t} />
               ))}
             </div>
           </motion.div>
-
         </div>
       </section>
 
@@ -942,11 +863,10 @@ export const ServicesPage = () => {
             className={`space-y-0 relative w-full ${catGroup.sectionBg || ''}`}
           >
             <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 py-20 space-y-24 relative z-10">
-                
                 {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
-                <svg 
-                  className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" 
-                  viewBox="0 0 100 100" 
+                <svg
+                  className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
+                  viewBox="0 0 100 100"
                   preserveAspectRatio="none"
                 >
                   <defs>
@@ -1151,9 +1071,9 @@ export const ServicesPage = () => {
                   })}
                 </div>
               </div>
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
 
       {/* ENTERPRISE STRATEGY & CAPABILITIES SECTIONS */}
       <ServicesEngineeringApproach />

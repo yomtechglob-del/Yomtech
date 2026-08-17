@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Globe3DCard } from '../../components/common/Globe3DCard';
 import {
-  ArrowRight, Cpu, Code, ShieldCheck, Cloud, Bot, Layout, GraduationCap, BarChart,
-  MessageCircle, ArrowUp, ArrowDown, Quote, Mail, Check
+  ArrowRight, Check,
+  MessageCircle, ArrowUp, Quote, Mail
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useReveal } from '../../hooks/useReveal';
 
-// 4 New Essential Home Ecosystem Sections
 import { HomeEcosystem } from '../../components/home/HomeEcosystem';
 import { HomeHowWeWork } from '../../components/home/HomeHowWeWork';
 import { HomeBusinessAndTalent } from '../../components/home/HomeBusinessAndTalent';
@@ -24,7 +23,6 @@ import educationImg from '../../assets/services/education.png';
 import crmImg from '../../assets/services/crm.png';
 
 import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
-
 // Hero entry animations run ONCE on load — not scroll-triggered, so framer-motion is fine here
 const fadeLeft = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };
 const fadeRight = { hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } };
@@ -36,8 +34,6 @@ export const HomePage = () => {
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   // CSS reveal refs — one IntersectionObserver each, zero scroll-thread JS
-  const buildHeaderRef = useReveal(0.2);
-  const buildGridRef = useReveal(0.1);
   const impactHeaderRef = useReveal(0.3);
   const impactGridRef = useReveal(0.15);
   const testimonialsRef = useReveal(0.2);
@@ -61,17 +57,6 @@ export const HomePage = () => {
     }
   };
 
-  const buildAndTeachServices = [
-    { title: 'ERP, CRM & WMS Solutions', icon: Cpu, img: erpImg, category: 'Enterprise' },
-    { title: 'Custom Software & App Development', icon: Code, img: customImg, category: 'Engineering' },
-    { title: 'Cybersecurity & IT Consulting', icon: ShieldCheck, img: cybersecurityImg, category: 'Security' },
-    { title: 'Cloud Services & Deployment', icon: Cloud, img: cloudImg, category: 'Cloud' },
-    { title: 'Web App Development', icon: Bot, img: webImg, category: 'Intelligence' },
-    { title: 'Mobile App Development', icon: Layout, img: mobileImg, category: 'Design' },
-    { title: 'Tech Education & Coaching', icon: GraduationCap, img: educationImg, category: 'Education' },
-    { title: 'CRM & Enterprise Analytics', icon: BarChart, img: crmImg, category: 'Analytics' }
-  ];
-//this is a comment
   const impactNumbers = [
     { stat: '2K+', label: 'Learners Empowered' },
     { stat: '25+', label: 'Business Solutions Deployed' },
@@ -99,7 +84,6 @@ export const HomePage = () => {
 
   return (
     <div className="bg-[#F8FAFC] text-[#071A2B]">
-
       {/* 1. HERO SECTION */}
       <section className="hero-scroll-fix home-section w-full relative pt-36 sm:pt-44 md:pt-48 pb-20 md:pb-28 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30" style={{ touchAction: 'pan-y' }}>
         
@@ -107,7 +91,6 @@ export const HomePage = () => {
         <AboutHeroBackground />
 
         <div className="max-w-[1720px] mx-auto w-full px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
-
           {/* Left Hero Content */}
           <motion.div
             className="lg:col-span-6 space-y-8"
@@ -366,8 +349,11 @@ export const HomePage = () => {
               <div className="relative w-full">
                 <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
                 <input
-                  type="email" required placeholder="Enter your email"
-                  value={newsletterEmail} onChange={(e) => setNewsletterEmail(e.target.value)}
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
                   className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] transition-all"
                 />
               </div>

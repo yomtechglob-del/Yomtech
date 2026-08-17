@@ -1,14 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
-import {
-  GraduationCap, Cpu, Layout, Monitor, BarChart, ArrowRight, Mail, CheckCircle2, Rocket,
-  Clock, Award, Sparkles, Layers, Star, BookOpen, FileText, Check, Zap, ChevronRight, ShieldCheck, Play
-} from 'lucide-react';
-
-import { CourseTechIllustration } from '../../components/academy/CourseTechIllustration';
-import { HeroCanvas } from '../../components/common/HeroCanvas';
-import { LearningJourney } from '../../components/academy/LearningJourney';
+import React from 'react';
+import { AcademyRadialHero } from '../../components/academy/AcademyRadialHero';
 import { LearningModel } from '../../components/academy/LearningModel';
 import { ClassroomToRealWorld } from '../../components/academy/ClassroomToRealWorld';
 import { MentorshipExperience } from '../../components/academy/MentorshipExperience';
@@ -26,84 +17,6 @@ import logoImg from '../../assets/academy/wabiskills-logo.jpg';
 import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
 export const AcademyPage = () => {
-  const navigate = useNavigate();
-  const [activeCourseTab, setActiveCourseTab] = useState('ALL');
-
-  const handleEnrollClick = (courseTitle) => {
-    navigate('/contact', { state: { inquiryType: 'ACADEMY_ENROLLMENT', prefillService: courseTitle } });
-  };
-
-  const courseCards = [
-    {
-      id: 'fullstack',
-      category: 'FULLSTACK',
-      title: 'Full Stack Web & Mobile Development',
-      badge: '🔥 Most Popular Bootcamp',
-      badgeColor: 'bg-amber-100/90 text-amber-950 border-amber-300',
-      desc: 'Master modern web and mobile app engineering. Learn front-end, back-end, databases, APIs, and cross-platform mobile solutions to architect scalable enterprise applications.',
-      visualType: 'fullstack',
-      layout: 'left-image',
-      duration: '16 Weeks',
-      format: 'Live Cohort + Hands-On Labs',
-      certificate: 'Industry Accredited Full-Stack Cert',
-      projectsCount: '6 Production Apps',
-      rating: '4.9 ⭐ (140+ Graduates)',
-      tags: ['React & Next.js', 'Node.js & Express', 'React Native Mobile', 'PostgreSQL & MongoDB', 'REST & GraphQL APIs', 'CI/CD & Cloud Deploy']
-    },
-    {
-      id: 'ai',
-      category: 'AI',
-      title: 'Artificial Intelligence & Machine Learning',
-      badge: '🤖 Future Tech & LLMs',
-      badgeColor: 'bg-emerald-100/90 text-emerald-950 border-emerald-300',
-      desc: 'Dive into AI and Machine Learning engineering. Train predictive ML models, build intelligent RAG LLM agents, deploy neural networks, and automate workflows with Python and PyTorch.',
-      visualType: 'ai',
-      layout: 'right-image',
-      duration: '14 Weeks',
-      format: 'Live AI Studio + Research Labs',
-      certificate: 'AI Specialist Certification',
-      projectsCount: '4 AI Neural Systems',
-      rating: '4.9 ⭐ (115+ Graduates)',
-      tags: ['Python & PyTorch', 'LLMs & Chatbots', 'Predictive Modeling', 'Neural Networks', 'Model Deployment', 'Prompt Engineering']
-    },
-    {
-      id: 'uiux',
-      category: 'DESIGN',
-      title: 'UI/UX Design & Product Systems',
-      badge: '🎨 Enterprise Figma Design',
-      badgeColor: 'bg-purple-100/90 text-purple-950 border-purple-300',
-      desc: 'Design user-friendly, high-converting digital interfaces. Master wireframing, interactive prototyping, user research methodologies, Figma design tokens, and seamless developer handoff.',
-      visualType: 'uiux',
-      layout: 'left-image',
-      duration: '12 Weeks',
-      format: 'Studio Workshops + Design Sprints',
-      certificate: 'Product Design Certification',
-      projectsCount: '5 Complete Portfolios',
-      rating: '4.8 ⭐ (125+ Graduates)',
-      tags: ['Figma Design Tokens', 'User Research & Testing', 'Interactive Wireframes', 'Design Systems', 'Web & Mobile UI', 'Developer Handoff']
-    },
-    {
-      id: 'data',
-      category: 'DATA',
-      title: 'Data Science & Enterprise Analytics',
-      badge: '📊 Strategic Analytics',
-      badgeColor: 'bg-sky-100/90 text-sky-950 border-sky-300',
-      desc: 'Turn complex data into actionable business intelligence. Learn Python data analysis stack, advanced SQL querying, automated ETL pipelines, statistics, and PowerBI dashboards.',
-      visualType: 'data',
-      layout: 'right-image',
-      duration: '12 Weeks',
-      format: 'Data Lab + Real Case Studies',
-      certificate: 'Data Analytics Certification',
-      projectsCount: '5 Enterprise Dashboards',
-      rating: '4.9 ⭐ (90+ Graduates)',
-      tags: ['Python Data Stack', 'Advanced SQL Querying', 'PowerBI & Tableau', 'Statistical Modeling', 'ETL Data Pipelines', 'Predictive Analytics']
-    }
-  ];
-
-  const filteredCourses = activeCourseTab === 'ALL'
-    ? courseCards
-    : courseCards.filter(c => c.category === activeCourseTab);
-
   return (
     <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden">
       {/* Architectural SVG Border Overlay */}
