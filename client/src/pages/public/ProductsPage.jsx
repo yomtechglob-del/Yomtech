@@ -17,6 +17,7 @@ import yomnexLogo from '../../assets/logos/yomnex-logo.png';
 // Products Components
 import { ProductsCatalogue } from '../../components/products/ProductsCatalogue';
 import { ProductsDedicatedPages } from '../../components/products/ProductsDedicatedPages';
+import { ProductsVideoShowcase } from '../../components/products/ProductsVideoShowcase';
 import { ProductsRequestDemo } from '../../components/products/ProductsRequestDemo';
 import { AboutFinalCTA } from '../../components/about/AboutFinalCTA';
 
@@ -229,6 +230,7 @@ export const ProductsPage = () => {
 
       {/* ── SECTIONS ────────────────────────────────────────────────────── */}
       <ProductsCatalogue />
+      <ProductsVideoShowcase />
       <ProductsDedicatedPages />
       <ProductsRequestDemo />
       <AboutFinalCTA />
