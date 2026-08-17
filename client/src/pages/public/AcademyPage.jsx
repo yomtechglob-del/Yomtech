@@ -1,4 +1,9 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  Rocket, Cpu, Layout, Monitor, BarChart, GraduationCap, ArrowRight, BookOpen,
+  Award, Zap, Users, Check, Sparkles, ChevronRight, ShieldCheck, Code, Globe
+} from 'lucide-react';
 import { AcademyRadialHero } from '../../components/academy/AcademyRadialHero';
 import { LearningModel } from '../../components/academy/LearningModel';
 import { ClassroomToRealWorld } from '../../components/academy/ClassroomToRealWorld';
