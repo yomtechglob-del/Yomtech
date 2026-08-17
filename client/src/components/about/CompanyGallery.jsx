@@ -12,6 +12,9 @@ import gallery07 from '../../assets/gallery/gallery 07.jpg';
 import gallery08 from '../../assets/gallery/gallery 08.jpg';
 import gallery09 from '../../assets/gallery/gallery 09.jpg';
 import logoEmblem from '../../assets/logos/logo.png';
+import heroTeamImg from '../../assets/about/hero_team.jpg';
+import ermiTwoImg from '../../assets/ermi-two.jpg';
+import erminOneImg from '../../assets/ermin-one.jpg';
 
 const GALLERY_ITEMS = [
   // Row 1: Top 2 Hero Cards (7 cols + 5 cols)
@@ -145,11 +148,32 @@ export const CompanyGallery = () => {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   return (
-    <section className="relative py-20 lg:py-28 overflow-hidden font-sans bg-[#F4F9FF]">
+    <section className="relative py-20 lg:py-28 overflow-hidden font-sans bg-[#03045E] text-white">
       
+      {/* About Hero Section Background Images & Cyan Gradient Overlay */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+        <img 
+          src={heroTeamImg} 
+          alt="About Hero Team Background" 
+          className="w-full h-full object-cover object-center opacity-35 mix-blend-luminosity scale-105"
+        />
+        <img 
+          src={ermiTwoImg} 
+          alt="Flowing Stream Background Layer" 
+          className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay animate-river-flow-1"
+        />
+        <img 
+          src={erminOneImg} 
+          alt="Flowing Stream Layer Right" 
+          className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-soft-light animate-river-flow-2"
+        />
+        {/* Dark Hero Cyan Gradient Vignette Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/90 via-[#0077B6]/85 to-[#0B1528]/95 pointer-events-none" />
+      </div>
+
       {/* Dotted Grid Mesh Texture Matching Page Design */}
       <div 
-        className="absolute inset-0 opacity-[0.5] pointer-events-none"
+        className="absolute inset-0 opacity-[0.25] pointer-events-none z-0"
         style={{
           backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
           backgroundSize: '24px 24px',
@@ -160,8 +184,8 @@ export const CompanyGallery = () => {
         
         {/* Section Divider Line (Matching Upper Section Dividers) */}
         <div className="relative flex items-center justify-start py-4 w-full max-w-full px-2 sm:px-6 mx-auto">
-          <div className="w-full h-[4px] bg-gradient-to-r from-[#0284C7] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
-          <div className="absolute left-2 sm:left-6 px-6 py-2 bg-[#F4F9FF] border-[3px] border-[#0284C7] rounded-full text-[#0284C7] text-xs sm:text-sm font-black flex items-center gap-2 shadow-md z-10">
+          <div className="w-full h-[4px] bg-gradient-to-r from-[#00b4d8] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
+          <div className="absolute left-2 sm:left-6 px-6 py-2 bg-[#03045E]/90 border-[3px] border-cyan-400 rounded-full text-cyan-200 text-xs sm:text-sm font-black flex items-center gap-2 shadow-xl z-10 backdrop-blur-md">
             <span>◆</span>
             <span className="uppercase tracking-[0.25em]">Our Innovation Gallery</span>
             <span>◆</span>
@@ -170,13 +194,13 @@ export const CompanyGallery = () => {
 
         {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
-            Pan-African Innovation & <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight font-display">
+            Pan-African Innovation &amp; <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#90e0ef] via-[#48cae4] to-cyan-200 font-roboto">
               Institutional Partnerships in Action
             </span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-2xl font-sans">
+          <p className="text-base sm:text-lg text-cyan-100/85 font-medium leading-relaxed max-w-2xl font-sans">
             Explore active campaigns, local and global partnerships, and institutional collaborations across YomTech Global and WabiSkills Academy.
           </p>
         </div>

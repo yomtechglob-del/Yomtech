@@ -54,6 +54,40 @@ body {
   overflow-x: hidden;
 }
 
+/* Continuous Water Horizontal Flow Animations */
+@keyframes waterFlowLeft {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes waterFlowRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-water-flow-left {
+  animation: waterFlowLeft 32s linear infinite;
+}
+
+.animate-water-flow-right {
+  animation: waterFlowRight 32s linear infinite;
+}
+
+.animate-water-flow-left-fast {
+  animation: waterFlowLeft 24s linear infinite;
+}
+
+.animate-water-flow-right-fast {
+  animation: waterFlowRight 24s linear infinite;
+}
+
+.water-flow-container:hover .animate-water-flow-left,
+.water-flow-container:hover .animate-water-flow-right,
+.water-flow-container:hover .animate-water-flow-left-fast,
+.water-flow-container:hover .animate-water-flow-right-fast {
+  animation-play-state: paused;
+}
+
 /* White & Luminous Glass Panel Utilities */
 .glass-panel {
   background: rgba(255, 255, 255, 0.95);

@@ -346,8 +346,8 @@ export const AboutPage = () => {
                   <span className="absolute top-1 right-1 z-20 w-3 h-3 rounded-full bg-cyan-400 border-2 border-slate-950 shadow-md animate-ping" />
                   <span className="absolute top-1 right-1 z-20 w-3 h-3 rounded-full bg-white border-2 border-cyan-400" />
                 </div>
-                <div className="mt-0.5 px-2.5 py-0.5 rounded-full bg-cyan-500 text-slate-950 text-[9px] sm:text-[10px] font-black font-display tracking-wider shadow-xl border border-white group-hover:bg-white group-hover:text-cyan-900 transition-colors">
-                  CEO
+                <div className="mt-0.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-[#00B4D8] to-[#0284C7] text-white text-[9px] sm:text-[10px] font-black font-display tracking-wider shadow-xl border border-white group-hover:bg-white group-hover:text-[#0284C7] transition-colors whitespace-nowrap">
+                  FOUNDER &amp; CEO
                 </div>
               </motion.div>
 
