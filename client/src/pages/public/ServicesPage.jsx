@@ -418,6 +418,8 @@ export const ServicesPage = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
             {quickServices.map((service, index) => {
               const Icon = service.icon;
+              const isHovered = hoveredServiceTitle === service.title;
+              const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
               return (
                 <motion.div
                       key={`${service.title}-${index}`}
