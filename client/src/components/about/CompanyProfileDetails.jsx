@@ -302,183 +302,228 @@ export const CompanyProfileDetails = () => {
         {/* ========================================================
             2. PRODUCTS & DIGITAL PLATFORMS
         ======================================================== */}
-        <div>
-          {/* Section Divider */}
-          <div className="relative flex items-center justify-start py-4 w-full max-w-full px-2 sm:px-6 mx-auto mb-10">
-            <div className="w-full h-[4px] bg-gradient-to-r from-[#0284C7] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
-            <div className="absolute left-2 sm:left-6 px-6 py-2 bg-[#F4F9FF] border-[3px] border-[#0284C7] rounded-full text-[#0284C7] text-xs sm:text-sm font-black flex items-center gap-2 shadow-md z-10">
-              <span>◆</span>
-              <span className="uppercase tracking-[0.25em]">Our Flagship Platforms</span>
-              <span>◆</span>
+        <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 sm:px-6 lg:px-8 py-20 lg:py-24 bg-[#03045E] text-white overflow-hidden my-16">
+          
+          {/* About Hero Section Background Images & Cyan Gradient Overlay (Full Section Body Background) */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+            <img 
+              src={heroTeamImg} 
+              alt="About Hero Team Background" 
+              className="w-full h-full object-cover object-center opacity-35 mix-blend-luminosity scale-105"
+            />
+            <img 
+              src={ermiTwoImg} 
+              alt="Flowing Stream Background Layer" 
+              className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay animate-river-flow-1"
+            />
+            <img 
+              src={erminOneImg} 
+              alt="Flowing Stream Layer Right" 
+              className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-soft-light animate-river-flow-2"
+            />
+            {/* Dark Hero Cyan Gradient Vignette Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/90 via-[#0077B6]/85 to-[#0B1528]/95 pointer-events-none" />
+          </div>
+
+          {/* Dotted Grid Mesh Texture Matching Section 4 */}
+          <div 
+            className="absolute inset-0 opacity-[0.25] pointer-events-none z-0"
+            style={{
+              backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+              backgroundSize: '24px 24px',
+            }}
+          />
+
+          <div className="max-w-[90rem] mx-auto relative z-10 space-y-10">
+            {/* Section Divider */}
+            <div className="relative flex items-center justify-start py-2 w-full max-w-full mx-auto">
+              <div className="w-full h-[4px] bg-gradient-to-r from-[#00b4d8] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
+              <div className="absolute left-0 px-6 py-2 bg-[#03045E]/90 border-[3px] border-cyan-400 rounded-full text-cyan-200 text-xs sm:text-sm font-black flex items-center gap-2 shadow-xl z-10 backdrop-blur-md">
+                <span>◆</span>
+                <span className="uppercase tracking-[0.25em]">Our Flagship Platforms</span>
+                <span>◆</span>
+              </div>
             </div>
-          </div>
 
-          <div className="text-left space-y-4 max-w-3xl mb-10">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display">
-              Integrated Digital Platforms &amp; Products
-            </h2>
-            <p className="text-slate-500 font-medium text-base">
-              YomTech Global builds and operates proprietary digital platforms that support education, recruitment, collaboration, and enterprise resource management.
-            </p>
-          </div>
+            <div className="text-left space-y-4 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-display">
+                Integrated Digital Platforms &amp; Products
+              </h2>
+              <p className="text-base sm:text-lg text-cyan-100/85 font-medium leading-relaxed font-sans">
+                YomTech Global builds and operates proprietary digital platforms that support education, recruitment, collaboration, and enterprise resource management.
+              </p>
+            </div>
 
-          {/* Top 3 Platforms Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {platforms.slice(0, 3).map((p) => (
-              <div 
-                key={p.id} 
-                style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
-                className="relative rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden"
-              >
-                {/* Sweeping Light Sheen Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2rem]" />
+            {/* Top 3 Platforms Row - Horizontal Flow Left Marquee */}
+            <div className="relative w-full overflow-hidden water-flow-container py-4">
+              {/* Glass Fade Edges matching dark cyan section */}
+              <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-[#03045E] via-[#03045E]/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#0B1528] via-[#0B1528]/80 to-transparent z-10 pointer-events-none" />
 
-                {/* Animated Liquid Water River Flow Movement Layer */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-[2rem] opacity-40 group-hover:opacity-75 transition-opacity duration-500">
-                  <motion.div 
-                    animate={{ x: ['-100%', '100%'] }}
-                    transition={{ repeat: Infinity, duration: 7, ease: 'linear' }}
-                    className="absolute -top-1/2 left-0 w-[200%] h-[200%] bg-gradient-to-r from-transparent via-cyan-300/20 via-amber-200/25 to-transparent rotate-12"
-                  />
-                  <svg className="absolute bottom-0 left-0 w-[200%] h-24 opacity-35 text-cyan-400 fill-current animate-river-flow-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0 C150,90 350,-40 500,40 C650,120 900,10 1200,60 L1200,120 L0,120 Z"></path>
-                  </svg>
-                  <svg className="absolute bottom-0 left-0 w-[200%] h-28 opacity-25 text-amber-300 fill-current animate-river-flow-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,30 C200,110 450,10 700,70 C950,130 1100,20 1200,80 L1200,120 L0,120 Z"></path>
-                  </svg>
-                </div>
+              <div className="flex w-max gap-6 animate-water-flow-left hover:[animation-play-state:paused]">
+                {[...platforms.slice(0, 3), ...platforms.slice(0, 3), ...platforms.slice(0, 3)].map((p, idx) => (
+                  <div 
+                    key={`${p.id}-${idx}`} 
+                    style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
+                    className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 cursor-pointer"
+                  >
+                    {/* Sweeping Light Sheen Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2rem]" />
 
-                <div className="space-y-4 relative z-10 w-full flex flex-col items-center">
-                  {/* Category Tag Top Center */}
-                  <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/90 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
-                    {p.tag}
-                  </span>
-
-                  {/* Floating White Logo Badge Center with Liquid Water Ripples */}
-                  <div className="relative my-1">
-                    <div className="absolute -inset-2 rounded-3xl bg-cyan-400/20 blur-sm animate-ping pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity" />
-                    <div className="absolute -inset-4 rounded-3xl bg-amber-400/15 blur-md animate-pulse pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity" />
-                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-3.5 shadow-md shadow-amber-500/10 border border-slate-100/90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex items-center justify-center overflow-hidden z-10">
-                      <img src={p.logo} alt={p.name} className="w-full h-full object-contain filter drop-shadow-xs" />
+                    {/* Animated Liquid Water River Flow Movement Layer */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-[2rem] opacity-40 group-hover:opacity-75 transition-opacity duration-500">
+                      <motion.div 
+                        animate={{ x: ['-100%', '100%'] }}
+                        transition={{ repeat: Infinity, duration: 7, ease: 'linear' }}
+                        className="absolute -top-1/2 left-0 w-[200%] h-[200%] bg-gradient-to-r from-transparent via-cyan-300/20 via-amber-200/25 to-transparent rotate-12"
+                      />
+                      <svg className="absolute bottom-0 left-0 w-[200%] h-24 opacity-35 text-cyan-400 fill-current animate-river-flow-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0 C150,90 350,-40 500,40 C650,120 900,10 1200,60 L1200,120 L0,120 Z"></path>
+                      </svg>
+                      <svg className="absolute bottom-0 left-0 w-[200%] h-28 opacity-25 text-amber-300 fill-current animate-river-flow-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,30 C200,110 450,10 700,70 C950,130 1100,20 1200,80 L1200,120 L0,120 Z"></path>
+                      </svg>
                     </div>
-                  </div>
 
-                  {/* Platform Title & Description Centered */}
-                  <div className="space-y-2 text-center">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
-                      {p.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
-                      {p.desc}
-                    </p>
-                  </div>
-                </div>
+                    <div className="space-y-4 relative z-10 w-full flex flex-col items-center">
+                      {/* Category Tag Top Center */}
+                      <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/90 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
+                        {p.tag}
+                      </span>
 
-                {/* Footer Link Centered: Action Link / Enterprise CTA Button with Official URL */}
-                {p.id === 'yomnex' ? (
-                  <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center relative z-10">
-                    <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-cyan-500 to-sky-400 text-white font-extrabold text-xs uppercase tracking-wider shadow-md shadow-cyan-500/20 group-hover:shadow-xl group-hover:shadow-cyan-500/35 group-hover:scale-105 transition-all duration-300 flex items-center gap-2">
-                      <span>Request System Demo</span>
-                      <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
-                        <ArrowRight className="w-3 h-3 text-white group-hover:translate-x-0.5 transition-transform" />
+                      {/* Floating White Logo Badge Center with Liquid Water Ripples */}
+                      <div className="relative my-1">
+                        <div className="absolute -inset-2 rounded-3xl bg-cyan-400/20 blur-sm animate-ping pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity" />
+                        <div className="absolute -inset-4 rounded-3xl bg-amber-400/15 blur-md animate-pulse pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity" />
+                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-3.5 shadow-md shadow-amber-500/10 border border-slate-100/90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex items-center justify-center overflow-hidden z-10">
+                          <img src={p.logo} alt={p.name} className="w-full h-full object-contain filter drop-shadow-xs" />
+                        </div>
+                      </div>
+
+                      {/* Platform Title & Description Centered */}
+                      <div className="space-y-2 text-center">
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
+                          {p.name}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
+                          {p.desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Footer Link Centered: Action Link / Enterprise CTA Button with Official URL */}
+                    {p.id === 'yomnex' ? (
+                      <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center relative z-10">
+                        <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#0284C7] via-cyan-500 to-sky-400 text-white font-extrabold text-xs uppercase tracking-wider shadow-md shadow-cyan-500/20 group-hover:shadow-xl group-hover:shadow-cyan-500/35 group-hover:scale-105 transition-all duration-300 flex items-center gap-2">
+                          <span>Request System Demo</span>
+                          <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center">
+                            <ArrowRight className="w-3 h-3 text-white group-hover:translate-x-0.5 transition-transform" />
+                          </div>
+                        </div>
+                      </div>
+                    ) : p.url ? (
+                      <a 
+                        href={p.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10 hover:text-cyan-700 transition-colors"
+                      >
+                        <span>{p.actionText || 'Explore Platform'}</span>
+                        <div className="w-7 h-7 rounded-full bg-cyan-50 border border-cyan-200/80 text-[#0284C7] flex items-center justify-center shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </div>
+                        <ExternalLink className="w-3.5 h-3.5 text-cyan-500 opacity-80" />
+                      </a>
+                    ) : (
+                      <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10">
+                        <span className="group-hover:text-cyan-700 transition-colors">{p.actionText || 'Explore Platform'}</span>
+                        <div className="w-7 h-7 rounded-full bg-cyan-50 border border-cyan-200/80 text-[#0284C7] flex items-center justify-center shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* CENTER MASTER ECOSYSTEM ANNOUNCEMENT VIDEO SHOWCASE */}
+            <CenterEcosystemVideo />
+
+            {/* Bottom 3 Platforms Row - Horizontal Flow Right Marquee */}
+            <div className="relative w-full overflow-hidden water-flow-container py-4">
+              {/* Glass Fade Edges matching dark cyan section */}
+              <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-[#03045E] via-[#03045E]/80 to-transparent z-10 pointer-events-none" />
+              <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#0B1528] via-[#0B1528]/80 to-transparent z-10 pointer-events-none" />
+
+              <div className="flex w-max gap-6 animate-water-flow-right hover:[animation-play-state:paused]">
+                {[...platforms.slice(3, 6), ...platforms.slice(3, 6), ...platforms.slice(3, 6)].map((p, idx) => (
+                  <div 
+                    key={`${p.id}-${idx}`} 
+                    style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
+                    className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 cursor-pointer"
+                  >
+                    {/* Sweeping Light Sheen Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2rem]" />
+
+                    {/* Animated Liquid Water River Flow Movement Layer */}
+                    <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-[2rem] opacity-40 group-hover:opacity-75 transition-opacity duration-500">
+                      <motion.div 
+                        animate={{ x: ['-100%', '100%'] }}
+                        transition={{ repeat: Infinity, duration: 7, ease: 'linear' }}
+                        className="absolute -top-1/2 left-0 w-[200%] h-[200%] bg-gradient-to-r from-transparent via-cyan-300/20 via-amber-200/25 to-transparent rotate-12"
+                      />
+                      <svg className="absolute bottom-0 left-0 w-[200%] h-24 opacity-35 text-cyan-400 fill-current animate-river-flow-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,0 C150,90 350,-40 500,40 C650,120 900,10 1200,60 L1200,120 L0,120 Z"></path>
+                      </svg>
+                      <svg className="absolute bottom-0 left-0 w-[200%] h-28 opacity-25 text-amber-300 fill-current animate-river-flow-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                        <path d="M0,30 C200,110 450,10 700,70 C950,130 1100,20 1200,80 L1200,120 L0,120 Z"></path>
+                      </svg>
+                    </div>
+
+                    <div className="space-y-4 relative z-10 w-full flex flex-col items-center">
+                      {/* Category Tag & Coming Soon Badge Top Center */}
+                      <div className="flex flex-wrap items-center justify-center gap-2">
+                        <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/90 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
+                          {p.tag}
+                        </span>
+                        <span className="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/80 text-amber-700 text-[10px] font-black uppercase tracking-widest shadow-xs flex items-center gap-1.5">
+                          <Clock className="w-3 h-3 text-amber-600 animate-pulse" />
+                          COMING SOON
+                        </span>
+                      </div>
+
+                      {/* Floating White Logo Badge Center with Liquid Water Ripples */}
+                      <div className="relative my-1">
+                        <div className="absolute -inset-2 rounded-3xl bg-cyan-400/20 blur-sm animate-ping pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity" />
+                        <div className="absolute -inset-4 rounded-3xl bg-amber-400/15 blur-md animate-pulse pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity" />
+                        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-3.5 shadow-md shadow-amber-500/10 border border-slate-100/90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex items-center justify-center overflow-hidden z-10">
+                          <img src={p.logo} alt={p.name} className="w-full h-full object-contain filter drop-shadow-xs" />
+                        </div>
+                      </div>
+
+                      {/* Platform Title & Description Centered */}
+                      <div className="space-y-2 text-center">
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-amber-600 transition-colors">
+                          {p.name}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
+                          {p.desc}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Footer Link Centered: Coming Soon Status Node */}
+                    <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-extrabold text-amber-700 relative z-10">
+                      <span className="group-hover:text-amber-800 transition-colors">Coming Soon</span>
+                      <div className="w-7 h-7 rounded-full bg-amber-50 border border-amber-300 text-amber-600 flex items-center justify-center shadow-xs group-hover:bg-amber-500 group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
+                        <Clock className="w-3.5 h-3.5" />
                       </div>
                     </div>
                   </div>
-                ) : p.url ? (
-                  <a 
-                    href={p.url} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10 hover:text-cyan-700 transition-colors"
-                  >
-                    <span>{p.actionText || 'Explore Platform'}</span>
-                    <div className="w-7 h-7 rounded-full bg-cyan-50 border border-cyan-200/80 text-[#0284C7] flex items-center justify-center shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    </div>
-                    <ExternalLink className="w-3.5 h-3.5 text-cyan-500 opacity-80" />
-                  </a>
-                ) : (
-                  <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10">
-                    <span className="group-hover:text-cyan-700 transition-colors">{p.actionText || 'Explore Platform'}</span>
-                    <div className="w-7 h-7 rounded-full bg-cyan-50 border border-cyan-200/80 text-[#0284C7] flex items-center justify-center shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                    </div>
-                  </div>
-                )}
+                ))}
               </div>
-            ))}
-          </div>
-
-          {/* CENTER MASTER ECOSYSTEM ANNOUNCEMENT VIDEO SHOWCASE */}
-          <CenterEcosystemVideo />
-
-          {/* Bottom 3 Platforms Row */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {platforms.slice(3, 6).map((p) => (
-              <div 
-                key={p.id} 
-                style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
-                className="relative rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden"
-              >
-                {/* Sweeping Light Sheen Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2rem]" />
-
-                {/* Animated Liquid Water River Flow Movement Layer */}
-                <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-[2rem] opacity-40 group-hover:opacity-75 transition-opacity duration-500">
-                  <motion.div 
-                    animate={{ x: ['-100%', '100%'] }}
-                    transition={{ repeat: Infinity, duration: 7, ease: 'linear' }}
-                    className="absolute -top-1/2 left-0 w-[200%] h-[200%] bg-gradient-to-r from-transparent via-cyan-300/20 via-amber-200/25 to-transparent rotate-12"
-                  />
-                  <svg className="absolute bottom-0 left-0 w-[200%] h-24 opacity-35 text-cyan-400 fill-current animate-river-flow-1" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,0 C150,90 350,-40 500,40 C650,120 900,10 1200,60 L1200,120 L0,120 Z"></path>
-                  </svg>
-                  <svg className="absolute bottom-0 left-0 w-[200%] h-28 opacity-25 text-amber-300 fill-current animate-river-flow-2" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                    <path d="M0,30 C200,110 450,10 700,70 C950,130 1100,20 1200,80 L1200,120 L0,120 Z"></path>
-                  </svg>
-                </div>
-
-                <div className="space-y-4 relative z-10 w-full flex flex-col items-center">
-                  {/* Category Tag & Coming Soon Badge Top Center */}
-                  <div className="flex flex-wrap items-center justify-center gap-2">
-                    <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200/90 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
-                      {p.tag}
-                    </span>
-                    <span className="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/80 text-amber-700 text-[10px] font-black uppercase tracking-widest shadow-xs flex items-center gap-1.5">
-                      <Clock className="w-3 h-3 text-amber-600 animate-pulse" />
-                      COMING SOON
-                    </span>
-                  </div>
-
-                  {/* Floating White Logo Badge Center with Liquid Water Ripples */}
-                  <div className="relative my-1">
-                    <div className="absolute -inset-2 rounded-3xl bg-cyan-400/20 blur-sm animate-ping pointer-events-none opacity-40 group-hover:opacity-80 transition-opacity" />
-                    <div className="absolute -inset-4 rounded-3xl bg-amber-400/15 blur-md animate-pulse pointer-events-none opacity-30 group-hover:opacity-60 transition-opacity" />
-                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-3.5 shadow-md shadow-amber-500/10 border border-slate-100/90 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 flex items-center justify-center overflow-hidden z-10">
-                      <img src={p.logo} alt={p.name} className="w-full h-full object-contain filter drop-shadow-xs" />
-                    </div>
-                  </div>
-
-                  {/* Platform Title & Description Centered */}
-                  <div className="space-y-2 text-center">
-                    <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-amber-600 transition-colors">
-                      {p.name}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
-                      {p.desc}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Footer Link Centered: Coming Soon Status Node */}
-                <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-extrabold text-amber-700 relative z-10">
-                  <span className="group-hover:text-amber-800 transition-colors">Coming Soon</span>
-                  <div className="w-7 h-7 rounded-full bg-amber-50 border border-amber-300 text-amber-600 flex items-center justify-center shadow-xs group-hover:bg-amber-500 group-hover:text-white group-hover:scale-110 group-hover:shadow-md transition-all duration-300">
-                    <Clock className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-            ))}
+            </div>
           </div>
         </div>
 
@@ -514,7 +559,8 @@ export const CompanyProfileDetails = () => {
                 return (
                   <div 
                     key={unit.id} 
-                    className={`group relative rounded-[2.2rem] bg-white/90 backdrop-blur-xl p-7 sm:p-8 border-2 border-slate-200/80 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col justify-between items-center text-center space-y-5 ${unit.borderHover} ${isPartnerships ? 'md:col-span-2 lg:col-span-2' : ''}`}
+                    style={{ background: 'linear-gradient(180deg, #F2FAFF 0%, #FDFEFF 50%, #F4FAFF 100%)' }}
+                    className={`group relative rounded-[2.2rem] backdrop-blur-xl p-7 sm:p-8 border-2 border-cyan-100/90 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col justify-between items-center text-center space-y-5 ${unit.borderHover} ${isPartnerships ? 'md:col-span-2 lg:col-span-2' : ''}`}
                   >
                     {/* Top Gradient Accent Bar */}
                     <div className={`absolute top-0 inset-x-0 h-1.5 ${unit.accentBar}`} />
@@ -559,34 +605,13 @@ export const CompanyProfileDetails = () => {
         {/* ========================================================
             4. DEVELOPMENT METHODOLOGY (6 PHASES)
         ======================================================== */}
-        <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 sm:px-6 lg:px-8 py-20 lg:py-24 bg-[#03045E] text-white overflow-hidden my-16">
+        <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 sm:px-6 lg:px-8 py-20 lg:py-24 bg-[#F4F9FF] text-slate-900 overflow-hidden my-16">
           
-          {/* About Hero Section Background Images & Cyan Gradient Overlay (Full Section Body Background) */}
-          <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
-            <img 
-              src={heroTeamImg} 
-              alt="About Hero Team Background" 
-              className="w-full h-full object-cover object-center opacity-35 mix-blend-luminosity scale-105"
-            />
-            <img 
-              src={ermiTwoImg} 
-              alt="Flowing Stream Background Layer" 
-              className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay animate-river-flow-1"
-            />
-            <img 
-              src={erminOneImg} 
-              alt="Flowing Stream Layer Right" 
-              className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-soft-light animate-river-flow-2"
-            />
-            {/* Dark Hero Cyan Gradient Vignette Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/90 via-[#0077B6]/85 to-[#0B1528]/95 pointer-events-none" />
-          </div>
-
-          {/* Dotted Grid Mesh Texture Matching Page Design */}
+          {/* Light Dotted Grid Mesh Texture Matching Image 2 */}
           <div 
-            className="absolute inset-0 opacity-[0.25] pointer-events-none z-0"
+            className="absolute inset-0 opacity-[0.35] pointer-events-none z-0"
             style={{
-              backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+              backgroundImage: 'radial-gradient(#0284C7 1.5px, transparent 1.5px)',
               backgroundSize: '24px 24px',
             }}
           />
@@ -594,8 +619,8 @@ export const CompanyProfileDetails = () => {
           <div className="max-w-[90rem] mx-auto relative z-10 space-y-10">
             {/* Section Divider */}
             <div className="relative flex items-center justify-start py-2 w-full max-w-full mx-auto">
-              <div className="w-full h-[4px] bg-gradient-to-r from-[#00b4d8] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
-              <div className="absolute left-0 px-6 py-2 bg-[#03045E]/90 border-[3px] border-cyan-400 rounded-full text-cyan-200 text-xs sm:text-sm font-black flex items-center gap-2 shadow-xl z-10 backdrop-blur-md">
+              <div className="w-full h-[4px] bg-gradient-to-r from-[#0284C7] via-cyan-400 to-cyan-100/20 shadow-sm rounded-full" />
+              <div className="absolute left-0 px-6 py-2 bg-[#F4F9FF] border-[3px] border-[#0284C7] rounded-full text-[#0284C7] text-xs sm:text-sm font-black flex items-center gap-2 shadow-md z-10">
                 <span>◆</span>
                 <span className="uppercase tracking-[0.25em]">Development Methodology</span>
                 <span>◆</span>
@@ -603,10 +628,10 @@ export const CompanyProfileDetails = () => {
             </div>
 
             <div className="text-left space-y-4 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight font-display">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
                 Structured &amp; Agile Engineering Execution
               </h2>
-              <p className="text-base sm:text-lg text-cyan-100/85 font-medium leading-relaxed font-sans">
+              <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed font-sans">
                 We follow a disciplined 6-phase agile methodology ensuring transparency, security, and precision alignment with client objectives.
               </p>
             </div>
@@ -618,41 +643,42 @@ export const CompanyProfileDetails = () => {
                 return (
                   <div 
                     key={m.step} 
-                    className="group relative rounded-[2.2rem] bg-[#0B1B36]/90 backdrop-blur-xl p-7 sm:p-8 border-2 border-cyan-500/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] text-white hover:bg-[#0077B6]/95 hover:border-white hover:shadow-[0_25px_60px_rgba(0,180,216,0.6)] hover:-translate-y-2.5 transition-all duration-500 overflow-visible flex flex-col justify-between space-y-6"
+                    style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+                    className="group relative rounded-[2.2rem] p-7 sm:p-8 border-2 border-indigo-200/80 shadow-md shadow-indigo-500/5 text-slate-900 hover:border-[#0284C7] hover:shadow-2xl hover:shadow-cyan-500/15 hover:-translate-y-2.5 transition-all duration-500 overflow-visible flex flex-col justify-between space-y-6"
                   >
-                    {/* Top Floating Neon Watermark Number */}
-                    <span className="text-6xl font-black font-display absolute top-3 right-5 select-none text-cyan-400/25 group-hover:text-white/40 group-hover:scale-110 transition-all duration-500">
+                    {/* Top Floating Watermark Number */}
+                    <span className="text-6xl font-black font-display absolute top-3 right-5 select-none text-cyan-200/50 group-hover:text-[#0284C7]/20 group-hover:scale-110 transition-all duration-500">
                       {m.step}
                     </span>
 
                     {/* Sweeping Cyber Light Sheen Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2.2rem]" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2.2rem]" />
 
                     {/* Header Row: Phase Tag */}
                     <div className="flex items-center justify-start relative z-10">
-                      <span className="px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#072448]/90 text-[#38BDF8] border border-cyan-400/50 shadow-md backdrop-blur-md group-hover:bg-white/20 group-hover:text-white group-hover:border-white/80 transition-colors duration-300">
+                      <span className="px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-50 text-[#0284C7] border border-cyan-200/80 shadow-xs group-hover:bg-[#0284C7] group-hover:text-white transition-colors duration-300">
                         PHASE {m.step} • {m.tag}
                       </span>
                     </div>
 
-                    {/* Main Content: Glowing Cyan Title & Readable Copy */}
+                    {/* Main Content: Title & Copy */}
                     <div className="space-y-2.5 relative z-10 text-left">
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-[#38BDF8] font-display group-hover:text-white transition-colors duration-300 drop-shadow-sm">
+                      <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors duration-300">
                         {m.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-slate-300/90 font-medium leading-relaxed group-hover:text-white/95 transition-colors duration-300">
+                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
                         {m.desc}
                       </p>
                     </div>
 
                     {/* Bottom Interactive Cyber Process Flow Indicator */}
-                    <div className="pt-4 border-t border-cyan-900/60 flex items-center justify-between text-[11px] font-extrabold text-slate-300 group-hover:text-white transition-colors duration-300 relative z-10">
+                    <div className="pt-4 border-t border-cyan-100/80 flex items-center justify-between text-[11px] font-extrabold text-slate-600 relative z-10">
                       <span className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#00B4D8] animate-ping" />
-                        <span className="text-slate-300 font-mono group-hover:text-cyan-100">Process Phase {m.step}</span>
+                        <span className="w-2 h-2 rounded-full bg-[#0284C7] animate-ping" />
+                        <span className="text-slate-500 font-mono">Process Phase {m.step}</span>
                       </span>
 
-                      <div className="flex items-center gap-1.5 bg-[#00B4D8] border border-cyan-300/80 px-3.5 py-1 rounded-full text-[10px] font-black text-slate-950 group-hover:bg-white group-hover:text-[#03045E] group-hover:scale-105 transition-all duration-300 shadow-md">
+                      <div className="flex items-center gap-1.5 bg-[#0284C7] border border-cyan-300/80 px-3.5 py-1 rounded-full text-[10px] font-black text-white group-hover:bg-cyan-600 group-hover:scale-105 transition-all duration-300 shadow-sm">
                         <span>{m.nextStep}</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -660,7 +686,7 @@ export const CompanyProfileDetails = () => {
 
                     {/* Desktop Floating Arrow Connector Bridge Node */}
                     {hasNextInRow && (
-                      <div className="hidden lg:flex absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#00B4D8] text-slate-950 items-center justify-center z-30 shadow-[0_0_20px_rgba(0,180,216,0.8)] group-hover:scale-125 group-hover:bg-white group-hover:text-[#03045E] group-hover:shadow-[0_0_30px_rgba(255,255,255,0.9)] transition-all duration-300 pointer-events-none">
+                      <div className="hidden lg:flex absolute -right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] items-center justify-center z-30 shadow-md group-hover:scale-125 group-hover:bg-[#0284C7] group-hover:text-white transition-all duration-300 pointer-events-none">
                         <ArrowRight className="w-4 h-4 animate-pulse" />
                       </div>
                     )}

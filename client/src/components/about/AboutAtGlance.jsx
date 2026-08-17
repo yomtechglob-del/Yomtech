@@ -98,7 +98,10 @@ export const AboutAtGlance = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
           
           {/* Left Column: Official Profile Card */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-8 sm:p-10 border-2 border-slate-200/80 shadow-xl text-left flex flex-col justify-between space-y-8">
+          <div 
+            style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+            className="lg:col-span-5 rounded-3xl p-8 sm:p-10 border-2 border-indigo-200/80 shadow-xl text-left flex flex-col justify-between space-y-8"
+          >
             <div className="space-y-6">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-slate-900 p-2 shadow-lg flex items-center justify-center flex-shrink-0">
@@ -156,7 +159,8 @@ export const AboutAtGlance = () => {
             {COMPANY_STATS.map((stat) => (
               <div 
                 key={stat.id}
-                className="bg-white rounded-3xl p-7 border-2 border-slate-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
+                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">

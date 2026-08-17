@@ -42,7 +42,7 @@ const GALLERY_ITEMS = [
     description: 'Delivering end-to-end cloud transformation, ERP roadmaps, and digital advisory in partnership with global enterprise leaders.',
     accent: 'bg-sky-500'
   },
-  // Row 2: 3 Tall Side-by-Side Vertical Columns (4 cols each - Matching User Screenshot)
+  // Row 2: 3 Square Side-by-Side Columns (4 cols each - Matching User Screenshot)
   {
     id: 3,
     title: 'WabiSkills Talent Development Partnerships with Regional Universities',
@@ -51,7 +51,7 @@ const GALLERY_ITEMS = [
     location: 'University Partners',
     date: 'Joint Bootcamps',
     image: gallery03,
-    span: 'md:col-span-4 aspect-[3/4] sm:aspect-[3/4.2] min-h-[480px] lg:min-h-[540px]',
+    span: 'md:col-span-4 aspect-square min-h-[300px] sm:min-h-[340px] lg:min-h-[380px]',
     description: 'Collaborative tech bootcamps and hands-on repository mentorship empowering graduates from local and pan-African universities.',
     badgeTag: 'LOCAL & GLOBAL ALLIANCES',
     badgeColor: 'bg-amber-400 text-slate-950',
@@ -65,7 +65,7 @@ const GALLERY_ITEMS = [
     location: 'Global Campaigns',
     date: '2026 Growth',
     image: gallery04,
-    span: 'md:col-span-4 aspect-[3/4] sm:aspect-[3/4.2] min-h-[480px] lg:min-h-[540px]',
+    span: 'md:col-span-4 aspect-square min-h-[300px] sm:min-h-[340px] lg:min-h-[380px]',
     description: 'Building long-term strategic alliances with corporate leaders, government bodies, and international technology institutions.',
     badgeTag: 'CORPORATE PARTNERSHIPS',
     badgeColor: 'bg-cyan-400 text-slate-950',
@@ -79,13 +79,13 @@ const GALLERY_ITEMS = [
     location: 'Innovation Labs',
     date: '2K+ Graduates',
     image: gallery05,
-    span: 'md:col-span-4 aspect-[3/4] sm:aspect-[3/4.2] min-h-[480px] lg:min-h-[540px]',
+    span: 'md:col-span-4 aspect-square min-h-[300px] sm:min-h-[340px] lg:min-h-[380px]',
     description: 'Transforming university graduates into industry-ready software engineers through joint institutional talent initiatives.',
     badgeTag: 'ACADEMY CAMPAIGNS',
     badgeColor: 'bg-indigo-400 text-slate-950',
     accent: 'bg-indigo-500'
   },
-  // Row 3: 4 Tall Side-by-Side Vertical Columns Below Row 2 (3 cols each)
+  // Row 3: 4 Square Side-by-Side Columns Below Row 2 (3 cols each)
   {
     id: 6,
     title: '24/7 Enterprise SLAs & Institutional Client Hotline Operations',
@@ -94,7 +94,7 @@ const GALLERY_ITEMS = [
     location: '24/7 SLA Hotline',
     date: 'Global Support',
     image: gallery06,
-    span: 'md:col-span-3 aspect-[3/4] sm:aspect-[3/4.2] min-h-[460px] lg:min-h-[500px]',
+    span: 'md:col-span-3 aspect-square min-h-[260px] sm:min-h-[300px] lg:min-h-[320px]',
     description: 'Providing round-the-clock technical operations, rapid incident SLAs, and dedicated hotline support for enterprise partners.',
     badgeTag: '24/7 ENTERPRISE SLAs',
     badgeColor: 'bg-emerald-400 text-slate-950',
@@ -108,7 +108,7 @@ const GALLERY_ITEMS = [
     location: 'Corporate Partners',
     date: 'ERP & WMS',
     image: gallery07,
-    span: 'md:col-span-3 aspect-[3/4] sm:aspect-[3/4.2] min-h-[460px] lg:min-h-[500px]',
+    span: 'md:col-span-3 aspect-square min-h-[260px] sm:min-h-[300px] lg:min-h-[320px]',
     description: 'Architecting custom ERP, CRM, and supply chain software platforms in partnership with regional enterprise organizations.',
     badgeTag: 'INSTITUTIONAL ERP',
     badgeColor: 'bg-sky-400 text-slate-950',
@@ -122,7 +122,7 @@ const GALLERY_ITEMS = [
     location: 'Regional Campuses',
     date: 'Cohort 2026',
     image: gallery08,
-    span: 'md:col-span-3 aspect-[3/4] sm:aspect-[3/4.2] min-h-[460px] lg:min-h-[500px]',
+    span: 'md:col-span-3 aspect-square min-h-[260px] sm:min-h-[300px] lg:min-h-[320px]',
     description: 'Immersive cohort training campaigns partnering with local technology centers to deliver practical full-stack skills.',
     badgeTag: 'DEV CAMPAIGNS',
     badgeColor: 'bg-amber-400 text-slate-950',
@@ -136,7 +136,7 @@ const GALLERY_ITEMS = [
     location: 'AWS & Azure Partners',
     date: 'Cloud Alliances',
     image: gallery09,
-    span: 'md:col-span-3 aspect-[3/4] sm:aspect-[3/4.2] min-h-[460px] lg:min-h-[500px]',
+    span: 'md:col-span-3 aspect-square min-h-[260px] sm:min-h-[300px] lg:min-h-[320px]',
     description: 'Building secure cloud migration, automated CI/CD pipelines, and high-availability infrastructure with global cloud providers.',
     badgeTag: 'CLOUD ALLIANCES',
     badgeColor: 'bg-purple-400 text-slate-950',

@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { Play, Pause, Maximize2, Volume2, VolumeX, Film, X, Sparkles, Radio } from 'lucide-react';
+import { Play, Pause, Maximize2, Volume2, VolumeX, Film, X, Sparkles, Radio, CheckCircle2 } from 'lucide-react';
 import videoPoster from '../../assets/vision_pan_africa.png';
 import heroTeamImg from '../../assets/about/hero_team.jpg';
 import ermiTwoImg from '../../assets/ermi-two.jpg';
 import erminOneImg from '../../assets/ermin-one.jpg';
 
 export const CenterEcosystemVideo = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const videoRef = useRef(null);
@@ -14,6 +14,17 @@ export const CenterEcosystemVideo = () => {
 
   // High quality sample tech video for interactive announcement preview
   const sampleVideoUrl = "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-41551-large.mp4";
+
+  // Ensure video plays automatically by default (muted) on mount
+  React.useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {
+        setIsPlaying(false);
+      });
+    }
+  }, []);
 
   const togglePlay = (e) => {
     e.stopPropagation();
@@ -77,12 +88,13 @@ export const CenterEcosystemVideo = () => {
           {/* Left Column: Interactive Video Player Frame */}
           <div className="lg:col-span-7 relative group/player rounded-2xl overflow-hidden shadow-2xl border-2 border-cyan-400/50 bg-slate-950 aspect-video flex items-center justify-center">
             
-            {/* HTML5 Video Element */}
+            {/* HTML5 Video Element with Muted Autoplay by Default */}
             <video
               ref={videoRef}
               src={sampleVideoUrl}
               poster={videoPoster}
               loop
+              autoPlay
               muted={isMuted}
               playsInline
               className="w-full h-full object-cover group-hover/player:scale-105 transition-transform duration-700 opacity-90"
@@ -105,7 +117,7 @@ export const CenterEcosystemVideo = () => {
                 </button>
               </div>
               <span className="px-4 py-1.5 rounded-full bg-slate-950/90 text-cyan-300 text-xs font-black uppercase tracking-widest border border-cyan-400/50 backdrop-blur-md shadow-lg">
-                {isPlaying ? 'Playing Announcement Preview' : 'Click To Watch Master Announcement Video'}
+                {isPlaying ? 'Live Ecosystem Preview' : 'Click To Watch Digital Ecosystem Video'}
               </span>
             </div>
 
@@ -140,19 +152,31 @@ export const CenterEcosystemVideo = () => {
           <div className="lg:col-span-5 space-y-5 text-white">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/50 text-cyan-300 text-xs font-black uppercase tracking-widest">
               <Radio className="w-4 h-4 text-cyan-400 animate-pulse" />
-              <span>Center Master Video Announcement</span>
+              <span>YomTech Digital Ecosystem Overview</span>
             </div>
 
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black font-display tracking-tight text-white leading-tight">
-              One Unified Video <br />
+              Experience Our Digital <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-[#1E90FF] to-sky-300">
-                Announcing All Platforms
+                Ecosystem in Action
               </span>
             </h3>
 
             <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
-              Watch our official master release video introducing <strong className="text-cyan-300 font-bold">WabiSkills, WabiJob, Yomnex ERP, WabiX, Mari</strong>, and <strong className="text-cyan-300 font-bold">YomTech Media</strong> in one seamless, high-impact presentation.
+              Watch our official video overview showcasing how YomTech Global powers <strong className="text-cyan-300 font-bold">talent development (WabiSkills)</strong>, <strong className="text-cyan-300 font-bold">recruitment (WabiJob)</strong>, <strong className="text-cyan-300 font-bold">enterprise ERP (Yomnex)</strong>, and digital innovation platforms across Africa — empowering organizations, professionals, and institutions with custom software automation, digital skills training, and next-generation ecosystem tools built for scalable growth.
             </p>
+
+            {/* Two Key Highlight Feature Lines */}
+            <div className="space-y-2 pt-2 border-t border-cyan-400/20 text-xs sm:text-sm text-cyan-100 font-medium">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span>Unified single-sign-on integration across all YomTech digital platforms.</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span>Empowering African enterprises and professionals with scalable digital solutions.</span>
+              </div>
+            </div>
 
             <div className="pt-3 flex flex-wrap items-center gap-3">
               <button 
@@ -160,12 +184,12 @@ export const CenterEcosystemVideo = () => {
                 className="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#1E90FF] via-cyan-400 to-cyan-500 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-xl shadow-cyan-500/35 hover:scale-105 transition-all cursor-pointer"
               >
                 <Play className="w-4 h-4 fill-slate-950" />
-                <span>Watch Official Video</span>
+                <span>Watch Ecosystem Showcase</span>
               </button>
               
               <span className="px-4 py-2 rounded-2xl bg-slate-900/90 border border-slate-700 text-slate-300 text-xs font-mono font-bold flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                4K Master Cut
+                4K Official Video
               </span>
             </div>
           </div>
@@ -182,7 +206,7 @@ export const CenterEcosystemVideo = () => {
               <div className="flex items-center gap-3">
                 <Film className="w-5 h-5 text-cyan-400" />
                 <span className="text-sm sm:text-base font-extrabold text-white font-display">
-                  YomTech Global - Ecosystem Announcement Master Video
+                  YomTech Global - Digital Ecosystem Video Overview
                 </span>
               </div>
 
