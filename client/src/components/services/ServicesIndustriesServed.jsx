@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Building2, GraduationCap, Landmark, Tv, Shield, Hotel, Sparkles } from 'lucide-react';
+import { Building2, GraduationCap, Landmark, Tv, Shield, Hotel } from 'lucide-react';
 
 export const ServicesIndustriesServed = () => {
   const sectors = [
@@ -10,10 +10,11 @@ export const ServicesIndustriesServed = () => {
       desc: 'Digital transformation solutions for public institutions, municipal trade bureaus, document automation, and citizen service portals.',
       icon: Building2,
       examples: 'SSGI, INSA, MInT, City Admin Trade Bureau',
+      accent: 'text-cyan-600',
       bg: 'bg-cyan-50',
       border: 'border-cyan-200',
-      text: 'text-[#0284C7]',
       badge: 'GOVERNMENT',
+      footerRight: 'Public Sector',
     },
     {
       title: 'Higher Education & Academics',
@@ -21,10 +22,11 @@ export const ServicesIndustriesServed = () => {
       desc: 'Learning management systems, campus IT networks, student portals, and repository mentorship programs.',
       icon: GraduationCap,
       examples: 'AASTU, ASTU, Arsi University, Kotebe University',
+      accent: 'text-emerald-600',
       bg: 'bg-emerald-50',
       border: 'border-emerald-200',
-      text: 'text-emerald-700',
       badge: 'ACADEMIC',
+      footerRight: 'University Partners',
     },
     {
       title: 'Banking & Financial Services',
@@ -32,10 +34,11 @@ export const ServicesIndustriesServed = () => {
       desc: 'Secure enterprise ERP integration, transaction management systems, CRM portals, and financial compliance auditing.',
       icon: Landmark,
       examples: 'Bunna Bank, Commercial Partners & SMEs',
+      accent: 'text-amber-600',
       bg: 'bg-amber-50',
       border: 'border-amber-200',
-      text: 'text-amber-700',
       badge: 'FINANCIAL',
+      footerRight: 'Financial Sector',
     },
     {
       title: 'Media & Innovation Houses',
@@ -43,10 +46,11 @@ export const ServicesIndustriesServed = () => {
       desc: 'Tech documentary productions, innovation media platforms, storytelling, and digital content distribution networks.',
       icon: Tv,
       examples: 'Fana Media Corporation, Balageru TV, Addis AI',
+      accent: 'text-purple-600',
       bg: 'bg-purple-50',
       border: 'border-purple-200',
-      text: 'text-purple-700',
       badge: 'MEDIA',
+      footerRight: 'Media Networks',
     },
     {
       title: 'Defense & National Security',
@@ -54,10 +58,11 @@ export const ServicesIndustriesServed = () => {
       desc: 'AI-integrated CCTV surveillance zones, data center maintenance, threat defense, and smart monitoring systems.',
       icon: Shield,
       examples: 'National Security Agencies & Smart Zones',
+      accent: 'text-sky-600',
       bg: 'bg-sky-50',
       border: 'border-sky-200',
-      text: 'text-sky-700',
       badge: 'SECURITY',
+      footerRight: 'National Defense',
     },
     {
       title: 'Hospitality & Commercial SMEs',
@@ -65,38 +70,47 @@ export const ServicesIndustriesServed = () => {
       desc: 'Customized ERP, Warehouse Management Systems (WMS), Sales Force Automation (SFA), and HR software.',
       icon: Hotel,
       examples: '10+ Major Hotel Chains & Private Enterprises',
+      accent: 'text-indigo-600',
       bg: 'bg-indigo-50',
       border: 'border-indigo-200',
-      text: 'text-indigo-700',
       badge: 'ENTERPRISE',
+      footerRight: 'Private Sector',
     },
   ];
 
   return (
-    <section className="py-24 sm:py-32 w-full bg-white relative text-slate-900 overflow-hidden border-b border-slate-200">
-      {/* Background Radial Glow */}
+    <section className="relative py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+      {/* Background Dot Mesh Texture */}
+      <div
+        className="absolute inset-0 opacity-[0.5] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+          backgroundSize: '24px 24px',
+        }}
+      />
       <div className="absolute top-1/4 right-1/4 w-[700px] h-[500px] bg-cyan-400/10 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10 space-y-16">
-        
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+
         {/* Section Header */}
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <span className="text-[11px] font-black uppercase tracking-[0.25em] text-[#0284C7] px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 inline-flex items-center gap-2 shadow-sm">
-            <Sparkles size={13} className="text-[#0284C7] animate-pulse" />
-            INDUSTRIES SERVED
-          </span>
-          
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight">
-            Empowering <span className="text-[#0284C7]">Key Sectors</span> Across Africa
+        <div className="text-left w-full space-y-4 max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+            <Building2 className="w-4 h-4 text-[#0284C7]" />
+            <span>Industries Served</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
+            Empowering Key Sectors <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+              Across Africa
+            </span>
           </h2>
-          
-          <p className="text-slate-600 text-sm sm:text-base md:text-lg font-normal leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl font-sans">
             Our software engineering, ERP solutions, tech bootcamps, and cybersecurity architectures serve mission-critical public and private organizations.
           </p>
         </div>
 
-        {/* Grid of 6 Sector Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* 6 Industry Sector Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sectors.map((sec, idx) => {
             const IconComp = sec.icon;
             return (
@@ -106,34 +120,35 @@ export const ServicesIndustriesServed = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
-                className={`group bg-white p-8 rounded-[2rem] border ${sec.border} shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between`}
+                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
               >
-                <div className="space-y-5">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className={`w-14 h-14 rounded-2xl ${sec.bg} ${sec.text} border ${sec.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
-                      <IconComp size={26} />
-                    </div>
-                    <span className={`text-[10px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full ${sec.bg} ${sec.text} border ${sec.border}`}>
+                    <span className={`px-3 py-1 rounded-full text-[9px] font-mono font-black uppercase tracking-widest ${sec.bg} border ${sec.border} ${sec.accent}`}>
                       {sec.badge}
                     </span>
+                    <div className={`w-12 h-12 rounded-2xl ${sec.bg} ${sec.accent} border ${sec.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
+                      <IconComp size={22} />
+                    </div>
                   </div>
 
-                  <div>
-                    <h3 className="text-xl font-black text-slate-900 mb-1 group-hover:text-[#0284C7] transition-colors">
-                      {sec.title}
-                    </h3>
-                    <div className={`text-xs font-black uppercase tracking-widest mb-3 ${sec.text}`}>
-                      {sec.subtitle}
-                    </div>
-                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed font-normal">
-                      {sec.desc}
-                    </p>
-                  </div>
+                  <h3 className="text-xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                    {sec.title}
+                  </h3>
+
+                  <h4 className={`text-xs font-extrabold uppercase tracking-widest ${sec.accent}`}>
+                    {sec.subtitle}
+                  </h4>
+
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                    {sec.desc}
+                  </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between text-xs">
-                  <span className="text-slate-500 font-semibold">Key Clients:</span>
-                  <span className="text-slate-900 font-extrabold text-right truncate max-w-[200px]" title={sec.examples}>
+                <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400">
+                  <span>Key Clients:</span>
+                  <span className={`${sec.accent} text-right truncate max-w-[180px]`} title={sec.examples}>
                     {sec.examples}
                   </span>
                 </div>
