@@ -83,9 +83,9 @@ export const Navbar = () => {
   };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 py-3 sm:py-3.5 md:py-3.5 hero-cyan-gradient border-b border-white/10 ${scrolled
-        ? 'shadow-[0_8px_32px_rgba(0,0,0,0.35)]'
-        : 'shadow-xl'
+    <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 py-3 sm:py-3.5 md:py-3.5 ${scrolled
+        ? 'bg-[#03045E]/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.35)] border-b border-white/10'
+        : 'bg-transparent shadow-none border-b-0'
       }`}>
       <div className="max-w-[1380px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between">
 
@@ -116,13 +116,13 @@ export const Navbar = () => {
                 >
                   <Link
                     to="/services"
-                    className={`relative text-sm xl:text-base font-extrabold tracking-tight transition-all duration-300 px-3 py-1.5 flex items-center gap-1.5 ${isActive
+                    className={`relative text-base sm:text-lg xl:text-xl font-extrabold tracking-tight transition-all duration-300 px-3.5 py-1.5 flex items-center gap-1.5 ${isActive
                         ? 'text-[#0ED3DD] drop-shadow-[0_0_12px_rgba(14,211,221,0.6)] font-black'
                         : 'text-white/90 hover:text-[#0ED3DD]'
                       }`}
                   >
                     <span>{link.name}</span>
-                    <ChevronDown size={16} className={`text-cyan-300 transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-white' : ''}`} />
+                    <ChevronDown size={18} className={`text-cyan-300 transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-white' : ''}`} />
                   </Link>
 
                   {/* High-End Enterprise Glassmorphic Dropdown Menu in Hero Colors */}
@@ -214,7 +214,7 @@ export const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className={`relative text-sm xl:text-base font-extrabold tracking-tight transition-all duration-300 px-3 py-1.5 flex items-center gap-1.5 ${isActive
+                className={`relative text-base sm:text-lg xl:text-xl font-extrabold tracking-tight transition-all duration-300 px-3.5 py-1.5 flex items-center gap-1.5 ${isActive
                     ? 'text-[#0ED3DD] drop-shadow-[0_0_12px_rgba(14,211,221,0.6)] font-black'
                     : 'text-white/90 hover:text-[#0ED3DD]'
                   }`}

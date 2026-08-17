@@ -116,7 +116,7 @@ export const AboutPage = () => {
       {/* ========================================================
           1. HERO SECTION (Left Text + Right 4-Logo Ecosystem Showcase Grid)
       ======================================================== */}
-      <section className="w-full pt-44 sm:pt-48 md:pt-52 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
+      <section className="w-full pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
         
         {/* Borderless Flowing Background Image Layer 1 (ermi-two.jpg - Left/Center) */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
