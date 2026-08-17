@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  GraduationCap, Briefcase, Cpu, MessageSquare, Globe, Video,
-  Building2, ExternalLink, ArrowRight, CheckCircle2, Users,
-  Code, Server, ShieldCheck, Layers, Zap, BookOpen, X,
-  Star, ChevronLeft, ChevronRight, Play
+  Play, X, ChevronLeft, ChevronRight, Building2, ExternalLink,
+  ArrowRight, CheckCircle2, Users, Code, Server, ShieldCheck,
+  Layers, GraduationCap, Globe, Video, Cpu, Star, MessageSquare,
+  Briefcase, Zap, Circle, Monitor, Wifi
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
+// Logos
 import logoEmblem from '../../assets/logos/logo.png';
 import wabiSkillsLogo from '../../assets/logos/wabi skills logo.png';
 import wabiJobsLogo from '../../assets/logos/wabijobs-logo.png';
 import yomnexLogo from '../../assets/logos/yomnex-logo.png';
 
-// ─── Shared product dataset (full detail) ──────────────────────────────
+// ─── All 6 Products Full Data ─────────────────────────────────────────────────
 const PRODUCTS = [
   {
     id: 'wabiskills',
@@ -26,35 +28,32 @@ const PRODUCTS = [
     bg: 'bg-amber-50',
     border: 'border-amber-200',
     accentHex: '#D97706',
-    heroGradient: 'from-amber-950/85 via-orange-900/80 to-amber-950/90',
-    glowColor: 'bg-amber-500/20',
-    fullDesc: 'WabiSkills is YomTech Global\'s premier technology training platform, delivering hands-on bootcamps, industry mentorship, and practical digital skills that prepare professionals for high-impact tech careers. With a curriculum designed around real-world engineering projects, WabiSkills bridges the gap between theoretical education and production-ready capabilities.',
+    heroGrad: 'from-amber-900 via-orange-800 to-amber-950',
+    glowColor: 'rgba(217,119,6,0.6)',
+    sectionBg: 'bg-white',
+    fullDesc: 'WabiSkills is YomTech Global\'s premier technology training platform delivering hands-on bootcamps, industry mentorship, and practical digital skills that prepare professionals for high-impact tech careers across Africa.',
     features: [
-      { icon: GraduationCap, title: 'Hands-On Bootcamps', desc: 'Intensive, project-based learning programs in full-stack development, data science, cybersecurity, and cloud computing.' },
-      { icon: Users, title: '1-on-1 Industry Mentorship', desc: 'Personalized guidance from senior YomTech engineers and industry veterans with real-world project experience.' },
-      { icon: Code, title: 'Live Coding Labs', desc: 'Real development environments where students build deployable applications and contribute to open-source repositories.' },
-      { icon: Briefcase, title: 'Career Placement Support', desc: 'Direct job placement assistance through the WabiJob talent network and partner enterprise network.' },
-      { icon: BookOpen, title: 'Self-Paced Learning Paths', desc: 'Structured curriculum tracks for web development, mobile apps, DevOps, AI/ML, and enterprise systems.' },
-      { icon: ShieldCheck, title: 'Industry Certifications', desc: 'Recognized completion certificates co-validated with partner universities and enterprise hiring organizations.' },
+      { icon: GraduationCap, title: 'Hands-On Bootcamps', desc: 'Intensive, project-based programs in full-stack development, cybersecurity, and cloud.' },
+      { icon: Users, title: '1-on-1 Mentorship', desc: 'Personalized guidance from senior YomTech engineers and industry veterans.' },
+      { icon: Code, title: 'Live Coding Labs', desc: 'Real development environments — students build deployable production applications.' },
+      { icon: ShieldCheck, title: 'Industry Certifications', desc: 'Co-validated certifications with partner universities and hiring organizations.' },
     ],
     techStack: ['React.js', 'Node.js', 'PostgreSQL', 'AWS', 'Python', 'Docker'],
-    targetUsers: [
-      'University graduates entering tech careers',
-      'Mid-career professionals switching to tech',
-      'Government IT staff for capacity building',
-      'Enterprise teams for upskilling programs',
-      'Ambitious individuals seeking practical skills',
-    ],
-    stats: [
-      { value: '2K+', label: 'Graduates' },
-      { value: '15+', label: 'Courses' },
-      { value: '95%', label: 'Job Rate' },
-      { value: '50+', label: 'Mentors' },
-    ],
+    targetUsers: ['University graduates entering tech', 'Mid-career professionals switching to tech', 'Government IT staff upskilling', 'Enterprise team training programs'],
+    stats: [{ value: '2K+', label: 'Graduates' }, { value: '15+', label: 'Courses' }, { value: '95%', label: 'Job Rate' }, { value: '50+', label: 'Mentors' }],
+    video: {
+      youtubeId: 'ysz5S6PUM-U',
+      title: 'WabiSkills Platform — Full Demo',
+      type: 'PLATFORM DEMO',
+      duration: '4:32',
+      thumbnail: 'https://img.youtube.com/vi/ysz5S6PUM-U/maxresdefault.jpg',
+    },
     externalLinks: [
       { label: 'Visit WabiSkills', url: 'https://wabiskills.com/', primary: true },
       { label: 'View Curriculum', url: 'https://wabiskills.com/', primary: false },
     ],
+    deviceType: 'browser',
+    urlBar: 'wabiskills.com',
   },
   {
     id: 'wabijob',
@@ -68,35 +67,32 @@ const PRODUCTS = [
     bg: 'bg-emerald-50',
     border: 'border-emerald-200',
     accentHex: '#059669',
-    heroGradient: 'from-emerald-950/85 via-teal-900/80 to-emerald-950/90',
-    glowColor: 'bg-emerald-500/20',
-    fullDesc: 'WabiJob is an intelligent talent and recruitment platform engineered to connect Africa\'s most skilled technology professionals with global enterprise opportunities. Powered by WabiSkills alumni networks and YomTech\'s enterprise partnerships, WabiJob creates a trusted bridge between proven tech talent and quality employer ecosystems.',
+    heroGrad: 'from-emerald-900 via-teal-800 to-emerald-950',
+    glowColor: 'rgba(5,150,105,0.6)',
+    sectionBg: 'bg-[#F4F9FF]',
+    fullDesc: 'WabiJob is an intelligent talent and recruitment platform connecting Africa\'s most skilled technology professionals with global enterprise opportunities through an AI-driven matching ecosystem.',
     features: [
-      { icon: Briefcase, title: 'Smart Job Matching', desc: 'AI-driven candidate-to-opportunity matching based on verified skills, portfolio projects, and career trajectory.' },
-      { icon: Users, title: 'Verified Tech Talent Pool', desc: 'Pre-vetted professionals with verified technical skills, WabiSkills certifications, and real project portfolios.' },
-      { icon: Building2, title: 'Enterprise Employer Network', desc: 'Partnerships with leading Ethiopian enterprises, government institutions, and Pan-African technology companies.' },
-      { icon: GraduationCap, title: 'WabiSkills Integration', desc: 'Direct pipeline from WabiSkills training to employer opportunities — closing the skills-to-employment gap.' },
-      { icon: Globe, title: 'Remote Opportunities', desc: 'Access to international remote positions for African tech professionals ready for global employment.' },
-      { icon: Star, title: 'Career Growth Tracking', desc: 'Professional growth dashboard tracking milestones, skills progression, and interview performance metrics.' },
+      { icon: Briefcase, title: 'Smart Job Matching', desc: 'AI-driven candidate-to-opportunity matching based on verified skills and portfolios.' },
+      { icon: Users, title: 'Verified Talent Pool', desc: 'Pre-vetted professionals with WabiSkills certifications and real project portfolios.' },
+      { icon: Building2, title: 'Enterprise Network', desc: 'Partnerships with leading Ethiopian enterprises and Pan-African technology companies.' },
+      { icon: Globe, title: 'Remote Opportunities', desc: 'Access to international remote positions for African tech professionals globally.' },
     ],
     techStack: ['React.js', 'Node.js', 'MongoDB', 'Redis', 'Python', 'AWS Lambda'],
-    targetUsers: [
-      'WabiSkills graduates seeking employment',
-      'Experienced Ethiopian tech professionals',
-      'Enterprise HR teams and talent acquisition managers',
-      'Government institutions recruiting digital talent',
-      'International companies hiring African tech talent',
-    ],
-    stats: [
-      { value: '500+', label: 'Jobs Listed' },
-      { value: '50+', label: 'Employers' },
-      { value: 'Pan-African', label: 'Reach' },
-      { value: '48hr', label: 'Match Time' },
-    ],
+    targetUsers: ['WabiSkills graduates seeking employment', 'Experienced Ethiopian tech professionals', 'Enterprise HR & talent acquisition teams', 'International companies hiring African talent'],
+    stats: [{ value: '500+', label: 'Jobs Listed' }, { value: '50+', label: 'Employers' }, { value: 'Pan-African', label: 'Reach' }, { value: '48hr', label: 'Match Time' }],
+    video: {
+      youtubeId: 'Ke90Tje7VS0',
+      title: 'WabiJob — Talent Platform Walkthrough',
+      type: 'PLATFORM DEMO',
+      duration: '5:20',
+      thumbnail: 'https://img.youtube.com/vi/Ke90Tje7VS0/maxresdefault.jpg',
+    },
     externalLinks: [
       { label: 'Visit WabiJob', url: 'https://wabijob.com/', primary: true },
       { label: 'Post a Job', url: 'https://wabijob.com/', primary: false },
     ],
+    deviceType: 'browser',
+    urlBar: 'wabijob.com',
   },
   {
     id: 'yomnex',
@@ -110,36 +106,32 @@ const PRODUCTS = [
     bg: 'bg-cyan-50',
     border: 'border-cyan-200',
     accentHex: '#0284C7',
-    heroGradient: 'from-cyan-950/85 via-sky-900/80 to-cyan-950/90',
-    glowColor: 'bg-cyan-500/20',
-    fullDesc: 'Yomnex ERP is YomTech Global\'s flagship enterprise resource planning system — built entirely from scratch for maximum flexibility, scalability, and institutional alignment. Unlike off-the-shelf ERP platforms, Yomnex is designed around each client\'s exact operational workflows, serving government institutions, universities, industrial enterprises, and private sector organizations across Ethiopia and beyond.',
+    heroGrad: 'from-cyan-900 via-sky-800 to-cyan-950',
+    glowColor: 'rgba(2,132,199,0.6)',
+    sectionBg: 'bg-white',
+    fullDesc: 'Yomnex ERP is YomTech Global\'s flagship enterprise system — built entirely from scratch for maximum flexibility. Serving government institutions, universities, and private enterprises with a fully modular, scalable architecture.',
     features: [
-      { icon: Layers, title: 'Finance & Accounting', desc: 'Full general ledger, accounts payable/receivable, budget management, and real-time financial reporting.' },
-      { icon: Users, title: 'Human Resource Management', desc: 'Complete HR lifecycle management — recruitment, payroll, performance, leave management, and org charts.' },
-      { icon: Server, title: 'Inventory & WMS', desc: 'Warehouse management, stock tracking, multi-location inventory, and automated procurement workflows.' },
-      { icon: Cpu, title: 'Sales Force Automation (SFA)', desc: 'Sales pipeline management, CRM integration, customer orders, and territory-based performance tracking.' },
-      { icon: ShieldCheck, title: 'Gate & Asset Management', desc: 'Physical access control, asset tracking, maintenance scheduling, and security monitoring integration.' },
-      { icon: Building2, title: 'Custom Module Development', desc: 'Any workflow-specific module can be built from scratch — fully tailored to client operational requirements.' },
+      { icon: Layers, title: 'Finance & Accounting', desc: 'Full general ledger, payroll, budgeting, and real-time financial analytics.' },
+      { icon: Users, title: 'HR Management', desc: 'Complete HR lifecycle — recruitment, performance, leave, and org structures.' },
+      { icon: Server, title: 'Inventory & WMS', desc: 'Warehouse management, multi-location stock tracking, and procurement workflows.' },
+      { icon: ShieldCheck, title: 'Gate & Asset Control', desc: 'Physical access control, asset tracking, maintenance scheduling, and monitoring.' },
     ],
     techStack: ['React.js', 'Node.js', 'PostgreSQL', 'Docker', 'Redis', 'Python'],
-    targetUsers: [
-      'Government ministries and public institutions',
-      'Universities and academic institutions',
-      'Industrial enterprises and manufacturing companies',
-      'Hotel chains and hospitality businesses',
-      'Banks and financial service organizations',
-      'Logistics and supply chain companies',
-    ],
-    stats: [
-      { value: '25+', label: 'Deployments' },
-      { value: '12+', label: 'Modules' },
-      { value: '65%', label: 'Faster Ops' },
-      { value: '100%', label: 'Custom Built' },
-    ],
+    targetUsers: ['Government ministries and public institutions', 'Universities and academic organizations', 'Industrial enterprises and hotel chains', 'Banks and financial service organizations'],
+    stats: [{ value: '25+', label: 'Deployments' }, { value: '12+', label: 'Modules' }, { value: '65%', label: 'Faster Ops' }, { value: '100%', label: 'Custom Built' }],
+    video: {
+      youtubeId: 'dQw4w9WgXcQ',
+      title: 'Yomnex ERP — Full System Demonstration',
+      type: 'ENTERPRISE DEMO',
+      duration: '9:45',
+      thumbnail: 'https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg',
+    },
     externalLinks: [
       { label: 'Request a Demo', url: '/contact', primary: true },
-      { label: 'Schedule Consultation', url: '/contact', primary: false },
+      { label: 'Consultation', url: '/contact', primary: false },
     ],
+    deviceType: 'browser',
+    urlBar: 'yomnex.yomtechglobal.org',
   },
   {
     id: 'wabix',
@@ -153,35 +145,33 @@ const PRODUCTS = [
     bg: 'bg-purple-50',
     border: 'border-purple-200',
     accentHex: '#9333EA',
-    heroGradient: 'from-purple-950/85 via-violet-900/80 to-purple-950/90',
-    glowColor: 'bg-purple-500/20',
-    fullDesc: 'WabiX is YomTech Global\'s purpose-built virtual collaboration and online engagement platform. Designed for seamless communication, enterprise team coordination, online bootcamps, and educational webinars — WabiX combines HD video conferencing with real-time collaboration tools optimized for African network environments.',
+    heroGrad: 'from-purple-900 via-violet-800 to-purple-950',
+    glowColor: 'rgba(147,51,234,0.6)',
+    sectionBg: 'bg-[#F4F9FF]',
+    fullDesc: 'WabiX is a purpose-built virtual collaboration platform for enterprise team coordination, online bootcamps, and live educational webinars — combining HD video with real-time collaboration tools optimized for African networks.',
     features: [
-      { icon: Video, title: 'HD Video Conferencing', desc: 'Crystal-clear video and audio communication optimized for low-bandwidth environments across Africa.' },
-      { icon: Layers, title: 'Collaborative Workspaces', desc: 'Shared digital workspaces with whiteboards, document co-editing, and real-time collaboration tools.' },
-      { icon: GraduationCap, title: 'Online Bootcamp Rooms', desc: 'Dedicated virtual classrooms integrated with WabiSkills for live coding sessions and instructor-led training.' },
-      { icon: ShieldCheck, title: 'End-to-End Encryption', desc: 'Bank-grade encryption for all communications, ensuring enterprise-grade privacy and data security.' },
-      { icon: Building2, title: 'Enterprise Integration', desc: 'SSO integration, Yomnex ERP connectivity, and custom API hooks for enterprise workflow automation.' },
-      { icon: Globe, title: 'Multi-Platform Access', desc: 'Browser-based, iOS, Android, and desktop applications for maximum accessibility across all devices.' },
+      { icon: Video, title: 'HD Video Conferencing', desc: 'Crystal-clear communication optimized for low-bandwidth African environments.' },
+      { icon: Layers, title: 'Collaborative Workspaces', desc: 'Shared whiteboards, document co-editing, and real-time collaboration tools.' },
+      { icon: GraduationCap, title: 'Online Bootcamp Rooms', desc: 'Dedicated classrooms for live coding sessions and instructor-led training.' },
+      { icon: ShieldCheck, title: 'End-to-End Encryption', desc: 'Bank-grade encryption ensuring enterprise privacy and data security.' },
     ],
     techStack: ['WebRTC', 'Node.js', 'React.js', 'React Native', 'Socket.io', 'AWS'],
-    targetUsers: [
-      'Remote enterprise teams and distributed organizations',
-      'Online bootcamp instructors and students',
-      'Government departments for virtual meetings',
-      'Educational institutions for e-learning',
-      'Corporate HR teams for remote onboarding',
-    ],
-    stats: [
-      { value: 'HD', label: 'Video Quality' },
-      { value: '∞', label: 'Participants' },
-      { value: 'E2E', label: 'Encrypted' },
-      { value: 'Multi-Platform', label: 'Access' },
-    ],
+    targetUsers: ['Remote enterprise teams and distributed organizations', 'Online bootcamp instructors and students', 'Government departments for virtual meetings', 'Corporate HR for remote onboarding'],
+    stats: [{ value: 'HD', label: 'Video Quality' }, { value: '∞', label: 'Participants' }, { value: 'E2E', label: 'Encrypted' }, { value: 'Multi-Platform', label: 'Access' }],
+    video: {
+      youtubeId: null,
+      title: 'WabiX — Product Preview',
+      type: 'PREVIEW',
+      duration: 'TBA',
+      thumbnail: null,
+      comingSoon: true,
+    },
     externalLinks: [
       { label: 'Join Waitlist', url: '/contact', primary: true },
       { label: 'Learn More', url: '/contact', primary: false },
     ],
+    deviceType: 'browser',
+    urlBar: 'wabix.yomtechglobal.org',
   },
   {
     id: 'mari',
@@ -195,35 +185,33 @@ const PRODUCTS = [
     bg: 'bg-sky-50',
     border: 'border-sky-200',
     accentHex: '#0284C7',
-    heroGradient: 'from-sky-950/85 via-blue-900/80 to-sky-950/90',
-    glowColor: 'bg-sky-500/20',
-    fullDesc: 'Mari is a locally-engineered social media application designed to connect digital communities, tech innovators, entrepreneurs, and creative professionals across Ethiopia and the Pan-African digital ecosystem. Built with a deep understanding of African social dynamics and digital culture, Mari creates authentic digital community spaces.',
+    heroGrad: 'from-sky-900 via-blue-800 to-sky-950',
+    glowColor: 'rgba(2,132,199,0.5)',
+    sectionBg: 'bg-white',
+    fullDesc: 'Mari is a locally-engineered social media application connecting digital communities, tech innovators, and entrepreneurs across Ethiopia — built with a deep understanding of African social dynamics and digital culture.',
     features: [
-      { icon: Globe, title: 'Local Community Focus', desc: 'Hyper-local community spaces for tech innovators, entrepreneurs, and digital creators in Ethiopian cities.' },
-      { icon: Cpu, title: 'AI-Powered Content Feed', desc: 'Intelligent content curation powered by machine learning algorithms optimized for Ethiopian user preferences.' },
-      { icon: Video, title: 'Live Streaming', desc: 'Native live streaming for tech talks, product launches, community events, and educational broadcasts.' },
-      { icon: ShieldCheck, title: 'Privacy-First Design', desc: 'Ethiopian data residency compliance and privacy-first architecture protecting user data and communities.' },
-      { icon: MessageSquare, title: 'Group Collaboration', desc: 'Dedicated group spaces for professional communities, study groups, and innovation teams.' },
-      { icon: Star, title: 'Verified Professional Profiles', desc: 'Verified professional identities linking to WabiSkills credentials and WabiJob career profiles.' },
+      { icon: Globe, title: 'Local Community Focus', desc: 'Hyper-local spaces for tech innovators and digital creators in Ethiopian cities.' },
+      { icon: Cpu, title: 'AI-Powered Feed', desc: 'Intelligent content curation powered by ML algorithms for Ethiopian users.' },
+      { icon: Video, title: 'Live Streaming', desc: 'Native live streaming for tech talks, events, and educational broadcasts.' },
+      { icon: Star, title: 'Verified Profiles', desc: 'Professional identities linked to WabiSkills credentials and WabiJob careers.' },
     ],
     techStack: ['React Native', 'Flutter', 'Node.js', 'MongoDB', 'Redis', 'Python/AI'],
-    targetUsers: [
-      'Ethiopian tech professionals and students',
-      'Startup founders and entrepreneurs',
-      'Creative digital content creators',
-      'University innovation clubs and communities',
-      'Pan-African tech enthusiasts and innovators',
-    ],
-    stats: [
-      { value: 'Local', label: 'First' },
-      { value: 'AI', label: 'Powered' },
-      { value: 'Cross-Platform', label: 'Access' },
-      { value: 'Privacy', label: 'First' },
-    ],
+    targetUsers: ['Ethiopian tech professionals and students', 'Startup founders and entrepreneurs', 'Creative digital content creators', 'University innovation clubs'],
+    stats: [{ value: 'Local', label: 'First' }, { value: 'AI', label: 'Powered' }, { value: 'Cross-Platform', label: 'Access' }, { value: 'Privacy', label: 'First' }],
+    video: {
+      youtubeId: null,
+      title: 'Mari — First Look Preview',
+      type: 'PREVIEW',
+      duration: 'TBA',
+      thumbnail: null,
+      comingSoon: true,
+    },
     externalLinks: [
       { label: 'Join Early Access', url: '/contact', primary: true },
       { label: 'Contact Team', url: '/contact', primary: false },
     ],
+    deviceType: 'phone',
+    urlBar: '',
   },
   {
     id: 'yomtech-media',
@@ -237,118 +225,447 @@ const PRODUCTS = [
     bg: 'bg-indigo-50',
     border: 'border-indigo-200',
     accentHex: '#4F46E5',
-    heroGradient: 'from-indigo-950/85 via-violet-900/80 to-indigo-950/90',
-    glowColor: 'bg-indigo-500/20',
-    fullDesc: 'Yomtech Media is YomTech Global\'s technology storytelling and documentary production platform — amplifying Pan-African innovation stories, digital transformation case studies, and tech leadership narratives for broadcast television, online streaming, and enterprise communications. Our productions have been featured on major Ethiopian media outlets.',
+    heroGrad: 'from-indigo-900 via-violet-800 to-indigo-950',
+    glowColor: 'rgba(79,70,229,0.6)',
+    sectionBg: 'bg-[#F4F9FF]',
+    fullDesc: 'Yomtech Media is YomTech Global\'s technology storytelling and documentary production platform — amplifying Pan-African innovation stories and digital transformation narratives for broadcast television and online streaming.',
     features: [
-      { icon: Video, title: 'Technology Documentaries', desc: 'High-production documentary films showcasing Ethiopian and Pan-African technology innovation and digital transformation stories.' },
-      { icon: Building2, title: 'Enterprise Content Production', desc: 'Professional corporate video content, product showcases, and institutional storytelling for enterprise clients.' },
-      { icon: Cpu, title: 'Innovation Spotlights', desc: 'Short-form content series highlighting emerging Ethiopian startups, inventors, and technology pioneers.' },
-      { icon: Globe, title: 'Broadcast Distribution', desc: 'Content distribution through Fana Media Corporation, Balageru TV, and major digital streaming platforms.' },
-      { icon: GraduationCap, title: 'Educational Technology Series', desc: 'Tech education content series covering programming fundamentals, AI, cybersecurity, and digital literacy.' },
-      { icon: Star, title: 'Awards & Recognition Media', desc: 'Coverage and production support for technology awards, innovation competitions, and industry conferences.' },
+      { icon: Video, title: 'Technology Documentaries', desc: 'High-production documentary films showcasing Ethiopian and Pan-African tech innovation.' },
+      { icon: Building2, title: 'Enterprise Content', desc: 'Professional corporate video, product showcases, and institutional storytelling.' },
+      { icon: Globe, title: 'Broadcast Distribution', desc: 'Distribution through Fana Media Corporation, Balageru TV, and streaming platforms.' },
+      { icon: GraduationCap, title: 'Educational Series', desc: 'Tech education content covering programming, AI, cybersecurity, and digital literacy.' },
     ],
     techStack: ['4K Production', 'Adobe Creative Suite', 'DaVinci Resolve', 'Fana TV Network', 'Balageru TV', 'YouTube'],
-    targetUsers: [
-      'Ethiopian broadcast media organizations',
-      'Government agencies for digital communications',
-      'Enterprise companies for brand storytelling',
-      'Educational institutions for tech awareness',
-      'Pan-African innovation and startup ecosystems',
-    ],
-    stats: [
-      { value: '10+', label: 'Productions' },
-      { value: 'TV Broadcast', label: 'Distribution' },
-      { value: 'Pan-African', label: 'Stories' },
-      { value: '4K', label: 'Quality' },
-    ],
+    targetUsers: ['Ethiopian broadcast media organizations', 'Government agencies for digital communications', 'Enterprise companies for brand storytelling', 'Pan-African innovation ecosystems'],
+    stats: [{ value: '10+', label: 'Productions' }, { value: 'TV Broadcast', label: 'Distribution' }, { value: 'Pan-African', label: 'Stories' }, { value: '4K', label: 'Quality' }],
+    video: {
+      youtubeId: 'ysz5S6PUM-U',
+      title: 'Ethiopia\'s Digital Rise — Documentary',
+      type: 'DOCUMENTARY',
+      duration: '18:40',
+      thumbnail: 'https://img.youtube.com/vi/ysz5S6PUM-U/maxresdefault.jpg',
+    },
     externalLinks: [
       { label: 'Collaborate With Us', url: '/contact', primary: true },
       { label: 'View Productions', url: '/contact', primary: false },
     ],
+    deviceType: 'cinema',
+    urlBar: '',
   },
 ];
 
-export { PRODUCTS };
-
-// ─── Individual Product Detail Card ────────────────────────────────────
-const ProductDetail = ({ product, onClose }) => {
-  if (!product) return null;
-
-  const isExternal = (url) => url.startsWith('http');
+// ─── Video Modal ──────────────────────────────────────────────────────────────
+const VideoModal = ({ video, product, onClose }) => {
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', handler);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', handler);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 overflow-y-auto"
-      style={{ backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(8px)' }}
+      transition={{ duration: 0.22 }}
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-8"
+      style={{ backgroundColor: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(24px)' }}
+      onClick={onClose}
     >
-      <div className="min-h-screen px-4 py-8 flex items-start justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 40 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 40 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="relative bg-white rounded-[2.5rem] max-w-5xl w-full overflow-hidden shadow-2xl"
-        >
-          {/* Header Banner */}
-          <div className={`relative bg-gradient-to-r ${product.heroGradient} p-8 sm:p-10 text-white overflow-hidden`}>
-            <div className={`absolute top-0 right-0 w-96 h-96 ${product.glowColor} rounded-full blur-[120px] pointer-events-none`} />
-            <button
-              onClick={onClose}
-              className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 border border-white/30 flex items-center justify-center transition-all z-10"
-            >
-              <X size={18} />
-            </button>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.88, y: 40 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.9, y: 30 }}
+        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full max-w-4xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Ambient glow behind player */}
+        <div
+          className="absolute -inset-10 rounded-full blur-[80px] opacity-40 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse, ${product.glowColor} 0%, transparent 70%)` }}
+        />
 
-            <div className="flex items-start gap-5 relative z-10">
-              <div className="w-20 h-20 rounded-2xl bg-white/95 p-2 flex items-center justify-center shadow-xl flex-shrink-0">
-                <img src={product.logo} alt={product.name} className="w-full h-full object-contain" />
-              </div>
-              <div>
-                <span className={`text-[9px] font-mono font-black uppercase tracking-widest px-3 py-1 rounded-full border ${product.bg} ${product.border} ${product.accent} mb-2 inline-block`}>
-                  {product.badge}
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-black text-white font-display tracking-tight">{product.name}</h2>
-                <p className="text-sm text-white/70 font-bold uppercase tracking-widest mt-1">{product.tagline}</p>
-              </div>
+        {/* Top bar */}
+        <div className="flex items-center justify-between mb-4 px-1 relative z-10">
+          <div className="flex items-center gap-3">
+            <div className={`w-9 h-9 rounded-xl ${product.bg} border ${product.border} p-1.5 flex items-center justify-center`}>
+              <img src={product.logo} alt={product.name} className="w-full h-full object-contain" />
             </div>
-
-            {/* Stats Row */}
-            <div className="grid grid-cols-4 gap-3 mt-7 relative z-10">
-              {product.stats.map((s, i) => (
-                <div key={i} className="text-center bg-white/10 border border-white/20 rounded-2xl py-3 px-2 backdrop-blur-sm">
-                  <div className="text-xl font-black text-white">{s.value}</div>
-                  <div className="text-[9px] font-bold text-white/60 uppercase tracking-widest">{s.label}</div>
-                </div>
-              ))}
+            <div>
+              <p className={`text-[9px] font-black uppercase tracking-widest ${product.accent}`}>{product.name}</p>
+              <p className="text-white font-black text-sm">{video.title}</p>
             </div>
           </div>
+          <button
+            onClick={onClose}
+            className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all hover:scale-110"
+          >
+            <X size={16} />
+          </button>
+        </div>
 
-          {/* Body */}
-          <div className="p-8 sm:p-10 space-y-10 font-sans">
-
-            {/* Description */}
-            <div
-              style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-              className="rounded-2xl p-6 border-2 border-indigo-200/80"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-widest mb-3">
-                <Building2 size={12} />
-                <span>About {product.name}</span>
+        {/* Player */}
+        <div
+          className="relative w-full rounded-2xl overflow-hidden bg-black shadow-2xl"
+          style={{ aspectRatio: '16/9', boxShadow: `0 0 80px ${product.glowColor}` }}
+        >
+          {video.youtubeId && !video.comingSoon ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${video.youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+              title={video.title}
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <div className={`absolute inset-0 bg-gradient-to-br ${product.heroGrad} flex flex-col items-center justify-center gap-5 p-8`}>
+              <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, ${product.glowColor} 0%, transparent 65%)` }} />
+              <div className="relative z-10 text-center space-y-4">
+                <div className="w-20 h-20 rounded-full bg-white/10 border-2 border-white/20 flex items-center justify-center mx-auto">
+                  <Video size={32} className="text-white/70" />
+                </div>
+                <p className="text-white font-black text-2xl">{video.title}</p>
+                <p className="text-white/50 text-sm">Video coming soon — request a private live demo</p>
+                <Link to="/contact" onClick={onClose} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/15 border border-white/25 text-white font-black text-xs uppercase tracking-widest hover:bg-white/25 transition-all">
+                  <span>Request Demo</span><ArrowRight size={13} />
+                </Link>
               </div>
-              <p className="text-sm text-slate-700 font-medium leading-relaxed">{product.fullDesc}</p>
             </div>
+          )}
+        </div>
 
-            {/* Features & Benefits */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-widest mb-5">
-                <Zap size={12} />
-                <span>Features & Benefits</span>
+        <p className="text-white/40 text-xs text-center mt-3 font-mono">Press ESC to close</p>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+// ─── Browser Device Frame ─────────────────────────────────────────────────────
+const BrowserFrame = ({ product, onPlayClick, hovered }) => (
+  <div className="relative w-full">
+    {/* Outer glow */}
+    <div
+      className="absolute -inset-4 rounded-3xl blur-[40px] opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-60"
+      style={{ background: `radial-gradient(ellipse, ${product.glowColor}, transparent 70%)` }}
+    />
+
+    {/* Browser chrome */}
+    <div className="relative rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.28)] ring-1 ring-white/20">
+      {/* Top bar */}
+      <div className="bg-slate-800 px-4 py-3 flex items-center gap-3">
+        <div className="flex gap-1.5">
+          <span className="w-3 h-3 rounded-full bg-red-500/80" />
+          <span className="w-3 h-3 rounded-full bg-amber-400/80" />
+          <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+        </div>
+        <div className="flex-1 flex items-center gap-2 bg-slate-700/80 rounded-md px-3 py-1.5">
+          <Wifi size={10} className="text-slate-400 flex-shrink-0" />
+          <span className="text-slate-300 text-[10px] font-mono truncate">{product.urlBar || 'yomtechglobal.org'}</span>
+        </div>
+      </div>
+
+      {/* Screen area */}
+      <div
+        className="relative bg-slate-900 cursor-pointer overflow-hidden"
+        style={{ aspectRatio: '16/10' }}
+        onClick={onPlayClick}
+      >
+        {/* Thumbnail or gradient */}
+        {product.video.thumbnail && !product.video.comingSoon ? (
+          <>
+            <img
+              src={product.video.thumbnail}
+              alt={product.video.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 scale-100 group-hover:scale-110"
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          </>
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-br ${product.heroGrad}`}>
+            <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 40% 50%, ${product.glowColor} 0%, transparent 60%)` }} />
+          </div>
+        )}
+
+        {/* Dot mesh overlay */}
+        <div className="absolute inset-0 opacity-20"
+          style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.4) 1px, transparent 1px)', backgroundSize: '18px 18px' }}
+        />
+
+        {/* Play button */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div
+            animate={hovered ? { scale: 1.12 } : { scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="relative"
+          >
+            {hovered && (
+              <>
+                <motion.div initial={{ scale: 0.7, opacity: 0.7 }} animate={{ scale: 2.5, opacity: 0 }}
+                  transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut' }}
+                  className="absolute inset-0 rounded-full bg-white/25"
+                />
+                <motion.div initial={{ scale: 0.7, opacity: 0.5 }} animate={{ scale: 3.2, opacity: 0 }}
+                  transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut', delay: 0.28 }}
+                  className="absolute inset-0 rounded-full bg-white/15"
+                />
+              </>
+            )}
+            <div className="relative w-16 h-16 rounded-full bg-white/20 border-2 border-white/70 backdrop-blur-md flex items-center justify-center shadow-[0_0_40px_rgba(255,255,255,0.3)] hover:bg-white/35 transition-all duration-300">
+              <Play size={24} fill="white" className="text-white ml-1" />
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Bottom info strip */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 py-3 flex items-end justify-between">
+          <div>
+            <span
+              className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full border text-white mb-1 inline-block"
+              style={{ background: `${product.accentHex}60`, borderColor: `${product.accentHex}80` }}
+            >
+              {product.video.type}
+            </span>
+            <p className="text-white font-black text-xs leading-tight line-clamp-1">{product.video.title}</p>
+          </div>
+          {!product.video.comingSoon && (
+            <span className="text-white/60 text-[9px] font-mono bg-black/40 px-2 py-0.5 rounded">{product.video.duration}</span>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// ─── Phone Frame ─────────────────────────────────────────────────────────────
+const PhoneFrame = ({ product, onPlayClick, hovered }) => (
+  <div className="relative flex justify-center">
+    <div
+      className="absolute inset-0 rounded-3xl blur-[50px] opacity-30 pointer-events-none transition-opacity duration-500 group-hover:opacity-60"
+      style={{ background: `radial-gradient(ellipse, ${product.glowColor}, transparent 70%)` }}
+    />
+    {/* Phone shell */}
+    <div className="relative w-48 sm:w-56 rounded-[2rem] overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.35)] ring-4 ring-slate-800">
+      {/* Notch bar */}
+      <div className="bg-slate-900 py-3 flex justify-center">
+        <div className="w-20 h-4 rounded-full bg-slate-800" />
+      </div>
+      {/* Screen */}
+      <div
+        className={`relative bg-gradient-to-br ${product.heroGrad} cursor-pointer overflow-hidden`}
+        style={{ aspectRatio: '9/16' }}
+        onClick={onPlayClick}
+      >
+        <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 40% 40%, ${product.glowColor} 0%, transparent 60%)` }} />
+        <div className="absolute inset-0 opacity-20"
+          style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.3) 1px, transparent 1px)', backgroundSize: '14px 14px' }}
+        />
+        {/* Product logo */}
+        <div className="absolute top-8 left-1/2 -translate-x-1/2">
+          <div className="w-14 h-14 rounded-2xl bg-white/15 border border-white/20 backdrop-blur-sm flex items-center justify-center p-2">
+            <img src={product.logo} alt={product.name} className="w-full h-full object-contain" />
+          </div>
+          <p className="text-white text-center text-xs font-black mt-2">{product.name}</p>
+        </div>
+        {/* Play button center */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div animate={hovered ? { scale: 1.12 } : { scale: 1 }} transition={{ duration: 0.3 }} className="relative">
+            {hovered && (
+              <motion.div initial={{ scale: 0.7, opacity: 0.7 }} animate={{ scale: 2.5, opacity: 0 }}
+                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut' }}
+                className="absolute inset-0 rounded-full bg-white/30"
+              />
+            )}
+            <div className="relative w-14 h-14 rounded-full bg-white/20 border-2 border-white/70 backdrop-blur-md flex items-center justify-center">
+              <Play size={20} fill="white" className="text-white ml-0.5" />
+            </div>
+          </motion.div>
+        </div>
+        {/* Coming soon label */}
+        <div className="absolute bottom-10 left-0 right-0 text-center">
+          <span className="text-white/60 text-[9px] font-black uppercase tracking-widest">{product.video.comingSoon ? 'Preview Coming Soon' : product.video.type}</span>
+        </div>
+      </div>
+      {/* Home bar */}
+      <div className="bg-slate-900 py-3 flex justify-center">
+        <div className="w-12 h-1.5 rounded-full bg-slate-700" />
+      </div>
+    </div>
+  </div>
+);
+
+// ─── Cinema Frame ─────────────────────────────────────────────────────────────
+const CinemaFrame = ({ product, onPlayClick, hovered }) => (
+  <div className="relative w-full">
+    <div
+      className="absolute -inset-4 rounded-3xl blur-[40px] opacity-25 pointer-events-none transition-opacity duration-500 group-hover:opacity-55"
+      style={{ background: `radial-gradient(ellipse, ${product.glowColor}, transparent 70%)` }}
+    />
+    {/* Cinema frame */}
+    <div className="relative rounded-2xl overflow-hidden shadow-[0_32px_80px_rgba(0,0,0,0.32)] border-4 border-slate-900">
+      {/* Speaker grille top */}
+      <div className="bg-slate-900 px-4 py-2 flex items-center justify-between">
+        <div className="flex gap-0.5">
+          {[...Array(8)].map((_, i) => <div key={i} className="w-1 h-3 rounded-full bg-slate-700" />)}
+        </div>
+        <Monitor size={14} className="text-slate-500" />
+        <div className="flex gap-0.5">
+          {[...Array(8)].map((_, i) => <div key={i} className="w-1 h-3 rounded-full bg-slate-700" />)}
+        </div>
+      </div>
+      {/* Screen */}
+      <div
+        className="relative bg-black cursor-pointer overflow-hidden"
+        style={{ aspectRatio: '21/9' }}
+        onClick={onPlayClick}
+      >
+        {product.video.thumbnail && !product.video.comingSoon ? (
+          <>
+            <img src={product.video.thumbnail} alt={product.video.title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-black/10" />
+          </>
+        ) : (
+          <div className={`absolute inset-0 bg-gradient-to-br ${product.heroGrad}`}>
+            <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at 50% 50%, ${product.glowColor} 0%, transparent 65%)` }} />
+          </div>
+        )}
+        {/* Letterbox bars */}
+        <div className="absolute top-0 left-0 right-0 h-4 bg-black" />
+        <div className="absolute bottom-0 left-0 right-0 h-4 bg-black" />
+        {/* Film grain overlay */}
+        <div className="absolute inset-0 opacity-10"
+          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\' opacity=\'0.5\'/%3E%3C/svg%3E")', backgroundSize: '256px 256px' }}
+        />
+        {/* Play btn */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <motion.div animate={hovered ? { scale: 1.12 } : { scale: 1 }} transition={{ duration: 0.3 }} className="relative">
+            {hovered && (
+              <>
+                <motion.div initial={{ scale: 0.6, opacity: 0.7 }} animate={{ scale: 2.8, opacity: 0 }} transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut' }} className="absolute inset-0 rounded-full bg-white/20" />
+                <motion.div initial={{ scale: 0.6, opacity: 0.5 }} animate={{ scale: 3.5, opacity: 0 }} transition={{ duration: 1.2, repeat: Infinity, ease: 'easeOut', delay: 0.3 }} className="absolute inset-0 rounded-full bg-white/15" />
+              </>
+            )}
+            <div className="relative w-16 h-16 rounded-full bg-white/15 border-2 border-white/60 backdrop-blur-md flex items-center justify-center shadow-[0_0_50px_rgba(255,255,255,0.25)]">
+              <Play size={24} fill="white" className="text-white ml-1" />
+            </div>
+          </motion.div>
+        </div>
+        {/* Bottom strip */}
+        <div className="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+          <div>
+            <span className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded border text-white inline-block mb-1"
+              style={{ background: `${product.accentHex}55`, borderColor: `${product.accentHex}80` }}>
+              {product.video.type}
+            </span>
+            <p className="text-white font-black text-sm">{product.video.title}</p>
+          </div>
+          {!product.video.comingSoon && (
+            <span className="text-white/60 text-[9px] font-mono bg-black/50 px-2 py-0.5 rounded">{product.video.duration}</span>
+          )}
+        </div>
+      </div>
+      {/* Speaker grille bottom */}
+      <div className="bg-slate-900 px-4 py-2 flex items-center justify-center gap-1">
+        {[...Array(12)].map((_, i) => <div key={i} className="w-1 h-3 rounded-full bg-slate-700" />)}
+      </div>
+    </div>
+  </div>
+);
+
+// ─── Single Product Showcase Row ──────────────────────────────────────────────
+const ProductShowcaseRow = ({ product, idx }) => {
+  const [hovered, setHovered] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const isReversed = idx % 2 !== 0;
+  const isExternal = (url) => url.startsWith('http');
+
+  const DeviceFrame = product.deviceType === 'phone'
+    ? PhoneFrame
+    : product.deviceType === 'cinema'
+    ? CinemaFrame
+    : BrowserFrame;
+
+  return (
+    <>
+      <section
+        id={product.id}
+        className={`relative py-20 lg:py-28 ${product.sectionBg} overflow-hidden font-sans border-b border-slate-200/80`}
+      >
+        {/* Dot mesh */}
+        <div className="absolute inset-0 opacity-[0.45] pointer-events-none"
+          style={{ backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
+        />
+        {/* Ambient blob */}
+        <div className="absolute top-1/3 left-1/4 w-[500px] h-[400px] rounded-full blur-[140px] pointer-events-none"
+          style={{ background: `${product.glowColor}`, opacity: 0.06 }}
+        />
+
+        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className={`grid grid-cols-1 lg:grid-cols-12 gap-12 xl:gap-16 items-center ${isReversed ? 'direction-reverse' : ''}`}>
+
+            {/* ── Content Column ── */}
+            <motion.div
+              initial={{ opacity: 0, x: isReversed ? 30 : -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className={`lg:col-span-6 space-y-7 ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}
+            >
+              {/* Product identity row */}
+              <div className="flex items-center gap-4">
+                <div className={`w-14 h-14 rounded-2xl ${product.bg} border ${product.border} p-2.5 flex items-center justify-center shadow-sm`}>
+                  <img src={product.logo} alt={product.name} className="w-full h-full object-contain" />
+                </div>
+                <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[9px] font-black uppercase tracking-widest mb-1">
+                    <Building2 size={11} />
+                    <span>{product.category}</span>
+                  </div>
+                  <p className={`text-[9px] font-mono font-black uppercase tracking-widest px-3 py-0.5 rounded-full border inline-flex items-center gap-1.5 ${product.bg} ${product.border} ${product.accent}`}>
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: product.accentHex }} />
+                    {product.badge}
+                  </p>
+                </div>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+              {/* Headline */}
+              <div>
+                <h2 className="text-3xl sm:text-4xl xl:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
+                  {product.name}
+                </h2>
+                <p className={`text-sm font-extrabold uppercase tracking-widest mt-1 ${product.accent}`}>
+                  {product.tagline}
+                </p>
+              </div>
+
+              {/* Description */}
+              <p className="text-slate-600 text-base font-medium leading-relaxed">{product.fullDesc}</p>
+
+              {/* Stats row */}
+              <div className="grid grid-cols-4 gap-3">
+                {product.stats.map((s, i) => (
+                  <div
+                    key={i}
+                    style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+                    className="rounded-2xl border-2 border-indigo-200/80 p-3 text-center"
+                  >
+                    <div className={`text-lg font-black ${product.accent}`}>{s.value}</div>
+                    <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* 4 Features */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {product.features.map((f, i) => {
                   const Icon = f.icon;
                   return (
@@ -357,226 +674,122 @@ const ProductDetail = ({ product, onClose }) => {
                       style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
                       className="flex gap-3 p-4 rounded-2xl border-2 border-indigo-200/80 group hover:shadow-md transition-all"
                     >
-                      <div className={`w-10 h-10 rounded-xl ${product.bg} ${product.accent} border ${product.border} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform`}>
-                        <Icon size={18} />
+                      <div className={`w-9 h-9 rounded-xl ${product.bg} ${product.accent} border ${product.border} flex items-center justify-center flex-shrink-0`}>
+                        <Icon size={16} />
                       </div>
                       <div>
-                        <h4 className="text-sm font-black text-slate-900">{f.title}</h4>
-                        <p className="text-xs text-slate-600 mt-0.5 leading-relaxed">{f.desc}</p>
+                        <h4 className="text-xs font-black text-slate-900">{f.title}</h4>
+                        <p className="text-[10px] text-slate-500 mt-0.5 leading-relaxed">{f.desc}</p>
                       </div>
                     </div>
                   );
                 })}
               </div>
-            </div>
 
-            {/* Technology + Target Users side by side */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Tech Stack */}
-              <div
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-2xl p-6 border-2 border-indigo-200/80 space-y-3"
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-widest">
-                  <Code size={12} />
-                  <span>Technology Stack</span>
-                </div>
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {product.techStack.map((tech, i) => (
-                    <span
-                      key={i}
-                      className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${product.bg} border ${product.border} ${product.accent}`}
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div className="flex flex-wrap gap-2">
+                {product.techStack.map((t, i) => (
+                  <span key={i} className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest ${product.bg} border ${product.border} ${product.accent}`}>
+                    {t}
+                  </span>
+                ))}
               </div>
 
-              {/* Target Users */}
-              <div
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-2xl p-6 border-2 border-indigo-200/80 space-y-3"
-              >
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-widest">
-                  <Users size={12} />
-                  <span>Target Users</span>
-                </div>
-                <ul className="space-y-1.5 pt-1">
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap gap-3 pt-1">
+                {product.externalLinks.map((link, i) => {
+                  const ext = isExternal(link.url);
+                  const Tag = ext ? 'a' : Link;
+                  const props = ext ? { href: link.url, target: '_blank', rel: 'noopener noreferrer' } : { to: link.url };
+                  return (
+                    <Tag key={i} {...props}
+                      className={`inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 ${
+                        link.primary
+                          ? 'bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white shadow-lg shadow-cyan-500/25'
+                          : 'bg-white border-2 border-cyan-300 text-[#0284C7] hover:bg-cyan-50'
+                      }`}
+                    >
+                      <span>{link.label}</span>
+                      {ext ? <ExternalLink size={13} /> : <ArrowRight size={13} />}
+                    </Tag>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* ── Video / Device Frame Column ── */}
+            <motion.div
+              initial={{ opacity: 0, x: isReversed ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+              className={`lg:col-span-6 ${isReversed ? 'lg:order-1' : 'lg:order-2'} group`}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              {/* Device type label */}
+              <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[9px] font-black uppercase tracking-widest mb-4 ${product.bg} ${product.border} ${product.accent}`}>
+                <Video size={11} />
+                <span>{product.video.type} · {product.video.duration}</span>
+              </div>
+
+              <DeviceFrame
+                product={product}
+                onPlayClick={() => setVideoOpen(true)}
+                hovered={hovered}
+              />
+
+              {/* Target users below device */}
+              <div className="mt-5 space-y-1.5">
+                <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">Target Users</p>
+                <div className="flex flex-wrap gap-2">
                   {product.targetUsers.map((u, i) => (
-                    <li key={i} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
-                      <CheckCircle2 size={13} className={`${product.accent} flex-shrink-0 mt-0.5`} />
+                    <div key={i} className="flex items-center gap-1.5 text-[10px] text-slate-600 font-medium">
+                      <CheckCircle2 size={11} className={product.accent} />
                       {u}
-                    </li>
+                    </div>
                   ))}
-                </ul>
+                </div>
               </div>
-            </div>
-
-            {/* CTA Row */}
-            <div className="flex flex-wrap gap-3 pt-2">
-              {product.externalLinks.map((link, i) => {
-                const ext = isExternal(link.url);
-                const Tag = ext ? 'a' : Link;
-                const props = ext
-                  ? { href: link.url, target: '_blank', rel: 'noopener noreferrer' }
-                  : { to: link.url };
-
-                return (
-                  <Tag
-                    key={i}
-                    {...props}
-                    className={`inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 ${
-                      link.primary
-                        ? 'bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white shadow-lg shadow-cyan-500/30'
-                        : 'bg-white border-2 border-cyan-300 text-[#0284C7] hover:bg-cyan-50'
-                    }`}
-                  >
-                    <span>{link.label}</span>
-                    {ext ? <ExternalLink size={14} /> : <ArrowRight size={14} />}
-                  </Tag>
-                );
-              })}
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-};
-
-// ─── Products Dedicated Pages Grid ─────────────────────────────────────
-export const ProductsDedicatedPages = () => {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  return (
-    <>
-      <section id="products-detail" className="relative py-20 lg:py-28 bg-white overflow-hidden font-sans border-b border-slate-200/80">
-        {/* Dot mesh */}
-        <div
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
-          style={{ backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
-        />
-        <div className="absolute top-1/3 right-1/4 w-[600px] h-[400px] bg-indigo-400/10 rounded-full blur-[140px] pointer-events-none" />
-
-        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
-
-          {/* Header */}
-          <div className="text-left w-full space-y-4 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Building2 className="w-4 h-4 text-[#0284C7]" />
-              <span>Dedicated Product Pages / Full Details</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
-              Explore Each Product <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                In Depth
-              </span>
-            </h2>
-            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl font-sans">
-              Tap any product to explore its complete feature set, technology stack, target users, screenshots, and how to get started.
-            </p>
-          </div>
-
-          {/* 6 Product Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PRODUCTS.map((product, idx) => (
-              <motion.div
-                key={product.id}
-                id={product.id}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl overflow-hidden border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all group cursor-pointer"
-                onClick={() => setSelectedProduct(product)}
-              >
-                {/* Colored header stripe */}
-                <div className={`relative bg-gradient-to-r ${product.heroGradient} p-6 text-white overflow-hidden`}>
-                  <div className={`absolute top-0 right-0 w-48 h-48 ${product.glowColor} rounded-full blur-[80px] pointer-events-none`} />
-                  <div className="flex items-center gap-4 relative z-10">
-                    <div className="w-14 h-14 rounded-2xl bg-white/95 p-2 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <img src={product.logo} alt={product.name} className="w-full h-full object-contain" />
-                    </div>
-                    <div>
-                      <span className={`text-[8px] font-mono font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full border ${product.bg} ${product.border} ${product.accent} mb-1 inline-block`}>
-                        {product.badge}
-                      </span>
-                      <h3 className="text-xl font-black text-white">{product.name}</h3>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="p-6 space-y-4">
-                  <p className={`text-[10px] font-extrabold uppercase tracking-widest ${product.accent}`}>
-                    {product.tagline}
-                  </p>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    {product.fullDesc.slice(0, 160)}...
-                  </p>
-
-                  {/* Stats */}
-                  <div className="grid grid-cols-4 gap-2">
-                    {product.stats.map((s, i) => (
-                      <div key={i} className="text-center">
-                        <div className={`text-base font-black ${product.accent}`}>{s.value}</div>
-                        <div className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">{s.label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Feature pills */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {product.features.slice(0, 3).map((f, i) => (
-                      <span key={i} className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${product.bg} border ${product.border} ${product.accent}`}>
-                        {f.title}
-                      </span>
-                    ))}
-                    {product.features.length > 3 && (
-                      <span className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-slate-100 border border-slate-200 text-slate-500">
-                        +{product.features.length - 3} more
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-200/70 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400">
-                    <button
-                      className={`flex items-center gap-1.5 ${product.accent} hover:opacity-80 transition-opacity`}
-                      onClick={() => setSelectedProduct(product)}
-                    >
-                      <span>View Full Details</span>
-                      <ArrowRight size={12} />
-                    </button>
-                    {product.link.startsWith('http') && (
-                      <a
-                        href={product.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={e => e.stopPropagation()}
-                        className={`flex items-center gap-1 ${product.accent} hover:opacity-80`}
-                      >
-                        <ExternalLink size={11} />
-                        <span>Visit</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Product Detail Modal */}
+      {/* Video Modal */}
       <AnimatePresence>
-        {selectedProduct && (
-          <ProductDetail
-            product={selectedProduct}
-            onClose={() => setSelectedProduct(null)}
-          />
+        {videoOpen && (
+          <VideoModal video={product.video} product={product} onClose={() => setVideoOpen(false)} />
         )}
       </AnimatePresence>
     </>
   );
 };
+
+// ─── Main Export ──────────────────────────────────────────────────────────────
+export const ProductsDedicatedPages = () => (
+  <div id="products-detail">
+    {/* Section intro header */}
+    <div className="bg-white border-b border-slate-100 py-10 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute inset-0 opacity-40"
+        style={{ backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
+      />
+      <div className="max-w-[90rem] mx-auto relative z-10 space-y-3">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+          <Building2 className="w-4 h-4" />
+          <span>Dedicated Product Pages / Deep Dives</span>
+        </div>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+          Every Product. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">One Story.</span>
+        </h2>
+        <p className="text-slate-500 text-base font-medium max-w-3xl">
+          Each YomTech platform has its own feature set, target users, technology stack, and video demonstration — explored in full detail below.
+        </p>
+      </div>
+    </div>
+
+    {PRODUCTS.map((product, idx) => (
+      <ProductShowcaseRow key={product.id} product={product} idx={idx} />
+    ))}
+  </div>
+);
