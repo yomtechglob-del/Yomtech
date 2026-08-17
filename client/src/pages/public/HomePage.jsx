@@ -34,12 +34,35 @@ export const HomePage = () => {
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   // CSS reveal refs — one IntersectionObserver each, zero scroll-thread JS
+  const buildHeaderRef = useReveal(0.3);
+  const buildGridRef = useReveal(0.15);
   const impactHeaderRef = useReveal(0.3);
   const impactGridRef = useReveal(0.15);
   const testimonialsRef = useReveal(0.2);
   const testimonialGrid = useReveal(0.1);
   const ctaRef = useReveal(0.2);
   const newsletterRef = useReveal(0.3);
+
+  const buildAndTeachServices = [
+    {
+      title: 'Enterprise Software & ERP Systems',
+      category: 'SOFTWARE & SYSTEMS',
+      img: erpImg,
+      icon: Check
+    },
+    {
+      title: 'Custom Web & Mobile Development',
+      category: 'FULLSTACK DEV',
+      img: webImg,
+      icon: Check
+    },
+    {
+      title: 'Cybersecurity & Cloud Infrastructure',
+      category: 'SECURITY & CLOUD',
+      img: cybersecurityImg,
+      icon: Check
+    }
+  ];
 
   const heroSubtitles = [
     "Innovative Tech Solutions for a Better Tomorrow",
