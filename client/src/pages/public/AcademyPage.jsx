@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Rocket, Cpu, Layout, Monitor, BarChart, GraduationCap, ArrowRight, BookOpen,
-  Award, Zap, Users, Check, Sparkles, ChevronRight, ShieldCheck, Code, Globe
+  Award, Zap, Users, Check, Sparkles, ChevronRight, ShieldCheck, Code, Globe,
+  Layers, CheckCircle2
 } from 'lucide-react';
 import { AcademyRadialHero } from '../../components/academy/AcademyRadialHero';
 import { LearningModel } from '../../components/academy/LearningModel';
@@ -21,7 +22,76 @@ import academyBootcampImg from '../../assets/academy/wabiskills_bootcamp.png';
 import logoImg from '../../assets/academy/wabiskills-logo.jpg';
 import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
+const ACADEMY_COURSES = [
+  {
+    id: 'fullstack',
+    category: 'FULLSTACK',
+    title: 'Fullstack Web & Mobile Development',
+    desc: 'Master frontend React, backend Node.js, Express, MongoDB/PostgreSQL, and mobile React Native development through end-to-end production software engineering.',
+    badge: 'Fullstack Engineering',
+    badgeColor: 'bg-sky-50 text-sky-700 border-sky-200',
+    duration: '16 Weeks',
+    format: 'Live Bootcamps + Hands-on',
+    projectsCount: '6+ Apps',
+    rating: '4.9 ★★★★★',
+    tags: ['React & Next.js', 'Node.js & Express', 'React Native Mobile', 'PostgreSQL & MongoDB', 'Cloud Deployment'],
+    layout: 'left-image'
+  },
+  {
+    id: 'ai',
+    category: 'AI',
+    title: 'Artificial Intelligence & Machine Learning',
+    desc: 'Deep dive into PyTorch, neural network architectures, computer vision, natural language processing, and LLM fine-tuning built for production environments.',
+    badge: 'AI & Data Science',
+    badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
+    duration: '20 Weeks',
+    format: 'Project Bootcamps',
+    projectsCount: '5+ AI Models',
+    rating: '5.0 ★★★★★',
+    tags: ['PyTorch & Python', 'Computer Vision (YOLO)', 'LLMs & Fine-Tuning', 'NLP & Vector DBs', 'Model Deployment'],
+    layout: 'right-image'
+  },
+  {
+    id: 'uiux',
+    category: 'DESIGN',
+    title: 'UI/UX & Modern Product Design',
+    desc: 'Learn user research, wireframing, interactive prototyping in Figma, design systems creation, and usability testing with real startup client projects.',
+    badge: 'Product Design',
+    badgeColor: 'bg-pink-50 text-pink-700 border-pink-200',
+    duration: '12 Weeks',
+    format: 'Design Studio Workshops',
+    projectsCount: '4+ Portfolios',
+    rating: '4.9 ★★★★★',
+    tags: ['Figma Mastery', 'User Research & Journey', 'Design Systems', 'Interactive Prototyping', 'Usability Audits'],
+    layout: 'left-image'
+  },
+  {
+    id: 'data',
+    category: 'DATA',
+    title: 'Data Engineering & Business Intelligence',
+    desc: 'Build scalable data pipelines, automated ETL workflows, SQL analytical queries, and executive dashboards with Python, PostgreSQL, and PowerBI/Tableau.',
+    badge: 'Data Engineering',
+    badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
+    duration: '14 Weeks',
+    format: 'Data Lab Bootcamps',
+    projectsCount: '5+ Dashboards',
+    rating: '4.8 ★★★★★',
+    tags: ['Python & Pandas', 'Advanced SQL & Postgres', 'ETL Data Pipelines', 'PowerBI Dashboards', 'Data Warehouse'],
+    layout: 'right-image'
+  }
+];
+
 export const AcademyPage = () => {
+  const [activeCourseTab, setActiveCourseTab] = useState('ALL');
+
+  const filteredCourses = activeCourseTab === 'ALL'
+    ? ACADEMY_COURSES
+    : ACADEMY_COURSES.filter(c => c.category === activeCourseTab);
+
+  const handleEnrollClick = (title) => {
+    window.open('https://wabiskills.com/', '_blank');
+  };
+
   return (
     <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden">
       {/* Architectural SVG Border Overlay */}
