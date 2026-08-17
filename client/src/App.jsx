@@ -8,6 +8,7 @@ import { ServicesPage } from './pages/public/ServicesPage';
 import { AcademyPage } from './pages/public/AcademyPage';
 import { AboutPage } from './pages/public/AboutPage';
 import { ContactPage } from './pages/public/ContactPage';
+import { ProductsPage } from './pages/public/ProductsPage';
 import { AdminLoginPage } from './pages/admin/AdminLoginPage';
 import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
 
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/cacademy" element={<Navigate to="/academy" replace />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
 

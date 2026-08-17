@@ -21,6 +21,7 @@ export const Navbar = () => {
     { name: 'Home', path: '/', hasDropdown: false },
     { name: 'Services', path: '/services', hasDropdown: true },
     { name: 'Academy', path: '/academy', hasDropdown: false },
+    { name: 'Products', path: '/products', hasDropdown: false },
     { name: 'About Us', path: '/about', hasDropdown: false },
     { name: 'Contact', path: '/contact', hasDropdown: false },
   ];
