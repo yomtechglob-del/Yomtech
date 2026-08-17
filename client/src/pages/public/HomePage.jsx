@@ -23,6 +23,8 @@ import mobileImg from '../../assets/services/mobile.png';
 import educationImg from '../../assets/services/education.png';
 import crmImg from '../../assets/services/crm.png';
 
+import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
+
 // Hero entry animations run ONCE on load — not scroll-triggered, so framer-motion is fine here
 const fadeLeft = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };
 const fadeRight = { hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } };
@@ -99,8 +101,12 @@ export const HomePage = () => {
     <div className="bg-[#F8FAFC] text-[#071A2B]">
 
       {/* 1. HERO SECTION */}
-      <section className="hero-scroll-fix home-section w-full relative pt-36 sm:pt-44 md:pt-48 pb-20 md:pb-28 hero-cyan-gradient text-white" style={{ touchAction: 'pan-y' }}>
-        <div className="max-w-[1720px] mx-auto w-full px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <section className="hero-scroll-fix home-section w-full relative pt-36 sm:pt-44 md:pt-48 pb-20 md:pb-28 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30" style={{ touchAction: 'pan-y' }}>
+        
+        {/* About Us Page Exact Hero Background */}
+        <AboutHeroBackground />
+
+        <div className="max-w-[1720px] mx-auto w-full px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
 
           {/* Left Hero Content */}
           <motion.div

@@ -23,6 +23,7 @@ import academyHeroImg from '../../assets/academy/wabiskills.jpg';
 import academyCoursesImg from '../../assets/academy/wabiskills_courses.png';
 import academyBootcampImg from '../../assets/academy/wabiskills_bootcamp.png';
 import logoImg from '../../assets/academy/wabiskills-logo.jpg';
+import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
 export const AcademyPage = () => {
   const navigate = useNavigate();
@@ -135,8 +136,12 @@ export const AcademyPage = () => {
       </svg>
 
       {/* 1. HERO SECTION */}
-      <section className="w-full pt-52 sm:pt-60 md:pt-64 pb-28 md:pb-36 relative z-10 hero-cyan-gradient">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <section className="w-full pt-52 sm:pt-60 md:pt-64 pb-28 md:pb-36 relative z-10 hero-cyan-gradient text-white border-b border-cyan-400/30 overflow-hidden">
+        
+        {/* About Us Page Exact Hero Background */}
+        <AboutHeroBackground />
+
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           {/* Left Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}

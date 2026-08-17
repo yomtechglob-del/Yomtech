@@ -34,6 +34,7 @@ import { CoreFoundations } from '../../components/about/CoreFoundations';
 import { CompanyGallery } from '../../components/about/CompanyGallery';
 import { CompanyProfileDetails } from '../../components/about/CompanyProfileDetails';
 import { AboutFinalCTA } from '../../components/about/AboutFinalCTA';
+import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
 export const AboutPage = () => {
   const navigate = useNavigate();

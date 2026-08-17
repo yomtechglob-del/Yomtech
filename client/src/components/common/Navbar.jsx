@@ -32,9 +32,7 @@ export const Navbar = () => {
       targetId: 'explore-our-services',
       desc: 'Browse full capabilities & enterprise solutions',
       icon: LayoutGrid,
-      badge: 'Full Suite',
-      gradient: 'from-[#0ED3DD] via-cyan-400 to-[#1DA1F2]',
-      glowColor: 'group-hover:shadow-[0_0_25px_rgba(14,211,221,0.8)]'
+      badge: 'FULL SUITE',
     },
     {
       name: 'IT Solutions',
@@ -42,9 +40,7 @@ export const Navbar = () => {
       targetId: 'it-solutions',
       desc: 'ERP, CRM, WMS & Security Systems',
       icon: Cpu,
-      badge: 'Enterprise',
-      gradient: 'from-emerald-400 to-[#0ED3DD]',
-      glowColor: 'group-hover:shadow-[0_0_25px_rgba(52,211,153,0.8)]'
+      badge: 'ENTERPRISE',
     },
     {
       name: 'Software Development',
@@ -52,9 +48,7 @@ export const Navbar = () => {
       targetId: 'software-development',
       desc: 'Custom Web, Mobile Apps & Platforms',
       icon: Code,
-      badge: 'Custom Code',
-      gradient: 'from-[#1DA1F2] to-cyan-300',
-      glowColor: 'group-hover:shadow-[0_0_25px_rgba(29,161,242,0.8)]'
+      badge: 'CUSTOM CODE',
     },
     {
       name: 'Education & Training',
@@ -62,9 +56,7 @@ export const Navbar = () => {
       targetId: 'education-training',
       desc: 'Cybersecurity, Cloud & Professional Coaching',
       icon: GraduationCap,
-      badge: 'WabiSkills',
-      gradient: 'from-amber-400 to-[#0ED3DD]',
-      glowColor: 'group-hover:shadow-[0_0_25px_rgba(251,191,36,0.8)]'
+      badge: 'WABISKILLS',
     },
   ];
 
@@ -125,18 +117,18 @@ export const Navbar = () => {
                     <ChevronDown size={18} className={`text-cyan-300 transition-transform duration-300 ${isServicesOpen ? 'rotate-180 text-white' : ''}`} />
                   </Link>
 
-                  {/* High-End Enterprise Glassmorphic Dropdown Menu in Hero Colors */}
+                  {/* High-End Enterprise Glassmorphic Dropdown Menu matching User Design */}
                   <AnimatePresence>
                     {isServicesOpen && (
                       <motion.div
-                        initial={{ opacity: 0, y: 16, scale: 0.95 }}
+                        initial={{ opacity: 0, y: 14, scale: 0.96 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 16, scale: 0.95 }}
-                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[420px] hero-cyan-gradient backdrop-blur-3xl border border-white/30 rounded-[2rem] p-4 shadow-[0_30px_80px_rgba(0,0,0,0.65),0_0_40px_rgba(255,255,255,0.2)] z-50 space-y-2 overflow-hidden text-white"
+                        exit={{ opacity: 0, y: 14, scale: 0.96 }}
+                        transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-3.5 w-[460px] bg-gradient-to-b from-[#00609C] via-[#00487C] to-[#002D54] backdrop-blur-3xl border border-cyan-400/50 rounded-[2.5rem] p-4 shadow-[0_30px_90px_rgba(0,0,0,0.8),0_0_50px_rgba(0,180,216,0.3)] z-50 space-y-2.5 overflow-hidden text-white"
                       >
-                        {/* Glow highlight top line */}
-                        <div className="absolute top-0 left-10 right-10 h-[1.5px] bg-gradient-to-r from-transparent via-white/80 to-transparent opacity-90" />
+                        {/* Top ambient highlight line */}
+                        <div className="absolute top-0 left-10 right-10 h-[2px] bg-gradient-to-r from-transparent via-cyan-300 to-transparent opacity-90" />
 
                         {serviceCategories.map((cat) => {
                           const IconComp = cat.icon;
@@ -148,58 +140,64 @@ export const Navbar = () => {
                                 e.preventDefault();
                                 handleDropdownClick(cat.path, cat.targetId);
                               }}
-                              className="group relative flex items-start gap-4 p-3.5 rounded-2xl border border-white/20 bg-black/20 hover:bg-white/20 backdrop-blur-xl hover:border-white/50 transition-all duration-300 cursor-pointer overflow-hidden shadow-md hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)]"
+                              className="group relative flex items-center justify-between p-3.5 rounded-2xl border border-cyan-400/40 bg-gradient-to-r from-[#005187]/80 to-[#0071B7]/80 hover:from-[#0068AC] hover:to-[#0089D4] backdrop-blur-xl hover:border-cyan-300 transition-all duration-300 cursor-pointer overflow-hidden shadow-lg hover:shadow-[0_10px_30px_rgba(0,180,216,0.35)] hover:scale-[1.01]"
                             >
                               {/* Hover Light Sweep Effect */}
                               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
-                              {/* Glass Icon Box with Hero Accent */}
-                              <div className="w-11 h-11 rounded-xl bg-white/20 border border-white/40 flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#042B24] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(255,255,255,0.7)] transition-all duration-300 shrink-0">
-                                <IconComp size={20} />
-                              </div>
-
-                              <div className="flex flex-col flex-grow">
-                                <div className="flex items-center justify-between gap-2">
-                                  <span className="text-sm font-black text-white tracking-tight group-hover:text-cyan-200 transition-colors">
-                                    {cat.name}
-                                  </span>
-
-                                  {/* Glass Technology Badge */}
-                                  <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/20 border border-white/40 text-white group-hover:bg-white group-hover:text-[#042B24] transition-all">
-                                    {cat.badge}
-                                  </span>
+                              <div className="flex items-center gap-4 relative z-10 flex-grow pr-2 min-w-0">
+                                {/* Solid White Icon Box with Glowing Aura */}
+                                <div className="relative shrink-0">
+                                  <div className="absolute inset-0 rounded-2xl bg-cyan-300/60 blur-md group-hover:blur-lg transition-all" />
+                                  <div className="relative w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-[#03045E] shadow-[0_0_20px_rgba(255,255,255,0.8)] group-hover:scale-105 transition-transform duration-300">
+                                    <IconComp size={22} className="text-[#03045E]" />
+                                  </div>
                                 </div>
 
-                                <span className="text-xs font-medium text-white/85 leading-relaxed mt-1 group-hover:text-white">
-                                  {cat.desc}
-                                </span>
+                                {/* Text Info */}
+                                <div className="flex flex-col flex-grow min-w-0">
+                                  <div className="flex items-center justify-between gap-2">
+                                    <span className="text-base font-extrabold text-white tracking-tight group-hover:text-cyan-100 transition-colors truncate">
+                                      {cat.name}
+                                    </span>
+
+                                    {/* Solid White Pill Badge */}
+                                    <span className="text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full bg-white text-[#03045E] shadow-sm shrink-0">
+                                      {cat.badge}
+                                    </span>
+                                  </div>
+
+                                  <span className="text-xs font-medium text-cyan-100/90 leading-relaxed mt-0.5 group-hover:text-white truncate">
+                                    {cat.desc}
+                                  </span>
+                                </div>
                               </div>
 
-                              {/* Interactive Arrow Indicator */}
-                              <div className="self-center opacity-70 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300 text-white">
-                                <ArrowRight size={16} />
+                              {/* Right Arrow */}
+                              <div className="relative z-10 text-white opacity-80 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300 shrink-0">
+                                <ArrowRight size={18} />
                               </div>
                             </a>
                           );
                         })}
 
-                        {/* Featured Bottom Enterprise Banner in Glass */}
-                        <div className="pt-2 mt-2 border-t border-white/20">
+                        {/* Featured Bottom Enterprise Banner */}
+                        <div className="pt-1 mt-1 border-t border-cyan-400/30">
                           <Link
                             to="/services"
                             onClick={() => setIsServicesOpen(false)}
-                            className="flex items-center justify-between p-3 rounded-2xl bg-white/20 hover:bg-white border border-white/40 text-xs font-black text-white hover:text-[#042B24] transition-all duration-300 group/footer shadow-lg hover:shadow-[0_0_30px_rgba(255,255,255,0.6)] relative overflow-hidden"
+                            className="group/footer relative flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-[#003B6E]/90 to-[#005B94]/90 border border-cyan-300/50 hover:border-cyan-200 text-xs font-black text-white transition-all duration-300 shadow-xl hover:scale-[1.01] overflow-hidden"
                           >
-                            <span className="flex items-center gap-2 relative z-10">
-                              <span className="relative flex h-2.5 w-2.5">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
-                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-300" />
+                            <span className="flex items-center gap-2.5 relative z-10">
+                              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-300 opacity-75" />
+                                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#0ED3DD]" />
                               </span>
-                              <Sparkles size={14} className="text-cyan-200 group-hover/footer:text-[#042B24] animate-pulse transition-colors" />
-                              <span>Explore Full Capabilities & Systems Matrix</span>
+                              <Sparkles size={15} className="text-cyan-200 animate-pulse shrink-0" />
+                              <span className="font-extrabold text-xs sm:text-sm tracking-tight">Explore Full Capabilities &amp; Systems Matrix</span>
                             </span>
-                            <div className="w-6 h-6 rounded-full bg-white text-[#042B24] group-hover/footer:bg-[#042B24] group-hover/footer:text-white flex items-center justify-center group-hover/footer:translate-x-1 transition-all shadow-md">
-                              <ArrowRight size={13} />
+                            <div className="w-7 h-7 rounded-full bg-white text-[#03045E] group-hover/footer:scale-110 flex items-center justify-center transition-all shadow-md shrink-0 relative z-10">
+                              <ArrowRight size={14} />
                             </div>
                           </Link>
                         </div>

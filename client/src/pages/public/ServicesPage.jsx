@@ -26,6 +26,7 @@ import educationImg from '../../assets/services/education.png';
 import pillarITImg from '../../assets/services/pillar_it_solutions.png';
 import pillarSoftwareImg from '../../assets/services/pillar_software_dev.png';
 import pillarEducationImg from '../../assets/services/pillar_education_training.png';
+import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
 // 4 New Enterprise Strategy Sections
 import { ServicesEngineeringApproach } from '../../components/services/ServicesEngineeringApproach';
@@ -378,8 +379,12 @@ export const ServicesPage = () => {
   return (
     <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
       {/* 1. HERO HEADER SECTION — side-by-side layout */}
-      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden bg-gradient-to-br from-[#0284C7] via-[#0072B8] to-[#1DA1F2] text-white">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient text-white border-b border-cyan-400/30">
+        
+        {/* About Us Page Exact Hero Background */}
+        <AboutHeroBackground />
+
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10">
 
           {/* LEFT — Text block */}
           <motion.div

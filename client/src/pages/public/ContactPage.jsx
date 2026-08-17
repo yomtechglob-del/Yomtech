@@ -158,32 +158,18 @@ export const ContactPage = () => {
         badge="Get In Touch"
         breadcrumbs={[{ name: 'Contact Us', path: '/contact' }]}
       >
-        <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-amber-500/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-amber-400 hover:bg-amber-500/25 hover:shadow-[0_0_30px_rgba(245,158,11,0.5)] hover:scale-105 transition-all duration-300">
-          <div className="w-6.5 h-6.5 rounded-full bg-amber-500/25 border border-amber-400/60 flex items-center justify-center text-amber-300 group-hover:scale-110 transition-transform shrink-0">
-            <MapPin size={14} />
+        <div className="group relative flex items-center gap-3 px-6 py-3 rounded-full bg-white/15 backdrop-blur-2xl border border-white/30 text-white font-extrabold text-xs sm:text-sm shadow-xl hover:border-cyan-300 hover:bg-white/20 transition-all duration-300">
+          <div className="w-6 h-6 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center text-[#0ED3DD] shrink-0">
+            <MapPin size={13} />
           </div>
-          <span className="text-amber-200 font-extrabold whitespace-nowrap">Megenagna Derartu Building, Office 906</span>
+          <span className="text-white whitespace-nowrap">Addis Ababa, Ethiopia · Office 906</span>
         </div>
 
-        <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-cyan-400/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-cyan-300 hover:bg-cyan-500/25 hover:shadow-[0_0_30px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300">
-          <div className="w-6.5 h-6.5 rounded-full bg-cyan-400/25 border border-cyan-400/60 flex items-center justify-center text-cyan-300 group-hover:scale-110 transition-transform shrink-0">
-            <Phone size={14} />
+        <div className="group relative flex items-center gap-3 px-6 py-3 rounded-full bg-white/15 backdrop-blur-2xl border border-white/30 text-white font-extrabold text-xs sm:text-sm shadow-xl hover:border-emerald-300 hover:bg-white/20 transition-all duration-300">
+          <div className="w-6 h-6 rounded-full bg-emerald-400/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0">
+            <Clock size={13} />
           </div>
-          <span className="text-cyan-200 font-extrabold whitespace-nowrap">+251 (977) 666-699</span>
-        </div>
-
-        <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-blue-500/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-blue-400 hover:bg-blue-500/25 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300">
-          <div className="w-6.5 h-6.5 rounded-full bg-blue-500/25 border border-blue-400/60 flex items-center justify-center text-blue-300 group-hover:scale-110 transition-transform shrink-0">
-            <Mail size={14} />
-          </div>
-          <span className="text-blue-200 font-extrabold whitespace-nowrap">contact@yomtechglobal.org</span>
-        </div>
-
-        <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-black/30 backdrop-blur-xl border border-emerald-500/50 text-white font-black text-xs xl:text-sm shadow-xl hover:border-emerald-400 hover:bg-emerald-500/25 hover:shadow-[0_0_30px_rgba(52,211,153,0.5)] hover:scale-105 transition-all duration-300">
-          <div className="w-6.5 h-6.5 rounded-full bg-emerald-500/25 border border-emerald-400/60 flex items-center justify-center text-emerald-300 group-hover:scale-110 transition-transform shrink-0">
-            <Clock size={14} />
-          </div>
-          <span className="text-emerald-200 font-extrabold whitespace-nowrap">24hr Response Guarantee</span>
+          <span className="text-emerald-200 whitespace-nowrap">24hr Response Guarantee</span>
         </div>
       </PageHeader>
 
