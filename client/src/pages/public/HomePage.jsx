@@ -1370,11 +1370,11 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 11 — NEW: THE FUTURE OF YOMTECH
+          SECTION 11 — THE FUTURE OF YOMTECH (PUSHPIN ROADMAP JOURNEY)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        {/* Dotted Grid Mesh Texture */}
         <div 
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
@@ -1383,9 +1383,9 @@ export const HomePage = () => {
           }}
         />
 
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-20 relative z-10">
 
-          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          {/* Header Badge */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
               <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
@@ -1406,38 +1406,144 @@ export const HomePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { num: '01', title: 'CONTINUOUS LEARNING', desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen their foundations.', gradient: 'from-[#0284C7] to-cyan-400' },
-              { num: '02', title: 'PRACTICAL INNOVATION', desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.', gradient: 'from-cyan-500 to-teal-400' },
-              { num: '03', title: 'SCALABLE ENGINEERING', desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.', gradient: 'from-blue-600 to-[#0284C7]' },
-              { num: '04', title: 'GLOBAL CONNECTION', desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.', gradient: 'from-indigo-600 to-blue-500' }
-            ].map((p) => (
-              <div 
-                key={p.num} 
-                className="bg-white/95 rounded-3xl p-7 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 space-y-5 relative overflow-hidden group hover:-translate-y-1 flex flex-col justify-between"
-              >
-                {/* Top Accent Gradient Edge */}
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${p.gradient}`} />
+          {/* Staggered 2-Column S-Curve Pushpin Roadmap Container */}
+          <div className="relative max-w-6xl mx-auto py-8">
+            
+            {/* Background S-Curve Connecting Dashed Path SVG */}
+            <svg 
+              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+              viewBox="0 0 100 100" 
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M 25,12 C 65,12 75,20 75,38 C 75,56 25,52 25,70 C 25,88 75,82 75,95" 
+                stroke="#0284C7" 
+                strokeWidth="0.5" 
+                strokeDasharray="1.5 1.5" 
+                strokeLinecap="round"
+                className="opacity-60"
+              />
+            </svg>
 
-                <div className="space-y-4 pt-1">
-                  <div className="flex items-center justify-between">
-                    <span className="w-11 h-11 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] flex items-center justify-center font-black font-mono text-sm shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:border-[#0284C7] transition-all duration-300">
-                      {p.num}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">PILLAR {p.num}</span>
-                  </div>
+            {/* Staggered 2-Column Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14 md:gap-y-20 relative z-10">
+              {[
+                { 
+                  num: '01', 
+                  title: 'Continuous Learning', 
+                  desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen their foundations.', 
+                  tilt: '-rotate-2 hover:rotate-0',
+                  offset: 'md:translate-y-0',
+                  pinColor: 'from-blue-500 to-blue-700 shadow-blue-500/40',
+                  numColor: 'text-blue-600',
+                  badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
+                  icon: GraduationCap,
+                  floatDuration: 4.3
+                },
+                { 
+                  num: '02', 
+                  title: 'Practical Innovation', 
+                  desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.', 
+                  tilt: 'rotate-2 hover:rotate-0',
+                  offset: 'md:translate-y-20',
+                  pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
+                  numColor: 'text-emerald-600',
+                  badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                  icon: Lightbulb,
+                  floatDuration: 4.9
+                },
+                { 
+                  num: '03', 
+                  title: 'Scalable Engineering', 
+                  desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.', 
+                  tilt: '-rotate-1 hover:rotate-0',
+                  offset: 'md:translate-y-0',
+                  pinColor: 'from-purple-500 to-purple-700 shadow-purple-500/40',
+                  numColor: 'text-purple-600',
+                  badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
+                  icon: Layers,
+                  floatDuration: 5.2
+                },
+                { 
+                  num: '04', 
+                  title: 'Global Connection', 
+                  desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.', 
+                  tilt: 'rotate-3 hover:rotate-0',
+                  offset: 'md:translate-y-20',
+                  pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
+                  numColor: 'text-amber-600',
+                  badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
+                  icon: Globe,
+                  floatDuration: 4.6
+                }
+              ].map((pillar, idx) => {
+                const PillarIcon = pillar.icon;
 
-                  <h3 className="text-base font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight">
-                    {p.title}
-                  </h3>
+                return (
+                  <motion.div 
+                    key={pillar.num}
+                    initial={{ opacity: 0, y: 50, scale: 0.94 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    className={`relative w-full ${pillar.offset}`}
+                  >
+                    {/* Continuous Ambient Floating Bobbing Container */}
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: pillar.floatDuration,
+                        ease: 'easeInOut',
+                      }}
+                      className="relative w-full"
+                    >
+                      {/* 3D Realistic Pushpin Top Medallion with Swaying Animation */}
+                      <motion.div 
+                        animate={{ rotate: [-3, 3, -3] }}
+                        transition={{ repeat: Infinity, duration: 3.2 + idx * 0.4, ease: 'easeInOut' }}
+                        className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none"
+                      >
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${pillar.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
+                          <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                        </div>
+                        <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                      </motion.div>
 
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    {p.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
+                      {/* Animated Pushpin Tilted Card Div */}
+                      <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] ${pillar.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-6 group cursor-pointer overflow-hidden`}>
+                        
+                        {/* Top Gradient Shimmer Highlight Line */}
+                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        <div className="flex items-center justify-between">
+                          <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${pillar.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
+                            {pillar.num}
+                          </span>
+
+                          <div className={`w-14 h-14 rounded-2xl ${pillar.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
+                            <PillarIcon size={26} className="group-hover:scale-110 transition-transform duration-300" />
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300 tracking-tight">
+                            {pillar.title}
+                          </h3>
+                          <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-800 transition-colors duration-300">
+                            {pillar.desc}
+                          </p>
+                        </div>
+
+                      </div>
+                    </motion.div>
+
+                  </motion.div>
+                );
+              })}
+            </div>
+
           </div>
 
         </div>
