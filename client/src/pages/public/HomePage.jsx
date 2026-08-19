@@ -8,7 +8,7 @@ import {
   GraduationCap, Code, Server, Video, Eye, Lock, Users,
   MessageCircle, ArrowUp, Calendar, FileText, ChevronRight,
   Factory, Landmark, Heart, BookOpen, Newspaper, Clock,
-  ExternalLink, BarChart3, Rocket, Share2, Play
+  ExternalLink, BarChart3, Rocket, Share2, Play, Lightbulb
 } from 'lucide-react';
 
 // Background & Brand Assets
