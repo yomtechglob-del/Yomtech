@@ -413,24 +413,17 @@ export const HomePage = () => {
       <AboutEcosystem
         hideBadge={true}
         customHeading={
-          <div className="space-y-6 mb-6">
-            <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Building2 size={16} className="text-[#0284C7]" />
-                <span>ARCHITECTING DIGITAL EXCELLENCE</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
-              </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+              <Building2 className="w-4 h-4" />
+              <span>ARCHITECTING DIGITAL EXCELLENCE</span>
             </div>
-
-            <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
-                Who We Are &amp; <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                  Our Ecosystem Philosophy
-                </span>
-              </h2>
-            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+              Who We Are &amp; <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                Our Ecosystem Philosophy
+              </span>
+            </h2>
           </div>
         }
         customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future."
