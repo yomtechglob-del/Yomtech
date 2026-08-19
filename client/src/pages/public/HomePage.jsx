@@ -669,7 +669,7 @@ export const HomePage = () => {
 
                   <div className="space-y-4 pt-1">
                     <div className="flex items-center justify-between">
-                      <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider shadow-2xs ${srv.badgeStyle || 'bg-cyan-50 text-[#0284C7] border border-cyan-200'}`}>
+                      <span className="px-3.5 py-1 rounded-full bg-white border-2 border-[#0284C7]/60 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
                         {srv.tag}
                       </span>
                       <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${srv.gradient || 'from-cyan-500 to-blue-600'} text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -689,7 +689,7 @@ export const HomePage = () => {
                   <div className="pt-4 border-t border-slate-100">
                     <button
                       onClick={() => navigate('/services')}
-                      className="w-full py-3 px-4 rounded-2xl bg-slate-50 group-hover:bg-[#0284C7] text-slate-800 group-hover:text-white border border-slate-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                      className="w-full py-3 px-4 rounded-full bg-white group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
                     >
                       <span>Explore Capability</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
