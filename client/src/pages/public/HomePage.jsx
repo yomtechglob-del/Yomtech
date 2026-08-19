@@ -442,6 +442,7 @@ export const HomePage = () => {
           </h2>
         }
         customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future."
+        showCeoQuote={true}
       />
 
 

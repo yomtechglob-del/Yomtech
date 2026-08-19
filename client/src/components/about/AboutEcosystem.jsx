@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sparkles, Globe, Cpu, Award, ArrowRight, CheckCircle2, X, 
-  BookOpen, Layers, ShieldCheck, Zap, Users, GraduationCap
+  BookOpen, Layers, ShieldCheck, Zap, Users, GraduationCap, Quote
 } from 'lucide-react';
 import yomtechLogo from '../../assets/logos/logo.png';
 
@@ -244,7 +244,7 @@ const EcosystemCenterHexagon = ({ logoSrc }) => (
   </div>
 );
 
-export const AboutEcosystem = ({ customBadgeText, customHeading, customDescription }) => {
+export const AboutEcosystem = ({ customBadgeText, customHeading, customDescription, showCeoQuote }) => {
   const [hoveredId, setHoveredId] = useState(null);
   const [selectedHex, setSelectedHex] = useState(null);
 
@@ -283,37 +283,50 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
               {customDescription || "Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide."}
             </p>
 
-            {/* 7 Core Values Pill Buttons */}
-            <div className="flex flex-wrap gap-2.5 pt-2">
-              <span className="px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <Sparkles className="w-3.5 h-3.5 text-sky-500" />
-                Innovation
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <Cpu className="w-3.5 h-3.5 text-orange-500" />
-                Intelligence
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <Zap className="w-3.5 h-3.5 text-purple-500" />
-                Creativity
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <BookOpen className="w-3.5 h-3.5 text-indigo-500" />
-                Continuous Learning
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <Globe className="w-3.5 h-3.5 text-amber-500" />
-                Client Success
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-                Integrity
-              </span>
-              <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
-                <Award className="w-3.5 h-3.5 text-cyan-500" />
-                Excellence
-              </span>
-            </div>
+            {/* CEO Quote Card (If showCeoQuote is true for Homepage) OR 7 Core Values Pill Buttons */}
+            {showCeoQuote ? (
+              <div className="p-6 rounded-2xl bg-cyan-50/70 border-l-4 border-[#0284C7] space-y-3 w-full shadow-sm">
+                <Quote size={24} className="text-[#0284C7]" />
+                <p className="text-sm font-bold text-slate-800 italic leading-relaxed">
+                  "Technology is not merely a tool; it is the foundation for innovation, opportunity, and sustainable growth."
+                </p>
+                <div className="pt-1">
+                  <p className="text-xs font-black text-slate-900">Ermias Alemayehu</p>
+                  <p className="text-[10px] font-bold text-[#0284C7] uppercase">Founder &amp; Chief Executive Officer</p>
+                </div>
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2.5 pt-2">
+                <span className="px-3.5 py-1.5 rounded-full bg-sky-50 border border-sky-200 text-sky-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <Sparkles className="w-3.5 h-3.5 text-sky-500" />
+                  Innovation
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <Cpu className="w-3.5 h-3.5 text-orange-500" />
+                  Intelligence
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <Zap className="w-3.5 h-3.5 text-purple-500" />
+                  Creativity
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <BookOpen className="w-3.5 h-3.5 text-indigo-500" />
+                  Continuous Learning
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <Globe className="w-3.5 h-3.5 text-amber-500" />
+                  Client Success
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
+                  Integrity
+                </span>
+                <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-cyan-700 text-xs font-bold flex items-center gap-1.5 shadow-xs">
+                  <Award className="w-3.5 h-3.5 text-cyan-500" />
+                  Excellence
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Right Column: Desktop Honeycomb Cluster Shifted to Right */}
