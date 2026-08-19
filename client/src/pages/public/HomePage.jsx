@@ -1034,7 +1034,8 @@ export const HomePage = () => {
                   pinColor: 'from-blue-500 to-blue-700 shadow-blue-500/40',
                   numColor: 'text-blue-600',
                   badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
-                  icon: Target
+                  icon: Target,
+                  floatDuration: 4.2
                 },
                 { 
                   num: '02', 
@@ -1045,7 +1046,8 @@ export const HomePage = () => {
                   pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
                   numColor: 'text-emerald-600',
                   badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                  icon: Code
+                  icon: Code,
+                  floatDuration: 4.8
                 },
                 { 
                   num: '03', 
@@ -1056,7 +1058,8 @@ export const HomePage = () => {
                   pinColor: 'from-purple-500 to-purple-700 shadow-purple-500/40',
                   numColor: 'text-purple-600',
                   badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
-                  icon: Cpu
+                  icon: Cpu,
+                  floatDuration: 5.1
                 },
                 { 
                   num: '04', 
@@ -1067,7 +1070,8 @@ export const HomePage = () => {
                   pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
                   numColor: 'text-amber-600',
                   badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
-                  icon: ShieldCheck
+                  icon: ShieldCheck,
+                  floatDuration: 4.5
                 },
                 { 
                   num: '05', 
@@ -1078,47 +1082,72 @@ export const HomePage = () => {
                   pinColor: 'from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
                   numColor: 'text-[#0284C7]',
                   badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200',
-                  icon: TrendingUp
+                  icon: TrendingUp,
+                  floatDuration: 5.4
                 }
-              ].map((step) => {
+              ].map((step, idx) => {
                 const StepIcon = step.icon;
 
                 return (
-                  <div key={step.num} className={`relative w-full ${step.offset}`}>
-                    
-                    {/* 3D Realistic Pushpin Top Medallion */}
-                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
-                        <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                      </div>
-                      <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
-                    </div>
-
-                    {/* Larger Pushpin Tilted Card Div */}
-                    <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-2xl ${step.tilt} transition-all duration-500 hover:-translate-y-2.5 relative z-20 space-y-6 group cursor-pointer`}>
-                      
-                      <div className="flex items-center justify-between">
-                        <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${step.numColor}`}>
-                          {step.num}
-                        </span>
-
-                        <div className={`w-14 h-14 rounded-2xl ${step.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}>
-                          <StepIcon size={26} />
+                  <motion.div 
+                    key={step.num}
+                    initial={{ opacity: 0, y: 50, scale: 0.94 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                    className={`relative w-full ${step.offset}`}
+                  >
+                    {/* Continuous Ambient Floating Bobbing Container */}
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: step.floatDuration,
+                        ease: 'easeInOut',
+                      }}
+                      className="relative w-full"
+                    >
+                      {/* 3D Realistic Pushpin Top Medallion with Swaying Animation */}
+                      <motion.div 
+                        animate={{ rotate: [-3, 3, -3] }}
+                        transition={{ repeat: Infinity, duration: 3.2 + idx * 0.4, ease: 'easeInOut' }}
+                        className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none"
+                      >
+                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
+                          <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
                         </div>
+                        <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                      </motion.div>
+
+                      {/* Animated Pushpin Tilted Card Div */}
+                      <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] ${step.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-6 group cursor-pointer overflow-hidden`}>
+                        
+                        {/* Top Gradient Shimmer Highlight Line */}
+                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                        <div className="flex items-center justify-between">
+                          <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${step.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
+                            {step.num}
+                          </span>
+
+                          <div className={`w-14 h-14 rounded-2xl ${step.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
+                            <StepIcon size={26} className="group-hover:scale-110 transition-transform duration-300" />
+                          </div>
+                        </div>
+
+                        <div className="space-y-3">
+                          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300 tracking-tight">
+                            {step.title}
+                          </h3>
+                          <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-800 transition-colors duration-300">
+                            {step.desc}
+                          </p>
+                        </div>
+
                       </div>
+                    </motion.div>
 
-                      <div className="space-y-3">
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors tracking-tight">
-                          {step.title}
-                        </h3>
-                        <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
-                          {step.desc}
-                        </p>
-                      </div>
-
-                    </div>
-
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
