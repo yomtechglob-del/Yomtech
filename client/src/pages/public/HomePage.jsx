@@ -1008,17 +1008,17 @@ export const HomePage = () => {
             {/* Background S-Curve Connecting Dashed Path SVG */}
             <svg 
               className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-              viewBox="0 0 1000 1000" 
+              viewBox="0 0 100 100" 
               fill="none"
               preserveAspectRatio="none"
             >
               <path 
-                d="M 250,150 C 750,150 750,350 250,550 C -250,750 750,850 500,980" 
+                d="M 25,6 C 65,6 75,10 75,23 C 75,36 25,35 25,48 C 25,60 75,53 75,65 C 75,77 50,76 50,88" 
                 stroke="#0284C7" 
-                strokeWidth="3.5" 
-                strokeDasharray="10 10" 
+                strokeWidth="0.4" 
+                strokeDasharray="1.2 1.2" 
                 strokeLinecap="round"
-                className="opacity-40"
+                className="opacity-60"
               />
             </svg>
 
