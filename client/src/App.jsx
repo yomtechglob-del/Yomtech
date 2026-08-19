@@ -7,6 +7,10 @@ import { ThreeDBackground } from './components/common/ThreeDBackground';
 import { HomePage } from './pages/public/HomePage';
 import { ServicesPage } from './pages/public/ServicesPage';
 import { SolutionsPage } from './pages/public/SolutionsPage';
+import { IndustriesPage } from './pages/public/IndustriesPage';
+import { PortfolioPage } from './pages/public/PortfolioPage';
+import { MethodologyPage } from './pages/public/MethodologyPage';
+import { PartnersPage } from './pages/public/PartnersPage';
 import { AcademyPage } from './pages/public/AcademyPage';
 import { AboutPage } from './pages/public/AboutPage';
 import { ContactPage } from './pages/public/ContactPage';
@@ -40,6 +44,10 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/solutions" element={<SolutionsPage />} />
+          <Route path="/industries" element={<IndustriesPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/methodology" element={<MethodologyPage />} />
+          <Route path="/partners" element={<PartnersPage />} />
           <Route path="/academy" element={<AcademyPage />} />
           <Route path="/cacademy" element={<Navigate to="/academy" replace />} />
           <Route path="/about" element={<AboutPage />} />
