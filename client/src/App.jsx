@@ -11,6 +11,8 @@ import { IndustriesPage } from './pages/public/IndustriesPage';
 import { PortfolioPage } from './pages/public/PortfolioPage';
 import { MethodologyPage } from './pages/public/MethodologyPage';
 import { PartnersPage } from './pages/public/PartnersPage';
+import { CareersPage } from './pages/public/CareersPage';
+import { MediaPage } from './pages/public/MediaPage';
 import { AcademyPage } from './pages/public/AcademyPage';
 import { AboutPage } from './pages/public/AboutPage';
 import { ContactPage } from './pages/public/ContactPage';
@@ -48,6 +50,8 @@ export default function App() {
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/methodology" element={<MethodologyPage />} />
           <Route path="/partners" element={<PartnersPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/media" element={<MediaPage />} />
           <Route path="/academy" element={<AcademyPage />} />
           <Route path="/cacademy" element={<Navigate to="/academy" replace />} />
           <Route path="/about" element={<AboutPage />} />
