@@ -812,13 +812,13 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 05 — NEW: PRODUCTS & PLATFORMS
+          SECTION 05 — OUR FLAGSHIP PLATFORMS (MATCHING ABOUT SECTION STYLING)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+      <section className="py-24 md:py-32 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#0B1528] text-white relative overflow-hidden font-sans border-b border-cyan-400/30">
         
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        {/* Cyber Dotted Grid Mesh Overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          className="absolute inset-0 opacity-[0.35] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
             backgroundSize: '24px 24px',
@@ -827,122 +827,155 @@ export const HomePage = () => {
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          {/* Top Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Rocket size={16} className="text-[#0284C7]" />
-                <span>YOMTECH PRODUCTS & PLATFORMS</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+              <div className="px-6 py-2 rounded-full bg-cyan-950/90 border-2 border-cyan-400/70 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10 -mr-[1px]">
+                <span className="text-[10px] text-cyan-300">◆</span>
+                <span>OUR FLAGSHIP PLATFORMS</span>
+                <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-400 via-[#0ED3DD] to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-                Technology Built Beyond <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600">
-                  The Single Project.
-                </span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+                Integrated Digital Platforms &amp; Products
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
-                Alongside enterprise technology services, YomTech Global develops and supports platforms and initiatives designed to create practical digital value, expand access to technology, and connect people with new opportunities.
+              <p className="text-cyan-100/90 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                YomTech Global builds and operates proprietary digital platforms that support education, recruitment, collaboration, and enterprise resource management.
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Featured Hero Product Card: Yomnex ERP */}
-            <div className="lg:col-span-6 bg-white/95 text-slate-900 rounded-3xl p-8 sm:p-12 border-2 border-[#0284C7] shadow-[0_20px_50px_rgba(2,132,199,0.12)] flex flex-col justify-between space-y-8 relative overflow-hidden">
-              {/* Top Accent Gradient Edge */}
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600" />
+          {/* Top 3 Platforms Row - Horizontal Flow Left Marquee Stream */}
+          <div className="relative w-full overflow-hidden py-4">
+            {/* Glass Fade Edges */}
+            <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-[#03045E] via-[#03045E]/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#0B1528] via-[#0B1528]/80 to-transparent z-10 pointer-events-none" />
 
-              <div className="space-y-5 relative z-10 pt-1">
-                <div className="flex items-center justify-between">
-                  <span className="px-4 py-1.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-mono font-black uppercase tracking-widest shadow-xs">
-                    FLAGSHIP ERP SUITE
-                  </span>
-                  <span className="text-xs font-mono text-[#0284C7] font-bold">YOMNEX ERP</span>
+            <div className="flex w-max gap-6 animate-water-flow-left hover:[animation-play-state:paused]">
+              {[
+                { id: 'wabiskills', name: 'WabiSkills', tag: 'Talent Academy', desc: 'Technology training and digital skills development platform', logo: wabiSkillsLogo, actionText: 'Explore Platform', url: 'https://wabiskills.com/' },
+                { id: 'wabijob', name: 'WabiJob', tag: 'Recruitment', desc: 'Talent and recruitment platform connecting professionals with opportunities', logo: wabiJobsLogo, actionText: 'Explore Platform', url: 'https://wabijob.com/' },
+                { id: 'yomnex', name: 'Yomnex ERP', tag: 'Enterprise ERP', desc: 'Fully custom-built enterprise resource planning system for organizations', logo: yomnexLogo, actionText: 'Request System Demo', url: '/products' },
+                { id: 'wabiskills2', name: 'WabiSkills', tag: 'Talent Academy', desc: 'Technology training and digital skills development platform', logo: wabiSkillsLogo, actionText: 'Explore Platform', url: 'https://wabiskills.com/' },
+                { id: 'wabijob2', name: 'WabiJob', tag: 'Recruitment', desc: 'Talent and recruitment platform connecting professionals with opportunities', logo: wabiJobsLogo, actionText: 'Explore Platform', url: 'https://wabijob.com/' },
+                { id: 'yomnex2', name: 'Yomnex ERP', tag: 'Enterprise ERP', desc: 'Fully custom-built enterprise resource planning system for organizations', logo: yomnexLogo, actionText: 'Request System Demo', url: '/products' }
+              ].map((p, idx) => (
+                <div 
+                  key={`top-p-${p.id}-${idx}`}
+                  style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
+                  className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-cyan-200/90 shadow-xl hover:border-cyan-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 text-slate-900 cursor-pointer"
+                >
+                  <div className="space-y-4 relative z-10 w-full flex flex-col items-center">
+                    <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
+                      {p.tag}
+                    </span>
+
+                    <div className="relative my-1">
+                      <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-3.5 shadow-md border border-slate-100/90 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center overflow-hidden z-10">
+                        <img src={p.logo} alt={p.name} className="w-full h-full object-contain filter drop-shadow-xs" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 text-center">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
+                        {p.name}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
+                        {p.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  {p.url && p.url.startsWith('http') ? (
+                    <a 
+                      href={p.url} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="pt-4 border-t border-slate-100 w-full flex items-center justify-center gap-2 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10 hover:text-cyan-700 transition-colors"
+                    >
+                      <span>{p.actionText || 'Explore Platform'}</span>
+                      <div className="w-7 h-7 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] flex items-center justify-center shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                      <ExternalLink className="w-3.5 h-3.5 text-cyan-500 opacity-80" />
+                    </a>
+                  ) : (
+                    <Link
+                      to={p.url || "/products"}
+                      className="pt-4 border-t border-slate-100 w-full flex items-center justify-center gap-2 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10 hover:text-cyan-700 transition-colors"
+                    >
+                      <span>{p.actionText || 'Explore Platform'}</span>
+                      <div className="w-7 h-7 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] flex items-center justify-center shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    </Link>
+                  )}
                 </div>
-
-                <div className="flex items-center gap-4 pt-2">
-                  <img src={yomnexLogo} alt="Yomnex ERP" className="h-12 object-contain" />
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">Yomnex ERP</h3>
-                </div>
-
-                <p className="text-slate-600 text-sm font-medium leading-relaxed">
-                  Enterprise-focused digital systems and business technology platforms designed completely from scratch for government institutions, banks, and large commercial operations.
-                </p>
-
-                <div className="grid grid-cols-2 gap-2.5 pt-2 text-xs font-bold text-slate-800">
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Finance &amp; Ledger</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Human Resources</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Procurement &amp; Stock</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Gate Access Controls</div>
-                </div>
-              </div>
-
-              <div className="pt-5 border-t border-slate-200/80 relative z-10 flex flex-wrap items-center justify-between gap-4">
-                <span className="text-xs font-extrabold text-slate-600 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  Zero per-user monthly licensing fees
-                </span>
-                <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white font-black text-xs uppercase tracking-widest shadow-md hover:shadow-lg hover:scale-105 transition-all">
-                  <span>Explore Yomnex Specs</span>
-                  <ArrowRight size={14} />
-                </Link>
-              </div>
+              ))}
             </div>
+          </div>
 
-            {/* Supporting Platform Cards Grid */}
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {/* WabiSkills Card */}
-              <div className="bg-white rounded-3xl p-7 border-2 border-emerald-300 shadow-lg flex flex-col justify-between space-y-6 hover:shadow-xl transition-all">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-black uppercase">LIVE ACADEMY</span>
-                    <img src={wabiSkillsLogo} alt="WabiSkills" className="h-6 object-contain" />
+          {/* Center Master Ecosystem Video Announcement Showcase */}
+          <CenterEcosystemVideo />
+
+          {/* Bottom 3 Platforms Row - Horizontal Flow Right Marquee Stream */}
+          <div className="relative w-full overflow-hidden py-4">
+            {/* Glass Fade Edges */}
+            <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-24 bg-gradient-to-r from-[#03045E] via-[#03045E]/80 to-transparent z-10 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-24 bg-gradient-to-l from-[#0B1528] via-[#0B1528]/80 to-transparent z-10 pointer-events-none" />
+
+            <div className="flex w-max gap-6 animate-water-flow-right hover:[animation-play-state:paused]">
+              {[
+                { id: 'wabix', name: 'WabiX', tag: 'Collaboration', desc: 'Virtual meeting and collaboration platform for online engagement', logo: logoEmblem, comingSoon: true },
+                { id: 'mari', name: 'Mari', tag: 'Social Media', desc: 'Next-generation social media application developed by YomTech Global', logo: logoEmblem, comingSoon: true },
+                { id: 'media', name: 'YomTech Media', tag: 'Tech Media', desc: 'Technology storytelling, documentaries, and innovation media platform', logo: logoEmblem, comingSoon: true },
+                { id: 'wabix2', name: 'WabiX', tag: 'Collaboration', desc: 'Virtual meeting and collaboration platform for online engagement', logo: logoEmblem, comingSoon: true },
+                { id: 'mari2', name: 'Mari', tag: 'Social Media', desc: 'Next-generation social media application developed by YomTech Global', logo: logoEmblem, comingSoon: true },
+                { id: 'media2', name: 'YomTech Media', tag: 'Tech Media', desc: 'Technology storytelling, documentaries, and innovation media platform', logo: logoEmblem, comingSoon: true }
+              ].map((p, idx) => (
+                <div 
+                  key={`bot-p-${p.id}-${idx}`}
+                  style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 100%)' }}
+                  className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-xl hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 text-slate-900 cursor-pointer"
+                >
+                  <div className="space-y-4 relative z-10 w-full flex flex-col items-center">
+                    <div className="flex flex-wrap items-center justify-center gap-2">
+                      <span className="px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
+                        {p.tag}
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-amber-500/15 border border-amber-400/80 text-amber-700 text-[10px] font-black uppercase tracking-widest shadow-xs flex items-center gap-1.5">
+                        <Clock className="w-3 h-3 text-amber-600 animate-pulse" />
+                        COMING SOON
+                      </span>
+                    </div>
+
+                    <div className="relative my-1">
+                      <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-white p-3.5 shadow-md border border-slate-100/90 group-hover:scale-110 transition-transform duration-500 flex items-center justify-center overflow-hidden z-10">
+                        <img src={p.logo} alt={p.name} className="w-full h-full object-contain filter drop-shadow-xs" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2 text-center">
+                      <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-amber-600 transition-colors">
+                        {p.name}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed max-w-sm mx-auto">
+                        {p.desc}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 font-display">WabiSkills Platform</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    A practical technology learning platform focused on hands-on coding bootcamps, mentorship, and real-world engineering experience.
-                  </p>
-                </div>
-                <a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-emerald-700 hover:text-emerald-900">
-                  <span>Visit WabiSkills Portal ↗</span>
-                  <ExternalLink size={13} />
-                </a>
-              </div>
 
-              {/* WabiJobs Card */}
-              <div className="bg-white rounded-3xl p-7 border-2 border-amber-300 shadow-lg flex flex-col justify-between space-y-6 hover:shadow-xl transition-all">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-black uppercase">TALENT NETWORK</span>
-                    <img src={wabiJobsLogo} alt="WabiJobs" className="h-6 object-contain" />
+                  <div className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2.5 text-xs sm:text-sm font-extrabold text-amber-700 relative z-10">
+                    <span className="group-hover:text-amber-800 transition-colors">Coming Soon</span>
+                    <div className="w-7 h-7 rounded-full bg-amber-50 border border-amber-300 text-amber-600 flex items-center justify-center shadow-xs group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+                      <Clock className="w-3.5 h-3.5" />
+                    </div>
                   </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 font-display">WabiJobs Ecosystem</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    A technology and professional opportunity ecosystem connecting vetted software skills, developers, and career pathways.
-                  </p>
                 </div>
-                <a href="https://wabijob.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-extrabold text-amber-700 hover:text-amber-900">
-                  <span>Visit WabiJobs Portal ↗</span>
-                  <ExternalLink size={13} />
-                </a>
-              </div>
-
-              {/* Future Digital Platforms Card */}
-              <div className="sm:col-span-2 bg-gradient-to-br from-cyan-50/90 to-blue-50/80 text-slate-900 rounded-3xl p-7 border-2 border-cyan-300 shadow-md flex flex-col justify-between space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-cyan-100 border border-cyan-300 text-[#0284C7] text-[10px] font-black uppercase">FUTURE PLATFORMS</span>
-                  <span className="text-[10px] font-mono font-bold text-[#0284C7]">R&amp;D ROADMAP</span>
-                </div>
-                <h3 className="text-lg font-extrabold text-slate-900 font-display">WabiX &amp; Mari Digital Ecosystem Initiatives</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Additional digital meeting tools, social communication apps, and technology media channels actively being engineered within the YomTech Global innovation labs.
-                </p>
-              </div>
+              ))}
             </div>
           </div>
 
