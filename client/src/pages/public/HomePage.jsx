@@ -414,28 +414,28 @@ export const HomePage = () => {
           SECTION 03 — NEW: THE YOMTECH GLOBAL ECOSYSTEM
           (Interactive Connected Node Nucleus Experience)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-slate-900 text-white relative overflow-hidden border-b border-slate-800 font-sans">
+      <section className="py-24 md:py-32 bg-gradient-to-b from-[#F0F7FF] via-[#F4FAFF] to-[#EAF4FF] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
         
-        {/* Animated Background Mesh & Ambient Glow Orbs */}
-        <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        {/* Animated Background Mesh & Soft Ambient Glow Orbs */}
+        <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-[0.08] pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
           
           {/* Header */}
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-950/80 border border-cyan-700/60 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(6,182,212,0.2)]">
-              <Sparkles size={14} className="text-cyan-400" />
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] shadow-xs">
+              <Sparkles size={14} className="text-[#0284C7]" />
               <span>YOMTECH GLOBAL ECOSYSTEM</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-tight text-white">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-tight text-slate-900">
               One Connected Ecosystem. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                 Engineered for High Impact.
               </span>
             </h2>
-            <p className="text-slate-300 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
               Yomtech Global unifies enterprise software engineering, cloud infrastructure, security, digital talent academy, and recruitment network into one seamless digital matrix.
             </p>
           </div>
@@ -453,8 +453,8 @@ export const HomePage = () => {
                     onClick={() => setActiveEcosystemTab(idx)}
                     className={`w-full p-5 sm:p-6 rounded-3xl text-left transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer relative overflow-hidden group border ${
                       isActive
-                        ? 'bg-slate-800/90 border-cyan-500/80 shadow-[0_15px_35px_rgba(6,182,212,0.25)] ring-2 ring-cyan-400/40 translate-x-2'
-                        : 'bg-slate-800/40 hover:bg-slate-800/70 border-slate-700/60 text-slate-300 hover:border-slate-600'
+                        ? 'bg-white border-[#0284C7] shadow-[0_15px_35px_rgba(2,132,199,0.18)] ring-4 ring-[#0284C7]/15 translate-x-2'
+                        : 'bg-white/70 hover:bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 shadow-xs'
                     }`}
                   >
                     {/* Left Active Edge Indicator */}
@@ -465,22 +465,22 @@ export const HomePage = () => {
                     <div className="flex items-center gap-4 relative z-10">
                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 shrink-0 ${
                         isActive 
-                          ? `bg-gradient-to-br ${pillar.gradient} text-white shadow-lg shadow-cyan-500/30 scale-105` 
-                          : 'bg-slate-700/60 text-slate-400 group-hover:text-white group-hover:bg-slate-700'
+                          ? `bg-gradient-to-br ${pillar.gradient} text-white shadow-md shadow-cyan-500/20 scale-105` 
+                          : 'bg-slate-100 text-slate-500 group-hover:text-[#0284C7] group-hover:bg-cyan-50'
                       }`}>
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-0.5">
-                          <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${
-                            isActive ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40' : 'bg-slate-700/40 text-slate-400'
+                          <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full ${
+                            isActive ? 'bg-cyan-100 text-[#0284C7] border border-cyan-200' : 'bg-slate-100 text-slate-500'
                           }`}>
                             {pillar.badge}
                           </span>
-                          <span className="text-[11px] font-mono text-slate-400">NODE #{pillar.number}</span>
+                          <span className="text-[11px] font-mono text-slate-400 font-bold">NODE #{pillar.number}</span>
                         </div>
                         <h3 className={`text-base sm:text-lg font-extrabold font-display leading-tight transition-colors ${
-                          isActive ? 'text-white' : 'text-slate-200 group-hover:text-white'
+                          isActive ? 'text-[#0284C7]' : 'text-slate-900 group-hover:text-[#0284C7]'
                         }`}>
                           {pillar.title}
                         </h3>
@@ -488,7 +488,7 @@ export const HomePage = () => {
                     </div>
 
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-                      isActive ? 'bg-cyan-500 text-slate-950 scale-110 shadow-md' : 'bg-slate-700/40 text-slate-400 group-hover:bg-slate-700'
+                      isActive ? 'bg-[#0284C7] text-white scale-110 shadow-md' : 'bg-slate-100 text-slate-400 group-hover:bg-cyan-50 group-hover:text-[#0284C7]'
                     }`}>
                       <ChevronRight size={16} className={`transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`} />
                     </div>
@@ -506,35 +506,35 @@ export const HomePage = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: -15, scale: 0.98 }}
                   transition={{ duration: 0.35, ease: 'easeOut' }}
-                  className="relative rounded-3xl p-8 sm:p-12 border border-slate-700/80 bg-slate-800/80 backdrop-blur-2xl shadow-[0_30px_70px_rgba(0,0,0,0.5)] overflow-hidden space-y-8"
+                  className="relative rounded-3xl p-8 sm:p-12 border-2 border-cyan-200/90 bg-white/95 backdrop-blur-2xl shadow-[0_25px_60px_rgba(2,132,199,0.12)] overflow-hidden space-y-8"
                 >
                   {/* Top Ambient Glow Background */}
-                  <div className={`absolute top-0 right-0 w-80 h-80 bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} opacity-15 blur-3xl pointer-events-none`} />
+                  <div className={`absolute top-0 right-0 w-80 h-80 bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} opacity-10 blur-3xl pointer-events-none`} />
 
                   {/* Header Status Bar */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-6 relative z-10">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 pb-6 relative z-10">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/90 text-xs font-mono text-cyan-300">
-                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                      <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-xs font-mono text-[#0284C7]">
+                        <span className="w-2 h-2 rounded-full bg-cyan-500 animate-ping" />
                         <span className="font-bold">NODE {ECOSYSTEM_PILLARS[activeEcosystemTab].number} // ONLINE</span>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${ECOSYSTEM_PILLARS[activeEcosystemTab].badgeBg}`}>
+                      <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#0284C7] text-white shadow-xs">
                         {ECOSYSTEM_PILLARS[activeEcosystemTab].badge}
                       </span>
                     </div>
 
-                    <div className="font-mono text-xs text-slate-400 flex items-center gap-2">
-                      <Zap size={14} className="text-cyan-400" />
+                    <div className="font-mono text-xs text-slate-500 font-bold flex items-center gap-2">
+                      <Zap size={14} className="text-[#0284C7]" />
                       <span>CONNECTED TO YOMTECH BACKBONE</span>
                     </div>
                   </div>
 
                   {/* Title & Description */}
                   <div className="space-y-3 relative z-10">
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black font-display text-white tracking-tight leading-tight">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black font-display text-slate-900 tracking-tight leading-tight">
                       {ECOSYSTEM_PILLARS[activeEcosystemTab].title}
                     </h3>
-                    <p className="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">
+                    <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
                       {ECOSYSTEM_PILLARS[activeEcosystemTab].desc}
                     </p>
                   </div>
@@ -542,13 +542,13 @@ export const HomePage = () => {
                   {/* Technical Capabilities Grid */}
                   <div className="space-y-4 relative z-10">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">
+                      <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">
                         Core Technical Capabilities:
                       </h4>
                       <div className="flex gap-2">
                         {ECOSYSTEM_PILLARS[activeEcosystemTab].metrics.map((m, idx) => (
-                          <span key={idx} className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-700/70 text-[10px] font-mono text-cyan-300">
-                            {m.label}: <strong className="text-white">{m.val}</strong>
+                          <span key={idx} className="px-2.5 py-1 rounded-md bg-cyan-50 border border-cyan-200 text-[10px] font-mono text-[#0284C7] font-bold">
+                            {m.label}: <strong className="text-slate-900">{m.val}</strong>
                           </span>
                         ))}
                       </div>
@@ -558,27 +558,27 @@ export const HomePage = () => {
                       {ECOSYSTEM_PILLARS[activeEcosystemTab].details.map((cap) => (
                         <div 
                           key={cap} 
-                          className="flex items-center gap-3 p-4 rounded-2xl bg-slate-900/70 border border-slate-700/70 text-xs sm:text-sm font-bold text-slate-100 hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-300 group/cap"
+                          className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200/90 text-xs sm:text-sm font-bold text-slate-800 hover:border-cyan-400 hover:bg-cyan-50/50 transition-all duration-300 group/cap shadow-xs"
                         >
-                          <div className={`w-6 h-6 rounded-lg bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} flex items-center justify-center text-white shrink-0 shadow-sm`}>
+                          <div className={`w-6 h-6 rounded-lg bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} flex items-center justify-center text-white shrink-0 shadow-xs`}>
                             <Check size={14} strokeWidth={3} />
                           </div>
-                          <span className="group-hover/cap:text-cyan-300 transition-colors">{cap}</span>
+                          <span className="group-hover/cap:text-[#0284C7] transition-colors">{cap}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
                   {/* Footer Action Line */}
-                  <div className="pt-6 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-4 relative z-10">
-                    <span className="text-xs font-bold text-slate-400 flex items-center gap-2">
-                      <Building2 size={14} className="text-cyan-400" />
+                  <div className="pt-6 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-4 relative z-10">
+                    <span className="text-xs font-bold text-slate-500 flex items-center gap-2">
+                      <Building2 size={14} className="text-[#0284C7]" />
                       Integrated under YomTech Global Parent Network
                     </span>
 
                     <Link 
                       to="/services" 
-                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} text-white font-black text-xs uppercase tracking-wider shadow-lg hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300`}
+                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300`}
                     >
                       <span>Explore Node Specs</span>
                       <ArrowRight size={15} />
