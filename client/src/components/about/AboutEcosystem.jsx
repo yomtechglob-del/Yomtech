@@ -244,7 +244,7 @@ const EcosystemCenterHexagon = ({ logoSrc }) => (
   </div>
 );
 
-export const AboutEcosystem = () => {
+export const AboutEcosystem = ({ customDescription }) => {
   const [hoveredId, setHoveredId] = useState(null);
   const [selectedHex, setSelectedHex] = useState(null);
 
@@ -274,7 +274,7 @@ export const AboutEcosystem = () => {
             </div>
 
             <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
-              Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide.
+              {customDescription || "Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide."}
             </p>
 
             {/* 7 Core Values Pill Buttons */}

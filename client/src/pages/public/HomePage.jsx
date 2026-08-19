@@ -231,13 +231,13 @@ const ECOSYSTEM_PILLARS = [
 ];
 
 const accentMap = {
-  cyan:    { bg: 'bg-cyan-50',    border: 'border-cyan-200',    text: 'text-cyan-700' },
+  cyan: { bg: 'bg-cyan-50', border: 'border-cyan-200', text: 'text-cyan-700' },
   emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700' },
-  violet:  { bg: 'bg-violet-50',  border: 'border-violet-200',  text: 'text-violet-700' },
-  sky:     { bg: 'bg-sky-50',     border: 'border-sky-200',     text: 'text-sky-700' },
-  amber:   { bg: 'bg-amber-50',   border: 'border-amber-200',   text: 'text-amber-700' },
-  rose:    { bg: 'bg-rose-50',    border: 'border-rose-200',    text: 'text-rose-700' },
-  indigo:  { bg: 'bg-indigo-50',  border: 'border-indigo-200',  text: 'text-indigo-700' },
+  violet: { bg: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-700' },
+  sky: { bg: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-700' },
+  amber: { bg: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-700' },
+  rose: { bg: 'bg-rose-50', border: 'border-rose-200', text: 'text-rose-700' },
+  indigo: { bg: 'bg-indigo-50', border: 'border-indigo-200', text: 'text-indigo-700' },
 };
 
 
@@ -430,8 +430,8 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Hexagonal Honeycomb Core Values Cluster Section from About Us */}
-      <AboutEcosystem />
+      {/* Hexagonal Honeycomb Core Values Cluster Section with custom Homepage description */}
+      <AboutEcosystem customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future." />
 
 
       {/* ════════════════════════════════════════════════════
@@ -467,16 +467,14 @@ export const HomePage = () => {
                   <button
                     key={pillar.id}
                     onClick={() => setActiveEcosystemTab(idx)}
-                    className={`w-full p-5 rounded-2xl text-left border transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer ${
-                      isActive
+                    className={`w-full p-5 rounded-2xl text-left border transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer ${isActive
                         ? 'bg-white border-[#0284C7] shadow-xl shadow-cyan-500/10 ring-2 ring-[#0284C7]/20 scale-[1.02]'
                         : 'bg-white/60 hover:bg-white border-slate-200/90 text-slate-700'
-                    }`}
+                      }`}
                   >
                     <div className="flex items-center gap-3.5">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs transition-colors shrink-0 ${
-                        isActive ? 'bg-gradient-to-tr ' + pillar.color + ' text-white shadow-md' : 'bg-slate-100 text-slate-500'
-                      }`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs transition-colors shrink-0 ${isActive ? 'bg-gradient-to-tr ' + pillar.color + ' text-white shadow-md' : 'bg-slate-100 text-slate-500'
+                        }`}>
                         {pillar.number}
                       </div>
                       <div>
@@ -1116,18 +1114,17 @@ export const HomePage = () => {
 
           <div className="space-y-6 text-center max-w-4xl mx-auto">
             <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">Trusted by Public Sector Institutions, Universities &amp; Enterprises</h3>
-            
+
             {/* Category Filter Pills */}
             <div className="flex flex-wrap justify-center gap-2">
               {partnerCategories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setPartnerFilter(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
-                    partnerFilter === cat
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${partnerFilter === cat
                       ? 'bg-[#0284C7] text-white shadow-md'
                       : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-                  }`}
+                    }`}
                 >
                   {cat}
                 </button>
