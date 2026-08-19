@@ -96,6 +96,7 @@ export const Footer = () => {
           <ul className="space-y-3 text-sm text-slate-200 font-medium">
             <li><Link to="/" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Home</Link></li>
             <li><Link to="/services" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Services</Link></li>
+            <li><Link to="/solutions" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Solutions</Link></li>
             <li><a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> WabiSkills Academy ↗</a></li>
             <li><Link to="/about" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> About Us</Link></li>
             <li><Link to="/contact" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Contact Us</Link></li>
@@ -136,7 +137,10 @@ export const Footer = () => {
             </div>
             <div className="flex items-center gap-2.5">
               <Phone size={16} className="text-[#0ED3DD] shrink-0" />
-              <a href="tel:+251977666699" className="hover:text-white transition-colors">+251 (977) 666-699</a>
+              <div className="flex flex-col">
+                <a href="tel:+251977666699" className="hover:text-white transition-colors">+251 (977) 666-699</a>
+                <a href="tel:+251116687546" className="hover:text-white transition-colors">+251 (11) 668-7546</a>
+              </div>
             </div>
             <div className="flex items-start gap-2.5">
               <MapPin size={16} className="text-[#0ED3DD] shrink-0 mt-0.5" />

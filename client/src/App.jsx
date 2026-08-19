@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route, Outlet, Navigate } from 'react-
 import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { ThreeDBackground } from './components/common/ThreeDBackground';
+
 import { HomePage } from './pages/public/HomePage';
 import { ServicesPage } from './pages/public/ServicesPage';
+import { SolutionsPage } from './pages/public/SolutionsPage';
 import { AcademyPage } from './pages/public/AcademyPage';
 import { AboutPage } from './pages/public/AboutPage';
 import { ContactPage } from './pages/public/ContactPage';
@@ -37,6 +39,7 @@ export default function App() {
         <Route element={<PublicLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/solutions" element={<SolutionsPage />} />
           <Route path="/academy" element={<AcademyPage />} />
           <Route path="/cacademy" element={<Navigate to="/academy" replace />} />
           <Route path="/about" element={<AboutPage />} />
