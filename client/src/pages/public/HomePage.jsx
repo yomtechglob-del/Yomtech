@@ -288,10 +288,37 @@ export const HomePage = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
-  const partnerCategories = ['All', 'Government', 'Academic', 'Media', 'Enterprise'];
-  const filteredPartners = partnerFilter === 'All'
-    ? ALL_PARTNERS
-    : ALL_PARTNERS.filter(p => p.category === partnerFilter);
+  // Partner Data matching About Us page
+  const publicInstitutions = [
+    { name: 'SSGI', fullName: 'Space Science & Geospatial Institute', logo: ssgiLogo, website: 'https://ssgi.gov.et/' },
+    { name: 'INSA', fullName: 'Information Network Security Administration', logo: insaLogo, website: 'https://www.insa.gov.et/' },
+    { name: 'MInT', fullName: 'Ministry of Innovation and Technology', logo: mintLogo, website: 'https://mint.gov.et/' },
+    { name: 'EAII', fullName: 'Ethiopian Artificial Intelligence Institute', logo: eaiiLogo, website: 'https://eaii.gov.et/' },
+    { name: 'City Admin', fullName: 'Addis Ababa City Trade Bureau', logo: cityadminLogo, website: 'https://addisababa.gov.et/' },
+  ];
+
+  const academicPartners = [
+    { name: 'AASTU', fullName: 'Addis Ababa Science & Technology University', logo: aastuLogo, website: 'https://www.aastu.edu.et/' },
+    { name: 'ASTU', fullName: 'Adama Science & Technology University', logo: astuLogo, website: 'https://www.astu.edu.et/' },
+    { name: 'Arsi Uni', fullName: 'Arsi University', logo: arsiLogo, website: 'https://www.arsiun.edu.et/' },
+    { name: 'Kotebe', fullName: 'Kotebe University of Education', logo: kotebeLogo, website: 'https://kue.edu.et/' },
+    { name: 'Select College', fullName: 'Select Business & Technology College', logo: selectLogo, website: 'https://select.edu.et/' },
+  ];
+
+  const mediaPartners = [
+    { name: 'Fana Media', fullName: 'Fana Media Corporation S.C', logo: fanaLogo, website: 'https://www.fanabc.com/' },
+    { name: 'Balageru TV', fullName: 'Balageru Television Network', logo: balageruLogo, website: 'https://balagerutv.com/' },
+    { name: 'Addis AI', fullName: 'Addis AI Media & Research', logo: addisAiLogo, website: 'https://eaii.gov.et/' },
+    { name: 'Yonile Digitals', fullName: 'Yonile Digital Productions', logo: yonileLogo, website: 'https://www.facebook.com/yoniledigital/' },
+  ];
+
+  const enterpriseClients = [
+    { name: 'Bunna Bank', category: 'Banking & Financial Sector', logo: bunnaLogo, website: 'https://bunnabanksc.com/' },
+    { name: 'STEMpower LLC', category: 'Global STEM Education Partner', logo: stempowerLogo, website: 'https://www.stempower.org/' },
+    { name: 'IE Networks', category: 'Enterprise Network Infrastructure', logo: ieNetworksLogo, website: 'https://www.ienetworks.co/' },
+    { name: 'Hospitality Sector', category: '10+ Premier Hotels & Resorts', logo: hospitalityLogo, website: 'https://www.ethiopianhotelsassociation.org/' },
+    { name: 'Nova Printing', category: 'Publishing & Industrial Advertising', logo: novaLogo, website: 'https://novaprintingethiopia.com/' },
+  ];
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
@@ -1682,39 +1709,192 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 13 — PARTNERS TICKER & NEWSLETTER
+          SECTION 13 — CLIENTS & STRATEGIC PARTNERS (MATCHING ABOUT US PAGE)
       ════════════════════════════════════════════════════ */}
-      <section className="py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-t border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
 
-          <div className="space-y-6 text-center max-w-4xl mx-auto">
-            <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">Trusted by Leading Public &amp; Private Institutions</h3>
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-            {/* Category Filter Pills */}
-            <div className="flex flex-wrap justify-center gap-2">
-              {partnerCategories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setPartnerFilter(cat)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${partnerFilter === cat
-                      ? 'bg-[#0284C7] text-white shadow-md'
-                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
-                    }`}
-                >
-                  {cat}
-                </button>
-              ))}
+          {/* Top Header Badge */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
+                <span>CLIENTS &amp; STRATEGIC PARTNERS</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
-            {/* Partner Grid */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 pt-4">
-              {filteredPartners.map((pt) => (
-                <div key={pt.name} className="p-3 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center space-y-2 hover:scale-105 transition-all">
-                  <img src={pt.logo} alt={pt.name} className="w-10 h-10 object-contain" />
-                  <span className="text-[10px] font-extrabold text-slate-700 text-center leading-tight truncate w-full">{pt.name}</span>
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight font-display">
+                Trusted by Leading Public &amp; Private Institutions
+              </h2>
+              <p className="text-slate-600 font-medium text-sm sm:text-base leading-relaxed">
+                YomTech Global works closely with government ministries, national security agencies, universities, media networks, and financial institutions.
+              </p>
+            </div>
+          </div>
+
+          <div className="space-y-12 text-left py-2">
+            
+            {/* Public Sector & Government (Water Flow Left) */}
+            <div className="space-y-4">
+              <h4 className="text-xs font-black uppercase tracking-widest text-[#0284C7] flex items-center gap-2">
+                <Building2 className="w-4 h-4 text-[#0284C7]" />
+                <span>Government &amp; Public Sector Partners</span>
+              </h4>
+              
+              <div className="relative w-full overflow-hidden py-2">
+                <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+                <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+
+                <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-left">
+                  {[...publicInstitutions, ...publicInstitutions, ...publicInstitutions].map((item, idx) => (
+                    <a 
+                      key={`pub-${idx}`}
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Visit official website: ${item.fullName}`}
+                      className="group relative w-44 sm:w-48 p-4 rounded-2xl bg-gradient-to-b from-sky-50/80 via-white to-sky-50/40 border border-sky-200/90 shadow-sm hover:shadow-xl hover:border-cyan-400 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center space-y-2.5 shrink-0 cursor-pointer"
+                    >
+                      <div className="absolute top-2 right-2 text-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink size={11} />
+                      </div>
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2.5 shadow-md border border-slate-100 flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
+                        <img src={item.logo} alt={item.fullName} className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
+                      </div>
+                      <div className="space-y-0.5 w-full">
+                        <span className="text-sm font-black text-slate-900 font-display block group-hover:text-[#0284C7] transition-colors truncate">{item.name}</span>
+                        <span className="text-[10px] text-slate-500 font-semibold block leading-tight line-clamp-2">{item.fullName}</span>
+                      </div>
+                    </a>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
+
+            {/* Academic & University Partners (Water Flow Right) */}
+            <div className="space-y-4 pt-6 border-t border-slate-200/60">
+              <h4 className="text-xs font-black uppercase tracking-widest text-indigo-600 flex items-center gap-2">
+                <GraduationCap className="w-4 h-4 text-indigo-600" />
+                <span>Academic &amp; University Partners</span>
+              </h4>
+
+              <div className="relative w-full overflow-hidden py-2">
+                <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+                <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+
+                <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-right">
+                  {[...academicPartners, ...academicPartners, ...academicPartners].map((item, idx) => (
+                    <a 
+                      key={`acad-${idx}`}
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Visit official website: ${item.fullName}`}
+                      className="group relative w-44 sm:w-48 p-4 rounded-2xl bg-gradient-to-b from-indigo-50/80 via-white to-indigo-50/40 border border-indigo-200/90 shadow-sm hover:shadow-xl hover:border-indigo-400 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center space-y-2.5 shrink-0 cursor-pointer"
+                    >
+                      <div className="absolute top-2 right-2 text-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink size={11} />
+                      </div>
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2.5 shadow-md border border-slate-100 flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
+                        <img src={item.logo} alt={item.fullName} className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
+                      </div>
+                      <div className="space-y-0.5 w-full">
+                        <span className="text-sm font-black text-slate-900 font-display block group-hover:text-indigo-600 transition-colors truncate">{item.name}</span>
+                        <span className="text-[10px] text-slate-500 font-semibold block leading-tight line-clamp-2">{item.fullName}</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Media & Tech Storytelling (Water Flow Left Fast) */}
+            <div className="space-y-4 pt-6 border-t border-slate-200/60">
+              <h4 className="text-xs font-black uppercase tracking-widest text-emerald-600 flex items-center gap-2">
+                <Video className="w-4 h-4 text-emerald-600" />
+                <span>Media &amp; Tech Storytelling Organizations</span>
+              </h4>
+
+              <div className="relative w-full overflow-hidden py-2">
+                <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+                <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+
+                <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-left-fast">
+                  {[...mediaPartners, ...mediaPartners, ...mediaPartners, ...mediaPartners].map((item, idx) => (
+                    <a 
+                      key={`med-${idx}`}
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Visit official website: ${item.fullName}`}
+                      className="group relative w-44 sm:w-48 p-4 rounded-2xl bg-gradient-to-b from-emerald-50/80 via-white to-emerald-50/40 border border-emerald-200/90 shadow-sm hover:shadow-xl hover:border-emerald-400 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center space-y-2.5 shrink-0 cursor-pointer"
+                    >
+                      <div className="absolute top-2 right-2 text-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink size={11} />
+                      </div>
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2.5 shadow-md border border-slate-100 flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
+                        <img src={item.logo} alt={item.fullName} className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
+                      </div>
+                      <div className="space-y-0.5 w-full">
+                        <span className="text-sm font-black text-slate-900 font-display block group-hover:text-emerald-600 transition-colors truncate">{item.name}</span>
+                        <span className="text-[10px] text-slate-500 font-semibold block leading-tight line-clamp-2">{item.fullName}</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Enterprise & Commercial Sector Clients (Water Flow Right) */}
+            <div className="space-y-4 pt-6 border-t border-slate-200/60">
+              <h4 className="text-xs font-black uppercase tracking-widest text-amber-600 flex items-center gap-2">
+                <Award className="w-4 h-4 text-amber-600" />
+                <span>Enterprise &amp; Commercial Sector Clients</span>
+              </h4>
+
+              <div className="relative w-full overflow-hidden py-2">
+                <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+                <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
+
+                <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-right">
+                  {[...enterpriseClients, ...enterpriseClients, ...enterpriseClients].map((item, idx) => (
+                    <a 
+                      key={`ent-${idx}`}
+                      href={item.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={`Visit official website: ${item.name}`}
+                      className="group relative w-44 sm:w-48 p-4 rounded-2xl bg-gradient-to-b from-amber-50/80 via-white to-amber-50/40 border border-amber-200/90 shadow-sm hover:shadow-xl hover:border-amber-400 hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center space-y-2.5 shrink-0 cursor-pointer"
+                    >
+                      <div className="absolute top-2 right-2 text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <ExternalLink size={11} />
+                      </div>
+                      <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white p-2.5 shadow-md border border-slate-100 flex items-center justify-center group-hover:scale-105 group-hover:shadow-lg transition-all duration-300">
+                        <img src={item.logo} alt={item.category} className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
+                      </div>
+                      <div className="space-y-0.5 w-full">
+                        <span className="text-sm font-black text-slate-900 font-display block group-hover:text-amber-600 transition-colors truncate">{item.name}</span>
+                        <span className="text-[10px] text-slate-500 font-semibold block leading-tight line-clamp-2">{item.category}</span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
 
         </div>
