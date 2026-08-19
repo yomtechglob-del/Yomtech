@@ -695,14 +695,13 @@ export const HomePage = () => {
           {/* 12 Official Services List Matrix (Horizontal Water Flow Marquee Stream) */}
           <div className="pt-12 border-t border-slate-200/80 space-y-6 relative overflow-hidden">
             
-            {/* Header */}
-            <div className="flex items-center justify-center gap-3 mb-2">
-              <div className="h-[1.5px] w-16 bg-gradient-to-r from-transparent via-[#0284C7] to-cyan-400" />
+            {/* Header (Right Aligned) */}
+            <div className="flex items-center justify-end gap-3 mb-2">
+              <div className="h-[1.5px] w-24 bg-gradient-to-r from-transparent via-[#0284C7] to-cyan-400" />
               <div className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.25em] flex items-center gap-2 shadow-2xs">
                 <Sparkles size={13} className="text-[#0284C7]" />
                 <span>OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER</span>
               </div>
-              <div className="h-[1.5px] w-16 bg-gradient-to-l from-transparent via-[#0284C7] to-cyan-400" />
             </div>
 
             {/* Left & Right Gradient Fade Masks (Water Flow Entrance & Exit Effect) */}
