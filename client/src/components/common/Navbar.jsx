@@ -20,8 +20,12 @@ export const Navbar = () => {
   const links = [
     { name: 'Home', path: '/', hasDropdown: false },
     { name: 'Services', path: '/services', hasDropdown: true },
+    { name: 'Solutions', path: '/solutions', hasDropdown: false },
+    { name: 'Industries', path: '/industries', hasDropdown: false },
+    { name: 'Portfolio', path: '/portfolio', hasDropdown: false },
+    { name: 'Partners', path: '/partners', hasDropdown: false },
+    { name: 'Careers', path: '/careers', hasDropdown: false },
     { name: 'Academy', path: '/academy', hasDropdown: false },
-    { name: 'Products', path: '/products', hasDropdown: false },
     { name: 'About Us', path: '/about', hasDropdown: false },
     { name: 'Contact', path: '/contact', hasDropdown: false },
   ];

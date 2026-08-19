@@ -88,12 +88,12 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Quick Links Column */}
-        <div>
+        {/* Quick Links Column (Spans 2 cols on lg in 2 side-by-side columns) */}
+        <div className="lg:col-span-2">
           <h4 className="font-extrabold font-display text-sm uppercase tracking-wider text-white mb-5 border-l-2 border-[#0ED3DD] pl-3">
             Quick Links
           </h4>
-          <ul className="space-y-3 text-sm text-slate-200 font-medium">
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm text-slate-200 font-medium">
             <li><Link to="/" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Home</Link></li>
             <li><Link to="/services" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Services</Link></li>
             <li><Link to="/solutions" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Solutions</Link></li>
