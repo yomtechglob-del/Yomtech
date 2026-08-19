@@ -244,7 +244,7 @@ const EcosystemCenterHexagon = ({ logoSrc }) => (
   </div>
 );
 
-export const AboutEcosystem = ({ customDescription }) => {
+export const AboutEcosystem = ({ customBadgeText, customHeading, customDescription }) => {
   const [hoveredId, setHoveredId] = useState(null);
   const [selectedHex, setSelectedHex] = useState(null);
 
@@ -268,10 +268,16 @@ export const AboutEcosystem = ({ customDescription }) => {
             <div className="inline-block relative">
               <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
                 <Award className="w-6 h-6 text-cyan-200" />
-                <span>VALUES</span>
+                <span>{customBadgeText || "VALUES"}</span>
               </div>
               <div className="absolute -bottom-2 left-4 w-4 h-2 bg-[#0369a1] rounded-b-sm transform skew-x-12" />
             </div>
+
+            {customHeading && (
+              <div className="pt-1">
+                {customHeading}
+              </div>
+            )}
 
             <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
               {customDescription || "Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide."}

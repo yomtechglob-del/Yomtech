@@ -430,8 +430,19 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Hexagonal Honeycomb Core Values Cluster Section with custom Homepage description */}
-      <AboutEcosystem customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future." />
+      {/* Hexagonal Honeycomb Core Values Cluster Section with custom Homepage badge, heading, and description */}
+      <AboutEcosystem
+        customBadgeText="WHO WE ARE"
+        customHeading={
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+            Who We Are &amp; <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+              Our Ecosystem Philosophy
+            </span>
+          </h2>
+        }
+        customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future."
+      />
 
 
       {/* ════════════════════════════════════════════════════
