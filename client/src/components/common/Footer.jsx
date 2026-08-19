@@ -169,8 +169,8 @@ export const Footer = () => {
           © 2026 Yomtech Global. All rights reserved. Built with precision software engineering.
         </div>
         <div className="flex items-center gap-6 text-[11px]">
-          <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
           <Link to="/admin/login" className="hover:text-purple-300 transition-colors flex items-center gap-1 text-purple-300 font-bold">
             <ShieldCheck size={12} />
             <span>Admin Portal</span>
