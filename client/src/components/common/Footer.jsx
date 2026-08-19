@@ -21,9 +21,9 @@ export const Footer = () => {
       {/* Background Decorative Ambient Flares */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-cyan-300/20 blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 relative z-10">
-        {/* Brand & About Column (Spans 2 cols on lg) */}
-        <div className="lg:col-span-2 space-y-6">
+      <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative z-10">
+        {/* 1. Brand & About Column */}
+        <div className="space-y-6">
           <div className="flex items-center gap-3">
             <img
               src={logoImg}
@@ -40,101 +40,31 @@ export const Footer = () => {
             </div>
           </div>
 
-          <p className="text-slate-200 text-sm leading-relaxed max-w-sm font-normal">
+          <p className="text-slate-200 text-sm leading-relaxed font-normal">
             Building digital enterprise solutions, powering ERP &amp; cloud systems, and training the next generation of workforce tech leaders via <a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="text-[#0ED3DD] hover:text-white font-semibold transition-colors">WabiSkills Academy</a>.
           </p>
 
           {/* Prominent Professional Admin Sign In Button in Footer */}
-          <div className="pt-2">
+          <div className="pt-1">
             <Link
               to="/admin/login"
-              className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-purple-500/25 border border-purple-400/50 text-purple-200 hover:text-white hover:bg-purple-500/40 text-xs font-extrabold transition-all shadow-sm group"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/25 border border-purple-400/50 text-purple-200 hover:text-white hover:bg-purple-500/40 text-xs font-extrabold transition-all shadow-sm group"
             >
-              <ShieldCheck size={16} className="text-purple-300 group-hover:scale-110 transition-transform" />
+              <ShieldCheck size={15} className="text-purple-300 group-hover:scale-110 transition-transform" />
               <span>Admin Portal Sign In</span>
             </Link>
           </div>
 
           {/* Social Badges */}
-          <div className="flex items-center gap-3 pt-2">
-            <a
-              href="#"
-              aria-label="LinkedIn profile"
-              className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-cyan-300 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-110"
-            >
-              <Linkedin size={16} />
-            </a>
-            <a
-              href="#"
-              aria-label="Twitter profile"
-              className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-cyan-300 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-110"
-            >
-              <Twitter size={16} />
-            </a>
-            <a
-              href="#"
-              aria-label="GitHub repository"
-              className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-cyan-300 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-110"
-            >
-              <Github size={16} />
-            </a>
-            <a
-              href="#"
-              aria-label="Facebook page"
-              className="w-9 h-9 rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:border-cyan-300 hover:bg-white/20 text-white flex items-center justify-center transition-all hover:scale-110"
-            >
-              <Facebook size={16} />
-            </a>
+          <div className="flex items-center gap-3 pt-1">
+            <a href="#" aria-label="LinkedIn profile" className="w-8 h-8 rounded-full bg-white/10 border border-white/20 hover:border-cyan-300 text-white flex items-center justify-center transition-all hover:scale-110"><Linkedin size={15} /></a>
+            <a href="#" aria-label="Twitter profile" className="w-8 h-8 rounded-full bg-white/10 border border-white/20 hover:border-cyan-300 text-white flex items-center justify-center transition-all hover:scale-110"><Twitter size={15} /></a>
+            <a href="#" aria-label="GitHub repository" className="w-8 h-8 rounded-full bg-white/10 border border-white/20 hover:border-cyan-300 text-white flex items-center justify-center transition-all hover:scale-110"><Github size={15} /></a>
+            <a href="#" aria-label="Facebook page" className="w-8 h-8 rounded-full bg-white/10 border border-white/20 hover:border-cyan-300 text-white flex items-center justify-center transition-all hover:scale-110"><Facebook size={15} /></a>
           </div>
         </div>
 
-        {/* Quick Links Column (Spans 2 cols on lg in 2 side-by-side columns) */}
-        <div className="lg:col-span-2">
-          <h4 className="font-extrabold font-display text-sm uppercase tracking-wider text-white mb-5 border-l-2 border-[#0ED3DD] pl-3">
-            Quick Links
-          </h4>
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm text-slate-200 font-medium">
-            <li><Link to="/" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Home</Link></li>
-            <li><Link to="/services" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Services</Link></li>
-            <li><Link to="/solutions" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Solutions</Link></li>
-            <li><Link to="/industries" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Industries</Link></li>
-            <li><Link to="/portfolio" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Portfolio</Link></li>
-            <li><Link to="/methodology" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Our Methodology</Link></li>
-            <li><Link to="/why-choose-us" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Why Choose Us</Link></li>
-            <li><Link to="/partners" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Strategic Partners</Link></li>
-            <li><Link to="/clients" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Enterprise Clients</Link></li>
-            <li><Link to="/careers" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Careers &amp; Recruitment</Link></li>
-            <li><Link to="/wabijob" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> WabiJob Ecosystem</Link></li>
-            <li><Link to="/media" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Tech Media</Link></li>
-            <li><Link to="/documentaries" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Tech Documentaries</Link></li>
-            <li><a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> WabiSkills Academy ↗</a></li>
-            <li><Link to="/about" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> About Us</Link></li>
-            <li><Link to="/contact" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Contact Us</Link></li>
-            <li>
-              <Link to="/admin/login" className="hover:text-purple-300 transition-colors flex items-center gap-1.5 text-purple-300 font-bold">
-                <ShieldCheck size={14} />
-                <span>Admin Gateway</span>
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Our Services Column */}
-        <div>
-          <h4 className="font-extrabold font-display text-sm uppercase tracking-wider text-white mb-5 border-l-2 border-[#0ED3DD] pl-3">
-            Capabilities
-          </h4>
-          <ul className="space-y-2.5 text-xs text-slate-200 font-medium">
-            <li className="hover:text-white transition-colors">ERP &amp; CRM Solutions</li>
-            <li className="hover:text-white transition-colors">WMS &amp; Logistics Systems</li>
-            <li className="hover:text-white transition-colors">Custom Web &amp; Mobile Apps</li>
-            <li className="hover:text-white transition-colors">Cybersecurity &amp; Audits</li>
-            <li className="hover:text-white transition-colors">Cloud DevOps &amp; Migration</li>
-            <li className="hover:text-white transition-colors">Data Analytics &amp; BI</li>
-          </ul>
-        </div>
-
-        {/* Contact & Newsletter Column */}
+        {/* 2. Contact & Updates Column (Placed BETWEEN Yomtech Global and Quick Links) */}
         <div className="space-y-6">
           <h4 className="font-extrabold font-display text-sm uppercase tracking-wider text-white mb-5 border-l-2 border-[#0ED3DD] pl-3">
             Contact &amp; Updates
@@ -184,6 +114,52 @@ export const Footer = () => {
               </div>
             )}
           </form>
+        </div>
+
+        {/* 3. Quick Links Column (Spans 2 cols on lg in 2 side-by-side sub-columns) */}
+        <div className="lg:col-span-2">
+          <h4 className="font-extrabold font-display text-sm uppercase tracking-wider text-white mb-5 border-l-2 border-[#0ED3DD] pl-3">
+            Quick Links
+          </h4>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 text-sm text-slate-200 font-medium">
+            <li><Link to="/" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Home</Link></li>
+            <li><Link to="/services" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Services</Link></li>
+            <li><Link to="/solutions" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Solutions</Link></li>
+            <li><Link to="/industries" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Industries</Link></li>
+            <li><Link to="/portfolio" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Portfolio</Link></li>
+            <li><Link to="/methodology" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Our Methodology</Link></li>
+            <li><Link to="/why-choose-us" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Why Choose Us</Link></li>
+            <li><Link to="/partners" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Strategic Partners</Link></li>
+            <li><Link to="/clients" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Enterprise Clients</Link></li>
+            <li><Link to="/careers" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Careers &amp; Recruitment</Link></li>
+            <li><Link to="/wabijob" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> WabiJob Ecosystem</Link></li>
+            <li><Link to="/media" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Tech Media</Link></li>
+            <li><Link to="/documentaries" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Tech Documentaries</Link></li>
+            <li><a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> WabiSkills Academy ↗</a></li>
+            <li><Link to="/about" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> About Us</Link></li>
+            <li><Link to="/contact" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Contact Us</Link></li>
+            <li>
+              <Link to="/admin/login" className="hover:text-purple-300 transition-colors flex items-center gap-1.5 text-purple-300 font-bold">
+                <ShieldCheck size={14} />
+                <span>Admin Gateway</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* 4. Capabilities Column */}
+        <div>
+          <h4 className="font-extrabold font-display text-sm uppercase tracking-wider text-white mb-5 border-l-2 border-[#0ED3DD] pl-3">
+            Capabilities
+          </h4>
+          <ul className="space-y-2.5 text-xs text-slate-200 font-medium">
+            <li className="hover:text-white transition-colors">ERP &amp; CRM Solutions</li>
+            <li className="hover:text-white transition-colors">WMS &amp; Logistics Systems</li>
+            <li className="hover:text-white transition-colors">Custom Web &amp; Mobile Apps</li>
+            <li className="hover:text-white transition-colors">Cybersecurity &amp; Audits</li>
+            <li className="hover:text-white transition-colors">Cloud DevOps &amp; Migration</li>
+            <li className="hover:text-white transition-colors">Data Analytics &amp; BI</li>
+          </ul>
         </div>
       </div>
 
