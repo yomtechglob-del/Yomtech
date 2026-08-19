@@ -1103,7 +1103,17 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 08 — ENGINEERING PROCESS (01 Discover → 05 Grow)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
@@ -1124,18 +1134,38 @@ export const HomePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          {/* 5 Engineering Journey Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
             {[
-              { num: '01', title: 'DISCOVER', desc: 'Requirement analysis, scope definition & architecture plan.' },
-              { num: '02', title: 'DESIGN', desc: 'System architecture, API design & UI/UX wireframing.' },
-              { num: '03', title: 'ENGINEER', desc: 'Agile sprint execution, clean code & microservices.' },
-              { num: '04', title: 'VALIDATE', desc: 'Penetration testing, sub-50ms latency & QA audits.' },
-              { num: '05', title: 'GROW', desc: 'Zero-downtime deployment & 24/7 SLA maintenance.' }
+              { num: '01', title: 'DISCOVER', desc: 'Requirement analysis, scope definition & architecture plan.', gradient: 'from-[#0284C7] to-cyan-400' },
+              { num: '02', title: 'DESIGN', desc: 'System architecture, API design & UI/UX wireframing.', gradient: 'from-cyan-500 to-teal-400' },
+              { num: '03', title: 'ENGINEER', desc: 'Agile sprint execution, clean code & microservices.', gradient: 'from-blue-600 to-[#0284C7]' },
+              { num: '04', title: 'VALIDATE', desc: 'Penetration testing, sub-50ms latency & QA audits.', gradient: 'from-indigo-600 to-blue-500' },
+              { num: '05', title: 'GROW', desc: 'Zero-downtime deployment & 24/7 SLA maintenance.', gradient: 'from-cyan-400 to-[#0ED3DD]' }
             ].map((step) => (
-              <div key={step.num} className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 relative">
-                <span className="text-2xl font-black font-mono text-[#0284C7] block">{step.num}</span>
-                <h3 className="text-base font-extrabold text-slate-900 font-display">{step.title}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">{step.desc}</p>
+              <div 
+                key={step.num} 
+                className="rounded-3xl p-7 bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 space-y-5 relative overflow-hidden group hover:-translate-y-1 flex flex-col justify-between"
+              >
+                {/* Top Accent Gradient Edge */}
+                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${step.gradient}`} />
+
+                <div className="space-y-4 pt-1">
+                  <div className="flex items-center justify-between">
+                    <span className="w-11 h-11 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] flex items-center justify-center font-black font-mono text-sm shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:border-[#0284C7] transition-all duration-300">
+                      {step.num}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">PHASE {step.num}</span>
+                  </div>
+
+                  <h3 className="text-lg font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight">
+                    {step.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
