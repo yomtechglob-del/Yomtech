@@ -435,30 +435,41 @@ export const HomePage = () => {
           SECTION 03 — NEW: THE YOMTECH GLOBAL ECOSYSTEM
           (Interactive Connected Node Nucleus Experience)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-gradient-to-b from-[#F0F7FF] via-[#F4FAFF] to-[#EAF4FF] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
-        {/* Animated Background Mesh & Soft Ambient Glow Orbs */}
-        <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1.2px,transparent_1.2px)] [background-size:32px_32px] opacity-[0.08] pointer-events-none" />
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-400/15 rounded-full blur-3xl pointer-events-none animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
           
-          {/* Header */}
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] shadow-xs">
-              <Sparkles size={14} className="text-[#0284C7]" />
-              <span>YOMTECH GLOBAL ECOSYSTEM</span>
+          {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -mr-[1px]">
+                <Sparkles size={16} className="text-[#0284C7]" />
+                <span>YOMTECH GLOBAL ECOSYSTEM</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-tight text-slate-900">
-              One Connected Ecosystem. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                Engineered for High Impact.
-              </span>
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              Yomtech Global unifies enterprise software engineering, cloud infrastructure, security, digital talent academy, and recruitment network into one seamless digital matrix.
-            </p>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-tight text-slate-900">
+                One Connected Ecosystem. <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                  Engineered for High Impact.
+                </span>
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                Yomtech Global unifies enterprise software engineering, cloud infrastructure, security, digital talent academy, and recruitment network into one seamless digital matrix.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
