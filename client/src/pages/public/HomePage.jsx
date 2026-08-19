@@ -692,39 +692,93 @@ export const HomePage = () => {
             })}
           </div>
 
-          {/* 12 Official Services List Matrix (Upgraded Design) */}
-          <div className="pt-12 border-t border-slate-200">
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="h-[1px] w-12 bg-cyan-300" />
-              <h3 className="text-xs font-black uppercase tracking-[0.25em] text-[#0284C7]">
-                OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER:
-              </h3>
-              <div className="h-[1px] w-12 bg-cyan-300" />
+          {/* 12 Official Services List Matrix (Horizontal Water Flow Marquee Stream) */}
+          <div className="pt-12 border-t border-slate-200/80 space-y-6 relative overflow-hidden">
+            
+            {/* Header */}
+            <div className="flex items-center justify-center gap-3 mb-2">
+              <div className="h-[1.5px] w-16 bg-gradient-to-r from-transparent via-[#0284C7] to-cyan-400" />
+              <div className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.25em] flex items-center gap-2 shadow-2xs">
+                <Sparkles size={13} className="text-[#0284C7]" />
+                <span>OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER</span>
+              </div>
+              <div className="h-[1.5px] w-16 bg-gradient-to-l from-transparent via-[#0284C7] to-cyan-400" />
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-              {OFFICIAL_SERVICES_LIST.map((item) => (
-                <div 
-                  key={item.name} 
-                  onClick={() => navigate('/services')}
-                  className="p-4 rounded-2xl bg-white hover:bg-cyan-50/50 border border-slate-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group hover:-translate-y-1 relative overflow-hidden"
-                >
-                  {/* Service Image Icon Container */}
-                  <div className="w-12 h-12 rounded-xl bg-cyan-50/60 border border-cyan-100 p-2 shadow-2xs group-hover:scale-110 group-hover:bg-cyan-100/60 group-hover:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
-                    <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
-                  </div>
+            {/* Left & Right Gradient Fade Masks (Water Flow Entrance & Exit Effect) */}
+            <div className="pointer-events-none absolute left-0 top-16 bottom-0 w-28 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-20" />
+            <div className="pointer-events-none absolute right-0 top-16 bottom-0 w-28 bg-gradient-to-l from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-20" />
 
-                  <div className="space-y-1 w-full">
-                    <div className="text-xs font-black text-slate-900 group-hover:text-[#0284C7] transition-colors line-clamp-1">
-                      {item.name}
+            {/* Row 1: Water Flow Stream Left */}
+            <div className="flex overflow-hidden group select-none py-1">
+              <motion.div
+                animate={{ x: ['0%', '-50%'] }}
+                transition={{
+                  repeat: Infinity,
+                  ease: 'linear',
+                  duration: 28
+                }}
+                className="flex gap-4 shrink-0"
+              >
+                {[...OFFICIAL_SERVICES_LIST, ...OFFICIAL_SERVICES_LIST].map((item, idx) => (
+                  <div 
+                    key={`stream1-${item.name}-${idx}`} 
+                    onClick={() => navigate('/services')}
+                    className="w-56 p-4 rounded-2xl bg-white hover:bg-cyan-50/50 border border-slate-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0"
+                  >
+                    {/* Service Image Icon Container */}
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50/60 border border-cyan-100 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100/60 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                      <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                     </div>
-                    <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
-                      {item.desc}
+
+                    <div className="space-y-1 w-full">
+                      <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
+                        {item.name}
+                      </div>
+                      <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
+                        {item.desc}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </motion.div>
             </div>
+
+            {/* Row 2: Water Flow Stream Right */}
+            <div className="flex overflow-hidden group select-none py-1">
+              <motion.div
+                animate={{ x: ['-50%', '0%'] }}
+                transition={{
+                  repeat: Infinity,
+                  ease: 'linear',
+                  duration: 32
+                }}
+                className="flex gap-4 shrink-0"
+              >
+                {[...OFFICIAL_SERVICES_LIST.slice().reverse(), ...OFFICIAL_SERVICES_LIST.slice().reverse()].map((item, idx) => (
+                  <div 
+                    key={`stream2-${item.name}-${idx}`} 
+                    onClick={() => navigate('/services')}
+                    className="w-56 p-4 rounded-2xl bg-white hover:bg-cyan-50/50 border border-slate-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0"
+                  >
+                    {/* Service Image Icon Container */}
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50/60 border border-cyan-100 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100/60 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                      <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
+                    </div>
+
+                    <div className="space-y-1 w-full">
+                      <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
+                        {item.name}
+                      </div>
+                      <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
+                        {item.desc}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
           </div>
 
         </div>
