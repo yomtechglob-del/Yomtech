@@ -18,6 +18,7 @@ import logoEmblem from '../../assets/logos/logo.png';
 import wabiSkillsLogo from '../../assets/logos/wabi skills logo.png';
 import wabiJobsLogo from '../../assets/logos/wabijobs-logo.png';
 import yomnexLogo from '../../assets/logos/yomnex-logo.png';
+import { AboutEcosystem } from '../../components/about/AboutEcosystem';
 
 // Service Images
 import erpImg from '../../assets/services/erp.png';
@@ -371,7 +372,7 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 02 — WHO WE ARE (Enterprise Introduction)
+          SECTION 02 — WHO WE ARE & CORE VALUES (Hexagonal Honeycomb Cluster)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
@@ -404,25 +405,33 @@ export const HomePage = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {CORE_VALUES.map((val) => (
-                <div
-                  key={val.title}
-                  style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                  className="p-5 rounded-2xl border-2 border-indigo-200/80 hover:border-cyan-400 transition-all space-y-2 group shadow-sm hover:shadow-md"
-                >
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="text-[#0284C7]" />
-                    <h3 className="text-base font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{val.title}</h3>
-                  </div>
-                  <p className="text-xs text-slate-600 leading-relaxed font-medium">{val.desc}</p>
+            <div className="lg:col-span-6">
+              <div className="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 shadow-sm flex flex-col justify-center items-center">
+                <h3 className="text-sm font-black uppercase tracking-widest text-[#0284C7] mb-4">OUR GUIDING PRINCIPLES MATRIX</h3>
+                <div className="grid grid-cols-2 gap-3 w-full">
+                  {CORE_VALUES.map((val) => (
+                    <div
+                      key={val.title}
+                      style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+                      className="p-4 rounded-2xl border-2 border-indigo-200/80 hover:border-cyan-400 transition-all space-y-1 group shadow-sm"
+                    >
+                      <div className="flex items-center gap-2">
+                        <CheckCircle2 size={15} className="text-[#0284C7]" />
+                        <h4 className="text-sm font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{val.title}</h4>
+                      </div>
+                      <p className="text-[11px] text-slate-600 leading-relaxed font-medium line-clamp-2">{val.desc}</p>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
 
         </div>
       </section>
+
+      {/* Hexagonal Honeycomb Core Values Cluster Section from About Us */}
+      <AboutEcosystem />
 
 
       {/* ════════════════════════════════════════════════════
