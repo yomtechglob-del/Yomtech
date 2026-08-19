@@ -635,13 +635,13 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 04 — EXISTING CORE CAPABILITIES (Upgraded Design)
+          SECTION 04 — EXISTING CORE CAPABILITIES (MATCHING FLAGSHIP PLATFORMS STYLING)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+      <section className="py-24 md:py-32 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#0B1528] text-white relative overflow-hidden font-sans border-b border-cyan-400/30">
         
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        {/* Cyber Dotted Grid Mesh Overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          className="absolute inset-0 opacity-[0.35] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
             backgroundSize: '24px 24px',
@@ -653,22 +653,22 @@ export const HomePage = () => {
           {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Cpu size={16} className="text-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-cyan-950/90 border-2 border-cyan-400/70 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10 -mr-[1px]">
+                <span className="text-[10px] text-cyan-300">◆</span>
                 <span>ENGINEERING CAPABILITY MATRIX</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+                <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-400 via-[#0ED3DD] to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
                 WE BUILD. WE ENGINEER. <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-[#0ED3DD] to-sky-300">
                   WE SUPPORT. WE TEACH.
                 </span>
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+              <p className="text-cyan-100/90 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
                 Our core services combine technology, innovation, and practical engineering expertise to deliver scalable software solutions.
               </p>
             </div>
@@ -681,18 +681,19 @@ export const HomePage = () => {
               return (
                 <div
                   key={srv.title}
-                  className="rounded-3xl p-7 bg-white border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-1"
+                  style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
+                  className="rounded-[2rem] p-7 border-2 border-cyan-200/90 shadow-xl hover:border-cyan-400 hover:-translate-y-2.5 transition-all duration-500 flex flex-col justify-between space-y-6 group relative overflow-hidden text-slate-900"
                 >
                   {/* Top Color Accent Line */}
                   <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${srv.gradient || 'from-cyan-500 to-blue-600'}`} />
 
                   <div className="space-y-4 pt-1">
                     <div className="flex items-center justify-between">
-                      <span className="px-4 py-1.5 rounded-full bg-cyan-50/80 border-2 border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                      <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
                         {srv.tag}
                       </span>
-                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${srv.gradient || 'from-cyan-500 to-blue-600'} text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                        <IconComp size={22} />
+                      <div className={`w-11 h-11 rounded-full bg-gradient-to-tr ${srv.gradient || 'from-cyan-500 to-blue-600'} text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                        <IconComp size={20} />
                       </div>
                     </div>
 
@@ -708,7 +709,7 @@ export const HomePage = () => {
                   <div className="pt-4 border-t border-slate-100">
                     <button
                       onClick={() => navigate('/services')}
-                      className="w-full py-3 px-5 rounded-full bg-cyan-50/70 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-300 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                      className="w-full py-2.5 px-4 rounded-full border-2 border-cyan-300 hover:border-cyan-500 text-[#0284C7] hover:bg-cyan-50 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all duration-300 shadow-xs cursor-pointer"
                     >
                       <span>Explore Capability</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -720,21 +721,21 @@ export const HomePage = () => {
           </div>
 
           {/* 12 Official Services List Matrix (Horizontal Water Flow Marquee Stream) */}
-          <div className="pt-12 border-t border-slate-200/80 space-y-6 relative overflow-hidden">
+          <div className="pt-12 border-t border-cyan-400/20 space-y-6 relative overflow-hidden">
             
-            {/* Header (Matching User Screenshot: Full-Length Left Line & Light Cyan Pill Badge with Diamonds) */}
+            {/* Header */}
             <div className="flex items-center justify-end mb-2 w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
-                <span className="text-[10px] text-[#0284C7]">◆</span>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-cyan-300" />
+              <div className="px-6 py-2 rounded-full bg-cyan-950/90 border-2 border-cyan-400/70 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-cyan-300">◆</span>
                 <span>OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+                <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
               </div>
             </div>
 
-            {/* Left & Right Gradient Fade Masks (Water Flow Entrance & Exit Effect) */}
-            <div className="pointer-events-none absolute left-0 top-16 bottom-0 w-28 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-20" />
-            <div className="pointer-events-none absolute right-0 top-16 bottom-0 w-28 bg-gradient-to-l from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-20" />
+            {/* Left & Right Gradient Fade Masks */}
+            <div className="pointer-events-none absolute left-0 top-16 bottom-0 w-28 bg-gradient-to-r from-[#03045E] via-[#03045E]/80 to-transparent z-20" />
+            <div className="pointer-events-none absolute right-0 top-16 bottom-0 w-28 bg-gradient-to-l from-[#0B1528] via-[#0B1528]/80 to-transparent z-20" />
 
             {/* Row 1: Water Flow Stream Left */}
             <div className="flex overflow-hidden group select-none py-1">
@@ -751,10 +752,11 @@ export const HomePage = () => {
                   <div 
                     key={`stream1-${item.name}-${idx}`} 
                     onClick={() => navigate('/services')}
-                    className="w-56 p-4 rounded-2xl bg-white hover:bg-cyan-50/50 border border-slate-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0"
+                    style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
+                    className="w-56 p-4 rounded-2xl border-2 border-cyan-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0 text-slate-900"
                   >
                     {/* Service Image Icon Container */}
-                    <div className="w-12 h-12 rounded-xl bg-cyan-50/60 border border-cyan-100 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100/60 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
                       <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                     </div>
 
@@ -762,7 +764,7 @@ export const HomePage = () => {
                       <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
                         {item.name}
                       </div>
-                      <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
+                      <div className="text-[10px] text-slate-600 font-semibold line-clamp-2 leading-tight">
                         {item.desc}
                       </div>
                     </div>
@@ -786,10 +788,11 @@ export const HomePage = () => {
                   <div 
                     key={`stream2-${item.name}-${idx}`} 
                     onClick={() => navigate('/services')}
-                    className="w-56 p-4 rounded-2xl bg-white hover:bg-cyan-50/50 border border-slate-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0"
+                    style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
+                    className="w-56 p-4 rounded-2xl border-2 border-cyan-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0 text-slate-900"
                   >
                     {/* Service Image Icon Container */}
-                    <div className="w-12 h-12 rounded-xl bg-cyan-50/60 border border-cyan-100 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100/60 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
                       <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                     </div>
 
@@ -797,7 +800,7 @@ export const HomePage = () => {
                       <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
                         {item.name}
                       </div>
-                      <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
+                      <div className="text-[10px] text-slate-600 font-semibold line-clamp-2 leading-tight">
                         {item.desc}
                       </div>
                     </div>
