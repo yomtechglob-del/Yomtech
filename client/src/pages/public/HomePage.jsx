@@ -1003,7 +1003,7 @@ export const HomePage = () => {
           </div>
 
           {/* Staggered 2-Column S-Curve Pushpin Roadmap Container */}
-          <div className="relative max-w-5xl mx-auto py-8">
+          <div className="relative max-w-6xl mx-auto py-8">
             
             {/* Background S-Curve Connecting Dashed Path SVG */}
             <svg 
@@ -1015,15 +1015,15 @@ export const HomePage = () => {
               <path 
                 d="M 25,6 C 65,6 75,10 75,23 C 75,36 25,35 25,48 C 25,60 75,53 75,65 C 75,77 50,76 50,88" 
                 stroke="#0284C7" 
-                strokeWidth="0.4" 
-                strokeDasharray="1.2 1.2" 
+                strokeWidth="0.5" 
+                strokeDasharray="1.5 1.5" 
                 strokeLinecap="round"
                 className="opacity-60"
               />
             </svg>
 
             {/* Staggered 2-Column Grid matching VektaOS Pushpin Screenshot */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-16 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14 md:gap-y-20 relative z-10">
               {[
                 { 
                   num: '01', 
@@ -1041,7 +1041,7 @@ export const HomePage = () => {
                   title: 'Manage & Design', 
                   desc: 'High-performance microservices architecture design, REST/GraphQL API specifications, and intuitive UI/UX wireframing.', 
                   tilt: 'rotate-2 hover:rotate-0',
-                  offset: 'md:translate-y-16',
+                  offset: 'md:translate-y-20',
                   pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
                   numColor: 'text-emerald-600',
                   badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
@@ -1063,7 +1063,7 @@ export const HomePage = () => {
                   title: 'Validate & Test', 
                   desc: 'End-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits.', 
                   tilt: 'rotate-3 hover:rotate-0',
-                  offset: 'md:translate-y-16',
+                  offset: 'md:translate-y-20',
                   pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
                   numColor: 'text-amber-600',
                   badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
@@ -1074,7 +1074,7 @@ export const HomePage = () => {
                   title: 'Deploy & Scale', 
                   desc: 'CI/CD automated pipeline deployment, zero-downtime launch, real-time APM monitoring, and round-the-clock SLA support.', 
                   tilt: '-rotate-1 hover:rotate-0',
-                  offset: 'md:col-span-2 md:max-w-md md:mx-auto md:translate-y-8',
+                  offset: 'md:col-span-2 md:max-w-xl md:mx-auto md:translate-y-10',
                   pinColor: 'from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
                   numColor: 'text-[#0284C7]',
                   badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200',
@@ -1087,31 +1087,31 @@ export const HomePage = () => {
                   <div key={step.num} className={`relative w-full ${step.offset}`}>
                     
                     {/* 3D Realistic Pushpin Top Medallion */}
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
-                        <div className="w-2.5 h-2.5 rounded-full bg-white/50 blur-[0.5px] absolute top-1 left-1" />
+                    <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                      <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
+                        <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
                       </div>
-                      <div className="w-0.5 h-2.5 bg-slate-400/80 shadow-xs" />
+                      <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
                     </div>
 
-                    {/* Pushpin Tilted Card (Matching VektaOS Screenshot) */}
-                    <div className={`rounded-3xl p-7 sm:p-8 bg-white/95 border-2 border-slate-100/90 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-2xl ${step.tilt} transition-all duration-500 hover:-translate-y-2 relative z-20 space-y-4 group cursor-pointer`}>
+                    {/* Larger Pushpin Tilted Card Div */}
+                    <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-2xl ${step.tilt} transition-all duration-500 hover:-translate-y-2.5 relative z-20 space-y-6 group cursor-pointer`}>
                       
                       <div className="flex items-center justify-between">
-                        <span className={`text-3xl font-black font-mono ${step.numColor}`}>
+                        <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${step.numColor}`}>
                           {step.num}
                         </span>
 
-                        <div className={`w-11 h-11 rounded-2xl ${step.badgeBg} border flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform duration-300`}>
-                          <StepIcon size={20} />
+                        <div className={`w-14 h-14 rounded-2xl ${step.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-300`}>
+                          <StepIcon size={26} />
                         </div>
                       </div>
 
-                      <div className="space-y-2">
-                        <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
+                      <div className="space-y-3">
+                        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors tracking-tight">
                           {step.title}
                         </h3>
-                        <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                        <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
                           {step.desc}
                         </p>
                       </div>
