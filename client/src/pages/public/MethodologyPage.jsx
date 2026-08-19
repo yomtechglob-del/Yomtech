@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import {
   Cpu, GitBranch, CheckCircle2, ArrowRight, Phone, ShieldCheck, Layers,
   Sparkles, Award, Globe, Building2, Zap, Users, Code, FileText, Lock,
-  Server, RefreshCw, Sliders, Activity, Target, Clock, Terminal, ChevronRight
+  Server, RefreshCw, Sliders, Activity, Target, Clock, Terminal, ChevronRight,
+  Briefcase, GraduationCap
 } from 'lucide-react';
 
 // Background & Brand Assets
