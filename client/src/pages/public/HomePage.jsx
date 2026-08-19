@@ -618,10 +618,16 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 04 — EXISTING CORE CAPABILITIES (Upgraded Design)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
-        {/* Subtle Decorative Grid Pattern */}
-        <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05] pointer-events-none" />
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
