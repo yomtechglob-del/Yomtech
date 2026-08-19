@@ -1159,11 +1159,11 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 09 — NEW: INSIGHTS, MEDIA & COMMUNITY
+          SECTION 09 — INSIGHTS, MEDIA & COMMUNITY (PUSHPIN CARDS)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        {/* Dotted Grid Mesh Texture */}
         <div 
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
@@ -1174,7 +1174,7 @@ export const HomePage = () => {
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          {/* Header Badge */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
               <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
@@ -1198,108 +1198,156 @@ export const HomePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* 3 Media Community Pushpin Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 pt-4">
+            
             {/* YOUTUBE */}
-            <div className="bg-white/95 rounded-3xl p-8 border-2 border-slate-100/90 hover:border-red-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(239,68,68,0.15)] transition-all duration-300 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-1">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-rose-500 to-red-400" />
-              <div className="space-y-4 pt-1">
-                <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
-                    YOUTUBE CHANNEL
-                  </span>
-                  <div className="w-12 h-12 rounded-2xl bg-red-50 border border-red-200 text-red-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
-                    <Video size={22} />
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative w-full"
+            >
+              {/* 3D Pushpin */}
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-red-500 to-red-700 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                </div>
+                <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+              </div>
+
+              <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-red-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(239,68,68,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                <div className="space-y-4 pt-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                      YOUTUBE CHANNEL
+                    </span>
+                    <div className="w-13 h-13 rounded-2xl bg-red-50 border-2 border-red-200 text-red-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white group-hover:rotate-12 transition-all duration-500">
+                      <Video size={24} />
+                    </div>
                   </div>
+
+                  <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-red-600 group-hover:translate-x-1 transition-all duration-300">
+                    Long-Form Engineering Insights
+                  </h3>
+                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                    Technology discussions, full-length tutorials, engineering deep dives, product stories, and national technology documentary films.
+                  </p>
                 </div>
 
-                <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-red-600 transition-colors leading-snug">
-                  Long-Form Engineering Insights
-                </h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Technology discussions, full-length tutorials, engineering deep dives, product stories, and national technology documentary films.
-                </p>
+                <div className="pt-4 border-t border-slate-100">
+                  <a 
+                    href="https://youtube.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full py-3.5 px-5 rounded-full bg-red-50 group-hover:bg-red-600 text-red-600 group-hover:text-white border-2 border-red-200 group-hover:border-red-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                  >
+                    <span>Watch On YouTube</span>
+                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
-
-              <div className="pt-4 border-t border-slate-100">
-                <a 
-                  href="https://youtube.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-full py-3 px-5 rounded-full bg-red-50 group-hover:bg-red-600 text-red-600 group-hover:text-white border-2 border-red-200 group-hover:border-red-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
-                >
-                  <span>Watch On YouTube</span>
-                  <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
+            </motion.div>
 
             {/* TIKTOK */}
-            <div className="bg-white/95 rounded-3xl p-8 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.15)] transition-all duration-300 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-1">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-slate-900" />
-              <div className="space-y-4 pt-1">
-                <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
-                    TIKTOK MEDIA
-                  </span>
-                  <div className="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-200 text-[#0284C7] shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0284C7] group-hover:text-white transition-all duration-300">
-                    <Sparkles size={22} />
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="relative w-full"
+            >
+              {/* 3D Pushpin */}
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-400 to-[#0284C7] border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                </div>
+                <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+              </div>
+
+              <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                <div className="space-y-4 pt-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                      TIKTOK MEDIA
+                    </span>
+                    <div className="w-13 h-13 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0284C7] group-hover:text-white group-hover:rotate-12 transition-all duration-500">
+                      <Sparkles size={24} />
+                    </div>
                   </div>
+
+                  <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300">
+                    Short-Form Tech Education
+                  </h3>
+                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                    Quick developer tips, coding highlights, tech awareness clips, career inspiration, and behind-the-scenes engineering moments.
+                  </p>
                 </div>
 
-                <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug">
-                  Short-Form Tech Education
-                </h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Quick developer tips, coding highlights, tech awareness clips, career inspiration, and behind-the-scenes engineering moments.
-                </p>
+                <div className="pt-4 border-t border-slate-100">
+                  <a 
+                    href="https://tiktok.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full py-3.5 px-5 rounded-full bg-cyan-50 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                  >
+                    <span>Follow On TikTok</span>
+                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
-
-              <div className="pt-4 border-t border-slate-100">
-                <a 
-                  href="https://tiktok.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-full py-3 px-5 rounded-full bg-cyan-50 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
-                >
-                  <span>Follow On TikTok</span>
-                  <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
+            </motion.div>
 
             {/* LINKEDIN */}
-            <div className="bg-white/95 rounded-3xl p-8 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(37,99,235,0.15)] transition-all duration-300 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-1">
-              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-700 via-blue-500 to-indigo-600" />
-              <div className="space-y-4 pt-1">
-                <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
-                    LINKEDIN NETWORK
-                  </span>
-                  <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-blue-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
-                    <Globe size={22} />
+            <motion.div 
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="relative w-full"
+            >
+              {/* 3D Pushpin */}
+              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-800 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                  <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                </div>
+                <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+              </div>
+
+              <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(37,99,235,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                <div className="space-y-4 pt-2">
+                  <div className="flex items-center justify-between">
+                    <span className="px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                      LINKEDIN NETWORK
+                    </span>
+                    <div className="w-13 h-13 rounded-2xl bg-blue-50 border-2 border-blue-200 text-blue-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:rotate-12 transition-all duration-500">
+                      <Globe size={24} />
+                    </div>
                   </div>
+
+                  <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300">
+                    Professional Network Updates
+                  </h3>
+                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                    Enterprise updates, technology whitepapers, strategic partnerships, project milestones, and career opportunities across Africa.
+                  </p>
                 </div>
 
-                <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 transition-colors leading-snug">
-                  Professional Network Updates
-                </h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Enterprise updates, technology whitepapers, strategic partnerships, project milestones, and career opportunities across Africa.
-                </p>
+                <div className="pt-4 border-t border-slate-100">
+                  <a 
+                    href="https://linkedin.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="w-full py-3.5 px-5 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white border-2 border-blue-200 group-hover:border-blue-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                  >
+                    <span>Connect On LinkedIn</span>
+                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
+                </div>
               </div>
+            </motion.div>
 
-              <div className="pt-4 border-t border-slate-100">
-                <a 
-                  href="https://linkedin.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="w-full py-3 px-5 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white border-2 border-blue-200 group-hover:border-blue-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
-                >
-                  <span>Connect On LinkedIn</span>
-                  <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </a>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -1307,11 +1355,11 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 10 — TESTIMONIALS & CLIENT PROOF
+          SECTION 10 — TESTIMONIALS & CLIENT PROOF (PUSHPIN CARDS)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        {/* Dotted Grid Mesh Texture */}
         <div 
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
@@ -1322,7 +1370,7 @@ export const HomePage = () => {
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
+          {/* Header Badge */}
           <div className="space-y-6">
             <div className="flex items-center justify-end w-full">
               <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
@@ -1340,28 +1388,39 @@ export const HomePage = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 pt-4">
             {TESTIMONIALS.map((t, idx) => (
-              <div
+              <motion.div
                 key={idx}
-                className="p-8 rounded-3xl bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-1"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                className="relative w-full"
               >
-                {/* Top Accent Gradient Line */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600" />
-
-                <p className="text-xs sm:text-sm text-slate-700 font-bold italic leading-relaxed pt-2">
-                  "{t.quote}"
-                </p>
-                <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
-                  <div>
-                    <h4 className="text-sm font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{t.author}</h4>
-                    <p className="text-[10px] font-bold text-[#0284C7] uppercase font-mono">{t.role}</p>
+                {/* 3D Pushpin */}
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                    <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
                   </div>
-                  <div className="flex text-amber-400 gap-0.5">
-                    {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
+                  <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                </div>
+
+                <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] transition-all duration-500 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                  <p className="text-sm sm:text-base text-slate-700 font-bold italic leading-relaxed pt-2">
+                    "{t.quote}"
+                  </p>
+                  <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                      <h4 className="text-base font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{t.author}</h4>
+                      <p className="text-xs font-bold text-[#0284C7] uppercase font-mono">{t.role}</p>
+                    </div>
+                    <div className="flex text-amber-400 gap-1">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
 
