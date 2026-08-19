@@ -62,49 +62,65 @@ const FEATURED_SERVICES = [
     icon: Cpu, img: erpImg,
     title: 'ERP, CRM & WMS Solutions',
     desc: 'We design and implement enterprise-grade ERP, CRM, and WMS systems that streamline business operations, improve decision-making, and enhance customer engagement.',
-    tag: 'ENTERPRISE', accent: 'cyan'
+    tag: 'ENTERPRISE', accent: 'cyan',
+    gradient: 'from-cyan-500 to-blue-600',
+    badgeStyle: 'bg-cyan-50 text-[#0284C7] border-cyan-200'
   },
   {
     icon: Code, img: customImg,
     title: 'Custom Software & App Development',
     desc: 'From responsive web apps to high-performance mobile apps, we build tailored software solutions that meet your exact business needs and scale with your growth.',
-    tag: 'FULLSTACK', accent: 'emerald'
+    tag: 'FULLSTACK', accent: 'emerald',
+    gradient: 'from-emerald-500 to-teal-600',
+    badgeStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200'
   },
   {
     icon: ShieldCheck, img: cybersecurityImg,
     title: 'Cybersecurity & Surveillance',
     desc: 'Protect your digital assets with our IT security consulting, surveillance system integration, and cybersecurity training programs to keep your systems safe.',
-    tag: 'SECURITY', accent: 'violet'
+    tag: 'SECURITY', accent: 'violet',
+    gradient: 'from-purple-600 to-fuchsia-600',
+    badgeStyle: 'bg-purple-50 text-purple-700 border-purple-200'
   },
   {
     icon: Globe, img: cloudImg,
     title: 'Cloud Services & Deployment',
     desc: 'We provide cloud migration, hosting, and deployment services that enable secure, scalable, and cost-effective business operations in the cloud.',
-    tag: 'CLOUD', accent: 'sky'
+    tag: 'CLOUD', accent: 'sky',
+    gradient: 'from-blue-600 to-indigo-600',
+    badgeStyle: 'bg-blue-50 text-blue-700 border-blue-200'
   },
   {
     icon: Zap, img: erpImg,
     title: 'AI & Automation',
     desc: 'Leverage intelligent automation, AI-driven insights, and smart workflows to boost efficiency, productivity, and innovation in your organization.',
-    tag: 'AI/ML', accent: 'indigo'
+    tag: 'AI/ML', accent: 'indigo',
+    gradient: 'from-indigo-500 to-purple-600',
+    badgeStyle: 'bg-indigo-50 text-indigo-700 border-indigo-200'
   },
   {
     icon: Monitor, img: customImg,
     title: 'UI/UX & Product Design',
     desc: 'We craft intuitive, user-friendly interfaces and digital experiences that empower businesses and delight customers across platforms.',
-    tag: 'DESIGN', accent: 'rose'
+    tag: 'DESIGN', accent: 'rose',
+    gradient: 'from-rose-500 to-pink-600',
+    badgeStyle: 'bg-rose-50 text-rose-700 border-rose-200'
   },
   {
     icon: GraduationCap, img: educationImg,
     title: 'Tech Education & Coaching',
     desc: 'Through online courses, mentorship, and hands-on training, we equip learners and professionals with future-ready tech skills.',
-    tag: 'ACADEMY', accent: 'amber'
+    tag: 'ACADEMY', accent: 'amber',
+    gradient: 'from-amber-500 to-orange-600',
+    badgeStyle: 'bg-amber-50 text-amber-800 border-amber-200'
   },
   {
     icon: BarChart3, img: crmImg,
     title: 'Data Analytics & Insights',
     desc: 'Transform raw data into actionable business intelligence with advanced analytics, dashboards, and reporting tools.',
-    tag: 'ANALYTICS', accent: 'cyan'
+    tag: 'ANALYTICS', accent: 'cyan',
+    gradient: 'from-teal-500 to-cyan-600',
+    badgeStyle: 'bg-teal-50 text-teal-700 border-teal-200'
   }
 ];
 
@@ -595,19 +611,23 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 04 — EXISTING CORE CAPABILITIES
+          SECTION 04 — EXISTING CORE CAPABILITIES (Upgraded Design)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
+      <section className="py-24 md:py-32 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Subtle Decorative Grid Pattern */}
+        <div className="absolute inset-0 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.05] pointer-events-none" />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Cpu size={14} />
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] shadow-xs">
+              <Cpu size={15} />
               <span>ENGINEERING CAPABILITY MATRIX</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
               WE BUILD. WE ENGINEER. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                 WE SUPPORT. WE TEACH.
               </span>
             </h2>
@@ -616,26 +636,29 @@ export const HomePage = () => {
             </p>
           </div>
 
+          {/* 8 Featured Engineering Capability Cards (4x2 Grid) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {FEATURED_SERVICES.map((srv) => {
               const IconComp = srv.icon;
               return (
                 <div
                   key={srv.title}
-                  style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                  className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-6 group"
+                  className="rounded-3xl p-7 bg-white border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-1"
                 >
-                  <div className="space-y-4">
+                  {/* Top Color Accent Line */}
+                  <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${srv.gradient || 'from-cyan-500 to-blue-600'}`} />
+
+                  <div className="space-y-4 pt-1">
                     <div className="flex items-center justify-between">
-                      <span className="px-3 py-1 rounded-full bg-white border border-slate-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-sm">
+                      <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider shadow-2xs ${srv.badgeStyle || 'bg-cyan-50 text-[#0284C7] border border-cyan-200'}`}>
                         {srv.tag}
                       </span>
-                      <div className="w-10 h-10 rounded-xl bg-white p-2 text-[#0284C7] shadow-sm flex items-center justify-center">
-                        <IconComp size={20} />
+                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${srv.gradient || 'from-cyan-500 to-blue-600'} text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                        <IconComp size={22} />
                       </div>
                     </div>
 
-                    <h3 className="text-lg font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight">
+                    <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight">
                       {srv.title}
                     </h3>
 
@@ -644,13 +667,13 @@ export const HomePage = () => {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-200/80">
+                  <div className="pt-4 border-t border-slate-100">
                     <button
                       onClick={() => navigate('/services')}
-                      className="w-full py-2.5 px-4 rounded-xl bg-white border border-slate-300 hover:border-cyan-400 text-slate-800 font-extrabold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-sm"
+                      className="w-full py-3 px-4 rounded-2xl bg-slate-50 group-hover:bg-[#0284C7] text-slate-800 group-hover:text-white border border-slate-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
                     >
                       <span>Explore Capability</span>
-                      <ArrowRight size={13} />
+                      <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </div>
@@ -658,14 +681,29 @@ export const HomePage = () => {
             })}
           </div>
 
-          {/* 12 Official Services List Matrix */}
-          <div className="pt-10 border-t border-slate-200">
-            <h3 className="text-center text-xs font-black uppercase tracking-widest text-slate-400 mb-8">Official YomTech Enterprise Service Roster:</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {/* 12 Official Services List Matrix (Upgraded Design) */}
+          <div className="pt-12 border-t border-slate-200">
+            <div className="flex items-center justify-center gap-3 mb-8">
+              <div className="h-[1px] w-12 bg-cyan-300" />
+              <h3 className="text-xs font-black uppercase tracking-[0.25em] text-[#0284C7]">
+                OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER:
+              </h3>
+              <div className="h-[1px] w-12 bg-cyan-300" />
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
               {OFFICIAL_SERVICES_LIST.map((item) => (
-                <div key={item.name} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 text-center space-y-1 hover:border-cyan-400 transition-colors">
-                  <div className="text-xs font-extrabold text-slate-900 truncate">{item.name}</div>
-                  <div className="text-[10px] text-slate-500 font-medium line-clamp-1">{item.desc}</div>
+                <div 
+                  key={item.name} 
+                  onClick={() => navigate('/services')}
+                  className="p-4 rounded-2xl bg-white hover:bg-cyan-50/40 border border-slate-200/90 hover:border-cyan-400 text-center space-y-1.5 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group hover:-translate-y-0.5"
+                >
+                  <div className="text-xs font-black text-slate-900 group-hover:text-[#0284C7] transition-colors truncate">
+                    {item.name}
+                  </div>
+                  <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
+                    {item.desc}
+                  </div>
                 </div>
               ))}
             </div>
