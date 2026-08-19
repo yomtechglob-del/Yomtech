@@ -413,17 +413,24 @@ export const HomePage = () => {
       <AboutEcosystem
         hideBadge={true}
         customHeading={
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Building2 className="w-4 h-4" />
-              <span>ARCHITECTING DIGITAL EXCELLENCE</span>
+          <div className="space-y-6 mb-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Building2 size={16} className="text-[#0284C7]" />
+                <span>ARCHITECTING DIGITAL EXCELLENCE</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
-              Who We Are &amp; <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                Our Ecosystem Philosophy
-              </span>
-            </h2>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+                Who We Are &amp; <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                  Our Ecosystem Philosophy
+                </span>
+              </h2>
+            </div>
           </div>
         }
         customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future."
@@ -983,20 +990,28 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 07 — NEW: TECHNOLOGY + TALENT (Split-Screen)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#F3EEFF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 bg-[#F3EEFF] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-300 text-purple-900 text-xs font-black uppercase tracking-widest">
-              <Users size={14} />
-              <span>TWO SIDES OF ONE ECOSYSTEM</span>
+          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-purple-100/90 border-2 border-purple-300 text-purple-950 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Users size={16} className="text-purple-900" />
+                <span>TWO SIDES OF ONE ECOSYSTEM</span>
+                <span className="text-[10px] text-purple-900 ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-purple-600 via-indigo-500 to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Technology Creates Greater Impact When <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-indigo-600 to-[#0284C7]">
-                People and Businesses Grow Together.
-              </span>
-            </h2>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Technology Creates Greater Impact When <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-indigo-600 to-[#0284C7]">
+                  People and Businesses Grow Together.
+                </span>
+              </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -1072,17 +1087,25 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 08 — ENGINEERING PROCESS (01 Discover → 05 Grow)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
+      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Zap size={14} />
-              <span>DEVELOPMENT LIFECYCLE &amp; PROCESS</span>
+          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-end w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
+                <span>DEVELOPMENT LIFECYCLE &amp; PROCESS</span>
+                <Zap size={16} className="text-[#0284C7] ml-0.5" />
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Structured Engineering Journey
-            </h2>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Structured Engineering Journey
+              </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
@@ -1108,23 +1131,31 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 09 — NEW: INSIGHTS, MEDIA & COMMUNITY
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#EAFBF4] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 bg-[#EAFBF4] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-widest">
-              <Globe size={14} />
-              <span>YOMTECH IN THE WORLD</span>
+          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-emerald-100/90 border-2 border-emerald-300 text-emerald-950 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Globe size={16} className="text-emerald-800" />
+                <span>YOMTECH IN THE WORLD</span>
+                <span className="text-[10px] text-emerald-800 ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-emerald-600 via-teal-500 to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Technology Doesn't Stop <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-teal-600 to-[#0284C7]">
-                At The Product.
-              </span>
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              YomTech Global shares technology knowledge, practical insights, innovation stories, engineering perspectives, and opportunities through its growing digital community.
-            </p>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Technology Doesn't Stop <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-teal-600 to-[#0284C7]">
+                  At The Product.
+                </span>
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                YomTech Global shares technology knowledge, practical insights, innovation stories, engineering perspectives, and opportunities through its growing digital community.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1190,17 +1221,25 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 10 — TESTIMONIALS & CLIENT PROOF
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
+      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Quote size={14} />
-              <span>WHAT OUR COMMUNITY SAYS</span>
+          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-end w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
+                <span>WHAT OUR COMMUNITY SAYS</span>
+                <Quote size={16} className="text-[#0284C7] ml-0.5" />
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Trusted by Engineers &amp; Leaders
-            </h2>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Trusted by Engineers &amp; Leaders
+              </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -1233,20 +1272,28 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 11 — NEW: THE FUTURE OF YOMTECH
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#FFF7E6] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 bg-[#FFF7E6] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black uppercase tracking-widest">
-              <Target size={14} />
-              <span>THE FUTURE OF TECHNOLOGY</span>
+          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-amber-100/90 border-2 border-amber-300 text-amber-950 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Target size={16} className="text-amber-800" />
+                <span>THE FUTURE OF TECHNOLOGY</span>
+                <span className="text-[10px] text-amber-800 ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-amber-500 via-orange-400 to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Building for What Comes Next.
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              Technology changes continuously. YomTech Global is built around continuous learning, practical engineering, responsible innovation, and scalable digital thinking so that today's solutions can evolve with tomorrow's opportunities.
-            </p>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Building for What Comes Next.
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                Technology changes continuously. YomTech Global is built around continuous learning, practical engineering, responsible innovation, and scalable digital thinking so that today's solutions can evolve with tomorrow's opportunities.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -1271,17 +1318,25 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 12 — FINAL DUAL-PATH CTA
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#00B4D8] text-white relative overflow-hidden">
+      <section className="py-24 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#00B4D8] text-white relative overflow-hidden font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/30 text-cyan-200 text-xs font-black uppercase tracking-widest">
-              <Sparkles size={14} />
-              <span>TAKE THE NEXT STEP</span>
+          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-end w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-cyan-300" />
+              <div className="px-6 py-2 rounded-full bg-white/15 backdrop-blur-md border-2 border-cyan-300/60 text-cyan-200 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-cyan-200">◆</span>
+                <span>TAKE THE NEXT STEP</span>
+                <Sparkles size={16} className="text-cyan-200 ml-0.5" />
+              </div>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
-              Ready to Build Your Technology Future?
-            </h2>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+                Ready to Build Your Technology Future?
+              </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
