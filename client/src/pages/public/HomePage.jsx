@@ -639,7 +639,7 @@ export const HomePage = () => {
                 <span>ENGINEERING CAPABILITY MATRIX</span>
                 <span className="text-[10px] text-[#0284C7]">◆</span>
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0284C7]/50 to-transparent" />
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
@@ -705,7 +705,7 @@ export const HomePage = () => {
             
             {/* Header (Matching User Screenshot: Full-Length Left Line & White Pill Badge with Diamonds) */}
             <div className="flex items-center justify-end mb-2 w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0284C7]/50 to-[#0284C7]" />
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
               <div className="px-5 py-1.5 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xs shrink-0 z-10 -ml-[1px]">
                 <span className="text-[10px] text-[#0284C7]">◆</span>
                 <span>OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER</span>
