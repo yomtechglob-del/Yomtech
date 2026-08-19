@@ -695,12 +695,13 @@ export const HomePage = () => {
           {/* 12 Official Services List Matrix (Horizontal Water Flow Marquee Stream) */}
           <div className="pt-12 border-t border-slate-200/80 space-y-6 relative overflow-hidden">
             
-            {/* Header (Right Aligned with Long Bold Accent Line to Left) */}
-            <div className="flex items-center justify-end gap-3.5 mb-2 w-full">
-              <div className="h-[3px] flex-1 max-w-xl bg-gradient-to-r from-transparent via-[#0284C7] to-cyan-400 rounded-full shadow-xs" />
-              <div className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.25em] flex items-center gap-2 shadow-2xs shrink-0">
-                <Sparkles size={13} className="text-[#0284C7]" />
+            {/* Header (Matching User Screenshot: Full-Length Left Line & White Pill Badge with Diamonds) */}
+            <div className="flex items-center justify-end mb-2 w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0284C7]/50 to-[#0284C7]" />
+              <div className="px-5 py-1.5 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xs shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
                 <span>OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER</span>
+                <span className="text-[10px] text-[#0284C7]">◆</span>
               </div>
             </div>
 
