@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   ArrowRight, Check, CheckCircle2, Phone, Star, Quote, Mail,
@@ -188,45 +188,60 @@ const ECOSYSTEM_PILLARS = [
     number: '01',
     title: 'SOFTWARE & SYSTEMS',
     badge: 'ENGINEER',
-    desc: 'Build scalable software systems, enterprise applications, APIs, and digital products.',
+    icon: Code,
+    desc: 'Build scalable software systems, enterprise web applications, high-throughput microservices, and robust APIs.',
     details: ['Custom Enterprise Web Apps', 'High-Concurrency Microservices', 'RESTful API Contracts', 'Multi-Tenant Architecture'],
-    color: 'from-[#0284C7] to-[#0ED3DD]'
+    metrics: [{ label: 'Performance', val: 'Sub-50ms' }, { label: 'Tech Stack', val: 'Node / React / Python' }],
+    gradient: 'from-cyan-500 to-blue-600',
+    badgeBg: 'bg-cyan-500 text-white'
   },
   {
     id: 'pillar-2',
     number: '02',
     title: 'INFRASTRUCTURE & PLATFORMS',
     badge: 'CLOUD',
-    desc: 'Design, deploy, and optimize modern digital infrastructure and technology platforms.',
+    icon: Server,
+    desc: 'Design, deploy, and optimize modern digital infrastructure, cloud data centers, and enterprise storage platforms.',
     details: ['Docker & Kubernetes Rollout', 'Cloud Data Center Hosting', 'Sub-50ms Latency Caching', 'Database Sharding & Storage'],
-    color: 'from-[#0077B6] to-[#00B4D8]'
+    metrics: [{ label: 'Availability', val: '99.99% SLA' }, { label: 'Cluster Scale', val: 'Auto-Elastic' }],
+    gradient: 'from-blue-600 to-indigo-600',
+    badgeBg: 'bg-blue-600 text-white'
   },
   {
     id: 'pillar-3',
     number: '03',
     title: 'SYSTEM PROTECTION',
     badge: 'SECURE',
-    desc: 'Build and support responsible, resilient, and security-focused digital systems.',
+    icon: ShieldCheck,
+    desc: 'Build and defend resilient digital systems with end-to-end encryption, automated penetration audits, and AI security.',
     details: ['Penetration Testing Audits', 'TLS 1.3 & AES-256 Encryption', 'AI Surveillance Zones', 'Vulnerability Hardening'],
-    color: 'from-[#7C3AED] to-[#A855F7]'
+    metrics: [{ label: 'Standard', val: 'Zero-Trust' }, { label: 'Encryption', val: 'AES-256 Bit' }],
+    gradient: 'from-purple-600 to-fuchsia-600',
+    badgeBg: 'bg-purple-600 text-white'
   },
   {
     id: 'pillar-4',
     number: '04',
     title: 'TALENT & MENTORSHIP',
     badge: 'EDUCATE',
-    desc: 'Develop practical technology skills through structured learning, mentorship, and real-world projects.',
+    icon: GraduationCap,
+    desc: 'Develop practical technology skills through structured bootcamps, repository mentorship, and verified certifications.',
     details: ['2,000+ Certified Alumni', 'Practical Code Bootcamps', 'Industry Leader Mentorship', 'Verified Skill Badging'],
-    color: 'from-[#059669] to-[#10B981]'
+    metrics: [{ label: 'Graduates', val: '2,000+ Alumni' }, { label: 'Placement', val: '94% Hired' }],
+    gradient: 'from-emerald-500 to-teal-600',
+    badgeBg: 'bg-emerald-600 text-white'
   },
   {
     id: 'pillar-5',
     number: '05',
     title: 'PROFESSIONAL NETWORK',
     badge: 'CONNECT',
-    desc: 'Connect businesses, engineers, learners, technology opportunities, and innovation communities.',
+    icon: Users,
+    desc: 'Connect top-tier engineers, enterprise clients, and vetted software portfolios through the automated WabiJobs platform.',
     details: ['48h Candidate Shortlisting', 'Direct Remote & Hybrid Placement', 'Vetted Code Portfolios', 'Contract & Staff Augmentation'],
-    color: 'from-[#D97706] to-[#F59E0B]'
+    metrics: [{ label: 'Matching Speed', val: '< 48 Hours' }, { label: 'Network', val: 'Pan-African' }],
+    gradient: 'from-amber-500 to-orange-600',
+    badgeBg: 'bg-amber-500 text-white'
   }
 ];
 
@@ -399,96 +414,181 @@ export const HomePage = () => {
           SECTION 03 — NEW: THE YOMTECH GLOBAL ECOSYSTEM
           (Interactive Connected Node Nucleus Experience)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#F4FAFF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0284c70a_1px,transparent_1px),linear-gradient(to_bottom,#0284c70a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
+      <section className="py-24 md:py-32 bg-slate-900 text-white relative overflow-hidden border-b border-slate-800 font-sans">
+        
+        {/* Animated Background Mesh & Ambient Glow Orbs */}
+        <div className="absolute inset-0 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:32px_32px] opacity-10 pointer-events-none" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
+          
+          {/* Header */}
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100/70 border border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Layers size={14} />
+            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-950/80 border border-cyan-700/60 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+              <Sparkles size={14} className="text-cyan-400" />
               <span>YOMTECH GLOBAL ECOSYSTEM</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              One Technology Ecosystem. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600">
-                Built to Create Real Impact.
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-tight text-white">
+              One Connected Ecosystem. <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
+                Engineered for High Impact.
               </span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              YomTech Global brings together enterprise engineering, digital platforms, technology talent, practical learning, and innovation initiatives into one connected ecosystem designed to solve real-world challenges.
+            <p className="text-slate-300 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+              Yomtech Global unifies enterprise software engineering, cloud infrastructure, security, digital talent academy, and recruitment network into one seamless digital matrix.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Node Selectors */}
-            <div className="lg:col-span-5 space-y-3">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            {/* Left Node Selectors (Pillars) */}
+            <div className="lg:col-span-5 space-y-3.5">
               {ECOSYSTEM_PILLARS.map((pillar, idx) => {
                 const isActive = activeEcosystemTab === idx;
+                const IconComponent = pillar.icon;
                 return (
                   <button
                     key={pillar.id}
                     onClick={() => setActiveEcosystemTab(idx)}
-                    className={`w-full p-5 rounded-2xl text-left border transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer ${isActive
-                        ? 'bg-white border-[#0284C7] shadow-xl shadow-cyan-500/10 ring-2 ring-[#0284C7]/20 scale-[1.02]'
-                        : 'bg-white/60 hover:bg-white border-slate-200/90 text-slate-700'
-                      }`}
+                    className={`w-full p-5 sm:p-6 rounded-3xl text-left transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer relative overflow-hidden group border ${
+                      isActive
+                        ? 'bg-slate-800/90 border-cyan-500/80 shadow-[0_15px_35px_rgba(6,182,212,0.25)] ring-2 ring-cyan-400/40 translate-x-2'
+                        : 'bg-slate-800/40 hover:bg-slate-800/70 border-slate-700/60 text-slate-300 hover:border-slate-600'
+                    }`}
                   >
-                    <div className="flex items-center gap-3.5">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs transition-colors shrink-0 ${isActive ? 'bg-gradient-to-tr ' + pillar.color + ' text-white shadow-md' : 'bg-slate-100 text-slate-500'
-                        }`}>
-                        {pillar.number}
+                    {/* Left Active Edge Indicator */}
+                    {isActive && (
+                      <div className={`absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b ${pillar.gradient}`} />
+                    )}
+
+                    <div className="flex items-center gap-4 relative z-10">
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 shrink-0 ${
+                        isActive 
+                          ? `bg-gradient-to-br ${pillar.gradient} text-white shadow-lg shadow-cyan-500/30 scale-105` 
+                          : 'bg-slate-700/60 text-slate-400 group-hover:text-white group-hover:bg-slate-700'
+                      }`}>
+                        <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] block">{pillar.badge}</span>
-                        <h3 className="text-base font-extrabold text-slate-900 leading-snug">{pillar.title}</h3>
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className={`text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${
+                            isActive ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40' : 'bg-slate-700/40 text-slate-400'
+                          }`}>
+                            {pillar.badge}
+                          </span>
+                          <span className="text-[11px] font-mono text-slate-400">NODE #{pillar.number}</span>
+                        </div>
+                        <h3 className={`text-base sm:text-lg font-extrabold font-display leading-tight transition-colors ${
+                          isActive ? 'text-white' : 'text-slate-200 group-hover:text-white'
+                        }`}>
+                          {pillar.title}
+                        </h3>
                       </div>
                     </div>
-                    <ChevronRight size={18} className={`transition-transform ${isActive ? 'rotate-90 text-[#0284C7]' : 'text-slate-400'}`} />
+
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                      isActive ? 'bg-cyan-500 text-slate-950 scale-110 shadow-md' : 'bg-slate-700/40 text-slate-400 group-hover:bg-slate-700'
+                    }`}>
+                      <ChevronRight size={16} className={`transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`} />
+                    </div>
                   </button>
                 );
               })}
             </div>
 
-            {/* Right Active Node Display Box */}
+            {/* Right Active Node Display Glass Card */}
             <div className="lg:col-span-7">
-              <div style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }} className="p-8 sm:p-12 rounded-3xl border-2 border-cyan-300 shadow-2xl relative overflow-hidden space-y-6">
-                <div className="absolute top-4 right-6 font-mono text-4xl font-black text-cyan-200/50 pointer-events-none">
-                  &lt;ECOSYSTEM /&gt;
-                </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeEcosystemTab}
+                  initial={{ opacity: 0, y: 15, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -15, scale: 0.98 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className="relative rounded-3xl p-8 sm:p-12 border border-slate-700/80 bg-slate-800/80 backdrop-blur-2xl shadow-[0_30px_70px_rgba(0,0,0,0.5)] overflow-hidden space-y-8"
+                >
+                  {/* Top Ambient Glow Background */}
+                  <div className={`absolute top-0 right-0 w-80 h-80 bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} opacity-15 blur-3xl pointer-events-none`} />
 
-                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase">
-                  NODE {ECOSYSTEM_PILLARS[activeEcosystemTab].number} · {ECOSYSTEM_PILLARS[activeEcosystemTab].badge}
-                </div>
-
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
-                  {ECOSYSTEM_PILLARS[activeEcosystemTab].title}
-                </h3>
-
-                <p className="text-slate-600 text-sm font-medium leading-relaxed">
-                  {ECOSYSTEM_PILLARS[activeEcosystemTab].desc}
-                </p>
-
-                <div className="space-y-3 pt-2">
-                  <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">Core Technical Capabilities:</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {ECOSYSTEM_PILLARS[activeEcosystemTab].details.map((cap) => (
-                      <div key={cap} className="flex items-center gap-2 p-3 rounded-xl bg-white/80 border border-slate-200 text-xs font-extrabold text-slate-800">
-                        <CheckCircle2 size={15} className="text-[#0284C7] shrink-0" />
-                        <span>{cap}</span>
+                  {/* Header Status Bar */}
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-700/80 pb-6 relative z-10">
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-slate-700/90 text-xs font-mono text-cyan-300">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+                        <span className="font-bold">NODE {ECOSYSTEM_PILLARS[activeEcosystemTab].number} // ONLINE</span>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                      <span className={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider ${ECOSYSTEM_PILLARS[activeEcosystemTab].badgeBg}`}>
+                        {ECOSYSTEM_PILLARS[activeEcosystemTab].badge}
+                      </span>
+                    </div>
 
-                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-500">Integrated under YomTech Global Parent Network</span>
-                  <Link to="/services" className="inline-flex items-center gap-1.5 text-xs font-black text-[#0284C7] hover:text-cyan-600">
-                    <span>View Node Specs</span>
-                    <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
+                    <div className="font-mono text-xs text-slate-400 flex items-center gap-2">
+                      <Zap size={14} className="text-cyan-400" />
+                      <span>CONNECTED TO YOMTECH BACKBONE</span>
+                    </div>
+                  </div>
+
+                  {/* Title & Description */}
+                  <div className="space-y-3 relative z-10">
+                    <h3 className="text-2xl sm:text-3xl md:text-4xl font-black font-display text-white tracking-tight leading-tight">
+                      {ECOSYSTEM_PILLARS[activeEcosystemTab].title}
+                    </h3>
+                    <p className="text-slate-300 text-sm sm:text-base font-medium leading-relaxed">
+                      {ECOSYSTEM_PILLARS[activeEcosystemTab].desc}
+                    </p>
+                  </div>
+
+                  {/* Technical Capabilities Grid */}
+                  <div className="space-y-4 relative z-10">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">
+                        Core Technical Capabilities:
+                      </h4>
+                      <div className="flex gap-2">
+                        {ECOSYSTEM_PILLARS[activeEcosystemTab].metrics.map((m, idx) => (
+                          <span key={idx} className="px-2.5 py-1 rounded-md bg-slate-900/80 border border-slate-700/70 text-[10px] font-mono text-cyan-300">
+                            {m.label}: <strong className="text-white">{m.val}</strong>
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {ECOSYSTEM_PILLARS[activeEcosystemTab].details.map((cap) => (
+                        <div 
+                          key={cap} 
+                          className="flex items-center gap-3 p-4 rounded-2xl bg-slate-900/70 border border-slate-700/70 text-xs sm:text-sm font-bold text-slate-100 hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-300 group/cap"
+                        >
+                          <div className={`w-6 h-6 rounded-lg bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} flex items-center justify-center text-white shrink-0 shadow-sm`}>
+                            <Check size={14} strokeWidth={3} />
+                          </div>
+                          <span className="group-hover/cap:text-cyan-300 transition-colors">{cap}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Footer Action Line */}
+                  <div className="pt-6 border-t border-slate-700/80 flex flex-wrap items-center justify-between gap-4 relative z-10">
+                    <span className="text-xs font-bold text-slate-400 flex items-center gap-2">
+                      <Building2 size={14} className="text-cyan-400" />
+                      Integrated under YomTech Global Parent Network
+                    </span>
+
+                    <Link 
+                      to="/services" 
+                      className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} text-white font-black text-xs uppercase tracking-wider shadow-lg hover:shadow-cyan-500/20 hover:scale-105 transition-all duration-300`}
+                    >
+                      <span>Explore Node Specs</span>
+                      <ArrowRight size={15} />
+                    </Link>
+                  </div>
+
+                </motion.div>
+              </AnimatePresence>
             </div>
+
           </div>
         </div>
       </section>
