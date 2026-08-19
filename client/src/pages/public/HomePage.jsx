@@ -374,72 +374,21 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 02 — WHO WE ARE & CORE VALUES (Hexagonal Honeycomb Cluster)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-                <Building2 className="w-4 h-4" />
-                <span>ARCHITECTING DIGITAL EXCELLENCE</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
-                Who We Are &amp; <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                  Our Ecosystem Philosophy
-                </span>
-              </h2>
-              <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
-                Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future.
-              </p>
-
-              <div className="p-6 rounded-2xl bg-cyan-50/70 border-l-4 border-[#0284C7] space-y-3">
-                <Quote size={24} className="text-[#0284C7]" />
-                <p className="text-sm font-bold text-slate-800 italic leading-relaxed">
-                  "Technology is not merely a tool; it is the foundation for innovation, opportunity, and sustainable growth."
-                </p>
-                <div className="pt-1">
-                  <p className="text-xs font-black text-slate-900">Ermias Alemayehu</p>
-                  <p className="text-[10px] font-bold text-[#0284C7] uppercase">Founder &amp; Chief Executive Officer</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="p-6 rounded-3xl bg-slate-50/80 border border-slate-200 shadow-sm flex flex-col justify-center items-center">
-                <h3 className="text-sm font-black uppercase tracking-widest text-[#0284C7] mb-4">OUR GUIDING PRINCIPLES MATRIX</h3>
-                <div className="grid grid-cols-2 gap-3 w-full">
-                  {CORE_VALUES.map((val) => (
-                    <div
-                      key={val.title}
-                      style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                      className="p-4 rounded-2xl border-2 border-indigo-200/80 hover:border-cyan-400 transition-all space-y-1 group shadow-sm"
-                    >
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 size={15} className="text-[#0284C7]" />
-                        <h4 className="text-sm font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{val.title}</h4>
-                      </div>
-                      <p className="text-[11px] text-slate-600 leading-relaxed font-medium line-clamp-2">{val.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Hexagonal Honeycomb Core Values Cluster Section with custom Homepage badge, heading, and description */}
       <AboutEcosystem
-        customBadgeText="WHO WE ARE"
+        hideBadge={true}
         customHeading={
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
-            Who We Are &amp; <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-              Our Ecosystem Philosophy
-            </span>
-          </h2>
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+              <Building2 className="w-4 h-4" />
+              <span>ARCHITECTING DIGITAL EXCELLENCE</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+              Who We Are &amp; <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                Our Ecosystem Philosophy
+              </span>
+            </h2>
+          </div>
         }
         customDescription="Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future."
         showCeoQuote={true}

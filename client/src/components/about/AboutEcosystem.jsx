@@ -244,7 +244,7 @@ const EcosystemCenterHexagon = ({ logoSrc }) => (
   </div>
 );
 
-export const AboutEcosystem = ({ customBadgeText, customHeading, customDescription, showCeoQuote }) => {
+export const AboutEcosystem = ({ customBadgeText, customHeading, customDescription, showCeoQuote, hideBadge }) => {
   const [hoveredId, setHoveredId] = useState(null);
   const [selectedHex, setSelectedHex] = useState(null);
 
@@ -265,13 +265,15 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
           
           {/* Left Column: Section Header */}
           <div className="lg:col-span-5 space-y-6 text-left flex flex-col items-start">
-            <div className="inline-block relative">
-              <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
-                <Award className="w-6 h-6 text-cyan-200" />
-                <span>{customBadgeText || "VALUES"}</span>
+            {!hideBadge && (
+              <div className="inline-block relative">
+                <div className="px-7 py-2.5 bg-[#0284C7] text-white text-xl sm:text-2xl font-black font-sans rounded-2xl shadow-md tracking-[0.2em] uppercase flex items-center gap-3">
+                  <Award className="w-6 h-6 text-cyan-200" />
+                  <span>{customBadgeText || "VALUES"}</span>
+                </div>
+                <div className="absolute -bottom-2 left-4 w-4 h-2 bg-[#0369a1] rounded-b-sm transform skew-x-12" />
               </div>
-              <div className="absolute -bottom-2 left-4 w-4 h-2 bg-[#0369a1] rounded-b-sm transform skew-x-12" />
-            </div>
+            )}
 
             {customHeading && (
               <div className="pt-1">
