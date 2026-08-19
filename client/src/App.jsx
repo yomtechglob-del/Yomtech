@@ -10,9 +10,13 @@ import { SolutionsPage } from './pages/public/SolutionsPage';
 import { IndustriesPage } from './pages/public/IndustriesPage';
 import { PortfolioPage } from './pages/public/PortfolioPage';
 import { MethodologyPage } from './pages/public/MethodologyPage';
+import { WhyChooseUsPage } from './pages/public/WhyChooseUsPage';
 import { PartnersPage } from './pages/public/PartnersPage';
+import { ClientsPage } from './pages/public/ClientsPage';
 import { CareersPage } from './pages/public/CareersPage';
+import { WabiJobPage } from './pages/public/WabiJobPage';
 import { MediaPage } from './pages/public/MediaPage';
+import { DocumentariesPage } from './pages/public/DocumentariesPage';
 import { AcademyPage } from './pages/public/AcademyPage';
 import { AboutPage } from './pages/public/AboutPage';
 import { ContactPage } from './pages/public/ContactPage';
@@ -49,9 +53,13 @@ export default function App() {
           <Route path="/industries" element={<IndustriesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/methodology" element={<MethodologyPage />} />
+          <Route path="/why-choose-us" element={<WhyChooseUsPage />} />
           <Route path="/partners" element={<PartnersPage />} />
+          <Route path="/clients" element={<ClientsPage />} />
           <Route path="/careers" element={<CareersPage />} />
+          <Route path="/wabijob" element={<WabiJobPage />} />
           <Route path="/media" element={<MediaPage />} />
+          <Route path="/documentaries" element={<DocumentariesPage />} />
           <Route path="/academy" element={<AcademyPage />} />
           <Route path="/cacademy" element={<Navigate to="/academy" replace />} />
           <Route path="/about" element={<AboutPage />} />
