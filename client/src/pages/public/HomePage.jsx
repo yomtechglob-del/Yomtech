@@ -966,7 +966,7 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 08 — ENGINEERING PROCESS (S-CURVE / ZIG-ZAG PUSHPIN ROADMAP JOURNEY)
+          SECTION 08 — ENGINEERING PROCESS (S-CURVE ZIG-ZAG PUSHPIN ROADMAP)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
@@ -1002,123 +1002,105 @@ export const HomePage = () => {
             </div>
           </div>
 
-          {/* S-Curve Zig-Zag Pushpin Journey Container */}
+          {/* Staggered 2-Column S-Curve Pushpin Roadmap Container */}
           <div className="relative max-w-5xl mx-auto py-8">
             
             {/* Background S-Curve Connecting Dashed Path SVG */}
             <svg 
               className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-              viewBox="0 0 1000 1200" 
+              viewBox="0 0 1000 1000" 
               fill="none"
               preserveAspectRatio="none"
             >
               <path 
-                d="M 280,100 C 700,200 700,350 280,480 C -100,610 700,740 280,870 C -100,1000 700,1080 500,1150" 
-                stroke="#38BDF8" 
-                strokeWidth="3" 
+                d="M 250,150 C 750,150 750,350 250,550 C -250,750 750,850 500,980" 
+                stroke="#0284C7" 
+                strokeWidth="3.5" 
                 strokeDasharray="10 10" 
                 strokeLinecap="round"
-                className="opacity-70"
+                className="opacity-40"
               />
             </svg>
 
-            {/* 5 S-Curve Journey Steps Stack */}
-            <div className="space-y-16 sm:space-y-20 relative z-10">
+            {/* Staggered 2-Column Grid matching VektaOS Pushpin Screenshot */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-16 relative z-10">
               {[
                 { 
                   num: '01', 
-                  title: 'DISCOVER', 
-                  subtitle: 'Requirement Analysis & Architecture', 
-                  desc: 'In-depth requirement analysis, technology stack selection, scope definition, and structural architecture plan.', 
-                  align: 'left',
+                  title: 'Plan & Discover', 
+                  desc: 'In-depth requirement analysis, tech stack selection, scope definition, and structural architecture plan.', 
                   tilt: '-rotate-2 hover:rotate-0',
-                  pinColor: 'bg-gradient-to-br from-blue-400 to-blue-600 shadow-blue-500/40',
-                  bgTint: 'bg-white/95 border-2 border-blue-200/90 shadow-[0_15px_35px_rgba(37,99,235,0.08)]',
-                  icon: Target,
-                  badgeBg: 'bg-blue-50 text-blue-700 border-blue-200'
+                  offset: 'md:translate-y-0',
+                  pinColor: 'from-blue-500 to-blue-700 shadow-blue-500/40',
+                  numColor: 'text-blue-600',
+                  badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
+                  icon: Target
                 },
                 { 
                   num: '02', 
-                  title: 'DESIGN', 
-                  subtitle: 'System Architecture & Wireframing', 
+                  title: 'Manage & Design', 
                   desc: 'High-performance microservices architecture design, REST/GraphQL API specifications, and intuitive UI/UX wireframing.', 
-                  align: 'right',
                   tilt: 'rotate-2 hover:rotate-0',
-                  pinColor: 'bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-emerald-500/40',
-                  bgTint: 'bg-white/95 border-2 border-emerald-200/90 shadow-[0_15px_35px_rgba(5,150,105,0.08)]',
-                  icon: Code,
-                  badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  offset: 'md:translate-y-16',
+                  pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
+                  numColor: 'text-emerald-600',
+                  badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                  icon: Code
                 },
                 { 
                   num: '03', 
-                  title: 'ENGINEER', 
-                  subtitle: 'Agile Sprint Execution & Clean Code', 
+                  title: 'Engineer & Build', 
                   desc: 'Test-driven development, agile sprint execution, clean modular codebase, and robust database optimization.', 
-                  align: 'left',
                   tilt: '-rotate-1 hover:rotate-0',
-                  pinColor: 'bg-gradient-to-br from-purple-400 to-purple-600 shadow-purple-500/40',
-                  bgTint: 'bg-white/95 border-2 border-purple-200/90 shadow-[0_15px_35px_rgba(124,58,237,0.08)]',
-                  icon: Cpu,
-                  badgeBg: 'bg-purple-50 text-purple-700 border-purple-200'
+                  offset: 'md:translate-y-0',
+                  pinColor: 'from-purple-500 to-purple-700 shadow-purple-500/40',
+                  numColor: 'text-purple-600',
+                  badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
+                  icon: Cpu
                 },
                 { 
                   num: '04', 
-                  title: 'VALIDATE', 
-                  subtitle: 'Penetration Testing & QA Audits', 
+                  title: 'Validate & Test', 
                   desc: 'End-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits.', 
-                  align: 'right',
                   tilt: 'rotate-3 hover:rotate-0',
-                  pinColor: 'bg-gradient-to-br from-amber-400 to-amber-600 shadow-amber-500/40',
-                  bgTint: 'bg-white/95 border-2 border-amber-200/90 shadow-[0_15px_35px_rgba(217,119,6,0.08)]',
-                  icon: ShieldCheck,
-                  badgeBg: 'bg-amber-50 text-amber-700 border-amber-200'
+                  offset: 'md:translate-y-16',
+                  pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
+                  numColor: 'text-amber-600',
+                  badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
+                  icon: ShieldCheck
                 },
                 { 
                   num: '05', 
-                  title: 'GROW', 
-                  subtitle: 'Zero-Downtime Deployment & 24/7 SLA', 
+                  title: 'Deploy & Scale', 
                   desc: 'CI/CD automated pipeline deployment, zero-downtime launch, real-time APM monitoring, and round-the-clock SLA support.', 
-                  align: 'center',
                   tilt: '-rotate-1 hover:rotate-0',
-                  pinColor: 'bg-gradient-to-br from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
-                  bgTint: 'bg-white/95 border-2 border-cyan-300 shadow-[0_15px_35px_rgba(2,132,199,0.12)]',
-                  icon: TrendingUp,
-                  badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200'
+                  offset: 'md:col-span-2 md:max-w-md md:mx-auto md:translate-y-8',
+                  pinColor: 'from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
+                  numColor: 'text-[#0284C7]',
+                  badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200',
+                  icon: TrendingUp
                 }
               ].map((step) => {
                 const StepIcon = step.icon;
-                
-                // Alignment positioning class
-                let layoutClass = 'md:mr-auto md:ml-0 md:max-w-md';
-                if (step.align === 'right') {
-                  layoutClass = 'md:ml-auto md:mr-0 md:max-w-md';
-                } else if (step.align === 'center') {
-                  layoutClass = 'md:mx-auto md:max-w-md';
-                }
 
                 return (
-                  <div key={step.num} className={`relative w-full ${layoutClass}`}>
+                  <div key={step.num} className={`relative w-full ${step.offset}`}>
                     
                     {/* 3D Realistic Pushpin Top Medallion */}
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                      <div className={`w-7 h-7 rounded-full ${step.pinColor} border-2 border-white shadow-lg flex items-center justify-center relative`}>
-                        <div className="w-2.5 h-2.5 rounded-full bg-white/40 blur-[0.5px] absolute top-1 left-1" />
+                      <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
+                        <div className="w-2.5 h-2.5 rounded-full bg-white/50 blur-[0.5px] absolute top-1 left-1" />
                       </div>
                       <div className="w-0.5 h-2.5 bg-slate-400/80 shadow-xs" />
                     </div>
 
-                    {/* Pushpin Tilted Card */}
-                    <div className={`rounded-3xl p-7 sm:p-8 ${step.bgTint} ${step.tilt} transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl relative z-20 space-y-4 group cursor-pointer`}>
+                    {/* Pushpin Tilted Card (Matching VektaOS Screenshot) */}
+                    <div className={`rounded-3xl p-7 sm:p-8 bg-white/95 border-2 border-slate-100/90 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-2xl ${step.tilt} transition-all duration-500 hover:-translate-y-2 relative z-20 space-y-4 group cursor-pointer`}>
                       
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-3">
-                          <span className="text-3xl font-black font-mono text-[#0284C7]">
-                            {step.num}
-                          </span>
-                          <span className={`px-3 py-1 rounded-full border text-[10px] font-mono font-black uppercase tracking-wider ${step.badgeBg}`}>
-                            PHASE {step.num}
-                          </span>
-                        </div>
+                        <span className={`text-3xl font-black font-mono ${step.numColor}`}>
+                          {step.num}
+                        </span>
 
                         <div className={`w-11 h-11 rounded-2xl ${step.badgeBg} border flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform duration-300`}>
                           <StepIcon size={20} />
@@ -1129,10 +1111,7 @@ export const HomePage = () => {
                         <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
                           {step.title}
                         </h3>
-                        <p className="text-xs font-bold text-[#0284C7] uppercase font-mono">
-                          {step.subtitle}
-                        </p>
-                        <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                        <p className="text-xs text-slate-600 font-medium leading-relaxed">
                           {step.desc}
                         </p>
                       </div>
