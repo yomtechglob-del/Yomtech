@@ -22,6 +22,8 @@ import { AboutEcosystem } from '../../components/about/AboutEcosystem';
 
 // Service Images
 import erpImg from '../../assets/services/erp.png';
+import wmsImg from '../../assets/services/wms.png';
+import sfaImg from '../../assets/services/sfa.png';
 import customImg from '../../assets/services/custom.png';
 import cybersecurityImg from '../../assets/services/cybersecurity.png';
 import cloudImg from '../../assets/services/cloud.png';
@@ -29,6 +31,9 @@ import webImg from '../../assets/services/web.png';
 import mobileImg from '../../assets/services/mobile.png';
 import educationImg from '../../assets/services/education.png';
 import crmImg from '../../assets/services/crm.png';
+import documentaryImg from '../../assets/services/documentary.png';
+import coachingImg from '../../assets/services/coaching.png';
+import securityImg from '../../assets/services/security.png';
 
 // Partner Logos
 import ssgiLogo from '../../assets/partners/ssgi.webp';
@@ -184,18 +189,18 @@ const CORE_VALUES = [
 ];
 
 const OFFICIAL_SERVICES_LIST = [
-  { name: 'ERP Software Solution', desc: 'Enterprise resource planning for operational excellence' },
-  { name: 'WMS Software Solution', desc: 'Warehouse management systems & inventory optimization' },
-  { name: 'SFA Software Solution', desc: 'Sales force automation & CRM tracking tools' },
-  { name: 'Online Tech Education', desc: 'WabiSkills digital academy & professional bootcamps' },
-  { name: 'Tech Documentary', desc: 'Media production & technology innovation storytelling' },
-  { name: 'Cybersecurity & IT Consulting', desc: 'Security audits, data center defense & IT advisory' },
-  { name: 'Mobile App Development', desc: 'Native & cross-platform iOS & Android mobile applications' },
-  { name: 'Web App Development', desc: 'High-performance web applications & enterprise portals' },
-  { name: 'Build Custom Software', desc: '100% custom-tailored software engineered from scratch' },
-  { name: 'Tech Coaching & Mentorship', desc: 'Career coaching, technical mentorship & skill acceleration' },
-  { name: 'Cloud Service & Deployment', desc: 'Cloud migration, DevOps automation & infrastructure hosting' },
-  { name: 'Surveillance & Security', desc: 'AI-integrated CCTV, smart monitoring & security systems' },
+  { name: 'ERP Software Solution', desc: 'Enterprise resource planning for operational excellence', img: erpImg },
+  { name: 'WMS Software Solution', desc: 'Warehouse management systems & inventory optimization', img: wmsImg },
+  { name: 'SFA Software Solution', desc: 'Sales force automation & CRM tracking tools', img: sfaImg },
+  { name: 'Online Tech Education', desc: 'WabiSkills digital academy & professional bootcamps', img: educationImg },
+  { name: 'Tech Documentary', desc: 'Media production & technology innovation storytelling', img: documentaryImg },
+  { name: 'Cybersecurity & IT Consulting', desc: 'Security audits, data center defense & IT advisory', img: cybersecurityImg },
+  { name: 'Mobile App Development', desc: 'Native & cross-platform iOS & Android mobile applications', img: mobileImg },
+  { name: 'Web App Development', desc: 'High-performance web applications & enterprise portals', img: webImg },
+  { name: 'Build Custom Software', desc: '100% custom-tailored software engineered from scratch', img: customImg },
+  { name: 'Tech Coaching & Mentorship', desc: 'Career coaching, technical mentorship & skill acceleration', img: coachingImg },
+  { name: 'Cloud Service & Deployment', desc: 'Cloud migration, DevOps automation & infrastructure hosting', img: cloudImg },
+  { name: 'Surveillance & Security', desc: 'AI-integrated CCTV, smart monitoring & security systems', img: securityImg },
 ];
 
 const ECOSYSTEM_PILLARS = [
@@ -696,13 +701,20 @@ export const HomePage = () => {
                 <div 
                   key={item.name} 
                   onClick={() => navigate('/services')}
-                  className="p-4 rounded-2xl bg-white hover:bg-cyan-50/40 border border-slate-200/90 hover:border-cyan-400 text-center space-y-1.5 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group hover:-translate-y-0.5"
+                  className="p-4 rounded-2xl bg-white hover:bg-cyan-50/50 border border-slate-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-xs hover:shadow-md transition-all duration-300 cursor-pointer group hover:-translate-y-1 relative overflow-hidden"
                 >
-                  <div className="text-xs font-black text-slate-900 group-hover:text-[#0284C7] transition-colors truncate">
-                    {item.name}
+                  {/* Service Image Icon Container */}
+                  <div className="w-12 h-12 rounded-xl bg-cyan-50/60 border border-cyan-100 p-2 shadow-2xs group-hover:scale-110 group-hover:bg-cyan-100/60 group-hover:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                    <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                   </div>
-                  <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
-                    {item.desc}
+
+                  <div className="space-y-1 w-full">
+                    <div className="text-xs font-black text-slate-900 group-hover:text-[#0284C7] transition-colors line-clamp-1">
+                      {item.name}
+                    </div>
+                    <div className="text-[10px] text-slate-500 font-semibold line-clamp-2 leading-tight">
+                      {item.desc}
+                    </div>
                   </div>
                 </div>
               ))}
