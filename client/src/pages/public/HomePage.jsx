@@ -1688,7 +1688,7 @@ export const HomePage = () => {
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
 
           <div className="space-y-6 text-center max-w-4xl mx-auto">
-            <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">Trusted by Public Sector Institutions, Universities &amp; Enterprises</h3>
+            <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">Trusted by Leading Public &amp; Private Institutions</h3>
 
             {/* Category Filter Pills */}
             <div className="flex flex-wrap justify-center gap-2">
