@@ -807,23 +807,41 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 05 — NEW: PRODUCTS & PLATFORMS
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#EAF6FF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100/80 border border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Rocket size={14} />
-              <span>YOMTECH PRODUCTS &amp; PLATFORMS</span>
+          {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Rocket size={16} className="text-[#0284C7]" />
+                <span>YOMTECH PRODUCTS & PLATFORMS</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Technology Built Beyond <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600">
-                The Single Project.
-              </span>
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              Alongside enterprise technology services, YomTech Global develops and supports platforms and initiatives designed to create practical digital value, expand access to technology, and connect people with new opportunities.
-            </p>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Technology Built Beyond <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600">
+                  The Single Project.
+                </span>
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                Alongside enterprise technology services, YomTech Global develops and supports platforms and initiatives designed to create practical digital value, expand access to technology, and connect people with new opportunities.
+              </p>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
