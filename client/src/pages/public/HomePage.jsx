@@ -922,17 +922,25 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 06 — MEASURED IMPACT & STATISTICS
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#071A2B] text-white relative overflow-hidden border-b border-cyan-400/30">
+      <section className="py-24 bg-[#071A2B] text-white relative overflow-hidden border-b border-cyan-400/30 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-3 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/30 text-cyan-300 text-xs font-black uppercase tracking-widest">
-              <TrendingUp size={14} />
-              <span>MEASURED ECOSYSTEM IMPACT</span>
+          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-cyan-950/80 border-2 border-cyan-500/60 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -mr-[1px]">
+                <TrendingUp size={16} className="text-cyan-300" />
+                <span>MEASURED ECOSYSTEM IMPACT</span>
+                <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-400 via-cyan-500/50 to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
-              Real Scale. Measured Achievements.
-            </h2>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+                Real Scale. Measured Achievements.
+              </h2>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
