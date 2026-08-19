@@ -966,11 +966,11 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 08 — ENGINEERING PROCESS (01 Discover → 05 Grow)
+          SECTION 08 — ENGINEERING PROCESS (S-CURVE / ZIG-ZAG PUSHPIN ROADMAP JOURNEY)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        {/* Dotted Grid Mesh Texture */}
         <div 
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
@@ -979,9 +979,9 @@ export const HomePage = () => {
           }}
         />
 
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-20 relative z-10">
 
-          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
+          {/* Header Badge */}
           <div className="space-y-6">
             <div className="flex items-center justify-end w-full">
               <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
@@ -996,43 +996,154 @@ export const HomePage = () => {
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
                 Structured Engineering Journey
               </h2>
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                From initial requirement discovery to zero-downtime production deployment — our 5-phase engineering roadmap built for reliability and scale.
+              </p>
             </div>
           </div>
 
-          {/* 5 Engineering Journey Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
-            {[
-              { num: '01', title: 'DISCOVER', desc: 'Requirement analysis, scope definition & architecture plan.', gradient: 'from-[#0284C7] to-cyan-400' },
-              { num: '02', title: 'DESIGN', desc: 'System architecture, API design & UI/UX wireframing.', gradient: 'from-cyan-500 to-teal-400' },
-              { num: '03', title: 'ENGINEER', desc: 'Agile sprint execution, clean code & microservices.', gradient: 'from-blue-600 to-[#0284C7]' },
-              { num: '04', title: 'VALIDATE', desc: 'Penetration testing, sub-50ms latency & QA audits.', gradient: 'from-indigo-600 to-blue-500' },
-              { num: '05', title: 'GROW', desc: 'Zero-downtime deployment & 24/7 SLA maintenance.', gradient: 'from-cyan-400 to-[#0ED3DD]' }
-            ].map((step) => (
-              <div 
-                key={step.num} 
-                className="rounded-3xl p-7 bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 space-y-5 relative overflow-hidden group hover:-translate-y-1 flex flex-col justify-between"
-              >
-                {/* Top Accent Gradient Edge */}
-                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${step.gradient}`} />
+          {/* S-Curve Zig-Zag Pushpin Journey Container */}
+          <div className="relative max-w-5xl mx-auto py-8">
+            
+            {/* Background S-Curve Connecting Dashed Path SVG */}
+            <svg 
+              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
+              viewBox="0 0 1000 1200" 
+              fill="none"
+              preserveAspectRatio="none"
+            >
+              <path 
+                d="M 280,100 C 700,200 700,350 280,480 C -100,610 700,740 280,870 C -100,1000 700,1080 500,1150" 
+                stroke="#38BDF8" 
+                strokeWidth="3" 
+                strokeDasharray="10 10" 
+                strokeLinecap="round"
+                className="opacity-70"
+              />
+            </svg>
 
-                <div className="space-y-4 pt-1">
-                  <div className="flex items-center justify-between">
-                    <span className="w-11 h-11 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] flex items-center justify-center font-black font-mono text-sm shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:border-[#0284C7] transition-all duration-300">
-                      {step.num}
-                    </span>
-                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">PHASE {step.num}</span>
+            {/* 5 S-Curve Journey Steps Stack */}
+            <div className="space-y-16 sm:space-y-20 relative z-10">
+              {[
+                { 
+                  num: '01', 
+                  title: 'DISCOVER', 
+                  subtitle: 'Requirement Analysis & Architecture', 
+                  desc: 'In-depth requirement analysis, technology stack selection, scope definition, and structural architecture plan.', 
+                  align: 'left',
+                  tilt: '-rotate-2 hover:rotate-0',
+                  pinColor: 'bg-gradient-to-br from-blue-400 to-blue-600 shadow-blue-500/40',
+                  bgTint: 'bg-white/95 border-2 border-blue-200/90 shadow-[0_15px_35px_rgba(37,99,235,0.08)]',
+                  icon: Target,
+                  badgeBg: 'bg-blue-50 text-blue-700 border-blue-200'
+                },
+                { 
+                  num: '02', 
+                  title: 'DESIGN', 
+                  subtitle: 'System Architecture & Wireframing', 
+                  desc: 'High-performance microservices architecture design, REST/GraphQL API specifications, and intuitive UI/UX wireframing.', 
+                  align: 'right',
+                  tilt: 'rotate-2 hover:rotate-0',
+                  pinColor: 'bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-emerald-500/40',
+                  bgTint: 'bg-white/95 border-2 border-emerald-200/90 shadow-[0_15px_35px_rgba(5,150,105,0.08)]',
+                  icon: Code,
+                  badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                },
+                { 
+                  num: '03', 
+                  title: 'ENGINEER', 
+                  subtitle: 'Agile Sprint Execution & Clean Code', 
+                  desc: 'Test-driven development, agile sprint execution, clean modular codebase, and robust database optimization.', 
+                  align: 'left',
+                  tilt: '-rotate-1 hover:rotate-0',
+                  pinColor: 'bg-gradient-to-br from-purple-400 to-purple-600 shadow-purple-500/40',
+                  bgTint: 'bg-white/95 border-2 border-purple-200/90 shadow-[0_15px_35px_rgba(124,58,237,0.08)]',
+                  icon: Cpu,
+                  badgeBg: 'bg-purple-50 text-purple-700 border-purple-200'
+                },
+                { 
+                  num: '04', 
+                  title: 'VALIDATE', 
+                  subtitle: 'Penetration Testing & QA Audits', 
+                  desc: 'End-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits.', 
+                  align: 'right',
+                  tilt: 'rotate-3 hover:rotate-0',
+                  pinColor: 'bg-gradient-to-br from-amber-400 to-amber-600 shadow-amber-500/40',
+                  bgTint: 'bg-white/95 border-2 border-amber-200/90 shadow-[0_15px_35px_rgba(217,119,6,0.08)]',
+                  icon: ShieldCheck,
+                  badgeBg: 'bg-amber-50 text-amber-700 border-amber-200'
+                },
+                { 
+                  num: '05', 
+                  title: 'GROW', 
+                  subtitle: 'Zero-Downtime Deployment & 24/7 SLA', 
+                  desc: 'CI/CD automated pipeline deployment, zero-downtime launch, real-time APM monitoring, and round-the-clock SLA support.', 
+                  align: 'center',
+                  tilt: '-rotate-1 hover:rotate-0',
+                  pinColor: 'bg-gradient-to-br from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
+                  bgTint: 'bg-white/95 border-2 border-cyan-300 shadow-[0_15px_35px_rgba(2,132,199,0.12)]',
+                  icon: TrendingUp,
+                  badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200'
+                }
+              ].map((step) => {
+                const StepIcon = step.icon;
+                
+                // Alignment positioning class
+                let layoutClass = 'md:mr-auto md:ml-0 md:max-w-md';
+                if (step.align === 'right') {
+                  layoutClass = 'md:ml-auto md:mr-0 md:max-w-md';
+                } else if (step.align === 'center') {
+                  layoutClass = 'md:mx-auto md:max-w-md';
+                }
+
+                return (
+                  <div key={step.num} className={`relative w-full ${layoutClass}`}>
+                    
+                    {/* 3D Realistic Pushpin Top Medallion */}
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                      <div className={`w-7 h-7 rounded-full ${step.pinColor} border-2 border-white shadow-lg flex items-center justify-center relative`}>
+                        <div className="w-2.5 h-2.5 rounded-full bg-white/40 blur-[0.5px] absolute top-1 left-1" />
+                      </div>
+                      <div className="w-0.5 h-2.5 bg-slate-400/80 shadow-xs" />
+                    </div>
+
+                    {/* Pushpin Tilted Card */}
+                    <div className={`rounded-3xl p-7 sm:p-8 ${step.bgTint} ${step.tilt} transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl relative z-20 space-y-4 group cursor-pointer`}>
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <span className="text-3xl font-black font-mono text-[#0284C7]">
+                            {step.num}
+                          </span>
+                          <span className={`px-3 py-1 rounded-full border text-[10px] font-mono font-black uppercase tracking-wider ${step.badgeBg}`}>
+                            PHASE {step.num}
+                          </span>
+                        </div>
+
+                        <div className={`w-11 h-11 rounded-2xl ${step.badgeBg} border flex items-center justify-center shadow-xs group-hover:scale-110 transition-transform duration-300`}>
+                          <StepIcon size={20} />
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
+                          {step.title}
+                        </h3>
+                        <p className="text-xs font-bold text-[#0284C7] uppercase font-mono">
+                          {step.subtitle}
+                        </p>
+                        <p className="text-xs text-slate-600 font-medium leading-relaxed pt-1">
+                          {step.desc}
+                        </p>
+                      </div>
+
+                    </div>
+
                   </div>
+                );
+              })}
+            </div>
 
-                  <h3 className="text-lg font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
 
         </div>
