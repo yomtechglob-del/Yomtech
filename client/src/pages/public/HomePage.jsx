@@ -28,8 +28,6 @@ import webImg from '../../assets/services/web.png';
 import mobileImg from '../../assets/services/mobile.png';
 import educationImg from '../../assets/services/education.png';
 import crmImg from '../../assets/services/crm.png';
-import securityImg from '../../assets/services/security.png';
-import documentaryImg from '../../assets/services/documentary.png';
 
 // Partner Logos
 import ssgiLogo from '../../assets/partners/ssgi.webp';
@@ -51,6 +49,10 @@ import stempowerLogo from '../../assets/partners/Global STEM Education Partner.p
 import ieNetworksLogo from '../../assets/partners/Enterprise Network Infrastructure.png';
 import hospitalityLogo from '../../assets/partners/Hospitality Sector.png';
 import novaLogo from '../../assets/partners/Nova Printing.webp';
+
+/* ─── Animation Helpers ─── */
+const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
+const stagger = { show: { transition: { staggerChildren: 0.08 } } };
 
 /* ─── DATA PRESERVATION ─── */
 
@@ -106,12 +108,12 @@ const FEATURED_SERVICES = [
 ];
 
 const COMPANY_STATS = [
-  { stat: '2015', label: 'Year Founded', badge: 'HERITAGE', subtitle: '10+ Years of Innovation' },
-  { stat: '25+', label: 'Solutions Deployed', badge: 'PROJECTS', subtitle: 'Enterprise Deployments' },
-  { stat: '2K+', label: 'Learners Empowered', badge: 'ACADEMY', subtitle: 'WabiSkills Alumni' },
-  { stat: '7+', label: 'Global Partnerships', badge: 'ALLIANCES', subtitle: 'Institutional Partners' },
-  { stat: '5+', label: 'Digital Platforms', badge: 'PRODUCTS', subtitle: 'Flagship Products' },
-  { stat: '10+', label: 'Hotels & Enterprises', badge: 'CLIENTS', subtitle: 'Commercial Sector' },
+  { stat: '2015', label: 'Year Founded', badge: 'HERITAGE', subtitle: '10+ Years of Innovation', accent: 'text-cyan-600', bg: 'bg-cyan-50', border: 'border-cyan-200' },
+  { stat: '25+', label: 'Solutions Deployed', badge: 'PROJECTS', subtitle: 'Enterprise Deployments', accent: 'text-sky-600', bg: 'bg-sky-50', border: 'border-sky-200' },
+  { stat: '2K+', label: 'Learners Empowered', badge: 'ACADEMY', subtitle: 'WabiSkills Alumni', accent: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200' },
+  { stat: '7+', label: 'Global Partnerships', badge: 'ALLIANCES', subtitle: 'Institutional Partners', accent: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+  { stat: '5+', label: 'Digital Platforms', badge: 'PRODUCTS', subtitle: 'Flagship Products', accent: 'text-violet-600', bg: 'bg-violet-50', border: 'border-violet-200' },
+  { stat: '10+', label: 'Hotels & Enterprises', badge: 'CLIENTS', subtitle: 'Commercial Sector', accent: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
 ];
 
 const ALL_PARTNERS = [
@@ -164,83 +166,126 @@ const CORE_VALUES = [
   { title: 'Continuous Learning', desc: 'We invest in growth, knowledge, and lifelong learning.', accent: 'indigo' },
 ];
 
+const OFFICIAL_SERVICES_LIST = [
+  { name: 'ERP Software Solution', desc: 'Enterprise resource planning for operational excellence' },
+  { name: 'WMS Software Solution', desc: 'Warehouse management systems & inventory optimization' },
+  { name: 'SFA Software Solution', desc: 'Sales force automation & CRM tracking tools' },
+  { name: 'Online Tech Education', desc: 'WabiSkills digital academy & professional bootcamps' },
+  { name: 'Tech Documentary', desc: 'Media production & technology innovation storytelling' },
+  { name: 'Cybersecurity & IT Consulting', desc: 'Security audits, data center defense & IT advisory' },
+  { name: 'Mobile App Development', desc: 'Native & cross-platform iOS & Android mobile applications' },
+  { name: 'Web App Development', desc: 'High-performance web applications & enterprise portals' },
+  { name: 'Build Custom Software', desc: '100% custom-tailored software engineered from scratch' },
+  { name: 'Tech Coaching & Mentorship', desc: 'Career coaching, technical mentorship & skill acceleration' },
+  { name: 'Cloud Service & Deployment', desc: 'Cloud migration, DevOps automation & infrastructure hosting' },
+  { name: 'Surveillance & Security', desc: 'AI-integrated CCTV, smart monitoring & security systems' },
+];
+
+const ECOSYSTEM_PILLARS = [
+  {
+    id: 'pillar-1',
+    number: '01',
+    title: 'SOFTWARE & SYSTEMS',
+    badge: 'ENGINEER',
+    desc: 'Build scalable software systems, enterprise applications, APIs, and digital products.',
+    details: ['Custom Enterprise Web Apps', 'High-Concurrency Microservices', 'RESTful API Contracts', 'Multi-Tenant Architecture'],
+    color: 'from-[#0284C7] to-[#0ED3DD]'
+  },
+  {
+    id: 'pillar-2',
+    number: '02',
+    title: 'INFRASTRUCTURE & PLATFORMS',
+    badge: 'CLOUD',
+    desc: 'Design, deploy, and optimize modern digital infrastructure and technology platforms.',
+    details: ['Docker & Kubernetes Rollout', 'Cloud Data Center Hosting', 'Sub-50ms Latency Caching', 'Database Sharding & Storage'],
+    color: 'from-[#0077B6] to-[#00B4D8]'
+  },
+  {
+    id: 'pillar-3',
+    number: '03',
+    title: 'SYSTEM PROTECTION',
+    badge: 'SECURE',
+    desc: 'Build and support responsible, resilient, and security-focused digital systems.',
+    details: ['Penetration Testing Audits', 'TLS 1.3 & AES-256 Encryption', 'AI Surveillance Zones', 'Vulnerability Hardening'],
+    color: 'from-[#7C3AED] to-[#A855F7]'
+  },
+  {
+    id: 'pillar-4',
+    number: '04',
+    title: 'TALENT & MENTORSHIP',
+    badge: 'EDUCATE',
+    desc: 'Develop practical technology skills through structured learning, mentorship, and real-world projects.',
+    details: ['2,000+ Certified Alumni', 'Practical Code Bootcamps', 'Industry Leader Mentorship', 'Verified Skill Badging'],
+    color: 'from-[#059669] to-[#10B981]'
+  },
+  {
+    id: 'pillar-5',
+    number: '05',
+    title: 'PROFESSIONAL NETWORK',
+    badge: 'CONNECT',
+    desc: 'Connect businesses, engineers, learners, technology opportunities, and innovation communities.',
+    details: ['48h Candidate Shortlisting', 'Direct Remote & Hybrid Placement', 'Vetted Code Portfolios', 'Contract & Staff Augmentation'],
+    color: 'from-[#D97706] to-[#F59E0B]'
+  }
+];
+
+const accentMap = {
+  cyan:    { bg: 'bg-cyan-50',    border: 'border-cyan-200',    text: 'text-cyan-700' },
+  emerald: { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700' },
+  violet:  { bg: 'bg-violet-50',  border: 'border-violet-200',  text: 'text-violet-700' },
+  sky:     { bg: 'bg-sky-50',     border: 'border-sky-200',     text: 'text-sky-700' },
+  amber:   { bg: 'bg-amber-50',   border: 'border-amber-200',   text: 'text-amber-700' },
+  rose:    { bg: 'bg-rose-50',    border: 'border-rose-200',    text: 'text-rose-700' },
+  indigo:  { bg: 'bg-indigo-50',  border: 'border-indigo-200',  text: 'text-indigo-700' },
+};
+
+
+/* ════════════════════════════════════════════════════════════
+   HOME PAGE COMPONENT
+   ════════════════════════════════════════════════════════════ */
 export const HomePage = () => {
   const navigate = useNavigate();
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const [activeEcosystemTab, setActiveEcosystemTab] = useState(0);
+  const [partnerFilter, setPartnerFilter] = useState('All');
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
-  const handleSubscribe = (e) => {
+  const partnerCategories = ['All', 'Government', 'Academic', 'Media', 'Enterprise'];
+  const filteredPartners = partnerFilter === 'All'
+    ? ALL_PARTNERS
+    : ALL_PARTNERS.filter(p => p.category === partnerFilter);
+
+  const handleNewsletterSubmit = (e) => {
     e.preventDefault();
     if (newsletterEmail) {
-      setSubscribed(true);
+      setNewsletterSuccess(true);
       setNewsletterEmail('');
-      setTimeout(() => setSubscribed(false), 4000);
+      setTimeout(() => setNewsletterSuccess(false), 4000);
     }
   };
 
-  const ECOSYSTEM_PILLARS = [
-    {
-      id: 'pillar-1',
-      title: 'SOFTWARE & SYSTEMS',
-      badge: 'ENGINEER',
-      color: 'from-[#0284C7] to-[#0ED3DD]',
-      desc: 'Build scalable software systems, enterprise applications, APIs, and digital products tailored for government and enterprise growth.',
-      capabilities: ['Custom Enterprise Web Apps', 'High-Concurrency Microservices', 'RESTful API Contracts', 'Multi-Tenant Architecture']
-    },
-    {
-      id: 'pillar-2',
-      title: 'INFRASTRUCTURE & PLATFORMS',
-      badge: 'CLOUD',
-      color: 'from-[#0077B6] to-[#00B4D8]',
-      desc: 'Design, deploy, and optimize modern digital infrastructure, containerized cloud environments, and enterprise platform suites.',
-      capabilities: ['Docker & Kubernetes Rollout', 'Cloud Data Center Hosting', 'Sub-50ms Latency Caching', 'Database Sharding & Storage']
-    },
-    {
-      id: 'pillar-3',
-      title: 'SYSTEM PROTECTION',
-      badge: 'SECURE',
-      color: 'from-[#7C3AED] to-[#A855F7]',
-      desc: 'Build and support responsible, resilient, and security-focused digital systems with real-time AI CCTV surveillance monitoring.',
-      capabilities: ['Penetration Testing Audits', 'TLS 1.3 & AES-256 Encryption', 'AI Surveillance Zones', 'Vulnerability Hardening']
-    },
-    {
-      id: 'pillar-4',
-      title: 'TALENT & MENTORSHIP',
-      badge: 'EDUCATE',
-      color: 'from-[#059669] to-[#10B981]',
-      desc: 'Develop practical technology skills through structured learning, mentorship, hands-on bootcamps, and real engineering practice via WabiSkills.',
-      capabilities: ['2,000+ Certified Alumni', 'Practical Code Bootcamps', 'Industry Leader Mentorship', 'Verified Skill Badging']
-    },
-    {
-      id: 'pillar-5',
-      title: 'PROFESSIONAL NETWORK',
-      badge: 'CONNECT',
-      color: 'from-[#D97706] to-[#F59E0B]',
-      desc: 'Connect businesses, software engineers, learners, technology opportunities, and innovation communities through the WabiJob talent network.',
-      capabilities: ['48h Candidate Shortlisting', 'Direct Remote & Hybrid Placement', 'Vetted Code Portfolios', 'Contract & Staff Augmentation']
-    }
-  ];
-
   return (
-    <div className="bg-[#071A2B] text-slate-900 min-h-screen relative overflow-x-hidden font-sans selection:bg-[#0ED3DD] selection:text-[#071A2B]">
+    <div className="bg-white text-slate-900 min-h-screen relative overflow-x-hidden font-sans">
 
       {/* ════════════════════════════════════════════════════
-          SECTION 01 — HERO SECTION (Preserved & Optimized)
+          SECTION 01 — EXISTING HERO (Preserved & Optimized)
       ════════════════════════════════════════════════════ */}
       <section className="w-full pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
-          <img src={ermiTwoImg} alt="" className="w-full h-full object-cover object-left-top opacity-55 mix-blend-overlay animate-river-flow-1 border-0" />
+          <img src={ermiTwoImg} alt="" className="w-full h-full object-cover opacity-55 mix-blend-overlay animate-river-flow-1 border-0" />
         </div>
         <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden z-0">
-          <img src={erminOneImg} alt="" className="w-full h-full object-cover object-right-top opacity-60 mix-blend-soft-light animate-river-flow-2 border-0" />
+          <img src={erminOneImg} alt="" className="w-full h-full object-cover opacity-60 mix-blend-soft-light animate-river-flow-2 border-0" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/85 via-[#0077B6]/70 to-[#00B4D8]/80 pointer-events-none z-0" />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
-          
-          {/* Left Content */}
-          <div className="lg:col-span-7 space-y-7 text-left items-start flex flex-col">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-7 space-y-7 text-left items-start flex flex-col"
+          >
             <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white text-xs font-black shadow-lg">
               <Sparkles size={14} className="text-cyan-300 animate-pulse" />
               <span className="text-cyan-200 font-bold uppercase tracking-widest text-[11px]">
@@ -272,23 +317,35 @@ export const HomePage = () => {
                 </div>
               </button>
 
+              <button
+                onClick={() => navigate('/contact')}
+                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-3 shadow-md"
+              >
+                <Calendar size={16} className="text-cyan-200" />
+                <span>Book a Consultation</span>
+              </button>
+
               <a
                 href="tel:+251977666699"
-                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-3 shadow-md"
+                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-3.5 shadow-md"
               >
                 <div className="w-8 h-8 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center shadow-md">
                   <Phone size={15} />
                 </div>
                 <div className="text-left">
-                  <p className="text-[9px] text-cyan-200 font-bold uppercase tracking-wider">Direct Line</p>
-                  <p className="text-xs font-black text-white">+251 (977) 666-699</p>
+                  <div className="text-[10px] text-cyan-200 font-bold uppercase">Direct Desk</div>
+                  <div className="text-xs font-black text-white">+251 (977) 666-699</div>
                 </div>
               </a>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right Visual Orbit Container */}
-          <div className="lg:col-span-5 flex justify-center lg:justify-end relative py-2 w-full min-h-[380px]">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-5 flex justify-center lg:justify-end relative py-2 w-full min-h-[380px]"
+          >
             <div className="relative w-full max-w-md aspect-square p-4 z-10 flex flex-col justify-center gap-4">
               <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-6 shadow-2xl space-y-4">
                 <div className="flex items-center gap-3">
@@ -308,21 +365,18 @@ export const HomePage = () => {
                 </div>
               </div>
             </div>
-          </div>
-
+          </motion.div>
         </div>
       </section>
 
 
       {/* ════════════════════════════════════════════════════
           SECTION 02 — WHO WE ARE (Enterprise Introduction)
-          Background: Pure White (#FFFFFF)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            
             <div className="lg:col-span-6 space-y-6">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
                 <Building2 className="w-4 h-4" />
@@ -338,7 +392,6 @@ export const HomePage = () => {
                 Yomtech Global was founded with a clear vision: to empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology — we help you create the future.
               </p>
 
-              {/* CEO Quote */}
               <div className="p-6 rounded-2xl bg-cyan-50/70 border-l-4 border-[#0284C7] space-y-3">
                 <Quote size={24} className="text-[#0284C7]" />
                 <p className="text-sm font-bold text-slate-800 italic leading-relaxed">
@@ -351,12 +404,12 @@ export const HomePage = () => {
               </div>
             </div>
 
-            {/* Core Values Grid */}
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               {CORE_VALUES.map((val) => (
                 <div
                   key={val.title}
-                  className="p-5 rounded-2xl bg-slate-50 border border-slate-200 hover:border-cyan-400 transition-all space-y-2 group shadow-sm hover:shadow-md"
+                  style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
+                  className="p-5 rounded-2xl border-2 border-indigo-200/80 hover:border-cyan-400 transition-all space-y-2 group shadow-sm hover:shadow-md"
                 >
                   <div className="flex items-center gap-2">
                     <CheckCircle2 size={16} className="text-[#0284C7]" />
@@ -366,7 +419,6 @@ export const HomePage = () => {
                 </div>
               ))}
             </div>
-
           </div>
 
         </div>
@@ -375,15 +427,12 @@ export const HomePage = () => {
 
       {/* ════════════════════════════════════════════════════
           SECTION 03 — NEW: THE YOMTECH GLOBAL ECOSYSTEM
-          Background: Ice Blue (#F4FAFF)
+          (Interactive Connected Node Nucleus Experience)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#F4FAFF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
-        
-        {/* Subtle CSS Blueprint Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#0284c70a_1px,transparent_1px),linear-gradient(to_bottom,#0284c70a_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none" />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
-
           <div className="text-center space-y-4 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100/70 border border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest">
               <Layers size={14} />
@@ -400,9 +449,7 @@ export const HomePage = () => {
             </p>
           </div>
 
-          {/* Central Nucleus & 5 Interactive Connected Nodes */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
             {/* Left Node Selectors */}
             <div className="lg:col-span-5 space-y-3">
               {ECOSYSTEM_PILLARS.map((pillar, idx) => {
@@ -421,7 +468,7 @@ export const HomePage = () => {
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-xs transition-colors shrink-0 ${
                         isActive ? 'bg-gradient-to-tr ' + pillar.color + ' text-white shadow-md' : 'bg-slate-100 text-slate-500'
                       }`}>
-                        0{idx + 1}
+                        {pillar.number}
                       </div>
                       <div>
                         <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] block">{pillar.badge}</span>
@@ -436,15 +483,13 @@ export const HomePage = () => {
 
             {/* Right Active Node Display Box */}
             <div className="lg:col-span-7">
-              <div className="p-8 sm:p-12 rounded-3xl bg-white border-2 border-cyan-300 shadow-2xl relative overflow-hidden space-y-6">
-                
-                {/* Code Bracket Decoration */}
+              <div style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }} className="p-8 sm:p-12 rounded-3xl border-2 border-cyan-300 shadow-2xl relative overflow-hidden space-y-6">
                 <div className="absolute top-4 right-6 font-mono text-4xl font-black text-cyan-200/50 pointer-events-none">
                   &lt;ECOSYSTEM /&gt;
                 </div>
 
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase">
-                  NODE 0{activeEcosystemTab + 1} · {ECOSYSTEM_PILLARS[activeEcosystemTab].badge}
+                  NODE {ECOSYSTEM_PILLARS[activeEcosystemTab].number} · {ECOSYSTEM_PILLARS[activeEcosystemTab].badge}
                 </div>
 
                 <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
@@ -456,10 +501,10 @@ export const HomePage = () => {
                 </p>
 
                 <div className="space-y-3 pt-2">
-                  <h4 className="text-xs font-black uppercase tracking-widest text-slate-400">Core Technical Capabilities:</h4>
+                  <h4 className="text-xs font-black uppercase tracking-widest text-slate-500">Core Technical Capabilities:</h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                    {ECOSYSTEM_PILLARS[activeEcosystemTab].capabilities.map((cap) => (
-                      <div key={cap} className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800">
+                    {ECOSYSTEM_PILLARS[activeEcosystemTab].details.map((cap) => (
+                      <div key={cap} className="flex items-center gap-2 p-3 rounded-xl bg-white/80 border border-slate-200 text-xs font-extrabold text-slate-800">
                         <CheckCircle2 size={15} className="text-[#0284C7] shrink-0" />
                         <span>{cap}</span>
                       </div>
@@ -467,26 +512,22 @@ export const HomePage = () => {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-400">Integrated under YomTech Global Parent Network</span>
+                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-500">Integrated under YomTech Global Parent Network</span>
                   <Link to="/services" className="inline-flex items-center gap-1.5 text-xs font-black text-[#0284C7] hover:text-cyan-600">
                     <span>View Node Specs</span>
                     <ArrowRight size={14} />
                   </Link>
                 </div>
-
               </div>
             </div>
-
           </div>
-
         </div>
       </section>
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 04 — EXISTING CORE CAPABILITIES MATRIX
-          Background: Pure White (#FFFFFF)
+          SECTION 04 — EXISTING CORE CAPABILITIES
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
@@ -507,7 +548,6 @@ export const HomePage = () => {
             </p>
           </div>
 
-          {/* Structured Responsive Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {FEATURED_SERVICES.map((srv) => {
               const IconComp = srv.icon;
@@ -550,13 +590,25 @@ export const HomePage = () => {
             })}
           </div>
 
+          {/* 12 Official Services List Matrix */}
+          <div className="pt-10 border-t border-slate-200">
+            <h3 className="text-center text-xs font-black uppercase tracking-widest text-slate-400 mb-8">Official YomTech Enterprise Service Roster:</h3>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {OFFICIAL_SERVICES_LIST.map((item) => (
+                <div key={item.name} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/90 text-center space-y-1 hover:border-cyan-400 transition-colors">
+                  <div className="text-xs font-extrabold text-slate-900 truncate">{item.name}</div>
+                  <div className="text-[10px] text-slate-500 font-medium line-clamp-1">{item.desc}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
         </div>
       </section>
 
 
       {/* ════════════════════════════════════════════════════
           SECTION 05 — NEW: PRODUCTS & PLATFORMS
-          Background: Light Cyan Tint (#EAF6FF)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#EAF6FF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
@@ -577,9 +629,7 @@ export const HomePage = () => {
             </p>
           </div>
 
-          {/* Featured Product Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            
             {/* Featured Hero Product Card: Yomnex ERP */}
             <div className="lg:col-span-6 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 border-2 border-cyan-400 shadow-2xl flex flex-col justify-between space-y-8 relative overflow-hidden">
               <div className="space-y-4 relative z-10">
@@ -587,7 +637,7 @@ export const HomePage = () => {
                   <span className="px-3.5 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-widest">
                     FLAGSHIP ERP SUITE
                   </span>
-                  <span className="text-xs font-mono text-cyan-200 font-bold">YOMNEX v2.5</span>
+                  <span className="text-xs font-mono text-cyan-200 font-bold">YOMNEX ERP</span>
                 </div>
 
                 <div className="flex items-center gap-4 pt-2">
@@ -609,7 +659,7 @@ export const HomePage = () => {
 
               <div className="pt-4 border-t border-white/20 relative z-10 flex items-center justify-between">
                 <span className="text-xs font-bold text-cyan-200">Zero per-user monthly licensing fees</span>
-                <Link to="/portfolio" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white font-black text-xs uppercase tracking-widest shadow-md">
+                <Link to="/products" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white font-black text-xs uppercase tracking-widest shadow-md">
                   <span>Explore Yomnex Specs</span>
                   <ArrowRight size={14} />
                 </Link>
@@ -618,7 +668,6 @@ export const HomePage = () => {
 
             {/* Supporting Platform Cards Grid */}
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
               {/* WabiSkills Card */}
               <div className="bg-white rounded-3xl p-7 border-2 border-emerald-300 shadow-xl flex flex-col justify-between space-y-6">
                 <div className="space-y-3">
@@ -655,7 +704,7 @@ export const HomePage = () => {
                 </a>
               </div>
 
-              {/* Future Digital Platforms Card (CMS-Ready) */}
+              {/* Future Digital Platforms Card */}
               <div className="sm:col-span-2 bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-3xl p-7 border border-indigo-400/40 shadow-xl flex flex-col justify-between space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="px-3 py-0.5 rounded-full bg-indigo-500/30 text-indigo-300 border border-indigo-400/40 text-[10px] font-black uppercase">FUTURE PLATFORMS</span>
@@ -666,9 +715,7 @@ export const HomePage = () => {
                   Additional digital meeting tools, social communication apps, and technology media channels actively being engineered within the YomTech Global innovation labs.
                 </p>
               </div>
-
             </div>
-
           </div>
 
         </div>
@@ -676,8 +723,7 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 06 — EXISTING IMPACT / STATISTICS
-          Background: Deep Navy (#071A2B)
+          SECTION 06 — MEASURED IMPACT & STATISTICS
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#071A2B] text-white relative overflow-hidden border-b border-cyan-400/30">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
@@ -713,7 +759,6 @@ export const HomePage = () => {
 
       {/* ════════════════════════════════════════════════════
           SECTION 07 — NEW: TECHNOLOGY + TALENT (Split-Screen)
-          Background: Light Purple / White Contrast (#F3EEFF)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-[#F3EEFF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
@@ -732,7 +777,6 @@ export const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
             {/* LEFT SIDE: FOR BUSINESSES */}
             <div className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-indigo-200 shadow-xl flex flex-col justify-between space-y-8">
               <div className="space-y-4">
@@ -778,25 +822,24 @@ export const HomePage = () => {
 
                 <div className="grid grid-cols-2 gap-2.5 pt-2">
                   <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> AI &amp; Machine Learning</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Fullstack Development</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> UI/UX Design</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Data &amp; Analytics</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Fullstack Engineering</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> UI/UX Product Design</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Data Analytics</div>
                   <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Practical Projects</div>
-                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Industry Mentorship</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs font-extrabold text-slate-800"><CheckCircle2 size={15} className="text-emerald-600" /> Senior Mentorship</div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-slate-100">
                 <button
                   onClick={() => navigate('/academy')}
-                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-black text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
+                  className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-black text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
                 >
-                  <span>Explore WabiSkills Academy</span>
+                  <span>Explore Academy</span>
                   <ArrowRight size={16} />
                 </button>
               </div>
             </div>
-
           </div>
 
         </div>
@@ -804,34 +847,33 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 08 — ENGINEERING PROCESS TIMELINE
-          Background: Light Mint (#EAFBF4)
+          SECTION 08 — ENGINEERING PROCESS (01 Discover → 05 Grow)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#EAFBF4] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-3 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-black uppercase tracking-widest">
-              <Code size={14} />
-              <span>OUR ENGINEERING LIFECYCLE</span>
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
+              <Zap size={14} />
+              <span>DEVELOPMENT LIFECYCLE &amp; PROCESS</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              A Structured Journey to <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600">Production</span>
+              Structured Engineering Journey
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
             {[
-              { step: '01', title: 'DISCOVER', desc: 'Requirement analysis, operational scope definition, and strategic SLA alignment.' },
-              { step: '02', title: 'DESIGN', desc: 'System architecture blueprints, API contracts, PostgreSQL schemas, and security design.' },
-              { step: '03', title: 'ENGINEER', desc: 'Agile 2-week development sprints, modular React/Node code, and continuous integration.' },
-              { step: '04', title: 'VALIDATE', desc: 'QA testing suite, sub-50ms latency checks, penetration audits, and client UAT sign-off.' },
-              { step: '05', title: 'GROW', desc: 'Docker containerized rollout, staff onboarding workshops, and 24/7 continuous support.' }
-            ].map((st) => (
-              <div key={st.step} className="bg-white rounded-3xl p-6 border-2 border-emerald-200 shadow-md space-y-3 relative">
-                <span className="text-3xl font-black font-mono text-emerald-600">{st.step}</span>
-                <h3 className="text-lg font-extrabold text-slate-900 font-display">{st.title}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">{st.desc}</p>
+              { num: '01', title: 'DISCOVER', desc: 'Requirement analysis, scope definition & architecture plan.' },
+              { num: '02', title: 'DESIGN', desc: 'System architecture, API design & UI/UX wireframing.' },
+              { num: '03', title: 'ENGINEER', desc: 'Agile sprint execution, clean code & microservices.' },
+              { num: '04', title: 'VALIDATE', desc: 'Penetration testing, sub-50ms latency & QA audits.' },
+              { num: '05', title: 'GROW', desc: 'Zero-downtime deployment & 24/7 SLA maintenance.' }
+            ].map((step) => (
+              <div key={step.num} className="p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-3 relative">
+                <span className="text-2xl font-black font-mono text-[#0284C7] block">{step.num}</span>
+                <h3 className="text-base font-extrabold text-slate-900 font-display">{step.title}</h3>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">{step.desc}</p>
               </div>
             ))}
           </div>
@@ -842,20 +884,19 @@ export const HomePage = () => {
 
       {/* ════════════════════════════════════════════════════
           SECTION 09 — NEW: INSIGHTS, MEDIA & COMMUNITY
-          Background: Light Amber (#FFF7E6)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#FFF7E6] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 bg-[#EAFBF4] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-800 text-xs font-black uppercase tracking-widest">
-              <Share2 size={14} />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-widest">
+              <Globe size={14} />
               <span>YOMTECH IN THE WORLD</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Technology Doesn't Stop at <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 via-orange-600 to-[#0284C7]">
-                The Product.
+              Technology Doesn't Stop <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-teal-600 to-[#0284C7]">
+                At The Product.
               </span>
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
@@ -864,61 +905,59 @@ export const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            
             {/* YOUTUBE */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-red-200 shadow-xl space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
+            <div className="bg-white rounded-3xl p-8 border-2 border-red-200 shadow-xl flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full bg-red-100 text-red-700 text-[10px] font-black uppercase">LONG-FORM MEDIA</span>
+                  <span className="px-3.5 py-1 rounded-full bg-red-50 text-red-700 text-xs font-black uppercase tracking-widest">YOUTUBE</span>
                   <Video size={20} className="text-red-600" />
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">YouTube Channel</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 font-display">Long-Form Engineering Insights</h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Technology discussions, engineering tutorials, product deep-dives, national AI documentaries, and innovation features.
+                  Technology discussions, full-length tutorials, engineering deep dives, product stories, and national technology documentary films.
                 </p>
               </div>
               <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-red-600 hover:text-red-800">
-                <Play size={14} fill="currentColor" />
-                <span>Watch YomTech Media ↗</span>
+                <span>Watch On YouTube ↗</span>
+                <ExternalLink size={14} />
               </a>
             </div>
 
             {/* TIKTOK */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-slate-300 shadow-xl space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
+            <div className="bg-white rounded-3xl p-8 border-2 border-slate-300 shadow-xl flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-slate-900 text-[10px] font-black uppercase">SHORT-FORM CONTENT</span>
+                  <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-900 text-xs font-black uppercase tracking-widest">TIKTOK</span>
                   <Sparkles size={20} className="text-slate-900" />
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">TikTok Community</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 font-display">Short-Form Tech Education</h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Quick coding tips, developer day-in-the-life, technology educational bites, career inspiration, and bootcamp highlights.
+                  Quick developer tips, coding highlights, tech awareness clips, career inspiration, and behind-the-scenes engineering moments.
                 </p>
               </div>
               <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 hover:text-slate-700">
-                <span>Follow Short Insights ↗</span>
-                <ExternalLink size={13} />
+                <span>Follow On TikTok ↗</span>
+                <ExternalLink size={14} />
               </a>
             </div>
 
             {/* LINKEDIN */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-sky-200 shadow-xl space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
+            <div className="bg-white rounded-3xl p-8 border-2 border-blue-200 shadow-xl flex flex-col justify-between space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-1 rounded-full bg-sky-100 text-sky-800 text-[10px] font-black uppercase">PROFESSIONAL NETWORK</span>
-                  <Globe size={20} className="text-[#0284C7]" />
+                  <span className="px-3.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-black uppercase tracking-widest">LINKEDIN</span>
+                  <Globe size={20} className="text-blue-600" />
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">LinkedIn Network</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 font-display">Professional Network Updates</h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                  Corporate updates, enterprise software case studies, strategic partnership announcements, and open tech career vacancies.
+                  Enterprise updates, technology whitepapers, strategic partnerships, project milestones, and career opportunities across Africa.
                 </p>
               </div>
-              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-[#0284C7] hover:text-sky-700">
-                <span>Connect on LinkedIn ↗</span>
-                <ExternalLink size={13} />
+              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-blue-600 hover:text-blue-800">
+                <span>Connect On LinkedIn ↗</span>
+                <ExternalLink size={14} />
               </a>
             </div>
-
           </div>
 
         </div>
@@ -926,42 +965,39 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 10 — TESTIMONIALS & TRUST
-          Background: Pure White (#FFFFFF)
+          SECTION 10 — TESTIMONIALS & CLIENT PROOF
       ════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-3 max-w-3xl mx-auto">
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Star size={14} className="fill-[#0284C7]" />
-              <span>VERIFIED CLIENT TESTIMONIALS</span>
+              <Quote size={14} />
+              <span>WHAT OUR COMMUNITY SAYS</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Trusted by Engineers, Founders &amp; Partners
+              Trusted by Engineers &amp; Leaders
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t) => (
+            {TESTIMONIALS.map((t, idx) => (
               <div
-                key={t.author}
+                key={idx}
                 style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-8 border-2 border-indigo-200/80 shadow-lg space-y-4 flex flex-col justify-between"
+                className="p-8 rounded-3xl border-2 border-indigo-200/80 shadow-lg flex flex-col justify-between space-y-6"
               >
-                <div className="space-y-3">
-                  <div className="flex items-center gap-1 text-amber-500">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" />
-                    ))}
+                <p className="text-xs sm:text-sm text-slate-700 font-bold italic leading-relaxed">
+                  "{t.quote}"
+                </p>
+                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
+                  <div>
+                    <h4 className="text-sm font-extrabold text-slate-900">{t.author}</h4>
+                    <p className="text-[10px] font-bold text-[#0284C7] uppercase">{t.role}</p>
                   </div>
-                  <p className="text-xs sm:text-sm font-semibold text-slate-800 italic leading-relaxed">
-                    "{t.quote}"
-                  </p>
-                </div>
-                <div className="pt-3 border-t border-slate-200/80">
-                  <p className="text-xs font-black text-slate-900">{t.author}</p>
-                  <p className="text-[10px] font-bold text-[#0284C7] uppercase">{t.role}</p>
+                  <div className="flex text-amber-400">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={12} fill="currentColor" />)}
+                  </div>
                 </div>
               </div>
             ))}
@@ -973,34 +1009,33 @@ export const HomePage = () => {
 
       {/* ════════════════════════════════════════════════════
           SECTION 11 — NEW: THE FUTURE OF YOMTECH
-          Background: Light Ice Blue (#F4FAFF)
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#F4FAFF] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
+      <section className="py-24 bg-[#FFF7E6] text-slate-900 relative overflow-hidden border-b border-slate-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100 border border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <CompassIcon />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 border border-amber-300 text-amber-900 text-xs font-black uppercase tracking-widest">
+              <Target size={14} />
               <span>THE FUTURE OF TECHNOLOGY</span>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              Building for <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600">What Comes Next.</span>
+              Building for What Comes Next.
             </h2>
             <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
               Technology changes continuously. YomTech Global is built around continuous learning, practical engineering, responsible innovation, and scalable digital thinking so that today's solutions can evolve with tomorrow's opportunities.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'PILLAR 01: CONTINUOUS LEARNING', desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen technical foundations.' },
-              { title: 'PILLAR 02: PRACTICAL INNOVATION', desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.' },
-              { title: 'PILLAR 03: SCALABLE ENGINEERING', desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that grow.' },
-              { title: 'PILLAR 04: GLOBAL CONNECTION', desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.' }
+              { num: '01', title: 'CONTINUOUS LEARNING', desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen their foundations.' },
+              { num: '02', title: 'PRACTICAL INNOVATION', desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.' },
+              { num: '03', title: 'SCALABLE ENGINEERING', desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.' },
+              { num: '04', title: 'GLOBAL CONNECTION', desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.' }
             ].map((p) => (
-              <div key={p.title} className="bg-white rounded-3xl p-7 border-2 border-slate-200 shadow-md space-y-3">
-                <span className="text-[10px] font-black text-[#0284C7] uppercase tracking-widest block">{p.title.split(':')[0]}</span>
-                <h3 className="text-base font-extrabold text-slate-900 font-display">{p.title.split(':')[1]}</h3>
+              <div key={p.num} className="bg-white rounded-3xl p-7 border-2 border-amber-200 shadow-xl space-y-4">
+                <span className="text-xs font-mono font-black text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">PILLAR {p.num}</span>
+                <h3 className="text-base font-extrabold text-slate-900 font-display">{p.title}</h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">{p.desc}</p>
               </div>
             ))}
@@ -1011,50 +1046,94 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 12 — DUAL PATH FINAL CTA
-          Background: Deep Navy (#071A2B)
+          SECTION 12 — FINAL DUAL-PATH CTA
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#071A2B] text-white relative overflow-hidden border-b border-cyan-400/30">
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            {/* PATH 1: FOR ORGANIZATIONS */}
-            <div className="p-10 rounded-3xl bg-gradient-to-r from-[#005187] to-[#0071B7] border-2 border-cyan-400/50 shadow-2xl space-y-6">
-              <span className="px-3 py-1 rounded-full bg-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-widest">
-                FOR ORGANIZATIONS &amp; ENTERPRISES
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">Start a Technology Conversation</h3>
-              <p className="text-xs sm:text-sm text-cyan-100 font-medium leading-relaxed">
-                Partner with YomTech Global to engineer custom ERP software, cloud infrastructure, or digital transformation solutions tailored to your operational goals.
+      <section className="py-24 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#00B4D8] text-white relative overflow-hidden">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
+
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 border border-white/30 text-cyan-200 text-xs font-black uppercase tracking-widest">
+              <Sparkles size={14} />
+              <span>TAKE THE NEXT STEP</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+              Ready to Build Your Technology Future?
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {/* FOR ORGANIZATIONS */}
+            <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 text-center space-y-6">
+              <span className="px-3.5 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-widest inline-block">FOR ORGANIZATIONS</span>
+              <h3 className="text-2xl font-extrabold text-white">Start a Technology Conversation</h3>
+              <p className="text-xs text-cyan-100 font-medium leading-relaxed">
+                Consult with our engineering leads to build custom ERPs, cloud architectures, or digital transformation workflows.
               </p>
               <button
                 onClick={() => navigate('/contact')}
-                className="px-8 py-3.5 rounded-full bg-white text-[#03045E] font-black text-xs uppercase tracking-widest shadow-xl hover:bg-cyan-100 transition-all flex items-center gap-2"
+                className="w-full py-4 rounded-2xl bg-white text-slate-950 hover:bg-cyan-300 font-black text-xs uppercase tracking-widest shadow-xl transition-all flex items-center justify-center gap-2"
               >
                 <span>Request Enterprise Proposal</span>
                 <ArrowRight size={16} />
               </button>
             </div>
 
-            {/* PATH 2: FOR INDIVIDUALS */}
-            <div className="p-10 rounded-3xl bg-gradient-to-r from-emerald-950/90 to-teal-900/90 border-2 border-emerald-400/50 shadow-2xl space-y-6">
-              <span className="px-3 py-1 rounded-full bg-emerald-400 text-slate-950 text-[10px] font-black uppercase tracking-widest">
-                FOR INDIVIDUALS &amp; LEARNERS
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">Start Building Your Technology Future</h3>
-              <p className="text-xs sm:text-sm text-emerald-100 font-medium leading-relaxed">
-                Join WabiSkills Academy or WabiJobs network to master production software engineering, gain mentorship, and unlock career opportunities.
+            {/* FOR INDIVIDUALS */}
+            <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 text-center space-y-6">
+              <span className="px-3.5 py-1 rounded-full bg-emerald-400 text-slate-950 text-xs font-black uppercase tracking-widest inline-block">FOR INDIVIDUALS</span>
+              <h3 className="text-2xl font-extrabold text-white">Start Building Your Future</h3>
+              <p className="text-xs text-cyan-100 font-medium leading-relaxed">
+                Enroll in WabiSkills bootcamps, master fullstack development, or join our vetted developer network.
               </p>
               <button
                 onClick={() => navigate('/academy')}
-                className="px-8 py-3.5 rounded-full bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-widest shadow-xl hover:bg-emerald-300 transition-all flex items-center gap-2"
+                className="w-full py-4 rounded-2xl bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-black text-xs uppercase tracking-widest shadow-xl transition-all flex items-center justify-center gap-2"
               >
-                <span>Explore WabiSkills Academy</span>
+                <span>Explore Academy Courses</span>
                 <ArrowRight size={16} />
               </button>
             </div>
+          </div>
 
+        </div>
+      </section>
+
+
+      {/* ════════════════════════════════════════════════════
+          SECTION 13 — PARTNERS TICKER & NEWSLETTER
+      ════════════════════════════════════════════════════ */}
+      <section className="py-20 bg-slate-50 text-slate-900 relative overflow-hidden border-t border-slate-200">
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
+
+          <div className="space-y-6 text-center max-w-4xl mx-auto">
+            <h3 className="text-xs font-black uppercase tracking-widest text-slate-500">Trusted by Public Sector Institutions, Universities &amp; Enterprises</h3>
+            
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {partnerCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setPartnerFilter(cat)}
+                  className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
+                    partnerFilter === cat
+                      ? 'bg-[#0284C7] text-white shadow-md'
+                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {/* Partner Grid */}
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-4 pt-4">
+              {filteredPartners.map((pt) => (
+                <div key={pt.name} className="p-3 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col items-center justify-center space-y-2 hover:scale-105 transition-all">
+                  <img src={pt.logo} alt={pt.name} className="w-10 h-10 object-contain" />
+                  <span className="text-[10px] font-extrabold text-slate-700 text-center leading-tight truncate w-full">{pt.name}</span>
+                </div>
+              ))}
+            </div>
           </div>
 
         </div>
@@ -1063,13 +1142,5 @@ export const HomePage = () => {
     </div>
   );
 };
-
-// Helper Compass icon
-const CompassIcon = () => (
-  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <circle cx="12" cy="12" r="10" strokeWidth="2" />
-    <path d="M16.24 7.76l-2.12 6.36-6.36 2.12 2.12-6.36 6.36-2.12z" strokeWidth="2" />
-  </svg>
-);
 
 export default HomePage;
