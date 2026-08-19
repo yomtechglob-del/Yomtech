@@ -853,35 +853,41 @@ export const HomePage = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Featured Hero Product Card: Yomnex ERP */}
-            <div className="lg:col-span-6 bg-slate-900 text-white rounded-3xl p-8 sm:p-12 border-2 border-cyan-400 shadow-2xl flex flex-col justify-between space-y-8 relative overflow-hidden">
-              <div className="space-y-4 relative z-10">
+            <div className="lg:col-span-6 bg-white/95 text-slate-900 rounded-3xl p-8 sm:p-12 border-2 border-[#0284C7] shadow-[0_20px_50px_rgba(2,132,199,0.12)] flex flex-col justify-between space-y-8 relative overflow-hidden">
+              {/* Top Accent Gradient Edge */}
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600" />
+
+              <div className="space-y-5 relative z-10 pt-1">
                 <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-widest">
+                  <span className="px-4 py-1.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-mono font-black uppercase tracking-widest shadow-xs">
                     FLAGSHIP ERP SUITE
                   </span>
-                  <span className="text-xs font-mono text-cyan-200 font-bold">YOMNEX ERP</span>
+                  <span className="text-xs font-mono text-[#0284C7] font-bold">YOMNEX ERP</span>
                 </div>
 
                 <div className="flex items-center gap-4 pt-2">
                   <img src={yomnexLogo} alt="Yomnex ERP" className="h-12 object-contain" />
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">Yomnex ERP</h3>
+                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display">Yomnex ERP</h3>
                 </div>
 
-                <p className="text-cyan-100/90 text-sm font-medium leading-relaxed">
+                <p className="text-slate-600 text-sm font-medium leading-relaxed">
                   Enterprise-focused digital systems and business technology platforms designed completely from scratch for government institutions, banks, and large commercial operations.
                 </p>
 
-                <div className="grid grid-cols-2 gap-2 pt-2 text-xs font-bold text-white">
-                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white/10 border border-white/20"><CheckCircle2 size={14} className="text-cyan-300" /> Finance &amp; Ledger</div>
-                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white/10 border border-white/20"><CheckCircle2 size={14} className="text-cyan-300" /> Human Resources</div>
-                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white/10 border border-white/20"><CheckCircle2 size={14} className="text-cyan-300" /> Procurement &amp; Stock</div>
-                  <div className="flex items-center gap-2 p-2.5 rounded-xl bg-white/10 border border-white/20"><CheckCircle2 size={14} className="text-cyan-300" /> Gate Access Controls</div>
+                <div className="grid grid-cols-2 gap-2.5 pt-2 text-xs font-bold text-slate-800">
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Finance &amp; Ledger</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Human Resources</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Procurement &amp; Stock</div>
+                  <div className="flex items-center gap-2 p-3 rounded-xl bg-cyan-50/80 border border-cyan-200"><CheckCircle2 size={15} className="text-[#0284C7]" /> Gate Access Controls</div>
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-white/20 relative z-10 flex items-center justify-between">
-                <span className="text-xs font-bold text-cyan-200">Zero per-user monthly licensing fees</span>
-                <Link to="/products" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white font-black text-xs uppercase tracking-widest shadow-md">
+              <div className="pt-5 border-t border-slate-200/80 relative z-10 flex flex-wrap items-center justify-between gap-4">
+                <span className="text-xs font-extrabold text-slate-600 flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  Zero per-user monthly licensing fees
+                </span>
+                <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white font-black text-xs uppercase tracking-widest shadow-md hover:shadow-lg hover:scale-105 transition-all">
                   <span>Explore Yomnex Specs</span>
                   <ArrowRight size={14} />
                 </Link>
@@ -891,10 +897,10 @@ export const HomePage = () => {
             {/* Supporting Platform Cards Grid */}
             <div className="lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* WabiSkills Card */}
-              <div className="bg-white rounded-3xl p-7 border-2 border-emerald-300 shadow-xl flex flex-col justify-between space-y-6">
+              <div className="bg-white rounded-3xl p-7 border-2 border-emerald-300 shadow-lg flex flex-col justify-between space-y-6 hover:shadow-xl transition-all">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase">LIVE ACADEMY</span>
+                    <span className="px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-black uppercase">LIVE ACADEMY</span>
                     <img src={wabiSkillsLogo} alt="WabiSkills" className="h-6 object-contain" />
                   </div>
                   <h3 className="text-xl font-extrabold text-slate-900 font-display">WabiSkills Platform</h3>
@@ -909,10 +915,10 @@ export const HomePage = () => {
               </div>
 
               {/* WabiJobs Card */}
-              <div className="bg-white rounded-3xl p-7 border-2 border-amber-300 shadow-xl flex flex-col justify-between space-y-6">
+              <div className="bg-white rounded-3xl p-7 border-2 border-amber-300 shadow-lg flex flex-col justify-between space-y-6 hover:shadow-xl transition-all">
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="px-3 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-black uppercase">TALENT NETWORK</span>
+                    <span className="px-3.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-black uppercase">TALENT NETWORK</span>
                     <img src={wabiJobsLogo} alt="WabiJobs" className="h-6 object-contain" />
                   </div>
                   <h3 className="text-xl font-extrabold text-slate-900 font-display">WabiJobs Ecosystem</h3>
@@ -927,13 +933,13 @@ export const HomePage = () => {
               </div>
 
               {/* Future Digital Platforms Card */}
-              <div className="sm:col-span-2 bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-3xl p-7 border border-indigo-400/40 shadow-xl flex flex-col justify-between space-y-4">
+              <div className="sm:col-span-2 bg-gradient-to-br from-cyan-50/90 to-blue-50/80 text-slate-900 rounded-3xl p-7 border-2 border-cyan-300 shadow-md flex flex-col justify-between space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="px-3 py-0.5 rounded-full bg-indigo-500/30 text-indigo-300 border border-indigo-400/40 text-[10px] font-black uppercase">FUTURE PLATFORMS</span>
-                  <span className="text-[10px] font-mono text-cyan-300">R&amp;D ROADMAP</span>
+                  <span className="px-3.5 py-1 rounded-full bg-cyan-100 border border-cyan-300 text-[#0284C7] text-[10px] font-black uppercase">FUTURE PLATFORMS</span>
+                  <span className="text-[10px] font-mono font-bold text-[#0284C7]">R&amp;D ROADMAP</span>
                 </div>
-                <h3 className="text-lg font-extrabold text-white font-display">WabiX &amp; Mari Digital Ecosystem Initiatives</h3>
-                <p className="text-xs text-slate-300 font-medium leading-relaxed">
+                <h3 className="text-lg font-extrabold text-slate-900 font-display">WabiX &amp; Mari Digital Ecosystem Initiatives</h3>
+                <p className="text-xs text-slate-600 font-medium leading-relaxed">
                   Additional digital meeting tools, social communication apps, and technology media channels actively being engineered within the YomTech Global innovation labs.
                 </p>
               </div>
@@ -947,22 +953,32 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 06 — MEASURED IMPACT & STATISTICS
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#071A2B] text-white relative overflow-hidden border-b border-cyan-400/30 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
           <div className="space-y-6">
             <div className="flex items-center justify-end w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-cyan-400" />
-              <div className="px-6 py-2 rounded-full bg-cyan-950/80 border-2 border-cyan-500/60 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
-                <span className="text-[10px] text-cyan-300">◆</span>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
                 <span>MEASURED ECOSYSTEM IMPACT</span>
-                <TrendingUp size={16} className="text-cyan-300 ml-0.5" />
+                <TrendingUp size={16} className="text-[#0284C7] ml-0.5" />
               </div>
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
                 Real Scale. Measured Achievements.
               </h2>
             </div>
@@ -972,13 +988,13 @@ export const HomePage = () => {
             {COMPANY_STATS.map((st) => (
               <div
                 key={st.label}
-                className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-6 text-center space-y-2 hover:bg-white/20 transition-all"
+                className="bg-white/95 backdrop-blur-xl border-2 border-slate-100/90 hover:border-cyan-300 rounded-3xl p-6 text-center space-y-2 hover:shadow-lg transition-all shadow-xs"
               >
-                <span className="text-3xl sm:text-4xl font-black font-display text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-[#0ED3DD] block">
+                <span className="text-3xl sm:text-4xl font-black font-display text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] block">
                   {st.stat}
                 </span>
-                <p className="text-xs font-extrabold text-white uppercase tracking-wider">{st.label}</p>
-                <p className="text-[10px] font-bold text-cyan-200">{st.subtitle}</p>
+                <p className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">{st.label}</p>
+                <p className="text-[10px] font-bold text-slate-500">{st.subtitle}</p>
               </div>
             ))}
           </div>
@@ -1318,22 +1334,32 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 12 — FINAL DUAL-PATH CTA
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#00B4D8] text-white relative overflow-hidden font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
 
           {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
           <div className="space-y-6">
             <div className="flex items-center justify-end w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-cyan-300" />
-              <div className="px-6 py-2 rounded-full bg-white/15 backdrop-blur-md border-2 border-cyan-300/60 text-cyan-200 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
-                <span className="text-[10px] text-cyan-200">◆</span>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
                 <span>TAKE THE NEXT STEP</span>
-                <Sparkles size={16} className="text-cyan-200 ml-0.5" />
+                <Sparkles size={16} className="text-[#0284C7] ml-0.5" />
               </div>
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
                 Ready to Build Your Technology Future?
               </h2>
             </div>
@@ -1341,15 +1367,15 @@ export const HomePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {/* FOR ORGANIZATIONS */}
-            <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 text-center space-y-6">
-              <span className="px-3.5 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-widest inline-block">FOR ORGANIZATIONS</span>
-              <h3 className="text-2xl font-extrabold text-white">Start a Technology Conversation</h3>
-              <p className="text-xs text-cyan-100 font-medium leading-relaxed">
+            <div className="bg-white/95 backdrop-blur-2xl border-2 border-cyan-200 rounded-3xl p-8 text-center space-y-6 shadow-xl hover:border-cyan-400 transition-all">
+              <span className="px-3.5 py-1 rounded-full bg-cyan-100 text-[#0284C7] border border-cyan-200 text-xs font-black uppercase tracking-widest inline-block">FOR ORGANIZATIONS</span>
+              <h3 className="text-2xl font-extrabold text-slate-900 font-display">Start a Technology Conversation</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
                 Consult with our engineering leads to build custom ERPs, cloud architectures, or digital transformation workflows.
               </p>
               <button
                 onClick={() => navigate('/contact')}
-                className="w-full py-4 rounded-2xl bg-white text-slate-950 hover:bg-cyan-300 font-black text-xs uppercase tracking-widest shadow-xl transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white hover:opacity-95 font-black text-xs uppercase tracking-widest shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Request Enterprise Proposal</span>
                 <ArrowRight size={16} />
@@ -1357,15 +1383,15 @@ export const HomePage = () => {
             </div>
 
             {/* FOR INDIVIDUALS */}
-            <div className="bg-white/10 backdrop-blur-2xl border border-white/30 rounded-3xl p-8 text-center space-y-6">
-              <span className="px-3.5 py-1 rounded-full bg-emerald-400 text-slate-950 text-xs font-black uppercase tracking-widest inline-block">FOR INDIVIDUALS</span>
-              <h3 className="text-2xl font-extrabold text-white">Start Building Your Future</h3>
-              <p className="text-xs text-cyan-100 font-medium leading-relaxed">
+            <div className="bg-white/95 backdrop-blur-2xl border-2 border-emerald-200 rounded-3xl p-8 text-center space-y-6 shadow-xl hover:border-emerald-400 transition-all">
+              <span className="px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-black uppercase tracking-widest inline-block">FOR INDIVIDUALS</span>
+              <h3 className="text-2xl font-extrabold text-slate-900 font-display">Start Building Your Future</h3>
+              <p className="text-xs text-slate-600 font-medium leading-relaxed">
                 Enroll in WabiSkills bootcamps, master fullstack development, or join our vetted developer network.
               </p>
               <button
                 onClick={() => navigate('/academy')}
-                className="w-full py-4 rounded-2xl bg-emerald-400 text-slate-950 hover:bg-emerald-300 font-black text-xs uppercase tracking-widest shadow-xl transition-all flex items-center justify-center gap-2"
+                className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white hover:opacity-95 font-black text-xs uppercase tracking-widest shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <span>Explore Academy Courses</span>
                 <ArrowRight size={16} />
