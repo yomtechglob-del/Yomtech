@@ -631,20 +631,28 @@ export const HomePage = () => {
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          <div className="text-center space-y-4 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] shadow-xs">
-              <Cpu size={15} />
-              <span>ENGINEERING CAPABILITY MATRIX</span>
+          {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-start w-full">
+              <div className="px-5 py-1.5 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Cpu size={15} className="text-[#0284C7]" />
+                <span>ENGINEERING CAPABILITY MATRIX</span>
+                <span className="text-[10px] text-[#0284C7]">◆</span>
+              </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0284C7]/50 to-transparent" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-              WE BUILD. WE ENGINEER. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                WE SUPPORT. WE TEACH.
-              </span>
-            </h2>
-            <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
-              Our core services combine technology, innovation, and practical engineering expertise to deliver scalable software solutions.
-            </p>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                WE BUILD. WE ENGINEER. <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                  WE SUPPORT. WE TEACH.
+                </span>
+              </h2>
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                Our core services combine technology, innovation, and practical engineering expertise to deliver scalable software solutions.
+              </p>
+            </div>
           </div>
 
           {/* 8 Featured Engineering Capability Cards (4x2 Grid) */}
