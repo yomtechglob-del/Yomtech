@@ -1177,24 +1177,34 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 09 — NEW: INSIGHTS, MEDIA & COMMUNITY
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#EAFBF4] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-emerald-100/90 border-2 border-emerald-300 text-emerald-950 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Globe size={16} className="text-emerald-800" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Globe size={16} className="text-[#0284C7]" />
                 <span>YOMTECH IN THE WORLD</span>
-                <span className="text-[10px] text-emerald-800 ml-0.5">◆</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-emerald-600 via-teal-500 to-transparent" />
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
                 Technology Doesn't Stop <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-teal-600 to-[#0284C7]">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                   At The Product.
                 </span>
               </h2>
@@ -1206,57 +1216,105 @@ export const HomePage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* YOUTUBE */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-red-200 shadow-xl flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
+            <div className="bg-white/95 rounded-3xl p-8 border-2 border-slate-100/90 hover:border-red-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(239,68,68,0.15)] transition-all duration-300 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-1">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-red-600 via-rose-500 to-red-400" />
+              <div className="space-y-4 pt-1">
                 <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-red-50 text-red-700 text-xs font-black uppercase tracking-widest">YOUTUBE</span>
-                  <Video size={20} className="text-red-600" />
+                  <span className="px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                    YOUTUBE CHANNEL
+                  </span>
+                  <div className="w-12 h-12 rounded-2xl bg-red-50 border border-red-200 text-red-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white transition-all duration-300">
+                    <Video size={22} />
+                  </div>
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">Long-Form Engineering Insights</h3>
+
+                <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-red-600 transition-colors leading-snug">
+                  Long-Form Engineering Insights
+                </h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
                   Technology discussions, full-length tutorials, engineering deep dives, product stories, and national technology documentary films.
                 </p>
               </div>
-              <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-red-600 hover:text-red-800">
-                <span>Watch On YouTube ↗</span>
-                <ExternalLink size={14} />
-              </a>
+
+              <div className="pt-4 border-t border-slate-100">
+                <a 
+                  href="https://youtube.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-3 px-5 rounded-full bg-red-50 group-hover:bg-red-600 text-red-600 group-hover:text-white border-2 border-red-200 group-hover:border-red-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                >
+                  <span>Watch On YouTube</span>
+                  <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
             </div>
 
             {/* TIKTOK */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-slate-300 shadow-xl flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
+            <div className="bg-white/95 rounded-3xl p-8 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.15)] transition-all duration-300 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-1">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-slate-900" />
+              <div className="space-y-4 pt-1">
                 <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-slate-100 text-slate-900 text-xs font-black uppercase tracking-widest">TIKTOK</span>
-                  <Sparkles size={20} className="text-slate-900" />
+                  <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                    TIKTOK MEDIA
+                  </span>
+                  <div className="w-12 h-12 rounded-2xl bg-cyan-50 border border-cyan-200 text-[#0284C7] shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0284C7] group-hover:text-white transition-all duration-300">
+                    <Sparkles size={22} />
+                  </div>
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">Short-Form Tech Education</h3>
+
+                <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug">
+                  Short-Form Tech Education
+                </h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
                   Quick developer tips, coding highlights, tech awareness clips, career inspiration, and behind-the-scenes engineering moments.
                 </p>
               </div>
-              <a href="https://tiktok.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-slate-900 hover:text-slate-700">
-                <span>Follow On TikTok ↗</span>
-                <ExternalLink size={14} />
-              </a>
+
+              <div className="pt-4 border-t border-slate-100">
+                <a 
+                  href="https://tiktok.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-3 px-5 rounded-full bg-cyan-50 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                >
+                  <span>Follow On TikTok</span>
+                  <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
             </div>
 
             {/* LINKEDIN */}
-            <div className="bg-white rounded-3xl p-8 border-2 border-blue-200 shadow-xl flex flex-col justify-between space-y-6">
-              <div className="space-y-4">
+            <div className="bg-white/95 rounded-3xl p-8 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(37,99,235,0.15)] transition-all duration-300 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-1">
+              <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-700 via-blue-500 to-indigo-600" />
+              <div className="space-y-4 pt-1">
                 <div className="flex items-center justify-between">
-                  <span className="px-3.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-black uppercase tracking-widest">LINKEDIN</span>
-                  <Globe size={20} className="text-blue-600" />
+                  <span className="px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                    LINKEDIN NETWORK
+                  </span>
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-200 text-blue-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                    <Globe size={22} />
+                  </div>
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-900 font-display">Professional Network Updates</h3>
+
+                <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 transition-colors leading-snug">
+                  Professional Network Updates
+                </h3>
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
                   Enterprise updates, technology whitepapers, strategic partnerships, project milestones, and career opportunities across Africa.
                 </p>
               </div>
-              <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-xs font-extrabold text-blue-600 hover:text-blue-800">
-                <span>Connect On LinkedIn ↗</span>
-                <ExternalLink size={14} />
-              </a>
+
+              <div className="pt-4 border-t border-slate-100">
+                <a 
+                  href="https://linkedin.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="w-full py-3 px-5 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white border-2 border-blue-200 group-hover:border-blue-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                >
+                  <span>Connect On LinkedIn</span>
+                  <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -1267,7 +1325,17 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 10 — TESTIMONIALS & CLIENT PROOF
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white text-slate-900 relative overflow-hidden border-b border-slate-200 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
@@ -1292,19 +1360,21 @@ export const HomePage = () => {
             {TESTIMONIALS.map((t, idx) => (
               <div
                 key={idx}
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="p-8 rounded-3xl border-2 border-indigo-200/80 shadow-lg flex flex-col justify-between space-y-6"
+                className="p-8 rounded-3xl bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-1"
               >
-                <p className="text-xs sm:text-sm text-slate-700 font-bold italic leading-relaxed">
+                {/* Top Accent Gradient Line */}
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600" />
+
+                <p className="text-xs sm:text-sm text-slate-700 font-bold italic leading-relaxed pt-2">
                   "{t.quote}"
                 </p>
-                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
+                <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
                   <div>
-                    <h4 className="text-sm font-extrabold text-slate-900">{t.author}</h4>
-                    <p className="text-[10px] font-bold text-[#0284C7] uppercase">{t.role}</p>
+                    <h4 className="text-sm font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{t.author}</h4>
+                    <p className="text-[10px] font-bold text-[#0284C7] uppercase font-mono">{t.role}</p>
                   </div>
-                  <div className="flex text-amber-400">
-                    {[...Array(5)].map((_, i) => <Star key={i} size={12} fill="currentColor" />)}
+                  <div className="flex text-amber-400 gap-0.5">
+                    {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="currentColor" />)}
                   </div>
                 </div>
               </div>
@@ -1318,18 +1388,28 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           SECTION 11 — NEW: THE FUTURE OF YOMTECH
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-[#FFF7E6] text-slate-900 relative overflow-hidden border-b border-slate-200/80 font-sans">
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
           {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-amber-100/90 border-2 border-amber-300 text-amber-950 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Target size={16} className="text-amber-800" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                <Target size={16} className="text-[#0284C7]" />
                 <span>THE FUTURE OF TECHNOLOGY</span>
-                <span className="text-[10px] text-amber-800 ml-0.5">◆</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-amber-500 via-orange-400 to-transparent" />
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
@@ -1344,15 +1424,34 @@ export const HomePage = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { num: '01', title: 'CONTINUOUS LEARNING', desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen their foundations.' },
-              { num: '02', title: 'PRACTICAL INNOVATION', desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.' },
-              { num: '03', title: 'SCALABLE ENGINEERING', desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.' },
-              { num: '04', title: 'GLOBAL CONNECTION', desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.' }
+              { num: '01', title: 'CONTINUOUS LEARNING', desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen their foundations.', gradient: 'from-[#0284C7] to-cyan-400' },
+              { num: '02', title: 'PRACTICAL INNOVATION', desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.', gradient: 'from-cyan-500 to-teal-400' },
+              { num: '03', title: 'SCALABLE ENGINEERING', desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.', gradient: 'from-blue-600 to-[#0284C7]' },
+              { num: '04', title: 'GLOBAL CONNECTION', desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.', gradient: 'from-indigo-600 to-blue-500' }
             ].map((p) => (
-              <div key={p.num} className="bg-white rounded-3xl p-7 border-2 border-amber-200 shadow-xl space-y-4">
-                <span className="text-xs font-mono font-black text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">PILLAR {p.num}</span>
-                <h3 className="text-base font-extrabold text-slate-900 font-display">{p.title}</h3>
-                <p className="text-xs text-slate-600 font-medium leading-relaxed">{p.desc}</p>
+              <div 
+                key={p.num} 
+                className="bg-white/95 rounded-3xl p-7 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 space-y-5 relative overflow-hidden group hover:-translate-y-1 flex flex-col justify-between"
+              >
+                {/* Top Accent Gradient Edge */}
+                <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${p.gradient}`} />
+
+                <div className="space-y-4 pt-1">
+                  <div className="flex items-center justify-between">
+                    <span className="w-11 h-11 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] flex items-center justify-center font-black font-mono text-sm shadow-xs group-hover:bg-[#0284C7] group-hover:text-white group-hover:border-[#0284C7] transition-all duration-300">
+                      {p.num}
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider">PILLAR {p.num}</span>
+                  </div>
+
+                  <h3 className="text-base font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug tracking-tight">
+                    {p.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                    {p.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
