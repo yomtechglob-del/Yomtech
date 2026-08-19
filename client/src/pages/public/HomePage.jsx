@@ -634,10 +634,10 @@ export const HomePage = () => {
           {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
           <div className="space-y-6">
             <div className="flex items-center justify-start w-full">
-              <div className="px-5 py-1.5 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Cpu size={15} className="text-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -mr-[1px]">
+                <Cpu size={16} className="text-[#0284C7]" />
                 <span>ENGINEERING CAPABILITY MATRIX</span>
-                <span className="text-[10px] text-[#0284C7]">◆</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
               </div>
               <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
@@ -669,7 +669,7 @@ export const HomePage = () => {
 
                   <div className="space-y-4 pt-1">
                     <div className="flex items-center justify-between">
-                      <span className="px-3.5 py-1 rounded-full bg-white border-2 border-[#0284C7]/60 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                      <span className="px-4 py-1.5 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
                         {srv.tag}
                       </span>
                       <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${srv.gradient || 'from-cyan-500 to-blue-600'} text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -689,7 +689,7 @@ export const HomePage = () => {
                   <div className="pt-4 border-t border-slate-100">
                     <button
                       onClick={() => navigate('/services')}
-                      className="w-full py-3 px-4 rounded-full bg-white group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                      className="w-full py-3 px-5 rounded-full bg-white group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
                     >
                       <span>Explore Capability</span>
                       <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
@@ -706,10 +706,10 @@ export const HomePage = () => {
             {/* Header (Matching User Screenshot: Full-Length Left Line & White Pill Badge with Diamonds) */}
             <div className="flex items-center justify-end mb-2 w-full">
               <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
-              <div className="px-5 py-1.5 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2 shadow-xs shrink-0 z-10 -ml-[1px]">
+              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
                 <span className="text-[10px] text-[#0284C7]">◆</span>
                 <span>OFFICIAL YOMTECH ENTERPRISE SERVICE ROSTER</span>
-                <span className="text-[10px] text-[#0284C7]">◆</span>
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
               </div>
             </div>
 
