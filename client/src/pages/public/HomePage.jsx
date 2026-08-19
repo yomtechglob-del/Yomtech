@@ -448,25 +448,25 @@ export const HomePage = () => {
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
           
-          {/* Top Badge (Right Aligned with Accent Line Spanning Full Length to the Left) */}
+          {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
           <div className="space-y-6">
-            <div className="flex items-center justify-end w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
-              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
-                <span className="text-[10px] text-[#0284C7]">◆</span>
+            <div className="flex items-center justify-start w-full">
+              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -mr-[1px]">
+                <Sparkles size={16} className="text-[#0284C7]" />
                 <span>YOMTECH GLOBAL ECOSYSTEM</span>
-                <Sparkles size={16} className="text-[#0284C7] ml-0.5" />
+                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
               </div>
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
-            <div className="text-right ml-auto space-y-3 max-w-3xl">
+            <div className="text-left space-y-3 max-w-3xl">
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display tracking-tight leading-tight text-slate-900">
                 One Connected Ecosystem. <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                   Engineered for High Impact.
                 </span>
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl ml-auto">
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
                 Yomtech Global unifies enterprise software engineering, cloud infrastructure, security, digital talent academy, and recruitment network into one seamless digital matrix.
               </p>
             </div>
