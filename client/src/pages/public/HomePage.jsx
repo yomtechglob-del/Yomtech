@@ -23,6 +23,7 @@ import educationImg from '../../assets/services/education.png';
 import crmImg from '../../assets/services/crm.png';
 
 import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
+
 // Hero entry animations run ONCE on load — not scroll-triggered, so framer-motion is fine here
 const fadeLeft = { hidden: { opacity: 0, x: -20 }, show: { opacity: 1, x: 0 } };
 const fadeRight = { hidden: { opacity: 0, x: 20 }, show: { opacity: 1, x: 0 } };
@@ -108,16 +109,19 @@ export const HomePage = () => {
   return (
     <div className="bg-[#F8FAFC] text-[#071A2B]">
       {/* 1. HERO SECTION */}
-      <section className="hero-scroll-fix home-section w-full relative pt-36 sm:pt-44 md:pt-48 pb-20 md:pb-28 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30" style={{ touchAction: 'pan-y' }}>
-        
+      { }
+      <section className="w-full relative pt-36 sm:pt-44 md:pt-48 pb-20 md:pb-28 hero-cyan-gradient text-white overflow-x-hidden overflow-y-visible border-b border-cyan-400/30 transform-gpu">
+
         {/* About Us Page Exact Hero Background */}
-        <AboutHeroBackground />
+        { }
+        <div className="absolute inset-0 z-0 pointer-events-none transform-gpu">
+          <AboutHeroBackground />
+        </div>
 
         <div className="max-w-[1720px] mx-auto w-full px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           {/* Left Hero Content */}
           <motion.div
             className="lg:col-span-6 space-y-8"
-            style={{ touchAction: 'pan-y' }}
             variants={fadeLeft}
             initial="hidden"
             animate="show"
@@ -146,7 +150,6 @@ export const HomePage = () => {
               {/* Bullet Statements */}
               <motion.div
                 className="space-y-3.5 pt-4 font-sans"
-                style={{ touchAction: 'pan-y' }}
                 variants={stagger}
                 initial="hidden"
                 animate="show"
@@ -155,7 +158,6 @@ export const HomePage = () => {
                   <motion.div
                     key={tagline}
                     className="flex items-center gap-3.5"
-                    style={{ touchAction: 'pan-y' }}
                     variants={fadeUp}
                     transition={{ duration: 0.45, delay: 0.3 + i * 0.08 }}
                   >
@@ -174,7 +176,6 @@ export const HomePage = () => {
             {/* CTA Buttons */}
             <motion.div
               className="pt-3 flex flex-wrap items-center gap-4"
-              style={{ touchAction: 'pan-y' }}
               variants={fadeUp}
               initial="hidden"
               animate="show"
@@ -199,14 +200,19 @@ export const HomePage = () => {
 
           {/* Right 3D Globe Visual */}
           <motion.div
-            className="lg:col-span-6 flex justify-center items-center"
-            style={{ minHeight: '720px', touchAction: 'pan-y' }}
+            className="lg:col-span-6 flex justify-center items-center relative"
+            style={{ minHeight: '720px' }}
             variants={fadeRight}
             initial="hidden"
             animate="show"
             transition={{ duration: 0.65, delay: 0.2 }}
           >
-            <Globe3DCard />
+            {/* Wrapper to prevent the 3D canvas from hijacking scroll/touch events.
+                Disables interactions on mobile so users can always swipe to scroll. */}
+            { }
+            <div className="w-full h-full flex justify-center items-center pointer-events-none lg:pointer-events-auto transform-gpu">
+              <Globe3DCard />
+            </div>
           </motion.div>
         </div>
       </section>
@@ -241,7 +247,8 @@ export const HomePage = () => {
                   <div className="bg-white border border-emerald-200/90 hover:border-[#0284C7] p-8 sm:p-9 md:p-10 rounded-[2.2rem] shadow-xl hover:shadow-[0_15px_40px_rgba(2,132,199,0.25)] transition-all duration-300 flex flex-col justify-between h-full overflow-hidden text-center items-center space-y-7 text-slate-900 hover:-translate-y-1">
                     <div className="space-y-6 flex flex-col items-center text-center w-full">
                       <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#0284C7] via-[#0ED3DD] to-blue-600 p-2 border border-sky-400/80 shadow-[0_0_25px_rgba(2,132,199,0.3)] mx-auto flex items-center justify-center">
-                        <img src={item.img} alt={item.title} className="w-full h-full object-cover rounded-2xl shadow-md" loading="lazy" />
+                        { }
+                        <img src={item.img} alt={item.title} className="w-full h-full object-cover rounded-2xl shadow-md" loading="lazy" decoding="async" />
                       </div>
                       <div className="space-y-2 text-center w-full px-2">
                         <span className="text-[10px] font-black tracking-widest text-[#0284C7] uppercase px-3.5 py-1 rounded-full bg-sky-50 border border-sky-200 inline-block shadow-sm">
@@ -333,8 +340,10 @@ export const HomePage = () => {
       <section className="home-section w-full relative py-24 bg-gradient-to-br from-[#FFF7ED] via-[#FFEDD5] to-[#FED7AA] text-slate-900 border-y border-amber-300/60 section-track-border section-track-border-amber">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <div ref={ctaRef} className="reveal bg-white border-2 border-amber-200 rounded-[2.5rem] p-10 md:p-16 relative overflow-hidden shadow-2xl space-y-8 text-slate-900">
-            <div className="absolute -top-20 -left-20 w-64 h-64 bg-amber-200/40 blur-[100px] rounded-full pointer-events-none glow-layer" />
-            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-sky-200/40 blur-[100px] rounded-full pointer-events-none glow-layer" />
+            { }
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-amber-200/40 blur-[100px] rounded-full pointer-events-none glow-layer transform-gpu" />
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-sky-200/40 blur-[100px] rounded-full pointer-events-none glow-layer transform-gpu" />
+
             <div className="space-y-4 max-w-3xl mx-auto relative z-10">
               <h2 className="text-3xl sm:text-5xl md:text-6xl font-black font-display text-slate-900 tracking-tight leading-tight">
                 Ready to Transform with <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Technology?</span>
