@@ -943,15 +943,15 @@ export const HomePage = () => {
       <section className="py-24 bg-[#071A2B] text-white relative overflow-hidden border-b border-cyan-400/30 font-sans">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
 
-          {/* Header Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
           <div className="space-y-6">
-            <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-cyan-950/80 border-2 border-cyan-500/60 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -mr-[1px]">
-                <TrendingUp size={16} className="text-cyan-300" />
+            <div className="flex items-center justify-end w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-cyan-500/50 to-cyan-400" />
+              <div className="px-6 py-2 rounded-full bg-cyan-950/80 border-2 border-cyan-500/60 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-cyan-300">◆</span>
                 <span>MEASURED ECOSYSTEM IMPACT</span>
-                <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
+                <TrendingUp size={16} className="text-cyan-300 ml-0.5" />
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-400 via-cyan-500/50 to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
