@@ -448,15 +448,15 @@ export const HomePage = () => {
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
           
-          {/* Top Badge (Left Aligned with Accent Line Spanning Full Length to the Right) */}
+          {/* Top Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
           <div className="space-y-6">
-            <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -mr-[1px]">
-                <Sparkles size={16} className="text-[#0284C7]" />
+            <div className="flex items-center justify-end w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-white border-2 border-[#0284C7] text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-sm shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
                 <span>YOMTECH GLOBAL ECOSYSTEM</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+                <Sparkles size={16} className="text-[#0284C7] ml-0.5" />
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
             <div className="text-left space-y-3 max-w-3xl">
