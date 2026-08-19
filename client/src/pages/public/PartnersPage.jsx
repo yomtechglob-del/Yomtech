@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import {
   Handshake, Building2, Globe, GraduationCap, Landmark, Cpu, Video,
   Briefcase, ArrowRight, CheckCircle2, Phone, Star, Layers, Sparkles,
@@ -308,7 +308,9 @@ const accentMap = {
 
 export const PartnersPage = () => {
   const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchParams] = useSearchParams();
+  const initialTab = searchParams.get('tab') || 'All';
+  const [selectedCategory, setSelectedCategory] = useState(initialTab);
   const [searchQuery, setSearchQuery] = useState('');
   const [activePartnerModal, setActivePartnerModal] = useState(null);
 
