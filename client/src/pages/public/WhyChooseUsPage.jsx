@@ -10,44 +10,150 @@ import ermiTwoImg from '../../assets/ermi-two.jpg';
 import erminOneImg from '../../assets/ermin-one.jpg';
 import logoEmblem from '../../assets/logos/logo.png';
 
-const COMPETITIVE_ADVANTAGES = [
+const ADVANTAGE_PAIRS = [
   {
-    title: 'End-to-End Expertise',
-    desc: 'Full lifecycle delivery from initial architectural design to deployment, security hardening, and continuous 24/7 technical support.',
-    icon: Layers,
-    accent: 'cyan'
+    left: {
+      num: '01',
+      title: 'End-to-End Expertise',
+      desc: 'Full lifecycle delivery from initial architectural design to deployment, security hardening, and continuous 24/7 technical support.',
+      icon: Layers,
+    },
+    right: {
+      num: '02',
+      title: '100% Custom-Built Systems',
+      desc: 'Every system is engineered from scratch based on exact client workflows — zero reliance on rigid third-party templates.',
+      icon: Code,
+    },
   },
   {
-    title: '100% Custom-Built Systems',
-    desc: 'Every system is engineered from scratch based on exact client workflows — zero reliance on rigid third-party templates or monthly licensing fees.',
-    icon: Code,
-    accent: 'emerald'
+    left: {
+      num: '03',
+      title: 'Government & Enterprise Experience',
+      desc: 'Proven track record delivering mission-critical platforms for federal ministries, security administrations, and banks.',
+      icon: Building2,
+    },
+    right: {
+      num: '04',
+      title: 'Integrated Digital Ecosystem',
+      desc: 'Unique synergy combining software engineering, ERP platforms, WabiSkills academy, WabiJob recruitment, and tech media.',
+      icon: Globe,
+    },
   },
   {
-    title: 'Government & Enterprise Experience',
-    desc: 'Proven track record delivering mission-critical platforms for federal ministries, security administrations, banks, and public institutions.',
-    icon: Building2,
-    accent: 'violet'
+    left: {
+      num: '05',
+      title: 'AI & Next-Gen Innovation',
+      desc: 'Deep integration of artificial intelligence, automated surveillance vision, predictive analytics, and cloud microservices.',
+      icon: Cpu,
+    },
+    right: {
+      num: '06',
+      title: 'Long-Term Partnership Mindset',
+      desc: 'We focus on sustainable collaboration, system evolution, and dedicated SLA maintenance rather than one-time delivery.',
+      icon: ShieldCheck,
+    },
   },
-  {
-    title: 'Integrated Digital Ecosystem',
-    desc: 'Unique synergy combining software engineering, ERP platforms, WabiSkills talent academy, WabiJob recruitment, and tech media production.',
-    icon: Globe,
-    accent: 'amber'
-  },
-  {
-    title: 'AI & Next-Gen Innovation',
-    desc: 'Deep integration of artificial intelligence, automated surveillance vision, predictive analytics, and cloud microservices.',
-    icon: Cpu,
-    accent: 'sky'
-  },
-  {
-    title: 'Long-Term Partnership Mindset',
-    desc: 'We focus on sustainable collaboration, system evolution, and dedicated SLA maintenance rather than one-time delivery.',
-    icon: ShieldCheck,
-    accent: 'rose'
-  }
 ];
+
+const InterlockingAdvantageRow = ({ left, right, idx }) => {
+  const LeftIcon = left.icon;
+  const RightIcon = right.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: idx * 0.08 }}
+      className="relative w-full my-3 sm:my-4 group transition-all duration-300 hover:scale-[1.01]"
+    >
+      {/* DESKTOP SVG PUZZLE INTERLOCKING JOIN */}
+      <div className="hidden md:block relative w-full aspect-[600/150] drop-shadow-xl">
+        <svg viewBox="0 0 600 150" className="w-full h-full overflow-visible pointer-events-none block">
+          <path
+            d="M 24,0 L 285,0 C 310,0 326,12 326,32 L 326,42 C 326,62 308,72 285,75 C 262,78 244,88 244,108 L 244,118 C 244,138 260,150 285,150 L 24,150 C 10,150 0,140 0,126 L 0,24 C 0,10 10,0 24,0 Z"
+            fill="#004b75"
+          />
+          <path
+            d="M 285,0 L 576,0 C 590,0 600,10 600,24 L 600,126 C 600,140 590,150 576,150 L 285,150 C 260,150 244,138 244,118 L 244,108 C 244,88 262,78 285,75 C 308,72 326,62 326,42 L 326,32 C 326,12 310,0 285,0 Z"
+            fill="#ea580c"
+          />
+        </svg>
+
+        <div className="absolute inset-0 grid grid-cols-2 p-6 pointer-events-auto">
+          {/* LEFT CARD CONTENT */}
+          <div className="relative flex flex-col justify-between pr-10 text-left">
+            <div className="flex items-center justify-between">
+              <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white shadow-inner group-hover:scale-110 transition-transform">
+                <LeftIcon size={24} strokeWidth={1.8} />
+              </div>
+              <span className="text-white font-black text-4xl font-display tracking-tight absolute right-[-24px] top-1 z-20 select-none">
+                {left.num}
+              </span>
+            </div>
+            <div className="space-y-1 z-10">
+              <h3 className="text-2xl lg:text-3xl font-extrabold text-white font-display tracking-tight leading-tight">
+                {left.title}
+              </h3>
+              <p className="text-xs lg:text-sm font-medium text-white/90 leading-tight font-sans line-clamp-2">
+                {left.desc}
+              </p>
+            </div>
+          </div>
+
+          {/* RIGHT CARD CONTENT */}
+          <div className="relative flex flex-col justify-between pl-10 text-left">
+            <div className="flex items-center justify-between">
+              <span className="text-white font-black text-4xl font-display tracking-tight absolute left-[-24px] bottom-1 z-20 select-none">
+                {right.num}
+              </span>
+              <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white shadow-inner group-hover:scale-110 transition-transform ml-auto">
+                <RightIcon size={24} strokeWidth={1.8} />
+              </div>
+            </div>
+            <div className="space-y-1 z-10">
+              <h3 className="text-2xl lg:text-3xl font-extrabold text-white font-display tracking-tight leading-tight">
+                {right.title}
+              </h3>
+              <p className="text-xs lg:text-sm font-medium text-white/90 leading-tight font-sans line-clamp-2">
+                {right.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* MOBILE STACKED LAYOUT */}
+      <div className="md:hidden flex flex-col space-y-3 rounded-3xl overflow-hidden shadow-lg">
+        <div className="bg-[#004b75] text-white p-6 rounded-3xl space-y-4 text-left relative">
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
+              <LeftIcon size={22} />
+            </div>
+            <span className="text-white font-black text-3xl font-display">{left.num}</span>
+          </div>
+          <div>
+            <h3 className="text-2xl font-black text-white font-display">{left.title}</h3>
+            <p className="text-xs text-white/90 font-medium leading-relaxed mt-1">{left.desc}</p>
+          </div>
+        </div>
+
+        <div className="bg-[#ea580c] text-white p-6 rounded-3xl space-y-4 text-left relative">
+          <div className="flex items-center justify-between">
+            <div className="w-10 h-10 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
+              <RightIcon size={22} />
+            </div>
+            <span className="text-white font-black text-3xl font-display">{right.num}</span>
+          </div>
+          <div>
+            <h3 className="text-2xl font-black text-white font-display">{right.title}</h3>
+            <p className="text-xs text-white/90 font-medium leading-relaxed mt-1">{right.desc}</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 export const WhyChooseUsPage = () => {
   const navigate = useNavigate();
@@ -123,36 +229,37 @@ export const WhyChooseUsPage = () => {
         </div>
       </section>
 
-      {/* Grid */}
-      <section className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
-        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
-          <div className="text-left space-y-3 max-w-4xl">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display">
-              Our 6 Core <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Competitive Advantages</span>
+      {/* Grid of Interlocking Competitive Advantage Cards */}
+      <section className="py-20 lg:py-28 bg-[#E3F2FD] relative overflow-hidden font-sans border-b border-slate-200/80">
+        {/* Background Dot Grid */}
+        <div
+          className="absolute inset-0 opacity-[0.35] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#0284c7 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 space-y-12">
+          <div className="text-center space-y-2 max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-100/80 border border-cyan-300 text-[#004b75] text-xs font-black uppercase tracking-widest shadow-xs">
+              <Sparkles className="w-4 h-4 text-[#004b75]" />
+              <span>ENTERPRISE ADVANTAGES</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 font-display tracking-tight">
+              Our 6 Core Competitive Advantages
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {COMPETITIVE_ADVANTAGES.map((item) => {
-              const IconComp = item.icon;
-              return (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                  className="rounded-3xl p-8 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all space-y-4"
-                >
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#0284C7] to-[#0ED3DD] text-white p-3 shadow-md flex items-center justify-center">
-                    <IconComp size={26} />
-                  </div>
-                  <h3 className="text-xl font-extrabold text-slate-900 font-display">{item.title}</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{item.desc}</p>
-                </motion.div>
-              );
-            })}
+          <div className="max-w-3xl mx-auto space-y-3">
+            {ADVANTAGE_PAIRS.map((pair, idx) => (
+              <InterlockingAdvantageRow
+                key={pair.left.num}
+                left={pair.left}
+                right={pair.right}
+                idx={idx}
+              />
+            ))}
           </div>
         </div>
       </section>

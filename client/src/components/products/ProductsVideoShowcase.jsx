@@ -50,6 +50,8 @@ const PRODUCT_VIDEOS = [
       { ...WABISKILLS_VIDEOS[0], type: 'STUDENT STORY', featured: true },
       { ...WABISKILLS_VIDEOS[1], type: 'TESTIMONIAL' },
       { ...WABISKILLS_VIDEOS[2], type: 'TESTIMONIAL' },
+      { ...WABISKILLS_VIDEOS[3], type: 'INTERVIEW' },
+      { ...WABISKILLS_VIDEOS[5], type: 'SCHOLARSHIP' },
     ],
   },
   {
@@ -70,6 +72,8 @@ const PRODUCT_VIDEOS = [
       { ...WABISKILLS_VIDEOS[3], type: 'OPPORTUNITY', featured: true },
       { ...WABISKILLS_VIDEOS[4], type: 'ANNOUNCEMENT' },
       { ...WABISKILLS_VIDEOS[5], type: 'SCHOLARSHIP' },
+      { ...WABISKILLS_VIDEOS[1], type: 'TESTIMONIAL' },
+      { ...WABISKILLS_VIDEOS[2], type: 'STUDENT STORY' },
     ],
   },
   {
@@ -90,6 +94,8 @@ const PRODUCT_VIDEOS = [
       { ...YOMTECH_VIDEOS[0], type: 'TECH SHOW', featured: true },
       { ...YOMTECH_VIDEOS[1], type: 'AI & FUTURE TECH' },
       { ...YOMTECH_VIDEOS[2], type: 'TECHNOLOGY' },
+      { ...YOMTECH_VIDEOS[3], type: 'TECH SERIES' },
+      { ...YOMTECH_VIDEOS[4], type: 'SCIENCE' },
     ],
   },
   {
@@ -110,6 +116,8 @@ const PRODUCT_VIDEOS = [
       { ...YOMTECH_VIDEOS[3], type: 'FUTURE TECH', featured: true },
       { ...YOMTECH_VIDEOS[4], type: 'SCIENCE' },
       { ...WABISKILLS_VIDEOS[4], type: 'ANNOUNCEMENT' },
+      { ...YOMTECH_VIDEOS[0], type: 'TECH SHOW' },
+      { ...YOMTECH_VIDEOS[2], type: 'DRONE TECH' },
     ],
   },
   {
@@ -130,6 +138,8 @@ const PRODUCT_VIDEOS = [
       { ...WABISKILLS_VIDEOS[1], type: 'COMMUNITY', featured: true },
       { ...WABISKILLS_VIDEOS[2], type: 'STORIES' },
       { ...WABISKILLS_VIDEOS[0], type: 'INSIGHT' },
+      { ...WABISKILLS_VIDEOS[3], type: 'SPOTLIGHT' },
+      { ...WABISKILLS_VIDEOS[5], type: 'ANNOUNCEMENT' },
     ],
   },
   {
@@ -150,6 +160,8 @@ const PRODUCT_VIDEOS = [
       { ...YOMTECH_VIDEOS[5], type: 'DOCUMENTARY', featured: true },
       { ...YOMTECH_VIDEOS[1], type: 'TV SHOW' },
       { ...YOMTECH_VIDEOS[3], type: 'TECH SERIES' },
+      { ...YOMTECH_VIDEOS[2], type: 'DRONE TECH' },
+      { ...YOMTECH_VIDEOS[4], type: 'SCIENCE' },
     ],
   },
 ];
@@ -254,7 +266,7 @@ const HeroFeaturedVideo = ({ onPlay }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)]"
+      className="relative rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)] border-2 border-white/20"
       style={{ aspectRatio: '21/8' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -267,92 +279,28 @@ const HeroFeaturedVideo = ({ onPlay }) => {
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         onError={(e) => { e.target.style.display = 'none'; }}
       />
-      {/* Gradient overlay */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${HERO_FEATURED_VIDEO.heroGrad} opacity-80`} />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent" />
-      {/* Dot mesh */}
-      <div className="absolute inset-0 opacity-[0.08]"
-        style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.5) 1.5px, transparent 1.5px)', backgroundSize: '22px 22px' }}
-      />
-      {/* Ambient blob */}
-      <div className="absolute right-0 top-0 w-1/2 h-full opacity-30 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at 80% 50%, ${HERO_FEATURED_VIDEO.glowColor}, transparent 65%)` }}
-      />
 
-      {/* Content */}
-      <div className="absolute inset-0 flex items-center px-10 sm:px-16 gap-10">
-        {/* Left: Info */}
-        <div className="flex-1 space-y-4 max-w-xl">
-          <div className="flex items-center gap-3 flex-wrap">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/90 text-white text-[9px] font-black uppercase tracking-widest">
-              <Youtube size={11} />
-              <span>YouTube</span>
-            </span>
-            <span className="px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[9px] font-black uppercase tracking-widest backdrop-blur-sm">
-              {HERO_FEATURED_VIDEO.type}
-            </span>
-            <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/70 text-[9px] font-mono">
-              {HERO_FEATURED_VIDEO.channelHandle}
-            </span>
+      {/* Center: Play Button */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
+        <motion.div
+          animate={hovered ? { scale: 1.15 } : { scale: 1 }}
+          transition={{ duration: 0.35 }}
+          className="relative"
+        >
+          {hovered && (
+            <>
+              <motion.div initial={{ scale: 0.6, opacity: 0.7 }} animate={{ scale: 3, opacity: 0 }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }}
+                className="absolute inset-0 rounded-full bg-red-500/40" />
+              <motion.div initial={{ scale: 0.6, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut', delay: 0.35 }}
+                className="absolute inset-0 rounded-full bg-red-500/20" />
+            </>
+          )}
+          <div className="relative w-24 h-24 rounded-full bg-red-600 border-4 border-white text-white flex items-center justify-center shadow-[0_0_60px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
+            <Play size={40} fill="white" className="text-white ml-2" />
           </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight line-clamp-2">
-            {HERO_FEATURED_VIDEO.title}
-          </h2>
-
-          <div className="flex items-center gap-4">
-            <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-1 flex items-center justify-center">
-              <img src={HERO_FEATURED_VIDEO.logo} alt="" className="w-full h-full object-contain" />
-            </div>
-            <span className="text-white/60 text-sm font-medium">{HERO_FEATURED_VIDEO.channel} · Official Channel</span>
-          </div>
-
-          <a
-            href={HERO_FEATURED_VIDEO.channelUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-2 text-white/60 text-xs font-mono hover:text-white transition-colors"
-          >
-            <ExternalLink size={11} />
-            <span>View Channel →</span>
-          </a>
-        </div>
-
-        {/* Center: Huge Play Button */}
-        <div className="flex-shrink-0">
-          <motion.div
-            animate={hovered ? { scale: 1.1 } : { scale: 1 }}
-            transition={{ duration: 0.35 }}
-            className="relative"
-          >
-            {hovered && (
-              <>
-                <motion.div initial={{ scale: 0.6, opacity: 0.7 }} animate={{ scale: 3, opacity: 0 }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }}
-                  className="absolute inset-0 rounded-full bg-white/20" />
-                <motion.div initial={{ scale: 0.6, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut', delay: 0.35 }}
-                  className="absolute inset-0 rounded-full bg-white/10" />
-              </>
-            )}
-            <div className="relative w-24 h-24 rounded-full bg-white/15 border-2 border-white/60 backdrop-blur-md flex items-center justify-center shadow-[0_0_60px_rgba(255,255,255,0.25)] hover:bg-white/25 transition-all">
-              <Play size={36} fill="white" className="text-white ml-2" />
-            </div>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Bottom strip */}
-      <div className="absolute bottom-0 left-0 right-0 px-10 sm:px-16 py-4 flex items-center justify-between border-t border-white/10">
-        <div className="flex items-center gap-2 text-white/50 text-xs font-mono">
-          <Tv size={13} />
-          <span>Airs on Fana Television — Every Wednesday</span>
-        </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/70 text-xs font-bold">
-          <Youtube size={12} className="text-red-400" />
-          <span>youtube.com/@yomtech</span>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -369,7 +317,7 @@ const BottomFeaturedVideo = ({ onPlay }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)]"
+      className="relative rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)] border-2 border-white/20"
       style={{ aspectRatio: '21/8' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -379,86 +327,29 @@ const BottomFeaturedVideo = ({ onPlay }) => {
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
         onError={(e) => { e.target.style.display = 'none'; }}
       />
-      <div className={`absolute inset-0 bg-gradient-to-l ${BOTTOM_FEATURED_VIDEO.heroGrad} opacity-80`} />
-      <div className="absolute inset-0 bg-gradient-to-l from-black/85 via-black/40 to-transparent" />
-      <div className="absolute inset-0 opacity-[0.08]"
-        style={{ backgroundImage: 'radial-gradient(rgba(255,255,255,0.5) 1.5px, transparent 1.5px)', backgroundSize: '22px 22px' }}
-      />
-      <div className="absolute left-0 top-0 w-1/2 h-full opacity-30 pointer-events-none"
-        style={{ background: `radial-gradient(ellipse at 20% 50%, ${BOTTOM_FEATURED_VIDEO.glowColor}, transparent 65%)` }}
-      />
 
-      <div className="absolute inset-0 flex items-center justify-end px-10 sm:px-16 gap-10">
-        {/* Center: Play */}
-        <div className="flex-shrink-0 order-2">
-          <motion.div animate={hovered ? { scale: 1.1 } : { scale: 1 }} transition={{ duration: 0.35 }} className="relative">
-            {hovered && (
-              <>
-                <motion.div initial={{ scale: 0.6, opacity: 0.7 }} animate={{ scale: 3, opacity: 0 }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }} className="absolute inset-0 rounded-full bg-white/20" />
-                <motion.div initial={{ scale: 0.6, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }}
-                  transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut', delay: 0.35 }} className="absolute inset-0 rounded-full bg-white/10" />
-              </>
-            )}
-            <div className="relative w-24 h-24 rounded-full bg-white/15 border-2 border-white/60 backdrop-blur-md flex items-center justify-center shadow-[0_0_60px_rgba(255,255,255,0.25)] hover:bg-white/25 transition-all">
-              <Play size={36} fill="white" className="text-white ml-2" />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Right: Info */}
-        <div className="flex-1 space-y-4 max-w-xl text-right order-1">
-          <div className="flex items-center gap-3 flex-wrap justify-end">
-            <span className="px-3 py-1 rounded-full bg-white/10 border border-white/20 text-white/70 text-[9px] font-mono">
-              {BOTTOM_FEATURED_VIDEO.channelHandle}
-            </span>
-            <span className="px-3 py-1 rounded-full bg-white/15 border border-white/25 text-white text-[9px] font-black uppercase tracking-widest">
-              {BOTTOM_FEATURED_VIDEO.type}
-            </span>
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/90 text-white text-[9px] font-black uppercase tracking-widest">
-              <Youtube size={11} />
-              <span>YouTube</span>
-            </span>
+      {/* Center: Play Button */}
+      <div className="absolute inset-0 flex items-center justify-center z-20">
+        <motion.div animate={hovered ? { scale: 1.15 } : { scale: 1 }} transition={{ duration: 0.35 }} className="relative">
+          {hovered && (
+            <>
+              <motion.div initial={{ scale: 0.6, opacity: 0.7 }} animate={{ scale: 3, opacity: 0 }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }} className="absolute inset-0 rounded-full bg-red-500/40" />
+              <motion.div initial={{ scale: 0.6, opacity: 0.5 }} animate={{ scale: 4, opacity: 0 }}
+                transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut', delay: 0.35 }} className="absolute inset-0 rounded-full bg-red-500/20" />
+            </>
+          )}
+          <div className="relative w-24 h-24 rounded-full bg-red-600 border-4 border-white text-white flex items-center justify-center shadow-[0_0_60px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
+            <Play size={40} fill="white" className="text-white ml-2" />
           </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight line-clamp-2">
-            {BOTTOM_FEATURED_VIDEO.title}
-          </h2>
-
-          <div className="flex items-center gap-4 justify-end">
-            <span className="text-white/60 text-sm font-medium">WabiSkills · Official Channel</span>
-            <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 p-1 flex items-center justify-center">
-              <img src={BOTTOM_FEATURED_VIDEO.logo} alt="" className="w-full h-full object-contain" />
-            </div>
-          </div>
-
-          <div className="flex justify-end">
-            <a href={BOTTOM_FEATURED_VIDEO.channelUrl} target="_blank" rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-2 text-white/60 text-xs font-mono hover:text-white transition-colors">
-              <span>← View Channel</span>
-              <ExternalLink size={11} />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 px-10 sm:px-16 py-4 flex items-center justify-between border-t border-white/10">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/70 text-xs font-bold">
-          <Youtube size={12} className="text-red-400" />
-          <span>youtube.com/@WabiSkills</span>
-        </div>
-        <div className="flex items-center gap-2 text-white/50 text-xs font-mono">
-          <Users size={13} />
-          <span>2.39K Subscribers · Student Testimonials & Stories</span>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );
 };
 
 // ─── Small Video Card for Grid ────────────────────────────────────────────────
-const VideoCard = ({ video, product, onPlay, featured }) => {
+const VideoCard = ({ video, product, onPlay, featured, isTopRight }) => {
   const [hovered, setHovered] = useState(false);
   const thumb = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
 
@@ -468,61 +359,33 @@ const VideoCard = ({ video, product, onPlay, featured }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className={`group relative rounded-2xl overflow-hidden cursor-pointer ${featured ? 'col-span-2' : ''}`}
-      style={{ aspectRatio: featured ? '16/7' : '16/10' }}
+      className={`group relative rounded-2xl overflow-hidden cursor-pointer ${featured ? 'col-span-2' : ''} ${isTopRight ? 'h-full min-h-full' : ''}`}
+      style={{ aspectRatio: featured ? '16/7' : isTopRight ? '16/14' : '16/10' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => onPlay(video, product)}
     >
+      {/* 100% Clean YouTube Thumbnail Image */}
       <img src={thumb} alt={video.title}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         onError={(e) => { e.target.style.display = 'none'; }}
       />
-      <div className={`absolute inset-0 bg-gradient-to-br ${product.heroGrad} opacity-70`} />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-      <div className="absolute inset-0 transition-opacity duration-500"
-        style={{ background: `radial-gradient(ellipse at 30% 50%, ${product.glowColor} 0%, transparent 60%)`, opacity: hovered ? 0.6 : 0.3 }}
-      />
 
-      {/* Top badges */}
-      <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-20">
-        <div className="flex items-center gap-1.5">
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-red-500/90 text-white text-[8px] font-black">
-            <Youtube size={9} /><span>YT</span>
-          </span>
-          <span className={`text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full border backdrop-blur-md ${product.bg} ${product.border} ${product.accent}`}>
-            {video.type}
-          </span>
-        </div>
-        <span className="text-white/60 text-[8px] font-mono bg-black/40 px-2 py-0.5 rounded">{video.channelHandle}</span>
-      </div>
-
-      {/* Play */}
+      {/* Play Button */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <motion.div animate={hovered ? { scale: 1.15 } : { scale: 1 }} transition={{ duration: 0.3 }} className="relative">
           {hovered && (
             <>
               <motion.div initial={{ scale: 0.6, opacity: 0.7 }} animate={{ scale: 2.5, opacity: 0 }}
-                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut' }} className="absolute inset-0 rounded-full bg-white/30" />
+                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut' }} className="absolute inset-0 rounded-full bg-red-500/40" />
               <motion.div initial={{ scale: 0.6, opacity: 0.5 }} animate={{ scale: 3.2, opacity: 0 }}
-                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut', delay: 0.28 }} className="absolute inset-0 rounded-full bg-white/15" />
+                transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut', delay: 0.28 }} className="absolute inset-0 rounded-full bg-red-500/20" />
             </>
           )}
-          <div className="relative w-12 h-12 rounded-full bg-white/20 border-2 border-white/70 backdrop-blur-md flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.25)] hover:bg-white/35 transition-all">
-            <Play size={18} fill="white" className="text-white ml-0.5" />
+          <div className="relative w-14 h-14 rounded-full bg-red-600 border-2 border-white text-white flex items-center justify-center shadow-[0_0_40px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
+            <Play size={22} fill="white" className="text-white ml-0.5" />
           </div>
         </motion.div>
-      </div>
-
-      {/* Bottom info */}
-      <div className="absolute bottom-0 left-0 right-0 px-3 py-3 z-20">
-        {featured && (
-          <div className="flex items-center gap-1 mb-1">
-            <Sparkles size={10} className="text-amber-300" />
-            <span className="text-amber-300 text-[8px] font-black uppercase tracking-widest">Featured</span>
-          </div>
-        )}
-        <p className="text-white font-black text-sm leading-tight line-clamp-2">{video.title}</p>
       </div>
     </motion.div>
   );
@@ -556,7 +419,7 @@ const ProductVideoGrid = ({ product, onPlay }) => (
       </a>
     </div>
 
-    {/* 3 video cards */}
+    {/* video cards grid */}
     <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
       {product.videos.map((video, i) => (
         <VideoCard
@@ -564,6 +427,7 @@ const ProductVideoGrid = ({ product, onPlay }) => (
           video={video}
           product={product}
           featured={i === 0}
+          isTopRight={i === 1}
           onPlay={onPlay}
         />
       ))}

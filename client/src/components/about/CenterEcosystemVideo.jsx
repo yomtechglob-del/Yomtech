@@ -6,46 +6,11 @@ import ermiTwoImg from '../../assets/ermi-two.jpg';
 import erminOneImg from '../../assets/ermin-one.jpg';
 
 export const CenterEcosystemVideo = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const videoRef = useRef(null);
-  const modalVideoRef = useRef(null);
 
-  // High quality sample tech video for interactive announcement preview
-  const sampleVideoUrl = "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-41551-large.mp4";
-
-  // Ensure video plays automatically by default (muted) on mount
-  React.useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().then(() => {
-        setIsPlaying(true);
-      }).catch(() => {
-        setIsPlaying(false);
-      });
-    }
-  }, []);
-
-  const togglePlay = (e) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      if (isPlaying) {
-        videoRef.current.pause();
-        setIsPlaying(false);
-      } else {
-        videoRef.current.play();
-        setIsPlaying(true);
-      }
-    }
-  };
-
-  const toggleMute = (e) => {
-    e.stopPropagation();
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-      setIsMuted(!isMuted);
-    }
-  };
+  const youtubeId = "PQ00Vons-ms";
+  const videoTitle = "የወደፊቱ የ AI አለም | Yomtech on Fana TV";
+  const thumbnail = `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`;
 
   return (
     <>
@@ -88,16 +53,12 @@ export const CenterEcosystemVideo = () => {
           {/* Left Column: Interactive Video Player Frame */}
           <div className="lg:col-span-7 relative group/player rounded-2xl overflow-hidden shadow-2xl border-2 border-cyan-400/50 bg-slate-950 aspect-video flex items-center justify-center">
             
-            {/* HTML5 Video Element with Muted Autoplay by Default */}
-            <video
-              ref={videoRef}
-              src={sampleVideoUrl}
-              poster={videoPoster}
-              loop
-              autoPlay
-              muted={isMuted}
-              playsInline
+            {/* Real YouTube Video Thumbnail Image */}
+            <img
+              src={thumbnail}
+              alt={videoTitle}
               className="w-full h-full object-cover group-hover/player:scale-105 transition-transform duration-700 opacity-90"
+              onError={(e) => { e.target.style.display = 'none'; }}
             />
 
             {/* Dark Cinematic Vignette & Gradient */}
@@ -110,32 +71,22 @@ export const CenterEcosystemVideo = () => {
                 <div className="absolute w-24 h-24 rounded-full bg-[#1E90FF]/50 animate-pulse" />
                 <button
                   type="button"
-                  onClick={togglePlay}
                   className="pointer-events-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#1E90FF] via-cyan-400 to-blue-600 text-white flex items-center justify-center shadow-[0_0_40px_rgba(30,144,255,0.9)] hover:scale-115 transition-transform duration-300 z-20 cursor-pointer"
                 >
-                  {isPlaying ? <Pause className="w-8 h-8 fill-white" /> : <Play className="w-8 h-8 fill-white translate-x-0.5" />}
+                  <Play className="w-8 h-8 fill-white translate-x-0.5" />
                 </button>
               </div>
               <span className="px-4 py-1.5 rounded-full bg-slate-950/90 text-cyan-300 text-xs font-black uppercase tracking-widest border border-cyan-400/50 backdrop-blur-md shadow-lg">
-                {isPlaying ? 'Live Ecosystem Preview' : 'Click To Watch Digital Ecosystem Video'}
+                Click To Watch Official Ecosystem Video
               </span>
             </div>
 
             {/* Bottom In-Video Controls Bar */}
             <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-30 pointer-events-auto">
               <div className="flex items-center gap-2">
-                <button 
-                  onClick={togglePlay} 
-                  className="w-9 h-9 rounded-xl bg-black/70 hover:bg-[#1E90FF] text-white flex items-center justify-center backdrop-blur-md transition-colors border border-white/10"
-                >
-                  {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-                </button>
-                <button 
-                  onClick={toggleMute} 
-                  className="w-9 h-9 rounded-xl bg-black/70 hover:bg-[#1E90FF] text-white flex items-center justify-center backdrop-blur-md transition-colors border border-white/10"
-                >
-                  {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
-                </button>
+                <span className="px-3 py-1 rounded-xl bg-red-600 text-white text-[10px] font-black uppercase tracking-widest flex items-center gap-1 shadow-md">
+                  YouTube · @yomtech
+                </span>
               </div>
 
               <button 
@@ -189,7 +140,7 @@ export const CenterEcosystemVideo = () => {
               
               <span className="px-4 py-2 rounded-2xl bg-slate-900/90 border border-slate-700 text-slate-300 text-xs font-mono font-bold flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                4K Official Video
+                Official Yomtech Video
               </span>
             </div>
           </div>
@@ -198,15 +149,20 @@ export const CenterEcosystemVideo = () => {
 
       {/* Full-Screen Video Lightbox Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-8 animate-fadeIn">
-          <div className="relative w-full max-w-5xl rounded-3xl bg-slate-900 border-2 border-cyan-500/50 shadow-[0_0_80px_rgba(2,132,199,0.4)] overflow-hidden">
-            
+        <div 
+          onClick={() => setIsModalOpen(false)}
+          className="fixed inset-0 z-[200] bg-slate-950/95 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-8 animate-fadeIn"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-5xl rounded-3xl bg-slate-900 border-2 border-cyan-500/50 shadow-[0_0_80px_rgba(2,132,199,0.4)] overflow-hidden"
+          >
             {/* Modal Top Header Bar */}
             <div className="px-6 py-4 bg-slate-950/90 border-b border-slate-800 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <Film className="w-5 h-5 text-cyan-400" />
                 <span className="text-sm sm:text-base font-extrabold text-white font-display">
-                  YomTech Global - Digital Ecosystem Video Overview
+                  YomTech Global - {videoTitle}
                 </span>
               </div>
 
@@ -218,15 +174,15 @@ export const CenterEcosystemVideo = () => {
               </button>
             </div>
 
-            {/* Video Player Box */}
+            {/* YouTube Embed Box */}
             <div className="relative aspect-video bg-black flex items-center justify-center">
-              <video
-                ref={modalVideoRef}
-                src={sampleVideoUrl}
-                poster={videoPoster}
-                controls
-                autoPlay
-                className="w-full h-full object-contain"
+              <iframe
+                src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1&rel=0&modestbranding=1`}
+                title={videoTitle}
+                className="w-full h-full"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
               />
             </div>
           </div>

@@ -1,148 +1,245 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Compass, Code, CheckCircle, Rocket, Wrench, Building2 } from 'lucide-react';
+import { 
+  Handshake, Puzzle, Lightbulb, TrendingUp, Presentation, 
+  Award, ShieldCheck, Rocket, Users, Target, Sparkles 
+} from 'lucide-react';
 
-export const ServicesDevMethodology = () => {
-  const steps = [
-    {
+const DECK_PAIRS = [
+  {
+    left: {
       num: '01',
-      title: 'Requirement Analysis',
-      desc: 'Understanding client needs, defining operational scope, and establishing clear project milestones.',
-      icon: FileText,
-      accent: 'text-cyan-600',
-      bg: 'bg-cyan-50',
-      border: 'border-cyan-200',
-      footerRight: 'Phase 02 Architecture',
+      title: 'Introduction',
+      desc: 'Who you are and what your company stands for.',
+      icon: Handshake,
     },
-    {
+    right: {
       num: '02',
-      title: 'System Architecture',
-      desc: 'Designing scalable, secure, and resilient system blueprints and cloud component interactions.',
-      icon: Compass,
-      accent: 'text-emerald-600',
-      bg: 'bg-emerald-50',
-      border: 'border-emerald-200',
-      footerRight: 'Phase 03 Sprints',
+      title: 'Problem',
+      desc: 'The real-world issue you\'re solving.',
+      icon: Puzzle,
     },
-    {
+  },
+  {
+    left: {
       num: '03',
-      title: 'Agile Engineering',
-      desc: 'Iterative sprint development with continuous client feedback, code reviews, and modular builds.',
-      icon: Code,
-      accent: 'text-indigo-600',
-      bg: 'bg-indigo-50',
-      border: 'border-indigo-200',
-      footerRight: 'Phase 04 QA Audit',
+      title: 'Solution',
+      desc: 'How your product uniquely fixes the problem.',
+      icon: Lightbulb,
     },
-    {
+    right: {
       num: '04',
-      title: 'QA & Security Testing',
-      desc: 'Rigorous load testing, vulnerability scanning, and multi-device usability verification.',
-      icon: CheckCircle,
-      accent: 'text-purple-600',
-      bg: 'bg-purple-50',
-      border: 'border-purple-200',
-      footerRight: 'Phase 05 Deployment',
+      title: 'Market',
+      desc: 'Size, growth, and your ideal customer.',
+      icon: TrendingUp,
     },
-    {
+  },
+  {
+    left: {
       num: '05',
-      title: 'Smooth Deployment',
-      desc: 'Zero-downtime production rollout, database migration, and staff operational onboarding.',
-      icon: Rocket,
-      accent: 'text-amber-600',
-      bg: 'bg-amber-50',
-      border: 'border-amber-200',
-      footerRight: 'Phase 06 24/7 SLA',
+      title: 'Business model',
+      desc: 'How you make money and scale.',
+      icon: Presentation,
     },
-    {
+    right: {
       num: '06',
-      title: '24/7 Support & Evolution',
-      desc: 'Ongoing monitoring, SLA maintenance, security updates, and continuous platform enhancements.',
-      icon: Wrench,
-      accent: 'text-sky-600',
-      bg: 'bg-sky-50',
-      border: 'border-sky-200',
-      footerRight: 'DevOps Maintenance',
+      title: 'Traction',
+      desc: 'Key milestones, users, or revenue to date.',
+      icon: Award,
     },
-  ];
+  },
+  {
+    left: {
+      num: '07',
+      title: 'Competition',
+      desc: 'Who else is in the space, and your edge.',
+      icon: ShieldCheck,
+    },
+    right: {
+      num: '08',
+      title: 'Financials',
+      desc: 'High-level revenue, costs, and projections.',
+      icon: Rocket,
+    },
+  },
+  {
+    left: {
+      num: '09',
+      title: 'Team',
+      desc: 'The people building the vision.',
+      icon: Users,
+    },
+    right: {
+      num: '10',
+      title: 'Ask',
+      desc: 'How much funding you need and why.',
+      icon: Target,
+    },
+  },
+];
+
+const InterlockingPairRow = ({ left, right, idx }) => {
+  const LeftIcon = left.icon;
+  const RightIcon = right.icon;
 
   return (
-    <section className="relative py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
-      {/* Background Dot Mesh Texture */}
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: idx * 0.08 }}
+      className="relative w-full my-8 sm:my-10 group transition-all duration-300 hover:scale-[1.01]"
+    >
+      {/* ─── DESKTOP SVG PUZZLE INTERLOCKING JOIN (md and above) ─── */}
+      <div className="hidden md:block relative w-full aspect-[600/300] min-h-[340px] drop-shadow-2xl">
+        <svg
+          viewBox="0 0 600 300"
+          className="w-full h-full overflow-visible pointer-events-none block"
+          preserveAspectRatio="none"
+        >
+          {/* Left Card - Deep Blue #004b75 */}
+          <path
+            d="M 36,0 L 285,0 C 315,0 332,20 332,54 L 332,74 C 332,114 308,132 285,140 C 262,148 238,166 238,206 L 238,226 C 238,260 255,300 285,300 L 36,300 C 16,300 0,280 0,252 L 0,48 C 0,20 16,0 36,0 Z"
+            fill="#004b75"
+          />
+
+          {/* Right Card - Vibrant Orange #ea580c */}
+          <path
+            d="M 285,0 L 564,0 C 584,0 600,20 600,48 L 600,252 C 600,280 584,300 564,300 L 285,300 C 255,300 238,260 238,226 L 238,206 C 238,166 262,148 285,140 C 308,132 332,114 332,74 L 332,54 C 332,20 315,0 285,0 Z"
+            fill="#ea580c"
+          />
+        </svg>
+
+        {/* Desktop HTML Content Layer */}
+        <div className="absolute inset-0 grid grid-cols-2 p-12 lg:p-14 pointer-events-auto">
+          {/* LEFT CARD CONTENT */}
+          <div className="relative flex flex-col justify-between pr-20 lg:pr-28 text-left space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white shadow-inner group-hover:scale-110 transition-transform">
+                <LeftIcon size={38} strokeWidth={1.8} />
+              </div>
+
+              {/* White Number 01 / 03 / 05 / 07 / 09 on Blue Puzzle Tab */}
+              <span className="text-white font-black text-6xl lg:text-7xl font-display tracking-tight absolute right-[-32px] lg:right-[-40px] top-2 z-20 select-none">
+                {left.num}
+              </span>
+            </div>
+
+            <div className="space-y-3 z-10">
+              <h3 className="text-4xl lg:text-6xl font-black text-white font-display tracking-tight leading-tight">
+                {left.title}
+              </h3>
+              <p className="text-base lg:text-lg font-medium text-white/90 leading-relaxed font-sans">
+                {left.desc}
+              </p>
+            </div>
+          </div>
+
+          {/* RIGHT CARD CONTENT */}
+          <div className="relative flex flex-col justify-between pl-20 lg:pl-28 text-left space-y-6">
+            <div className="flex items-center justify-between">
+              {/* White Number 02 / 04 / 06 / 08 / 10 on Orange Puzzle Tab */}
+              <span className="text-white font-black text-6xl lg:text-7xl font-display tracking-tight absolute left-[-32px] lg:left-[-40px] bottom-2 z-20 select-none">
+                {right.num}
+              </span>
+
+              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white shadow-inner group-hover:scale-110 transition-transform ml-auto">
+                <RightIcon size={38} strokeWidth={1.8} />
+              </div>
+            </div>
+
+            <div className="space-y-3 z-10">
+              <h3 className="text-4xl lg:text-6xl font-black text-white font-display tracking-tight leading-tight">
+                {right.title}
+              </h3>
+              <p className="text-base lg:text-lg font-medium text-white/90 leading-relaxed font-sans">
+                {right.desc}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ─── MOBILE RESPONSIVE STACKED LAYOUT (below md) ─── */}
+      <div className="md:hidden flex flex-col space-y-6 rounded-3xl overflow-hidden shadow-2xl">
+        {/* Mobile Left Card */}
+        <div className="bg-[#004b75] text-white p-10 sm:p-12 rounded-3xl space-y-6 text-left relative min-h-[280px]">
+          <div className="flex items-center justify-between">
+            <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
+              <LeftIcon size={34} />
+            </div>
+            <span className="text-white font-black text-6xl font-display">{left.num}</span>
+          </div>
+          <div>
+            <h3 className="text-4xl sm:text-5xl font-black text-white font-display">{left.title}</h3>
+            <p className="text-lg text-white/90 font-medium leading-relaxed mt-3">{left.desc}</p>
+          </div>
+        </div>
+
+        {/* Mobile Right Card */}
+        <div className="bg-[#ea580c] text-white p-10 sm:p-12 rounded-3xl space-y-6 text-left relative min-h-[280px]">
+          <div className="flex items-center justify-between">
+            <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
+              <RightIcon size={34} />
+            </div>
+            <span className="text-white font-black text-6xl font-display">{right.num}</span>
+          </div>
+          <div>
+            <h3 className="text-4xl sm:text-5xl font-black text-white font-display">{right.title}</h3>
+            <p className="text-lg text-white/90 font-medium leading-relaxed mt-3">{right.desc}</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+export const ServicesDevMethodology = () => {
+  return (
+    <section className="relative py-24 lg:py-32 bg-[#E3F2FD] overflow-hidden font-sans border-b border-slate-200/80">
+      
+      {/* Background Subtle Dot Grid */}
       <div
-        className="absolute inset-0 opacity-[0.5] pointer-events-none"
+        className="absolute inset-0 opacity-[0.35] pointer-events-none"
         style={{
-          backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+          backgroundImage: 'radial-gradient(#0284c7 1.5px, transparent 1.5px)',
           backgroundSize: '24px 24px',
         }}
       />
-      <div className="absolute top-1/3 right-1/3 w-[600px] h-[400px] bg-indigo-400/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[88rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
 
-        {/* Section Header */}
-        <div className="text-left w-full space-y-4 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-            <Building2 className="w-4 h-4 text-[#0284C7]" />
-            <span>Development Methodology</span>
+        {/* Deck Title Header matching Screenshot 2 */}
+        <div className="text-center space-y-4 max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-cyan-100/80 border border-cyan-300 text-[#004b75] text-xs sm:text-sm font-black uppercase tracking-widest shadow-xs">
+            <Sparkles className="w-4 h-4 text-[#004b75]" />
+            <span>INVESTOR PITCH DECK & METHODOLOGY</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
-            Our Structured Agile <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-              Execution Engine
-            </span>
+
+          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight font-display">
+            Key slides
           </h2>
-          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl font-sans">
-            At YomTech Global, we follow a structured, agile-driven methodology designed to deliver high-quality, scalable, and secure digital solutions from scratch.
+
+          <p className="text-lg sm:text-xl lg:text-2xl font-bold text-slate-700 font-sans tracking-tight">
+            every investor pitch deck needs
           </p>
         </div>
 
-        {/* 6 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {steps.map((step, idx) => {
-            const IconComp = step.icon;
-            return (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.07 }}
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
-              >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className={`px-3 py-1 rounded-full text-[9px] font-mono font-black uppercase tracking-widest ${step.bg} border ${step.border} ${step.accent}`}>
-                      PHASE {step.num}
-                    </span>
-                    <div className={`w-12 h-12 rounded-2xl ${step.bg} ${step.accent} border ${step.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
-                      <IconComp size={20} />
-                    </div>
-                  </div>
-
-                  <h3 className="text-4xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
-                    {step.num}
-                  </h3>
-
-                  <h4 className={`text-base font-extrabold ${step.accent}`}>
-                    {step.title}
-                  </h4>
-
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                    {step.desc}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400">
-                  <span>Process Phase {step.num}</span>
-                  <span className={step.accent}>{step.footerRight}</span>
-                </div>
-              </motion.div>
-            );
-          })}
+        {/* Interlocking 2-Column Deck Grid (Matching Screenshot 2) */}
+        <div className="max-w-7xl mx-auto space-y-5">
+          {DECK_PAIRS.map((pair, idx) => (
+            <InterlockingPairRow
+              key={pair.left.num}
+              left={pair.left}
+              right={pair.right}
+              idx={idx}
+            />
+          ))}
         </div>
+
       </div>
     </section>
   );
 };
+
+export default ServicesDevMethodology;
