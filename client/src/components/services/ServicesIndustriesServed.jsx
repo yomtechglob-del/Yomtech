@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Building2, GraduationCap, Landmark, Tv, Shield, Hotel } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
 export const ServicesIndustriesServed = () => {
   const sectors = [
@@ -125,9 +126,16 @@ export const ServicesIndustriesServed = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
                 style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
+                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group relative overflow-hidden"
               >
-                <div className="space-y-3">
+                {/* Logo Watermark Background */}
+                <img
+                  src={logoEmblem}
+                  alt=""
+                  className="absolute -bottom-2 -right-2 w-32 h-32 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+                  aria-hidden="true"
+                />
+                <div className="space-y-3 relative z-10">
                   <div className="flex items-center justify-between">
                     <span className={`px-3 py-1 rounded-full text-[9px] font-mono font-black uppercase tracking-widest ${sec.bg} border ${sec.border} ${sec.accent}`}>
                       {sec.badge}

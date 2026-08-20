@@ -34,8 +34,6 @@ import { ServicesScalableTechnology } from '../../components/services/ServicesSc
 import { ServicesPartnershipModel } from '../../components/services/ServicesPartnershipModel';
 import { ServicesTechStack } from '../../components/services/ServicesTechStack';
 import { ServicesIndustriesServed } from '../../components/services/ServicesIndustriesServed';
-import { ServicesProductsEcosystem } from '../../components/services/ServicesProductsEcosystem';
-import { ServicesDevMethodology } from '../../components/services/ServicesDevMethodology';
 import { ServicesCaseStudies } from '../../components/services/ServicesCaseStudies';
 import { ServicesRequestQuoteCTA } from '../../components/services/ServicesRequestQuoteCTA';
 
@@ -1087,8 +1085,6 @@ export const ServicesPage = () => {
       <ServicesChallengeToImpact />
       <ServicesTechStack />
       <ServicesIndustriesServed />
-      <ServicesProductsEcosystem />
-      <ServicesDevMethodology />
       <ServicesCaseStudies />
       <ServicesScalableTechnology />
       <ServicesPartnershipModel />

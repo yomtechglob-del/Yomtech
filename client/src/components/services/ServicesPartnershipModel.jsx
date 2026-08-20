@@ -51,7 +51,7 @@ export const ServicesPartnershipModel = () => {
   ];
 
   return (
-    <section className="relative py-20 lg:py-28 bg-white overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"

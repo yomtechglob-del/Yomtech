@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Code, Server, Database, Cloud, ShieldCheck, Cpu, Building2 } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
 export const ServicesTechStack = () => {
   const [activeTab, setActiveTab] = useState('ALL');
@@ -27,7 +28,7 @@ export const ServicesTechStack = () => {
   const filteredItems = activeTab === 'ALL' ? techItems : techItems.filter(item => item.category === activeTab);
 
   return (
-    <section className="relative py-20 lg:py-28 bg-white overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -90,9 +91,16 @@ export const ServicesTechStack = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
                 style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
+                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group relative overflow-hidden"
               >
-                <div className="space-y-3">
+                {/* Logo Watermark Background */}
+                <img
+                  src={logoEmblem}
+                  alt=""
+                  className="absolute -bottom-2 -right-2 w-28 h-28 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+                  aria-hidden="true"
+                />
+                <div className="space-y-3 relative z-10">
                   <div className="flex items-center justify-between">
                     <div className={`w-12 h-12 rounded-2xl ${item.bg} ${item.accent} border ${item.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
                       <IconComp size={20} />
