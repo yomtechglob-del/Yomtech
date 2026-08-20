@@ -285,7 +285,9 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const [activeEcosystemTab, setActiveEcosystemTab] = useState(0);
   const [partnerFilter, setPartnerFilter] = useState('All');
+  const [hoveredHomeService, setHoveredHomeService] = useState(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
+
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
 
   const partnerCategories = ['All', 'Government', 'Academic', 'Media', 'Enterprise'];
@@ -444,9 +446,9 @@ export const HomePage = () => {
           (Interactive Connected Node Nucleus Experience)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -455,7 +457,7 @@ export const HomePage = () => {
         />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
-          
+
           {/* Top Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
           <div className="space-y-6">
             <div className="flex items-center justify-end w-full">
@@ -481,7 +483,7 @@ export const HomePage = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            
+
             {/* Left Node Selectors (Pillars) */}
             <div className="lg:col-span-5 space-y-3.5">
               {ECOSYSTEM_PILLARS.map((pillar, idx) => {
@@ -491,11 +493,10 @@ export const HomePage = () => {
                   <button
                     key={pillar.id}
                     onClick={() => setActiveEcosystemTab(idx)}
-                    className={`w-full p-5 sm:p-6 rounded-3xl text-left transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer relative overflow-hidden group border ${
-                      isActive
-                        ? 'bg-white border-[#0284C7] shadow-[0_15px_35px_rgba(2,132,199,0.18)] ring-4 ring-[#0284C7]/15 translate-x-2'
-                        : 'bg-white/70 hover:bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 shadow-xs'
-                    }`}
+                    className={`w-full p-5 sm:p-6 rounded-3xl text-left transition-all duration-300 flex items-center justify-between gap-4 cursor-pointer relative overflow-hidden group border ${isActive
+                      ? 'bg-white border-[#0284C7] shadow-[0_15px_35px_rgba(2,132,199,0.18)] ring-4 ring-[#0284C7]/15 translate-x-2'
+                      : 'bg-white/70 hover:bg-white border-slate-200/90 text-slate-700 hover:border-slate-300 shadow-xs'
+                      }`}
                   >
                     {/* Left Active Edge Indicator */}
                     {isActive && (
@@ -503,33 +504,29 @@ export const HomePage = () => {
                     )}
 
                     <div className="flex items-center gap-4 relative z-10">
-                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 shrink-0 ${
-                        isActive 
-                          ? `bg-gradient-to-br ${pillar.gradient} text-white shadow-md shadow-cyan-500/20 scale-105` 
-                          : 'bg-slate-100 text-slate-500 group-hover:text-[#0284C7] group-hover:bg-cyan-50'
-                      }`}>
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center font-black text-sm transition-all duration-300 shrink-0 ${isActive
+                        ? `bg-gradient-to-br ${pillar.gradient} text-white shadow-md shadow-cyan-500/20 scale-105`
+                        : 'bg-slate-100 text-slate-500 group-hover:text-[#0284C7] group-hover:bg-cyan-50'
+                        }`}>
                         <IconComponent className="w-5 h-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2 mb-0.5">
-                          <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full ${
-                            isActive ? 'bg-cyan-100 text-[#0284C7] border border-cyan-200' : 'bg-slate-100 text-slate-500'
-                          }`}>
+                          <span className={`text-[10px] font-black uppercase tracking-widest px-2.5 py-0.5 rounded-full ${isActive ? 'bg-cyan-100 text-[#0284C7] border border-cyan-200' : 'bg-slate-100 text-slate-500'
+                            }`}>
                             {pillar.badge}
                           </span>
                           <span className="text-[11px] font-mono text-slate-400 font-bold">NODE #{pillar.number}</span>
                         </div>
-                        <h3 className={`text-base sm:text-lg font-extrabold font-display leading-tight transition-colors ${
-                          isActive ? 'text-[#0284C7]' : 'text-slate-900 group-hover:text-[#0284C7]'
-                        }`}>
+                        <h3 className={`text-base sm:text-lg font-extrabold font-display leading-tight transition-colors ${isActive ? 'text-[#0284C7]' : 'text-slate-900 group-hover:text-[#0284C7]'
+                          }`}>
                           {pillar.title}
                         </h3>
                       </div>
                     </div>
 
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-                      isActive ? 'bg-[#0284C7] text-white scale-110 shadow-md' : 'bg-slate-100 text-slate-400 group-hover:bg-cyan-50 group-hover:text-[#0284C7]'
-                    }`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${isActive ? 'bg-[#0284C7] text-white scale-110 shadow-md' : 'bg-slate-100 text-slate-400 group-hover:bg-cyan-50 group-hover:text-[#0284C7]'
+                      }`}>
                       <ChevronRight size={16} className={`transition-transform duration-300 ${isActive ? 'rotate-90' : ''}`} />
                     </div>
                   </button>
@@ -596,8 +593,8 @@ export const HomePage = () => {
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {ECOSYSTEM_PILLARS[activeEcosystemTab].details.map((cap) => (
-                        <div 
-                          key={cap} 
+                        <div
+                          key={cap}
                           className="flex items-center gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-200/90 text-xs sm:text-sm font-bold text-slate-800 hover:border-cyan-400 hover:bg-cyan-50/50 transition-all duration-300 group/cap shadow-xs"
                         >
                           <div className={`w-6 h-6 rounded-lg bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} flex items-center justify-center text-white shrink-0 shadow-xs`}>
@@ -616,8 +613,8 @@ export const HomePage = () => {
                       Integrated under YomTech Global Parent Network
                     </span>
 
-                    <Link 
-                      to="/services" 
+                    <Link
+                      to="/services"
                       className={`inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} text-white font-black text-xs uppercase tracking-wider shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300`}
                     >
                       <span>Explore Node Specs</span>
@@ -638,9 +635,9 @@ export const HomePage = () => {
           SECTION 04 — EXISTING CORE CAPABILITIES (MATCHING FLAGSHIP PLATFORMS STYLING)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-gradient-to-r from-[#03045E] via-[#0077B6] to-[#0B1528] text-white relative overflow-hidden font-sans border-b border-cyan-400/30">
-        
+
         {/* Cyber Dotted Grid Mesh Overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.35] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -721,8 +718,8 @@ export const HomePage = () => {
           </div>
 
           {/* 12 Official Services List Matrix (Horizontal Water Flow Marquee Stream) */}
-          <div className="pt-12 border-t border-cyan-400/20 space-y-6 relative overflow-hidden">
-            
+          <div className="pt-12 space-y-6 relative overflow-hidden w-full">
+
             {/* Header */}
             <div className="flex items-center justify-end mb-2 w-full">
               <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-cyan-400/60 to-cyan-300" />
@@ -733,81 +730,114 @@ export const HomePage = () => {
               </div>
             </div>
 
-            {/* Left & Right Gradient Fade Masks */}
-            <div className="pointer-events-none absolute left-0 top-16 bottom-0 w-28 bg-gradient-to-r from-[#03045E] via-[#03045E]/80 to-transparent z-20" />
-            <div className="pointer-events-none absolute right-0 top-16 bottom-0 w-28 bg-gradient-to-l from-[#0B1528] via-[#0B1528]/80 to-transparent z-20" />
+
+            <style>{`
+              @keyframes serviceStreamLeft {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+              }
+              @keyframes serviceStreamRight {
+                0% { transform: translateX(-50%); }
+                100% { transform: translateX(0%); }
+              }
+            `}</style>
 
             {/* Row 1: Water Flow Stream Left */}
-            <div className="flex overflow-hidden group select-none py-1">
-              <motion.div
-                animate={{ x: ['0%', '-50%'] }}
-                transition={{
-                  repeat: Infinity,
-                  ease: 'linear',
-                  duration: 28
+            <div className="flex overflow-hidden group select-none py-2">
+              <div
+                className="flex gap-5 shrink-0 w-max"
+                style={{
+                  animation: 'serviceStreamLeft 30s linear infinite',
+                  animationPlayState: hoveredHomeService ? 'paused' : 'running'
                 }}
-                className="flex gap-4 shrink-0"
               >
-                {[...OFFICIAL_SERVICES_LIST, ...OFFICIAL_SERVICES_LIST].map((item, idx) => (
-                  <div 
-                    key={`stream1-${item.name}-${idx}`} 
-                    onClick={() => navigate('/services')}
-                    style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
-                    className="w-56 p-4 rounded-2xl border-2 border-cyan-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0 text-slate-900"
-                  >
-                    {/* Service Image Icon Container */}
-                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
-                      <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
-                    </div>
+                {[...OFFICIAL_SERVICES_LIST, ...OFFICIAL_SERVICES_LIST].map((item, idx) => {
+                  const isHovered = hoveredHomeService === item.name;
+                  const isDimmed = Boolean(hoveredHomeService && !isHovered);
 
-                    <div className="space-y-1 w-full">
-                      <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
-                        {item.name}
+                  return (
+                    <div
+                      key={`stream1-${item.name}-${idx}`}
+                      onClick={() => navigate('/services')}
+                      onMouseEnter={() => setHoveredHomeService(item.name)}
+                      onMouseLeave={() => setHoveredHomeService(null)}
+                      style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
+                      className={`w-56 p-4.5 rounded-2xl border-2 text-center flex flex-col items-center justify-between space-y-3 shadow-md transition-all duration-300 cursor-pointer relative overflow-hidden shrink-0 text-slate-900 ${isHovered
+                        ? 'border-[#0ED3DD] shadow-[0_15px_35px_rgba(14,211,221,0.35)] scale-105 z-30 blur-0'
+                        : isDimmed
+                          ? 'blur-[4px] opacity-35 scale-95 border-cyan-200/50'
+                          : 'border-cyan-200/90 hover:border-[#0ED3DD] hover:shadow-xl'
+                        }`}
+                    >
+                      {/* Service Image Icon Container */}
+                      <div className={`w-12 h-12 rounded-xl bg-cyan-50/80 border p-2 shadow-2xs transition-all duration-300 flex items-center justify-center shrink-0 ${isHovered ? 'bg-[#0ED3DD]/20 border-[#0ED3DD] scale-110' : 'border-cyan-200'
+                        }`}>
+                        <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                       </div>
-                      <div className="text-[10px] text-slate-600 font-semibold line-clamp-2 leading-tight">
-                        {item.desc}
+
+                      <div className="space-y-1 w-full">
+                        <div className={`text-xs font-black transition-colors line-clamp-1 ${isHovered ? 'text-[#0ED3DD]' : 'text-slate-900'
+                          }`}>
+                          {item.name}
+                        </div>
+                        <div className="text-[10px] text-slate-600 font-semibold line-clamp-2 leading-tight">
+                          {item.desc}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </motion.div>
+                  );
+                })}
+              </div>
             </div>
 
             {/* Row 2: Water Flow Stream Right */}
-            <div className="flex overflow-hidden group select-none py-1">
-              <motion.div
-                animate={{ x: ['-50%', '0%'] }}
-                transition={{
-                  repeat: Infinity,
-                  ease: 'linear',
-                  duration: 32
+            <div className="flex overflow-hidden group select-none py-2">
+              <div
+                className="flex gap-5 shrink-0 w-max"
+                style={{
+                  animation: 'serviceStreamRight 35s linear infinite',
+                  animationPlayState: hoveredHomeService ? 'paused' : 'running'
                 }}
-                className="flex gap-4 shrink-0"
               >
-                {[...OFFICIAL_SERVICES_LIST.slice().reverse(), ...OFFICIAL_SERVICES_LIST.slice().reverse()].map((item, idx) => (
-                  <div 
-                    key={`stream2-${item.name}-${idx}`} 
-                    onClick={() => navigate('/services')}
-                    style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
-                    className="w-56 p-4 rounded-2xl border-2 border-cyan-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0 text-slate-900"
-                  >
-                    {/* Service Image Icon Container */}
-                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
-                      <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
-                    </div>
+                {[...OFFICIAL_SERVICES_LIST.slice().reverse(), ...OFFICIAL_SERVICES_LIST.slice().reverse()].map((item, idx) => {
+                  const isHovered = hoveredHomeService === item.name;
+                  const isDimmed = Boolean(hoveredHomeService && !isHovered);
 
-                    <div className="space-y-1 w-full">
-                      <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
-                        {item.name}
+                  return (
+                    <div
+                      key={`stream2-${item.name}-${idx}`}
+                      onClick={() => navigate('/services')}
+                      onMouseEnter={() => setHoveredHomeService(item.name)}
+                      onMouseLeave={() => setHoveredHomeService(null)}
+                      style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
+                      className={`w-56 p-4.5 rounded-2xl border-2 text-center flex flex-col items-center justify-between space-y-3 shadow-md transition-all duration-300 cursor-pointer relative overflow-hidden shrink-0 text-slate-900 ${isHovered
+                        ? 'border-[#0ED3DD] shadow-[0_15px_35px_rgba(14,211,221,0.35)] scale-105 z-30 blur-0'
+                        : isDimmed
+                          ? 'blur-[4px] opacity-35 scale-95 border-cyan-200/50'
+                          : 'border-cyan-200/90 hover:border-[#0ED3DD] hover:shadow-xl'
+                        }`}
+                    >
+                      {/* Service Image Icon Container */}
+                      <div className={`w-12 h-12 rounded-xl bg-cyan-50/80 border p-2 shadow-2xs transition-all duration-300 flex items-center justify-center shrink-0 ${isHovered ? 'bg-[#0ED3DD]/20 border-[#0ED3DD] scale-110' : 'border-cyan-200'
+                        }`}>
+                        <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                       </div>
-                      <div className="text-[10px] text-slate-600 font-semibold line-clamp-2 leading-tight">
-                        {item.desc}
+
+                      <div className="space-y-1 w-full">
+                        <div className={`text-xs font-black transition-colors line-clamp-1 ${isHovered ? 'text-[#0ED3DD]' : 'text-slate-900'
+                          }`}>
+                          {item.name}
+                        </div>
+                        <div className="text-[10px] text-slate-600 font-semibold line-clamp-2 leading-tight">
+                          {item.desc}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </motion.div>
+                  );
+                })}
+              </div>
             </div>
+
 
           </div>
 
@@ -819,9 +849,9 @@ export const HomePage = () => {
           SECTION 06 — MEASURED IMPACT & STATISTICS
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -969,9 +999,9 @@ export const HomePage = () => {
           SECTION 08 — ENGINEERING PROCESS (S-CURVE ZIG-ZAG PUSHPIN ROADMAP)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -1004,19 +1034,19 @@ export const HomePage = () => {
 
           {/* Staggered 2-Column S-Curve Pushpin Roadmap Container */}
           <div className="relative max-w-5xl mx-auto py-8">
-            
+
             {/* Background S-Curve Connecting Dashed Path SVG */}
-            <svg 
+            <svg
               className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-              viewBox="0 0 1000 1000" 
+              viewBox="0 0 1000 1000"
               fill="none"
               preserveAspectRatio="none"
             >
-              <path 
-                d="M 250,150 C 750,150 750,350 250,550 C -250,750 750,850 500,980" 
-                stroke="#0284C7" 
-                strokeWidth="3.5" 
-                strokeDasharray="10 10" 
+              <path
+                d="M 250,150 C 750,150 750,350 250,550 C -250,750 750,850 500,980"
+                stroke="#0284C7"
+                strokeWidth="3.5"
+                strokeDasharray="10 10"
                 strokeLinecap="round"
                 className="opacity-40"
               />
@@ -1025,10 +1055,10 @@ export const HomePage = () => {
             {/* Staggered 2-Column Grid matching VektaOS Pushpin Screenshot */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-16 relative z-10">
               {[
-                { 
-                  num: '01', 
-                  title: 'Plan & Discover', 
-                  desc: 'In-depth requirement analysis, tech stack selection, scope definition, and structural architecture plan.', 
+                {
+                  num: '01',
+                  title: 'Plan & Discover',
+                  desc: 'In-depth requirement analysis, tech stack selection, scope definition, and structural architecture plan.',
                   tilt: '-rotate-2 hover:rotate-0',
                   offset: 'md:translate-y-0',
                   pinColor: 'from-blue-500 to-blue-700 shadow-blue-500/40',
@@ -1036,10 +1066,10 @@ export const HomePage = () => {
                   badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
                   icon: Target
                 },
-                { 
-                  num: '02', 
-                  title: 'Manage & Design', 
-                  desc: 'High-performance microservices architecture design, REST/GraphQL API specifications, and intuitive UI/UX wireframing.', 
+                {
+                  num: '02',
+                  title: 'Manage & Design',
+                  desc: 'High-performance microservices architecture design, REST/GraphQL API specifications, and intuitive UI/UX wireframing.',
                   tilt: 'rotate-2 hover:rotate-0',
                   offset: 'md:translate-y-16',
                   pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
@@ -1047,10 +1077,10 @@ export const HomePage = () => {
                   badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
                   icon: Code
                 },
-                { 
-                  num: '03', 
-                  title: 'Engineer & Build', 
-                  desc: 'Test-driven development, agile sprint execution, clean modular codebase, and robust database optimization.', 
+                {
+                  num: '03',
+                  title: 'Engineer & Build',
+                  desc: 'Test-driven development, agile sprint execution, clean modular codebase, and robust database optimization.',
                   tilt: '-rotate-1 hover:rotate-0',
                   offset: 'md:translate-y-0',
                   pinColor: 'from-purple-500 to-purple-700 shadow-purple-500/40',
@@ -1058,10 +1088,10 @@ export const HomePage = () => {
                   badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
                   icon: Cpu
                 },
-                { 
-                  num: '04', 
-                  title: 'Validate & Test', 
-                  desc: 'End-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits.', 
+                {
+                  num: '04',
+                  title: 'Validate & Test',
+                  desc: 'End-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits.',
                   tilt: 'rotate-3 hover:rotate-0',
                   offset: 'md:translate-y-16',
                   pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
@@ -1069,10 +1099,10 @@ export const HomePage = () => {
                   badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
                   icon: ShieldCheck
                 },
-                { 
-                  num: '05', 
-                  title: 'Deploy & Scale', 
-                  desc: 'CI/CD automated pipeline deployment, zero-downtime launch, real-time APM monitoring, and round-the-clock SLA support.', 
+                {
+                  num: '05',
+                  title: 'Deploy & Scale',
+                  desc: 'CI/CD automated pipeline deployment, zero-downtime launch, real-time APM monitoring, and round-the-clock SLA support.',
                   tilt: '-rotate-1 hover:rotate-0',
                   offset: 'md:col-span-2 md:max-w-md md:mx-auto md:translate-y-8',
                   pinColor: 'from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
@@ -1085,7 +1115,7 @@ export const HomePage = () => {
 
                 return (
                   <div key={step.num} className={`relative w-full ${step.offset}`}>
-                    
+
                     {/* 3D Realistic Pushpin Top Medallion */}
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
                       <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
@@ -1096,7 +1126,7 @@ export const HomePage = () => {
 
                     {/* Pushpin Tilted Card (Matching VektaOS Screenshot) */}
                     <div className={`rounded-3xl p-7 sm:p-8 bg-white/95 border-2 border-slate-100/90 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-2xl ${step.tilt} transition-all duration-500 hover:-translate-y-2 relative z-20 space-y-4 group cursor-pointer`}>
-                      
+
                       <div className="flex items-center justify-between">
                         <span className={`text-3xl font-black font-mono ${step.numColor}`}>
                           {step.num}
@@ -1133,9 +1163,9 @@ export const HomePage = () => {
           SECTION 09 — NEW: INSIGHTS, MEDIA & COMMUNITY
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -1192,10 +1222,10 @@ export const HomePage = () => {
               </div>
 
               <div className="pt-4 border-t border-slate-100">
-                <a 
-                  href="https://youtube.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://youtube.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-3 px-5 rounded-full bg-red-50 group-hover:bg-red-600 text-red-600 group-hover:text-white border-2 border-red-200 group-hover:border-red-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
                 >
                   <span>Watch On YouTube</span>
@@ -1226,10 +1256,10 @@ export const HomePage = () => {
               </div>
 
               <div className="pt-4 border-t border-slate-100">
-                <a 
-                  href="https://tiktok.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://tiktok.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-3 px-5 rounded-full bg-cyan-50 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
                 >
                   <span>Follow On TikTok</span>
@@ -1260,10 +1290,10 @@ export const HomePage = () => {
               </div>
 
               <div className="pt-4 border-t border-slate-100">
-                <a 
-                  href="https://linkedin.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
+                <a
+                  href="https://linkedin.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-full py-3 px-5 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white border-2 border-blue-200 group-hover:border-blue-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
                 >
                   <span>Connect On LinkedIn</span>
@@ -1281,9 +1311,9 @@ export const HomePage = () => {
           SECTION 10 — TESTIMONIALS & CLIENT PROOF
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -1344,9 +1374,9 @@ export const HomePage = () => {
           SECTION 11 — NEW: THE FUTURE OF YOMTECH
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -1384,8 +1414,8 @@ export const HomePage = () => {
               { num: '03', title: 'SCALABLE ENGINEERING', desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.', gradient: 'from-blue-600 to-[#0284C7]' },
               { num: '04', title: 'GLOBAL CONNECTION', desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.', gradient: 'from-indigo-600 to-blue-500' }
             ].map((p) => (
-              <div 
-                key={p.num} 
+              <div
+                key={p.num}
                 className="bg-white/95 rounded-3xl p-7 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(2,132,199,0.14)] transition-all duration-300 space-y-5 relative overflow-hidden group hover:-translate-y-1 flex flex-col justify-between"
               >
                 {/* Top Accent Gradient Edge */}
@@ -1419,9 +1449,9 @@ export const HomePage = () => {
           SECTION 12 — FINAL DUAL-PATH CTA
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
+
         {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.5] pointer-events-none"
           style={{
             backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -1503,8 +1533,8 @@ export const HomePage = () => {
                   key={cat}
                   onClick={() => setPartnerFilter(cat)}
                   className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${partnerFilter === cat
-                      ? 'bg-[#0284C7] text-white shadow-md'
-                      : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                    ? 'bg-[#0284C7] text-white shadow-md'
+                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
                     }`}
                 >
                   {cat}

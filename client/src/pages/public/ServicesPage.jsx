@@ -210,7 +210,7 @@ export const ServicesPage = () => {
         const bottomY = parseFloat((((headerRect.bottom + padY - catRect.top) / catRect.height) * 100).toFixed(2));
         const leftX = parseFloat((((headerRect.left - padX - catRect.left) / catRect.width) * 100).toFixed(2));
         const rightX = parseFloat((((headerRect.right + padX - catRect.left) / catRect.width) * 100).toFixed(2));
-        
+
         newHeaderY[slug] = bottomY;
         newHeaderBounds[slug] = { topY, bottomY, leftX, rightX };
       }
@@ -386,13 +386,14 @@ export const ServicesPage = () => {
   return (
     <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
       {/* 1. HERO HEADER SECTION — Executive Bento Glass Canopy Layout */}
-      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient text-white border-b border-cyan-400/30">
-        
+      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient text-white">
+
+
         {/* About Us Page Exact Hero Background */}
         <AboutHeroBackground />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10 space-y-16">
-          
+
           {/* Top Title & Hero Subtitle Block */}
           <div className="text-center max-w-4xl mx-auto space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black font-display tracking-tight text-white leading-tight">
@@ -404,81 +405,128 @@ export const ServicesPage = () => {
           </div>
 
           {/* 12 Quick Service Icon Grid Glass Canopy Bento Container */}
-          <div className="max-w-7xl mx-auto bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[3rem] p-6 sm:p-10 md:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.35)] relative overflow-hidden space-y-12">
-            
+          <div className="max-w-7xl mx-auto bg-white/10 backdrop-blur-2xl rounded-[3rem] p-6 sm:p-10 md:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.35)] relative overflow-hidden space-y-12">
+
             {/* Background Shimmer Flare inside Glass Canopy */}
             <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#0ED3DD]/20 blur-[100px] pointer-events-none" />
             <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#0284C7]/25 blur-[100px] pointer-events-none" />
 
             {/* Header Block inside Glass Canopy */}
             <div className="text-center space-y-4 relative z-10">
-              <span className="text-[11px] font-black uppercase tracking-[0.25em] text-white px-6 py-2.5 rounded-full bg-white/20 border border-white/40 inline-block shadow-lg backdrop-blur-md">
+              <span className="text-[11px] font-black uppercase tracking-[0.25em] text-white px-6 py-2.5 rounded-full bg-white/20 inline-block shadow-lg backdrop-blur-md">
                 EXPLORE OUR CAPABILITIES
               </span>
+
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight">
                 13+ Total Services Across <span className="bg-gradient-to-r from-amber-300 via-[#0ED3DD] to-sky-300 bg-clip-text text-transparent">3 Pillars</span>
               </h2>
             </div>
+            {/* Horizontal Rotating Service Cards */}
+            <div className="relative z-10 overflow-hidden">
+              <style>{`
+    @keyframes scrollHorizontal {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+  `}</style>
+              <div
+                className="flex gap-5 sm:gap-6 w-max"
+                style={{
+                  animation: 'scrollHorizontal 25s linear infinite',
+                  animationPlayState: hoveredServiceTitle ? 'paused' : 'running'
+                }}
+              >
+                {[...quickServices, ...quickServices].map((service, index) => {
+                  const Icon = service.icon;
+                  const isHovered = hoveredServiceTitle === service.title;
+                  const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
 
-            {/* 12 Quick Service Cards Array */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 relative z-10">
-              {quickServices.map((service, index) => {
-                const Icon = service.icon;
-                const isHovered = hoveredServiceTitle === service.title;
-                const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
-                return (
-                  <motion.div
-                    key={`${service.title}-${index}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: (index % quickServices.length) * 0.04 }}
-                    onClick={() => {
-                      handleCategoryFilter('all');
-                      const targetId = slugify(service.title);
-                      setTimeout(() => {
-                        const el = document.getElementById(targetId);
-                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      }, 150);
-                    }}
-                    className={`group relative flex flex-col items-center text-center cursor-pointer p-4 rounded-2xl bg-white/10 hover:bg-white/25 border border-white/15 hover:border-[#0ED3DD]/70 shadow-lg hover:shadow-[0_15px_30px_rgba(14,211,221,0.25)] transition-all duration-300 hover:-translate-y-1.5 ${
-                      isDimmed ? 'blur-[2.5px] opacity-35 scale-[0.97]' : 'blur-0 opacity-100 scale-100'
-                    }`}
-                    onMouseEnter={() => setHoveredServiceTitle(service.title)}
-                    onMouseLeave={() => setHoveredServiceTitle(null)}
-                  >
-                    <div
-                      className="relative z-10 mb-3.5 flex h-[96px] w-[96px] items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:scale-105"
-                      style={{
-                        borderColor: isHovered ? '#38bdf8' : 'rgba(59, 130, 246, 0.95)',
-                        background: isHovered
-                          ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
-                          : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
-                        boxShadow: isHovered
-                          ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
-                          : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)'
+                  return (
+                    <motion.div
+                      key={`${service.title}-${index}`}
+                      onClick={() => {
+                        handleCategoryFilter('all');
+
+                        const targetId = slugify(service.title);
+
+                        setTimeout(() => {
+                          const el = document.getElementById(targetId);
+
+                          if (el) {
+                            el.scrollIntoView({
+                              behavior: 'smooth',
+                              block: 'center',
+                            });
+                          }
+                        }, 150);
                       }}
+                      className={`group relative flex-shrink-0 w-[170px] sm:w-[190px] lg:w-[205px]
+            flex flex-col items-center text-center cursor-pointer
+            p-4 rounded-2xl
+            bg-white/10 hover:bg-white/25
+            border border-white/15
+            hover:border-[#0ED3DD]/70
+            shadow-lg
+            hover:shadow-[0_15px_30px_rgba(14,211,221,0.25)]
+            transition-all duration-300
+            hover:-translate-y-1.5
+            ${isDimmed
+                          ? 'blur-[4px] opacity-30 scale-[0.95]'
+                          : isHovered
+                            ? 'blur-0 opacity-100 scale-105 border-[#0ED3DD] shadow-[0_15px_35px_rgba(14,211,221,0.4)] z-30'
+                            : 'blur-0 opacity-100 scale-100'
+                        }`}
+
+                      onMouseEnter={() => setHoveredServiceTitle(service.title)}
+                      onMouseLeave={() => setHoveredServiceTitle(null)}
                     >
-                      <div className="absolute inset-2 rounded-full border border-sky-300/35" />
-                      <div className="absolute -bottom-2.5 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                      {/* Icon */}
                       <div
-                        className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-105"
-                        style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)' }}
+                        className="relative z-10 mb-3.5 flex h-[96px] w-[96px]
+              items-center justify-center rounded-full border-2
+              transition-all duration-300 group-hover:scale-105"
+                        style={{
+                          borderColor: isHovered
+                            ? '#38bdf8'
+                            : 'rgba(59, 130, 246, 0.95)',
+
+                          background: isHovered
+                            ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
+                            : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
+
+                          boxShadow: isHovered
+                            ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
+                            : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)',
+                        }}
                       >
-                        <Icon size={22} className="text-white" />
+                        <div className="absolute inset-2 rounded-full border border-sky-300/35" />
+
+                        <div className="absolute -bottom-2.5 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+
+                        <div
+                          className="relative z-10 flex h-14 w-14 items-center justify-center
+                rounded-full text-white transition-transform duration-300
+                group-hover:scale-105"
+                          style={{
+                            background:
+                              'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)',
+                          }}
+                        >
+                          <Icon size={22} className="text-white" />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="relative z-10 px-1 w-full">
-                      <h3 className="text-xs font-bold leading-snug text-white group-hover:text-[#0ED3DD] transition-colors">
-                        {service.title}
-                      </h3>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                      {/* Service Name */}
+                      <div className="relative z-10 px-1 w-full">
+                        <h3 className="text-xs font-bold leading-snug text-white group-hover:text-[#0ED3DD] transition-colors">
+                          {service.title}
+                        </h3>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
             </div>
-
-            {/* Explore Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -821,38 +869,38 @@ export const ServicesPage = () => {
         const pathD = (() => {
           const count = catGroup.items.length;
           if (!count) return '';
-              
-              const points = realPoints[slug] || catGroup.items.map((item, i) => {
-                const H = 160 + 460 * count;
-                const y = parseFloat(((160 + (i + 0.5) * 460) / H * 100).toFixed(2));
-                const x = item.layout === 'left-image' ? 44.0 : 56.0;
-                return `${x} ${y}`;
-              });
-              
-              const bounds = realHeaderBounds[slug];
-              let topY, bottomY, leftX, rightX;
-              if (bounds) {
-                topY = bounds.topY;
-                bottomY = bounds.bottomY;
-                leftX = bounds.leftX;
-                rightX = bounds.rightX;
-              } else {
-                const H = 160 + 460 * count;
-                topY = parseFloat(((20 / H) * 100).toFixed(2));
-                bottomY = parseFloat(((145 / H) * 100).toFixed(2));
-                leftX = catGroup.categoryTitle === 'IT Solutions' ? 28.0 : 26.0;
-                rightX = catGroup.categoryTitle === 'IT Solutions' ? 72.0 : 74.0;
-              }
 
-              const midY = parseFloat(((topY + bottomY) / 2).toFixed(2));
-              const capR = parseFloat(((bottomY - topY) / 2).toFixed(2));
-              const topFlatR = parseFloat((rightX - capR).toFixed(2));
-              const topFlatL = parseFloat((leftX + capR).toFixed(2));
+          const points = realPoints[slug] || catGroup.items.map((item, i) => {
+            const H = 160 + 460 * count;
+            const y = parseFloat(((160 + (i + 0.5) * 460) / H * 100).toFixed(2));
+            const x = item.layout === 'left-image' ? 44.0 : 56.0;
+            return `${x} ${y}`;
+          });
 
-              const headerLoop = `M 50 ${bottomY} L ${topFlatL} ${bottomY} Q ${leftX} ${bottomY} ${leftX} ${midY} Q ${leftX} ${topY} ${topFlatL} ${topY} L ${topFlatR} ${topY} Q ${rightX} ${topY} ${rightX} ${midY} Q ${rightX} ${bottomY} ${topFlatR} ${bottomY} L 50 ${bottomY}`;
+          const bounds = realHeaderBounds[slug];
+          let topY, bottomY, leftX, rightX;
+          if (bounds) {
+            topY = bounds.topY;
+            bottomY = bounds.bottomY;
+            leftX = bounds.leftX;
+            rightX = bounds.rightX;
+          } else {
+            const H = 160 + 460 * count;
+            topY = parseFloat(((20 / H) * 100).toFixed(2));
+            bottomY = parseFloat(((145 / H) * 100).toFixed(2));
+            leftX = catGroup.categoryTitle === 'IT Solutions' ? 28.0 : 26.0;
+            rightX = catGroup.categoryTitle === 'IT Solutions' ? 72.0 : 74.0;
+          }
 
-              return `${headerLoop} L ${points.join(' L ')} L 50 100`;
-            })();
+          const midY = parseFloat(((topY + bottomY) / 2).toFixed(2));
+          const capR = parseFloat(((bottomY - topY) / 2).toFixed(2));
+          const topFlatR = parseFloat((rightX - capR).toFixed(2));
+          const topFlatL = parseFloat((leftX + capR).toFixed(2));
+
+          const headerLoop = `M 50 ${bottomY} L ${topFlatL} ${bottomY} Q ${leftX} ${bottomY} ${leftX} ${midY} Q ${leftX} ${topY} ${topFlatL} ${topY} L ${topFlatR} ${topY} Q ${rightX} ${topY} ${rightX} ${midY} Q ${rightX} ${bottomY} ${topFlatR} ${bottomY} L 50 ${bottomY}`;
+
+          return `${headerLoop} L ${points.join(' L ')} L 50 100`;
+        })();
 
         // Per-category theme colors for zigzag lines, nodes, headers, and UI elements
         const themeColors = {
@@ -863,224 +911,222 @@ export const ServicesPage = () => {
         }[catGroup.themeColor] || { primary: '#0284C7', secondary: '#0ED3DD', tertiary: '#38BDF8', pillBorder: 'border-sky-300/70', pillText: 'text-[#0284C7]', hoverText: 'group-hover:text-[#0284C7]', glowBg: 'bg-sky-400/20', shadowColor: 'shadow-sky-500/20', headerBorder: 'border-sky-100', headerShadow: 'shadow-[0_15px_40px_rgba(2,132,199,0.12)]', dashedOuter: 'border-[#0284C7]/70', dashedInner: 'border-[#0ED3DD]/60' };
 
         return (
-          <div 
-            key={catGroup.categoryTitle} 
-            id={slug} 
+          <div
+            key={catGroup.categoryTitle}
+            id={slug}
             ref={(el) => (categoryRefs.current[slug] = el)}
             className={`space-y-0 relative w-full ${catGroup.sectionBg || ''}`}
           >
             <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 py-20 space-y-24 relative z-10">
-                {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
-                <svg
-                  className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
-                  viewBox="0 0 100 100"
-                  preserveAspectRatio="none"
-                >
-                  <defs>
-                    <linearGradient id={`neonZigzag_${slugify(catGroup.categoryTitle)}`} x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" stopColor={themeColors.primary} />
-                      <stop offset="50%" stopColor={themeColors.secondary} />
-                      <stop offset="100%" stopColor={themeColors.tertiary} />
-                    </linearGradient>
-                    <filter id={`neonBlur_${slugify(catGroup.categoryTitle)}`} x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="0.8" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
+              {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
+              <svg
+                className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
+                viewBox="0 0 100 100"
+                preserveAspectRatio="none"
+              >
+                <defs>
+                  <linearGradient id={`neonZigzag_${slugify(catGroup.categoryTitle)}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor={themeColors.primary} />
+                    <stop offset="50%" stopColor={themeColors.secondary} />
+                    <stop offset="100%" stopColor={themeColors.tertiary} />
+                  </linearGradient>
+                  <filter id={`neonBlur_${slugify(catGroup.categoryTitle)}`} x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="0.8" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
 
-                  {/* Faint Ambient Background Glow Track */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
-                    strokeWidth="9"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    opacity="0.15"
-                    filter={`url(#neonBlur_${slugify(catGroup.categoryTitle)})`}
-                    vectorEffect="non-scaling-stroke"
+                {/* Faint Ambient Background Glow Track */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
+                  strokeWidth="9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  opacity="0.15"
+                  filter={`url(#neonBlur_${slugify(catGroup.categoryTitle)})`}
+                  vectorEffect="non-scaling-stroke"
+                />
+
+                {/* Double Line Track - Outer Rail Base */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
+                  strokeWidth="5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+
+                {/* Double Line Track - Inner Core Gap (Creating 2 Parallel Lines) */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  vectorEffect="non-scaling-stroke"
+                />
+
+                {/* Double Line Track - Dashed Continuous Flow Stream */}
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
+                  strokeWidth="1.6"
+                  strokeDasharray="8 8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="animate-zigzag-dash"
+                  vectorEffect="non-scaling-stroke"
+                />
+
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth="1.5"
+                  strokeDasharray="4 20"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="animate-zigzag-laser"
+                  vectorEffect="non-scaling-stroke"
+                />
+              </svg>
+
+              <div className="text-center mb-20 flex flex-col items-center relative z-10">
+                <div className="relative inline-block group cursor-default">
+                  {/* SOLID GLOW BORDER - Cleanly styled inside the two lines */}
+                  <div
+                    className={`absolute -inset-2 border-2 border-solid animate-pulse-slow pointer-events-none opacity-40 ${catGroup.themeColor === 'violet' ? 'rounded-[2.25rem]' : 'rounded-full'}`}
+                    style={{
+                      borderColor: catGroup.themeColor === 'violet'
+                        ? `${themeColors.primary}B3`
+                        : themeColors.primary,
+                    }}
+                  />
+                  <div
+                    className={`absolute inset-1 border border-solid animate-pulse-slow pointer-events-none opacity-30 ${catGroup.themeColor === 'violet' ? 'rounded-[1.75rem]' : 'rounded-full'}`}
+                    style={{
+                      borderColor: catGroup.themeColor === 'violet'
+                        ? `${themeColors.secondary}99`
+                        : themeColors.secondary,
+                    }}
                   />
 
-                  {/* Double Line Track - Outer Rail Base */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    vectorEffect="non-scaling-stroke"
+                  {/* Ethereal Glow */}
+                  <div
+                    className={`absolute -inset-1 opacity-20 blur-xl group-hover:opacity-40 transition-opacity ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'}`}
+                    style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
                   />
 
-                  {/* Double Line Track - Inner Core Gap (Creating 2 Parallel Lines) */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke="#ffffff"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    vectorEffect="non-scaling-stroke"
-                  />
-
-                  {/* Double Line Track - Dashed Continuous Flow Stream */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
-                    strokeWidth="1.6"
-                    strokeDasharray="8 8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="animate-zigzag-dash"
-                    vectorEffect="non-scaling-stroke"
-                  />
-
-                  {/* Double Line Track - Dynamic Fast Traveling Laser Particles */}
-                  <path
-                    d={pathD}
-                    fill="none"
-                    stroke="#ffffff"
-                    strokeWidth="1.5"
-                    strokeDasharray="4 20"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="animate-zigzag-laser"
-                    vectorEffect="non-scaling-stroke"
-                  />
-                </svg>
-
-                {/* Category Header */}
-                <div className="text-center mb-20 flex flex-col items-center relative z-10">
-                  <div className="relative inline-block group cursor-default">
-                    {/* SOLID GLOW BORDER - Cleanly styled inside the two lines */}
-                    <div
-                      className={`absolute -inset-2 border-2 border-solid animate-pulse-slow pointer-events-none opacity-40 ${catGroup.themeColor === 'violet' ? 'rounded-[2.25rem]' : 'rounded-full'}`}
-                      style={{
-                        borderColor: catGroup.themeColor === 'violet'
-                          ? `${themeColors.primary}B3`
-                          : themeColors.primary,
-                      }}
-                    />
-                    <div
-                      className={`absolute inset-1 border border-solid animate-pulse-slow pointer-events-none opacity-30 ${catGroup.themeColor === 'violet' ? 'rounded-[1.75rem]' : 'rounded-full'}`}
-                      style={{
-                        borderColor: catGroup.themeColor === 'violet'
-                          ? `${themeColors.secondary}99`
-                          : themeColors.secondary,
-                      }}
-                    />
-
-                    {/* Ethereal Glow */}
-                    <div
-                      className={`absolute -inset-1 opacity-20 blur-xl group-hover:opacity-40 transition-opacity ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'}`}
-                      style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
-                    />
-
-                    <div className={`relative px-10 py-4.5 bg-white/95 backdrop-blur-2xl border-2 min-w-[520px] flex items-center justify-center ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'} ${themeColors.headerBorder} ${themeColors.headerShadow}`}>
-                      <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-none">
-                        {catGroup.categoryTitle}
-                      </h2>
-                    </div>
+                  <div className={`relative px-10 py-4.5 bg-white/95 backdrop-blur-2xl border-2 min-w-[520px] flex items-center justify-center ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'} ${themeColors.headerBorder} ${themeColors.headerShadow}`}>
+                    <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-none">
+                      {catGroup.categoryTitle}
+                    </h2>
                   </div>
                 </div>
+              </div>
 
-                {/* ZIG-ZAG CONTENT CONTAINER */}
-                <div className="relative w-full">
+              {/* ZIG-ZAG CONTENT CONTAINER */}
+              <div className="relative w-full">
 
-                  {catGroup.items.map((item, itemIdx) => {
-                    const isLeftImage = item.layout === 'left-image';
-                    return (
-                      <motion.div
-                        key={item.title}
-                        id={slugify(item.title)}
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className={`flex flex-col lg:flex-row ${isLeftImage ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-between items-center relative z-10 w-full mb-36 last:mb-0`}
-                      >
-                        {/* TEXT CONTENT (Frameless Seamless Text directly on Section Body) */}
-                        <div className="w-full lg:w-[44%]">
-                          <div className="relative w-full p-2 sm:p-4 cursor-pointer group">
-                            
-                            <div className="flex items-center gap-3 mb-6">
-                              <span className={`text-xs font-mono font-extrabold uppercase tracking-widest ${themeColors.pillText} px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border ${themeColors.pillBorder} shadow-xs`}>
-                                {catGroup.categoryTitle} • STEP 0{itemIdx + 1}
+                {catGroup.items.map((item, itemIdx) => {
+                  const isLeftImage = item.layout === 'left-image';
+                  return (
+                    <motion.div
+                      key={item.title}
+                      id={slugify(item.title)}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5 }}
+                      className={`flex flex-col lg:flex-row ${isLeftImage ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-between items-center relative z-10 w-full mb-36 last:mb-0`}
+                    >
+                      {/* TEXT CONTENT (Frameless Seamless Text directly on Section Body) */}
+                      <div className="w-full lg:w-[44%]">
+                        <div className="relative w-full p-2 sm:p-4 cursor-pointer group">
+
+                          <div className="flex items-center gap-3 mb-6">
+                            <span className={`text-xs font-mono font-extrabold uppercase tracking-widest ${themeColors.pillText} px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border ${themeColors.pillBorder} shadow-xs`}>
+                              {catGroup.categoryTitle} • STEP 0{itemIdx + 1}
+                            </span>
+                          </div>
+
+                          <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 ${themeColors.hoverText} transition-colors leading-tight mb-4`}>
+                            {item.title}
+                          </h3>
+
+                          <p className="text-slate-600 text-base leading-relaxed font-medium mb-8">
+                            {item.desc}
+                          </p>
+
+                          <div>
+                            <button
+                              onClick={() => handleContactClick(item.title)}
+                              className={`inline-flex items-center gap-3 px-7 py-3 rounded-full text-white font-black text-sm shadow-lg ${themeColors.shadowColor} hover:scale-105 transition-all duration-300`}
+                              style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
+                            >
+                              <span>For More Contact us</span>
+                              <ArrowRight size={16} />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* IMAGE SHOWCASE CONTAINER (Decreased Compact Size) */}
+                      <div className={`w-full lg:w-[44%] h-full flex items-center ${isLeftImage ? 'justify-end' : 'justify-start'} relative`}>
+                        {/* Animated Glow Behind Image */}
+                        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full ${themeColors.glowBg} blur-[80px] opacity-30 animate-pulse-slow pointer-events-none`} />
+
+                        {/* Image Wrapper with Custom Curved Concave Barrel Shape (Matching Reference Screenshot) */}
+                        <div className="relative w-full max-w-md flex items-center justify-center">
+                          <CurvedBarrelImageCard
+                            src={item.image}
+                            alt={`${item.title} Illustration`}
+                            themeColor={catGroup.themeColor || 'sky'}
+                          />
+
+                          {/* Step Node Badge anchored directly to inner border of Image Wrapper */}
+                          <div
+                            ref={(el) => (nodeBadgeRefs.current[`${slug}_${itemIdx}`] = el)}
+                            className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isLeftImage ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}
+                          >
+                            <div className="relative w-14 h-14 rounded-full border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
+
+                              {/* Rotating Angle Ring over Node Icon */}
+                              <div className="absolute -inset-2.5 rounded-full border-2 border-solid animate-pulse-slow pointer-events-none opacity-40" style={{ borderColor: `${themeColors.primary}CC` }} />
+
+                              {(() => {
+                                const ItemNodeIcon = item.icon || Cpu;
+                                return <ItemNodeIcon className="w-6 h-6 text-white relative z-10" strokeWidth={2.2} />;
+                              })()}
+
+                              {/* Mini Step Number Badge (Matching Reference Screenshot) */}
+                              <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-md text-[11px] font-black flex items-center justify-center">
+                                <span className="w-full h-full rounded-full text-white flex items-center justify-center" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
+                                  {itemIdx + 1}
+                                </span>
                               </span>
                             </div>
-
-                            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 ${themeColors.hoverText} transition-colors leading-tight mb-4`}>
-                              {item.title}
-                            </h3>
-
-                            <p className="text-slate-600 text-base leading-relaxed font-medium mb-8">
-                              {item.desc}
-                            </p>
-
-                            <div>
-                              <button
-                                onClick={() => handleContactClick(item.title)}
-                                className={`inline-flex items-center gap-3 px-7 py-3 rounded-full text-white font-black text-sm shadow-lg ${themeColors.shadowColor} hover:scale-105 transition-all duration-300`}
-                                style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
-                              >
-                                <span>For More Contact us</span>
-                                <ArrowRight size={16} />
-                              </button>
-                            </div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* IMAGE SHOWCASE CONTAINER (Decreased Compact Size) */}
-                        <div className={`w-full lg:w-[44%] h-full flex items-center ${isLeftImage ? 'justify-end' : 'justify-start'} relative`}>
-                          {/* Animated Glow Behind Image */}
-                          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[85%] rounded-full ${themeColors.glowBg} blur-[80px] opacity-30 animate-pulse-slow pointer-events-none`} />
-
-                          {/* Image Wrapper with Custom Curved Concave Barrel Shape (Matching Reference Screenshot) */}
-                          <div className="relative w-full max-w-md flex items-center justify-center">
-                            <CurvedBarrelImageCard
-                              src={item.image}
-                              alt={`${item.title} Illustration`}
-                              themeColor={catGroup.themeColor || 'sky'}
-                            />
-
-                            {/* Step Node Badge anchored directly to inner border of Image Wrapper */}
-                            <div 
-                              ref={(el) => (nodeBadgeRefs.current[`${slug}_${itemIdx}`] = el)}
-                              className={`hidden lg:flex absolute top-1/2 -translate-y-1/2 z-20 flex-col items-center justify-center transition-all duration-500 ${isLeftImage ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'}`}
-                            >
-                              <div className="relative w-14 h-14 rounded-full border-[2.5px] border-white shadow-[0_4px_25px_rgba(0,0,0,0.15)] flex items-center justify-center transition-all duration-500 hover:scale-125" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
-                                
-                                {/* Rotating Angle Ring over Node Icon */}
-                                <div className="absolute -inset-2.5 rounded-full border-2 border-solid animate-pulse-slow pointer-events-none opacity-40" style={{ borderColor: `${themeColors.primary}CC` }} />
-                                
-                                {(() => {
-                                  const ItemNodeIcon = item.icon || Cpu;
-                                  return <ItemNodeIcon className="w-6 h-6 text-white relative z-10" strokeWidth={2.2} />;
-                                })()}
-                                
-                                {/* Mini Step Number Badge (Matching Reference Screenshot) */}
-                                <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-white border-2 border-white shadow-md text-[11px] font-black flex items-center justify-center">
-                                  <span className="w-full h-full rounded-full text-white flex items-center justify-center" style={{ background: `linear-gradient(to bottom right, ${themeColors.primary}, ${themeColors.secondary})` }}>
-                                    {itemIdx + 1}
-                                  </span>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </motion.div>
-                    );
-                  })}
-                </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
-          );
-        })}
+          </div>
+        );
+      })}
 
       {/* ENTERPRISE STRATEGY & CAPABILITIES SECTIONS */}
       <ServicesEngineeringApproach />

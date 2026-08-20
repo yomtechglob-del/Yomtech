@@ -80,7 +80,7 @@ export const PRODUCTS_DATA = [
     badge: 'COMING SOON',
     badgeColor: 'text-purple-600 bg-purple-50 border-purple-200',
     link: '/products#wabix',
-    logo: logoEmblem,
+    logo: wabiJobsLogo,
     accent: 'text-purple-600',
     bg: 'bg-purple-50',
     border: 'border-purple-200',
@@ -98,7 +98,7 @@ export const PRODUCTS_DATA = [
     badge: 'IN DEVELOPMENT',
     badgeColor: 'text-sky-600 bg-sky-50 border-sky-200',
     link: '/products#mari',
-    logo: logoEmblem,
+    logo: wabiJobsLogo,
     accent: 'text-sky-600',
     bg: 'bg-sky-50',
     border: 'border-sky-200',
@@ -169,11 +169,10 @@ export const ProductsCatalogue = ({ onProductSelect }) => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 cursor-pointer ${
-                activeCategory === cat.id
-                  ? 'bg-[#0284C7] text-white shadow-lg shadow-sky-500/30 scale-105'
-                  : 'bg-white text-slate-700 border border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/50'
-              }`}
+              className={`px-6 py-2.5 rounded-full text-xs font-black transition-all duration-300 cursor-pointer ${activeCategory === cat.id
+                ? 'bg-[#0284C7] text-white shadow-lg shadow-sky-500/30 scale-105'
+                : 'bg-white text-slate-700 border border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/50'
+                }`}
             >
               {cat.label}
             </button>

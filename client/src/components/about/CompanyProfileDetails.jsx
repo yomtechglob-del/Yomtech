@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Building2, ShieldCheck, Award, Users, CheckCircle2, Globe, Sparkles, 
+import {
+  Building2, ShieldCheck, Award, Users, CheckCircle2, Globe, Sparkles,
   Cpu, FileText, ChevronRight, Phone, Mail, MapPin, ExternalLink, Calendar,
   Layers, Lock, Server, Video, Briefcase, GraduationCap, ArrowRight, Zap, Target, Clock
 } from 'lucide-react';
@@ -82,12 +82,12 @@ export const CompanyProfileDetails = () => {
   ];
 
   const platforms = [
-    { id: 'wabiskills', name: 'WabiSkills', tag: 'Talent Academy', desc: 'Technology training and digital skills development platform', logo: wabiSkillsLogo, actionText: 'Explore Platform', url: 'https://wabiskills.com/' },
-    { id: 'wabijob', name: 'WabiJob', tag: 'Recruitment', desc: 'Talent and recruitment platform connecting professionals with opportunities', logo: wabiJobsLogo, actionText: 'Explore Platform', url: 'https://wabijob.com/' },
-    { id: 'yomnex', name: 'Yomnex ERP', tag: 'Enterprise ERP', desc: 'Fully custom-built enterprise resource planning system for organizations', logo: yomnexLogo, actionText: 'Request System Demo' },
-    { id: 'wabix', name: 'WabiX', tag: 'Collaboration', desc: 'Virtual meeting and collaboration platform for online engagement', logo: logoEmblem, comingSoon: true },
-    { id: 'mari', name: 'Mari', tag: 'Social Media', desc: 'Next-generation social media application developed by YomTech Global', logo: logoEmblem, comingSoon: true },
-    { id: 'media', name: 'YomTech Media', tag: 'Tech Media', desc: 'Technology storytelling, documentaries, and innovation media platform', logo: logoEmblem, comingSoon: true },
+    { id: 'wabiskills', name: 'WabiSkills', logo: wabiSkillsLogo, tag: 'Talent Academy', desc: 'Technology training and digital skills development platform' },
+    { id: 'wabijob', name: 'WabiJob', logo: wabiJobsLogo, tag: 'Recruitment', desc: 'Talent and recruitment platform connecting professionals with opportunities' },
+    { id: 'yomnex', name: 'Yomnex ERP', logo: yomnexLogo, tag: 'Enterprise ERP', desc: 'Fully custom-built enterprise resource planning system for organizations' },
+    { id: 'wabix', name: 'WabiX', logo: logoEmblem, tag: 'Collaboration', desc: 'Virtual meeting and collaboration platform for online engagement' },
+    { id: 'mari', name: 'Mari', logo: logoEmblem, tag: 'Social Media', desc: 'Next-generation social media application developed by YomTech Global' },
+    { id: 'media', name: 'YomTech Media', logo: logoEmblem, tag: 'Tech Media', desc: 'Technology storytelling, documentaries, and innovation media platform' },
   ];
 
   const organizationalUnits = [
@@ -154,9 +154,9 @@ export const CompanyProfileDetails = () => {
   ];
 
   const methodologySteps = [
-    { 
-      step: '01', 
-      title: 'Requirement Analysis', 
+    {
+      step: '01',
+      title: 'Requirement Analysis',
       tag: 'INITIATION & SCOPE',
       nextStep: 'Phase 02 Architecture',
       desc: 'Understanding client needs, defining functional scope, and setting clear project objectives & KPIs.',
@@ -165,9 +165,9 @@ export const CompanyProfileDetails = () => {
       badgeBg: 'bg-cyan-500/20 text-cyan-300 border-cyan-400/50',
       glow: 'hover:border-cyan-300 hover:shadow-[0_15px_45px_rgba(0,180,216,0.4)]'
     },
-    { 
-      step: '02', 
-      title: 'System Architecture', 
+    {
+      step: '02',
+      title: 'System Architecture',
       tag: 'BLUEPRINT & SECURITY',
       nextStep: 'Phase 03 Sprints',
       desc: 'Creating scalable, secure cloud-native architecture blueprints, database schemas & API contracts.',
@@ -176,9 +176,9 @@ export const CompanyProfileDetails = () => {
       badgeBg: 'bg-indigo-500/20 text-indigo-300 border-indigo-400/50',
       glow: 'hover:border-indigo-300 hover:shadow-[0_15px_45px_rgba(99,102,241,0.4)]'
     },
-    { 
-      step: '03', 
-      title: 'Agile Development', 
+    {
+      step: '03',
+      title: 'Agile Development',
       tag: 'ITERATIVE SPRINTS',
       nextStep: 'Phase 04 QA Audit',
       desc: 'Iterative full-stack engineering with continuous integration, automated code reviews & sprint demos.',
@@ -187,9 +187,9 @@ export const CompanyProfileDetails = () => {
       badgeBg: 'bg-sky-500/20 text-sky-300 border-sky-400/50',
       glow: 'hover:border-sky-300 hover:shadow-[0_15px_45px_rgba(56,189,248,0.4)]'
     },
-    { 
-      step: '04', 
-      title: 'QA & Security Testing', 
+    {
+      step: '04',
+      title: 'QA & Security Testing',
       tag: 'AUDIT & COMPLIANCE',
       nextStep: 'Phase 05 Deployment',
       desc: 'Rigorous performance load testing, penetration scans, vulnerability audits & ISO compliance checks.',
@@ -198,9 +198,9 @@ export const CompanyProfileDetails = () => {
       badgeBg: 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50',
       glow: 'hover:border-emerald-300 hover:shadow-[0_15px_45px_rgba(16,185,129,0.4)]'
     },
-    { 
-      step: '05', 
-      title: 'Deployment Rollout', 
+    {
+      step: '05',
+      title: 'Deployment Rollout',
       tag: 'CI/CD LAUNCH',
       nextStep: 'Phase 06 24/7 SLA',
       desc: 'Zero-downtime automated CI/CD deployment rollout, environment provisioning & failover testing.',
@@ -209,9 +209,9 @@ export const CompanyProfileDetails = () => {
       badgeBg: 'bg-purple-500/20 text-purple-300 border-purple-400/50',
       glow: 'hover:border-purple-300 hover:shadow-[0_15px_45px_rgba(168,85,247,0.4)]'
     },
-    { 
-      step: '06', 
-      title: 'Continuous Support', 
+    {
+      step: '06',
+      title: 'Continuous Support',
       tag: '24/7 SLA & DEVOPS',
       nextStep: 'DevOps Maintenance',
       desc: 'Ongoing feature updates, proactive infrastructure monitoring, 24/7 SLA hotline & DevOps maintenance.',
@@ -224,9 +224,9 @@ export const CompanyProfileDetails = () => {
 
   return (
     <section className="relative py-20 lg:py-28 font-sans bg-[#F4F9FF] text-slate-900 overflow-hidden">
-      
+
       {/* Background Dot Matrix Texture */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
         style={{
           backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -303,22 +303,22 @@ export const CompanyProfileDetails = () => {
             2. PRODUCTS & DIGITAL PLATFORMS
         ======================================================== */}
         <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 sm:px-6 lg:px-8 py-20 lg:py-24 bg-[#03045E] text-white overflow-hidden my-16">
-          
+
           {/* About Hero Section Background Images & Cyan Gradient Overlay (Full Section Body Background) */}
           <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
-            <img 
-              src={heroTeamImg} 
-              alt="About Hero Team Background" 
+            <img
+              src={heroTeamImg}
+              alt="About Hero Team Background"
               className="w-full h-full object-cover object-center opacity-35 mix-blend-luminosity scale-105"
             />
-            <img 
-              src={ermiTwoImg} 
-              alt="Flowing Stream Background Layer" 
+            <img
+              src={ermiTwoImg}
+              alt="Flowing Stream Background Layer"
               className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay animate-river-flow-1"
             />
-            <img 
-              src={erminOneImg} 
-              alt="Flowing Stream Layer Right" 
+            <img
+              src={erminOneImg}
+              alt="Flowing Stream Layer Right"
               className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-soft-light animate-river-flow-2"
             />
             {/* Dark Hero Cyan Gradient Vignette Overlay */}
@@ -326,7 +326,7 @@ export const CompanyProfileDetails = () => {
           </div>
 
           {/* Dotted Grid Mesh Texture Matching Section 4 */}
-          <div 
+          <div
             className="absolute inset-0 opacity-[0.25] pointer-events-none z-0"
             style={{
               backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
@@ -362,8 +362,8 @@ export const CompanyProfileDetails = () => {
 
               <div className="flex w-max gap-6 animate-water-flow-left hover:[animation-play-state:paused]">
                 {[...platforms.slice(0, 3), ...platforms.slice(0, 3), ...platforms.slice(0, 3)].map((p, idx) => (
-                  <div 
-                    key={`${p.id}-${idx}`} 
+                  <div
+                    key={`${p.id}-${idx}`}
                     style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
                     className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 cursor-pointer"
                   >
@@ -372,7 +372,7 @@ export const CompanyProfileDetails = () => {
 
                     {/* Animated Liquid Water River Flow Movement Layer */}
                     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-[2rem] opacity-40 group-hover:opacity-75 transition-opacity duration-500">
-                      <motion.div 
+                      <motion.div
                         animate={{ x: ['-100%', '100%'] }}
                         transition={{ repeat: Infinity, duration: 7, ease: 'linear' }}
                         className="absolute -top-1/2 left-0 w-[200%] h-[200%] bg-gradient-to-r from-transparent via-cyan-300/20 via-amber-200/25 to-transparent rotate-12"
@@ -422,10 +422,10 @@ export const CompanyProfileDetails = () => {
                         </div>
                       </div>
                     ) : p.url ? (
-                      <a 
-                        href={p.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer" 
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="pt-4 border-t border-amber-100/80 w-full flex items-center justify-center gap-2 text-xs sm:text-sm font-extrabold text-[#0284C7] relative z-10 hover:text-cyan-700 transition-colors"
                       >
                         <span>{p.actionText || 'Explore Platform'}</span>
@@ -458,8 +458,8 @@ export const CompanyProfileDetails = () => {
 
               <div className="flex w-max gap-6 animate-water-flow-right hover:[animation-play-state:paused]">
                 {[...platforms.slice(3, 6), ...platforms.slice(3, 6), ...platforms.slice(3, 6)].map((p, idx) => (
-                  <div 
-                    key={`${p.id}-${idx}`} 
+                  <div
+                    key={`${p.id}-${idx}`}
                     style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
                     className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 cursor-pointer"
                   >
@@ -468,7 +468,7 @@ export const CompanyProfileDetails = () => {
 
                     {/* Animated Liquid Water River Flow Movement Layer */}
                     <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 rounded-[2rem] opacity-40 group-hover:opacity-75 transition-opacity duration-500">
-                      <motion.div 
+                      <motion.div
                         animate={{ x: ['-100%', '100%'] }}
                         transition={{ repeat: Infinity, duration: 7, ease: 'linear' }}
                         className="absolute -top-1/2 left-0 w-[200%] h-[200%] bg-gradient-to-r from-transparent via-cyan-300/20 via-amber-200/25 to-transparent rotate-12"
@@ -557,8 +557,8 @@ export const CompanyProfileDetails = () => {
                 const IconComponent = unit.icon;
                 const isPartnerships = unit.id === 'partnerships';
                 return (
-                  <div 
-                    key={unit.id} 
+                  <div
+                    key={unit.id}
                     style={{ background: 'linear-gradient(180deg, #F2FAFF 0%, #FDFEFF 50%, #F4FAFF 100%)' }}
                     className={`group relative rounded-[2.2rem] backdrop-blur-xl p-7 sm:p-8 border-2 border-cyan-100/90 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden flex flex-col justify-between items-center text-center space-y-5 ${unit.borderHover} ${isPartnerships ? 'md:col-span-2 lg:col-span-2' : ''}`}
                   >
@@ -606,9 +606,9 @@ export const CompanyProfileDetails = () => {
             4. DEVELOPMENT METHODOLOGY (6 PHASES)
         ======================================================== */}
         <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] px-4 sm:px-6 lg:px-8 py-20 lg:py-24 bg-[#F4F9FF] text-slate-900 overflow-hidden my-16">
-          
+
           {/* Light Dotted Grid Mesh Texture Matching Image 2 */}
-          <div 
+          <div
             className="absolute inset-0 opacity-[0.35] pointer-events-none z-0"
             style={{
               backgroundImage: 'radial-gradient(#0284C7 1.5px, transparent 1.5px)',
@@ -641,8 +641,8 @@ export const CompanyProfileDetails = () => {
                 const IconComp = m.icon;
                 const hasNextInRow = (idx + 1) % 3 !== 0 && idx < methodologySteps.length - 1;
                 return (
-                  <div 
-                    key={m.step} 
+                  <div
+                    key={m.step}
                     style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
                     className="group relative rounded-[2.2rem] p-7 sm:p-8 border-2 border-indigo-200/80 shadow-md shadow-indigo-500/5 text-slate-900 hover:border-[#0284C7] hover:shadow-2xl hover:shadow-cyan-500/15 hover:-translate-y-2.5 transition-all duration-500 overflow-visible flex flex-col justify-between space-y-6"
                   >
@@ -728,7 +728,7 @@ export const CompanyProfileDetails = () => {
                 <Building2 className="w-4 h-4 text-[#0284C7]" />
                 <span>Government &amp; Public Sector Partners</span>
               </h4>
-              
+
               <div className="relative w-full overflow-hidden water-flow-container py-2">
                 {/* Glass Fade Edges for Water Sheen Effect */}
                 <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-[#F4F9FF] via-[#F4F9FF]/80 to-transparent z-10 pointer-events-none" />
@@ -736,7 +736,7 @@ export const CompanyProfileDetails = () => {
 
                 <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-left">
                   {[...publicInstitutions, ...publicInstitutions, ...publicInstitutions].map((item, idx) => (
-                    <a 
+                    <a
                       key={idx}
                       href={item.website}
                       target="_blank"
@@ -773,7 +773,7 @@ export const CompanyProfileDetails = () => {
 
                 <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-right">
                   {[...academicPartners, ...academicPartners, ...academicPartners].map((item, idx) => (
-                    <a 
+                    <a
                       key={idx}
                       href={item.website}
                       target="_blank"
@@ -810,7 +810,7 @@ export const CompanyProfileDetails = () => {
 
                 <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-left-fast">
                   {[...mediaPartners, ...mediaPartners, ...mediaPartners, ...mediaPartners].map((item, idx) => (
-                    <a 
+                    <a
                       key={idx}
                       href={item.website}
                       target="_blank"
@@ -847,7 +847,7 @@ export const CompanyProfileDetails = () => {
 
                 <div className="flex w-max gap-4 sm:gap-5 animate-water-flow-right">
                   {[...enterpriseClients, ...enterpriseClients, ...enterpriseClients].map((item, idx) => (
-                    <a 
+                    <a
                       key={idx}
                       href={item.website}
                       target="_blank"

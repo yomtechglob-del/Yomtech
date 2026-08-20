@@ -1,583 +1,344 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BriefcaseBusiness, ChevronRight, GraduationCap, HeartHandshake } from 'lucide-react';
+import {
+  BriefcaseBusiness, GraduationCap, HeartHandshake, Layers, Cpu, ChevronRight,
+  Search, Settings, Coins, Users, Sparkles, HandCoins
+} from 'lucide-react';
+import { AboutHeroBackground } from '../common/AboutHeroBackground';
 
-import backgroundImg from '../../assets/academy/product/background.png';
 import wabiskillsLogo from '../../assets/academy/product/wabiskills.jpg';
 import wabijobsLogo from '../../assets/academy/product/wabijobs.jpg';
 import yomnexLogo from '../../assets/academy/product/yomnex hoiziontal-04.png';
 import logoImg from '../../assets/logos/logo.png';
 
-const ACADEMY_PRODUCTS = [
+// 5 Orbital Product Pins
+const PINS_DATA = [
   {
     id: 'wabiskills',
-    label: 'WABISKILLS',
+    name: 'WabiSkills',
+    badgeLabel: 'WABI SKILLS',
     logo: wabiskillsLogo,
-    external: true,
-    iconTint: 'bg-[#26658C]',
+    fallbackIcon: Search,
+    color: '#FFA500', // Vibrant Orange
+    colorGlow: 'rgba(255, 165, 0, 0.65)',
+    angle: -120, // 12 o'clock area
+    link: 'https://wabiskills.com/'
   },
   {
     id: 'wabijob',
-    label: 'WABIJOB',
+    name: 'WabiJob',
+    badgeLabel: 'WABI JOB',
     logo: wabijobsLogo,
-    external: false,
-    fallbackIcon: BriefcaseBusiness,
-    iconTint: 'bg-[#0EA5E9]',
+    fallbackIcon: Settings,
+    color: '#10B981', // Neon Green
+    colorGlow: 'rgba(16, 185, 129, 0.65)',
+    angle: -40,
+    link: '/services'
+  },
+  {
+    id: 'mari',
+    name: 'Mari',
+    badgeLabel: 'MARI',
+    monogram: 'M',
+    fallbackIcon: Coins,
+    color: '#EF4444', // Red
+    colorGlow: 'rgba(239, 68, 68, 0.65)',
+    angle: 40,
+    link: '/services'
   },
   {
     id: 'yomnex',
-    label: 'YOMNEX',
-    external: false,
-    iconTint: 'bg-[#2563EB]',
+    name: 'Yomnex',
+    badgeLabel: 'YOMI',
+    logo: yomnexLogo,
+    fallbackIcon: Users,
+    color: '#00E5FF', // Electric Blue
+    colorGlow: 'rgba(0, 229, 255, 0.65)',
+    angle: 100,
+    link: '/services'
   },
   {
-    id: 'wabx',
-    label: 'WABX',
-   
-    external: false,
+    id: 'wabix',
+    name: 'Wabix',
+    badgeLabel: 'WABIX',
     monogram: 'W',
-    iconTint: 'bg-[#1D5EF5]',
-  },
-  {
-    id: 'meri',
-    label: 'MERI',
-    external: false,
-    fallbackIcon: HeartHandshake,
-    iconTint: 'bg-[#D946EF]',
-  },
+    fallbackIcon: Sparkles,
+    color: '#A855F7', // Purple
+    colorGlow: 'rgba(168, 85, 247, 0.65)',
+    angle: 160,
+    link: '/services'
+  }
 ];
 
-const ProductIcon = ({ product }) => {
-  if (product.logo) {
-    return (
-      <img
-        src={product.logo}
-        alt={product.label}
-        className="h-[62px] w-[62px] rounded-full object-contain bg-white"
-      />
-    );
-  }
-
-  if (product.monogram) {
-    return (
-      <div className="flex h-[62px] w-[62px] items-center justify-center rounded-full bg-white">
-        <span className="text-[2.5rem] font-black leading-none text-[#7298f2]">{product.monogram}</span>
-      </div>
-    );
-  }
-
-  const FallbackIcon = product.fallbackIcon ?? GraduationCap;
-
-  return (
-    <div className={`flex h-[62px] w-[62px] items-center justify-center rounded-full ${product.iconTint} text-white`}>
-      <FallbackIcon size={30} strokeWidth={2.2} />
-    </div>
-  );
-};
-
 export const AcademyRadialHero = () => {
+  const [hoveredId, setHoveredId] = useState(null);
+  const [isPaused, setIsPaused] = useState(false);
+
   return (
-    <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-8 sm:pt-32 md:pt-36 md:pb-24">
+    <section className="relative overflow-hidden bg-[#02050E] text-white py-12 lg:py-16 min-h-[850px] flex flex-col justify-center font-sans border-b border-cyan-400/20">
 
-   
-      <div className="absolute inset-0">
-        <img
-          src={backgroundImg}
-          alt=""
-          aria-hidden
-          className="h-full w-full object-cover scale-110"
-        />
+      {/* Services Background Theme */}
+      <AboutHeroBackground />
 
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.78)_8%,rgba(235,244,255,0.58)_42%,rgba(145,184,255,0.18)_100%)]" />
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_46%,rgba(255,255,255,0.95),transparent_16%),radial-gradient(circle_at_72%_18%,rgba(29,94,245,0.18),transparent_22%),radial-gradient(circle_at_86%_74%,rgba(37,99,235,0.28),transparent_22%)] backdrop-blur-[6px]" />
+      {/* Dynamic Ambient Radial Flares */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[650px] h-[650px] bg-[#00E5FF]/15 rounded-full blur-[160px] animate-pulse" />
+        <div className="absolute top-1/3 right-1/4 w-[550px] h-[550px] bg-[#FFA500]/15 rounded-full blur-[140px] animate-pulse" style={{ animationDuration: '6s' }} />
       </div>
 
+      <div className="max-w-[1380px] mx-auto px-4 sm:px-8 w-full relative z-10 my-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
 
-      <div className="absolute left-7 top-8 grid grid-cols-4 gap-3 opacity-65 sm:left-10 sm:top-12">
-        {Array.from({ length: 16 }).map((_, index) => (
-          <motion.span
-            key={index}
-            animate={{
-              opacity: [0.35, 1, 0.35],
-              scale: [0.8, 1.15, 0.8],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: index * 0.08,
-            }}
-            className="h-1.5 w-1.5 rounded-full bg-[#5584d0]"
-          />
-        ))}
-      </div>
+          {/* =========================================================
+              LEFT COLUMN: DYNAMIC & HIGHLY ANIMATED ORBIT HUB
+          ========================================================= */}
+          <div className="lg:col-span-7 flex justify-center relative py-6">
 
-      <div className="absolute bottom-10 right-8 grid grid-cols-4 gap-3 opacity-55 sm:right-10">
-        {Array.from({ length: 16 }).map((_, index) => (
-          <motion.span
-            key={index}
-            animate={{
-              opacity: [0.25, 0.8, 0.25],
-            }}
-            transition={{
-              duration: 2.5,
-              repeat: Infinity,
-              delay: index * 0.1,
-            }}
-            className="h-1.5 w-1.5 rounded-full bg-[#3B82F6]"
-          />
-        ))}
-      </div>
-
-
-      {/* =========================================================
-          MAIN CONTAINER
-      ========================================================= */}
-      <div className="relative z-10 mx-auto max-w-[1450px]">
-
-        <div className="relative min-h-[780px] lg:min-h-[820px]">
-
-
-          {/* =====================================================
-              CONNECTION SYSTEM
-          ===================================================== */}
-          <svg
-            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-            viewBox="0 0 1450 820"
-            fill="none"
-            preserveAspectRatio="none"
-          >
-
-            <defs>
-
-              {/* Main line gradient */}
-              <linearGradient
-                id="productConnectionGradient"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="0"
-              >
-                <stop offset="0%" stopColor="#2563EB" />
-                <stop offset="50%" stopColor="#0ED3DD" />
-                <stop offset="100%" stopColor="#60A5FA" />
-              </linearGradient>
-
-              {/* Glow */}
-              <filter
-                id="connectionGlow"
-                x="-100%"
-                y="-100%"
-                width="300%"
-                height="300%"
-              >
-                <feGaussianBlur stdDeviation="4" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-
-            </defs>
-
-
-            {/* =================================================
-                CURVED CONNECTION LINES
-            ================================================= */}
-
-            {[
-              "M590 180 C 650 175, 690 125, 750 105",
-              "M610 285 C 675 280, 700 240, 750 235",
-              "M620 405 C 680 405, 710 405, 750 405",
-              "M610 525 C 675 530, 700 575, 750 575",
-              "M590 645 C 650 650, 690 700, 750 705",
-            ].map((path, index) => (
-              <g key={index}>
-
-                {/* Outer glow */}
-                <path
-                  d={path}
-                  stroke="#0ED3DD"
-                  strokeWidth="10"
-                  strokeLinecap="round"
-                  opacity="0.12"
-                  filter="url(#connectionGlow)"
-                />
-
-                {/* Main line */}
-                <motion.path
-                  d={path}
-                  stroke="url(#productConnectionGradient)"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeDasharray="10 9"
-                  animate={{
-                    strokeDashoffset: [0, -38],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-
-              </g>
-            ))}
-
-
-            {/* =================================================
-                CONNECTION NODES
-            ================================================= */}
-
-            {[
-              { x: 590, y: 180 },
-              { x: 610, y: 285 },
-              { x: 620, y: 405 },
-              { x: 610, y: 525 },
-              { x: 590, y: 645 },
-            ].map((node, index) => (
-              <g key={index}>
-
-                {/* Outer glow */}
-                <motion.circle
-                  cx={node.x}
-                  cy={node.y}
-                  r="15"
-                  fill="#0ED3DD"
-                  opacity="0.15"
-                  animate={{
-                    r: [12, 18, 12],
-                    opacity: [0.15, 0.35, 0.15],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: index * 0.2,
-                  }}
-                />
-
-                {/* White node */}
-                <circle
-                  cx={node.x}
-                  cy={node.y}
-                  r="10"
-                  fill="white"
-                  stroke="#D5DEEF"
-                  strokeWidth="3"
-                />
-
-              </g>
-            ))}
-
-
-            {/* Small blue connection points */}
-            {[
-              { x: 750, y: 105 },
-              { x: 750, y: 235 },
-              { x: 750, y: 405 },
-              { x: 750, y: 575 },
-              { x: 750, y: 705 },
-            ].map((node, index) => (
-              <motion.circle
-                key={index}
-                cx={node.x}
-                cy={node.y}
-                r="6"
-                fill="#0ED3DD"
-                stroke="white"
-                strokeWidth="2"
-                animate={{
-                  r: [5, 8, 5],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  delay: index * 0.2,
-                }}
-              />
-            ))}
-
-          </svg>
-
-
-          {/* =====================================================
-              CONTENT
-          ===================================================== */}
-          <div className="relative flex min-h-[780px] flex-col items-center justify-center gap-14 lg:block">
-
-
-            {/* ===================================================
-                LARGE CENTER CIRCLE
-            =================================================== */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                duration: 0.8,
-                ease: "easeOut",
-              }}
-              className="relative lg:absolute lg:left-[20px] lg:top-[115px]"
+            <div
+              className="relative w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] md:w-[520px] md:h-[520px] flex items-center justify-center group/hub"
+              onMouseEnter={() => setIsPaused(true)}
+              onMouseLeave={() => setIsPaused(false)}
             >
 
-              <div className="relative h-[min(82vw,520px)] w-[min(82vw,520px)] sm:h-[500px] sm:w-[500px]">
+              {/* 1. Outer Fine Dash Orbit Ring (Rotating Slow Clockwise) */}
+              <div
+                className="absolute inset-0 rounded-full border border-cyan-400/30 border-dashed pointer-events-none animate-[spin_55s_linear_infinite]"
+              />
 
+              {/* 2. Inner Neon Cyan Accent Ring (Rotating Counter-Clockwise) */}
+              <div
+                className="absolute inset-14 sm:inset-16 rounded-full border-2 border-transparent border-t-[#00E5FF] border-b-[#00E5FF]/60 pointer-events-none animate-[spin_20s_linear_infinite_reverse]"
+                style={{ filter: 'drop-shadow(0 0 10px #00E5FF)' }}
+              />
 
-                {/* Outer glow */}
-                <div className="absolute -inset-8 rounded-full bg-blue-500/20 blur-3xl" />
-
-
-                {/* Outer rotating ring */}
-                <motion.div
-                  animate={{
-                    rotate: 360,
+              {/* =========================================================
+                  CONTINUOUSLY ROTATING ORBIT CONTAINER (Spin 35s)
+              ========================================================= */}
+              <div
+                className="absolute inset-0 flex items-center justify-center pointer-events-auto"
+                style={{
+                  animation: 'spin 35s linear infinite',
+                  animationPlayState: (isPaused || hoveredId) ? 'paused' : 'running'
+                }}
+              >
+                {/* Multi-Color Gradient Orbit Line Path */}
+                <div
+                  className="absolute inset-6 sm:inset-8 rounded-full border-2 border-transparent pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(135deg, #FFA500 0%, #10B981 25%, #EF4444 50%, #00E5FF 70%, #A855F7 85%, #0ED3DD 100%) border-box',
+                    WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+                    WebkitMaskComposite: 'destination-out',
+                    maskComposite: 'exclude',
+                    filter: 'drop-shadow(0 0 16px rgba(0, 229, 255, 0.6))'
                   }}
-                  transition={{
-                    duration: 25,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute -inset-[18px] rounded-full border border-blue-500/70 border-dashed"
                 />
 
+                {/* 5 ROTATING TEARDROP LOCATION PIN ELEMENTS */}
+                {PINS_DATA.map((pin) => {
+                  const isActive = hoveredId === pin.id;
+                  const IconComp = pin.fallbackIcon;
 
-                {/* Second rotating ring */}
-                <motion.div
-                  animate={{
-                    rotate: -360,
-                  }}
-                  transition={{
-                    duration: 18,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                  className="absolute -inset-[7px] rounded-full border-[2px] border-[#0ED3DD]/70"
-                />
+                  // Radius ~ 205px
+                  const rad = (pin.angle * Math.PI) / 180;
+                  const r = 205;
+                  const x = Math.cos(rad) * r;
+                  const y = Math.sin(rad) * r;
 
-                <div className="absolute inset-[43px] rounded-full bg-[#D5DEEF] shadow-inner" />
+                  // Pointer tail angle pointing towards center (0,0)
+                  const tailRotation = pin.angle + 90;
 
-                <div className="absolute inset-[60px] flex flex-col items-center justify-center rounded-full border border-white bg-white/80 px-8 text-center shadow-[0_20px_60px_rgba(15,23,42,0.15)]">
-                
-                  <motion.img
-                    src={logoImg}
-                    alt="Yomtech Global"
-                    className="mb-5 h-24 w-auto object-contain sm:h-28"
-                    animate={{
-                      y: [0, -5, 0],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                
-                  <h2 className="text-[2.7rem] font-black uppercase leading-none tracking-tight text-[#173B78] sm:text-[3.3rem]">
-                    OUR
-                  </h2>
-
-                  <h3 className="mt-2 text-[3.1rem] font-black uppercase leading-none tracking-tight text-[#07acc9] sm:text-[4rem]">
-                    PRODUCTS
-                  </h3>
-
-
-                  <div className="mt-7 flex items-center gap-2">
-
-                    <span className="h-1 w-3 rounded-full bg-[#21396e]" />
-
-                    <span className="h-2 w-2 rounded-full bg-[#0ED3DD]" />
-
-                    <span className="h-1 w-16 rounded-full bg-gradient-to-r from-[#213c76] to-[#0ED3DD]" />
-
-                    <span className="h-2 w-2 rounded-full bg-[#0ED3DD]" />
-
-                    <span className="h-1 w-3 rounded-full bg-[#2563EB]" />
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </motion.div>
-
-            <div className="w-full lg:absolute lg:right-0 lg:top-[45px] lg:w-[720px]">
-
-              <div className="space-y-6 sm:space-y-7">
-
-                {ACADEMY_PRODUCTS.map((product, index) => (
-
-                  <motion.a
-                    key={product.id}
-                    href={product.url}
-                    target={product.external ? "_blank" : undefined}
-                    rel={product.external ? "noopener noreferrer" : undefined}
-
-                    initial={{
-                      opacity: 0,
-                      x: 50,
-                    }}
-
-                    animate={{
-                      opacity: 1,
-                      x: 0,
-                    }}
-
-                    transition={{
-                      duration: 0.6,
-                      delay: index * 0.12,
-                      ease: "easeOut",
-                    }}
-
-                    className="group relative flex items-center"
-                  >
-
-                    <div className="relative z-20 flex h-[112px] w-[112px] shrink-0 items-center justify-center">
-
-
-                      <motion.div
-                        animate={{
-                          rotate: 360,
+                  return (
+                    <div
+                      key={`rotating-pin-${pin.id}`}
+                      onMouseEnter={() => setHoveredId(pin.id)}
+                      onMouseLeave={() => setHoveredId(null)}
+                      className="absolute z-30 cursor-pointer group/pin"
+                      style={{
+                        transform: `translate(${x}px, ${y}px)`
+                      }}
+                    >
+                      {/* Counter-rotating Wrapper to keep logo upright during 360° orbit rotation */}
+                      <div
+                        style={{
+                          animation: 'spin 35s linear infinite reverse',
+                          animationPlayState: (isPaused || hoveredId) ? 'paused' : 'running'
                         }}
-                        transition={{
-                          duration: 9 + index,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        className="absolute inset-0 rounded-full border-[2px] border-dashed border-[#2563EB]/80"
-                      />
+                        className="relative flex items-center justify-center"
+                      >
+                        {/* Teardrop Pointer Tail */}
+                        <div
+                          className="absolute w-4 h-4 rotate-45 transition-all duration-300 pointer-events-none opacity-90"
+                          style={{
+                            backgroundColor: pin.color,
+                            boxShadow: `0 0 15px ${pin.color}`,
+                            transform: `rotate(${tailRotation}deg) translateY(16px)`
+                          }}
+                        />
 
-
-                      <motion.div
-                        animate={{
-                          rotate: -360,
-                        }}
-                        transition={{
-                          duration: 7 + index,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                        className="absolute inset-[7px] rounded-full border-[2px] border-cyan-400/70"
-                      />
-
-
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.08, 1],
-                          opacity: [0.25, 0.55, 0.25],
-                        }}
-                        transition={{
-                          duration: 2.4,
-                          repeat: Infinity,
-                          delay: index * 0.2,
-                        }}
-                        className="absolute inset-[12px] rounded-full bg-cyan-400/20 blur-md"
-                      />
-
-
-                      {/* Main white circle */}
-                      <div className="relative flex h-[94px] w-[94px] items-center justify-center rounded-full border-[3px] border-white bg-[#D5DEEF] shadow-[0_0_30px_rgba(14,165,233,0.35)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_45px_rgba(14,211,221,0.65)]">
-
-
-                        {/* Inner circle */}
-                        <div className="flex h-[82px] w-[82px] items-center justify-center overflow-hidden rounded-full border border-blue-200 bg-white">
-
-                          <motion.div
-                            whileHover={{
-                              scale: 1.1,
-                              rotate: 5,
-                            }}
-                            transition={{
-                              duration: 0.3,
-                            }}
-                            className="flex h-full w-full items-center justify-center"
-                          >
-                            <ProductIcon product={product} />
-                          </motion.div>
-
+                        {/* Location Pin Head Circle — SHOW ONLY LOGO WITH ANIMATED PULSE */}
+                        <div
+                          className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center relative z-10 transition-all duration-300 ${isActive ? 'scale-135 z-40 drop-shadow-[0_0_25px_rgba(255,255,255,0.9)]' : 'hover:scale-115 drop-shadow-lg'
+                            }`}
+                        >
+                          {/* SHOW ONLY THE CLEAN LOGO / ICON */}
+                          <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center p-0.5 shadow-xl bg-[#02050E]/90 backdrop-blur-md border border-white/30">
+                            {pin.logo ? (
+                              <img
+                                src={pin.logo}
+                                alt={pin.name}
+                                className={`rounded-full transition-all ${pin.id === 'yomnex'
+                                    ? 'w-[75%] h-[75%] object-contain p-0.5 bg-white/95 scale-80'
+                                    : 'w-full h-full object-cover'
+                                  }`}
+                              />
+                            ) : pin.monogram ? (
+                              <span className="text-2xl font-black font-display text-white">{pin.monogram}</span>
+                            ) : (
+                              <IconComp className="w-7 h-7 text-white group-hover/pin:scale-110 transition-transform" strokeWidth={2} />
+                            )}
+                          </div>
                         </div>
 
                       </div>
-
                     </div>
+                  );
+                })}
 
-                    <motion.div
-                      whileHover={{
-                        x: 8,
-                      }}
-                      transition={{
-                        duration: 0.3,
-                      }}
-
-                      className="relative -ml-5 flex min-h-[100px] w-[45%] items-center justify-between overflow-hidden border-[0.5px] blue-300/50 bg-white/10 pl-10 pr-8 text-white shadow-[0_12px_35px_rgba(15,23,42,0.15)] backdrop-blur-md"
-                      
+                {/* Intermediate Small Glowing Orbit Dots */}
+                {[-60, 0, 60, 120, 180, 240].map((midAngle, i) => {
+                  const rad = (midAngle * Math.PI) / 180;
+                  const x = Math.cos(rad) * 205;
+                  const y = Math.sin(rad) * 205;
+                  return (
+                    <div
+                      key={`orbit-dot-${i}`}
+                      className="absolute w-3 h-3 rounded-full bg-white border-2 border-cyan-400 shadow-[0_0_12px_#00E5FF] pointer-events-none animate-ping"
                       style={{
-                        clipPath:
-                          "polygon(0 0, 94% 0, 100% 50%, 94% 100%, 0 100%, 5% 50%)",
+                        transform: `translate(${x}px, ${y}px)`,
+                        animationDuration: `${2 + i * 0.5}s`
                       }}
-                    >
-
-         
-                      <div className="absolute inset-0 bg-white/30 backdrop-blur-xl border border-white/50" />
-
-
-                      <motion.div
-                        animate={{
-                          x: ["-120%", "120%"],
-                        }}
-                        transition={{
-                          duration: 4,
-                          repeat: Infinity,
-                          ease: "linear",
-                          delay: index * 0.35,
-                        }}
-                        className="absolute inset-y-0 left-0 w-[35%] skew-x-12 bg-gradient-to-r from-transparent via-white/15 to-transparent"
-                      />
-
-
-                      <div className="relative z-10 min-w-0">
-
-
-                        
-                        <h3 className="text-[1.15rem] font-black uppercase tracking-wide text-[#123B73] sm:text-[1.3rem]">
-                          {product.label}
-                        </h3>                 
-                      </div>
-
-
-                      {/* Arrow */}
-                      <motion.div
-                        whileHover={{
-                          scale: 1.15,
-                        }}
-
-                        animate={{
-                          x: [0, 4, 0],
-                        }}
-
-                        transition={{
-                          duration: 1.6,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-
-                        className="relative z-10 ml-5 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/70 bg-white/5 text-white"
-                      >
-                        <ChevronRight size={25} strokeWidth={2.5} />
-                      </motion.div>
-
-                    </motion.div>
-
-                  </motion.a>
-
-                ))}
+                    />
+                  );
+                })}
 
               </div>
+
+              {/* ===================================================
+                  STILL CENTRAL CORE CIRCLE (With Pulsing Ripple Aura)
+              =================================================== */}
+              {/* Pulsing Ripple Aura Ring 1 */}
+              <motion.div
+                animate={{ scale: [1, 1.25, 1], opacity: [0.5, 0, 0.5] }}
+                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute inset-16 rounded-full border-2 border-[#00E5FF]/60 pointer-events-none"
+              />
+
+              {/* Double Inner Cyan Rings around Core */}
+              <div className="absolute inset-20 sm:inset-24 rounded-full border-2 border-[#00E5FF]/50 pointer-events-none shadow-[0_0_25px_rgba(0,229,255,0.3)]" />
+              <div className="absolute inset-24 sm:inset-28 rounded-full border border-[#00E5FF]/35 pointer-events-none" />
+
+              <motion.div
+                animate={{ y: [-3, 3, -3] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-48 h-48 sm:w-60 sm:h-60 rounded-full bg-gradient-to-b from-[#091426] via-[#040A14] to-[#02050B] border-3 border-[#00E5FF]/80 flex flex-col items-center justify-center p-6 text-center shadow-[0_0_60px_rgba(0,229,255,0.5)] relative z-20 overflow-hidden"
+              >
+                {/* Core Ambient Glow */}
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#00E5FF]/30 via-transparent to-transparent pointer-events-none" />
+
+                {/* Yomtech Emblem */}
+                <div className="w-10 h-10 sm:w-14 sm:h-14 mb-2 rounded-xl p-1.5 bg-[#030914] border border-[#00E5FF]/50 flex items-center justify-center shadow-md">
+                  <img src={logoImg} alt="Yomtech Emblem" className="w-full h-full object-contain" />
+                </div>
+
+                <h2 className="text-xl sm:text-2.5xl font-black uppercase tracking-tight text-white font-display leading-tight mt-0.5">
+                  OUR
+                </h2>
+                <h2 className="text-xl sm:text-2.5xl font-black uppercase tracking-tight text-white font-display leading-tight">
+                  PRODUCT
+                </h2>
+
+                {/* 5 Bottom Indicator Dots */}
+                <div className="flex items-center gap-1.5 mt-3">
+                  {PINS_DATA.map((prod) => {
+                    const isActive = hoveredId === prod.id;
+                    return (
+                      <div
+                        key={`core-dot-${prod.id}`}
+                        className="w-2 h-2 rounded-full transition-all duration-300"
+                        style={{
+                          backgroundColor: isActive ? prod.color : '#00E5FF',
+                          opacity: isActive ? 1 : 0.35,
+                          scale: isActive ? 1.5 : 1,
+                          boxShadow: isActive ? `0 0 12px ${prod.color}` : 'none'
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              </motion.div>
+
             </div>
 
           </div>
+
+          {/* =========================================================
+              RIGHT COLUMN: Glass Background Product Cards
+          ========================================================= */}
+          <div className="lg:col-span-5 flex flex-col justify-center space-y-4 sm:space-y-5">
+            {PINS_DATA.map((prod, index) => {
+              const isActive = hoveredId === prod.id;
+
+              return (
+                <motion.a
+                  key={`card-${prod.id}`}
+                  href={prod.link}
+                  target={prod.link.startsWith('http') ? '_blank' : '_self'}
+                  rel="noopener noreferrer"
+                  onMouseEnter={() => setHoveredId(prod.id)}
+                  onMouseLeave={() => setHoveredId(null)}
+                  initial={{ opacity: 0, x: 40 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ x: 8, scale: 1.02 }}
+                  className="w-full rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex items-center justify-between transition-all duration-300 cursor-pointer relative overflow-hidden group/card bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-[#0ED3DD] shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_35px_rgba(14,211,221,0.3)]"
+                  style={{
+                    background: isActive ? 'rgba(255, 255, 255, 0.16)' : 'rgba(255, 255, 255, 0.08)',
+                    borderColor: isActive ? prod.color : 'rgba(255, 255, 255, 0.2)',
+                  }}
+                >
+                  {/* Left: Product Name Text */}
+                  <div className="flex items-center gap-3">
+                    <h3
+                      className="text-xl sm:text-2.5xl font-black font-display tracking-tight transition-colors"
+                      style={{ color: prod.color }}
+                    >
+                      {prod.name}
+                    </h3>
+                  </div>
+
+                  {/* Right: Glass Circular Chevron Arrow Button > */}
+                  <div
+                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-white/30 flex items-center justify-center transition-all duration-300 shrink-0 group-hover/card:scale-110 bg-white/10 backdrop-blur-md"
+                    style={{
+                      borderColor: isActive ? prod.color : 'rgba(255, 255, 255, 0.3)',
+                      color: prod.color,
+                      background: isActive ? prod.color : 'rgba(255, 255, 255, 0.1)',
+                    }}
+                  >
+                    <ChevronRight
+                      size={22}
+                      style={{ color: isActive ? '#000000' : prod.color }}
+                      className="group-hover/card:translate-x-0.5 transition-transform"
+                    />
+                  </div>
+                </motion.a>
+              );
+            })}
+          </div>
+
         </div>
       </div>
+
     </section>
   );
 };

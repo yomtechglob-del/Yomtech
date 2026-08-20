@@ -1,0 +1,12 @@
+PrismaClientConstructorValidationError: "adapter" property can only be provided to PrismaClient constructor when "driverAdapters" preview feature is enabled.
+Read more at https://pris.ly/d/client-constructor
+    at Object.adapter (D:\All project\YomtechGlobal\Yomtech\server\node_modules\@prisma\client\runtime\library.js:125:262)
+    at Gl (D:\All project\YomtechGlobal\Yomtech\server\node_modules\@prisma\client\runtime\library.js:126:2527)
+    at new t (D:\All project\YomtechGlobal\Yomtech\server\node_modules\@prisma\client\runtime\library.js:130:748)
+    at Object.<anonymous> (D:\All project\YomtechGlobal\Yomtech\server\src\config\database.js:9:16)
+    at Module._compile (node:internal/modules/cjs/loader:1944:14)
+    at Object..js (node:internal/modules/cjs/loader:2084:10)
+    at Module.load (node:internal/modules/cjs/loader:1666:32)
+    at Module._load (node:internal/modules/cjs/loader:1447:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:260:19)
+    at Module.require (node:internal/modules/cjs/loader:1689:12)
