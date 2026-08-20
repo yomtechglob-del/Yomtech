@@ -1,81 +1,92 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Building2, GraduationCap, Landmark, Tv, Shield, Hotel } from 'lucide-react';
-import logoEmblem from '../../assets/logos/logo.png';
 
 export const ServicesIndustriesServed = () => {
   const sectors = [
     {
-      title: 'Government & Public Sector',
-      subtitle: 'E-Government & Municipalities',
+      step: '01',
+      phase: 'SECTOR 01',
+      stage: 'GOVERNMENT',
+      title: 'Government & Public Sector Digitalization',
       desc: 'Digital transformation solutions for public institutions, municipal trade bureaus, document automation, and citizen service portals.',
+      examples: 'Key Clients: SSGI, INSA, MInT, City Admin Trade Bureau',
       icon: Building2,
-      examples: 'SSGI, INSA, MInT, City Admin Trade Bureau',
-      accent: 'text-cyan-600',
-      bg: 'bg-cyan-50',
-      border: 'border-cyan-200',
-      badge: 'GOVERNMENT',
-      footerRight: 'Public Sector',
+      themeBg: 'bg-[#E53E3E]',
+      themeDarkBg: 'bg-[#C53030]',
+      themeText: 'text-[#E53E3E]',
+      themeBorder: 'border-[#E53E3E]',
+      offset: 'ml-0',
     },
     {
-      title: 'Higher Education & Academics',
-      subtitle: 'Universities & Vocational Centers',
-      desc: 'Learning management systems, campus IT networks, student portals, and repository mentorship programs.',
+      step: '02',
+      phase: 'SECTOR 02',
+      stage: 'ACADEMIC',
+      title: 'Higher Education & Vocational Academics',
+      desc: 'Learning management systems, campus IT networks, student management portals, and repository mentorship programs.',
+      examples: 'Key Clients: AASTU, ASTU, Arsi University, Kotebe University',
       icon: GraduationCap,
-      examples: 'AASTU, ASTU, Arsi University, Kotebe University',
-      accent: 'text-emerald-600',
-      bg: 'bg-emerald-50',
-      border: 'border-emerald-200',
-      badge: 'ACADEMIC',
-      footerRight: 'University Partners',
+      themeBg: 'bg-[#ED8936]',
+      themeDarkBg: 'bg-[#DD6B20]',
+      themeText: 'text-[#ED8936]',
+      themeBorder: 'border-[#ED8936]',
+      offset: 'ml-0 sm:ml-6 lg:ml-12',
     },
     {
-      title: 'Banking & Financial Services',
-      subtitle: 'Banks & Financial Institutions',
+      step: '03',
+      phase: 'SECTOR 03',
+      stage: 'FINANCIAL',
+      title: 'Banking & Financial Institutions',
       desc: 'Secure enterprise ERP integration, transaction management systems, CRM portals, and financial compliance auditing.',
+      examples: 'Key Clients: Bunna Bank, Commercial Partners & SMEs',
       icon: Landmark,
-      examples: 'Bunna Bank, Commercial Partners & SMEs',
-      accent: 'text-amber-600',
-      bg: 'bg-amber-50',
-      border: 'border-amber-200',
-      badge: 'FINANCIAL',
-      footerRight: 'Financial Sector',
+      themeBg: 'bg-[#48BB78]',
+      themeDarkBg: 'bg-[#38A169]',
+      themeText: 'text-[#48BB78]',
+      themeBorder: 'border-[#48BB78]',
+      offset: 'ml-0 sm:ml-12 lg:ml-24',
     },
     {
+      step: '04',
+      phase: 'SECTOR 04',
+      stage: 'MEDIA',
       title: 'Media & Innovation Houses',
-      subtitle: 'Broadcasting & Tech Media',
       desc: 'Tech documentary productions, innovation media platforms, storytelling, and digital content distribution networks.',
+      examples: 'Key Clients: Fana Media Corporation, Balageru TV, Addis AI',
       icon: Tv,
-      examples: 'Fana Media Corporation, Balageru TV, Addis AI',
-      accent: 'text-purple-600',
-      bg: 'bg-purple-50',
-      border: 'border-purple-200',
-      badge: 'MEDIA',
-      footerRight: 'Media Networks',
+      themeBg: 'bg-[#00A3C4]',
+      themeDarkBg: 'bg-[#0987A0]',
+      themeText: 'text-[#00A3C4]',
+      themeBorder: 'border-[#00A3C4]',
+      offset: 'ml-0 sm:ml-18 lg:ml-36',
     },
     {
-      title: 'Defense & National Security',
-      subtitle: 'Surveillance & Cybersecurity',
+      step: '05',
+      phase: 'SECTOR 05',
+      stage: 'SECURITY',
+      title: 'Defense & National Security Infrastructures',
       desc: 'AI-integrated CCTV surveillance zones, data center maintenance, threat defense, and smart monitoring systems.',
+      examples: 'Key Clients: National Security Agencies & Smart Zones',
       icon: Shield,
-      examples: 'National Security Agencies & Smart Zones',
-      accent: 'text-sky-600',
-      bg: 'bg-sky-50',
-      border: 'border-sky-200',
-      badge: 'SECURITY',
-      footerRight: 'National Defense',
+      themeBg: 'bg-[#3182CE]',
+      themeDarkBg: 'bg-[#2B6CB0]',
+      themeText: 'text-[#3182CE]',
+      themeBorder: 'border-[#3182CE]',
+      offset: 'ml-0 sm:ml-12 lg:ml-24',
     },
     {
-      title: 'Hospitality & Commercial SMEs',
-      subtitle: 'Hotels, Logistics & Trade',
+      step: '06',
+      phase: 'SECTOR 06',
+      stage: 'ENTERPRISE',
+      title: 'Hospitality & Commercial Enterprises',
       desc: 'Customized ERP, Warehouse Management Systems (WMS), Sales Force Automation (SFA), and HR software.',
+      examples: 'Key Clients: 10+ Major Hotel Chains & Private Enterprises',
       icon: Hotel,
-      examples: '10+ Major Hotel Chains & Private Enterprises',
-      accent: 'text-indigo-600',
-      bg: 'bg-indigo-50',
-      border: 'border-indigo-200',
-      badge: 'ENTERPRISE',
-      footerRight: 'Private Sector',
+      themeBg: 'bg-[#805AD5]',
+      themeDarkBg: 'bg-[#6B46C1]',
+      themeText: 'text-[#805AD5]',
+      themeBorder: 'border-[#805AD5]',
+      offset: 'ml-0 sm:ml-6 lg:ml-12',
     },
   ];
 
@@ -114,61 +125,69 @@ export const ServicesIndustriesServed = () => {
           </p>
         </div>
 
-        {/* 6 Industry Sector Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Infographic Banner Flow Container (Matching Reference Template) */}
+        <div className="space-y-8 max-w-5xl">
           {sectors.map((sec, idx) => {
             const IconComp = sec.icon;
             return (
               <motion.div
-                key={sec.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={sec.step}
+                initial={{ opacity: 0, x: -35 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: idx * 0.08 }}
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group relative overflow-hidden"
+                className={`relative flex items-stretch w-full max-w-3xl ${sec.offset} group`}
               >
-                {/* Logo Watermark Background */}
-                <img
-                  src={logoEmblem}
-                  alt=""
-                  className="absolute -bottom-2 -right-2 w-32 h-32 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
-                  aria-hidden="true"
-                />
-                <div className="space-y-3 relative z-10">
-                  <div className="flex items-center justify-between">
-                    <span className={`px-3 py-1 rounded-full text-[9px] font-mono font-black uppercase tracking-widest ${sec.bg} border ${sec.border} ${sec.accent}`}>
-                      {sec.badge}
-                    </span>
-                    <div className={`w-12 h-12 rounded-2xl ${sec.bg} ${sec.accent} border ${sec.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
-                      <IconComp size={22} />
+                {/* Left Solid Number Box */}
+                <div className={`w-28 sm:w-36 shrink-0 ${sec.themeBg} text-white rounded-l-3xl p-4 sm:p-6 flex flex-col justify-center items-center shadow-lg relative z-10 overflow-hidden`}>
+                  <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-white/90">
+                    {sec.phase}
+                  </span>
+                  <span className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white mt-1 drop-shadow-md">
+                    {sec.step}
+                  </span>
+                </div>
+
+                {/* Main Card Body + Top Folded Ribbon Banner */}
+                <div className="flex-1 bg-white rounded-r-3xl border-2 border-slate-100/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] p-5 sm:p-7 pt-7 relative flex flex-col justify-center gap-1.5 z-0 pr-20 sm:pr-28 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
+                  
+                  {/* Top Folded Ribbon Banner */}
+                  <div className="absolute -top-3.5 left-0 flex items-center z-20">
+                    <div className={`w-2.5 h-3.5 ${sec.themeDarkBg} rounded-tl-sm clip-fold-left pointer-events-none`} />
+                    <div className={`${sec.themeBg} text-white px-6 py-1 rounded-t-xl shadow-md font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5`}>
+                      <span>{sec.stage}</span>
                     </div>
                   </div>
 
-                  <h3 className="text-xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                  <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-display tracking-tight mt-1 group-hover:text-[#0284C7] transition-colors">
                     {sec.title}
                   </h3>
 
-                  <h4 className={`text-xs font-extrabold uppercase tracking-widest ${sec.accent}`}>
-                    {sec.subtitle}
-                  </h4>
-
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
                     {sec.desc}
                   </p>
+
+                  <div className="pt-2 text-[11px] font-extrabold uppercase text-[#0284C7] tracking-wider">
+                    {sec.examples}
+                  </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400">
-                  <span>Key Clients:</span>
-                  <span className={`${sec.accent} text-right truncate max-w-[180px]`} title={sec.examples}>
-                    {sec.examples}
-                  </span>
+                {/* Right Protruding Double-Ring Circular Icon Badge */}
+                <div className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                  <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 shadow-2xl border-2 border-slate-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-full h-full rounded-full ${sec.themeBg} flex items-center justify-center text-white shadow-inner`}>
+                      <IconComp className="w-6 h-6 sm:w-7 sm:h-7 text-white" strokeWidth={2.2} />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
+
       </div>
     </section>
   );
 };
+
+export default ServicesIndustriesServed;

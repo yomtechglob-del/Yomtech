@@ -6,40 +6,49 @@ import { Link } from 'react-router-dom';
 export const ServicesCaseStudies = () => {
   const caseStudies = [
     {
+      step: '01',
+      phase: 'PROJECT 01',
+      stage: 'ENTERPRISE ERP',
       title: 'Pan-African Enterprise ERP Rollout',
-      client: 'Public Sector & Industrial Enterprises',
+      client: 'Partner: Public Sector & Industrial Enterprises',
       impact: 'Integrated 12+ operational departments (Finance, HR, WMS, SFA, Gate Security) into a single centralized Yomnex ERP platform, eliminating data silos and reducing approval times by 65%.',
       icon: Building2,
-      tag: 'ENTERPRISE ERP',
       metrics: '65% Faster Approvals',
-      accent: 'text-cyan-600',
-      bg: 'bg-cyan-50',
-      border: 'border-cyan-200',
-      footerRight: 'Government SLAs',
+      themeBg: 'bg-[#E53E3E]',
+      themeDarkBg: 'bg-[#C53030]',
+      themeText: 'text-[#E53E3E]',
+      themeBorder: 'border-[#E53E3E]',
+      offset: 'ml-0',
     },
     {
+      step: '02',
+      phase: 'PROJECT 02',
+      stage: 'E-GOVERNMENT',
       title: 'E-Government & Municipal Trade Portal',
-      client: 'Addis Ababa City Admin Trade Bureau',
+      client: 'Partner: Addis Ababa City Admin Trade Bureau',
       impact: 'Digitized business licensing, trade renewals, document archiving, and workflow automation, enabling over 100,000+ businesses to process licenses digitally.',
       icon: Landmark,
-      tag: 'E-GOVERNMENT',
       metrics: '100,000+ Businesses Served',
-      accent: 'text-emerald-600',
-      bg: 'bg-emerald-50',
-      border: 'border-emerald-200',
-      footerRight: 'Public Sector Impact',
+      themeBg: 'bg-[#ED8936]',
+      themeDarkBg: 'bg-[#DD6B20]',
+      themeText: 'text-[#ED8936]',
+      themeBorder: 'border-[#ED8936]',
+      offset: 'ml-0 sm:ml-6 lg:ml-16',
     },
     {
+      step: '03',
+      phase: 'PROJECT 03',
+      stage: 'SURVEILLANCE',
       title: 'AI-Integrated Security & Surveillance Zone',
-      client: 'Space Science Institute & INSA',
+      client: 'Partner: Space Science Institute & INSA',
       impact: 'Deployed smart CCTV camera networks with automated motion detection, real-time analytics, and secure data center infrastructure for national research installations.',
       icon: Shield,
-      tag: 'SMART SURVEILLANCE',
       metrics: '24/7 Real-Time Monitoring',
-      accent: 'text-sky-600',
-      bg: 'bg-sky-50',
-      border: 'border-sky-200',
-      footerRight: 'National Security',
+      themeBg: 'bg-[#48BB78]',
+      themeDarkBg: 'bg-[#38A169]',
+      themeText: 'text-[#48BB78]',
+      themeBorder: 'border-[#48BB78]',
+      offset: 'ml-0 sm:ml-12 lg:ml-32',
     },
   ];
 
@@ -78,65 +87,89 @@ export const ServicesCaseStudies = () => {
           </p>
         </div>
 
-        {/* 3 Case Study Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Infographic Banner Flow Container (Matching Reference Template) */}
+        <div className="space-y-8 max-w-5xl">
           {caseStudies.map((cs, idx) => {
             const IconComp = cs.icon;
             return (
               <motion.div
-                key={cs.title}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                key={cs.step}
+                initial={{ opacity: 0, x: -35 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: idx * 0.1 }}
-                style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                className={`relative flex items-stretch w-full max-w-3xl ${cs.offset} group`}
               >
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className={`px-3 py-1 rounded-full text-[9px] font-mono font-black uppercase tracking-widest ${cs.bg} border ${cs.border} ${cs.accent}`}>
-                      {cs.tag}
-                    </span>
-                    <span className="px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase">
-                      {cs.metrics}
+                {/* Left Solid Number Box */}
+                <div className={`w-28 sm:w-36 shrink-0 ${cs.themeBg} text-white rounded-l-3xl p-4 sm:p-6 flex flex-col justify-center items-center shadow-lg relative z-10 overflow-hidden`}>
+                  <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-white/90">
+                    {cs.phase}
+                  </span>
+                  <span className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white mt-1 drop-shadow-md">
+                    {cs.step}
+                  </span>
+                </div>
+
+                {/* Main Card Body + Top Folded Ribbon Banner */}
+                <div className="flex-1 bg-white rounded-r-3xl border-2 border-slate-100/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] p-5 sm:p-7 pt-7 relative flex flex-col justify-center gap-1.5 z-0 pr-20 sm:pr-28 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
+                  
+                  {/* Top Folded Ribbon Banner */}
+                  <div className="absolute -top-3.5 left-0 flex items-center justify-between w-full pr-8 z-20 pointer-events-none">
+                    <div className="flex items-center">
+                      <div className={`w-2.5 h-3.5 ${cs.themeDarkBg} rounded-tl-sm clip-fold-left pointer-events-none`} />
+                      <div className={`${cs.themeBg} text-white px-6 py-1 rounded-t-xl shadow-md font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5`}>
+                        <span>{cs.stage}</span>
+                      </div>
+                    </div>
+
+                    <span className="px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[10px] font-black uppercase shadow-xs pointer-events-auto">
+                      ⚡ {cs.metrics}
                     </span>
                   </div>
 
-                  <div className={`w-12 h-12 rounded-2xl ${cs.bg} ${cs.accent} border ${cs.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
-                    <IconComp size={22} />
-                  </div>
-
-                  <h3 className="text-xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                  <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-display tracking-tight mt-2 group-hover:text-[#0284C7] transition-colors">
                     {cs.title}
                   </h3>
 
-                  <h4 className={`text-xs font-extrabold ${cs.accent}`}>
-                    Partner: {cs.client}
-                  </h4>
+                  <div className="text-xs font-black uppercase tracking-wider text-[#0284C7]">
+                    {cs.client}
+                  </div>
 
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
                     {cs.impact}
                   </p>
+
+                  <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold text-slate-400">
+                    <span className="flex items-center gap-1.5 text-emerald-600 font-black">
+                      <CheckCircle2 size={14} />
+                      Deployed & Verified SLA
+                    </span>
+                    <Link
+                      to="/contact"
+                      className="flex items-center gap-1 text-[#0284C7] font-black hover:underline"
+                    >
+                      <span>Request Case Study Demo</span>
+                      <ArrowRight size={12} />
+                    </Link>
+                  </div>
                 </div>
 
-                <div className="pt-3 border-t border-slate-200/70 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400">
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle2 size={13} className="text-emerald-600" />
-                    Deployed & Verified
-                  </span>
-                  <Link
-                    to="/contact"
-                    className={`flex items-center gap-1 ${cs.accent} hover:opacity-80 transition-opacity`}
-                  >
-                    <span>Request Demo</span>
-                    <ArrowRight size={12} />
-                  </Link>
+                {/* Right Protruding Double-Ring Circular Icon Badge */}
+                <div className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                  <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 shadow-2xl border-2 border-slate-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                    <div className={`w-full h-full rounded-full ${cs.themeBg} flex items-center justify-center text-white shadow-inner`}>
+                      <IconComp className="w-6 h-6 sm:w-7 sm:h-7 text-white" strokeWidth={2.2} />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
+
       </div>
     </section>
   );
 };
+
+export default ServicesCaseStudies;

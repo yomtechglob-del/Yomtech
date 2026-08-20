@@ -18,58 +18,94 @@ import consultingTeamImg from '../../assets/about/consulting_team.jpg';
 const METHODOLOGY_STEPS = [
   {
     step: '01',
+    phase: 'STEP 01',
+    stage: 'DISCOVERY',
     title: 'Requirement Analysis & Planning',
     subtitle: 'Scope Definition & Strategic Alignment',
     icon: FileText,
-    accent: 'cyan',
+    themeBg: 'bg-[#E53E3E]',
+    themeDarkBg: 'bg-[#C53030]',
+    themeText: 'text-[#E53E3E]',
+    themeBorder: 'border-[#E53E3E]',
     desc: 'Deep-dive discovery to understand client operational workflows, define precise system scope, establish technical parameters, and set clear project milestones.',
-    deliverables: ['Detailed SRS Document', 'Project Roadmap', 'Risk Mitigation Strategy', 'SLA Framework']
+    deliverables: ['Detailed SRS Document', 'Project Roadmap', 'Risk Mitigation Strategy', 'SLA Framework'],
+    offset: 'ml-0',
   },
   {
     step: '02',
+    phase: 'STEP 02',
+    stage: 'ARCHITECTURE',
     title: 'System Design & Architecture',
     subtitle: 'Scalable & Secure System Blueprints',
     icon: Sliders,
-    accent: 'emerald',
+    themeBg: 'bg-[#ED8936]',
+    themeDarkBg: 'bg-[#DD6B20]',
+    themeText: 'text-[#ED8936]',
+    themeBorder: 'border-[#ED8936]',
     desc: 'Engineering high-concurrency database schemas, microservice API contracts, security protocols, and responsive UI/UX prototypes tailored to client needs.',
-    deliverables: ['Database Schema Specs', 'API Contract Blueprints', 'UX/UI Wireframe Prototypes', 'Security Architecture']
+    deliverables: ['Database Schema Specs', 'API Contract Blueprints', 'UX/UI Wireframe Prototypes', 'Security Architecture'],
+    offset: 'ml-0 sm:ml-6 lg:ml-12',
   },
   {
     step: '03',
+    phase: 'STEP 03',
+    stage: 'DEVELOPMENT',
     title: 'Agile Development Process',
     subtitle: 'Iterative Sprints & Transparent Codebase',
     icon: Code,
-    accent: 'violet',
+    themeBg: 'bg-[#48BB78]',
+    themeDarkBg: 'bg-[#38A169]',
+    themeText: 'text-[#48BB78]',
+    themeBorder: 'border-[#48BB78]',
     desc: 'Iterative 2-week development sprints with continuous integration, automated builds, weekly client reviews, and complete code transparency.',
-    deliverables: ['Bi-Weekly Demo Builds', 'Clean Modular Code', 'Sprint Progress Dashboards', 'Version-Controlled Repo']
+    deliverables: ['Bi-Weekly Demo Builds', 'Clean Modular Code', 'Sprint Progress Dashboards', 'Version-Controlled Repo'],
+    offset: 'ml-0 sm:ml-12 lg:ml-24',
   },
   {
     step: '04',
+    phase: 'STEP 04',
+    stage: 'QUALITY ASSURANCE',
     title: 'Testing & Quality Assurance',
     subtitle: 'Performance, Penetration & Load Validation',
     icon: ShieldCheck,
-    accent: 'amber',
+    themeBg: 'bg-[#00A3C4]',
+    themeDarkBg: 'bg-[#0987A0]',
+    themeText: 'text-[#00A3C4]',
+    themeBorder: 'border-[#00A3C4]',
     desc: 'Comprehensive QA including automated unit tests, sub-50ms latency load testing, vulnerability penetration audits, and user acceptance testing (UAT).',
-    deliverables: ['Automated Test Suite', 'Security Audit Certificate', 'Load Performance Report', 'UAT Sign-Off']
+    deliverables: ['Automated Test Suite', 'Security Audit Certificate', 'Load Performance Report', 'UAT Sign-Off'],
+    offset: 'ml-0 sm:ml-18 lg:ml-36',
   },
   {
     step: '05',
+    phase: 'STEP 05',
+    stage: 'DEPLOYMENT',
     title: 'Deployment & Implementation',
     subtitle: 'Zero-Downtime Rollout & Operational Onboarding',
     icon: Server,
-    accent: 'indigo',
+    themeBg: 'bg-[#3182CE]',
+    themeDarkBg: 'bg-[#2B6CB0]',
+    themeText: 'text-[#3182CE]',
+    themeBorder: 'border-[#3182CE]',
     desc: 'Containerized deployment via Docker/Kubernetes on cloud or on-premise data centers, accompanied by staff training and seamless system migration.',
-    deliverables: ['Containerized Production Build', 'Staff Onboarding Workshops', 'Zero-Downtime Migration', 'System Admin Manuals']
+    deliverables: ['Containerized Production Build', 'Staff Onboarding Workshops', 'Zero-Downtime Migration', 'System Admin Manuals'],
+    offset: 'ml-0 sm:ml-12 lg:ml-24',
   },
   {
     step: '06',
+    phase: 'STEP 06',
+    stage: 'MAINTENANCE',
     title: 'Maintenance & Continuous Support',
     subtitle: 'Ongoing Optimization & System Evolution',
     icon: RefreshCw,
-    accent: 'rose',
+    themeBg: 'bg-[#805AD5]',
+    themeDarkBg: 'bg-[#6B46C1]',
+    themeText: 'text-[#805AD5]',
+    themeBorder: 'border-[#805AD5]',
     desc: 'Dedicated 24/7 technical support, continuous system optimization, security patch updates, and ongoing feature expansion throughout the product lifecycle.',
-    deliverables: ['24/7 Helpdesk Support', 'SLA Response Guarantee', 'Quarterly System Audits', 'Feature Upgrade Patches']
-  }
+    deliverables: ['24/7 Helpdesk Support', 'SLA Response Guarantee', 'Quarterly System Audits', 'Feature Upgrade Patches'],
+    offset: 'ml-0 sm:ml-6 lg:ml-12',
+  },
 ];
 
 /* ─── WHY CHOOSE US / COMPETITIVE ADVANTAGES ─── */
@@ -269,46 +305,69 @@ export const MethodologyPage = () => {
             </p>
           </div>
 
-          {/* Timeline Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {METHODOLOGY_STEPS.map((step) => {
-              const a = accentMap[step.accent];
+          {/* Infographic Banner Flow Container (Matching Reference Template) */}
+          <div className="space-y-8 max-w-5xl">
+            {METHODOLOGY_STEPS.map((step, idx) => {
               const IconComp = step.icon;
               return (
                 <motion.div
                   key={step.step}
-                  initial={{ opacity: 0, y: 25 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -35 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
-                  style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                  className="rounded-3xl p-8 border-2 border-indigo-200/80 shadow-xl hover:shadow-2xl transition-all flex flex-col justify-between space-y-6 group"
+                  transition={{ duration: 0.45, delay: idx * 0.08 }}
+                  className={`relative flex items-stretch w-full max-w-3xl ${step.offset} group`}
                 >
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-4xl font-black font-display text-slate-300 group-hover:text-[#0284C7] transition-colors">{step.step}</span>
-                      <div className={`w-12 h-12 rounded-2xl bg-gradient-to-tr ${a.gradient} p-2.5 text-white shadow-md flex items-center justify-center`}>
-                        <IconComp size={22} />
+                  {/* Left Solid Number Box */}
+                  <div className={`w-28 sm:w-36 shrink-0 ${step.themeBg} text-white rounded-l-3xl p-4 sm:p-6 flex flex-col justify-center items-center shadow-lg relative z-10 overflow-hidden`}>
+                    <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-white/90">
+                      {step.phase}
+                    </span>
+                    <span className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white mt-1 drop-shadow-md">
+                      {step.step}
+                    </span>
+                  </div>
+
+                  {/* Main Card Body + Top Folded Ribbon Banner */}
+                  <div className="flex-1 bg-white rounded-r-3xl border-2 border-slate-100/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] p-5 sm:p-7 pt-7 relative flex flex-col justify-center gap-1.5 z-0 pr-20 sm:pr-28 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
+                    
+                    {/* Top Folded Ribbon Banner */}
+                    <div className="absolute -top-3.5 left-0 flex items-center z-20">
+                      <div className={`w-2.5 h-3.5 ${step.themeDarkBg} rounded-tl-sm clip-fold-left pointer-events-none`} />
+                      <div className={`${step.themeBg} text-white px-6 py-1 rounded-t-xl shadow-md font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5`}>
+                        <span>{step.stage}</span>
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <h3 className="text-xl font-extrabold text-slate-900 font-display tracking-tight leading-snug">{step.title}</h3>
-                      <p className={`text-xs font-extrabold ${a.text}`}>{step.subtitle}</p>
-                    </div>
+                    <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-display tracking-tight mt-1 group-hover:text-[#0284C7] transition-colors">
+                      {step.title}
+                    </h3>
 
-                    <p className="text-xs text-slate-600 font-medium leading-relaxed">{step.desc}</p>
+                    <h4 className={`text-xs font-extrabold ${step.themeText}`}>
+                      {step.subtitle}
+                    </h4>
+
+                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                      {step.desc}
+                    </p>
+
+                    {/* Deliverables Pills */}
+                    <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center gap-2">
+                      {step.deliverables.map((del) => (
+                        <span key={del} className="px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-bold flex items-center gap-1">
+                          <CheckCircle2 size={11} className="text-[#0284C7]" />
+                          <span>{del}</span>
+                        </span>
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-200/80 space-y-2">
-                    <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">Deliverables &amp; Artifacts:</span>
-                    <div className="space-y-1">
-                      {step.deliverables.map((del) => (
-                        <div key={del} className="flex items-center gap-2 text-xs font-bold text-slate-800">
-                          <CheckCircle2 size={13} className="text-[#0284C7] shrink-0" />
-                          <span>{del}</span>
-                        </div>
-                      ))}
+                  {/* Right Protruding Double-Ring Circular Icon Badge */}
+                  <div className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
+                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 shadow-2xl border-2 border-slate-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`w-full h-full rounded-full ${step.themeBg} flex items-center justify-center text-white shadow-inner`}>
+                        <IconComp className="w-6 h-6 sm:w-7 sm:h-7 text-white" strokeWidth={2.2} />
+                      </div>
                     </div>
                   </div>
                 </motion.div>
