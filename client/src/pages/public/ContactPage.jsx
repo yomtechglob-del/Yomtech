@@ -6,6 +6,7 @@ import {
   Mail, Phone, MapPin, Clock, Send, CheckCircle, AlertCircle, MessageSquare, User,
   Facebook, Instagram, Youtube, Video
 } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
 const FaqItem = ({ faq, index }) => {
   const [open, setOpen] = useState(index === 0);
@@ -180,49 +181,61 @@ export const ContactPage = () => {
           {/* TOP 4 FLOATING INFO CARDS (EXACT SCREENSHOT DESIGN) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {/* Card 1: OUR LOCATION */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-emerald-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group">
-              <div className="w-14 h-14 mx-auto rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <MapPin size={24} />
+            <div className="bg-white p-7 rounded-[1.75rem] border border-emerald-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 mx-auto rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MapPin size={24} />
+                </div>
+                <div className="text-[10px] font-black uppercase text-emerald-700 tracking-widest">OUR LOCATION</div>
+                <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
+                  Megenagna Derartu Building, Office 906
+                </div>
+                <div className="text-xs font-semibold text-slate-500">Addis Ababa, Ethiopia</div>
               </div>
-              <div className="text-[10px] font-black uppercase text-emerald-700 tracking-widest">OUR LOCATION</div>
-              <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
-                Megenagna Derartu Building, Office 906
-              </div>
-              <div className="text-xs font-semibold text-slate-500">Addis Ababa, Ethiopia</div>
             </div>
 
             {/* Card 2: PHONE NUMBERS */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-amber-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group">
-              <div className="w-14 h-14 mx-auto rounded-full bg-amber-100/80 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Phone size={24} />
+            <div className="bg-white p-7 rounded-[1.75rem] border border-amber-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 mx-auto rounded-full bg-amber-100/80 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Phone size={24} />
+                </div>
+                <div className="text-[10px] font-black uppercase text-amber-700 tracking-widest">PHONE NUMBERS</div>
+                <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">+251 (977) 666-699</div>
+                <div className="text-xs font-semibold text-slate-500">+251 (912) 625-381</div>
               </div>
-              <div className="text-[10px] font-black uppercase text-amber-700 tracking-widest">PHONE NUMBERS</div>
-              <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">+251 (977) 666-699</div>
-              <div className="text-xs font-semibold text-slate-500">+251 (912) 625-381</div>
             </div>
 
             {/* Card 3: EMAIL ADDRESS */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-sky-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group">
-              <div className="w-14 h-14 mx-auto rounded-full bg-sky-100/80 text-[#0284C7] flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Mail size={24} />
+            <div className="bg-white p-7 rounded-[1.75rem] border border-sky-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 mx-auto rounded-full bg-sky-100/80 text-[#0284C7] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Mail size={24} />
+                </div>
+                <div className="text-[10px] font-black uppercase text-[#0284C7] tracking-widest">EMAIL ADDRESS</div>
+                <div className="text-xs sm:text-sm font-black text-slate-900 break-all leading-snug">
+                  contact@yomtechglobal.org
+                </div>
+                <div className="text-xs font-semibold text-slate-500">support@yomtechglobal.org</div>
               </div>
-              <div className="text-[10px] font-black uppercase text-[#0284C7] tracking-widest">EMAIL ADDRESS</div>
-              <div className="text-xs sm:text-sm font-black text-slate-900 break-all leading-snug">
-                contact@yomtechglobal.org
-              </div>
-              <div className="text-xs font-semibold text-slate-500">support@yomtechglobal.org</div>
             </div>
 
             {/* Card 4: OFFICE HOURS */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-purple-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group">
-              <div className="w-14 h-14 mx-auto rounded-full bg-purple-100/80 text-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Clock size={24} />
+            <div className="bg-white p-7 rounded-[1.75rem] border border-purple-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+              <div className="relative z-10">
+                <div className="w-14 h-14 mx-auto rounded-full bg-purple-100/80 text-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Clock size={24} />
+                </div>
+                <div className="text-[10px] font-black uppercase text-purple-700 tracking-widest">OFFICE HOURS</div>
+                <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
+                  Mon – Sat: 8:30 AM – 5:30 PM
+                </div>
+                <div className="text-xs font-semibold text-slate-500">Sunday: Closed</div>
               </div>
-              <div className="text-[10px] font-black uppercase text-purple-700 tracking-widest">OFFICE HOURS</div>
-              <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
-                Mon – Sat: 8:30 AM – 5:30 PM
-              </div>
-              <div className="text-xs font-semibold text-slate-500">Sunday: Closed</div>
             </div>
           </div>
 
@@ -233,31 +246,34 @@ export const ContactPage = () => {
             <div className="lg:col-span-5 space-y-6">
               
               {/* Social Platforms Card */}
-              <div className="bg-[#F5F3FF] p-7 sm:p-8 rounded-[2rem] border border-purple-200/70 shadow-md space-y-4">
-                <div className="text-[10px] font-black uppercase tracking-widest text-purple-600">
-                  SOCIAL PLATFORMS
-                </div>
-                <h4 className="text-2xl font-black font-display text-slate-900">Follow Us</h4>
-                <p className="text-slate-500 text-xs font-medium">Stay updated with our latest programs and news.</p>
-                
-                {/* 4 Social Action Buttons Grid */}
-                <div className="grid grid-cols-4 gap-3 pt-2">
-                  <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-400 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                    <Facebook size={20} className="text-blue-600 group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-bold text-slate-700">Facebook</span>
-                  </a>
-                  <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-pink-400 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                    <Instagram size={20} className="text-pink-600 group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-bold text-slate-700">Instagram</span>
-                  </a>
-                  <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-800 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                    <Video size={20} className="text-slate-900 group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-bold text-slate-700">TikTok</span>
-                  </a>
-                  <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-red-500 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                    <Youtube size={20} className="text-red-600 group-hover:scale-110 transition-transform" />
-                    <span className="text-[10px] font-bold text-slate-700">YouTube</span>
-                  </a>
+              <div className="bg-[#F5F3FF] p-7 sm:p-8 rounded-[2rem] border border-purple-200/70 shadow-md space-y-4 relative overflow-hidden">
+                <img src={logoEmblem} alt="" className="absolute -bottom-4 -right-4 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+                <div className="relative z-10 space-y-4">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-purple-600">
+                    SOCIAL PLATFORMS
+                  </div>
+                  <h4 className="text-2xl font-black font-display text-slate-900">Follow Us</h4>
+                  <p className="text-slate-500 text-xs font-medium">Stay updated with our latest programs and news.</p>
+                  
+                  {/* 4 Social Action Buttons Grid */}
+                  <div className="grid grid-cols-4 gap-3 pt-2">
+                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-400 flex flex-col items-center justify-center gap-1.5 transition-all group">
+                      <Facebook size={20} className="text-blue-600 group-hover:scale-110 transition-transform" />
+                      <span className="text-[10px] font-bold text-slate-700">Facebook</span>
+                    </a>
+                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-pink-400 flex flex-col items-center justify-center gap-1.5 transition-all group">
+                      <Instagram size={20} className="text-pink-600 group-hover:scale-110 transition-transform" />
+                      <span className="text-[10px] font-bold text-slate-700">Instagram</span>
+                    </a>
+                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-800 flex flex-col items-center justify-center gap-1.5 transition-all group">
+                      <Video size={20} className="text-slate-900 group-hover:scale-110 transition-transform" />
+                      <span className="text-[10px] font-bold text-slate-700">TikTok</span>
+                    </a>
+                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-red-500 flex flex-col items-center justify-center gap-1.5 transition-all group">
+                      <Youtube size={20} className="text-red-600 group-hover:scale-110 transition-transform" />
+                      <span className="text-[10px] font-bold text-slate-700">YouTube</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -294,7 +310,10 @@ export const ContactPage = () => {
                 {/* Top accent line */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-[#0284C7] to-[#0ED3DD]" />
 
-                <div className="space-y-2">
+                {/* Logo Watermark Background */}
+                <img src={logoEmblem} alt="" className="absolute -bottom-6 -right-6 w-64 h-64 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+
+                <div className="space-y-2 relative z-10">
                   <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 inline-flex items-center gap-1.5">
                     <Send size={12} />
                     <span>SEND A MESSAGE</span>

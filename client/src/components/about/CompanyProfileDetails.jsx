@@ -367,6 +367,14 @@ export const CompanyProfileDetails = () => {
                     style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
                     className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 cursor-pointer"
                   >
+                    {/* Logo Watermark Background */}
+                    <img
+                      src={logoEmblem}
+                      alt=""
+                      className="absolute -bottom-4 -right-4 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+                      aria-hidden="true"
+                    />
+
                     {/* Sweeping Light Sheen Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2rem]" />
 
@@ -463,6 +471,14 @@ export const CompanyProfileDetails = () => {
                     style={{ background: 'linear-gradient(180deg, #FFFDF0 0%, #FFFFFF 30%, #FFFFFF 70%, #FFFDF0 100%)' }}
                     className="relative w-[22rem] sm:w-[24rem] rounded-[2rem] p-7 sm:p-8 border-2 border-amber-200/90 shadow-md shadow-amber-500/5 hover:shadow-2xl hover:shadow-amber-500/15 hover:border-amber-400 hover:-translate-y-2.5 transition-all duration-500 text-center flex flex-col items-center justify-between space-y-6 group overflow-hidden shrink-0 cursor-pointer"
                   >
+                    {/* Logo Watermark Background */}
+                    <img
+                      src={logoEmblem}
+                      alt=""
+                      className="absolute -bottom-4 -right-4 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+                      aria-hidden="true"
+                    />
+
                     {/* Sweeping Light Sheen Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-amber-200/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0 rounded-[2rem]" />
 
@@ -565,6 +581,14 @@ export const CompanyProfileDetails = () => {
                     {/* Top Gradient Accent Bar */}
                     <div className={`absolute top-0 inset-x-0 h-1.5 ${unit.accentBar}`} />
 
+                    {/* Logo Watermark Background */}
+                    <img
+                      src={logoEmblem}
+                      alt=""
+                      className="absolute -bottom-4 -right-4 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+                      aria-hidden="true"
+                    />
+
                     {/* Sweeping Light Sheen Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out pointer-events-none z-0" />
 
@@ -644,10 +668,18 @@ export const CompanyProfileDetails = () => {
                   <div 
                     key={m.step} 
                     style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                    className="group relative rounded-[2.2rem] p-7 sm:p-8 border-2 border-indigo-200/80 shadow-md shadow-indigo-500/5 text-slate-900 hover:border-[#0284C7] hover:shadow-2xl hover:shadow-cyan-500/15 hover:-translate-y-2.5 transition-all duration-500 overflow-visible flex flex-col justify-between space-y-6"
+                    className="group relative rounded-[2.2rem] p-7 sm:p-8 border-2 border-indigo-200/80 shadow-md shadow-indigo-500/5 text-slate-900 hover:border-[#0284C7] hover:shadow-2xl hover:shadow-cyan-500/15 hover:-translate-y-2.5 transition-all duration-500 overflow-hidden flex flex-col justify-between space-y-6"
                   >
+                    {/* Logo Watermark Background */}
+                    <img
+                      src={logoEmblem}
+                      alt=""
+                      className="absolute -bottom-4 -right-4 w-44 h-44 object-contain opacity-[0.50] pointer-events-none select-none z-[1]"
+                      aria-hidden="true"
+                    />
+
                     {/* Top Floating Watermark Number */}
-                    <span className="text-6xl font-black font-display absolute top-3 right-5 select-none text-cyan-200/50 group-hover:text-[#0284C7]/20 group-hover:scale-110 transition-all duration-500">
+                    <span className="text-6xl font-black font-display absolute top-3 right-5 select-none text-cyan-400/90 group-hover:text-[#0284C7] group-hover:scale-110 transition-all duration-500 z-10">
                       {m.step}
                     </span>
 
@@ -890,8 +922,16 @@ export const CompanyProfileDetails = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch text-left">
             {/* Left: Official Business License Details */}
-            <div className="lg:col-span-7 bg-white rounded-3xl p-8 border-2 border-slate-200/80 shadow-xl space-y-6 flex flex-col justify-between">
-              <div className="space-y-4">
+            <div className="lg:col-span-7 bg-white rounded-3xl p-8 border-2 border-slate-200/80 shadow-xl space-y-6 flex flex-col justify-between relative overflow-hidden">
+              {/* Logo Watermark Background */}
+              <img
+                src={logoEmblem}
+                alt=""
+                className="absolute -bottom-6 -right-6 w-56 h-56 object-contain opacity-[0.28] pointer-events-none select-none"
+                aria-hidden="true"
+              />
+
+              <div className="space-y-4 relative z-10">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-cyan-50 text-[#0284C7] text-xs font-black uppercase tracking-widest border border-cyan-200">
                   <FileText className="w-4 h-4" />
                   <span>Official Registration &amp; Trade License</span>
@@ -925,7 +965,7 @@ export const CompanyProfileDetails = () => {
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center justify-between">
+              <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-semibold flex items-center justify-between relative z-10">
                 <span className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
                   Intellectual Property Authority Certified
@@ -939,6 +979,14 @@ export const CompanyProfileDetails = () => {
               {/* Background Glow Accents matching Hero section */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-400/25 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-900/40 rounded-full blur-3xl pointer-events-none" />
+
+              {/* Logo Watermark Background */}
+              <img
+                src={logoEmblem}
+                alt=""
+                className="absolute -bottom-6 -right-6 w-56 h-56 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+                aria-hidden="true"
+              />
 
               <div className="relative z-10 space-y-4">
                 <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md text-cyan-200 text-xs font-black uppercase tracking-widest border border-cyan-300/40 shadow-sm">

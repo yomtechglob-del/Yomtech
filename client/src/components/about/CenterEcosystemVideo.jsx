@@ -4,6 +4,7 @@ import videoPoster from '../../assets/vision_pan_africa.png';
 import heroTeamImg from '../../assets/about/hero_team.jpg';
 import ermiTwoImg from '../../assets/ermi-two.jpg';
 import erminOneImg from '../../assets/ermin-one.jpg';
+import logoImg from '../../assets/logos/logo.png';
 
 export const CenterEcosystemVideo = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,6 +20,14 @@ export const CenterEcosystemVideo = () => {
         onClick={() => setIsModalOpen(true)}
         className="group relative rounded-[2.5rem] bg-[#03045E] border-2 border-cyan-400/80 shadow-[0_20px_60px_rgba(0,180,216,0.35)] hover:shadow-[0_25px_90px_rgba(30,144,255,0.5)] transition-all duration-500 overflow-hidden my-10 cursor-pointer text-left"
       >
+        {/* Logo Watermark Background */}
+        <img
+          src={logoImg}
+          alt=""
+          className="absolute -bottom-6 -right-6 w-64 h-64 object-contain opacity-[0.28] pointer-events-none select-none z-[1]"
+          aria-hidden="true"
+        />
+
         {/* About Hero Section Background Images & Cyan Gradient Overlay */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
           <img 

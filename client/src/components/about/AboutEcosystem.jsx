@@ -156,6 +156,19 @@ const EcosystemHexagonCard = ({ hex, isHovered, onHover, onClick }) => {
         />
       </svg>
 
+      {/* Logo Watermark — clipped strictly inside hexagon boundary */}
+      <div
+        className="absolute inset-0 pointer-events-none z-[5] flex items-end justify-end pb-10 pr-10"
+        style={{ clipPath: 'polygon(50% 2.5%, 95.7% 25.3%, 95.7% 74.7%, 50% 97.5%, 4.3% 74.7%, 4.3% 25.3%)' }}
+        aria-hidden="true"
+      >
+        <img
+          src={yomtechLogo}
+          alt=""
+          className="w-14 h-14 object-contain opacity-[0.28] select-none"
+        />
+      </div>
+
       {/* Hexagon Content */}
       <div className="relative z-10 p-5 text-center flex flex-col items-center justify-center h-full max-w-[195px] space-y-1.5 select-text">
         {/* Bold Colored Number */}
@@ -213,6 +226,19 @@ const EcosystemCenterHexagon = ({ logoSrc }) => (
         opacity="0.4"
       />
     </svg>
+
+    {/* Logo Watermark — clipped strictly inside hexagon boundary */}
+    <div
+      className="absolute inset-0 pointer-events-none z-[5] flex items-end justify-end pb-10 pr-10"
+      style={{ clipPath: 'polygon(50% 2.5%, 95.7% 25.3%, 95.7% 74.7%, 50% 97.5%, 4.3% 74.7%, 4.3% 25.3%)' }}
+      aria-hidden="true"
+    >
+      <img
+        src={yomtechLogo}
+        alt=""
+        className="w-14 h-14 object-contain opacity-[0.28] select-none"
+      />
+    </div>
 
     <div className="relative z-10 p-4 text-center flex flex-col items-center justify-center h-full max-w-[180px] space-y-1 select-text">
       {/* Top Header Text */}

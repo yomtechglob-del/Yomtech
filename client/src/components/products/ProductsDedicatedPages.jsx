@@ -656,10 +656,17 @@ const ProductShowcaseRow = ({ product, idx }) => {
                   <div
                     key={i}
                     style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                    className="rounded-2xl border-2 border-indigo-200/80 p-3 text-center"
+                    className="rounded-2xl border-2 border-indigo-200/80 p-3 text-center relative overflow-hidden"
                   >
-                    <div className={`text-lg font-black ${product.accent}`}>{s.value}</div>
-                    <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">{s.label}</div>
+                    {/* Logo Watermark Background */}
+                    <img
+                      src={logoEmblem}
+                      alt=""
+                      className="absolute -bottom-1 -right-1 w-12 h-12 object-contain opacity-[0.28] pointer-events-none select-none"
+                      aria-hidden="true"
+                    />
+                    <div className={`text-lg font-black ${product.accent} relative z-10`}>{s.value}</div>
+                    <div className="text-[9px] font-bold text-slate-500 uppercase tracking-widest relative z-10">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -672,12 +679,19 @@ const ProductShowcaseRow = ({ product, idx }) => {
                     <div
                       key={i}
                       style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                      className="flex gap-3 p-4 rounded-2xl border-2 border-indigo-200/80 group hover:shadow-md transition-all"
+                      className="flex gap-3 p-4 rounded-2xl border-2 border-indigo-200/80 group hover:shadow-md transition-all relative overflow-hidden"
                     >
-                      <div className={`w-9 h-9 rounded-xl ${product.bg} ${product.accent} border ${product.border} flex items-center justify-center flex-shrink-0`}>
+                      {/* Logo Watermark Background */}
+                      <img
+                        src={logoEmblem}
+                        alt=""
+                        className="absolute bottom-1 right-1 w-16 h-16 object-contain opacity-[0.28] pointer-events-none select-none"
+                        aria-hidden="true"
+                      />
+                      <div className={`w-9 h-9 rounded-xl ${product.bg} ${product.accent} border ${product.border} flex items-center justify-center flex-shrink-0 relative z-10`}>
                         <Icon size={16} />
                       </div>
-                      <div>
+                      <div className="relative z-10">
                         <h4 className="text-xs font-black text-slate-900">{f.title}</h4>
                         <p className="text-[10px] text-slate-500 mt-0.5 leading-relaxed">{f.desc}</p>
                       </div>

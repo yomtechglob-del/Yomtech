@@ -65,6 +65,26 @@ body {
   100% { transform: translateX(0%); }
 }
 
+/* S-Curve Water Flowing Stroke Animation */
+@keyframes sCurveWaterFlow {
+  0% {
+    stroke-dashoffset: 600;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-scurve-water {
+  stroke-dasharray: 50 30;
+  animation: sCurveWaterFlow 3s linear infinite;
+}
+
+.animate-scurve-water-reverse {
+  stroke-dasharray: 50 30;
+  animation: sCurveWaterFlow 3s linear infinite reverse;
+}
+
 .animate-water-flow-left {
   animation: waterFlowLeft 32s linear infinite;
 }

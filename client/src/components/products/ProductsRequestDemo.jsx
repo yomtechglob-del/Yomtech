@@ -58,9 +58,16 @@ export const ProductsRequestDemo = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: idx * 0.1 }}
                   style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                  className="rounded-3xl p-6 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all space-y-3 group"
+                  className="rounded-3xl p-6 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all space-y-3 group relative overflow-hidden"
                 >
-                  <div className="flex items-center justify-between">
+                  {/* Logo Watermark Background */}
+                  <img
+                    src={logoImg}
+                    alt=""
+                    className="absolute bottom-1 right-1 w-20 h-20 object-contain opacity-[0.28] pointer-events-none select-none"
+                    aria-hidden="true"
+                  />
+                  <div className="flex items-center justify-between relative z-10">
                     <div className={`w-12 h-12 rounded-2xl ${r.bg} ${r.accent} border ${r.border} flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
                       <Icon size={20} />
                     </div>
@@ -68,8 +75,8 @@ export const ProductsRequestDemo = () => {
                       BENEFIT
                     </span>
                   </div>
-                  <h3 className="text-lg font-black text-slate-900 group-hover:text-[#0284C7] transition-colors">{r.title}</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{r.desc}</p>
+                  <h3 className="text-lg font-black text-slate-900 group-hover:text-[#0284C7] transition-colors relative z-10">{r.title}</h3>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed relative z-10">{r.desc}</p>
                 </motion.div>
               );
             })}
@@ -90,6 +97,14 @@ export const ProductsRequestDemo = () => {
               >
                 <div className="bg-white rounded-[2.4rem] p-8 space-y-6 relative overflow-hidden h-full flex flex-col">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-50/80 to-sky-100/60 rounded-full blur-3xl pointer-events-none" />
+
+                  {/* Logo Watermark Background */}
+                  <img
+                    src={logoImg}
+                    alt=""
+                    className="absolute -bottom-4 -right-4 w-48 h-48 object-contain opacity-[0.28] pointer-events-none select-none"
+                    aria-hidden="true"
+                  />
 
                   {/* Logo badge */}
                   <div className="flex justify-start relative z-10">

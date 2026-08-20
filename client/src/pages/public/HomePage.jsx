@@ -8,7 +8,8 @@ import {
   GraduationCap, Code, Server, Video, Eye, Lock, Users,
   MessageCircle, ArrowUp, Calendar, FileText, ChevronRight,
   Factory, Landmark, Heart, BookOpen, Newspaper, Clock,
-  ExternalLink, BarChart3, Rocket, Share2, Play, Lightbulb
+  ExternalLink, BarChart3, Rocket, Share2, Play, Lightbulb,
+  Search, GitBranch, ClipboardList
 } from 'lucide-react';
 
 // Background & Brand Assets
@@ -578,6 +579,11 @@ export const HomePage = () => {
                   {/* Top Ambient Glow Background */}
                   <div className={`absolute top-0 right-0 w-80 h-80 bg-gradient-to-br ${ECOSYSTEM_PILLARS[activeEcosystemTab].gradient} opacity-10 blur-3xl pointer-events-none`} />
 
+                  {/* Background Watermark YomTech Logo */}
+                  <div className="absolute -right-6 -bottom-6 w-64 h-64 opacity-[0.28] pointer-events-none z-0">
+                    <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+                  </div>
+
                   {/* Header Status Bar */}
                   <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200/80 pb-6 relative z-10">
                     <div className="flex items-center gap-3">
@@ -714,7 +720,12 @@ export const HomePage = () => {
                   {/* Top Color Accent Line */}
                   <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${srv.gradient || 'from-cyan-500 to-blue-600'}`} />
 
-                  <div className="space-y-4 pt-1">
+                  {/* Background Watermark YomTech Logo */}
+                  <div className="absolute -right-4 -bottom-4 w-40 h-40 opacity-[0.28] pointer-events-none z-0">
+                    <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+                  </div>
+
+                  <div className="space-y-4 pt-1 relative z-10">
                     <div className="flex items-center justify-between">
                       <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-black uppercase tracking-wider shadow-xs">
                         {srv.tag}
@@ -733,7 +744,7 @@ export const HomePage = () => {
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-slate-100">
+                  <div className="pt-4 border-t border-slate-100 relative z-10">
                     <button
                       onClick={() => navigate('/services')}
                       className="w-full py-2.5 px-4 rounded-full border-2 border-cyan-300 hover:border-cyan-500 text-[#0284C7] hover:bg-cyan-50 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all duration-300 shadow-xs cursor-pointer"
@@ -782,12 +793,17 @@ export const HomePage = () => {
                     style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
                     className="w-56 p-4 rounded-2xl border-2 border-cyan-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0 text-slate-900"
                   >
+                    {/* Background Watermark YomTech Logo */}
+                    <div className="absolute -right-3 -bottom-3 w-28 h-28 opacity-[0.25] pointer-events-none z-0">
+                      <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+                    </div>
+
                     {/* Service Image Icon Container */}
-                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0 relative z-10">
                       <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                     </div>
 
-                    <div className="space-y-1 w-full">
+                    <div className="space-y-1 w-full relative z-10">
                       <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
                         {item.name}
                       </div>
@@ -818,12 +834,17 @@ export const HomePage = () => {
                     style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)' }}
                     className="w-56 p-4 rounded-2xl border-2 border-cyan-200/90 hover:border-cyan-400 text-center flex flex-col items-center justify-between space-y-3 shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group/card hover:-translate-y-1 relative overflow-hidden shrink-0 text-slate-900"
                   >
+                    {/* Background Watermark YomTech Logo */}
+                    <div className="absolute -right-3 -bottom-3 w-28 h-28 opacity-[0.25] pointer-events-none z-0">
+                      <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+                    </div>
+
                     {/* Service Image Icon Container */}
-                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50/80 border border-cyan-200 p-2 shadow-2xs group-hover/card:scale-110 group-hover/card:bg-cyan-100 group-hover/card:border-cyan-300 transition-all duration-300 flex items-center justify-center shrink-0 relative z-10">
                       <img src={item.img} alt={item.name} className="w-full h-full object-contain" />
                     </div>
 
-                    <div className="space-y-1 w-full">
+                    <div className="space-y-1 w-full relative z-10">
                       <div className="text-xs font-black text-slate-900 group-hover/card:text-[#0284C7] transition-colors line-clamp-1">
                         {item.name}
                       </div>
@@ -880,13 +901,20 @@ export const HomePage = () => {
             {COMPANY_STATS.map((st) => (
               <div
                 key={st.label}
-                className="bg-white/95 backdrop-blur-xl border-2 border-slate-100/90 hover:border-cyan-300 rounded-3xl p-6 text-center space-y-2 hover:shadow-lg transition-all shadow-xs"
+                className="bg-white/95 backdrop-blur-xl border-2 border-slate-100/90 hover:border-cyan-300 rounded-3xl p-6 text-center space-y-2 hover:shadow-lg transition-all shadow-xs relative overflow-hidden"
               >
-                <span className="text-3xl sm:text-4xl font-black font-display text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] block">
+                {/* Logo Watermark Background */}
+                <img
+                  src={logoEmblem}
+                  alt=""
+                  className="absolute bottom-2 right-2 w-20 h-20 object-contain opacity-[0.28] pointer-events-none select-none"
+                  aria-hidden="true"
+                />
+                <span className="text-3xl sm:text-4xl font-black font-display text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] block relative z-10">
                   {st.stat}
                 </span>
-                <p className="text-xs font-extrabold text-slate-900 uppercase tracking-wider">{st.label}</p>
-                <p className="text-[10px] font-bold text-slate-500">{st.subtitle}</p>
+                <p className="text-xs font-extrabold text-slate-900 uppercase tracking-wider relative z-10">{st.label}</p>
+                <p className="text-[10px] font-bold text-slate-500 relative z-10">{st.subtitle}</p>
               </div>
             ))}
           </div>
@@ -924,8 +952,13 @@ export const HomePage = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* LEFT SIDE: FOR BUSINESSES */}
-            <div className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-indigo-200 shadow-xl flex flex-col justify-between space-y-8">
-              <div className="space-y-4">
+            <div className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-indigo-200 shadow-xl flex flex-col justify-between space-y-8 relative overflow-hidden">
+              {/* Background Watermark YomTech Logo */}
+              <div className="absolute -right-6 -bottom-6 w-56 h-56 opacity-[0.28] pointer-events-none z-0">
+                <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+              </div>
+
+              <div className="space-y-4 relative z-10">
                 <span className="px-3.5 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 text-xs font-black uppercase tracking-widest">
                   FOR BUSINESSES &amp; ENTERPRISES
                 </span>
@@ -944,7 +977,7 @@ export const HomePage = () => {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100">
+              <div className="pt-4 border-t border-slate-100 relative z-10">
                 <button
                   onClick={() => navigate('/services')}
                   className="w-full py-4 rounded-2xl bg-gradient-to-r from-indigo-600 to-[#0284C7] text-white font-black text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
@@ -956,8 +989,13 @@ export const HomePage = () => {
             </div>
 
             {/* RIGHT SIDE: FOR TECHNOLOGY TALENT */}
-            <div className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-emerald-200 shadow-xl flex flex-col justify-between space-y-8">
-              <div className="space-y-4">
+            <div className="bg-white rounded-3xl p-8 sm:p-12 border-2 border-emerald-200 shadow-xl flex flex-col justify-between space-y-8 relative overflow-hidden">
+              {/* Background Watermark YomTech Logo */}
+              <div className="absolute -right-6 -bottom-6 w-56 h-56 opacity-[0.28] pointer-events-none z-0">
+                <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+              </div>
+
+              <div className="space-y-4 relative z-10">
                 <span className="px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-black uppercase tracking-widest">
                   FOR TECHNOLOGY TALENT &amp; LEARNERS
                 </span>
@@ -976,7 +1014,7 @@ export const HomePage = () => {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-100">
+              <div className="pt-4 border-t border-slate-100 relative z-10">
                 <button
                   onClick={() => navigate('/academy')}
                   className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white font-black text-xs uppercase tracking-widest shadow-md flex items-center justify-center gap-2 hover:scale-[1.02] transition-transform"
@@ -993,7 +1031,7 @@ export const HomePage = () => {
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 08 — ENGINEERING PROCESS (S-CURVE ZIG-ZAG PUSHPIN ROADMAP)
+          SECTION 12 — DEVELOPMENT LIFECYCLE & PROCESS (S-CURVE INFOGRAPHIC)
       ════════════════════════════════════════════════════ */}
       <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
         
@@ -1029,683 +1067,972 @@ export const HomePage = () => {
             </div>
           </div>
 
-          {/* Staggered 2-Column S-Curve Pushpin Roadmap Container */}
-          <div className="relative max-w-6xl mx-auto py-8">
-            
-            {/* Background S-Curve Connecting Dashed Path SVG */}
-            <svg 
-              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-              viewBox="0 0 100 100" 
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <path 
-                d="M 25,6 C 65,6 75,10 75,23 C 75,36 25,35 25,48 C 25,60 75,53 75,65 C 75,77 50,76 50,88" 
-                stroke="#0284C7" 
-                strokeWidth="0.5" 
-                strokeDasharray="1.5 1.5" 
-                strokeLinecap="round"
-                className="opacity-60"
-              />
-            </svg>
+          {/* ─── S-CURVE SNAKE RIBBON INFOGRAPHIC ─── */}
+          <div className="py-8 px-4 sm:px-12 relative overflow-hidden">
 
-            {/* Staggered 2-Column Grid matching VektaOS Pushpin Screenshot */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14 md:gap-y-20 relative z-10">
-              {[
-                { 
-                  num: '01', 
-                  title: 'Plan & Discover', 
-                  desc: 'In-depth requirement analysis, tech stack selection, scope definition, and structural architecture plan.', 
-                  tilt: '-rotate-2 hover:rotate-0',
-                  offset: 'md:translate-y-0',
-                  pinColor: 'from-blue-500 to-blue-700 shadow-blue-500/40',
-                  numColor: 'text-blue-600',
-                  badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
-                  icon: Target,
-                  floatDuration: 4.2
-                },
-                { 
-                  num: '02', 
-                  title: 'Manage & Design', 
-                  desc: 'High-performance microservices architecture design, REST/GraphQL API specifications, and intuitive UI/UX wireframing.', 
-                  tilt: 'rotate-2 hover:rotate-0',
-                  offset: 'md:translate-y-20',
-                  pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
-                  numColor: 'text-emerald-600',
-                  badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                  icon: Code,
-                  floatDuration: 4.8
-                },
-                { 
-                  num: '03', 
-                  title: 'Engineer & Build', 
-                  desc: 'Test-driven development, agile sprint execution, clean modular codebase, and robust database optimization.', 
-                  tilt: '-rotate-1 hover:rotate-0',
-                  offset: 'md:translate-y-0',
-                  pinColor: 'from-purple-500 to-purple-700 shadow-purple-500/40',
-                  numColor: 'text-purple-600',
-                  badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
-                  icon: Cpu,
-                  floatDuration: 5.1
-                },
-                { 
-                  num: '04', 
-                  title: 'Validate & Test', 
-                  desc: 'End-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits.', 
-                  tilt: 'rotate-3 hover:rotate-0',
-                  offset: 'md:translate-y-20',
-                  pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
-                  numColor: 'text-amber-600',
-                  badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
-                  icon: ShieldCheck,
-                  floatDuration: 4.5
-                },
-                { 
-                  num: '05', 
-                  title: 'Deploy & Scale', 
-                  desc: 'CI/CD automated pipeline deployment, zero-downtime launch, real-time APM monitoring, and round-the-clock SLA support.', 
-                  tilt: '-rotate-1 hover:rotate-0',
-                  offset: 'md:col-span-2 md:max-w-xl md:mx-auto md:translate-y-10',
-                  pinColor: 'from-cyan-400 to-[#0284C7] shadow-cyan-500/40',
-                  numColor: 'text-[#0284C7]',
-                  badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200',
-                  icon: TrendingUp,
-                  floatDuration: 5.4
-                }
-              ].map((step, idx) => {
-                const StepIcon = step.icon;
+            {/* Top Left Header Banner */}
+            <div className="absolute top-10 left-0 hidden lg:block z-20">
+              <div className="px-8 py-6 rounded-r-3xl bg-cyan-50/95 border-y border-r border-cyan-300 border-l-[8px] border-l-[#0284C7] text-slate-900 shadow-xl max-w-md backdrop-blur-md relative overflow-hidden space-y-2">
+                {/* Background Watermark YomTech Logo */}
+                <div className="absolute -right-4 -bottom-4 w-44 h-44 opacity-[0.38] pointer-events-none z-0">
+                  <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+                </div>
 
-                return (
-                  <motion.div 
-                    key={step.num}
-                    initial={{ opacity: 0, y: 50, scale: 0.94 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    className={`relative w-full ${step.offset}`}
-                  >
-                    {/* Continuous Ambient Floating Bobbing Container */}
+                <div className="relative z-10 space-y-2">
+                  <p className="text-xs sm:text-sm font-black uppercase tracking-[0.25em] text-[#0284C7]">FIVE STEPS</p>
+                  <h4 className="text-base sm:text-lg md:text-xl font-black font-display uppercase tracking-wider text-slate-950 leading-tight">
+                    FROM CHALLENGE TO DIGITAL IMPACT
+                  </h4>
+                  <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed pt-2 border-t border-cyan-200/80">
+                    A structured engineering process that transforms complex business challenges into reliable, scalable, and future-ready technology solutions.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative max-w-7xl mx-auto py-8">
+
+              {/* Single Continuous 1-Piece Snake Ribbon SVG Overlay (With Water Stream Flow Movements) */}
+              <div className="absolute left-1/2 -translate-x-1/2 top-14 bottom-14 w-[420px] sm:w-[480px] pointer-events-none hidden md:block z-0">
+                <svg className="w-full h-full" viewBox="0 0 460 900" fill="none" preserveAspectRatio="none">
+                  {/* Arc 1 (Purple - Left Loop) */}
+                  <path d="M 230 0 A 140 140 0 0 0 230 180" stroke="#7C3AED" strokeWidth="48" strokeLinecap="round" fill="none" />
+                  <path d="M 230 0 A 140 140 0 0 0 230 180" stroke="rgba(255,255,255,0.75)" strokeWidth="14" strokeLinecap="round" className="animate-scurve-water" fill="none" />
+                  <path d="M 230 0 A 140 140 0 0 0 230 180" stroke="#C4B5FD" strokeWidth="5" strokeLinecap="round" className="animate-scurve-water" fill="none" />
+
+                  {/* Arc 2 (Blue - Right Loop) */}
+                  <path d="M 230 180 A 140 140 0 0 1 230 360" stroke="#0284C7" strokeWidth="48" strokeLinecap="round" fill="none" />
+                  <path d="M 230 180 A 140 140 0 0 1 230 360" stroke="rgba(255,255,255,0.75)" strokeWidth="14" strokeLinecap="round" className="animate-scurve-water-reverse" fill="none" />
+                  <path d="M 230 180 A 140 140 0 0 1 230 360" stroke="#7DD3FC" strokeWidth="5" strokeLinecap="round" className="animate-scurve-water-reverse" fill="none" />
+
+                  {/* Arc 3 (Green - Left Loop) */}
+                  <path d="M 230 360 A 140 140 0 0 0 230 540" stroke="#059669" strokeWidth="48" strokeLinecap="round" fill="none" />
+                  <path d="M 230 360 A 140 140 0 0 0 230 540" stroke="rgba(255,255,255,0.75)" strokeWidth="14" strokeLinecap="round" className="animate-scurve-water" fill="none" />
+                  <path d="M 230 360 A 140 140 0 0 0 230 540" stroke="#6EE7B7" strokeWidth="5" strokeLinecap="round" className="animate-scurve-water" fill="none" />
+
+                  {/* Arc 4 (Orange - Right Loop) */}
+                  <path d="M 230 540 A 140 140 0 0 1 230 720" stroke="#D97706" strokeWidth="48" strokeLinecap="round" fill="none" />
+                  <path d="M 230 540 A 140 140 0 0 1 230 720" stroke="rgba(255,255,255,0.75)" strokeWidth="14" strokeLinecap="round" className="animate-scurve-water-reverse" fill="none" />
+                  <path d="M 230 540 A 140 140 0 0 1 230 720" stroke="#FDE68A" strokeWidth="5" strokeLinecap="round" className="animate-scurve-water-reverse" fill="none" />
+
+                  {/* Arc 5 (Pink - Left Loop) */}
+                  <path d="M 230 720 A 140 140 0 0 0 230 900" stroke="#DB2777" strokeWidth="48" strokeLinecap="round" fill="none" />
+                  <path d="M 230 720 A 140 140 0 0 0 230 900" stroke="rgba(255,255,255,0.75)" strokeWidth="14" strokeLinecap="round" className="animate-scurve-water" fill="none" />
+                  <path d="M 230 720 A 140 140 0 0 0 230 900" stroke="#FBCFE8" strokeWidth="5" strokeLinecap="round" className="animate-scurve-water" fill="none" />
+                </svg>
+              </div>
+
+              <div className="flex flex-col justify-between min-h-[1050px] space-y-12 md:space-y-0">
+                {[
+                  {
+                    step: '01',
+                    title: 'DISCOVER & PLAN THE CHALLENGE',
+                    subtitle: 'Understand Before We Engineer.',
+                    side: 'right',
+                    desc: 'We begin with in-depth requirement analysis, tech stack selection, scope definition, and structural architecture planning to understand your organization, users, workflows, and long-term objectives.',
+                    focusAreas: [
+                      'Business & workflow analysis',
+                      'Tech stack & scope definition',
+                      'User & stakeholder requirements',
+                      'Structural architecture planning',
+                    ],
+                    icon: Search,
+                    color: '#7C3AED',
+                    lineColor: 'from-purple-600 via-purple-400 to-indigo-600',
+                    badgeBg: 'bg-purple-600 text-white',
+                    textColor: 'text-purple-900',
+                  },
+                  {
+                    step: '02',
+                    title: 'STRATEGIZE, DESIGN & ARCHITECT',
+                    subtitle: 'Turn Insight Into a Clear Technology Blueprint.',
+                    side: 'left',
+                    desc: 'Our engineers transform requirements into high-performance microservices architecture designs, REST/GraphQL API specifications, intuitive UI/UX wireframes, and actionable implementation roadmaps.',
+                    focusAreas: [
+                      'Solution strategy & UX planning',
+                      'Microservices & software architecture',
+                      'REST & GraphQL API specifications',
+                      'UI/UX wireframing & tech selection',
+                    ],
+                    icon: Eye,
+                    color: '#0284C7',
+                    lineColor: 'from-sky-600 via-cyan-400 to-blue-600',
+                    badgeBg: 'bg-[#0284C7] text-white',
+                    textColor: 'text-sky-900',
+                  },
+                  {
+                    step: '03',
+                    title: 'ENGINEER & BUILD THE SOLUTION',
+                    subtitle: 'Build Technology That Works in the Real World.',
+                    side: 'right',
+                    desc: 'We design and develop scalable digital products using test-driven development, agile sprint execution, clean modular codebases, reliable APIs, secure systems, and robust database optimization.',
+                    focusAreas: [
+                      'Enterprise software, web & mobile',
+                      'Test-driven & agile sprint execution',
+                      'Clean modular code & API integration',
+                      'Database optimization & cloud architecture',
+                    ],
+                    icon: ClipboardList,
+                    color: '#059669',
+                    lineColor: 'from-emerald-600 via-teal-400 to-green-600',
+                    badgeBg: 'bg-emerald-600 text-white',
+                    textColor: 'text-emerald-900',
+                  },
+                  {
+                    step: '04',
+                    title: 'VALIDATE, SECURE & TEST',
+                    subtitle: 'Ensure Quality Before It Creates Impact.',
+                    side: 'left',
+                    desc: 'Every solution undergoes end-to-end security penetration testing, sub-50ms latency performance tuning, and comprehensive QA audits across functionality, usability, and reliability prior to deployment.',
+                    focusAreas: [
+                      'Quality assurance & QA audits',
+                      'Sub-50ms latency performance tuning',
+                      'Security validation & penetration testing',
+                      'Deployment & cloud infrastructure',
+                    ],
+                    icon: Cpu,
+                    color: '#D97706',
+                    lineColor: 'from-amber-600 via-yellow-400 to-orange-600',
+                    badgeBg: 'bg-amber-600 text-white',
+                    textColor: 'text-amber-950',
+                  },
+                  {
+                    step: '05',
+                    title: 'DEPLOY, EVOLVE & SCALE',
+                    subtitle: 'Technology Should Keep Moving Forward.',
+                    side: 'right',
+                    desc: 'Our work extends beyond launch with automated CI/CD pipeline deployment, zero-downtime releases, real-time APM monitoring, 24/7 SLA support, and continuous system scaling as business needs evolve.',
+                    focusAreas: [
+                      'Continuous improvement & SLA support',
+                      'Automated CI/CD & zero-downtime launch',
+                      'Real-time APM monitoring',
+                      'System scaling & future innovation',
+                    ],
+                    icon: Star,
+                    color: '#DB2777',
+                    lineColor: 'from-pink-600 via-rose-400 to-fuchsia-600',
+                    badgeBg: 'bg-pink-600 text-white',
+                    textColor: 'text-pink-950',
+                  },
+                ].map((item, idx) => {
+                  const StepIcon = item.icon;
+                  const isRight = item.side === 'right';
+
+                  return (
                     <motion.div
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: step.floatDuration,
-                        ease: 'easeInOut',
-                      }}
-                      className="relative w-full"
+                      key={item.step}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: idx * 0.12 }}
+                      className="relative flex items-center w-full z-10 py-6"
                     >
-                      {/* 3D Realistic Pushpin Top Medallion with Swaying Animation */}
-                      <motion.div 
-                        animate={{ rotate: [-3, 3, -3] }}
-                        transition={{ repeat: Infinity, duration: 3.2 + idx * 0.4, ease: 'easeInOut' }}
-                        className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none"
-                      >
-                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${step.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
-                          <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                        </div>
-                        <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
-                      </motion.div>
+                      {/* LEFT PANEL */}
+                      <div className="flex-1 flex justify-end pr-4 md:pr-12">
+                        {!isRight && (
+                          <div className="space-y-3 w-full max-w-xl text-left group">
+                            {/* Title + Far Left Icon Badge Row */}
+                            <div className="flex items-center justify-between gap-4">
+                              <motion.div 
+                                whileHover={{ scale: 1.2, rotate: 360 }}
+                                transition={{ duration: 0.4 }}
+                                className={`w-20 h-20 sm:w-22 sm:h-22 rounded-full ${item.badgeBg} flex items-center justify-center shadow-2xl border-4 border-white shrink-0 z-10 cursor-pointer`}
+                              >
+                                <StepIcon size={38} />
+                              </motion.div>
+                              <div className="text-right">
+                                <h4 className={`text-lg sm:text-xl md:text-2xl font-black font-display uppercase tracking-wider ${item.textColor} group-hover:translate-x-1 transition-transform`}>
+                                  {item.title}
+                                </h4>
+                                {item.subtitle && (
+                                  <p className="text-xs sm:text-sm font-extrabold text-slate-800 italic mt-0.5">{item.subtitle}</p>
+                                )}
+                              </div>
+                            </div>
 
-                      {/* Animated Pushpin Tilted Card Div */}
-                      <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] ${step.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-6 group cursor-pointer overflow-hidden`}>
-                        
-                        {/* Top Gradient Shimmer Highlight Line */}
-                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            {/* Horizontal Colored Connector Line with Water Flow */}
+                            <div className={`h-[6px] w-full bg-gradient-to-r ${item.lineColor} rounded-full relative overflow-hidden shadow-sm`}>
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent animate-water-flow-left" />
+                            </div>
 
-                        <div className="flex items-center justify-between">
-                          <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${step.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
-                            {step.num}
-                          </span>
+                            {/* Description Paragraph Below Line */}
+                            <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed pt-1 text-left max-w-md sm:max-w-lg">
+                              {item.desc}
+                            </p>
 
-                          <div className={`w-14 h-14 rounded-2xl ${step.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
-                            <StepIcon size={26} className="group-hover:scale-110 transition-transform duration-300" />
+                            {/* Focus Areas List */}
+                            {item.focusAreas && (
+                              <div className="pt-3 border-t border-slate-300/70 mt-3 space-y-2">
+                                <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900">Focus Areas:</p>
+                                <ul className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm font-semibold text-slate-700">
+                                  {item.focusAreas.map((area, i) => (
+                                    <li key={i} className="flex items-center gap-2.5">
+                                      <span className="w-2 h-2 rounded-full shrink-0 shadow-xs" style={{ background: item.color }} />
+                                      <span>{area}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
                           </div>
-                        </div>
+                        )}
+                      </div>
 
-                        <div className="space-y-3">
-                          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300 tracking-tight">
-                            {step.title}
-                          </h3>
-                          <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-800 transition-colors duration-300">
-                            {step.desc}
-                          </p>
-                        </div>
+                      {/* CENTER PURE WHITE STEP CIRCLE BADGE */}
+                      <div className="relative shrink-0 z-20 mx-4 sm:mx-12 flex items-center justify-center" style={{ width: 210, height: 210 }}>
+                        {/* Rotating Conic Gradient Glow */}
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ repeat: Infinity, duration: 12, ease: 'linear' }}
+                          className="absolute -inset-4 rounded-full opacity-70 blur-lg pointer-events-none"
+                          style={{ background: `conic-gradient(from 0deg, ${item.color}, transparent 60%, ${item.color})` }}
+                        />
 
+                        {/* Pure White Step Circle */}
+                        <motion.div 
+                          whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }}
+                          transition={{ duration: 0.3 }}
+                          className="w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-white shadow-[0_25px_60px_rgba(0,0,0,0.2)] border-4 border-white flex flex-col items-center justify-center relative z-10 cursor-pointer"
+                        >
+                          <span className="text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-slate-400">
+                            STEP
+                          </span>
+                          <span className="text-7xl sm:text-8xl font-black font-display tracking-tight leading-none mt-0.5" style={{ color: item.color }}>
+                            {item.step}
+                          </span>
+                        </motion.div>
+                      </div>
+
+                      {/* RIGHT PANEL */}
+                      <div className="flex-1 flex justify-start pl-4 md:pl-12">
+                        {isRight && (
+                          <div className="space-y-3 w-full max-w-xl group text-left">
+                            {/* Title + Subtitle + Far End Icon Badge Row */}
+                            <div className="flex items-center justify-between gap-4">
+                              <div>
+                                <h4 className={`text-lg sm:text-xl md:text-2xl font-black font-display uppercase tracking-wider ${item.textColor} group-hover:-translate-x-1 transition-transform`}>
+                                  {item.title}
+                                </h4>
+                                {item.subtitle && (
+                                  <p className="text-xs sm:text-sm font-extrabold text-slate-800 italic mt-0.5">{item.subtitle}</p>
+                                )}
+                              </div>
+                              <motion.div 
+                                whileHover={{ scale: 1.2, rotate: 360 }}
+                                transition={{ duration: 0.4 }}
+                                className={`w-20 h-20 sm:w-22 sm:h-22 rounded-full ${item.badgeBg} flex items-center justify-center shadow-2xl border-4 border-white shrink-0 z-10 cursor-pointer`}
+                              >
+                                <StepIcon size={38} />
+                              </motion.div>
+                            </div>
+
+                            {/* Horizontal Colored Connector Line with Water Flow */}
+                            <div className={`h-[6px] w-full bg-gradient-to-r ${item.lineColor} rounded-full relative overflow-hidden shadow-sm`}>
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent animate-water-flow-left" />
+                            </div>
+
+                            {/* Description Paragraph Below Line */}
+                            <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed pt-1 text-left max-w-md sm:max-w-lg">
+                              {item.desc}
+                            </p>
+
+                            {/* Focus Areas List */}
+                            {item.focusAreas && (
+                              <div className="pt-3 border-t border-slate-300/70 mt-3 space-y-2">
+                                <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900">Focus Areas:</p>
+                                <ul className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm font-semibold text-slate-700">
+                                  {item.focusAreas.map((area, i) => (
+                                    <li key={i} className="flex items-center gap-2.5">
+                                      <span className="w-2 h-2 rounded-full shrink-0 shadow-xs" style={{ background: item.color }} />
+                                      <span>{area}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
 
+            {/* ─── 4 HORIZONTAL PHASE CARDS ─── */}
+            <div className="pt-16 max-w-[1650px] mx-auto space-y-10">
+              
+              {/* Phase Cards Section Header */}
+              <div className="space-y-5 text-left">
+                <div className="flex items-center justify-start w-full">
+                  <div className="px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                    <span className="text-[10px] text-[#0284C7]">◆</span>
+                    <span>FOUR-PHASE EXECUTION FRAMEWORK</span>
+                    <span className="text-[10px] text-[#0284C7]">◆</span>
+                  </div>
+                  <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
+                </div>
+
+                <div className="space-y-3 max-w-3xl">
+                  <h3 className="text-3xl sm:text-4xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                    Building Technology That Scales for Tomorrow.
+                  </h3>
+                  <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
+                    Our four-phase engineering framework ensures every line of code, microservices architecture, and cloud database is engineered for reliability, security, and long-term business impact.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+              {[
+                {
+                  badge: 'STRATEGY', phase: 'PHASE 01', phaseSub: 'ARCHITECTURE FIRST',
+                  title: 'Discovery & Scope',
+                  desc: 'Comprehensive domain requirement discovery, tech stack benchmarking, risk assessment, and structural blueprint planning.',
+                  deliverables: ['Requirement Analysis', 'Tech Stack Choice', 'Risk & Security Audit', 'Architectural Roadmap'],
+                  icon: Search, gradient: 'from-[#EFF6FF] via-[#F8FAFC] to-[#E0F2FE]',
+                  badgeColor: 'text-[#0284C7] bg-cyan-100/80 border-cyan-300',
+                  iconBg: 'bg-gradient-to-br from-[#0284C7] to-[#0ED3DD] text-white shadow-lg shadow-cyan-500/20',
+                  phaseColor: 'text-[#0284C7]',
+                  borderHover: 'hover:border-cyan-400',
+                  topLine: 'from-[#0284C7] to-[#0ED3DD]',
+                },
+                {
+                  badge: 'DESIGN', phase: 'PHASE 02', phaseSub: 'MODULAR INTEGRATION',
+                  title: 'System Architecture',
+                  desc: 'High-performance microservices specification, REST & GraphQL API contracts, database schema models, and UI/UX wireframes.',
+                  deliverables: ['Microservices Spec', 'REST & GraphQL APIs', 'DB Schema & Caching', 'UI/UX Wireframing'],
+                  icon: Layers, gradient: 'from-[#ECFDF5] via-[#F8FAFC] to-[#D1FAE5]',
+                  badgeColor: 'text-emerald-700 bg-emerald-100/80 border-emerald-300',
+                  iconBg: 'bg-gradient-to-br from-emerald-500 to-teal-600 text-white shadow-lg shadow-emerald-500/20',
+                  phaseColor: 'text-emerald-700',
+                  borderHover: 'hover:border-emerald-400',
+                  topLine: 'from-emerald-500 to-teal-500',
+                },
+                {
+                  badge: 'BUILD', phase: 'PHASE 03', phaseSub: 'ZERO DOWNTIME',
+                  title: 'Agile Engineering',
+                  desc: 'Test-driven sprint execution, clean modular codebase development, sub-50ms query tuning, and automated CI/CD pipelines.',
+                  deliverables: ['TDD Sprint Execution', 'Clean Modular Code', 'Query & Latency Tuning', 'Automated CI/CD Build'],
+                  icon: Code, gradient: 'from-[#F5F3FF] via-[#F8FAFC] to-[#EDE9FE]',
+                  badgeColor: 'text-purple-700 bg-purple-100/80 border-purple-300',
+                  iconBg: 'bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/20',
+                  phaseColor: 'text-purple-700',
+                  borderHover: 'hover:border-purple-400',
+                  topLine: 'from-purple-600 to-indigo-600',
+                },
+                {
+                  badge: 'IMPACT', phase: 'PHASE 04', phaseSub: 'MEASURABLE IMPACT',
+                  title: 'Deployment & Scale',
+                  desc: 'Zero-downtime production deployment, real-time APM monitoring, 24/7 SLA technical support, and continuous capacity building.',
+                  deliverables: ['Zero-Downtime Launch', 'Real-Time APM Logs', '24/7 SLA Technical Desk', 'System Scale Evolution'],
+                  icon: TrendingUp, gradient: 'from-[#FFF7ED] via-[#F8FAFC] to-[#FFEDD5]',
+                  badgeColor: 'text-orange-800 bg-amber-100/80 border-amber-300',
+                  iconBg: 'bg-gradient-to-br from-amber-500 to-orange-600 text-white shadow-lg shadow-orange-500/20',
+                  phaseColor: 'text-orange-700',
+                  borderHover: 'hover:border-orange-400',
+                  topLine: 'from-amber-500 to-orange-600',
+                },
+              ].map((card, idx) => {
+                const CardIcon = card.icon;
+                return (
+                  <motion.div
+                    key={card.phase}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className={`relative rounded-[2rem] p-8 sm:p-9 bg-gradient-to-br ${card.gradient} border-2 border-slate-200/90 ${card.borderHover} shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between min-h-[360px] group overflow-hidden`}
+                  >
+                    {/* Top Color Accent Line */}
+                    <div className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r ${card.topLine}`} />
+
+                    {/* Background Watermark YomTech Logo */}
+                    <div className="absolute -right-5 -bottom-5 w-44 h-44 opacity-[0.32] pointer-events-none z-0">
+                      <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
+                    </div>
+
+                    {/* Top Row: badge + icon */}
+                    <div className="flex items-start justify-between mb-5 relative z-10">
+                      <div>
+                        <span className={`px-3.5 py-1.5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] border ${card.badgeColor} inline-block mb-1 shadow-xs`}>
+                          {card.badge}
+                        </span>
+                        <p className={`text-xs font-black uppercase tracking-widest ${card.phaseColor}`}>{card.phase}</p>
+                      </div>
+                      <div className={`w-14 h-14 rounded-2xl border-2 border-white flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-transform ${card.iconBg}`}>
+                        <CardIcon size={26} />
+                      </div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 space-y-3 relative z-10 my-2">
+                      <h3 className="text-2xl font-black text-slate-900 font-display leading-tight">{card.title}</h3>
+                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">{card.desc}</p>
+                      
+                      {/* Deliverables Bullet Points */}
+                      <div className="pt-2 border-t border-slate-300/60 space-y-1.5">
+                        {card.deliverables.map((item, i) => (
+                          <div key={i} className="flex items-center gap-2 text-[11px] font-bold text-slate-700">
+                            <span className="w-1.5 h-1.5 rounded-full bg-slate-900 shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Bottom Row */}
+                    <div className="flex items-center justify-between pt-4 mt-2 border-t border-slate-300/70 relative z-10">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-500">{card.phaseSub}</span>
+                      <ArrowRight size={16} className="text-slate-400 group-hover:text-[#0284C7] group-hover:translate-x-1.5 transition-all" />
+                    </div>
                   </motion.div>
                 );
               })}
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* ════════════════════════════════════════════════════
-          SECTION 09 — INSIGHTS, MEDIA & COMMUNITY (PUSHPIN CARDS)
-      ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
-        {/* Dotted Grid Mesh Texture */}
-        <div 
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
-
-          {/* Header Badge */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Globe size={16} className="text-[#0284C7]" />
-                <span>YOMTECH IN THE WORLD</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
             </div>
 
-            <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-                Technology Doesn't Stop <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                  At The Product.
-                </span>
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
-                YomTech Global shares technology knowledge, practical insights, innovation stories, engineering perspectives, and opportunities through its growing digital community.
-              </p>
-            </div>
-          </div>
+          {/* ─── DUAL CTA CARDS ─── */}
+          <div className="pt-16 max-w-[1650px] mx-auto space-y-10">
 
-          {/* 3 Media Community Pushpin Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 pt-4">
-            
-            {/* YOUTUBE */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="relative w-full"
+            {/* Dual CTA Section Header */}
+            <div className="space-y-5 text-left">
+              <div className="flex items-center justify-start w-full">
+                <div className="px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
+                  <span className="text-[10px] text-[#0284C7]">◆</span>
+                  <span>ENGAGE WITH YOMTECH GLOBAL</span>
+                  <span className="text-[10px] text-[#0284C7]">◆</span>
+                </div>
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
+              </div>
+
+              <div className="space-y-3 max-w-3xl">
+                <h3 className="text-3xl sm:text-4xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                  Tailored Engineering Solutions for Organizations &amp; Talent.
+                </h3>
+                <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed">
+                  Whether you are an enterprise seeking custom ERP systems and cloud transformation or an ambitious developer expanding your technology career, YomTech Global delivers the platform for your growth.
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10">
+            {/* FOR ORGANIZATIONS */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="bg-gradient-to-br from-[#EBF3FC] via-white to-[#DBEAFE] border-2 border-cyan-300 rounded-[2.5rem] p-9 sm:p-11 text-left space-y-6 shadow-2xl hover:border-cyan-500 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
             >
-              {/* 3D Pushpin */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-red-500 to-red-700 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                </div>
-                <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+              {/* Background Watermark YomTech Logo */}
+              <div className="absolute -right-8 -bottom-8 w-56 h-56 opacity-[0.38] pointer-events-none z-0">
+                <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
               </div>
 
-              <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-red-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(239,68,68,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
-                <div className="space-y-4 pt-2">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
-                      YOUTUBE CHANNEL
-                    </span>
-                    <div className="w-13 h-13 rounded-2xl bg-red-50 border-2 border-red-200 text-red-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white group-hover:rotate-12 transition-all duration-500">
-                      <Video size={24} />
-                    </div>
+              <div className="relative z-10 space-y-6">
+                <div className="flex items-center justify-between">
+                  <span className="px-4 py-1.5 rounded-full bg-cyan-100/90 text-[#0284C7] border border-cyan-300 text-[10px] font-black uppercase tracking-[0.2em] inline-block shadow-xs">
+                    FOR ORGANIZATIONS &amp; ENTERPRISE
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-cyan-700 bg-white/90 px-3.5 py-1 rounded-full border border-cyan-200 shadow-xs">24-HOUR PROPOSAL DESK</span>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <div className="w-20 h-20 rounded-2xl bg-white p-3 shadow-xl border-2 border-cyan-200/90 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <img src={yomnexLogo} alt="YomNex Enterprise Platform" className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
                   </div>
-
-                  <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-red-600 group-hover:translate-x-1 transition-all duration-300">
-                    Long-Form Engineering Insights
-                  </h3>
-                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                    Technology discussions, full-length tutorials, engineering deep dives, product stories, and national technology documentary films.
-                  </p>
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display leading-tight">Start a Technology Conversation</h3>
+                    <p className="text-xs text-[#0284C7] font-extrabold uppercase tracking-wider mt-1">YOMNEX ENTERPRISE &amp; CUSTOM SOFTWARE</p>
+                  </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100">
-                  <a 
-                    href="https://youtube.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="w-full py-3.5 px-5 rounded-full bg-red-50 group-hover:bg-red-600 text-red-600 group-hover:text-white border-2 border-red-200 group-hover:border-red-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
-                  >
-                    <span>Watch On YouTube</span>
-                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
+                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                  Consult with YomTech Global's senior software architects to engineer custom ERPs, cloud platforms, AI workflows, or modern surveillance systems.
+                </p>
+
+                {/* Organization Value List */}
+                <div className="space-y-2.5 py-3 border-y border-cyan-200/90">
+                  {[
+                    'Custom Enterprise ERP, CRM & WMS Engineering',
+                    'Zero-Downtime Cloud Migration & Microservices',
+                    'Dedicated Engineering Squad & 24/7 SLA Support',
+                  ].map((val, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-xs font-bold text-slate-800">
+                      <div className="w-4.5 h-4.5 rounded-full bg-cyan-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <Check size={12} strokeWidth={3} />
+                      </div>
+                      <span>{val}</span>
+                    </div>
+                  ))}
                 </div>
+
+                <button
+                  onClick={() => navigate('/contact')}
+                  className="w-full py-6 sm:py-6.5 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0077B6] to-[#0ED3DD] text-white hover:opacity-95 font-black text-sm sm:text-base uppercase tracking-[0.2em] shadow-xl shadow-cyan-600/30 hover:shadow-cyan-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3.5 cursor-pointer group/btn"
+                >
+                  <span>Request Enterprise Proposal</span>
+                  <ArrowRight size={22} strokeWidth={2.5} className="group-hover/btn:translate-x-2 transition-transform" />
+                </button>
               </div>
             </motion.div>
 
-            {/* TIKTOK */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative w-full"
+            {/* FOR INDIVIDUALS */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-[#E6F7F3] via-white to-[#D1FAE5] border-2 border-emerald-300 rounded-[2.5rem] p-9 sm:p-11 text-left space-y-6 shadow-2xl hover:border-emerald-500 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
             >
-              {/* 3D Pushpin */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-400 to-[#0284C7] border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                </div>
-                <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+              {/* Background Watermark YomTech Logo */}
+              <div className="absolute -right-8 -bottom-8 w-56 h-56 opacity-[0.38] pointer-events-none z-0">
+                <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
               </div>
 
-              <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
-                <div className="space-y-4 pt-2">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
-                      TIKTOK MEDIA
-                    </span>
-                    <div className="w-13 h-13 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0284C7] group-hover:text-white group-hover:rotate-12 transition-all duration-500">
-                      <Sparkles size={24} />
-                    </div>
+              <div className="relative z-10 space-y-6">
+                <div className="flex items-center justify-between">
+                  <span className="px-4 py-1.5 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-300 text-[10px] font-black uppercase tracking-[0.2em] inline-block shadow-xs">
+                    FOR INDIVIDUALS &amp; DEVELOPERS
+                  </span>
+                  <span className="text-[10px] font-mono font-bold text-emerald-700 bg-white/90 px-3.5 py-1 rounded-full border border-emerald-200 shadow-xs">2,000+ ALUMNI NETWORK</span>
+                </div>
+
+                <div className="flex items-center gap-5">
+                  <div className="w-20 h-20 rounded-2xl bg-white p-3 shadow-xl border-2 border-emerald-200/90 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                    <img src={wabiSkillsLogo} alt="WabiSkills Academy" className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
                   </div>
-
-                  <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300">
-                    Short-Form Tech Education
-                  </h3>
-                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                    Quick developer tips, coding highlights, tech awareness clips, career inspiration, and behind-the-scenes engineering moments.
-                  </p>
+                  <div>
+                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display leading-tight">Start Building Your Future</h3>
+                    <p className="text-xs text-emerald-700 font-extrabold uppercase tracking-wider mt-1">WABISKILLS ACADEMY &amp; WABIJOBS NETWORK</p>
+                  </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-100">
-                  <a 
-                    href="https://tiktok.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="w-full py-3.5 px-5 rounded-full bg-cyan-50 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
-                  >
-                    <span>Follow On TikTok</span>
-                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
+                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                  Enroll in WabiSkills bootcamps, master fullstack development, build real-world software portfolios, and get placed via the WabiJobs network.
+                </p>
+
+                {/* Individual Value List */}
+                <div className="space-y-2.5 py-3 border-y border-emerald-200/90">
+                  {[
+                    'Practical Fullstack & Cloud Engineering Bootcamps',
+                    'Direct Mentorship from Senior Tech Leads',
+                    'Automated Vetted Developer Placement via WabiJobs',
+                  ].map((val, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5 text-xs font-bold text-slate-800">
+                      <div className="w-4.5 h-4.5 rounded-full bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                        <Check size={12} strokeWidth={3} />
+                      </div>
+                      <span>{val}</span>
+                    </div>
+                  ))}
                 </div>
+
+                <button
+                  onClick={() => navigate('/academy')}
+                  className="w-full py-6 sm:py-6.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white hover:opacity-95 font-black text-sm sm:text-base uppercase tracking-[0.2em] shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3.5 cursor-pointer group/btn"
+                >
+                  <span>Explore Academy Courses</span>
+                  <ArrowRight size={22} strokeWidth={2.5} className="group-hover/btn:translate-x-2 transition-transform" />
+                </button>
               </div>
             </motion.div>
-
-            {/* LINKEDIN */}
-            <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative w-full"
-            >
-              {/* 3D Pushpin */}
-              <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-800 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
-                  <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                </div>
-                <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
-              </div>
-
-              <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(37,99,235,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
-                <div className="space-y-4 pt-2">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
-                      LINKEDIN NETWORK
-                    </span>
-                    <div className="w-13 h-13 rounded-2xl bg-blue-50 border-2 border-blue-200 text-blue-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:rotate-12 transition-all duration-500">
-                      <Globe size={24} />
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300">
-                    Professional Network Updates
-                  </h3>
-                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                    Enterprise updates, technology whitepapers, strategic partnerships, project milestones, and career opportunities across Africa.
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-100">
-                  <a 
-                    href="https://linkedin.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="w-full py-3.5 px-5 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white border-2 border-blue-200 group-hover:border-blue-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
-                  >
-                    <span>Connect On LinkedIn</span>
-                    <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-
           </div>
-
         </div>
-      </section>
+      </div>
+    </section>
 
 
       {/* ════════════════════════════════════════════════════
-          SECTION 10 — TESTIMONIALS & CLIENT PROOF (PUSHPIN CARDS)
+          UNIFIED SECTION — THE FUTURE OF TECHNOLOGY & YOMTECH IN THE WORLD
       ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
+      <section className="w-full py-24 md:py-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30 font-sans">
         
-        {/* Dotted Grid Mesh Texture */}
-        <div 
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
-
-          {/* Header Badge */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-end w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
-                <span className="text-[10px] text-[#0284C7]">◆</span>
-                <span>WHAT OUR COMMUNITY SAYS</span>
-                <Quote size={16} className="text-[#0284C7] ml-0.5" />
-              </div>
-            </div>
-
-            <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-                Trusted by Engineers &amp; Leaders
-              </h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 pt-4">
-            {TESTIMONIALS.map((t, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.15 }}
-                className="relative w-full"
-              >
-                {/* 3D Pushpin */}
-                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
-                    <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                  </div>
-                  <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
-                </div>
-
-                <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] transition-all duration-500 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
-                  <p className="text-sm sm:text-base text-slate-700 font-bold italic leading-relaxed pt-2">
-                    "{t.quote}"
-                  </p>
-                  <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-base font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{t.author}</h4>
-                      <p className="text-xs font-bold text-[#0284C7] uppercase font-mono">{t.role}</p>
-                    </div>
-                    <div className="flex text-amber-400 gap-1">
-                      {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
+        {/* Hero Section Animated Background Layers */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+          <img src={ermiTwoImg} alt="" className="w-full h-full object-cover opacity-55 mix-blend-overlay animate-river-flow-1 border-0" />
         </div>
-      </section>
+        <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden z-0">
+          <img src={erminOneImg} alt="" className="w-full h-full object-cover opacity-60 mix-blend-soft-light animate-river-flow-2 border-0" />
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/85 via-[#0077B6]/70 to-[#00B4D8]/80 pointer-events-none z-0" />
 
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-28 md:space-y-36 relative z-10">
 
-      {/* ════════════════════════════════════════════════════
-          SECTION 11 — THE FUTURE OF YOMTECH (PUSHPIN ROADMAP JOURNEY)
-      ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
-        {/* Dotted Grid Mesh Texture */}
-        <div 
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-20 relative z-10">
-
-          {/* Header Badge */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-start w-full">
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -mr-[1px]">
-                <Target size={16} className="text-[#0284C7]" />
-                <span>THE FUTURE OF TECHNOLOGY</span>
-                <span className="text-[10px] text-[#0284C7] ml-0.5">◆</span>
+          {/* ─── BLOCK 1: THE FUTURE OF TECHNOLOGY ─── */}
+          <div className="space-y-20">
+            {/* Header Badge */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-start w-full">
+                <div className="px-6 py-2 rounded-full bg-cyan-950/90 border-2 border-cyan-400/70 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10 -mr-[1px]">
+                  <Target size={16} className="text-cyan-300" />
+                  <span>THE FUTURE OF TECHNOLOGY</span>
+                  <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
+                </div>
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-400 via-[#0ED3DD] to-transparent" />
               </div>
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-transparent" />
+
+              <div className="text-left space-y-3 max-w-3xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+                  Building for What Comes Next.
+                </h2>
+                <p className="text-cyan-100/90 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                  Technology changes continuously. YomTech Global is built around continuous learning, practical engineering, responsible innovation, and scalable digital thinking so that today's solutions can evolve with tomorrow's opportunities.
+                </p>
+              </div>
             </div>
 
-            <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-                Building for What Comes Next.
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
-                Technology changes continuously. YomTech Global is built around continuous learning, practical engineering, responsible innovation, and scalable digital thinking so that today's solutions can evolve with tomorrow's opportunities.
-              </p>
-            </div>
-          </div>
-
-          {/* Staggered 2-Column S-Curve Pushpin Roadmap Container */}
-          <div className="relative max-w-6xl mx-auto py-8">
-            
-            {/* Background S-Curve Connecting Dashed Path SVG */}
-            <svg 
-              className="absolute inset-0 w-full h-full pointer-events-none hidden md:block"
-              viewBox="0 0 100 100" 
-              fill="none"
-              preserveAspectRatio="none"
-            >
-              <path 
-                d="M 25,12 C 65,12 75,20 75,38 C 75,56 25,52 25,70 C 25,88 75,82 75,95" 
-                stroke="#0284C7" 
-                strokeWidth="0.5" 
-                strokeDasharray="1.5 1.5" 
-                strokeLinecap="round"
-                className="opacity-60"
-              />
-            </svg>
-
-            {/* Staggered 2-Column Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14 md:gap-y-20 relative z-10">
+            {/* Zigzag Staircase Pushpin Roadmap Container */}
+            <div className="relative max-w-5xl mx-auto py-8 flex flex-col gap-0">
+              
               {[
                 { 
                   num: '01', 
                   title: 'Continuous Learning', 
                   desc: 'Technology professionals and organizations continuously expand knowledge, experiment with new tools, and strengthen their foundations.', 
-                  tilt: '-rotate-2 hover:rotate-0',
-                  offset: 'md:translate-y-0',
+                  tilt: '-rotate-1 hover:rotate-0',
                   pinColor: 'from-blue-500 to-blue-700 shadow-blue-500/40',
                   numColor: 'text-blue-600',
                   badgeBg: 'bg-blue-50 text-blue-700 border-blue-200',
                   icon: GraduationCap,
-                  floatDuration: 4.3
+                  floatDuration: 4.3,
+                  align: 'left',
+                  curveDir: 'right',
+                  pinLeft: true,
                 },
                 { 
                   num: '02', 
                   title: 'Practical Innovation', 
                   desc: 'Ideas become valuable when they are transformed into useful products, working systems, and solutions to real-world challenges.', 
-                  tilt: 'rotate-2 hover:rotate-0',
-                  offset: 'md:translate-y-20',
+                  tilt: 'rotate-1 hover:rotate-0',
                   pinColor: 'from-emerald-500 to-emerald-700 shadow-emerald-500/40',
                   numColor: 'text-emerald-600',
                   badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
                   icon: Lightbulb,
-                  floatDuration: 4.9
+                  floatDuration: 4.9,
+                  align: 'right',
+                  curveDir: 'left',
+                  pinLeft: false,
                 },
                 { 
                   num: '03', 
                   title: 'Scalable Engineering', 
                   desc: 'Strong architecture, maintainable code, resilient systems, and thoughtful technology decisions create foundations that can grow.', 
                   tilt: '-rotate-1 hover:rotate-0',
-                  offset: 'md:translate-y-0',
                   pinColor: 'from-purple-500 to-purple-700 shadow-purple-500/40',
                   numColor: 'text-purple-600',
                   badgeBg: 'bg-purple-50 text-purple-700 border-purple-200',
                   icon: Layers,
-                  floatDuration: 5.2
+                  floatDuration: 5.2,
+                  align: 'left',
+                  curveDir: 'right',
+                  pinLeft: true,
                 },
                 { 
                   num: '04', 
                   title: 'Global Connection', 
                   desc: 'Technology creates opportunities to connect businesses, engineers, learners, and partners beyond geographic boundaries.', 
-                  tilt: 'rotate-3 hover:rotate-0',
-                  offset: 'md:translate-y-20',
+                  tilt: 'rotate-1 hover:rotate-0',
                   pinColor: 'from-amber-500 to-amber-700 shadow-amber-500/40',
                   numColor: 'text-amber-600',
                   badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
                   icon: Globe,
-                  floatDuration: 4.6
+                  floatDuration: 4.6,
+                  align: 'right',
+                  curveDir: 'none',
+                  pinLeft: false,
                 }
               ].map((pillar, idx) => {
                 const PillarIcon = pillar.icon;
+                const isLeft = pillar.align === 'left';
 
                 return (
-                  <motion.div 
-                    key={pillar.num}
-                    initial={{ opacity: 0, y: 50, scale: 0.94 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.7, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                    className={`relative w-full ${pillar.offset}`}
-                  >
-                    {/* Continuous Ambient Floating Bobbing Container */}
-                    <motion.div
-                      animate={{ y: [0, -8, 0] }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: pillar.floatDuration,
-                        ease: 'easeInOut',
-                      }}
-                      className="relative w-full"
+                  <div key={pillar.num} className="relative flex flex-col">
+                    {/* Card Row */}
+                    <motion.div 
+                      initial={{ opacity: 0, x: isLeft ? -60 : 60, scale: 0.94 }}
+                      whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                      viewport={{ once: true, margin: '-40px' }}
+                      transition={{ duration: 0.7, delay: idx * 0.13, ease: [0.22, 1, 0.36, 1] }}
+                      className={`flex ${isLeft ? 'justify-start' : 'justify-end'} w-full`}
                     >
-                      {/* 3D Realistic Pushpin Top Medallion with Swaying Animation */}
-                      <motion.div 
-                        animate={{ rotate: [-3, 3, -3] }}
-                        transition={{ repeat: Infinity, duration: 3.2 + idx * 0.4, ease: 'easeInOut' }}
-                        className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none"
+                      <motion.div
+                        animate={{ y: [0, -7, 0] }}
+                        transition={{ repeat: Infinity, duration: pillar.floatDuration, ease: 'easeInOut' }}
+                        className="relative w-full md:w-[68%]"
                       >
-                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${pillar.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
-                          <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
-                        </div>
-                        <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
-                      </motion.div>
+                        {/* Pushpin */}
+                        <motion.div 
+                          animate={{ rotate: [-3, 3, -3] }}
+                          transition={{ repeat: Infinity, duration: 3.2 + idx * 0.4, ease: 'easeInOut' }}
+                          className={`absolute -top-5 ${pillar.pinLeft ? 'left-10' : 'right-10'} z-30 flex flex-col items-center pointer-events-none`}
+                        >
+                          <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${pillar.pinColor} border-2 border-white shadow-[0_10px_20px_rgba(0,0,0,0.25)] flex items-center justify-center relative`}>
+                            <div className="w-3 h-3 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                          </div>
+                          <div className="w-1 h-3 bg-slate-400/90" />
+                        </motion.div>
 
-                      {/* Animated Pushpin Tilted Card Div */}
-                      <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] ${pillar.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-6 group cursor-pointer overflow-hidden`}>
-                        
-                        {/* Top Gradient Shimmer Highlight Line */}
-                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        {/* Card */}
+                        <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] ${pillar.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-6 group cursor-pointer overflow-hidden`}>
+                          
+                          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          
+                          {/* Logo Watermark Background */}
+                          <img
+                            src={logoEmblem}
+                            alt=""
+                            className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none"
+                            aria-hidden="true"
+                          />
 
-                        <div className="flex items-center justify-between">
-                          <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${pillar.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
-                            {pillar.num}
-                          </span>
+                          <div className="flex items-center justify-between">
+                            <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${pillar.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
+                              {pillar.num}
+                            </span>
+                            <div className={`w-14 h-14 rounded-2xl ${pillar.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
+                              <PillarIcon size={26} className="group-hover:scale-110 transition-transform duration-300" />
+                            </div>
+                          </div>
 
-                          <div className={`w-14 h-14 rounded-2xl ${pillar.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
-                            <PillarIcon size={26} className="group-hover:scale-110 transition-transform duration-300" />
+                          <div className="space-y-3">
+                            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-all duration-300 tracking-tight">
+                              {pillar.title}
+                            </h3>
+                            <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-800 transition-colors duration-300">
+                              {pillar.desc}
+                            </p>
                           </div>
                         </div>
-
-                        <div className="space-y-3">
-                          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300 tracking-tight">
-                            {pillar.title}
-                          </h3>
-                          <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-800 transition-colors duration-300">
-                            {pillar.desc}
-                          </p>
-                        </div>
-
-                      </div>
+                      </motion.div>
                     </motion.div>
 
-                  </motion.div>
+                    {/* Dashed Curved Connector SVG between steps */}
+                    {pillar.curveDir !== 'none' && (
+                      <div className="hidden md:flex w-full h-20 items-center justify-center relative -my-2 pointer-events-none">
+                        <svg
+                          viewBox="0 0 400 80"
+                          fill="none"
+                          className="w-full h-full"
+                          preserveAspectRatio="none"
+                        >
+                          {pillar.curveDir === 'right' ? (
+                            /* Curve sweeping from left-side card down to right-side card */
+                            <path
+                              d="M 100,5 C 100,50 300,30 300,75"
+                              stroke="#0ED3DD"
+                              strokeWidth="2"
+                              strokeDasharray="8 6"
+                              strokeLinecap="round"
+                              opacity="0.85"
+                            />
+                          ) : (
+                            /* Curve sweeping from right-side card down to left-side card */
+                            <path
+                              d="M 300,5 C 300,50 100,30 100,75"
+                              stroke="#0ED3DD"
+                              strokeWidth="2"
+                              strokeDasharray="8 6"
+                              strokeLinecap="round"
+                              opacity="0.85"
+                            />
+                          )}
+                        </svg>
+                      </div>
+                    )}
+                  </div>
                 );
               })}
             </div>
-
           </div>
 
-        </div>
-      </section>
 
+          {/* ─── BLOCK 2: YOMTECH IN THE WORLD ─── */}
+          <div className="space-y-16 pt-8 border-t border-cyan-400/30">
+            {/* Header Badge */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-start w-full">
+                <div className="px-6 py-2 rounded-full bg-cyan-950/90 border-2 border-cyan-400/70 text-cyan-300 text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10 -mr-[1px]">
+                  <Globe size={16} className="text-cyan-300" />
+                  <span>YOMTECH IN THE WORLD</span>
+                  <span className="text-[10px] text-cyan-300 ml-0.5">◆</span>
+                </div>
+                <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-400 via-[#0ED3DD] to-transparent" />
+              </div>
 
-      {/* ════════════════════════════════════════════════════
-          SECTION 12 — FINAL DUAL-PATH CTA
-      ════════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-b border-slate-200/90 font-sans">
-        
-        {/* Dotted Grid Mesh Texture Matching User Screenshot */}
-        <div 
-          className="absolute inset-0 opacity-[0.5] pointer-events-none"
-          style={{
-            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
-            backgroundSize: '24px 24px',
-          }}
-        />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-12 relative z-10">
-
-          {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-end w-full gap-0">
-              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10">
-                <span className="text-[10px] text-[#0284C7] font-bold">◆</span>
-                <span>TAKE THE NEXT STEP</span>
-                <Sparkles size={16} className="text-[#0284C7] ml-0.5" />
+              <div className="text-left space-y-3 max-w-3xl">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight leading-tight">
+                  Technology Doesn't Stop <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-200 via-cyan-400 to-indigo-300">
+                    At The Product.
+                  </span>
+                </h2>
+                <p className="text-cyan-100/90 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                  YomTech Global shares technology knowledge, practical insights, innovation stories, engineering perspectives, and opportunities through its growing digital community.
+                </p>
               </div>
             </div>
 
-            <div className="text-left space-y-3 max-w-3xl">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-                Ready to Build Your Technology Future?
-              </h2>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* FOR ORGANIZATIONS */}
-            <div className="bg-white/95 backdrop-blur-2xl border-2 border-cyan-200 rounded-3xl p-8 text-center space-y-6 shadow-xl hover:border-cyan-400 transition-all">
-              <span className="px-3.5 py-1 rounded-full bg-cyan-100 text-[#0284C7] border border-cyan-200 text-xs font-black uppercase tracking-widest inline-block">FOR ORGANIZATIONS</span>
-              <h3 className="text-2xl font-extrabold text-slate-900 font-display">Start a Technology Conversation</h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                Consult with our engineering leads to build custom ERPs, cloud architectures, or digital transformation workflows.
-              </p>
-              <button
-                onClick={() => navigate('/contact')}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] text-white hover:opacity-95 font-black text-xs uppercase tracking-widest shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+            {/* 3 Media Community Pushpin Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+              
+              {/* YOUTUBE */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="relative w-full"
               >
-                <span>Request Enterprise Proposal</span>
-                <ArrowRight size={16} />
-              </button>
-            </div>
+                {/* 3D Pushpin */}
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-red-500 to-red-700 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                    <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                  </div>
+                  <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                </div>
 
-            {/* FOR INDIVIDUALS */}
-            <div className="bg-white/95 backdrop-blur-2xl border-2 border-emerald-200 rounded-3xl p-8 text-center space-y-6 shadow-xl hover:border-emerald-400 transition-all">
-              <span className="px-3.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-black uppercase tracking-widest inline-block">FOR INDIVIDUALS</span>
-              <h3 className="text-2xl font-extrabold text-slate-900 font-display">Start Building Your Future</h3>
-              <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                Enroll in WabiSkills bootcamps, master fullstack development, or join our vetted developer network.
-              </p>
-              <button
-                onClick={() => navigate('/academy')}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 text-white hover:opacity-95 font-black text-xs uppercase tracking-widest shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer"
+                <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-red-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(239,68,68,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                  {/* Logo Watermark Background */}
+                  <img src={logoEmblem} alt="" className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none" aria-hidden="true" />
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center justify-between">
+                      <span className="px-3.5 py-1 rounded-full bg-red-50 border border-red-200 text-red-600 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                        YOUTUBE CHANNEL
+                      </span>
+                      <div className="w-13 h-13 rounded-2xl bg-red-50 border-2 border-red-200 text-red-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-red-600 group-hover:text-white group-hover:rotate-12 transition-all duration-500">
+                        <Video size={24} />
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-red-600 group-hover:translate-x-1 transition-all duration-300">
+                      Long-Form Engineering Insights
+                    </h3>
+                    <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                      Technology discussions, full-length tutorials, engineering deep dives, product stories, and national technology documentary films.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100">
+                    <a 
+                      href="https://youtube.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="w-full py-3.5 px-5 rounded-full bg-red-50 group-hover:bg-red-600 text-red-600 group-hover:text-white border-2 border-red-200 group-hover:border-red-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                    >
+                      <span>Watch On YouTube</span>
+                      <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* TIKTOK */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="relative w-full"
               >
-                <span>Explore Academy Courses</span>
-                <ArrowRight size={16} />
-              </button>
+                {/* 3D Pushpin */}
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-400 to-[#0284C7] border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                    <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                  </div>
+                  <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                </div>
+
+                <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                  {/* Logo Watermark Background */}
+                  <img src={logoEmblem} alt="" className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none" aria-hidden="true" />
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center justify-between">
+                      <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                        TIKTOK MEDIA
+                      </span>
+                      <div className="w-13 h-13 rounded-2xl bg-cyan-50 border-2 border-cyan-200 text-[#0284C7] shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-[#0284C7] group-hover:text-white group-hover:rotate-12 transition-all duration-500">
+                        <Sparkles size={24} />
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] group-hover:translate-x-1 transition-all duration-300">
+                      Short-Form Tech Education
+                    </h3>
+                    <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                      Quick developer tips, coding highlights, tech awareness clips, career inspiration, and behind-the-scenes engineering moments.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100">
+                    <a 
+                      href="https://tiktok.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="w-full py-3.5 px-5 rounded-full bg-cyan-50 group-hover:bg-[#0284C7] text-[#0284C7] group-hover:text-white border-2 border-cyan-200 group-hover:border-[#0284C7] font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                    >
+                      <span>Follow On TikTok</span>
+                      <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* LINKEDIN */}
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="relative w-full"
+              >
+                {/* 3D Pushpin */}
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-600 to-indigo-800 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                    <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                  </div>
+                  <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                </div>
+
+                <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(37,99,235,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                  {/* Logo Watermark Background */}
+                  <img src={logoEmblem} alt="" className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none" aria-hidden="true" />
+                  <div className="space-y-4 pt-2">
+                    <div className="flex items-center justify-between">
+                      <span className="px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[10px] font-mono font-black uppercase tracking-wider shadow-xs">
+                        LINKEDIN NETWORK
+                      </span>
+                      <div className="w-13 h-13 rounded-2xl bg-blue-50 border-2 border-blue-200 text-blue-600 shadow-xs flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 group-hover:text-white group-hover:rotate-12 transition-all duration-500">
+                        <Globe size={24} />
+                      </div>
+                    </div>
+
+                    <h3 className="text-2xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 group-hover:translate-x-1 transition-all duration-300">
+                      Professional Network Updates
+                    </h3>
+                    <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                      Enterprise updates, technology whitepapers, strategic partnerships, project milestones, and career opportunities across Africa.
+                    </p>
+                  </div>
+
+                  <div className="pt-4 border-t border-slate-100">
+                    <a 
+                      href="https://linkedin.com/" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="w-full py-3.5 px-5 rounded-full bg-blue-50 group-hover:bg-blue-600 text-blue-600 group-hover:text-white border-2 border-blue-200 group-hover:border-blue-600 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-300 shadow-xs cursor-pointer"
+                    >
+                      <span>Connect On LinkedIn</span>
+                      <ExternalLink size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+
             </div>
           </div>
 
         </div>
       </section>
+
+
+
 
 
       {/* ════════════════════════════════════════════════════
@@ -1895,6 +2222,80 @@ export const HomePage = () => {
               </div>
             </div>
 
+          </div>
+
+        </div>
+      </section>
+
+
+      {/* ════════════════════════════════════════════════════
+          SECTION 14 — COMMUNITY TESTIMONIALS & REVIEWS
+      ════════════════════════════════════════════════════ */}
+      <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden border-t border-slate-200/90 font-sans">
+        
+        {/* Dotted Grid Mesh Texture */}
+        <div 
+          className="absolute inset-0 opacity-[0.5] pointer-events-none"
+          style={{
+            backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+            backgroundSize: '24px 24px',
+          }}
+        />
+
+        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-16 relative z-10">
+
+          {/* Header Badge */}
+          <div className="space-y-6">
+            <div className="flex items-center justify-end w-full">
+              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
+              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
+                <span className="text-[10px] text-[#0284C7]">◆</span>
+                <span>WHAT OUR COMMUNITY SAYS</span>
+                <Quote size={16} className="text-[#0284C7] ml-0.5" />
+              </div>
+            </div>
+
+            <div className="text-left space-y-3 max-w-3xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                Trusted by Engineers &amp; Leaders
+              </h2>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 pt-4">
+            {TESTIMONIALS.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.15 }}
+                className="relative w-full"
+              >
+                {/* 3D Pushpin */}
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center pointer-events-none">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 border-2 border-white shadow-[0_8px_16px_rgba(0,0,0,0.25)] flex items-center justify-center relative">
+                    <div className="w-2.5 h-2.5 rounded-full bg-white/60 blur-[0.5px] absolute top-1.5 left-1.5" />
+                  </div>
+                  <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
+                </div>
+
+                <div className="p-8 sm:p-10 rounded-[2.5rem] bg-white/95 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] transition-all duration-500 flex flex-col justify-between space-y-6 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                  <p className="text-sm sm:text-base text-slate-700 font-bold italic leading-relaxed pt-2">
+                    "{t.quote}"
+                  </p>
+                  <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
+                    <div>
+                      <h4 className="text-base font-extrabold text-slate-900 group-hover:text-[#0284C7] transition-colors">{t.author}</h4>
+                      <p className="text-xs font-bold text-[#0284C7] uppercase font-mono">{t.role}</p>
+                    </div>
+                    <div className="flex text-amber-400 gap-1">
+                      {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
 
         </div>

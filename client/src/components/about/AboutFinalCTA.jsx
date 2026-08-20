@@ -26,6 +26,14 @@ export const AboutFinalCTA = () => {
             {/* Radial Aura Glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#0ED3DD]/20 via-cyan-100/30 to-sky-200/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
 
+            {/* Logo Watermark Background */}
+            <img
+              src={logoImg}
+              alt=""
+              className="absolute -bottom-6 -right-6 w-64 h-64 object-contain opacity-[0.28] pointer-events-none select-none"
+              aria-hidden="true"
+            />
+
             {/* Top Floating YomTech Logo Badge */}
             <div className="flex justify-center relative z-10">
               <div className="p-1 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-md hover:scale-105 transition-transform duration-300">

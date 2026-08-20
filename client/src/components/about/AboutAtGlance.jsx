@@ -100,9 +100,16 @@ export const AboutAtGlance = () => {
           {/* Left Column: Official Profile Card */}
           <div 
             style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-            className="lg:col-span-5 rounded-3xl p-8 sm:p-10 border-2 border-indigo-200/80 shadow-xl text-left flex flex-col justify-between space-y-8"
+            className="lg:col-span-5 rounded-3xl p-8 sm:p-10 border-2 border-indigo-200/80 shadow-xl text-left flex flex-col justify-between space-y-8 relative overflow-hidden"
           >
-            <div className="space-y-6">
+            {/* Logo Watermark Background */}
+            <img
+              src={logoEmblem}
+              alt=""
+              className="absolute -bottom-6 -right-6 w-56 h-56 object-contain opacity-[0.28] pointer-events-none select-none"
+              aria-hidden="true"
+            />
+            <div className="space-y-6 relative z-10">
               <div className="flex items-center gap-4">
                 <div className="w-14 h-14 rounded-2xl bg-slate-900 p-2 shadow-lg flex items-center justify-center flex-shrink-0">
                   <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
@@ -148,7 +155,7 @@ export const AboutAtGlance = () => {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold space-y-1">
+            <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold space-y-1 relative z-10">
               <span className="font-bold uppercase tracking-wider text-[10px] text-[#0284C7] block">Core Business Areas:</span>
               <span className="block text-slate-700">Custom ERP · Digital Transformation · AI &amp; Surveillance · WabiSkills Academy · Tech Media</span>
             </div>
@@ -160,9 +167,16 @@ export const AboutAtGlance = () => {
               <div 
                 key={stat.id}
                 style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group"
+                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group relative overflow-hidden"
               >
-                <div className="space-y-3">
+                {/* Logo Watermark Background */}
+                <img
+                  src={logoEmblem}
+                  alt=""
+                  className="absolute -bottom-2 -right-2 w-28 h-28 object-contain opacity-[0.28] pointer-events-none select-none"
+                  aria-hidden="true"
+                />
+                <div className="space-y-3 relative z-10">
                   <div className="flex items-center justify-between">
                     <span className={`px-3 py-1 rounded-full text-[9px] font-mono font-black uppercase tracking-widest ${stat.bg} ${stat.border} ${stat.accent}`}>
                       {stat.category}
@@ -185,7 +199,7 @@ export const AboutAtGlance = () => {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400">
+                <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[10px] font-extrabold uppercase text-slate-400 relative z-10">
                   <span>{stat.footerLeft}</span>
                   <span className={stat.accent}>{stat.footerRight}</span>
                 </div>
