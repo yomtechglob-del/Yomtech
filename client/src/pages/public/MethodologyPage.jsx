@@ -252,10 +252,14 @@ export const MethodologyPage = () => {
       <section className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-          <div className="text-left space-y-3 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <GitBranch className="w-4 h-4" />
-              <span>DEVELOPMENT LIFECYCLE</span>
+          <div className="text-left space-y-3 max-w-full">
+            <div className="flex items-center gap-0 w-full">
+              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span>DEVELOPMENT LIFECYCLE</span>
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+              </div>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
               Our 6-Step <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Agile Methodology</span>
@@ -322,10 +326,14 @@ export const MethodologyPage = () => {
       <section className="py-20 lg:py-28 bg-white relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-          <div className="text-left space-y-3 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Award className="w-4 h-4" />
-              <span>COMPETITIVE ADVANTAGES</span>
+          <div className="text-left space-y-3 max-w-full">
+            <div className="flex items-center gap-0 w-full">
+              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span>COMPETITIVE ADVANTAGES</span>
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+              </div>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Yomtech Global</span>
@@ -369,10 +377,14 @@ export const MethodologyPage = () => {
       <section className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-          <div className="text-left space-y-3 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-              <Users className="w-4 h-4" />
-              <span>OUR TEAMS &amp; STRUCTURE</span>
+          <div className="text-left space-y-3 max-w-full">
+            <div className="flex items-center gap-0 w-full">
+              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span>OUR TEAMS & STRUCTURE</span>
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+              </div>
             </div>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
               Structured for <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Operational Excellence</span>

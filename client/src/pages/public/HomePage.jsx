@@ -1654,10 +1654,10 @@ export const HomePage = () => {
 
           {/* Header Badge (Right Aligned Badge with Accent Line Spanning Full Length to the Left) */}
           <div className="space-y-6">
-            <div className="flex items-center justify-end w-full">
-              <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7]" />
-              <div className="px-6 py-2 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-xs shrink-0 z-10 -ml-[1px]">
-                <span className="text-[10px] text-[#0284C7]">◆</span>
+            <div className="flex items-center justify-end w-full gap-0">
+              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+              <div className="px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-[0.2em] flex items-center gap-2.5 shadow-md shrink-0 z-10">
+                <span className="text-[10px] text-[#0284C7] font-bold">◆</span>
                 <span>TAKE THE NEXT STEP</span>
                 <Sparkles size={16} className="text-[#0284C7] ml-0.5" />
               </div>

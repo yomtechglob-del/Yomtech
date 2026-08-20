@@ -75,11 +75,15 @@ export const ServicesScalableTechnology = () => {
 
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-        {/* Section Header */}
-        <div className="text-left w-full space-y-4 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-            <Building2 className="w-4 h-4 text-[#0284C7]" />
-            <span>Scalable Technology</span>
+        {/* Section Header with Connected Horizontal Accent Line */}
+        <div className="text-left w-full space-y-4 max-w-full">
+          <div className="flex items-center gap-0 w-full">
+            <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+            <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
+              <span className="text-[#0284C7] font-bold text-xs">◆</span>
+              <span>SCALABLE TECHNOLOGY</span>
+              <span className="text-[#0284C7] font-bold text-xs">◆</span>
+            </div>
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
             Built for Today. <br />

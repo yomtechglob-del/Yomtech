@@ -536,7 +536,7 @@ export const ProductsCatalogue = ({ onProductSelect }) => {
         {/* Section Header matching Reference Screenshot Style */}
         <div className="space-y-4 max-w-7xl text-left">
           {/* Badge with Bold Horizontal Cyan Accent Line Extension */}
-          <div className="flex items-center gap-4 w-full">
+          <div className="flex items-center gap-0 w-full">
             <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#03045E] border-2 border-[#0ED3DD] text-[#0ED3DD] text-xs sm:text-sm font-black uppercase tracking-widest shadow-[0_0_20px_rgba(14,211,221,0.35)] backdrop-blur-md shrink-0">
               <span className="text-[#0ED3DD] font-bold text-sm">◆</span>
               <span>FULL DIGITAL PRODUCT ECOSYSTEM</span>
