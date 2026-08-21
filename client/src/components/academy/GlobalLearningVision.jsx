@@ -2,74 +2,79 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users2, BookOpen, Cpu, TrendingUp } from 'lucide-react';
 
-/* ─── 4-STEP WABISKILLS INCLUSIVE VISION INFOGRAPHIC (MATCHING IMAGE 2) ─── */
+/* ─── 4-STEP 3D PENCIL INFOGRAPHIC LAYOUT (EXACT MATCH FOR SCREENSHOT 2) ─── */
 const CONNECTIONS = [
   { 
     id: '01',
     step: '01',
-    dataTag: 'DATA A',
+    optionNum: 'OPTION 01',
     title: 'PEOPLE', 
-    subtitle: 'Global Community',
+    subtitle: 'GLOBAL COMMUNITY',
     desc: 'Connecting ambitious learners across global technology communities and developer networks.', 
     icon: Users2,
-    gradient: 'from-[#0EA5E9] via-[#0284C7] to-[#0369A1]',
-    ringBorder: 'border-[#0EA5E9]',
-    badgeBg: 'bg-[#0EA5E9]',
-    themeText: 'text-[#0EA5E9]',
+    topBorder: 'border-t-4 border-[#F97316]',
+    numberColor: 'text-[#F97316]',
+    badgeBg: 'bg-orange-50 text-[#EA580C] border-orange-200/60',
+    iconBg: 'bg-orange-50 border-orange-200/80 text-[#F97316]',
+    arrowBg: 'bg-[#F97316]',
   },
   { 
     id: '02',
     step: '02',
-    dataTag: 'DATA B',
+    optionNum: 'OPTION 02',
     title: 'KNOWLEDGE', 
-    subtitle: 'Democratized Excellence',
+    subtitle: 'DEMOCRATIZED EXCELLENCE',
     desc: 'Democratizing production software engineering education, system design & elite architecture practices.', 
     icon: BookOpen,
-    gradient: 'from-[#F59E0B] via-[#D97706] to-[#B45309]',
-    ringBorder: 'border-[#F59E0B]',
-    badgeBg: 'bg-[#F59E0B]',
-    themeText: 'text-[#D97706]',
+    topBorder: 'border-t-4 border-[#0EA5E9]',
+    numberColor: 'text-[#0EA5E9]',
+    badgeBg: 'bg-sky-50 text-[#0284C7] border-sky-200/60',
+    iconBg: 'bg-sky-50 border-sky-200/80 text-[#0EA5E9]',
+    arrowBg: 'bg-[#0EA5E9]',
   },
   { 
     id: '03',
     step: '03',
-    dataTag: 'DATA C',
+    optionNum: 'OPTION 03',
     title: 'TECHNOLOGY', 
-    subtitle: 'Modern Architecture',
+    subtitle: 'MODERN ARCHITECTURE',
     desc: 'Mastering cutting-edge fullstack web, cloud microservices, LLM artificial intelligence & data architecture.', 
     icon: Cpu,
-    gradient: 'from-[#A855F7] via-[#9333EA] to-[#7E22CE]',
-    ringBorder: 'border-[#A855F7]',
-    badgeBg: 'bg-[#A855F7]',
-    themeText: 'text-[#9333EA]',
+    topBorder: 'border-t-4 border-[#06B6D4]',
+    numberColor: 'text-[#06B6D4]',
+    badgeBg: 'bg-cyan-50 text-[#0891B2] border-cyan-200/60',
+    iconBg: 'bg-cyan-50 border-cyan-200/80 text-[#06B6D4]',
+    arrowBg: 'bg-[#06B6D4]',
   },
   { 
     id: '04',
     step: '04',
-    dataTag: 'DATA D',
+    optionNum: 'OPTION 04',
     title: 'OPPORTUNITY', 
-    subtitle: 'Career Autonomy',
+    subtitle: 'CAREER AUTONOMY',
     desc: 'Empowering software craftsmanship, high-impact career progression & remote engineering autonomy without limits.', 
     icon: TrendingUp,
-    gradient: 'from-[#10B981] via-[#059669] to-[#047857]',
-    ringBorder: 'border-[#10B981]',
-    badgeBg: 'bg-[#10B981]',
-    themeText: 'text-[#059669]',
+    topBorder: 'border-t-4 border-[#F59E0B]',
+    numberColor: 'text-[#D97706]',
+    badgeBg: 'bg-amber-50 text-[#D97706] border-amber-200/60',
+    iconBg: 'bg-amber-50 border-amber-200/80 text-[#D97706]',
+    arrowBg: 'bg-[#F59E0B]',
   }
 ];
 
 export const GlobalLearningVision = () => {
   return (
-    <section className="relative min-h-screen py-24 md:py-36 bg-white overflow-hidden font-sans selection:bg-indigo-500/20 selection:text-indigo-900 border-b border-slate-200/80">
+    <section className="relative min-h-screen py-24 md:py-36 bg-[#F4F8FC] overflow-hidden font-sans selection:bg-indigo-500/20 selection:text-indigo-900 border-b border-slate-200/80">
       
-      {/* Ambient Atmospheric Orbs & Blueprint Grid */}
+      {/* Precision Blueprint Dot Grid Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-100/70 via-slate-50/50 to-white" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F0F6FC] via-[#F4F8FC] to-[#F0F6FC]" />
         
+        {/* Cyan Dot Matrix Grid */}
         <div 
-          className="absolute inset-0 opacity-[0.25]" 
+          className="absolute inset-0 opacity-[0.45]" 
           style={{ 
-            backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)', 
+            backgroundImage: 'radial-gradient(#0EA5E9 1.5px, transparent 1.5px)', 
             backgroundSize: '24px 24px',
           }}
         />
@@ -80,7 +85,7 @@ export const GlobalLearningVision = () => {
 
       <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-16">
         
-        {/* Section Header matching Image 2 */}
+        {/* Section Header */}
         <div className="text-left space-y-4 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
             <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
@@ -100,16 +105,37 @@ export const GlobalLearningVision = () => {
           </p>
         </div>
 
-        {/* 4-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT (MATCHING IMAGE 2 EXACTLY) */}
-        <div className="relative max-w-6xl mx-auto py-6">
+        {/* 4-STEP 3D PENCIL INFOGRAPHIC TIMELINE LAYOUT (EXACT MATCH FOR SCREENSHOT 2) */}
+        <div className="relative max-w-5xl mx-auto py-8">
           
-          {/* Central Connected Zig-Zag Line (Desktop Only) */}
-          <div className="hidden lg:block absolute inset-y-12 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-yellow-400 via-purple-400 to-emerald-500 rounded-full shadow-[0_0_12px_rgba(14,165,233,0.4)] pointer-events-none z-0" />
+          {/* Central 3D Wooden Pencil Vector Spine (Desktop Only) */}
+          <div className="hidden lg:flex flex-col items-center absolute inset-y-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
+            {/* Pencil Shaft with 3D Wood Gradients & Facets */}
+            <div className="w-10 sm:w-11 flex-1 bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#B45309] rounded-t-full shadow-2xl relative overflow-hidden border-x border-amber-600/40">
+              <div className="absolute inset-0 flex justify-between px-2 opacity-30">
+                <div className="w-1 h-full bg-amber-950/40" />
+                <div className="w-1 h-full bg-amber-100/50" />
+                <div className="w-1 h-full bg-amber-950/40" />
+              </div>
+            </div>
 
-          <div className="space-y-12 relative z-10">
+            {/* Sharpened Wooden Cone Tip */}
+            <div 
+              className="w-10 sm:w-11 h-14 bg-[#E5D3B3] shadow-md relative overflow-hidden shrink-0"
+              style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
+            >
+              {/* Pencil Lead Graphite Point at Tip */}
+              <div 
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-5 bg-[#1E293B]"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
+              />
+            </div>
+          </div>
+
+          <div className="space-y-12 lg:space-y-16 relative z-10">
             {CONNECTIONS.map((c, idx) => {
               const IconComp = c.icon;
-              const isEven = idx % 2 === 1;
+              const isEven = idx % 2 === 1; // Left: 01, 03; Right: 02, 04
 
               return (
                 <motion.div
@@ -117,50 +143,34 @@ export const GlobalLearningVision = () => {
                   initial={{ opacity: 0, y: 35 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 w-full ${
+                  transition={{ duration: 0.45, delay: idx * 0.1 }}
+                  className={`flex flex-col lg:flex-row items-center w-full ${
                     isEven ? 'lg:flex-row-reverse' : ''
                   }`}
                 >
-                  {/* Main Step Pill Card matching Image 2 */}
-                  <div className="w-full lg:w-[calc(50%-2.5rem)] group">
-                    <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                  {/* Step Card Plate matching Screenshot 2 */}
+                  <div className="w-full lg:w-[calc(50%-3rem)] group">
+                    <div className={`bg-white rounded-2xl p-6 sm:p-8 shadow-[0_12px_35px_rgba(0,0,0,0.07)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5 border border-slate-100 ${c.topBorder}`}>
                       
-                      {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
-                      <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>
-                        
-                        {/* Circular Double-Ring Badge + Arrow Pointer Tab matching Image 2 */}
-                        <div className={`flex items-center gap-2 ${isEven ? 'flex-row-reverse' : ''}`}>
-                          <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 border-4 ${c.ringBorder} shadow-lg flex items-center justify-center shrink-0`}>
-                            <div className={`w-full h-full rounded-full ${c.badgeBg} flex flex-col items-center justify-center text-white font-mono font-black text-xs shadow-inner`}>
-                              <span className="text-[8px] uppercase tracking-tighter opacity-90">STEP</span>
-                              <span className="text-sm font-extrabold leading-none">{c.step}</span>
-                            </div>
-                          </div>
-
-                          {/* Arrow Pointer Tab matching Image 2 */}
-                          <div
-                            className={`px-4 py-1.5 bg-gradient-to-r ${c.gradient} text-white font-mono font-black text-xs uppercase tracking-wider shadow-md ${
-                              isEven ? 'rounded-l-2xl rounded-r-sm' : 'rounded-r-2xl rounded-l-sm'
-                            }`}
-                          >
-                            <span>{c.dataTag}</span>
-                          </div>
-                        </div>
-
-                        {/* Icon Badge */}
-                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${c.gradient} text-white flex items-center justify-center shadow-md shrink-0 group-hover:scale-110 transition-transform`}>
-                          <IconComp size={22} strokeWidth={2.2} />
-                        </div>
-                      </div>
-
-                      {/* Card Content */}
-                      <div className="space-y-2 text-left">
-                        <div className="flex items-center gap-2">
-                          <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-0.5 rounded-md bg-slate-100 ${c.themeText}`}>
+                      {/* Top Row: Large Step Number + Subtitle Pill Badge + Top Right Icon */}
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex items-center gap-3">
+                          <span className={`text-3xl sm:text-4xl font-black font-mono ${c.numberColor} leading-none`}>
+                            {c.step}
+                          </span>
+                          <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider border ${c.badgeBg}`}>
                             {c.subtitle}
                           </span>
                         </div>
+
+                        {/* Top-Right Icon Box matching Screenshot 2 */}
+                        <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shrink-0 shadow-xs ${c.iconBg} group-hover:scale-110 transition-transform`}>
+                          <IconComp size={20} strokeWidth={2.2} />
+                        </div>
+                      </div>
+
+                      {/* Middle Title & Description */}
+                      <div className="space-y-2 text-left pt-2">
                         <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
                           {c.title}
                         </h3>
@@ -169,16 +179,21 @@ export const GlobalLearningVision = () => {
                         </p>
                       </div>
 
+                      {/* Bottom Arrow Pointer Tab matching Screenshot 2 */}
+                      <div className="pt-2 flex justify-start">
+                        <div 
+                          className={`px-3 py-1 ${c.arrowBg} text-white font-mono font-black text-[10px] uppercase tracking-widest shadow-xs rounded-sm flex items-center gap-1 -ml-6 -mb-6 rounded-r-md`}
+                          style={{ clipPath: 'polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%)' }}
+                        >
+                          <span>◆ {c.optionNum}</span>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 
-                  {/* Central Connected Node Dot matching Image 2 */}
-                  <div className="hidden lg:flex w-12 h-12 rounded-full bg-white border-4 border-slate-200 shadow-md items-center justify-center z-10 shrink-0">
-                    <div className={`w-5 h-5 rounded-full ${c.badgeBg} animate-ping`} />
-                  </div>
-
-                  {/* Empty Space for Grid Balance */}
-                  <div className="hidden lg:block w-[calc(50%-2.5rem)]" />
+                  {/* Empty Grid Space for 3D Pencil Balance */}
+                  <div className="hidden lg:block w-[calc(50%-3rem)]" />
 
                 </motion.div>
               );

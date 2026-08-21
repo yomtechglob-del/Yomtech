@@ -20,7 +20,6 @@ const METHODOLOGY_STEPS = [
     step: '01',
     phase: 'STEP 01',
     stage: 'DISCOVERY',
-    dataTag: 'DATA A',
     title: 'Requirement Analysis & Planning',
     subtitle: 'Scope Definition & Strategic Alignment',
     icon: FileText,
@@ -38,7 +37,6 @@ const METHODOLOGY_STEPS = [
     step: '02',
     phase: 'STEP 02',
     stage: 'ARCHITECTURE',
-    dataTag: 'DATA B',
     title: 'System Design & Architecture',
     subtitle: 'Scalable & Secure System Blueprints',
     icon: Sliders,
@@ -56,7 +54,6 @@ const METHODOLOGY_STEPS = [
     step: '03',
     phase: 'STEP 03',
     stage: 'DEVELOPMENT',
-    dataTag: 'DATA C',
     title: 'Agile Development Process',
     subtitle: 'Iterative Sprints & Transparent Codebase',
     icon: Code,
@@ -74,7 +71,6 @@ const METHODOLOGY_STEPS = [
     step: '04',
     phase: 'STEP 04',
     stage: 'QUALITY ASSURANCE',
-    dataTag: 'DATA D',
     title: 'Testing & Quality Assurance',
     subtitle: 'Performance, Penetration & Load Validation',
     icon: ShieldCheck,
@@ -92,7 +88,6 @@ const METHODOLOGY_STEPS = [
     step: '05',
     phase: 'STEP 05',
     stage: 'DEPLOYMENT',
-    dataTag: 'DATA E',
     title: 'Deployment & Implementation',
     subtitle: 'Zero-Downtime Rollout & Operational Onboarding',
     icon: Server,
@@ -110,7 +105,6 @@ const METHODOLOGY_STEPS = [
     step: '06',
     phase: 'STEP 06',
     stage: 'MAINTENANCE',
-    dataTag: 'DATA F',
     title: 'Maintenance & Continuous Support',
     subtitle: 'Ongoing Optimization & System Evolution',
     icon: RefreshCw,
@@ -303,7 +297,25 @@ export const MethodologyPage = () => {
       {/* ════════════════════════════════════════════════════
           6-STEP AGILE DEVELOPMENT METHODOLOGY
       ════════════════════════════════════════════════════ */}
-      <section className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
+      <section className="py-20 lg:py-28 bg-[#F4F8FC] relative overflow-hidden font-sans border-b border-slate-200/80">
+        
+        {/* Precision Blueprint Dot Grid Background matching Screenshot 2 */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F0F6FC] via-[#F4F8FC] to-[#F0F6FC]" />
+          
+          {/* Cyan Dot Matrix Grid */}
+          <div 
+            className="absolute inset-0 opacity-[0.45]" 
+            style={{ 
+              backgroundImage: 'radial-gradient(#0EA5E9 1.5px, transparent 1.5px)', 
+              backgroundSize: '24px 24px',
+            }}
+          />
+          
+          <div className="absolute top-[10%] left-[10%] w-[45vw] h-[45vw] rounded-full bg-cyan-400/10 blur-[140px]" />
+          <div className="absolute bottom-[10%] right-[10%] w-[45vw] h-[45vw] rounded-full bg-blue-400/10 blur-[150px]" />
+        </div>
+
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
           {/* Left-Aligned Header with Pill Badge + Horizontal Cyan Line Extension (Matching Image 2) */}
@@ -318,15 +330,15 @@ export const MethodologyPage = () => {
             </div>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
-              Our 6-Step <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Agile Methodology</span>
+              6-Step Agile <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600 font-display">Development Process</span>
             </h2>
 
             <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl">
-              Our structured approach ensures continuous collaboration, complete transparency, zero-downtime deployment, and alignment with client objectives throughout the project lifecycle.
+              From requirement analysis to continuous maintenance, our 6-step framework guarantees quality, transparency, and timely delivery.
             </p>
           </div>
 
-          {/* 6-STEP ALTERNATING BUSINESS INFOGRAPHIC CONTAINER (MATCHING IMAGE 2) */}
+          {/* 6-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT (MATCHING IMAGE 2 EXACTLY) */}
           <div className="relative max-w-6xl mx-auto py-8">
             
             {/* Central Connected Zig-Zag Line (Desktop Only) */}
@@ -348,9 +360,9 @@ export const MethodologyPage = () => {
                       isEven ? 'lg:flex-row-reverse' : ''
                     }`}
                   >
-                    {/* Main Step Pill Card matching Image 2 */}
+                    {/* Pure Crisp White Step Pill Card Plate matching Screenshot 1 */}
                     <div className="w-full lg:w-[calc(50%-2.5rem)] group">
-                      <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                      <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
                         
                         {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
                         <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>

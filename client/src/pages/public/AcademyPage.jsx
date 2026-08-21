@@ -8,7 +8,6 @@ import {
 import { AcademyRadialHero } from '../../components/academy/AcademyRadialHero';
 import { LearningModel } from '../../components/academy/LearningModel';
 import { ClassroomToRealWorld } from '../../components/academy/ClassroomToRealWorld';
-import { MentorshipExperience } from '../../components/academy/MentorshipExperience';
 import { CareerReadiness } from '../../components/academy/CareerReadiness';
 import { AcademyEcosystem } from '../../components/academy/AcademyEcosystem';
 import { PracticalLearning } from '../../components/academy/PracticalLearning';
@@ -315,9 +314,6 @@ export const AcademyPage = () => {
 
       {/* 4. CLASSROOM TO REAL WORLD */}
       <ClassroomToRealWorld />
-
-      {/* 5. MENTORSHIP & LIVE-ONLY EXPERIENCE */}
-      <MentorshipExperience />
 
       {/* 6. TECHNICAL PROGRESSION 3D PENCIL INFOGRAPHIC (EXACT WABISKILLS.COM COPY) */}
       <CareerReadiness />

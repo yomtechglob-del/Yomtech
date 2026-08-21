@@ -1,62 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BookOpen, Code2, RefreshCw } from 'lucide-react';
+import { BookOpen, Code2, RefreshCw, ChevronRight } from 'lucide-react';
 
-/* ─── 3-STEP PRACTICAL LEARNING PHILOSOPHY INFOGRAPHIC (MATCHING IMAGE 2) ─── */
+/* ─── 3-STEP SEQUENTIAL BUSINESS INFOGRAPHIC FLOW (EXACT MATCH FOR SCREENSHOT 2) ─── */
 const PRINCIPLES = [
   {
     id: '01',
     step: '01',
-    dataTag: 'DATA A',
     label: 'UNDERSTAND',
-    subtitle: 'Build Strong Foundations',
+    subtitle: 'BUILD STRONG FOUNDATIONS',
     description: 'Master software engineering concepts, system design principles, and clean code practices from the ground up.',
     icon: BookOpen,
-    gradient: 'from-[#0EA5E9] via-[#0284C7] to-[#0369A1]',
-    ringBorder: 'border-[#0EA5E9]',
-    badgeBg: 'bg-[#0EA5E9]',
+    accentColor: '#0EA5E9',
+    borderColor: 'border-cyan-200/80',
+    borderDash: 'border-cyan-400/60',
+    cardBg: 'bg-[#0EA5E9]',
+    badgeBg: 'bg-cyan-50 text-[#0284C7] border-cyan-200',
     themeText: 'text-[#0EA5E9]',
+    dotBg: 'bg-[#0EA5E9]',
   },
   {
     id: '02',
     step: '02',
-    dataTag: 'DATA B',
     label: 'APPLY',
-    subtitle: 'Turn Concepts Into Working Solutions',
+    subtitle: 'PRACTICAL SOLUTIONS',
     description: 'Architect production web, mobile, and AI software applications with hands-on coding and real repositories.',
     icon: Code2,
-    gradient: 'from-[#F59E0B] via-[#D97706] to-[#B45309]',
-    ringBorder: 'border-[#F59E0B]',
-    badgeBg: 'bg-[#F59E0B]',
+    accentColor: '#F59E0B',
+    borderColor: 'border-amber-200/80',
+    borderDash: 'border-amber-400/60',
+    cardBg: 'bg-[#F59E0B]',
+    badgeBg: 'bg-amber-50 text-[#D97706] border-amber-200',
     themeText: 'text-[#D97706]',
+    dotBg: 'bg-[#F59E0B]',
   },
   {
     id: '03',
     step: '03',
-    dataTag: 'DATA C',
     label: 'IMPROVE',
-    subtitle: 'Learn From Feedback & Iteration',
+    subtitle: 'FEEDBACK & ITERATION',
     description: 'Refine software quality continuously through senior mentor code reviews, pull requests, and performance tuning.',
     icon: RefreshCw,
-    gradient: 'from-[#A855F7] via-[#9333EA] to-[#7E22CE]',
-    ringBorder: 'border-[#A855F7]',
-    badgeBg: 'bg-[#A855F7]',
+    accentColor: '#A855F7',
+    borderColor: 'border-purple-200/80',
+    borderDash: 'border-purple-400/60',
+    cardBg: 'bg-[#A855F7]',
+    badgeBg: 'bg-purple-50 text-[#9333EA] border-purple-200',
     themeText: 'text-[#9333EA]',
+    dotBg: 'bg-[#A855F7]',
   }
 ];
 
 export const PracticalLearning = () => {
   return (
-    <section className="relative min-h-screen py-24 md:py-32 bg-[#F8FAFC] overflow-hidden font-sans selection:bg-amber-500/20 selection:text-amber-900 border-b border-slate-200/80">
+    <section className="relative min-h-screen py-24 md:py-36 bg-[#F4F8FC] overflow-hidden font-sans selection:bg-amber-500/20 selection:text-amber-900 border-b border-slate-200/80">
       
-      {/* Precision Blueprint Dot Grid & Ambient Orbs */}
+      {/* Precision Blueprint Dot Grid Background */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#FFFCF5] via-[#FFFDF9] to-[#F5F8FA]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F0F6FC] via-[#F4F8FC] to-[#F0F6FC]" />
         
+        {/* Cyan Dot Matrix Grid */}
         <div 
-          className="absolute inset-0 opacity-[0.25]" 
+          className="absolute inset-0 opacity-[0.45]" 
           style={{ 
-            backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)', 
+            backgroundImage: 'radial-gradient(#0EA5E9 1.5px, transparent 1.5px)', 
             backgroundSize: '24px 24px',
           }}
         />
@@ -65,9 +72,9 @@ export const PracticalLearning = () => {
         <div className="absolute top-[20%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-cyan-200/20 blur-[140px]" />
       </div>
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-16">
+      <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-16">
         
-        {/* Left-Aligned Header matching Image 2 */}
+        {/* Left-Aligned Section Header */}
         <div className="text-left space-y-4 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
             <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
@@ -87,87 +94,80 @@ export const PracticalLearning = () => {
           </p>
         </div>
 
-        {/* 3-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT (MATCHING IMAGE 2 EXACTLY) */}
-        <div className="relative max-w-6xl mx-auto py-6">
+        {/* 3-STEP SEQUENTIAL BUSINESS INFOGRAPHIC FLOW LAYOUT (MATCHING SCREENSHOT 2) */}
+        <div className="relative max-w-6xl mx-auto pt-6">
           
-          {/* Central Connected Zig-Zag Line (Desktop Only) */}
-          <div className="hidden lg:block absolute inset-y-12 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-yellow-400 to-purple-500 rounded-full shadow-[0_0_12px_rgba(14,165,233,0.4)] pointer-events-none z-0" />
-
-          <div className="space-y-12 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 items-stretch">
             {PRINCIPLES.map((principle, idx) => {
               const IconComp = principle.icon;
-              const isEven = idx % 2 === 1;
+              const isLast = idx === PRINCIPLES.length - 1;
 
               return (
-                <motion.div
-                  key={principle.id}
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
-                  className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 w-full ${
-                    isEven ? 'lg:flex-row-reverse' : ''
-                  }`}
-                >
-                  {/* Main Step Pill Card matching Image 2 */}
-                  <div className="w-full lg:w-[calc(50%-2.5rem)] group">
-                    <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                <div key={principle.id} className="relative flex flex-col items-center group">
+                  
+                  {/* Outer Dotted Outline Frame Container matching Screenshot 2 */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.45, delay: idx * 0.12 }}
+                    className={`w-full border-2 border-dashed ${principle.borderDash} rounded-3xl p-3 relative bg-white/40 backdrop-blur-xs hover:bg-white/60 transition-all duration-300 hover:-translate-y-2 shadow-sm hover:shadow-xl flex flex-col justify-between h-full`}
+                  >
+                    {/* Inner Background Color Block Plate matching Screenshot 2 */}
+                    <div className={`${principle.cardBg} rounded-2xl p-1 relative flex flex-col justify-between h-full overflow-hidden shadow-inner`}>
                       
-                      {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
-                      <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>
+                      {/* Pure White Card Body matching Screenshot 2 */}
+                      <div className="bg-white rounded-xl p-6 sm:p-7 shadow-md space-y-4 flex flex-col justify-between h-full relative z-10 text-left border border-slate-100">
                         
-                        {/* Circular Double-Ring Badge + Arrow Pointer Tab matching Image 2 */}
-                        <div className={`flex items-center gap-2 ${isEven ? 'flex-row-reverse' : ''}`}>
-                          <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 border-4 ${principle.ringBorder} shadow-lg flex items-center justify-center shrink-0`}>
-                            <div className={`w-full h-full rounded-full ${principle.badgeBg} flex flex-col items-center justify-center text-white font-mono font-black text-xs shadow-inner`}>
-                              <span className="text-[8px] uppercase tracking-tighter opacity-90">STEP</span>
-                              <span className="text-sm font-extrabold leading-none">{principle.step}</span>
-                            </div>
+                        {/* Top Row: Centered Icon */}
+                        <div className="flex items-center justify-between">
+                          <div className={`w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center ${principle.themeText} shadow-2xs group-hover:scale-110 transition-transform`}>
+                            <IconComp size={20} strokeWidth={2.2} />
                           </div>
-
-                          {/* Arrow Pointer Tab matching Image 2 */}
-                          <div
-                            className={`px-4 py-1.5 bg-gradient-to-r ${principle.gradient} text-white font-mono font-black text-xs uppercase tracking-wider shadow-md ${
-                              isEven ? 'rounded-l-2xl rounded-r-sm' : 'rounded-r-2xl rounded-l-sm'
-                            }`}
-                          >
-                            <span>{principle.dataTag}</span>
-                          </div>
-                        </div>
-
-                        {/* Icon Badge */}
-                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${principle.gradient} text-white flex items-center justify-center shadow-md shrink-0 group-hover:scale-110 transition-transform`}>
-                          <IconComp size={22} strokeWidth={2.2} />
-                        </div>
-                      </div>
-
-                      {/* Card Content */}
-                      <div className="space-y-2 text-left">
-                        <div className="flex items-center gap-2">
-                          <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-0.5 rounded-md bg-slate-100 ${principle.themeText}`}>
+                          <span className={`text-[9px] font-mono font-black uppercase px-2.5 py-1 rounded-md border ${principle.badgeBg}`}>
                             {principle.subtitle}
                           </span>
                         </div>
-                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
-                          {principle.label}
-                        </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
-                          {principle.description}
-                        </p>
+
+                        {/* Title & Description */}
+                        <div className="space-y-2 text-left pt-2">
+                          <h3 className="text-xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                            {principle.label}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                            {principle.description}
+                          </p>
+                        </div>
+
+                        {/* Bottom Step Number matching Screenshot 2 */}
+                        <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-slate-400 font-mono font-bold text-xs">
+                          <span>STEP</span>
+                          <span className={`text-base font-black font-mono ${principle.themeText}`}>
+                            {principle.step}
+                          </span>
+                        </div>
+
                       </div>
 
+                      {/* Directional Arrow Pointer Notch on Right Side matching Screenshot 2 */}
+                      {!isLast && (
+                        <div 
+                          className={`hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-4 h-8 ${principle.cardBg} z-20`}
+                          style={{ clipPath: 'polygon(0 0, 100% 50%, 0 100%)' }}
+                        />
+                      )}
+
                     </div>
-                  </div>
+                  </motion.div>
 
-                  {/* Central Connected Node Dot matching Image 2 */}
-                  <div className="hidden lg:flex w-12 h-12 rounded-full bg-white border-4 border-slate-200 shadow-md items-center justify-center z-10 shrink-0">
-                    <div className={`w-5 h-5 rounded-full ${principle.badgeBg} animate-ping`} />
-                  </div>
+                  {/* Connected Node Dot between Cards matching Screenshot 2 */}
+                  {!isLast && (
+                    <div className="hidden md:flex absolute -right-6 top-1/2 -translate-y-1/2 z-30 items-center justify-center">
+                      <div className={`w-4 h-4 rounded-full ${principle.dotBg} border-2 border-white shadow-md animate-pulse`} />
+                    </div>
+                  )}
 
-                  {/* Empty Space for Grid Balance */}
-                  <div className="hidden lg:block w-[calc(50%-2.5rem)]" />
-
-                </motion.div>
+                </div>
               );
             })}
           </div>
