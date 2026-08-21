@@ -83,30 +83,30 @@ export const GlobalLearningVision = () => {
         <div className="absolute bottom-[-10%] left-[10%] w-[50vw] h-[50vw] rounded-full bg-cyan-300/15 blur-[140px]" />
       </div>
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-20">
         
         {/* Section Header */}
-        <div className="text-left space-y-4 max-w-full relative">
+        <div className="text-left space-y-5 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               <span>WABISKILLS INCLUSIVE VISION</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
-            <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
+            <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
             WabiSkills Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-sky-500">Without Borders</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10 font-sans">
+          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl relative z-10 font-sans">
             At WabiSkills, we make quality tech education accessible, practical, and interactive. We offer 50% scholarships for all college students and full scholarships because talent has no limits.
           </p>
         </div>
 
         {/* 4-STEP 3D PENCIL INFOGRAPHIC TIMELINE LAYOUT (EXACT MATCH FOR SCREENSHOT 2) */}
-        <div className="relative max-w-5xl mx-auto py-8">
+        <div className="relative max-w-[90rem] mx-auto py-8">
           
           {/* Central 3D Wooden Pencil Vector Spine (Desktop Only) */}
           <div className="hidden lg:flex flex-col items-center absolute inset-y-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">

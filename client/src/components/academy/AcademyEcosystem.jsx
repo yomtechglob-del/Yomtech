@@ -97,25 +97,25 @@ export const AcademyEcosystem = () => {
         <div className="absolute bottom-[10%] right-[10%] w-[45vw] h-[45vw] rounded-full bg-blue-400/10 blur-[150px]" />
       </div>
 
-      <div className="max-w-[92rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-12">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-20">
         
         {/* Left-Aligned Header with Pill Badge & Cyan Accent Line */}
-        <div className="text-left space-y-4 max-w-full relative">
+        <div className="text-left space-y-5 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               <span>GLOBAL INTEGRATION</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
-            <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
+            <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight relative z-10">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black font-display text-slate-900 tracking-tight leading-tight relative z-10">
             Academy <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-sky-500">Ecosystem</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10 font-sans">
-            Connecting WabiSkills learners, mentors, projects, and the YomTech Global engineering core into a single, unified intelligence network.
+          <p className="text-lg sm:text-xl text-slate-600 font-medium leading-relaxed max-w-4xl relative z-10 font-sans">
+            How YomTech Global and WabiSkills interconnect to train elite engineers and deliver enterprise solutions.
           </p>
         </div>
 
@@ -160,7 +160,7 @@ export const AcademyEcosystem = () => {
         </div>
 
         {/* 5-STEP BUSINESS INFOGRAPHIC CONTAINER (EXACT IMAGE 2 RECREATION) */}
-        <div className="relative max-w-6xl mx-auto py-4">
+        <div className="relative max-w-[90rem] mx-auto py-4">
           
           {/* Animated Water Flow Liquid Vertical Spine (Desktop Only) */}
           <div className="hidden lg:block absolute inset-0 pointer-events-none z-0 overflow-visible">

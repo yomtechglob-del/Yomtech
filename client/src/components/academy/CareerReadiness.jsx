@@ -2,24 +2,25 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User, FileText, BarChart2, ExternalLink, Award, Code2, ShieldCheck, Sparkles, Monitor, GraduationCap } from 'lucide-react';
 
+/* ─── 3D PENCIL INFOGRAPHIC COURSES (2-LINE DESCRIPTIONS PREVENTING OVERLAP) ─── */
 export const CareerReadiness = () => {
   const summaryColumns = [
-    { num: '01', title: 'FULLSTACK DEV', desc: 'Fullstack Developer in 6 months with live MERN classes & projects.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200' },
-    { num: '02', title: 'AI & PYTHON', desc: 'Master AI & Python with hands-on Machine Learning labs.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200' },
-    { num: '03', title: 'CYBERSECURITY', desc: 'Learn Cyber Security in 3 months & become job-ready.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200' },
-    { num: '04', title: 'UI/UX DESIGN', desc: 'Master Figma, Product Design & daily follow-up sessions.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200' },
-    { num: '05', title: 'KIDS TECH CAMP', desc: 'Physical weekend classes for Grade 4–11 at Derartu Tower.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200' },
-    { num: '06', title: 'LIVE TRAININGS', desc: 'Live group sessions, scholarships & paid internship placements.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200' },
+    { num: '01', title: 'FULLSTACK DEV', desc: 'Fullstack Developer in 6 months with live MERN classes & projects.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
+    { num: '02', title: 'AI & PYTHON', desc: 'Master AI & Python with hands-on Machine Learning labs.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
+    { num: '03', title: 'CYBERSECURITY', desc: 'Learn Cyber Security in 3 months & become job-ready.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
+    { num: '04', title: 'UI/UX DESIGN', desc: 'Master Figma, Product Design & daily follow-up sessions.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
+    { num: '05', title: 'KIDS TECH CAMP', desc: 'Physical weekend classes for Grade 4–11 at Derartu Tower.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
+    { num: '06', title: 'LIVE TRAININGS', desc: 'Live group sessions, scholarships & paid internship placements.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
   ];
 
   return (
     <section className="relative py-28 lg:py-44 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       
-      <div className="max-w-[110rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
 
-        {/* Section Header with Official WabiSkills Content matching Image 2 */}
-        <div className="text-left space-y-4 max-w-full relative">
-          {/* Blueprint Dot Grid Overlay matching Image 2 */}
+        {/* Section Header */}
+        <div className="text-left space-y-5 max-w-full relative">
+          {/* Blueprint Dot Grid Overlay */}
           <div
             className="absolute -inset-4 opacity-[0.35] pointer-events-none"
             style={{
@@ -30,7 +31,7 @@ export const CareerReadiness = () => {
 
           {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               <span>ANNOUNCING WABISKILLS COURSES BY</span>
               <a 
@@ -40,31 +41,32 @@ export const CareerReadiness = () => {
                 className="inline-flex items-center gap-1 text-[#0EA5E9] hover:text-cyan-600 underline font-black underline-offset-4 transition-colors"
               >
                 WABISKILLS.COM
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-4 h-4" />
               </a>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
-            <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
+            <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10 select-text cursor-text">
             Unlock Potential &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Shape Tomorrow with WabiSkills</span>
           </h2>
 
-          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10 font-sans">
+          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl relative z-10 font-sans select-text cursor-text">
             Our mission is to help people find the best tech courses online &amp; physical camps to learn with experts anytime, anywhere — powered by WabiSkills (Yomtech Global's Educational Platform).
           </p>
         </div>
 
-        {/* Gigantic Scaled Vector Infographic: Central 3D Pencil + Exact WabiSkills Official Course Ribbons */}
-        <div className="relative max-w-[95rem] mx-auto flex flex-col items-center">
+        {/* Scaled Vector Infographic: Central 3D Pencil + Ribbons (2-LINE NON-OVERLAPPING TEXT) */}
+        <div className="relative max-w-[90rem] mx-auto flex flex-col items-center">
           
           <div className="w-full relative flex justify-center overflow-x-auto">
             <svg 
-              className="w-full max-w-[1450px] h-auto min-w-[1050px] select-none" 
+              className="w-full max-w-[1550px] h-auto min-w-[1100px] select-text cursor-text" 
               viewBox="0 0 1450 1200" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
+              style={{ userSelect: 'text' }}
             >
               <defs>
                 {/* 3D Drop Shadow Filters */}
@@ -128,7 +130,7 @@ export const CareerReadiness = () => {
               {/* Ground Shadow under Pencil Point */}
               <ellipse cx="725" cy="1080" rx="70" ry="14" fill="#0f172a" opacity="0.25" />
 
-              {/* GIGANTIC CENTRAL 3D PENCIL SHAFT */}
+              {/* CENTRAL 3D PENCIL SHAFT */}
               <g id="CentralPencil3D" filter="url(#pencilBodyShadow)">
                 {/* Red Eraser Cap */}
                 <path d="M 675 60 C 675 20, 775 20, 775 60 L 775 110 L 675 110 Z" fill="url(#redEraserGrad)" />
@@ -169,22 +171,24 @@ export const CareerReadiness = () => {
                 {/* Ribbon 02 Right Banner */}
                 <path d="M 775 290 L 1370 290 L 1320 335 L 1370 380 L 775 380 Z" fill="url(#amberRibbonFront)" />
 
-                {/* Banner 01 Text (Left) */}
-                <text x="150" y="240" fill="#FFFFFF" fontSize="34" fontWeight="900" fontFamily="monospace">01</text>
-                <line x1="225" y1="195" x2="225" y2="255" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="250" y="215" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif">FULLSTACK DEVELOPMENT</text>
-                <text x="250" y="248" fill="#FFFFFF" fontSize="17" fontWeight="700" opacity="0.95" fontFamily="sans-serif">Become a Fullstack Developer in 6 months with live MERN classes</text>
+                {/* Banner 01 Text (Left) - 2 CLEAN LINES, NO OVERLAP */}
+                <text x="150" y="240" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>01</text>
+                <line x1="220" y1="195" x2="220" y2="255" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
+                <text x="240" y="210" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>FULLSTACK DEVELOPMENT</text>
+                <text x="240" y="235" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Become a Fullstack Developer in 6 months</text>
+                <text x="240" y="255" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>with live MERN classes &amp; real projects</text>
 
-                {/* Banner 02 Text (Right) */}
-                <text x="815" y="325" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif">ARTIFICIAL INTELLIGENCE</text>
-                <text x="815" y="358" fill="#FFFFFF" fontSize="17" fontWeight="700" opacity="0.95" fontFamily="sans-serif">Master AI &amp; Python with hands-on Machine Learning labs</text>
-                <line x1="1225" y1="305" x2="1225" y2="365" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="1245" y="350" fill="#FFFFFF" fontSize="34" fontWeight="900" fontFamily="monospace">02</text>
+                {/* Banner 02 Text (Right) - 2 CLEAN LINES, NO OVERLAP */}
+                <text x="815" y="320" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>ARTIFICIAL INTELLIGENCE</text>
+                <text x="815" y="345" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Master AI &amp; Python with hands-on</text>
+                <text x="815" y="365" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Machine Learning labs &amp; projects</text>
+                <line x1="1235" y1="305" x2="1235" y2="365" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
+                <text x="1255" y="350" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>02</text>
 
                 {/* White Circle Icon Badge over Loop */}
-                <circle cx="725" cy="260" r="42" fill="#FFFFFF" stroke="#EA580C" strokeWidth="6" />
-                <g transform="translate(704, 239)">
-                  <Code2 size={42} className="text-[#EA580C]" strokeWidth={2.8} />
+                <circle cx="725" cy="260" r="44" fill="#FFFFFF" stroke="#EA580C" strokeWidth="6" />
+                <g transform="translate(702, 237)">
+                  <Code2 size={46} className="text-[#EA580C]" strokeWidth={2.8} />
                 </g>
               </g>
 
@@ -209,22 +213,24 @@ export const CareerReadiness = () => {
                 {/* Ribbon 04 Right Banner */}
                 <path d="M 775 570 L 1370 570 L 1320 615 L 1370 660 L 775 660 Z" fill="url(#blueRibbonFront)" />
 
-                {/* Banner 03 Text (Left) */}
-                <text x="150" y="520" fill="#FFFFFF" fontSize="34" fontWeight="900" fontFamily="monospace">03</text>
-                <line x1="225" y1="475" x2="225" y2="535" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="250" y="495" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif">CYBERSECURITY TRAINING</text>
-                <text x="250" y="528" fill="#FFFFFF" fontSize="17" fontWeight="700" opacity="0.95" fontFamily="sans-serif">Learn Cyber Security in 3 months &amp; become job-ready</text>
+                {/* Banner 03 Text (Left) - 2 CLEAN LINES */}
+                <text x="150" y="520" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>03</text>
+                <line x1="220" y1="475" x2="220" y2="535" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
+                <text x="240" y="490" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>CYBERSECURITY TRAINING</text>
+                <text x="240" y="515" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Learn Cyber Security in 3 months</text>
+                <text x="240" y="535" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; become fully job-ready</text>
 
-                {/* Banner 04 Text (Right) */}
-                <text x="815" y="605" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif">UI/UX PRODUCT DESIGN</text>
-                <text x="815" y="638" fill="#FFFFFF" fontSize="17" fontWeight="700" opacity="0.95" fontFamily="sans-serif">Master Figma, Product Design &amp; daily follow-up sessions</text>
-                <line x1="1225" y1="585" x2="1225" y2="645" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="1245" y="630" fill="#FFFFFF" fontSize="34" fontWeight="900" fontFamily="monospace">04</text>
+                {/* Banner 04 Text (Right) - 2 CLEAN LINES */}
+                <text x="815" y="600" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>UI/UX PRODUCT DESIGN</text>
+                <text x="815" y="625" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Master Figma, Product Design</text>
+                <text x="815" y="645" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; daily follow-up sessions</text>
+                <line x1="1235" y1="585" x2="1235" y2="645" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
+                <text x="1255" y="630" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>04</text>
 
                 {/* White Circle Icon Badge over Loop */}
-                <circle cx="725" cy="540" r="42" fill="#FFFFFF" stroke="#0284C7" strokeWidth="6" />
-                <g transform="translate(704, 519)">
-                  <ShieldCheck size={42} className="text-[#0284C7]" strokeWidth={2.8} />
+                <circle cx="725" cy="540" r="44" fill="#FFFFFF" stroke="#0284C7" strokeWidth="6" />
+                <g transform="translate(702, 517)">
+                  <ShieldCheck size={46} className="text-[#0284C7]" strokeWidth={2.8} />
                 </g>
               </g>
 
@@ -249,42 +255,44 @@ export const CareerReadiness = () => {
                 {/* Ribbon 06 Right Banner */}
                 <path d="M 775 850 L 1370 850 L 1320 895 L 1370 940 L 775 940 Z" fill="url(#greenRibbonFront)" />
 
-                {/* Banner 05 Text (Left) */}
-                <text x="150" y="800" fill="#FFFFFF" fontSize="34" fontWeight="900" fontFamily="monospace">05</text>
-                <line x1="225" y1="755" x2="225" y2="815" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="250" y="775" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif">KIDS TECH PHYSICAL CAMP</text>
-                <text x="250" y="808" fill="#FFFFFF" fontSize="17" fontWeight="700" opacity="0.95" fontFamily="sans-serif">Weekend physical classes for Grade 4–11 at Derartu Tower</text>
+                {/* Banner 05 Text (Left) - 2 CLEAN LINES */}
+                <text x="150" y="800" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>05</text>
+                <line x1="220" y1="755" x2="220" y2="815" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
+                <text x="240" y="770" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>KIDS TECH PHYSICAL CAMP</text>
+                <text x="240" y="795" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Weekend physical classes for</text>
+                <text x="240" y="815" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Grade 4–11 at Derartu Tower</text>
 
-                {/* Banner 06 Text (Right) */}
-                <text x="815" y="885" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif">LIVE SESSIONS &amp; INTERNSHIPS</text>
-                <text x="815" y="918" fill="#FFFFFF" fontSize="17" fontWeight="700" opacity="0.95" fontFamily="sans-serif">Live group sessions, scholarships &amp; paid team placements</text>
-                <line x1="1225" y1="865" x2="1225" y2="925" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="1245" y="910" fill="#FFFFFF" fontSize="34" fontWeight="900" fontFamily="monospace">06</text>
+                {/* Banner 06 Text (Right) - 2 CLEAN LINES */}
+                <text x="815" y="880" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>LIVE SESSIONS &amp; INTERNSHIPS</text>
+                <text x="815" y="905" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Live group sessions, scholarships</text>
+                <text x="815" y="925" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; paid team placements</text>
+                <line x1="1235" y1="865" x2="1235" y2="925" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
+                <text x="1255" y="910" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>06</text>
 
                 {/* White Circle Icon Badge over Loop */}
-                <circle cx="725" cy="820" r="42" fill="#FFFFFF" stroke="#059669" strokeWidth="6" />
-                <g transform="translate(704, 799)">
-                  <GraduationCap size={42} className="text-[#059669]" strokeWidth={2.8} />
+                <circle cx="725" cy="820" r="44" fill="#FFFFFF" stroke="#059669" strokeWidth="6" />
+                <g transform="translate(702, 797)">
+                  <GraduationCap size={46} className="text-[#059669]" strokeWidth={2.8} />
                 </g>
               </g>
 
             </svg>
           </div>
 
-          {/* Bottom 6 Official WabiSkills Course Overview Columns */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 pt-16 border-t-4 border-slate-200 mt-20 w-full">
+          {/* Bottom 6 Course Cards (100% COPYABLE TEXT) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 pt-16 border-t-4 border-slate-200/90 mt-24 w-full select-text cursor-text">
             {summaryColumns.map((col) => (
               <div 
                 key={col.num}
-                className={`p-6 rounded-3xl ${col.bg} border-4 ${col.border} space-y-2 text-center shadow-md hover:shadow-2xl transition-all hover:-translate-y-1.5`}
+                className={`p-7 sm:p-9 rounded-[2.5rem] ${col.bg} border-4 ${col.border} space-y-3 text-center shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 flex flex-col justify-between select-text cursor-text`}
               >
-                <div className={`text-4xl font-mono font-black ${col.color}`}>
+                <div className={`text-5xl font-mono font-black ${col.color} select-text`}>
                   {col.num}
                 </div>
-                <h4 className="text-xs font-black text-slate-800 uppercase tracking-wider">
+                <h4 className="text-sm sm:text-base font-black text-slate-800 uppercase tracking-wider leading-tight select-text">
                   {col.title}
                 </h4>
-                <p className="text-xs text-slate-600 font-bold leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 font-bold leading-relaxed select-text">
                   {col.desc}
                 </p>
               </div>
