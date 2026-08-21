@@ -63,7 +63,7 @@ export const CareerReadiness = () => {
           <div className="w-full relative flex justify-center overflow-x-auto">
             <svg 
               className="w-full max-w-[1550px] h-auto min-w-[1100px] select-text cursor-text" 
-              viewBox="0 0 1450 1200" 
+              viewBox="0 0 1450 1095" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
               style={{ userSelect: 'text' }}
@@ -280,7 +280,7 @@ export const CareerReadiness = () => {
           </div>
 
           {/* Bottom 6 Course Cards (100% COPYABLE TEXT) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 pt-16 border-t-4 border-slate-200/90 mt-24 w-full select-text cursor-text">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 pt-6 sm:pt-8 border-t-2 border-slate-200/80 mt-2 w-full select-text cursor-text">
             {summaryColumns.map((col) => (
               <div 
                 key={col.num}
