@@ -1,13 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MessageSquare, Wrench, GraduationCap, TrendingUp, Compass } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
+/* ─── SERVICES PARTNERSHIP MODEL (WATERMARK LOGO IN RIGHT BOTTOM CORNER & TITLE CASE) ─── */
 export const ServicesPartnershipModel = () => {
   const pillars = [
     {
       step: '01',
-      optionLabel: 'OPTION 01',
-      stage: 'UNDERSTAND',
+      optionLabel: 'Option 01',
+      stage: 'Understand',
       title: 'Active Listening & Operational Alignment',
       desc: 'We listen to the organization, its people, goals, workflows, and operational challenges to ensure complete strategic alignment.',
       icon: MessageSquare,
@@ -20,8 +22,8 @@ export const ServicesPartnershipModel = () => {
     },
     {
       step: '02',
-      optionLabel: 'OPTION 02',
-      stage: 'BUILD',
+      optionLabel: 'Option 02',
+      stage: 'Build',
       title: 'Practical Solution Delivery',
       desc: 'We transform client requirements into reliable, custom-built software, Yomnex ERP modules, and high-performance enterprise platforms.',
       icon: Wrench,
@@ -34,8 +36,8 @@ export const ServicesPartnershipModel = () => {
     },
     {
       step: '03',
-      optionLabel: 'OPTION 03',
-      stage: 'ENABLE',
+      optionLabel: 'Option 03',
+      stage: 'Enable',
       title: 'Knowledge & Capability Transfer',
       desc: 'We train internal teams and individuals to work with technology effectively through dedicated WabiSkills mentorship and hands-on onboarding.',
       icon: GraduationCap,
@@ -48,8 +50,8 @@ export const ServicesPartnershipModel = () => {
     },
     {
       step: '04',
-      optionLabel: 'OPTION 04',
-      stage: 'GROW',
+      optionLabel: 'Option 04',
+      stage: 'Grow',
       title: 'Continuous Infrastructure Evolution',
       desc: 'We continue evolving technology infrastructure, security protocols, and operational capabilities as new digital opportunities emerge.',
       icon: TrendingUp,
@@ -76,13 +78,13 @@ export const ServicesPartnershipModel = () => {
 
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
 
-        {/* Section Header with Connected Horizontal Accent Line */}
+        {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
           <div className="flex items-center gap-0 w-full">
             <div className="h-[4px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_12px_rgba(14,211,221,0.7)]" />
-            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-widest shadow-lg backdrop-blur-md shrink-0">
+            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
-              <span>LONG-TERM PARTNERSHIP MODEL</span>
+              <span>Long-Term Partnership Model</span>
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
@@ -154,17 +156,22 @@ export const ServicesPartnershipModel = () => {
                       }}
                     >
                       {/* Scaled Inner White Card Plate */}
-                      <div className={`bg-white p-7 sm:p-9 lg:p-11 relative flex flex-col justify-between space-y-5 shadow-inner ${
+                      <div className={`bg-white p-7 sm:p-9 lg:p-11 relative flex flex-col justify-between space-y-5 shadow-inner overflow-hidden ${
                         isLeft ? 'pl-10 sm:pl-12 rounded-r-3xl' : 'pr-10 sm:pr-12 rounded-l-3xl'
                       }`}>
                         
+                        {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                        <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                          <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                        </div>
+
                         {/* Top Header: Step Number & Stage Tag */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between relative z-10">
                           <div className="flex items-center gap-4">
                             <span className={`text-4xl sm:text-6xl font-black font-mono tracking-tight ${pillar.themeText}`}>
                               {pillar.step}
                             </span>
-                            <span className={`px-4 py-1.5 rounded-full text-xs font-mono font-black uppercase tracking-widest ${pillar.themeLightBg} ${pillar.themeText} border-2 ${pillar.themeBorder}`}>
+                            <span className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold tracking-wider ${pillar.themeLightBg} ${pillar.themeText} border-2 ${pillar.themeBorder}`}>
                               {pillar.stage}
                             </span>
                           </div>
@@ -175,12 +182,12 @@ export const ServicesPartnershipModel = () => {
                         </div>
 
                         {/* Title & Description */}
-                        <div className="space-y-3">
-                          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                        <div className="space-y-3 relative z-10">
+                          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                             {pillar.title}
                           </h3>
 
-                          <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                          <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-normal leading-relaxed">
                             {pillar.desc}
                           </p>
                         </div>
@@ -189,7 +196,7 @@ export const ServicesPartnershipModel = () => {
 
                     {/* Floating Step Tag Label Outside */}
                     <div className={`pt-3 flex items-center ${isLeft ? 'justify-start pl-6' : 'justify-end pr-6'}`}>
-                      <span className={`text-xs sm:text-sm font-mono font-black uppercase tracking-widest ${pillar.themeText}`}>
+                      <span className={`text-xs sm:text-sm font-mono font-bold tracking-wider ${pillar.themeText}`}>
                         ◆ {pillar.optionLabel}
                       </span>
                     </div>

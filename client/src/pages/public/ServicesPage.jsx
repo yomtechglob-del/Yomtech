@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   Cpu, LayoutGrid, Monitor, GraduationCap, Video, ShieldCheck, Smartphone,
-  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles, ChevronLeft, ChevronRight
+  Globe, Code, UserCheck, Cloud, Camera, ArrowRight, Mail, Filter, Check, Sparkles, ChevronLeft, ChevronRight, Send, CheckCircle2
 } from 'lucide-react';
 // Real high quality visual image assets for each service card
 import erpImg from '../../assets/services/erp.png';
@@ -20,6 +20,7 @@ import cloudImg from '../../assets/services/cloud.png';
 import coachingImg from '../../assets/services/coaching.png';
 import educationImg from '../../assets/services/education.png';
 import academyBgImg from '../../assets/academy/product/background.png';
+import logoEmblem from '../../assets/logos/logo.png';
 
 // Premium 3-pillar composite hero images
 import pillarITImg from '../../assets/services/pillar_it_solutions.png';
@@ -1090,51 +1091,84 @@ export const ServicesPage = () => {
       <ServicesPartnershipModel />
       <ServicesRequestQuoteCTA />
 
-      {/* SUBSCRIBE TO NEWSLETTER SECTION (About Us Clean Theme) */}
-      <section className="py-24 bg-[#F8FAFC] relative text-slate-900 border-t border-slate-200">
-        <div className="max-w-3xl mx-auto px-6 relative z-10">
+      {/* ─── SUBSCRIBE TO NEWSLETTER SECTION (UPGRADED 3D DESIGN SYSTEM) ─── */}
+      <section className="py-28 bg-[#F4F9FF] relative text-slate-900 border-t border-slate-200/80 overflow-hidden font-sans">
+        {/* Precision Blueprint Dot Grid Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          <div 
+            className="absolute inset-0 opacity-[0.45]" 
+            style={{ 
+              backgroundImage: 'radial-gradient(#0EA5E9 1.5px, transparent 1.5px)', 
+              backgroundSize: '24px 24px',
+            }}
+          />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[450px] bg-cyan-400/15 rounded-full blur-[150px]" />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white border border-slate-200/90 p-8 sm:p-14 rounded-[2.5rem] text-center space-y-6 shadow-xl relative overflow-hidden text-slate-900"
+            transition={{ duration: 0.5 }}
+            className="p-[2px] rounded-[3.5rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-[0_25px_60px_rgba(2,132,199,0.18)]"
           >
-            <div className="space-y-2">
-              <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 inline-block">
-                NEWSLETTER &amp; UPDATES
-              </span>
-              <h3 className="text-2xl md:text-3xl font-black font-display text-slate-900">
-                Stay Ahead of Digital Transformation
-              </h3>
-              <p className="text-xs md:text-sm text-slate-600 max-w-lg mx-auto font-normal">
-                Get the latest tech updates, tutorials, and engineering insights straight to your inbox.
-              </p>
-            </div>
+            <div className="bg-white rounded-[3.4rem] p-10 sm:p-16 text-center space-y-8 relative overflow-hidden shadow-inner border border-slate-100">
+              
+              {/* Translucent YomTech Brand Logo Watermark Background */}
+              <div className="absolute -right-6 -bottom-6 opacity-[0.22] pointer-events-none z-0">
+                <img src={logoEmblem} alt="" className="w-80 sm:w-96 h-80 sm:h-96 object-contain" />
+              </div>
+              
+              {/* Top Pill Badge */}
+              <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-bold shrink-0 backdrop-blur-md">
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span>Newsletter &amp; Updates</span>
+                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+              </div>
 
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row items-center gap-3 pt-2 max-w-xl mx-auto">
-              <div className="relative w-full">
-                <Mail size={18} className="absolute left-4 top-3.5 text-slate-400" />
-                <input
-                  type="email"
-                  required
-                  placeholder="Enter your work email address"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-300 rounded-xl pl-11 pr-4 py-3 text-xs md:text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] transition-all"
-                />
+              {/* Title & Description */}
+              <div className="space-y-3 max-w-2xl mx-auto">
+                <h3 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                  Stay Ahead of <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 font-display">Digital Transformation</span>
+                </h3>
+                <p className="text-sm sm:text-base text-slate-500 font-normal leading-relaxed">
+                  Get the latest tech updates, tutorials, and engineering insights straight to your inbox.
+                </p>
               </div>
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-8 py-3 rounded-xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-xs md:text-sm shrink-0 shadow-lg shadow-sky-500/20 transition-all cursor-pointer"
-              >
-                Subscribe
-              </button>
-            </form>
-            {newsletterSuccess && (
-              <div className="text-xs font-bold text-[#0284C7] animate-pulse">
-                ✓ Thank you for subscribing!
-              </div>
-            )}
+
+              {/* Form Input & Button */}
+              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row items-center gap-4 pt-2 max-w-xl mx-auto">
+                <div className="relative w-full group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-cyan-50 border border-cyan-200 flex items-center justify-center text-[#0284C7] group-focus-within:scale-105 transition-transform">
+                    <Mail size={18} strokeWidth={2.2} />
+                  </div>
+                  <input
+                    type="email"
+                    required
+                    placeholder="Enter your work email address"
+                    value={newsletterEmail}
+                    onChange={(e) => setNewsletterEmail(e.target.value)}
+                    className="w-full bg-slate-50/90 border-2 border-slate-200 rounded-2xl pl-16 pr-5 py-4 text-xs sm:text-sm text-slate-900 placeholder-slate-400 font-medium focus:outline-none focus:border-[#0284C7] focus:bg-white focus:ring-4 focus:ring-[#0284C7]/15 transition-all shadow-inner"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-9 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-bold text-xs sm:text-sm shrink-0 shadow-xl shadow-cyan-500/25 hover:scale-105 transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 border border-white/30"
+                >
+                  <span>Subscribe</span>
+                  <Send size={16} />
+                </button>
+              </form>
+
+              {newsletterSuccess && (
+                <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold animate-pulse">
+                  <CheckCircle2 size={16} />
+                  <span>Thank you for subscribing! Check your inbox soon.</span>
+                </div>
+              )}
+
+            </div>
           </motion.div>
         </div>
       </section>

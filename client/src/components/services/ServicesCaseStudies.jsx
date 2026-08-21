@@ -2,44 +2,49 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Building2, Shield, Landmark, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import logoEmblem from '../../assets/logos/logo.png';
 
+/* ─── SERVICES CASE STUDIES & PORTFOLIO (WATERMARK LOGO IN RIGHT BOTTOM CORNER) ─── */
 export const ServicesCaseStudies = () => {
   const caseStudies = [
     {
       step: '01',
-      optionLabel: 'OPTION',
-      stage: 'ENTERPRISE ERP',
+      optionLabel: 'Option',
+      stage: 'Enterprise ERP',
       title: 'Pan-African Enterprise ERP Rollout',
       client: 'Partner: Public Sector & Industrial Enterprises',
       impact: 'Integrated 12+ operational departments (Finance, HR, WMS, SFA, Gate Security) into a single centralized Yomnex ERP platform, eliminating data silos and reducing approval times by 65%.',
       icon: Building2,
       metrics: '65% Faster Approvals',
-      numColor: 'text-[#D97706]',
-      gradientBg: 'bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#B45309]',
+      numColor: 'text-[#0EA5E9]',
+      iconBg: 'bg-white text-[#0EA5E9]',
+      gradientBg: 'bg-gradient-to-r from-[#0EA5E9] via-[#0284C7] to-[#0369A1]',
     },
     {
       step: '02',
-      optionLabel: 'OPTION',
-      stage: 'E-GOVERNMENT',
+      optionLabel: 'Option',
+      stage: 'E-Government',
       title: 'E-Government & Municipal Trade Portal',
       client: 'Partner: Addis Ababa City Admin Trade Bureau',
       impact: 'Digitized business licensing, trade renewals, document archiving, and workflow automation, enabling over 100,000+ businesses to process licenses digitally.',
       icon: Landmark,
       metrics: '100,000+ Businesses Served',
-      numColor: 'text-[#0284C7]',
-      gradientBg: 'bg-gradient-to-r from-[#0284C7] via-[#0369A1] to-[#075985]',
+      numColor: 'text-[#06B6D4]',
+      iconBg: 'bg-white text-[#06B6D4]',
+      gradientBg: 'bg-gradient-to-r from-[#06B6D4] via-[#0891B2] to-[#0E7490]',
     },
     {
       step: '03',
-      optionLabel: 'OPTION',
-      stage: 'SURVEILLANCE',
+      optionLabel: 'Option',
+      stage: 'Surveillance',
       title: 'AI-Integrated Security & Surveillance Zone',
       client: 'Partner: Space Science Institute & INSA',
       impact: 'Deployed smart CCTV camera networks with automated motion detection, real-time analytics, and secure data center infrastructure for national research installations.',
       icon: Shield,
       metrics: '24/7 Real-Time Monitoring',
-      numColor: 'text-[#10B981]',
-      gradientBg: 'bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857]',
+      numColor: 'text-[#8B5CF6]',
+      iconBg: 'bg-white text-[#8B5CF6]',
+      gradientBg: 'bg-gradient-to-r from-[#8B5CF6] via-[#7C3AED] to-[#6D28D9]',
     },
   ];
 
@@ -61,9 +66,9 @@ export const ServicesCaseStudies = () => {
         <div className="text-left w-full space-y-4 max-w-full">
           <div className="flex items-center gap-0 w-full">
             <div className="h-[4px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_12px_rgba(14,211,221,0.7)]" />
-            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-widest shadow-lg backdrop-blur-md shrink-0">
+            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
-              <span>CASE STUDIES & PORTFOLIO</span>
+              <span>Case Studies &amp; Portfolio</span>
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
@@ -79,14 +84,19 @@ export const ServicesCaseStudies = () => {
             {/* Scaled Rotated 45-Degree White Diamond Base Frame */}
             <div className="w-[410px] h-[410px] sm:w-[510px] sm:h-[510px] lg:w-[560px] lg:h-[560px] rounded-[4rem] bg-white shadow-[0_30px_70px_rgba(0,0,0,0.14)] border-4 border-slate-100/90 rotate-45 flex items-center justify-center relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
               
+              {/* Translucent YomTech Brand Logo Watermark Background */}
+              <div className="absolute right-4 bottom-4 opacity-[0.20] pointer-events-none z-0">
+                <img src={logoEmblem} alt="" className="w-56 sm:w-72 h-56 sm:h-72 object-contain" />
+              </div>
+
               {/* Scaled Inner Counter-Rotated Content (-45 Deg) */}
-              <div className="-rotate-45 w-[340px] sm:w-[420px] lg:w-[450px] p-6 sm:p-10 space-y-5 text-left font-sans">
-                <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-mono font-black uppercase tracking-widest inline-block">
-                  PORTFOLIO IMPACT
+              <div className="-rotate-45 w-[340px] sm:w-[420px] lg:w-[450px] p-6 sm:p-10 space-y-5 text-left font-sans relative z-10">
+                <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-mono font-bold inline-block">
+                  Portfolio Impact
                 </span>
 
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight font-display">
-                  Proven Results & <br />
+                  Proven Results &amp; <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                     Real Impact
                   </span>
@@ -98,23 +108,23 @@ export const ServicesCaseStudies = () => {
 
                 {/* Scaled Key Performance Indicators */}
                 <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-100 text-center">
-                  <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200">
-                    <p className="text-xl sm:text-2xl font-black text-[#D97706] font-mono">65%</p>
-                    <p className="text-[10px] font-bold text-slate-500 uppercase">Faster Approval</p>
+                  <div className="p-3 rounded-2xl bg-cyan-50 border border-cyan-200">
+                    <p className="text-xl sm:text-2xl font-black text-[#0EA5E9] font-mono">65%</p>
+                    <p className="text-[10px] font-bold text-slate-500">Faster Approval</p>
                   </div>
                   <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200">
-                    <p className="text-xl sm:text-2xl font-black text-[#0284C7] font-mono">100K+</p>
-                    <p className="text-[10px] font-bold text-slate-500 uppercase">Licenses</p>
+                    <p className="text-xl sm:text-2xl font-black text-[#06B6D4] font-mono">100K+</p>
+                    <p className="text-[10px] font-bold text-slate-500">Licenses</p>
                   </div>
-                  <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200">
-                    <p className="text-xl sm:text-2xl font-black text-[#10B981] font-mono">24/7</p>
-                    <p className="text-[10px] font-bold text-slate-500 uppercase">SLA Audits</p>
+                  <div className="p-3 rounded-2xl bg-purple-50 border border-purple-200">
+                    <p className="text-xl sm:text-2xl font-black text-[#8B5CF6] font-mono">24/7</p>
+                    <p className="text-[10px] font-bold text-slate-500">SLA Audits</p>
                   </div>
                 </div>
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-[#0284C7] text-white font-black text-xs sm:text-sm uppercase tracking-widest shadow-xl shadow-sky-500/30 hover:bg-sky-700 transition-all mt-2"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-[#0284C7] text-white font-bold text-xs sm:text-sm tracking-wider shadow-xl shadow-sky-500/30 hover:bg-sky-700 transition-all mt-2"
                 >
                   <span>Explore Case Studies</span>
                   <ArrowRight size={14} />
@@ -124,9 +134,11 @@ export const ServicesCaseStudies = () => {
             </div>
           </div>
 
-          {/* Right Stacked Metallic Swallowtail Ribbon Banner Cards */}
+          {/* Right Stacked Metallic Swallowtail Ribbon Banner Cards with Black "V" Notch Cutout */}
           <div className="lg:col-span-7 space-y-6">
             {caseStudies.map((cs, idx) => {
+              const IconComp = cs.icon;
+
               return (
                 <motion.div
                   key={cs.step}
@@ -134,14 +146,14 @@ export const ServicesCaseStudies = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: idx * 0.08 }}
-                  className="flex items-stretch rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden bg-white border border-slate-100/90"
+                  className="flex items-stretch rounded-3xl shadow-2xl hover:shadow-[0_25px_60px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden bg-[#0A0F1D] border border-slate-800"
                 >
                   {/* Left White Number Box + 3D Shadow Fold Line */}
                   <div className="w-24 sm:w-32 shrink-0 bg-white p-5 sm:p-7 flex flex-col justify-center items-center border-r-4 border-slate-200/80 shadow-[4px_0_15px_rgba(0,0,0,0.08)] z-10">
                     <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${cs.numColor} leading-none`}>
                       {cs.step}
                     </span>
-                    <span className="text-[10px] font-mono font-black uppercase text-slate-400 tracking-widest mt-1">
+                    <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider mt-1">
                       {cs.optionLabel}
                     </span>
                   </div>
@@ -151,19 +163,30 @@ export const ServicesCaseStudies = () => {
                     className={`flex-1 ${cs.gradientBg} text-white p-6 sm:p-8 pr-12 relative flex flex-col justify-center space-y-2 z-0 overflow-hidden`}
                     style={{ clipPath: 'polygon(0 0, 100% 0, 93% 50%, 100% 100%, 0 100%)' }}
                   >
+                    {/* Translucent YomTech Brand Logo Watermark Background at Right-Bottom Corner */}
+                    <div className="absolute right-10 bottom-1 opacity-[0.20] pointer-events-none z-0">
+                      <img src={logoEmblem} alt="" className="w-32 sm:w-40 h-32 sm:h-40 object-contain brightness-200" />
+                    </div>
+
                     {/* Vibrant Light Sheen Top Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-transparent pointer-events-none" />
 
+                    {/* Top Row: Icon Badge + Stage Pill + Metrics Pill */}
                     <div className="flex flex-wrap items-center justify-between gap-2 pr-6 relative z-10">
-                      <span className="px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-white text-[10px] font-mono font-black uppercase tracking-widest border border-white/40">
-                        {cs.stage}
-                      </span>
-                      <span className="px-3.5 py-1.5 rounded-full bg-white text-slate-900 text-[11px] font-black uppercase tracking-wider shadow-md">
+                      <div className="flex items-center gap-2.5">
+                        <div className={`w-8 h-8 rounded-xl ${cs.iconBg} flex items-center justify-center shadow-md shrink-0 border border-white/60`}>
+                          <IconComp size={18} strokeWidth={2.4} />
+                        </div>
+                        <span className="px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-white text-[10px] font-mono font-bold tracking-wider border border-white/40">
+                          {cs.stage}
+                        </span>
+                      </div>
+                      <span className="px-3.5 py-1.5 rounded-full bg-white text-slate-900 text-[11px] font-bold tracking-wider shadow-md">
                         ⚡ {cs.metrics}
                       </span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-black text-white font-display tracking-tight leading-snug drop-shadow-sm relative z-10">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white font-display tracking-tight leading-snug drop-shadow-sm relative z-10">
                       {cs.title}
                     </h3>
 
@@ -171,7 +194,7 @@ export const ServicesCaseStudies = () => {
                       {cs.impact}
                     </p>
 
-                    <div className="text-[11px] font-black uppercase text-white/90 tracking-wider pt-1 relative z-10">
+                    <div className="text-[11px] font-bold text-white/90 tracking-wider pt-1 relative z-10">
                       {cs.client}
                     </div>
                   </div>

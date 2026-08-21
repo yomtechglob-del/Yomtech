@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import logoEmblem from '../../assets/logos/logo.png';
 
 // --- Official Tech Brand SVG Icons ---
 const ReactNextIcon = () => (
@@ -21,7 +22,7 @@ const NodeExpressIcon = () => (
 const PythonIcon = () => (
   <svg viewBox="0 0 24 24" className="w-7 h-7">
     <path fill="#3776AB" d="M11.87 2c-4.46 0-4.19 1.93-4.19 1.93l.01 2h4.25v.6H6.03S2 6.06 2 10.55c0 4.48 3.5 4.32 3.5 4.32h2.09v-2.94s-.11-3.5 3.5-3.5h3.42s3.32.06 3.32-3.23c0-3.3-2.9-3.2-2.9-3.2h-2.99zm-2.02 1.35c.42 0 .76.34.76.76 0 .42-.34.76-.76.76-.42 0-.76-.34-.76-.76 0-.42.34-.76.76-.76z" />
-    <path fill="#FFD43B" d="M12.13 22c4.46 0 4.19-1.93 4.19-1.93l-.01-2h-4.25v-.6h5.91S22 17.94 22 13.45c0-4.48-3.5-4.32-3.5-4.32h-2.09v2.94s.11 3.5-3.5 3.5h-3.42s-3.32-.06-3.32 3.23c0 3.3 2.9 3.2 2.9 3.2h2.99zm2.02-1.35c-.42 0-.76-.34-.76-.76 0-.42.34-.76.76-.76.42 0 .76.34.76.76 0 .42-.34.76-.76.76z" />
+    <path fill="#FFD43B" d="M12.13 22c4.46 0 4.19-1.93 4.19-1.93l-.01-2h-4.25v-.6h5.91S22 17.94 22 13.45c0-4.48-3.5-4.32-3.5-4.32h-2.09v2.94s.11 3.5-3.5 3.5h-3.42s-3.32-.06-3.32 3.23c0 3.3 2.9 3.2 2.9 3.2h2.99zm2.02-1.35c-.42 0-.76-.34-.76-.76 0-.42-.34-.76.76-.76.42 0 .76.34.76.76 0 .42-.34-.76-.76-.76z" />
   </svg>
 );
 
@@ -74,7 +75,7 @@ export const ServicesTechStack = () => {
       category: 'FRONTEND', 
       desc: 'Modern reactive web architectures with Server-Side Rendering (SSR) & ISR capabilities.', 
       icon: ReactNextIcon, 
-      stage: 'FRONTEND', 
+      stage: 'Frontend', 
       themeBg: 'bg-[#06B6D4]', 
       themeText: 'text-[#06B6D4]', 
       themeBorder: 'border-[#06B6D4]', 
@@ -86,7 +87,7 @@ export const ServicesTechStack = () => {
       category: 'BACKEND', 
       desc: 'High-throughput microservices, event-driven REST APIs, and GraphQL endpoints.', 
       icon: NodeExpressIcon, 
-      stage: 'BACKEND', 
+      stage: 'Backend', 
       themeBg: 'bg-[#339933]', 
       themeText: 'text-[#339933]', 
       themeBorder: 'border-[#339933]', 
@@ -98,7 +99,7 @@ export const ServicesTechStack = () => {
       category: 'BACKEND', 
       desc: 'AI model serving, automated data processing pipelines, and analytical engines.', 
       icon: PythonIcon, 
-      stage: 'AI & BACKEND', 
+      stage: 'AI & Backend', 
       themeBg: 'bg-[#3776AB]', 
       themeText: 'text-[#3776AB]', 
       themeBorder: 'border-[#3776AB]', 
@@ -110,7 +111,7 @@ export const ServicesTechStack = () => {
       category: 'DATABASE', 
       desc: 'Enterprise relational data stores & high-performance document databases.', 
       icon: PostgresMongoIcon, 
-      stage: 'DATABASE', 
+      stage: 'Database', 
       themeBg: 'bg-[#47A248]', 
       themeText: 'text-[#47A248]', 
       themeBorder: 'border-[#47A248]', 
@@ -122,7 +123,7 @@ export const ServicesTechStack = () => {
       category: 'DATABASE', 
       desc: 'Containerized deployment pipelines, Helm charts, and cloud orchestration.', 
       icon: DockerK8sIcon, 
-      stage: 'DEVOPS', 
+      stage: 'DevOps', 
       themeBg: 'bg-[#2496ED]', 
       themeText: 'text-[#2496ED]', 
       themeBorder: 'border-[#2496ED]', 
@@ -134,7 +135,7 @@ export const ServicesTechStack = () => {
       category: 'SECURITY', 
       desc: 'Object detection, spatial tracking, and automated video analytics for security.', 
       icon: AiVisionIcon, 
-      stage: 'SURVEILLANCE', 
+      stage: 'Surveillance', 
       themeBg: 'bg-[#805AD5]', 
       themeText: 'text-[#805AD5]', 
       themeBorder: 'border-[#805AD5]', 
@@ -146,7 +147,7 @@ export const ServicesTechStack = () => {
       category: 'FRONTEND', 
       desc: 'Cross-platform mobile applications for iOS & Android with native performance.', 
       icon: FlutterMobileIcon, 
-      stage: 'MOBILE', 
+      stage: 'Mobile', 
       themeBg: 'bg-[#02569B]', 
       themeText: 'text-[#02569B]', 
       themeBorder: 'border-[#02569B]', 
@@ -158,7 +159,7 @@ export const ServicesTechStack = () => {
       category: 'BACKEND', 
       desc: 'In-memory data structures for sub-millisecond session caching and message pub/sub.', 
       icon: RedisIcon, 
-      stage: 'PERFORMANCE', 
+      stage: 'Performance', 
       themeBg: 'bg-[#DC382D]', 
       themeText: 'text-[#DC382D]', 
       themeBorder: 'border-[#DC382D]', 
@@ -182,13 +183,13 @@ export const ServicesTechStack = () => {
 
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-        {/* Section Header with Connected Horizontal Accent Line */}
+        {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
           <div className="flex items-center gap-0 w-full">
             <div className="h-[4px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_12px_rgba(14,211,221,0.7)]" />
-            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-widest shadow-lg backdrop-blur-md shrink-0">
+            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
-              <span>TECHNOLOGIES & TOOLS</span>
+              <span>Technologies &amp; Tools</span>
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
@@ -209,7 +210,7 @@ export const ServicesTechStack = () => {
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`px-7 py-3 rounded-full text-xs sm:text-sm font-black transition-all duration-300 cursor-pointer ${
+              className={`px-7 py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                 activeTab === cat.id
                   ? 'bg-[#0284C7] text-white shadow-xl shadow-sky-500/30 scale-105'
                   : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/50'
@@ -220,7 +221,7 @@ export const ServicesTechStack = () => {
           ))}
         </div>
 
-        {/* Top Curved Notch Tab Cards Grid (With Official Brand SVG Icons) */}
+        {/* Top Curved Notch Tab Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pt-4">
           {filteredItems.map((item, idx) => {
             const IconComp = item.icon;
@@ -233,15 +234,20 @@ export const ServicesTechStack = () => {
                 transition={{ duration: 0.45, delay: idx * 0.06 }}
                 className="bg-white rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-2.5 transition-all duration-300 relative flex flex-col justify-between overflow-hidden group border border-slate-100/90 pt-8 p-7 space-y-6"
               >
+                {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                <div className="absolute right-2 bottom-4 opacity-[0.18] pointer-events-none z-0">
+                  <img src={logoEmblem} alt="" className="w-24 sm:w-28 h-24 sm:h-28 object-contain" />
+                </div>
+
                 {/* Top Protruding Curved Tab Notch */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 flex flex-col items-center z-10">
                   <div className={`${item.themeBg} text-white px-8 py-1.5 rounded-b-2xl shadow-md font-black text-lg font-mono tracking-tight flex items-center justify-center`}>
                     <span>{item.step}</span>
                   </div>
                 </div>
 
-                {/* Card Main Body: Centered Icon, Stage Tag, Title, Description */}
-                <div className="space-y-4 text-center pt-3 flex flex-col items-center">
+                {/* Card Main Body */}
+                <div className="space-y-4 text-center pt-3 flex flex-col items-center relative z-10">
                   
                   {/* Centered Official Tech Brand Icon */}
                   <div className={`w-16 h-16 rounded-2xl ${item.themeLightBg} border-2 ${item.themeBorder} flex items-center justify-center shadow-inner group-hover:scale-115 transition-transform duration-300`}>
@@ -249,23 +255,23 @@ export const ServicesTechStack = () => {
                   </div>
 
                   {/* Stage Tag */}
-                  <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-widest ${item.themeLightBg} ${item.themeText} border ${item.themeBorder}`}>
+                  <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider ${item.themeLightBg} ${item.themeText} border ${item.themeBorder}`}>
                     {item.stage}
                   </span>
 
                   {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                     {item.name}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
 
                 {/* Bottom Solid Colored Accent Strip */}
-                <div className={`h-2.5 w-full ${item.themeBg} rounded-b-3xl -mx-7 -mb-7 mt-4`} />
+                <div className={`h-2.5 w-full ${item.themeBg} rounded-b-3xl -mx-7 -mb-7 mt-4 relative z-10`} />
               </motion.div>
             );
           })}

@@ -14,12 +14,12 @@ import erminOneImg from '../../assets/ermin-one.jpg';
 import logoEmblem from '../../assets/logos/logo.png';
 import consultingTeamImg from '../../assets/about/consulting_team.jpg';
 
-/* ─── 6-STEP AGILE DEVELOPMENT METHODOLOGY MATCHING IMAGE 2 ─── */
+/* ─── 6-STEP AGILE DEVELOPMENT METHODOLOGY WITH PRIMARY BRAND COLORS & WATERMARK LOGOS ─── */
 const METHODOLOGY_STEPS = [
   {
     step: '01',
-    phase: 'STEP 01',
-    stage: 'DISCOVERY',
+    phase: 'Step 01',
+    stage: 'Discovery',
     title: 'Requirement Analysis & Planning',
     subtitle: 'Scope Definition & Strategic Alignment',
     icon: FileText,
@@ -35,8 +35,8 @@ const METHODOLOGY_STEPS = [
   },
   {
     step: '02',
-    phase: 'STEP 02',
-    stage: 'ARCHITECTURE',
+    phase: 'Step 02',
+    stage: 'Architecture',
     title: 'System Design & Architecture',
     subtitle: 'Scalable & Secure System Blueprints',
     icon: Sliders,
@@ -52,8 +52,8 @@ const METHODOLOGY_STEPS = [
   },
   {
     step: '03',
-    phase: 'STEP 03',
-    stage: 'DEVELOPMENT',
+    phase: 'Step 03',
+    stage: 'Development',
     title: 'Agile Development Process',
     subtitle: 'Iterative Sprints & Transparent Codebase',
     icon: Code,
@@ -69,8 +69,8 @@ const METHODOLOGY_STEPS = [
   },
   {
     step: '04',
-    phase: 'STEP 04',
-    stage: 'QUALITY ASSURANCE',
+    phase: 'Step 04',
+    stage: 'Quality Assurance',
     title: 'Testing & Quality Assurance',
     subtitle: 'Performance, Penetration & Load Validation',
     icon: ShieldCheck,
@@ -86,35 +86,35 @@ const METHODOLOGY_STEPS = [
   },
   {
     step: '05',
-    phase: 'STEP 05',
-    stage: 'DEPLOYMENT',
+    phase: 'Step 05',
+    stage: 'Deployment',
     title: 'Deployment & Implementation',
     subtitle: 'Zero-Downtime Rollout & Operational Onboarding',
     icon: Server,
-    hex: '#EF4444',
-    gradient: 'from-[#EF4444] via-[#DC2626] to-[#B91C1C]',
-    ringBorder: 'border-[#EF4444]',
-    ringBg: 'bg-[#EF4444]',
-    ringText: 'text-[#EF4444]',
-    badgeBg: 'bg-[#EF4444]',
-    themeText: 'text-[#DC2626]',
+    hex: '#06B6D4',
+    gradient: 'from-[#06B6D4] via-[#0891B2] to-[#0E7490]',
+    ringBorder: 'border-[#06B6D4]',
+    ringBg: 'bg-[#06B6D4]',
+    ringText: 'text-[#06B6D4]',
+    badgeBg: 'bg-[#06B6D4]',
+    themeText: 'text-[#0891B2]',
     desc: 'Containerized deployment via Docker/Kubernetes on cloud or on-premise data centers, accompanied by staff training and seamless system migration.',
     deliverables: ['Containerized Production Build', 'Staff Onboarding Workshops', 'Zero-Downtime Migration', 'System Admin Manuals'],
   },
   {
     step: '06',
-    phase: 'STEP 06',
-    stage: 'MAINTENANCE',
+    phase: 'Step 06',
+    stage: 'Maintenance',
     title: 'Maintenance & Continuous Support',
     subtitle: 'Ongoing Optimization & System Evolution',
     icon: RefreshCw,
-    hex: '#6366F1',
-    gradient: 'from-[#6366F1] via-[#4F46E5] to-[#4338CA]',
-    ringBorder: 'border-[#6366F1]',
-    ringBg: 'bg-[#6366F1]',
-    ringText: 'text-[#6366F1]',
-    badgeBg: 'bg-[#6366F1]',
-    themeText: 'text-[#4F46E5]',
+    hex: '#1DA1F2',
+    gradient: 'from-[#1DA1F2] via-[#0284C7] to-[#0369A1]',
+    ringBorder: 'border-[#1DA1F2]',
+    ringBg: 'bg-[#1DA1F2]',
+    ringText: 'text-[#1DA1F2]',
+    badgeBg: 'bg-[#1DA1F2]',
+    themeText: 'text-[#0284C7]',
     desc: 'Dedicated 24/7 technical support, continuous system optimization, security patch updates, and ongoing feature expansion throughout the product lifecycle.',
     deliverables: ['24/7 Helpdesk Support', 'SLA Response Guarantee', 'Quarterly System Audits', 'Feature Upgrade Patches'],
   },
@@ -156,7 +156,7 @@ const WHY_CHOOSE_US = [
     title: 'Long-Term Partnership Mindset',
     desc: 'We focus on sustainable collaboration, system evolution, and dedicated SLA maintenance rather than one-time delivery.',
     icon: ShieldCheck,
-    accent: 'rose'
+    accent: 'emerald'
   }
 ];
 
@@ -175,7 +175,6 @@ const accentMap = {
   violet:  { bg: 'bg-violet-50',  border: 'border-violet-200',  text: 'text-violet-700',  gradient: 'from-violet-600 to-purple-500' },
   amber:   { bg: 'bg-amber-50',   border: 'border-amber-200',   text: 'text-amber-700',   gradient: 'from-amber-600 to-orange-500' },
   indigo:  { bg: 'bg-indigo-50',  border: 'border-indigo-200',  text: 'text-indigo-700',  gradient: 'from-indigo-600 to-blue-500' },
-  rose:    { bg: 'bg-rose-50',    border: 'border-rose-200',    text: 'text-rose-700',    gradient: 'from-rose-600 to-pink-500' },
   sky:     { bg: 'bg-sky-50',     border: 'border-sky-200',     text: 'text-sky-700',     gradient: 'from-sky-600 to-blue-500' },
 };
 
@@ -185,9 +184,7 @@ export const MethodologyPage = () => {
   return (
     <div className="bg-white text-slate-900 min-h-screen relative overflow-hidden font-sans">
 
-      {/* ════════════════════════════════════════════════════
-          HERO SECTION (Matching AboutPage, HomePage & SolutionsPage System)
-      ════════════════════════════════════════════════════ */}
+      {/* HERO SECTION */}
       <section className="w-full pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
         
         {/* Flowing Background Image Layers */}
@@ -215,10 +212,10 @@ export const MethodologyPage = () => {
             className="lg:col-span-7 space-y-7 text-left items-start flex flex-col"
           >
             {/* Top Pill Tag */}
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white text-xs font-black shadow-lg">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white text-xs font-bold shadow-lg">
               <GitBranch size={14} className="text-cyan-300 animate-pulse" />
-              <span className="text-cyan-200 font-bold uppercase tracking-widest text-[11px]">
-                AGILE METHODOLOGY &amp; COMPETITIVE ADVANTAGES
+              <span className="text-cyan-200 font-bold uppercase tracking-wider text-[11px]">
+                Agile Methodology &amp; Competitive Advantages
               </span>
             </div>
 
@@ -240,7 +237,7 @@ export const MethodologyPage = () => {
             <div className="flex flex-wrap items-center gap-5 pt-3">
               <button
                 onClick={() => navigate('/contact')}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#00b4d8] via-[#0077b6] to-[#023e8a] hover:from-[#90e0ef] hover:to-[#0077b6] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3 group border border-cyan-300/40"
+                className="px-8 py-4 rounded-full bg-gradient-to-r from-[#00b4d8] via-[#0077b6] to-[#023e8a] hover:from-[#90e0ef] hover:to-[#0077b6] text-white font-bold text-xs uppercase tracking-wider shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-3 group border border-cyan-300/40"
               >
                 <span>Partner With Us</span>
                 <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -250,7 +247,7 @@ export const MethodologyPage = () => {
 
               <a
                 href="tel:+251977666699"
-                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-3 shadow-md"
+                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold text-xs uppercase tracking-wider backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-3 shadow-md"
               >
                 <div className="w-8 h-8 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center shadow-md">
                   <Phone size={15} />
@@ -294,12 +291,10 @@ export const MethodologyPage = () => {
       </section>
 
 
-      {/* ════════════════════════════════════════════════════
-          6-STEP AGILE DEVELOPMENT METHODOLOGY
-      ════════════════════════════════════════════════════ */}
+      {/* 6-STEP AGILE DEVELOPMENT METHODOLOGY */}
       <section className="py-20 lg:py-28 bg-[#F4F8FC] relative overflow-hidden font-sans border-b border-slate-200/80">
         
-        {/* Precision Blueprint Dot Grid Background matching Screenshot 2 */}
+        {/* Precision Blueprint Dot Grid Background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-[#F0F6FC] via-[#F4F8FC] to-[#F0F6FC]" />
           
@@ -316,14 +311,14 @@ export const MethodologyPage = () => {
           <div className="absolute bottom-[10%] right-[10%] w-[45vw] h-[45vw] rounded-full bg-blue-400/10 blur-[150px]" />
         </div>
 
-        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-          {/* Left-Aligned Header with Pill Badge + Horizontal Cyan Line Extension (Matching Image 2) */}
+          {/* Left-Aligned Header */}
           <div className="text-left space-y-4 max-w-full relative">
             <div className="flex items-center gap-0 w-full relative z-10">
-              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-bold shrink-0 backdrop-blur-md">
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-                <span>DEVELOPMENT LIFECYCLE</span>
+                <span>Development Lifecycle</span>
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
               <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
@@ -338,8 +333,8 @@ export const MethodologyPage = () => {
             </p>
           </div>
 
-          {/* 6-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT (MATCHING IMAGE 2 EXACTLY) */}
-          <div className="relative max-w-6xl mx-auto py-8">
+          {/* 6-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT */}
+          <div className="relative max-w-[90rem] mx-auto py-8">
             
             {/* Central Connected Zig-Zag Line (Desktop Only) */}
             <div className="hidden lg:block absolute inset-y-12 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-purple-400 via-emerald-400 to-indigo-500 rounded-full shadow-[0_0_12px_rgba(14,165,233,0.4)] pointer-events-none z-0" />
@@ -360,25 +355,30 @@ export const MethodologyPage = () => {
                       isEven ? 'lg:flex-row-reverse' : ''
                     }`}
                   >
-                    {/* Pure Crisp White Step Pill Card Plate matching Screenshot 1 */}
+                    {/* Pure Crisp White Step Pill Card Plate */}
                     <div className="w-full lg:w-[calc(50%-2.5rem)] group">
-                      <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                      <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5 border border-slate-100 overflow-hidden">
                         
-                        {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
-                        <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>
+                        {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                        <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                          <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                        </div>
+
+                        {/* Header Row: Double Ring Step Badge + Arrow Pointer Tab */}
+                        <div className={`flex items-center justify-between gap-4 relative z-10 ${isEven ? 'flex-row-reverse' : ''}`}>
                           
-                          {/* Circular Double-Ring Badge + Arrow Pointer Tab matching Image 2 */}
+                          {/* Circular Double-Ring Badge + Arrow Pointer Tab */}
                           <div className={`flex items-center gap-2 ${isEven ? 'flex-row-reverse' : ''}`}>
                             <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 border-4 ${step.ringBorder} shadow-lg flex items-center justify-center shrink-0`}>
                               <div className={`w-full h-full rounded-full ${step.badgeBg} flex flex-col items-center justify-center text-white font-mono font-black text-xs shadow-inner`}>
-                                <span className="text-[8px] uppercase tracking-tighter opacity-90">STEP</span>
+                                <span className="text-[8px] tracking-tighter opacity-90">Step</span>
                                 <span className="text-sm font-extrabold leading-none">{step.step}</span>
                               </div>
                             </div>
 
-                            {/* Arrow Pointer Tab matching Image 2 */}
+                            {/* Arrow Pointer Tab */}
                             <div
-                              className={`px-4 py-1.5 bg-gradient-to-r ${step.gradient} text-white font-mono font-black text-xs uppercase tracking-wider shadow-md ${
+                              className={`px-4 py-1.5 bg-gradient-to-r ${step.gradient} text-white font-mono font-bold text-xs shadow-md ${
                                 isEven ? 'rounded-l-2xl rounded-r-sm' : 'rounded-r-2xl rounded-l-sm'
                               }`}
                             >
@@ -393,22 +393,22 @@ export const MethodologyPage = () => {
                         </div>
 
                         {/* Card Content */}
-                        <div className="space-y-2 text-left">
-                          <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                        <div className="space-y-2 text-left relative z-10">
+                          <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
                             {step.title}
                           </h3>
-                          <h4 className={`text-xs font-bold ${step.themeText}`}>
+                          <h4 className={`text-xs font-semibold ${step.themeText}`}>
                             {step.subtitle}
                           </h4>
-                          <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                          <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                             {step.desc}
                           </p>
                         </div>
 
                         {/* Deliverables Badges */}
-                        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2">
+                        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2 relative z-10">
                           {step.deliverables.map((del) => (
-                            <span key={del} className="px-3 py-1 rounded-xl bg-slate-50 text-slate-700 text-[11px] font-bold border border-slate-200/80 shadow-2xs flex items-center gap-1.5">
+                            <span key={del} className="px-3 py-1 rounded-xl bg-slate-50 text-slate-700 text-[11px] font-semibold border border-slate-200/80 shadow-2xs flex items-center gap-1.5">
                               <CheckCircle2 size={12} className={step.themeText} />
                               <span>{del}</span>
                             </span>
@@ -418,7 +418,7 @@ export const MethodologyPage = () => {
                       </div>
                     </div>
 
-                    {/* Central Connected Node Dot matching Image 2 */}
+                    {/* Central Connected Node Dot */}
                     <div className="hidden lg:flex w-12 h-12 rounded-full bg-white border-4 border-slate-200 shadow-md items-center justify-center z-10 shrink-0">
                       <div className={`w-5 h-5 rounded-full ${step.badgeBg} animate-ping`} />
                     </div>
@@ -437,18 +437,16 @@ export const MethodologyPage = () => {
       </section>
 
 
-      {/* ════════════════════════════════════════════════════
-          WHY CHOOSE US / WHAT SETS US APART
-      ════════════════════════════════════════════════════ */}
+      {/* WHY CHOOSE US */}
       <section className="py-20 lg:py-28 bg-white relative overflow-hidden font-sans border-b border-slate-200/80">
-        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
           <div className="text-left space-y-3 max-w-full">
             <div className="flex items-center gap-0 w-full">
               <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-bold shrink-0 backdrop-blur-md">
                 <span className="text-[#0284C7] font-bold text-xs">◆</span>
-                <span>COMPETITIVE ADVANTAGES</span>
+                <span>Competitive Advantages</span>
                 <span className="text-[#0284C7] font-bold text-xs">◆</span>
               </div>
             </div>
@@ -460,7 +458,7 @@ export const MethodologyPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[90rem] mx-auto">
             {WHY_CHOOSE_US.map((item) => {
               const a = accentMap[item.accent];
               const IconComp = item.icon;
@@ -472,13 +470,18 @@ export const MethodologyPage = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5 }}
                   style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                  className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all space-y-4 group"
+                  className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all space-y-4 group relative overflow-hidden"
                 >
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${a.gradient} p-3 text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                  {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                  <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                    <img src={logoEmblem} alt="" className="w-24 sm:w-28 h-24 sm:h-28 object-contain" />
+                  </div>
+
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-tr ${a.gradient} p-3 text-white shadow-md flex items-center justify-center group-hover:scale-110 transition-transform relative z-10`}>
                     <IconComp size={26} />
                   </div>
-                  <h3 className="text-lg font-extrabold text-slate-900 font-display tracking-tight">{item.title}</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{item.desc}</p>
+                  <h3 className="text-lg font-bold text-slate-900 font-display tracking-tight relative z-10">{item.title}</h3>
+                  <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed relative z-10">{item.desc}</p>
                 </motion.div>
               );
             })}
@@ -488,18 +491,16 @@ export const MethodologyPage = () => {
       </section>
 
 
-      {/* ════════════════════════════════════════════════════
-          CORE TEAMS & ORGANIZATIONAL STRUCTURE
-      ════════════════════════════════════════════════════ */}
+      {/* CORE TEAMS & ORGANIZATIONAL STRUCTURE */}
       <section className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
-        <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
           <div className="text-left space-y-3 max-w-full">
             <div className="flex items-center gap-0 w-full">
               <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-bold shrink-0 backdrop-blur-md">
                 <span className="text-[#0284C7] font-bold text-xs">◆</span>
-                <span>OUR TEAMS & STRUCTURE</span>
+                <span>Our Teams &amp; Structure</span>
                 <span className="text-[#0284C7] font-bold text-xs">◆</span>
               </div>
             </div>
@@ -511,19 +512,24 @@ export const MethodologyPage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-[90rem] mx-auto">
             {CORE_TEAMS.map((team) => {
               const IconComp = team.icon;
               return (
                 <div
                   key={team.title}
-                  className="bg-white rounded-3xl p-7 border-2 border-slate-200 shadow-md hover:shadow-lg hover:border-cyan-300 transition-all space-y-4 group"
+                  className="bg-white rounded-3xl p-7 border-2 border-slate-200 shadow-md hover:shadow-lg hover:border-cyan-300 transition-all space-y-4 group relative overflow-hidden"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
+                  {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                  <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                    <img src={logoEmblem} alt="" className="w-24 sm:w-28 h-24 sm:h-28 object-contain" />
+                  </div>
+
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#0284C7] to-[#0ED3DD] text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform relative z-10">
                     <IconComp size={24} />
                   </div>
-                  <h3 className="text-lg font-extrabold text-slate-900 font-display tracking-tight">{team.title}</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{team.desc}</p>
+                  <h3 className="text-lg font-bold text-slate-900 font-display tracking-tight relative z-10">{team.title}</h3>
+                  <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed relative z-10">{team.desc}</p>
                 </div>
               );
             })}
@@ -533,31 +539,35 @@ export const MethodologyPage = () => {
       </section>
 
 
-      {/* ════════════════════════════════════════════════════
-          FINAL CALL TO ACTION
-      ════════════════════════════════════════════════════ */}
+      {/* FINAL CALL TO ACTION */}
       <section className="py-28 w-full bg-gradient-to-b from-slate-50 via-cyan-50/40 to-slate-50 relative text-slate-900 overflow-hidden border-t border-slate-200/80">
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10 text-center space-y-8">
           <div className="p-[1.5px] rounded-[3.2rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-2xl max-w-5xl mx-auto">
             <div className="bg-white rounded-[3.1rem] p-10 sm:p-16 text-slate-900 text-center space-y-8 relative overflow-hidden shadow-inner">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+              
+              {/* Translucent YomTech Brand Logo Watermark Background */}
+              <div className="absolute -right-6 -bottom-6 opacity-[0.20] pointer-events-none z-0">
+                <img src={logoEmblem} alt="" className="w-80 sm:w-96 h-80 sm:h-96 object-contain" />
+              </div>
+
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight relative z-10">
                 Ready to Start Your <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Digital Journey?</span>
               </h2>
-              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto">
+              <p className="text-slate-600 text-sm sm:text-base font-medium leading-relaxed max-w-2xl mx-auto relative z-10">
                 Work with Yomtech Global to engineer high-quality, scalable, and secure digital solutions built specifically for your goals.
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-5 pt-4">
+              <div className="flex flex-wrap items-center justify-center gap-5 pt-4 relative z-10">
                 <button
                   onClick={() => navigate('/contact')}
-                  className="px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3"
+                  className="px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-bold text-xs uppercase tracking-wider shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3 cursor-pointer"
                 >
                   <span>Request Proposal</span>
                   <ArrowRight size={18} />
                 </button>
                 <button
                   onClick={() => navigate('/portfolio')}
-                  className="px-9 py-4 rounded-full bg-white border-2 border-[#0ED3DD] text-[#0284C7] font-black text-xs uppercase tracking-widest shadow-md hover:bg-cyan-50 transition-all duration-300 flex items-center gap-3"
+                  className="px-9 py-4 rounded-full bg-white border-2 border-[#0ED3DD] text-[#0284C7] font-bold text-xs uppercase tracking-wider shadow-md hover:bg-cyan-50 transition-all duration-300 flex items-center gap-3 cursor-pointer"
                 >
                   <Layers size={18} className="text-[#0ED3DD]" />
                   <span>View Case Studies</span>

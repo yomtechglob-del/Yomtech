@@ -4,13 +4,15 @@ import {
   Search, FileText, Compass, Layers, 
   Code, ShieldCheck, Server, GraduationCap, TrendingUp 
 } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
+/* ─── SERVICES CHALLENGE TO IMPACT (WATERMARK LOGO IN RIGHT BOTTOM CORNER) ─── */
 export const ServicesChallengeToImpact = () => {
   const steps = [
     {
       step: '01',
-      optionLabel: 'OPTION 01',
-      stage: 'CHALLENGE',
+      optionLabel: 'Option 01',
+      stage: 'Challenge',
       title: 'Problem Identification & Operational Audit',
       desc: 'Identify operational bottlenecks, fragmented legacy systems, workflow inefficiencies, and core technical requirements across client workflows.',
       icon: Search,
@@ -22,8 +24,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '02',
-      optionLabel: 'OPTION 02',
-      stage: 'SCOPING',
+      optionLabel: 'Option 02',
+      stage: 'Scoping',
       title: 'Technical SRS & Roadmap Scoping',
       desc: 'Translate organizational goals into detailed Software Requirement Specifications (SRS), milestone roadmaps, risk matrices, and SLA frameworks.',
       icon: FileText,
@@ -35,8 +37,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '03',
-      optionLabel: 'OPTION 03',
-      stage: 'STRATEGY',
+      optionLabel: 'Option 03',
+      stage: 'Strategy',
       title: 'Strategic System & Data Blueprints',
       desc: 'Architect high-concurrency database schemas, microservice API contracts, zero-trust security frameworks, and scalable cloud foundations.',
       icon: Compass,
@@ -48,8 +50,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '04',
-      optionLabel: 'OPTION 04',
-      stage: 'DESIGN',
+      optionLabel: 'Option 04',
+      stage: 'Design',
       title: 'Interactive UX & System Prototypes',
       desc: 'Design intuitive enterprise user interfaces, system wireframes, role-based dashboards, and interactive prototypes for client validation.',
       icon: Layers,
@@ -61,8 +63,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '05',
-      optionLabel: 'OPTION 05',
-      stage: 'SOLUTION',
+      optionLabel: 'Option 05',
+      stage: 'Solution',
       title: 'Agile Build & Custom Software',
       desc: 'Engineering custom software, Yomnex ERP modules, mobile applications, and AI surveillance engines using clean, version-controlled code.',
       icon: Code,
@@ -74,8 +76,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '06',
-      optionLabel: 'OPTION 06',
-      stage: 'QA & SECURITY',
+      optionLabel: 'Option 06',
+      stage: 'QA & Security',
       title: 'Performance, Penetration & QA Validation',
       desc: 'Execute automated unit test suites, vulnerability penetration audits, sub-50ms latency load validation, and formal user acceptance testing (UAT).',
       icon: ShieldCheck,
@@ -87,8 +89,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '07',
-      optionLabel: 'OPTION 07',
-      stage: 'INTEGRATION',
+      optionLabel: 'Option 07',
+      stage: 'Integration',
       title: 'Zero-Downtime Deployment & Migration',
       desc: 'Containerized deployment via Docker/Kubernetes on cloud or on-premise data centers, accompanied by seamless system migration and data sync.',
       icon: Server,
@@ -100,8 +102,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '08',
-      optionLabel: 'OPTION 08',
-      stage: 'CAPACITY',
+      optionLabel: 'Option 08',
+      stage: 'Capacity',
       title: 'Institutional Onboarding & Staff Mentorship',
       desc: 'Conduct hands-on technical workshops, administrator onboarding, user training manuals, and WabiSkills capability transfer for client teams.',
       icon: GraduationCap,
@@ -113,8 +115,8 @@ export const ServicesChallengeToImpact = () => {
     },
     {
       step: '09',
-      optionLabel: 'OPTION 09',
-      stage: 'EVOLUTION',
+      optionLabel: 'Option 09',
+      stage: 'Evolution',
       title: '24/7 SLA Support & Continuous Scaling',
       desc: 'Enable round-the-clock technical support, continuous performance tuning, periodic security patch updates, feature expansions, and long-term scaling.',
       icon: TrendingUp,
@@ -140,13 +142,13 @@ export const ServicesChallengeToImpact = () => {
 
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
 
-        {/* Section Header with Connected Horizontal Accent Line */}
+        {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
           <div className="flex items-center gap-0 w-full">
             <div className="h-[4px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_12px_rgba(14,211,221,0.7)]" />
-            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-widest shadow-lg backdrop-blur-md shrink-0">
+            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
-              <span>ENGINEERING PROCESS METHODOLOGY</span>
+              <span>Engineering Process Methodology</span>
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
@@ -161,7 +163,7 @@ export const ServicesChallengeToImpact = () => {
           </p>
         </div>
 
-        {/* Tilted Stitched Leather Patch Cards Grid (Matching Image 2 Reference) */}
+        {/* Tilted Stitched Leather Patch Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12 max-w-[90rem] mx-auto">
           {steps.map((item, idx) => {
             const IconComp = item.icon;
@@ -178,11 +180,16 @@ export const ServicesChallengeToImpact = () => {
                 <div className={`w-full h-full ${item.baseGradient} rounded-[2.8rem] p-3 sm:p-4 shadow-2xl ${item.tiltBase} group-hover:rotate-0 group-hover:scale-[1.02] transition-all duration-500`}>
                   
                   {/* Inner Counter-Tilted White Stitched Patch Card */}
-                  <div className={`bg-white rounded-[2.3rem] p-7 sm:p-9 shadow-inner border-2 border-dashed border-slate-300 relative ${item.tiltCard} group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between space-y-6 h-full`}>
+                  <div className={`bg-white rounded-[2.3rem] p-7 sm:p-9 shadow-inner border-2 border-dashed border-slate-300 relative ${item.tiltCard} group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between space-y-6 h-full overflow-hidden`}>
                     
+                    {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                    <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                      <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                    </div>
+
                     {/* Top Row: Option Label & Step Number */}
-                    <div className="space-y-1">
-                      <span className={`text-[11px] font-mono font-black uppercase tracking-widest ${item.textColor} block`}>
+                    <div className="space-y-1 relative z-10">
+                      <span className={`text-[11px] font-mono font-bold tracking-wider ${item.textColor} block`}>
                         {item.optionLabel}
                       </span>
                       <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${item.textColor} leading-none block`}>
@@ -191,22 +198,22 @@ export const ServicesChallengeToImpact = () => {
                     </div>
 
                     {/* Middle Section: Title & Description */}
-                    <div className="space-y-3 flex-1">
-                      <div className="inline-block px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] font-mono font-black uppercase tracking-wider mb-1">
+                    <div className="space-y-3 flex-1 relative z-10">
+                      <div className="inline-block px-3.5 py-1 rounded-full bg-slate-100 text-slate-700 text-[10px] font-mono font-bold tracking-wider mb-1">
                         {item.stage}
                       </div>
 
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                         {item.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
 
                     {/* Bottom Right: Circular Icon Badge */}
-                    <div className="self-end pt-2">
+                    <div className="self-end pt-2 relative z-10">
                       <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full border-4 ${item.borderColor} bg-white shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                         <IconComp className={`w-7 h-7 ${item.textColor}`} strokeWidth={2.2} />
                       </div>

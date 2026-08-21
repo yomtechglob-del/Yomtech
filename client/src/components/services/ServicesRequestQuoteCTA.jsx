@@ -24,6 +24,11 @@ export const ServicesRequestQuoteCTA = () => {
         >
           <div className="bg-white rounded-[3.1rem] p-10 sm:p-16 text-slate-900 text-center space-y-8 relative overflow-hidden shadow-inner">
             
+            {/* Translucent YomTech Brand Logo Watermark Background */}
+            <div className="absolute -right-6 -bottom-6 opacity-[0.20] pointer-events-none z-0">
+              <img src={logoImg} alt="" className="w-80 sm:w-96 h-80 sm:h-96 object-contain" />
+            </div>
+
             {/* Radial Aura Glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#0ED3DD]/20 via-cyan-100/30 to-sky-200/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
 
@@ -34,8 +39,8 @@ export const ServicesRequestQuoteCTA = () => {
                   <div className="w-6 h-6 rounded-lg overflow-hidden border border-cyan-300 shrink-0">
                     <img src={logoImg} alt="YomTech Logo" className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] font-display">
-                    ⚡ START YOUR DIGITAL TRANSFORMATION
+                  <span className="text-[10px] font-bold tracking-wider text-[#0284C7] font-display">
+                    ⚡ Start Your Digital Transformation
                   </span>
                 </div>
               </div>
@@ -58,7 +63,7 @@ export const ServicesRequestQuoteCTA = () => {
             <div className="flex flex-wrap items-center justify-center gap-4 pt-2 relative z-10">
               <Link
                 to="/contact"
-                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs sm:text-sm shadow-[0_10px_30px_rgba(2,132,199,0.35)] hover:shadow-[0_15px_40px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300"
+                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-bold text-xs sm:text-sm shadow-[0_10px_30px_rgba(2,132,199,0.35)] hover:shadow-[0_15px_40px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300"
               >
                 <span>Request a Custom Quote</span>
                 <div className="w-6 h-6 rounded-full bg-white text-[#0284C7] flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -68,7 +73,7 @@ export const ServicesRequestQuoteCTA = () => {
 
               <a
                 href="tel:+251977666699"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cyan-50 text-[#0284C7] border border-cyan-200 font-extrabold text-xs sm:text-sm shadow-md hover:bg-cyan-100 hover:border-cyan-300 hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cyan-50 text-[#0284C7] border border-cyan-200 font-bold text-xs sm:text-sm shadow-md hover:bg-cyan-100 hover:border-cyan-300 hover:scale-105 transition-all duration-300"
               >
                 <Phone size={16} className="text-[#0284C7]" />
                 <span>Call +251 (977) 666-699</span>
@@ -76,7 +81,7 @@ export const ServicesRequestQuoteCTA = () => {
             </div>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-slate-100 text-xs font-extrabold text-slate-600 relative z-10">
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-slate-100 text-xs font-bold text-slate-600 relative z-10">
               <div className="flex items-center gap-2">
                 <CheckCircle2 size={16} className="text-emerald-600" />
                 <span>24hr Quote Guarantee</span>
@@ -98,3 +103,5 @@ export const ServicesRequestQuoteCTA = () => {
     </section>
   );
 };
+
+export default ServicesRequestQuoteCTA;
