@@ -1,180 +1,64 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { Globe, Users2, BookOpen, Cpu, TrendingUp, Sparkles, Activity } from 'lucide-react';
+import { Users2, BookOpen, Cpu, TrendingUp } from 'lucide-react';
 
+/* ─── 4-STEP WABISKILLS INCLUSIVE VISION INFOGRAPHIC (MATCHING IMAGE 2) ─── */
 const CONNECTIONS = [
   { 
     id: '01',
+    step: '01',
+    dataTag: 'DATA A',
     title: 'PEOPLE', 
     subtitle: 'Global Community',
     desc: 'Connecting ambitious learners across global technology communities and developer networks.', 
     icon: Users2,
-    theme: {
-      accent: 'text-indigo-600',
-      border: 'border-indigo-300',
-      bgGradient: 'from-indigo-50/80 via-purple-50/30 to-white',
-      gradient: 'from-indigo-500 via-purple-500 to-fuchsia-500',
-      glow: 'rgba(99, 102, 241, 0.25)',
-      particle: 'bg-indigo-300'
-    }
+    gradient: 'from-[#0EA5E9] via-[#0284C7] to-[#0369A1]',
+    ringBorder: 'border-[#0EA5E9]',
+    badgeBg: 'bg-[#0EA5E9]',
+    themeText: 'text-[#0EA5E9]',
   },
   { 
     id: '02',
+    step: '02',
+    dataTag: 'DATA B',
     title: 'KNOWLEDGE', 
     subtitle: 'Democratized Excellence',
     desc: 'Democratizing production software engineering education, system design & elite architecture practices.', 
     icon: BookOpen,
-    theme: {
-      accent: 'text-cyan-600',
-      border: 'border-cyan-300',
-      bgGradient: 'from-cyan-50/80 via-sky-50/30 to-white',
-      gradient: 'from-cyan-400 via-blue-500 to-sky-500',
-      glow: 'rgba(6, 182, 212, 0.25)',
-      particle: 'bg-cyan-300'
-    }
+    gradient: 'from-[#F59E0B] via-[#D97706] to-[#B45309]',
+    ringBorder: 'border-[#F59E0B]',
+    badgeBg: 'bg-[#F59E0B]',
+    themeText: 'text-[#D97706]',
   },
   { 
     id: '03',
+    step: '03',
+    dataTag: 'DATA C',
     title: 'TECHNOLOGY', 
     subtitle: 'Modern Architecture',
     desc: 'Mastering cutting-edge fullstack web, cloud microservices, LLM artificial intelligence & data architecture.', 
     icon: Cpu,
-    theme: {
-      accent: 'text-violet-600',
-      border: 'border-violet-300',
-      bgGradient: 'from-violet-50/80 via-fuchsia-50/30 to-white',
-      gradient: 'from-violet-500 via-purple-500 to-fuchsia-400',
-      glow: 'rgba(139, 92, 246, 0.25)',
-      particle: 'bg-violet-300'
-    }
+    gradient: 'from-[#A855F7] via-[#9333EA] to-[#7E22CE]',
+    ringBorder: 'border-[#A855F7]',
+    badgeBg: 'bg-[#A855F7]',
+    themeText: 'text-[#9333EA]',
   },
   { 
     id: '04',
+    step: '04',
+    dataTag: 'DATA D',
     title: 'OPPORTUNITY', 
     subtitle: 'Career Autonomy',
     desc: 'Empowering software craftsmanship, high-impact career progression & remote engineering autonomy without limits.', 
     icon: TrendingUp,
-    theme: {
-      accent: 'text-emerald-600',
-      border: 'border-emerald-300',
-      bgGradient: 'from-emerald-50/80 via-teal-50/30 to-white',
-      gradient: 'from-emerald-400 via-teal-500 to-green-400',
-      glow: 'rgba(16, 185, 129, 0.25)',
-      particle: 'bg-teal-300'
-    }
+    gradient: 'from-[#10B981] via-[#059669] to-[#047857]',
+    ringBorder: 'border-[#10B981]',
+    badgeBg: 'bg-[#10B981]',
+    themeText: 'text-[#059669]',
   }
 ];
 
-const VisionCard = ({ connection, hoveredCard, setHoveredCard, idx }) => {
-  const cardRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const isHovered = hoveredCard === connection.id;
-  const isDimmed = hoveredCard !== null && hoveredCard !== connection.id;
-  const Icon = connection.icon;
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setMousePos({ x, y });
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setHoveredCard(connection.id)}
-      onMouseLeave={() => setHoveredCard(null)}
-      className={`relative group flex flex-col h-full min-h-[360px] rounded-[2.6rem] bg-gradient-to-b ${connection.theme.bgGradient} backdrop-blur-xl border transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden cursor-pointer
-        ${isHovered ? `border-transparent z-20` : `${connection.theme.border} shadow-[0_10px_35px_rgba(0,0,0,0.04)] z-10`}
-        ${isDimmed ? 'opacity-40 scale-[0.97] blur-[1px]' : 'opacity-100 blur-0'}
-      `}
-      style={{
-        transform: isHovered 
-          ? `perspective(1000px) rotateX(${(mousePos.y - 180) / -30}deg) rotateY(${(mousePos.x - 180) / 30}deg) scale3d(1.03, 1.03, 1.03)`
-          : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-        boxShadow: isHovered 
-          ? `0 30px 60px -12px ${connection.theme.glow}, 0 0 0 2px rgba(255,255,255,1) inset` 
-          : '0 10px 30px -10px rgba(0,0,0,0.05), 0 0 0 1px rgba(255,255,255,0.6) inset',
-        animation: `fade-in-up 0.8s ease-out ${idx * 0.1}s both`
-      }}
-    >
-      {/* Dynamic Cursor Spotlight Refraction */}
-      <div 
-        className="absolute inset-0 z-0 transition-opacity duration-300 pointer-events-none rounded-[2.6rem] overflow-hidden"
-        style={{ opacity: isHovered ? 1 : 0 }}
-      >
-        <div 
-          className="absolute w-[400px] h-[400px] rounded-full blur-[60px] transition-transform duration-75 ease-out mix-blend-multiply"
-          style={{
-            background: connection.theme.glow,
-            transform: `translate(${mousePos.x - 200}px, ${mousePos.y - 200}px)`,
-          }}
-        />
-      </div>
-
-      {/* Animated Gradient Border Reveal */}
-      <div 
-        className={`absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none rounded-[2.6rem] bg-gradient-to-br ${connection.theme.gradient} p-[2px]`}
-        style={{ WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)', WebkitMaskComposite: 'xor' }}
-      >
-        <div className="w-full h-full bg-transparent rounded-[calc(2.6rem-2px)]" />
-      </div>
-
-      {/* Content Container */}
-      <div className="relative z-10 flex flex-col h-full p-8 md:p-10">
-        
-        {/* Top Header Row */}
-        <div className="flex justify-between items-center mb-8">
-          <span className={`px-4 py-1.5 rounded-full bg-white border shadow-sm text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-500
-            ${isHovered ? `border-transparent ${connection.theme.accent}` : 'border-slate-100 text-slate-500'}`}
-          >
-            NODE 0{idx + 1}
-          </span>
-          
-          <div className={`w-12 h-12 rounded-2xl bg-white border shadow-sm flex items-center justify-center transition-all duration-500 relative overflow-hidden group-hover:rotate-12 group-hover:scale-110
-            ${isHovered ? `border-transparent` : 'border-slate-100'}`}
-          >
-            <div className={`absolute inset-0 bg-gradient-to-br ${connection.theme.gradient} opacity-0 group-hover:opacity-15 transition-opacity duration-300`} />
-            <Icon className={`w-5 h-5 transition-colors duration-500 ${isHovered ? connection.theme.accent : 'text-slate-400'}`} strokeWidth={isHovered ? 2.5 : 1.5} />
-          </div>
-        </div>
-
-        {/* Text Content */}
-        <div className="text-center flex-1 flex flex-col justify-center mb-6">
-          <h3 className={`text-2xl font-black uppercase tracking-tight mb-2 transition-colors duration-500 ${isHovered ? 'text-slate-900' : 'text-slate-800'}`}>
-            {connection.title}
-          </h3>
-          <h4 className={`text-xs font-bold uppercase tracking-wider mb-4 transition-colors duration-500 ${isHovered ? connection.theme.accent : 'text-slate-500'}`}>
-            {connection.subtitle}
-          </h4>
-          <p className={`text-[13px] md:text-sm leading-relaxed font-medium transition-colors duration-500 ${isHovered ? 'text-slate-700' : 'text-slate-600'}`}>
-            {connection.desc}
-          </p>
-        </div>
-
-        {/* Laser-Sweep Bottom Energy Track */}
-        <div className="mt-auto w-full h-2 bg-slate-100 rounded-full overflow-hidden relative shadow-inner">
-           <div className={`absolute inset-0 bg-gradient-to-r ${connection.theme.gradient} transition-transform duration-700 ease-out origin-left ${isHovered ? 'scale-x-100' : 'scale-x-100 opacity-60'}`} />
-           <div 
-              className={`absolute top-0 bottom-0 w-1/3 bg-white/80 blur-[2px] transition-all duration-1000 ease-in-out z-10 ${connection.theme.particle}`}
-              style={{
-                transform: isHovered ? 'translateX(300%)' : 'translateX(-100%)',
-                opacity: isHovered ? 1 : 0,
-                transitionDelay: isHovered ? '0.2s' : '0s'
-              }} 
-           />
-        </div>
-
-      </div>
-    </div>
-  );
-};
-
 export const GlobalLearningVision = () => {
-  const [hoveredCard, setHoveredCard] = useState(null);
-
   return (
     <section className="relative min-h-screen py-24 md:py-36 bg-white overflow-hidden font-sans selection:bg-indigo-500/20 selection:text-indigo-900 border-b border-slate-200/80">
       
@@ -185,73 +69,125 @@ export const GlobalLearningVision = () => {
         <div 
           className="absolute inset-0 opacity-[0.25]" 
           style={{ 
-            backgroundImage: 'linear-gradient(rgba(148,163,184,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.3) 1px, transparent 1px)', 
-            backgroundSize: '56px 56px',
-            maskImage: 'radial-gradient(ellipse 90% 90% at 50% 20%, black 20%, transparent 80%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at 50% 20%, black 20%, transparent 80%)'
+            backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)', 
+            backgroundSize: '24px 24px',
           }}
         />
         
-        <div className="absolute top-[-10%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-indigo-300/15 blur-[140px] mix-blend-multiply animate-float-slow" />
-        <div className="absolute bottom-[-10%] left-[10%] w-[50vw] h-[50vw] rounded-full bg-cyan-300/15 blur-[140px] mix-blend-multiply animate-float-slower" style={{ animationDelay: '-4s' }} />
+        <div className="absolute top-[-10%] right-[10%] w-[50vw] h-[50vw] rounded-full bg-indigo-300/15 blur-[140px]" />
+        <div className="absolute bottom-[-10%] left-[10%] w-[50vw] h-[50vw] rounded-full bg-cyan-300/15 blur-[140px]" />
       </div>
 
-      <div className="max-w-[108rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-16">
         
-        {/* Kinetic Header */}
-        <div className="text-center max-w-4xl mx-auto mb-20 flex flex-col items-center">
-          
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/80 backdrop-blur-md border border-indigo-200 shadow-[0_4px_20px_-4px_rgba(99,102,241,0.2)] mb-8 hover:bg-white hover:scale-105 transition-all duration-300 cursor-default group">
-            <Globe className="w-4 h-4 text-indigo-600 animate-[spin_12s_linear_infinite]" />
-            <span className="text-[10px] font-black tracking-[0.25em] uppercase text-indigo-900 font-sans">
-              WABISKILLS INCLUSIVE VISION
-            </span>
+        {/* Section Header matching Image 2 */}
+        <div className="text-left space-y-4 max-w-full relative">
+          <div className="flex items-center gap-0 w-full relative z-10">
+            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              <span>WABISKILLS INCLUSIVE VISION</span>
+              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+            </div>
+            <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
           </div>
-          
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight font-display">
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
             WabiSkills Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-sky-500">Without Borders</span>
           </h2>
-          
-          <p className="text-lg md:text-xl text-slate-600 font-semibold max-w-2xl leading-relaxed font-sans">
+
+          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10 font-sans">
             At WabiSkills, we make quality tech education accessible, practical, and interactive. We offer 50% scholarships for all college students and full scholarships because talent has no limits.
           </p>
         </div>
 
-        {/* 4 Connected Global Milestone Nodes Grid */}
-        <div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 relative z-10 w-full"
-          onMouseLeave={() => setHoveredCard(null)}
-        >
-          {CONNECTIONS.map((c, idx) => (
-            <VisionCard 
-              key={c.id} 
-              connection={c} 
-              hoveredCard={hoveredCard}
-              setHoveredCard={setHoveredCard}
-              idx={idx}
-            />
-          ))}
+        {/* 4-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT (MATCHING IMAGE 2 EXACTLY) */}
+        <div className="relative max-w-6xl mx-auto py-6">
+          
+          {/* Central Connected Zig-Zag Line (Desktop Only) */}
+          <div className="hidden lg:block absolute inset-y-12 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-yellow-400 via-purple-400 to-emerald-500 rounded-full shadow-[0_0_12px_rgba(14,165,233,0.4)] pointer-events-none z-0" />
+
+          <div className="space-y-12 relative z-10">
+            {CONNECTIONS.map((c, idx) => {
+              const IconComp = c.icon;
+              const isEven = idx % 2 === 1;
+
+              return (
+                <motion.div
+                  key={c.id}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 w-full ${
+                    isEven ? 'lg:flex-row-reverse' : ''
+                  }`}
+                >
+                  {/* Main Step Pill Card matching Image 2 */}
+                  <div className="w-full lg:w-[calc(50%-2.5rem)] group">
+                    <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                      
+                      {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
+                      <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>
+                        
+                        {/* Circular Double-Ring Badge + Arrow Pointer Tab matching Image 2 */}
+                        <div className={`flex items-center gap-2 ${isEven ? 'flex-row-reverse' : ''}`}>
+                          <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 border-4 ${c.ringBorder} shadow-lg flex items-center justify-center shrink-0`}>
+                            <div className={`w-full h-full rounded-full ${c.badgeBg} flex flex-col items-center justify-center text-white font-mono font-black text-xs shadow-inner`}>
+                              <span className="text-[8px] uppercase tracking-tighter opacity-90">STEP</span>
+                              <span className="text-sm font-extrabold leading-none">{c.step}</span>
+                            </div>
+                          </div>
+
+                          {/* Arrow Pointer Tab matching Image 2 */}
+                          <div
+                            className={`px-4 py-1.5 bg-gradient-to-r ${c.gradient} text-white font-mono font-black text-xs uppercase tracking-wider shadow-md ${
+                              isEven ? 'rounded-l-2xl rounded-r-sm' : 'rounded-r-2xl rounded-l-sm'
+                            }`}
+                          >
+                            <span>{c.dataTag}</span>
+                          </div>
+                        </div>
+
+                        {/* Icon Badge */}
+                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${c.gradient} text-white flex items-center justify-center shadow-md shrink-0 group-hover:scale-110 transition-transform`}>
+                          <IconComp size={22} strokeWidth={2.2} />
+                        </div>
+                      </div>
+
+                      {/* Card Content */}
+                      <div className="space-y-2 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-0.5 rounded-md bg-slate-100 ${c.themeText}`}>
+                            {c.subtitle}
+                          </span>
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                          {c.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                          {c.desc}
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Central Connected Node Dot matching Image 2 */}
+                  <div className="hidden lg:flex w-12 h-12 rounded-full bg-white border-4 border-slate-200 shadow-md items-center justify-center z-10 shrink-0">
+                    <div className={`w-5 h-5 rounded-full ${c.badgeBg} animate-ping`} />
+                  </div>
+
+                  {/* Empty Space for Grid Balance */}
+                  <div className="hidden lg:block w-[calc(50%-2.5rem)]" />
+
+                </motion.div>
+              );
+            })}
+          </div>
+
         </div>
 
       </div>
-
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes float-slow {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(30px, -40px) scale(1.05); }
-        }
-        .animate-float-slow {
-          animation: float-slow 18s ease-in-out infinite;
-        }
-
-        @keyframes float-slower {
-          0%, 100% { transform: translate(0px, 0px) scale(1); }
-          50% { transform: translate(-30px, 40px) scale(0.95); }
-        }
-        .animate-float-slower {
-          animation: float-slower 24s ease-in-out infinite;
-        }
-      `}} />
     </section>
   );
 };

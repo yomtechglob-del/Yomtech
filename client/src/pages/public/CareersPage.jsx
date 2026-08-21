@@ -369,19 +369,31 @@ export const CareersPage = () => {
       <section id="job-vacancies" className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-          <div className="text-left space-y-3 max-w-full">
-            <div className="flex items-center gap-0 w-full">
-              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+          <div className="text-left space-y-4 max-w-full relative">
+            {/* Blueprint Dot Grid Overlay matching Image 2 */}
+            <div
+              className="absolute -inset-4 opacity-[0.35] pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)',
+                backgroundSize: '24px 24px',
+              }}
+            />
+
+            {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
                 <span>JOB VACANCY LISTINGS</span>
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
               Explore Available <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Positions</span>
             </h2>
-            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl">
+
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
               Select any role below to view detailed job descriptions, responsibilities, technical requirements, salary range, and benefits.
             </p>
           </div>
@@ -582,19 +594,21 @@ export const CareersPage = () => {
       <section id="apply-form" className="py-20 lg:py-28 bg-white relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
 
-          <div className="text-left space-y-3 max-w-full">
-            <div className="flex items-center gap-0 w-full">
-              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+          <div className="text-left space-y-4 max-w-full relative">
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
                 <span>ONLINE JOB APPLICATION</span>
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
               Submit Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">CV &amp; Profile</span>
             </h2>
-            <p className="text-base text-slate-500 font-medium leading-relaxed">
+
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
               Complete your applicant profile and upload your CV/resume to apply directly.
             </p>
           </div>
@@ -787,19 +801,21 @@ export const CareersPage = () => {
       <section id="track-status" className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
 
-          <div className="text-left space-y-3 max-w-full">
-            <div className="flex items-center gap-0 w-full">
-              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+          <div className="text-left space-y-4 max-w-full relative">
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
                 <span>REAL-TIME STATUS TRACKING</span>
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
               Track Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Application Progress</span>
             </h2>
-            <p className="text-base text-slate-500 font-medium leading-relaxed">
+
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
               Enter your tracking reference code (e.g. <code className="font-mono bg-white px-2 py-0.5 rounded border border-slate-200 text-[#0284C7]">YOM-2025-8492</code>) to check your real-time status.
             </p>
           </div>
@@ -842,30 +858,62 @@ export const CareersPage = () => {
                 </span>
               </div>
 
-              {/* Progress Timeline */}
+              {/* Progress Timeline (5-Card Modern Business Infographic Style Matching Screenshot 2) */}
               <div className="space-y-4">
-                <h4 className="text-xs font-black uppercase tracking-widest text-slate-900">Application Pipeline:</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+                <h4 className="text-xs font-mono font-black uppercase tracking-widest text-slate-900">Application Pipeline:</h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                   {STAGES.map((st, idx) => {
                     const isPassed = idx <= trackedResult.stepIndex;
                     const isCurrent = idx === trackedResult.stepIndex;
+                    const stageGradients = [
+                      'from-[#F97316] via-[#EA580C] to-[#C2410C]',
+                      'from-[#E11D48] via-[#D946EF] to-[#9333EA]',
+                      'from-[#8B5CF6] via-[#6366F1] to-[#4338CA]',
+                      'from-[#0EA5E9] via-[#0284C7] to-[#1E40AF]',
+                      'from-[#10B981] via-[#059669] to-[#047857]',
+                    ];
+                    const gradientStr = stageGradients[idx % stageGradients.length];
+
                     return (
                       <div
                         key={st.name}
-                        className={`p-3.5 rounded-2xl border text-left space-y-1 transition-all ${
-                          isCurrent
-                            ? 'bg-[#0284C7] text-white border-[#0284C7] shadow-lg scale-105'
-                            : isPassed
-                            ? 'bg-emerald-50 text-slate-800 border-emerald-200'
-                            : 'bg-slate-50 text-slate-400 border-slate-200 opacity-60'
+                        className={`rounded-3xl p-[3px] bg-gradient-to-b ${gradientStr} shadow-md transition-all duration-300 ${
+                          isCurrent ? 'scale-105 shadow-xl ring-4 ring-cyan-300' : isPassed ? 'opacity-100' : 'opacity-65'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <span className="text-[10px] font-mono font-black">Step 0{idx + 1}</span>
-                          {isPassed && <CheckCircle2 size={13} className={isCurrent ? 'text-white' : 'text-emerald-500'} />}
+                        <div className="bg-white rounded-[1.4rem] overflow-hidden h-full flex flex-col justify-between border border-slate-100">
+                          {/* Ribbon Header matching Screenshot 2 */}
+                          <div
+                            className={`p-3.5 bg-gradient-to-r ${gradientStr} text-white flex items-center justify-between shadow-xs`}
+                            style={{ clipPath: 'polygon(0 0, 100% 0, 100% 80%, 0 100%)' }}
+                          >
+                            <span className="text-2xl font-black font-mono tracking-tight drop-shadow-xs">
+                              0{idx + 1}.
+                            </span>
+                            <span className="text-[9px] font-mono font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/20 backdrop-blur-md">
+                              {isPassed ? '✓ Passed' : 'Pending'}
+                            </span>
+                          </div>
+
+                          <div className="p-4 space-y-1.5 text-left flex-1 flex flex-col justify-between">
+                            <div>
+                              <h5 className="text-xs font-black text-slate-900 leading-snug font-display">
+                                {st.name}
+                              </h5>
+                              <p className="text-[11px] text-slate-500 font-medium leading-relaxed">
+                                {st.desc}
+                              </p>
+                            </div>
+
+                            {isCurrent && (
+                              <div className="pt-2">
+                                <span className="inline-block px-2.5 py-0.5 rounded-full bg-cyan-100 text-[#0284C7] text-[9px] font-black uppercase tracking-widest animate-pulse">
+                                  Current Stage
+                                </span>
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <p className="text-xs font-black leading-snug">{st.name}</p>
-                        <p className={`text-[9px] ${isCurrent ? 'text-cyan-100' : 'text-slate-500'}`}>{st.desc}</p>
                       </div>
                     );
                   })}

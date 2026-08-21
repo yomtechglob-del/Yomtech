@@ -17,30 +17,41 @@ export const CareerReadiness = () => {
       
       <div className="max-w-[110rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-        {/* Section Header with Official WabiSkills Content */}
-        <div className="text-center max-w-4xl mx-auto space-y-5">
-          <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-widest shadow-md backdrop-blur-md">
-            <Award className="w-4 h-4 text-[#0284C7]" />
-            <span>ANNOUNCING WABISKILLS COURSES BY</span>
-            <a 
-              href="https://wabiskills.com/" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center gap-1 text-[#0284C7] hover:text-cyan-600 underline font-black underline-offset-4 transition-colors"
-            >
-              WABISKILLS.COM
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+        {/* Section Header with Official WabiSkills Content matching Image 2 */}
+        <div className="text-left space-y-4 max-w-full relative">
+          {/* Blueprint Dot Grid Overlay matching Image 2 */}
+          <div
+            className="absolute -inset-4 opacity-[0.35] pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)',
+              backgroundSize: '24px 24px',
+            }}
+          />
+
+          {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
+          <div className="flex items-center gap-0 w-full relative z-10">
+            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              <span>ANNOUNCING WABISKILLS COURSES BY</span>
+              <a 
+                href="https://wabiskills.com/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1 text-[#0EA5E9] hover:text-cyan-600 underline font-black underline-offset-4 transition-colors"
+              >
+                WABISKILLS.COM
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+            </div>
+            <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 font-display">
-            Unlock Potential &amp; <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-              Shape Tomorrow with WabiSkills
-            </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10">
+            Unlock Potential &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Shape Tomorrow with WabiSkills</span>
           </h2>
 
-          <p className="text-lg sm:text-xl lg:text-2xl text-slate-600 font-semibold max-w-3xl mx-auto leading-relaxed font-sans">
+          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10 font-sans">
             Our mission is to help people find the best tech courses online &amp; physical camps to learn with experts anytime, anywhere — powered by WabiSkills (Yomtech Global's Educational Platform).
           </p>
         </div>

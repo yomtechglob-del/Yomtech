@@ -14,97 +14,115 @@ import erminOneImg from '../../assets/ermin-one.jpg';
 import logoEmblem from '../../assets/logos/logo.png';
 import consultingTeamImg from '../../assets/about/consulting_team.jpg';
 
-/* ─── 6-STEP AGILE DEVELOPMENT METHODOLOGY ─── */
+/* ─── 6-STEP AGILE DEVELOPMENT METHODOLOGY MATCHING IMAGE 2 ─── */
 const METHODOLOGY_STEPS = [
   {
     step: '01',
     phase: 'STEP 01',
     stage: 'DISCOVERY',
+    dataTag: 'DATA A',
     title: 'Requirement Analysis & Planning',
     subtitle: 'Scope Definition & Strategic Alignment',
     icon: FileText,
-    themeBg: 'bg-[#E53E3E]',
-    themeDarkBg: 'bg-[#C53030]',
-    themeText: 'text-[#E53E3E]',
-    themeBorder: 'border-[#E53E3E]',
+    hex: '#0EA5E9',
+    gradient: 'from-[#0EA5E9] via-[#0284C7] to-[#0369A1]',
+    ringBorder: 'border-[#0EA5E9]',
+    ringBg: 'bg-[#0EA5E9]',
+    ringText: 'text-[#0EA5E9]',
+    badgeBg: 'bg-[#0EA5E9]',
+    themeText: 'text-[#0EA5E9]',
     desc: 'Deep-dive discovery to understand client operational workflows, define precise system scope, establish technical parameters, and set clear project milestones.',
     deliverables: ['Detailed SRS Document', 'Project Roadmap', 'Risk Mitigation Strategy', 'SLA Framework'],
-    offset: 'ml-0',
   },
   {
     step: '02',
     phase: 'STEP 02',
     stage: 'ARCHITECTURE',
+    dataTag: 'DATA B',
     title: 'System Design & Architecture',
     subtitle: 'Scalable & Secure System Blueprints',
     icon: Sliders,
-    themeBg: 'bg-[#ED8936]',
-    themeDarkBg: 'bg-[#DD6B20]',
-    themeText: 'text-[#ED8936]',
-    themeBorder: 'border-[#ED8936]',
+    hex: '#F59E0B',
+    gradient: 'from-[#F59E0B] via-[#D97706] to-[#B45309]',
+    ringBorder: 'border-[#F59E0B]',
+    ringBg: 'bg-[#F59E0B]',
+    ringText: 'text-[#F59E0B]',
+    badgeBg: 'bg-[#F59E0B]',
+    themeText: 'text-[#D97706]',
     desc: 'Engineering high-concurrency database schemas, microservice API contracts, security protocols, and responsive UI/UX prototypes tailored to client needs.',
     deliverables: ['Database Schema Specs', 'API Contract Blueprints', 'UX/UI Wireframe Prototypes', 'Security Architecture'],
-    offset: 'ml-0 sm:ml-6 lg:ml-12',
   },
   {
     step: '03',
     phase: 'STEP 03',
     stage: 'DEVELOPMENT',
+    dataTag: 'DATA C',
     title: 'Agile Development Process',
     subtitle: 'Iterative Sprints & Transparent Codebase',
     icon: Code,
-    themeBg: 'bg-[#48BB78]',
-    themeDarkBg: 'bg-[#38A169]',
-    themeText: 'text-[#48BB78]',
-    themeBorder: 'border-[#48BB78]',
+    hex: '#A855F7',
+    gradient: 'from-[#A855F7] via-[#9333EA] to-[#7E22CE]',
+    ringBorder: 'border-[#A855F7]',
+    ringBg: 'bg-[#A855F7]',
+    ringText: 'text-[#A855F7]',
+    badgeBg: 'bg-[#A855F7]',
+    themeText: 'text-[#9333EA]',
     desc: 'Iterative 2-week development sprints with continuous integration, automated builds, weekly client reviews, and complete code transparency.',
     deliverables: ['Bi-Weekly Demo Builds', 'Clean Modular Code', 'Sprint Progress Dashboards', 'Version-Controlled Repo'],
-    offset: 'ml-0 sm:ml-12 lg:ml-24',
   },
   {
     step: '04',
     phase: 'STEP 04',
     stage: 'QUALITY ASSURANCE',
+    dataTag: 'DATA D',
     title: 'Testing & Quality Assurance',
     subtitle: 'Performance, Penetration & Load Validation',
     icon: ShieldCheck,
-    themeBg: 'bg-[#00A3C4]',
-    themeDarkBg: 'bg-[#0987A0]',
-    themeText: 'text-[#00A3C4]',
-    themeBorder: 'border-[#00A3C4]',
+    hex: '#10B981',
+    gradient: 'from-[#10B981] via-[#059669] to-[#047857]',
+    ringBorder: 'border-[#10B981]',
+    ringBg: 'bg-[#10B981]',
+    ringText: 'text-[#10B981]',
+    badgeBg: 'bg-[#10B981]',
+    themeText: 'text-[#059669]',
     desc: 'Comprehensive QA including automated unit tests, sub-50ms latency load testing, vulnerability penetration audits, and user acceptance testing (UAT).',
     deliverables: ['Automated Test Suite', 'Security Audit Certificate', 'Load Performance Report', 'UAT Sign-Off'],
-    offset: 'ml-0 sm:ml-18 lg:ml-36',
   },
   {
     step: '05',
     phase: 'STEP 05',
     stage: 'DEPLOYMENT',
+    dataTag: 'DATA E',
     title: 'Deployment & Implementation',
     subtitle: 'Zero-Downtime Rollout & Operational Onboarding',
     icon: Server,
-    themeBg: 'bg-[#3182CE]',
-    themeDarkBg: 'bg-[#2B6CB0]',
-    themeText: 'text-[#3182CE]',
-    themeBorder: 'border-[#3182CE]',
+    hex: '#EF4444',
+    gradient: 'from-[#EF4444] via-[#DC2626] to-[#B91C1C]',
+    ringBorder: 'border-[#EF4444]',
+    ringBg: 'bg-[#EF4444]',
+    ringText: 'text-[#EF4444]',
+    badgeBg: 'bg-[#EF4444]',
+    themeText: 'text-[#DC2626]',
     desc: 'Containerized deployment via Docker/Kubernetes on cloud or on-premise data centers, accompanied by staff training and seamless system migration.',
     deliverables: ['Containerized Production Build', 'Staff Onboarding Workshops', 'Zero-Downtime Migration', 'System Admin Manuals'],
-    offset: 'ml-0 sm:ml-12 lg:ml-24',
   },
   {
     step: '06',
     phase: 'STEP 06',
     stage: 'MAINTENANCE',
+    dataTag: 'DATA F',
     title: 'Maintenance & Continuous Support',
     subtitle: 'Ongoing Optimization & System Evolution',
     icon: RefreshCw,
-    themeBg: 'bg-[#805AD5]',
-    themeDarkBg: 'bg-[#6B46C1]',
-    themeText: 'text-[#805AD5]',
-    themeBorder: 'border-[#805AD5]',
+    hex: '#6366F1',
+    gradient: 'from-[#6366F1] via-[#4F46E5] to-[#4338CA]',
+    ringBorder: 'border-[#6366F1]',
+    ringBg: 'bg-[#6366F1]',
+    ringText: 'text-[#6366F1]',
+    badgeBg: 'bg-[#6366F1]',
+    themeText: 'text-[#4F46E5]',
     desc: 'Dedicated 24/7 technical support, continuous system optimization, security patch updates, and ongoing feature expansion throughout the product lifecycle.',
     deliverables: ['24/7 Helpdesk Support', 'SLA Response Guarantee', 'Quarterly System Audits', 'Feature Upgrade Patches'],
-    offset: 'ml-0 sm:ml-6 lg:ml-12',
   },
 ];
 
@@ -288,91 +306,119 @@ export const MethodologyPage = () => {
       <section className="py-20 lg:py-28 bg-[#F4F9FF] relative overflow-hidden font-sans border-b border-slate-200/80">
         <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-          <div className="text-left space-y-3 max-w-full">
-            <div className="flex items-center gap-0 w-full">
-              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+          {/* Left-Aligned Header with Pill Badge + Horizontal Cyan Line Extension (Matching Image 2) */}
+          <div className="text-left space-y-4 max-w-full relative">
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
                 <span>DEVELOPMENT LIFECYCLE</span>
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
+
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-display tracking-tight leading-tight">
               Our 6-Step <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Agile Methodology</span>
             </h2>
+
             <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl">
               Our structured approach ensures continuous collaboration, complete transparency, zero-downtime deployment, and alignment with client objectives throughout the project lifecycle.
             </p>
           </div>
 
-          {/* Infographic Banner Flow Container (Matching Reference Template) */}
-          <div className="space-y-8 max-w-5xl">
-            {METHODOLOGY_STEPS.map((step, idx) => {
-              const IconComp = step.icon;
-              return (
-                <motion.div
-                  key={step.step}
-                  initial={{ opacity: 0, x: -35 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: idx * 0.08 }}
-                  className={`relative flex items-stretch w-full max-w-3xl ${step.offset} group`}
-                >
-                  {/* Left Solid Number Box */}
-                  <div className={`w-28 sm:w-36 shrink-0 ${step.themeBg} text-white rounded-l-3xl p-4 sm:p-6 flex flex-col justify-center items-center shadow-lg relative z-10 overflow-hidden`}>
-                    <span className="text-[10px] sm:text-xs font-mono font-bold uppercase tracking-widest text-white/90">
-                      {step.phase}
-                    </span>
-                    <span className="text-3xl sm:text-5xl font-black font-display tracking-tight text-white mt-1 drop-shadow-md">
-                      {step.step}
-                    </span>
-                  </div>
+          {/* 6-STEP ALTERNATING BUSINESS INFOGRAPHIC CONTAINER (MATCHING IMAGE 2) */}
+          <div className="relative max-w-6xl mx-auto py-8">
+            
+            {/* Central Connected Zig-Zag Line (Desktop Only) */}
+            <div className="hidden lg:block absolute inset-y-12 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-purple-400 via-emerald-400 to-indigo-500 rounded-full shadow-[0_0_12px_rgba(14,165,233,0.4)] pointer-events-none z-0" />
 
-                  {/* Main Card Body + Top Folded Ribbon Banner */}
-                  <div className="flex-1 bg-white rounded-r-3xl border-2 border-slate-100/90 shadow-[0_10px_30px_rgba(0,0,0,0.06)] p-5 sm:p-7 pt-7 relative flex flex-col justify-center gap-1.5 z-0 pr-20 sm:pr-28 hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
-                    
-                    {/* Top Folded Ribbon Banner */}
-                    <div className="absolute -top-3.5 left-0 flex items-center z-20">
-                      <div className={`w-2.5 h-3.5 ${step.themeDarkBg} rounded-tl-sm clip-fold-left pointer-events-none`} />
-                      <div className={`${step.themeBg} text-white px-6 py-1 rounded-t-xl shadow-md font-black text-[10px] sm:text-xs uppercase tracking-widest flex items-center gap-1.5`}>
-                        <span>{step.stage}</span>
+            <div className="space-y-12 relative z-10">
+              {METHODOLOGY_STEPS.map((step, idx) => {
+                const IconComp = step.icon;
+                const isEven = idx % 2 === 1;
+
+                return (
+                  <motion.div
+                    key={step.step}
+                    initial={{ opacity: 0, y: 35 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: idx * 0.1 }}
+                    className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 w-full ${
+                      isEven ? 'lg:flex-row-reverse' : ''
+                    }`}
+                  >
+                    {/* Main Step Pill Card matching Image 2 */}
+                    <div className="w-full lg:w-[calc(50%-2.5rem)] group">
+                      <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                        
+                        {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
+                        <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>
+                          
+                          {/* Circular Double-Ring Badge + Arrow Pointer Tab matching Image 2 */}
+                          <div className={`flex items-center gap-2 ${isEven ? 'flex-row-reverse' : ''}`}>
+                            <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 border-4 ${step.ringBorder} shadow-lg flex items-center justify-center shrink-0`}>
+                              <div className={`w-full h-full rounded-full ${step.badgeBg} flex flex-col items-center justify-center text-white font-mono font-black text-xs shadow-inner`}>
+                                <span className="text-[8px] uppercase tracking-tighter opacity-90">STEP</span>
+                                <span className="text-sm font-extrabold leading-none">{step.step}</span>
+                              </div>
+                            </div>
+
+                            {/* Arrow Pointer Tab matching Image 2 */}
+                            <div
+                              className={`px-4 py-1.5 bg-gradient-to-r ${step.gradient} text-white font-mono font-black text-xs uppercase tracking-wider shadow-md ${
+                                isEven ? 'rounded-l-2xl rounded-r-sm' : 'rounded-r-2xl rounded-l-sm'
+                              }`}
+                            >
+                              <span>{step.stage}</span>
+                            </div>
+                          </div>
+
+                          {/* Icon Badge */}
+                          <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${step.gradient} text-white flex items-center justify-center shadow-md shrink-0 group-hover:scale-110 transition-transform`}>
+                            <IconComp size={22} strokeWidth={2.2} />
+                          </div>
+                        </div>
+
+                        {/* Card Content */}
+                        <div className="space-y-2 text-left">
+                          <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                            {step.title}
+                          </h3>
+                          <h4 className={`text-xs font-bold ${step.themeText}`}>
+                            {step.subtitle}
+                          </h4>
+                          <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                            {step.desc}
+                          </p>
+                        </div>
+
+                        {/* Deliverables Badges */}
+                        <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center gap-2">
+                          {step.deliverables.map((del) => (
+                            <span key={del} className="px-3 py-1 rounded-xl bg-slate-50 text-slate-700 text-[11px] font-bold border border-slate-200/80 shadow-2xs flex items-center gap-1.5">
+                              <CheckCircle2 size={12} className={step.themeText} />
+                              <span>{del}</span>
+                            </span>
+                          ))}
+                        </div>
+
                       </div>
                     </div>
 
-                    <h3 className="text-lg sm:text-2xl font-black text-slate-900 font-display tracking-tight mt-1 group-hover:text-[#0284C7] transition-colors">
-                      {step.title}
-                    </h3>
-
-                    <h4 className={`text-xs font-extrabold ${step.themeText}`}>
-                      {step.subtitle}
-                    </h4>
-
-                    <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
-                      {step.desc}
-                    </p>
-
-                    {/* Deliverables Pills */}
-                    <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center gap-2">
-                      {step.deliverables.map((del) => (
-                        <span key={del} className="px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 text-[10px] font-bold flex items-center gap-1">
-                          <CheckCircle2 size={11} className="text-[#0284C7]" />
-                          <span>{del}</span>
-                        </span>
-                      ))}
+                    {/* Central Connected Node Dot matching Image 2 */}
+                    <div className="hidden lg:flex w-12 h-12 rounded-full bg-white border-4 border-slate-200 shadow-md items-center justify-center z-10 shrink-0">
+                      <div className={`w-5 h-5 rounded-full ${step.badgeBg} animate-ping`} />
                     </div>
-                  </div>
 
-                  {/* Right Protruding Double-Ring Circular Icon Badge */}
-                  <div className="absolute -right-5 sm:-right-7 top-1/2 -translate-y-1/2 z-20 flex items-center justify-center">
-                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 shadow-2xl border-2 border-slate-100 flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                      <div className={`w-full h-full rounded-full ${step.themeBg} flex items-center justify-center text-white shadow-inner`}>
-                        <IconComp className="w-6 h-6 sm:w-7 sm:h-7 text-white" strokeWidth={2.2} />
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+                    {/* Empty Space for Grid Balance */}
+                    <div className="hidden lg:block w-[calc(50%-2.5rem)]" />
+
+                  </motion.div>
+                );
+              })}
+            </div>
+
           </div>
 
         </div>

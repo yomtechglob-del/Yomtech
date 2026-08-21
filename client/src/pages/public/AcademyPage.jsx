@@ -26,76 +26,81 @@ const ACADEMY_COURSES = [
   {
     id: 'fullstack',
     category: 'FULLSTACK',
+    stepNumber: '01.',
+    icon: Code,
     title: 'Fullstack Web & Mobile Development',
     desc: 'Become a Fullstack Developer in 6 months with live classes, projects, and group support. Master HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and MERN Stack.',
     badge: 'MERN Stack • 6 Months',
-    badgeColor: 'bg-sky-50 text-sky-700 border-sky-200',
     duration: '5.5–6 Months',
     format: 'Live Classes + Daily Follow-ups',
     projectsCount: '1000+ Students Enrolled',
     rating: '5.0 ★★★★★',
     tags: ['HTML & CSS', 'JavaScript & React', 'Node.js & Express', 'MongoDB & MERN', 'Live Projects'],
-    layout: 'left-image',
+    gradientHeader: 'from-[#F97316] via-[#EA580C] to-[#C2410C]',
     url: 'https://wabiskills.com/'
   },
   {
     id: 'ai',
     category: 'AI',
+    stepNumber: '02.',
+    icon: Cpu,
     title: 'Artificial Intelligence (AI with Python)',
     desc: 'Master AI and Python in a few months with hands-on projects, real-world applications, and live mentorship. Deep Learning, Machine Learning models & LLM integration.',
     badge: 'AI & Machine Learning',
-    badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
     duration: '2–6 Months Self-Paced',
     format: 'Hands-on Projects + Live Labs',
     projectsCount: '125+ Students Enrolled',
     rating: '5.0 ★★★★★',
     tags: ['Python Fundamentals', 'Machine Learning', 'Deep Learning', 'PyTorch & Neural Networks', 'AI Projects'],
-    layout: 'right-image',
+    gradientHeader: 'from-[#E11D48] via-[#D946EF] to-[#9333EA]',
     url: 'https://wabiskills.com/'
   },
   {
     id: 'uiux',
     category: 'DESIGN',
+    stepNumber: '03.',
+    icon: Layout,
     title: 'UI/UX & Product Design',
     desc: 'Master UI/UX design through live sessions, projects, and daily follow-ups. Learn Figma, User Research, Wireframing, Product Design, and Interactive Prototyping.',
     badge: 'UI/UX & Product Design',
-    badgeColor: 'bg-pink-50 text-pink-700 border-pink-200',
     duration: '1.5–2 Months',
     format: 'Live Design Studio Workshops',
     projectsCount: '956+ Students Enrolled',
     rating: '4.9 ★★★★★',
     tags: ['Figma Mastery', 'UX Research', 'Product Design', 'Interactive Prototypes', 'Design Systems'],
-    layout: 'left-image',
+    gradientHeader: 'from-[#8B5CF6] via-[#6366F1] to-[#4338CA]',
     url: 'https://wabiskills.com/'
   },
   {
     id: 'cyber',
     category: 'SECURITY',
+    stepNumber: '04.',
+    icon: ShieldCheck,
     title: 'Cyber Security Training Program',
     desc: 'Learn Cybersecurity in 3 months with practical defense projects and become job-ready professionals. Network security, threat auditing, and hands-on labs.',
     badge: 'Cyber Security',
-    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
     duration: '3 Months Intensive',
     format: 'Practical Security Labs',
     projectsCount: 'Job-Ready Certificate',
     rating: '4.9 ★★★★★',
     tags: ['Network Security', 'Ethical Auditing', 'Threat Analysis', 'Defensive Labs', 'Practical Cyber'],
-    layout: 'right-image',
+    gradientHeader: 'from-[#0EA5E9] via-[#0284C7] to-[#1E40AF]',
     url: 'https://wabiskills.com/'
   },
   {
     id: 'kids',
     category: 'KIDS TECH',
+    stepNumber: '05.',
+    icon: Sparkles,
     title: 'Kids Tech & Physical Summer Camp',
     desc: 'Weekend physical classes for talented, tech-passionate students (Grade 4–11) at Derartu Tower, Megenagna. Programming fundamentals, AI for kids, and video editing.',
     badge: 'Grade 4–11 Physical Camp',
-    badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
     duration: '2–3 Months Summer/Weekend',
     format: 'In-Person at Derartu Tower 9th Fl',
     projectsCount: 'Admission by Interview',
     rating: '5.0 ★★★★★',
     tags: ['Programming Fundamentals', 'AI for Kids', 'Video Editing', 'Basic Computers', 'Hands-on Projects'],
-    layout: 'left-image',
+    gradientHeader: 'from-[#10B981] via-[#059669] to-[#047857]',
     url: 'https://wabiskills.com/'
   }
 ];
@@ -172,25 +177,36 @@ export const AcademyPage = () => {
       <section className="py-24 bg-white text-slate-900 relative z-20 border-b border-slate-200">
         <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
-          <div className="text-center max-w-4xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-sm">
-              <Award className="w-4 h-4 text-[#0284C7]" />
-              <span>OFFICIAL WABISKILLS COURSES</span>
-              <span className="text-[#0284C7] font-bold">◆</span>
+          <div className="text-left space-y-4 max-w-full relative">
+            {/* Blueprint Dot Grid Background matching Image 2 */}
+            <div
+              className="absolute -inset-4 opacity-[0.35] pointer-events-none"
+              style={{
+                backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)',
+                backgroundSize: '24px 24px',
+              }}
+            />
+
+            {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+                <span>OFFICIAL WABISKILLS COURSES</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
             
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display">
-              What You’ll Learn with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                WabiSkills Courses
-              </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10">
+              What You’ll Learn with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">WabiSkills Courses</span>
             </h2>
-            <p className="text-lg text-slate-500 font-semibold max-w-2xl mx-auto">
+            
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
               Master in-demand skills from technology to personal growth — all in one place. Live classes, real-world projects, and daily instructor support.
             </p>
 
             {/* Course Filter Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-6">
+            <div className="flex flex-wrap items-center gap-3 pt-4 relative z-10">
               {['ALL', 'FULLSTACK', 'AI', 'DESIGN', 'SECURITY', 'KIDS TECH'].map(tab => (
                 <button
                   key={tab}
@@ -207,59 +223,88 @@ export const AcademyPage = () => {
             </div>
           </div>
 
-          {/* Courses Grid */}
+          {/* Courses Grid (5-Pillar Modern Business Infographic Style Matching Screenshot 2) */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredCourses.map(course => (
-              <motion.div
-                key={course.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-3xl p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between space-y-6 group hover:-translate-y-1.5"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className={`px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${course.badgeColor}`}>
-                      {course.badge}
-                    </span>
-                    <span className="text-xs font-bold text-amber-500 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
-                      {course.rating}
-                    </span>
+            {filteredCourses.map(course => {
+              const CourseIcon = course.icon;
+              return (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className={`rounded-[2.2rem] p-[3.5px] bg-gradient-to-b ${course.gradientHeader} shadow-xl hover:shadow-2xl transition-all duration-300 group hover:-translate-y-2.5 flex flex-col justify-between`}
+                >
+                  <div className="bg-white rounded-[2rem] overflow-hidden flex flex-col justify-between h-full border border-slate-100">
+                    
+                    {/* Angled Ribbon Header matching Screenshot 2 */}
+                    <div
+                      className={`p-6 bg-gradient-to-r ${course.gradientHeader} text-white relative overflow-hidden flex items-center justify-between shadow-md`}
+                      style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 0 100%)' }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className="text-3xl font-black font-mono tracking-tighter text-white drop-shadow-md">
+                          {course.stepNumber}
+                        </span>
+                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-black uppercase tracking-wider border border-white/30">
+                          {course.badge}
+                        </span>
+                      </div>
+
+                      <div className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white shadow-inner">
+                        <CourseIcon size={24} strokeWidth={2.2} />
+                      </div>
+                    </div>
+
+                    {/* Body Content */}
+                    <div className="p-7 space-y-5 flex-1 flex flex-col justify-between">
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-mono font-black uppercase tracking-widest text-slate-400">
+                            {course.category}
+                          </span>
+                          <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 shadow-2xs flex items-center gap-1">
+                            <span>{course.rating}</span>
+                          </span>
+                        </div>
+
+                        <h3 className="text-2xl font-black text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug">
+                          {course.title}
+                        </h3>
+
+                        <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                          {course.desc}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2 pt-2">
+                          {course.tags.map(tag => (
+                            <span key={tag} className="text-[11px] font-bold bg-slate-50 text-slate-600 px-3 py-1 rounded-xl border border-slate-200/80 shadow-2xs">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
+                          <div className="text-xs font-black text-slate-800">{course.duration}</div>
+                        </div>
+
+                        <button
+                          onClick={() => handleEnrollClick(course.url)}
+                          className={`px-5 py-2.5 rounded-2xl bg-gradient-to-r ${course.gradientHeader} text-white text-xs font-black uppercase tracking-wider shadow-lg hover:scale-105 flex items-center gap-2 transition-all`}
+                        >
+                          <span>ENROLL NOW</span>
+                          <ExternalLink className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+                    </div>
+
                   </div>
-
-                  <h3 className="text-2xl font-black text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
-                    {course.title}
-                  </h3>
-
-                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                    {course.desc}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 pt-2">
-                    {course.tags.map(tag => (
-                      <span key={tag} className="text-[11px] font-bold bg-slate-50 text-slate-500 px-3 py-1 rounded-lg border border-slate-200">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
-                  <div>
-                    <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
-                    <div className="text-sm font-black text-slate-800">{course.duration}</div>
-                  </div>
-
-                  <button
-                    onClick={() => handleEnrollClick(course.url)}
-                    className="px-6 py-3 rounded-2xl bg-[#0284C7] hover:bg-sky-600 text-white text-xs font-black uppercase tracking-wider shadow-lg shadow-sky-500/20 flex items-center gap-2 transition-all hover:gap-3"
-                  >
-                    <span>ENROLL NOW</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
 
         </div>
@@ -287,19 +332,20 @@ export const AcademyPage = () => {
       <section className="py-24 bg-white text-slate-900 relative z-20 border-b border-slate-200">
         <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
-          <div className="text-center max-w-4xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-sm">
-              <Users className="w-4 h-4 text-[#0284C7]" />
-              <span>WHAT OUR STUDENTS SAY</span>
+          <div className="text-left space-y-4 max-w-full relative">
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+                <span>WHAT OUR STUDENTS SAY</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display">
-              Nurturing Skills That <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                Shape Your Future
-              </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10">
+              Nurturing Skills That <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Shape Your Future</span>
             </h2>
-            <p className="text-lg text-slate-500 font-semibold max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
               We collect feedback from both our online and physical class students after every training round. Here are a few testimonials reflecting their transformation.
             </p>
           </div>
@@ -350,16 +396,21 @@ export const AcademyPage = () => {
       <section className="py-24 bg-slate-50 text-slate-900 relative z-20 border-b border-slate-200">
         <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
-          <div className="text-center max-w-4xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-sm">
-              <Bell className="w-4 h-4 text-[#0284C7]" />
-              <span>OFFICIAL ANNOUNCEMENTS &amp; NEWS</span>
+          <div className="text-left space-y-4 max-w-full relative">
+            <div className="flex items-center gap-0 w-full relative z-10">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+                <span>OFFICIAL ANNOUNCEMENTS &amp; NEWS</span>
+                <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              </div>
+              <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
             </div>
 
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display">
-              Latest News &amp; Physical Camps
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10">
+              Latest News &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Physical Camps</span>
             </h2>
-            <p className="text-lg text-slate-500 font-semibold max-w-2xl mx-auto">
+
+            <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
               Stay updated with WabiSkills training rounds, physical summer camps at Derartu Tower, Megenagna, and scholarship registrations.
             </p>
           </div>

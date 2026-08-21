@@ -1,333 +1,193 @@
-import React, { useState, useRef } from 'react';
-import { 
-  BookOpen, Code2, Cpu, Wrench, Layers, Network, ShieldCheck, 
-  Terminal, GitPullRequest, Users, Lightbulb, Rocket, 
-  ArrowRight, Zap, ChevronRight, Activity
-} from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { BookOpen, Terminal, GitPullRequest, Rocket } from 'lucide-react';
 
-const PHASE_1_THEORY = [
-  { 
-    id: 't1', 
-    icon: Cpu, 
-    title: 'Fundamentals', 
-    desc: 'Core computer science, deep data structures, and algorithmic efficiency.',
-    accent: 'text-blue-500',
-    bg: 'bg-blue-50',
-    border: 'border-blue-100'
+/* ─── 4-STEP CLASSROOM TO REAL WORLD INFOGRAPHIC (MATCHING IMAGE 2) ─── */
+const TRANSFORMATION_STEPS = [
+  {
+    id: '01',
+    step: '01',
+    dataTag: 'DATA A',
+    title: 'THEORY & COMPUTER SCIENCE',
+    subtitle: 'Phase 01 • Core Engineering Principles',
+    description: 'Master computer science fundamentals, data structures, algorithm design, system design, and software architecture patterns.',
+    icon: BookOpen,
+    gradient: 'from-[#0EA5E9] via-[#0284C7] to-[#0369A1]',
+    ringBorder: 'border-[#0EA5E9]',
+    badgeBg: 'bg-[#0EA5E9]',
+    themeText: 'text-[#0EA5E9]',
   },
-  { 
-    id: 't2', 
-    icon: Wrench, 
-    title: 'Modern Tools', 
-    desc: 'Git version control, IDE mastery, Docker containers, and package managers.',
-    accent: 'text-violet-500',
-    bg: 'bg-violet-50',
-    border: 'border-violet-100'
+  {
+    id: '02',
+    step: '02',
+    dataTag: 'DATA B',
+    title: 'SIMULATED PRODUCTION',
+    subtitle: 'Phase 02 • Enterprise Environment',
+    description: 'Architect multi-tenant fullstack web, mobile, and AI applications inside live enterprise git repositories.',
+    icon: Terminal,
+    gradient: 'from-[#F59E0B] via-[#D97706] to-[#B45309]',
+    ringBorder: 'border-[#F59E0B]',
+    badgeBg: 'bg-[#F59E0B]',
+    themeText: 'text-[#D97706]',
   },
-  { 
-    id: 't3', 
-    icon: Layers, 
-    title: 'Frameworks', 
-    desc: 'React, Next.js, Node.js, Express, Python, and PyTorch integration.',
-    accent: 'text-pink-500',
-    bg: 'bg-pink-50',
-    border: 'border-pink-100'
+  {
+    id: '03',
+    step: '03',
+    dataTag: 'DATA C',
+    title: 'LIVE CODE REVIEWS',
+    subtitle: 'Phase 03 • Senior Mentorship',
+    description: 'Undergo thorough pull request code reviews, performance bottleneck refactoring, and security audits.',
+    icon: GitPullRequest,
+    gradient: 'from-[#A855F7] via-[#9333EA] to-[#7E22CE]',
+    ringBorder: 'border-[#A855F7]',
+    badgeBg: 'bg-[#A855F7]',
+    themeText: 'text-[#9333EA]',
   },
-  { 
-    id: 't4', 
-    icon: Network, 
-    title: 'Architecture', 
-    desc: 'Microservices, RESTful/GraphQL APIs, and scalable database schemas.',
-    accent: 'text-emerald-500',
-    bg: 'bg-emerald-50',
-    border: 'border-emerald-100'
-  },
-  { 
-    id: 't5', 
-    icon: ShieldCheck, 
-    title: 'Best Practices', 
-    desc: 'Clean code standards, CI/CD automated pipelines, and cloud security.',
-    accent: 'text-amber-500',
-    bg: 'bg-amber-50',
-    border: 'border-amber-100'
+  {
+    id: '04',
+    step: '04',
+    dataTag: 'DATA D',
+    title: 'CLOUD DEPLOYMENT & IMPACT',
+    subtitle: 'Phase 04 • Real World Rollout',
+    description: 'Deploy production applications to AWS/GCP cloud platforms with CI/CD automation and high availability monitoring.',
+    icon: Rocket,
+    gradient: 'from-[#10B981] via-[#059669] to-[#047857]',
+    ringBorder: 'border-[#10B981]',
+    badgeBg: 'bg-[#10B981]',
+    themeText: 'text-[#059669]',
   }
 ];
-
-const PHASE_2_APPLICATION = [
-  { 
-    id: 'a1', 
-    icon: Terminal, 
-    title: 'Production Projects', 
-    desc: 'Architecting and building full-fledged, multi-tenant web and mobile applications.',
-    accent: 'text-blue-500',
-    bg: 'bg-blue-50',
-    border: 'border-blue-100'
-  },
-  { 
-    id: 'a2', 
-    icon: GitPullRequest, 
-    title: 'Live Repositories', 
-    desc: 'Managing complex feature branches, pull requests, and rigorous code reviews.',
-    accent: 'text-violet-500',
-    bg: 'bg-violet-50',
-    border: 'border-violet-100'
-  },
-  { 
-    id: 'a3', 
-    icon: Users, 
-    title: 'Team Collaboration', 
-    desc: 'Agile enterprise workflows, issue tracking, and synchronized pair programming.',
-    accent: 'text-pink-500',
-    bg: 'bg-pink-50',
-    border: 'border-pink-100'
-  },
-  { 
-    id: 'a4', 
-    icon: Lightbulb, 
-    title: 'Complex Problem Solving', 
-    desc: 'Advanced debugging, resolving performance bottlenecks, and scaling systems.',
-    accent: 'text-emerald-500',
-    bg: 'bg-emerald-50',
-    border: 'border-emerald-100'
-  },
-  { 
-    id: 'a5', 
-    icon: Rocket, 
-    title: 'Real Scenarios', 
-    desc: 'Deploying to AWS/GCP cloud platforms with high uptime SLAs and monitoring.',
-    accent: 'text-amber-500',
-    bg: 'bg-amber-50',
-    border: 'border-amber-100'
-  }
-];
-
-const InteractiveNode = ({ item, index, align = 'left' }) => {
-  const Icon = item.icon;
-  const delay = `${index * 100}ms`;
-
-  return (
-    <div 
-      className="group relative flex items-start gap-4 p-4 rounded-2xl transition-all duration-500 ease-out hover:bg-white hover:shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:-translate-y-0.5 border border-transparent hover:border-slate-100 cursor-pointer animate-fade-in-up bg-white/40"
-      style={{ animationDelay: delay, animationFillMode: 'both' }}
-    >
-      {/* Icon Container */}
-      <div className={`relative flex-shrink-0 w-12 h-12 rounded-xl ${item.bg} ${item.border} border flex items-center justify-center ${item.accent} transition-transform duration-500 group-hover:scale-110 shadow-sm z-10`}>
-        <Icon className="w-5 h-5" />
-        <div className="absolute inset-0 rounded-xl border border-current opacity-0 group-hover:animate-ping-slow pointer-events-none" />
-      </div>
-
-      {/* Text Content */}
-      <div className="flex-1 pt-1 transition-transform duration-500 ease-out group-hover:translate-x-1">
-        <h4 className="text-sm md:text-base font-extrabold text-slate-800 mb-1 group-hover:text-slate-900 transition-colors">
-          {item.title}
-        </h4>
-        <p className="text-xs md:text-sm text-slate-500 leading-relaxed font-medium group-hover:text-slate-600 transition-colors">
-          {item.desc}
-        </p>
-      </div>
-      
-      {/* Decorative Chevron */}
-      {align === 'left' && (
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 text-slate-300 hidden md:block">
-          <ChevronRight className="w-5 h-5" />
-        </div>
-      )}
-    </div>
-  );
-};
 
 export const ClassroomToRealWorld = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const containerRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    setMousePosition({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-  };
-
   return (
-    <section 
-      ref={containerRef}
-      onMouseMove={handleMouseMove}
-      className="relative min-h-screen py-24 md:py-32 bg-[#F4F7FC] overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-cyan-900 border-b border-emerald-200/80"
-    >
-      {/* Ethereal Ambient Background Layer */}
+    <section className="relative min-h-screen py-24 md:py-32 bg-[#F8FAFC] overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-cyan-900 border-b border-slate-200/80">
+      
+      {/* Precision Blueprint Grid & Ethereal Orbs */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Crisp Blueprint Grid */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#F4F7FC] via-white to-[#F8FAFC]" />
+        
         <div 
-          className="absolute inset-0 opacity-[0.4]" 
+          className="absolute inset-0 opacity-[0.25]" 
           style={{ 
-            backgroundImage: 'linear-gradient(rgba(148,163,184,0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(148,163,184,0.15) 1px, transparent 1px)', 
-            backgroundSize: '40px 40px',
-            maskImage: 'radial-gradient(ellipse 90% 90% at center, black 30%, transparent 80%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 90% 90% at center, black 30%, transparent 80%)'
+            backgroundImage: 'radial-gradient(rgba(14, 165, 233, 0.25) 1.5px, transparent 1.5px)', 
+            backgroundSize: '24px 24px',
           }}
         />
         
-        {/* Interactive Soft Spotlight */}
-        <div 
-          className="hidden lg:block absolute w-[1000px] h-[1000px] rounded-full pointer-events-none transition-transform duration-700 ease-out opacity-60"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 30%, transparent 70%)',
-            transform: `translate(${mousePosition.x - 500}px, ${mousePosition.y - 500}px)`
-          }}
-        />
-        
-        {/* Ambient Floating Orbs */}
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-400/20 blur-[120px] animate-blob mix-blend-multiply" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-violet-400/20 blur-[120px] animate-blob animation-delay-2000 mix-blend-multiply" />
-        <div className="absolute top-[20%] right-[20%] w-[30vw] h-[30vw] rounded-full bg-cyan-400/20 blur-[100px] animate-blob animation-delay-4000 mix-blend-multiply" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-blue-400/15 blur-[120px]" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[50vw] h-[50vw] rounded-full bg-violet-400/15 blur-[120px]" />
       </div>
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full space-y-16">
         
-        <div className="text-center max-w-4xl mx-auto mb-20 flex flex-col items-center">
-          
-          {/* Animated Premium Pill Badge */}
-          <div className="group relative inline-flex items-center justify-center mb-8 cursor-default">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full blur-md opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-            <div className="relative flex items-center gap-2 px-5 py-2 rounded-full bg-white border border-slate-200 shadow-sm transition-transform group-hover:scale-105 duration-300">
-              <Zap className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-              <span className="text-[10px] font-black tracking-[0.25em] uppercase text-slate-600 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-cyan-600 transition-all duration-300">
-                Practical Application
-              </span>
+        {/* Left-Aligned Section Header matching Image 2 */}
+        <div className="text-left space-y-4 max-w-full relative">
+          <div className="flex items-center gap-0 w-full relative z-10">
+            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              <span>PRACTICAL APPLICATION</span>
+              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
+            <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
           </div>
-          
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
-            From Classroom <br className="md:hidden"/>
-            <span className="relative inline-block px-2">
-              <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-violet-500">
-                to Real World
-              </span>
-              <div className="absolute -bottom-2 left-0 right-0 h-3 bg-cyan-200/40 -z-10 transform -skew-x-12" />
-            </span>
+
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 font-display tracking-tight leading-tight relative z-10">
+            From Classroom <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-cyan-500 to-violet-500">to Real World</span>
           </h2>
-          
-          <p className="text-lg md:text-xl text-slate-500 font-medium max-w-2xl leading-relaxed">
+
+          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10 font-sans">
             Connecting theoretical engineering knowledge with elite production software craftsmanship.
           </p>
-
-          {/* Central Knowledge -> Application Bridge Indicator */}
-          <div className="mt-12 inline-flex items-center gap-6 px-8 py-4 rounded-full bg-white/80 border border-white shadow-[0_8px_30px_rgba(0,0,0,0.04)] backdrop-blur-md relative overflow-hidden group">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-violet-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <span className="text-xs font-black tracking-[0.2em] uppercase text-slate-500 relative z-10 group-hover:text-slate-800 transition-colors">Knowledge</span>
-            <div className="relative flex items-center justify-center w-8 h-8 z-10">
-              <div className="absolute inset-0 rounded-full border border-cyan-400/50 animate-ping" />
-              <ArrowRight className="w-4 h-4 text-cyan-500" />
-            </div>
-            <span className="text-xs font-black tracking-[0.2em] uppercase text-cyan-600 relative z-10">Application</span>
-          </div>
         </div>
 
-        <div className="relative grid grid-cols-1 lg:grid-cols-[1fr_auto_1fr] gap-8 lg:gap-0 items-center">
+        {/* 4-STEP ALTERNATING BUSINESS INFOGRAPHIC LAYOUT (MATCHING IMAGE 2 EXACTLY) */}
+        <div className="relative max-w-6xl mx-auto py-6">
           
-          {/* LEFT PANEL: Learn The Technology */}
-          <div className="relative group rounded-[2.5rem] bg-white/60 backdrop-blur-2xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-6 md:p-10 flex flex-col transition-all duration-700 hover:shadow-[0_30px_80px_-20px_rgba(6,182,212,0.15)] z-10 hover:border-blue-100">
-            <div className="mb-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-50 to-cyan-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                  <BookOpen className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-[9px] font-black uppercase tracking-[0.2em] border border-blue-100 mb-2 shadow-sm">
-                    Phase 01 &bull; Theory &amp; Patterns
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Learn the Technology</h3>
-                </div>
-              </div>
-            </div>
+          {/* Central Connected Zig-Zag Line (Desktop Only) */}
+          <div className="hidden lg:block absolute inset-y-12 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-cyan-400 via-yellow-400 via-purple-400 to-emerald-500 rounded-full shadow-[0_0_12px_rgba(14,165,233,0.4)] pointer-events-none z-0" />
 
-            <div className="flex flex-col gap-2 relative">
-              {PHASE_1_THEORY.map((item, index) => (
-                <InteractiveNode key={item.id} item={item} index={index} align="left" />
-              ))}
-            </div>
-          </div>
+          <div className="space-y-12 relative z-10">
+            {TRANSFORMATION_STEPS.map((stepItem, idx) => {
+              const IconComp = stepItem.icon;
+              const isEven = idx % 2 === 1;
 
-          {/* CENTER: The Animated Data Bridge (Desktop Only) */}
-          <div className="hidden lg:flex w-24 h-full relative items-center justify-center z-0">
-             {/* Glowing Vertical Line Spine */}
-             <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-gradient-to-b from-blue-500/30 via-cyan-400 via-violet-500 to-blue-500/30 rounded-full shadow-[0_0_12px_rgba(6,182,212,0.6)] pointer-events-none" />
+              return (
+                <motion.div
+                  key={stepItem.id}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 w-full ${
+                    isEven ? 'lg:flex-row-reverse' : ''
+                  }`}
+                >
+                  {/* Main Step Pill Card matching Image 2 */}
+                  <div className="w-full lg:w-[calc(50%-2.5rem)] group">
+                    <div className="bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5">
+                      
+                      {/* Header Row: Double Ring Step Badge + Arrow Pointer Data Tag matching Image 2 */}
+                      <div className={`flex items-center justify-between gap-4 ${isEven ? 'flex-row-reverse' : ''}`}>
+                        
+                        {/* Circular Double-Ring Badge + Arrow Pointer Tab matching Image 2 */}
+                        <div className={`flex items-center gap-2 ${isEven ? 'flex-row-reverse' : ''}`}>
+                          <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white p-1 border-4 ${stepItem.ringBorder} shadow-lg flex items-center justify-center shrink-0`}>
+                            <div className={`w-full h-full rounded-full ${stepItem.badgeBg} flex flex-col items-center justify-center text-white font-mono font-black text-xs shadow-inner`}>
+                              <span className="text-[8px] uppercase tracking-tighter opacity-90">STEP</span>
+                              <span className="text-sm font-extrabold leading-none">{stepItem.step}</span>
+                            </div>
+                          </div>
 
-             <div className="absolute top-1/2 left-0 right-0 h-px bg-slate-200 -translate-y-1/2 overflow-hidden">
-                <div className="absolute top-0 left-0 h-full w-[200%] bg-gradient-to-r from-transparent via-cyan-400 to-violet-500 animate-data-stream opacity-80" />
-             </div>
-             
-             <div className="relative w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center z-10 shadow-[0_0_30px_rgba(6,182,212,0.2)]">
-                <div className="absolute inset-0 rounded-full border-2 border-cyan-400/30 animate-[spin_4s_linear_infinite]" style={{ borderTopColor: 'transparent', borderLeftColor: 'transparent' }} />
-                <div className="absolute inset-0 rounded-full border-2 border-violet-400/30 animate-[spin_6s_linear_infinite_reverse]" style={{ borderBottomColor: 'transparent', borderRightColor: 'transparent' }} />
-                <Activity className="w-4 h-4 text-cyan-600 animate-pulse" />
-             </div>
-          </div>
+                          {/* Arrow Pointer Tab matching Image 2 */}
+                          <div
+                            className={`px-4 py-1.5 bg-gradient-to-r ${stepItem.gradient} text-white font-mono font-black text-xs uppercase tracking-wider shadow-md ${
+                              isEven ? 'rounded-l-2xl rounded-r-sm' : 'rounded-r-2xl rounded-l-sm'
+                            }`}
+                          >
+                            <span>{stepItem.dataTag}</span>
+                          </div>
+                        </div>
 
-          {/* RIGHT PANEL: Build With The Technology */}
-          <div className="relative group rounded-[2.5rem] bg-white/60 backdrop-blur-2xl border border-white shadow-[0_20px_60px_-15px_rgba(0,0,0,0.05)] p-6 md:p-10 flex flex-col transition-all duration-700 hover:shadow-[0_30px_80px_-20px_rgba(139,92,246,0.15)] z-10 hover:border-violet-100">
-            <div className="mb-10">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-50 to-pink-50 border border-violet-100 flex items-center justify-center text-violet-600 shadow-inner group-hover:scale-110 transition-transform duration-500">
-                  <Code2 className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="inline-block px-3 py-1 rounded-full bg-violet-50 text-violet-600 text-[9px] font-black uppercase tracking-[0.2em] border border-violet-100 mb-2 shadow-sm">
-                    Phase 02 &bull; Craftsmanship
-                  </span>
-                  <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">Build With the Technology</h3>
-                </div>
-              </div>
-            </div>
+                        {/* Icon Badge */}
+                        <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${stepItem.gradient} text-white flex items-center justify-center shadow-md shrink-0 group-hover:scale-110 transition-transform`}>
+                          <IconComp size={22} strokeWidth={2.2} />
+                        </div>
+                      </div>
 
-            <div className="flex flex-col gap-2">
-              {PHASE_2_APPLICATION.map((item, index) => (
-                <InteractiveNode key={item.id} item={item} index={index + 5} align="right" />
-              ))}
-            </div>
+                      {/* Card Content */}
+                      <div className="space-y-2 text-left">
+                        <div className="flex items-center gap-2">
+                          <span className={`text-[10px] font-mono font-black uppercase px-2.5 py-0.5 rounded-md bg-slate-100 ${stepItem.themeText}`}>
+                            {stepItem.subtitle}
+                          </span>
+                        </div>
+                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                          {stepItem.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                          {stepItem.description}
+                        </p>
+                      </div>
+
+                    </div>
+                  </div>
+
+                  {/* Central Connected Node Dot matching Image 2 */}
+                  <div className="hidden lg:flex w-12 h-12 rounded-full bg-white border-4 border-slate-200 shadow-md items-center justify-center z-10 shrink-0">
+                    <div className={`w-5 h-5 rounded-full ${stepItem.badgeBg} animate-ping`} />
+                  </div>
+
+                  {/* Empty Space for Grid Balance */}
+                  <div className="hidden lg:block w-[calc(50%-2.5rem)]" />
+
+                </motion.div>
+              );
+            })}
           </div>
 
         </div>
+
       </div>
-
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 15s infinite alternate ease-in-out;
-        }
-        .animation-delay-2000 { animation-delay: 2s; }
-        .animation-delay-4000 { animation-delay: 4s; }
-
-        @keyframes data-stream {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0%); }
-        }
-        .animate-data-stream {
-          animation: data-stream 1.5s linear infinite;
-        }
-
-        @keyframes fade-in-up {
-          0% { opacity: 0; transform: translateY(15px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes ping-slow {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(1.5); opacity: 0; }
-        }
-        .animate-ping-slow {
-          animation: ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-      `}} />
     </section>
   );
 };
