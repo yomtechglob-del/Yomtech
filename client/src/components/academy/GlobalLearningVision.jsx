@@ -2,14 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Users2, BookOpen, Cpu, TrendingUp } from 'lucide-react';
 
-/* ─── 4-STEP 3D PENCIL INFOGRAPHIC LAYOUT (EXACT MATCH FOR SCREENSHOT 2) ─── */
+/* ─── 4-STEP 3D PENCIL INFOGRAPHIC LAYOUT (TITLE CASE HEADERS) ─── */
 const CONNECTIONS = [
   { 
     id: '01',
     step: '01',
-    optionNum: 'OPTION 01',
-    title: 'PEOPLE', 
-    subtitle: 'GLOBAL COMMUNITY',
+    optionNum: 'Option 01',
+    title: 'People', 
+    subtitle: 'Global Community',
     desc: 'Connecting ambitious learners across global technology communities and developer networks.', 
     icon: Users2,
     topBorder: 'border-t-4 border-[#F97316]',
@@ -21,9 +21,9 @@ const CONNECTIONS = [
   { 
     id: '02',
     step: '02',
-    optionNum: 'OPTION 02',
-    title: 'KNOWLEDGE', 
-    subtitle: 'DEMOCRATIZED EXCELLENCE',
+    optionNum: 'Option 02',
+    title: 'Knowledge', 
+    subtitle: 'Democratized Excellence',
     desc: 'Democratizing production software engineering education, system design & elite architecture practices.', 
     icon: BookOpen,
     topBorder: 'border-t-4 border-[#0EA5E9]',
@@ -35,9 +35,9 @@ const CONNECTIONS = [
   { 
     id: '03',
     step: '03',
-    optionNum: 'OPTION 03',
-    title: 'TECHNOLOGY', 
-    subtitle: 'MODERN ARCHITECTURE',
+    optionNum: 'Option 03',
+    title: 'Technology', 
+    subtitle: 'Modern Architecture',
     desc: 'Mastering cutting-edge fullstack web, cloud microservices, LLM artificial intelligence & data architecture.', 
     icon: Cpu,
     topBorder: 'border-t-4 border-[#06B6D4]',
@@ -49,9 +49,9 @@ const CONNECTIONS = [
   { 
     id: '04',
     step: '04',
-    optionNum: 'OPTION 04',
-    title: 'OPPORTUNITY', 
-    subtitle: 'CAREER AUTONOMY',
+    optionNum: 'Option 04',
+    title: 'Opportunity', 
+    subtitle: 'Career Autonomy',
     desc: 'Empowering software craftsmanship, high-impact career progression & remote engineering autonomy without limits.', 
     icon: TrendingUp,
     topBorder: 'border-t-4 border-[#F59E0B]',
@@ -88,9 +88,9 @@ export const GlobalLearningVision = () => {
         {/* Section Header */}
         <div className="text-left space-y-5 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-              <span>WABISKILLS INCLUSIVE VISION</span>
+              <span>WabiSkills Inclusive Vision</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
             <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
@@ -105,7 +105,7 @@ export const GlobalLearningVision = () => {
           </p>
         </div>
 
-        {/* 4-STEP 3D PENCIL INFOGRAPHIC TIMELINE LAYOUT (EXACT MATCH FOR SCREENSHOT 2) */}
+        {/* 4-STEP 3D PENCIL INFOGRAPHIC TIMELINE LAYOUT */}
         <div className="relative max-w-[90rem] mx-auto py-8">
           
           {/* Central 3D Wooden Pencil Vector Spine (Desktop Only) */}
@@ -135,7 +135,7 @@ export const GlobalLearningVision = () => {
           <div className="space-y-12 lg:space-y-16 relative z-10">
             {CONNECTIONS.map((c, idx) => {
               const IconComp = c.icon;
-              const isEven = idx % 2 === 1; // Left: 01, 03; Right: 02, 04
+              const isEven = idx % 2 === 1;
 
               return (
                 <motion.div
@@ -148,7 +148,7 @@ export const GlobalLearningVision = () => {
                     isEven ? 'lg:flex-row-reverse' : ''
                   }`}
                 >
-                  {/* Step Card Plate matching Screenshot 2 */}
+                  {/* Step Card Plate */}
                   <div className="w-full lg:w-[calc(50%-3rem)] group">
                     <div className={`bg-white rounded-2xl p-6 sm:p-8 shadow-[0_12px_35px_rgba(0,0,0,0.07)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5 border border-slate-100 ${c.topBorder}`}>
                       
@@ -158,12 +158,12 @@ export const GlobalLearningVision = () => {
                           <span className={`text-3xl sm:text-4xl font-black font-mono ${c.numberColor} leading-none`}>
                             {c.step}
                           </span>
-                          <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-black uppercase tracking-wider border ${c.badgeBg}`}>
+                          <span className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border ${c.badgeBg}`}>
                             {c.subtitle}
                           </span>
                         </div>
 
-                        {/* Top-Right Icon Box matching Screenshot 2 */}
+                        {/* Top-Right Icon Box */}
                         <div className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl flex items-center justify-center shrink-0 shadow-xs ${c.iconBg} group-hover:scale-110 transition-transform`}>
                           <IconComp size={20} strokeWidth={2.2} />
                         </div>
@@ -171,18 +171,18 @@ export const GlobalLearningVision = () => {
 
                       {/* Middle Title & Description */}
                       <div className="space-y-2 text-left pt-2">
-                        <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
+                        <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
                           {c.title}
                         </h3>
-                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                        <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                           {c.desc}
                         </p>
                       </div>
 
-                      {/* Bottom Arrow Pointer Tab matching Screenshot 2 */}
+                      {/* Bottom Arrow Pointer Tab */}
                       <div className="pt-2 flex justify-start">
                         <div 
-                          className={`px-3 py-1 ${c.arrowBg} text-white font-mono font-black text-[10px] uppercase tracking-widest shadow-xs rounded-sm flex items-center gap-1 -ml-6 -mb-6 rounded-r-md`}
+                          className={`px-3.5 py-1.5 ${c.arrowBg} text-white font-mono font-bold text-xs shadow-xs rounded-sm flex items-center gap-1 -ml-6 -mb-6 rounded-r-md`}
                           style={{ clipPath: 'polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%)' }}
                         >
                           <span>◆ {c.optionNum}</span>

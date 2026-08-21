@@ -2,15 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { User, FileText, BarChart2, ExternalLink, Award, Code2, ShieldCheck, Sparkles, Monitor, GraduationCap } from 'lucide-react';
 
-/* ─── 3D PENCIL INFOGRAPHIC COURSES (2-LINE DESCRIPTIONS PREVENTING OVERLAP) ─── */
+/* ─── 3D PENCIL INFOGRAPHIC COURSES (TITLE CASE HEADERS & TEXT) ─── */
 export const CareerReadiness = () => {
   const summaryColumns = [
-    { num: '01', title: 'FULLSTACK DEV', desc: 'Fullstack Developer in 6 months with live MERN classes & projects.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
-    { num: '02', title: 'AI & PYTHON', desc: 'Master AI & Python with hands-on Machine Learning labs.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
-    { num: '03', title: 'CYBERSECURITY', desc: 'Learn Cyber Security in 3 months & become job-ready.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
-    { num: '04', title: 'UI/UX DESIGN', desc: 'Master Figma, Product Design & daily follow-up sessions.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
-    { num: '05', title: 'KIDS TECH CAMP', desc: 'Physical weekend classes for Grade 4–11 at Derartu Tower.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
-    { num: '06', title: 'LIVE TRAININGS', desc: 'Live group sessions, scholarships & paid internship placements.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
+    { num: '01', title: 'Fullstack Dev', desc: 'Fullstack Developer in 6 months with live MERN classes & projects.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
+    { num: '02', title: 'AI & Python', desc: 'Master AI & Python with hands-on Machine Learning labs.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
+    { num: '03', title: 'Cybersecurity', desc: 'Learn Cyber Security in 3 months & become job-ready.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
+    { num: '04', title: 'UI/UX Design', desc: 'Master Figma, Product Design & daily follow-up sessions.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
+    { num: '05', title: 'Kids Tech Camp', desc: 'Physical weekend classes for Grade 4–11 at Derartu Tower.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
+    { num: '06', title: 'Live Trainings', desc: 'Live group sessions, scholarships & paid internship placements.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
   ];
 
   return (
@@ -31,16 +31,16 @@ export const CareerReadiness = () => {
 
           {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-              <span>ANNOUNCING WABISKILLS COURSES BY</span>
+              <span>Announcing WabiSkills Courses by</span>
               <a 
                 href="https://wabiskills.com/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="inline-flex items-center gap-1 text-[#0EA5E9] hover:text-cyan-600 underline font-black underline-offset-4 transition-colors"
+                className="inline-flex items-center gap-1 text-[#0EA5E9] hover:text-cyan-600 underline font-bold underline-offset-4 transition-colors"
               >
-                WABISKILLS.COM
+                WabiSkills.com
                 <ExternalLink className="w-4 h-4" />
               </a>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
@@ -57,7 +57,7 @@ export const CareerReadiness = () => {
           </p>
         </div>
 
-        {/* Scaled Vector Infographic: Central 3D Pencil + Ribbons (2-LINE NON-OVERLAPPING TEXT) */}
+        {/* Scaled Vector Infographic: Central 3D Pencil + Ribbons */}
         <div className="relative max-w-[90rem] mx-auto flex flex-col items-center">
           
           <div className="w-full relative flex justify-center overflow-x-auto">
@@ -151,7 +151,7 @@ export const CareerReadiness = () => {
               </g>
 
               {/* -------------------------------------------------------------
-                  BAND 1: AMBER RIBBON (01 FULLSTACK DEV -> OVER PENCIL -> 02 AI & PYTHON)
+                  BAND 1: AMBER RIBBON (01 Fullstack Dev -> OVER PENCIL -> 02 AI & Python)
               ------------------------------------------------------------- */}
               <g id="AmberRibbonBand" filter="url(#ribbonGlowShadow)">
                 {/* Ribbon 01 Left Banner */}
@@ -171,17 +171,17 @@ export const CareerReadiness = () => {
                 {/* Ribbon 02 Right Banner */}
                 <path d="M 775 290 L 1370 290 L 1320 335 L 1370 380 L 775 380 Z" fill="url(#amberRibbonFront)" />
 
-                {/* Banner 01 Text (Left) - 2 CLEAN LINES, NO OVERLAP */}
+                {/* Banner 01 Text (Left) */}
                 <text x="150" y="240" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>01</text>
                 <line x1="220" y1="195" x2="220" y2="255" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="240" y="210" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>FULLSTACK DEVELOPMENT</text>
-                <text x="240" y="235" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Become a Fullstack Developer in 6 months</text>
-                <text x="240" y="255" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>with live MERN classes &amp; real projects</text>
+                <text x="240" y="210" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Fullstack Development</text>
+                <text x="240" y="235" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Become a Fullstack Developer in 6 months</text>
+                <text x="240" y="255" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>with live MERN classes &amp; real projects</text>
 
-                {/* Banner 02 Text (Right) - 2 CLEAN LINES, NO OVERLAP */}
-                <text x="815" y="320" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>ARTIFICIAL INTELLIGENCE</text>
-                <text x="815" y="345" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Master AI &amp; Python with hands-on</text>
-                <text x="815" y="365" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Machine Learning labs &amp; projects</text>
+                {/* Banner 02 Text (Right) */}
+                <text x="815" y="320" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Artificial Intelligence</text>
+                <text x="815" y="345" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Master AI &amp; Python with hands-on</text>
+                <text x="815" y="365" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Machine Learning labs &amp; projects</text>
                 <line x1="1235" y1="305" x2="1235" y2="365" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
                 <text x="1255" y="350" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>02</text>
 
@@ -193,7 +193,7 @@ export const CareerReadiness = () => {
               </g>
 
               {/* -------------------------------------------------------------
-                  BAND 2: BLUE RIBBON (03 CYBERSECURITY -> OVER PENCIL -> 04 UI/UX DESIGN)
+                  BAND 2: BLUE RIBBON (03 Cybersecurity -> OVER PENCIL -> 04 UI/UX Design)
               ------------------------------------------------------------- */}
               <g id="BlueRibbonBand" filter="url(#ribbonGlowShadow)">
                 {/* Ribbon 03 Left Banner */}
@@ -213,17 +213,17 @@ export const CareerReadiness = () => {
                 {/* Ribbon 04 Right Banner */}
                 <path d="M 775 570 L 1370 570 L 1320 615 L 1370 660 L 775 660 Z" fill="url(#blueRibbonFront)" />
 
-                {/* Banner 03 Text (Left) - 2 CLEAN LINES */}
+                {/* Banner 03 Text (Left) */}
                 <text x="150" y="520" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>03</text>
                 <line x1="220" y1="475" x2="220" y2="535" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="240" y="490" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>CYBERSECURITY TRAINING</text>
-                <text x="240" y="515" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Learn Cyber Security in 3 months</text>
-                <text x="240" y="535" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; become fully job-ready</text>
+                <text x="240" y="490" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Cybersecurity Training</text>
+                <text x="240" y="515" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Learn Cyber Security in 3 months</text>
+                <text x="240" y="535" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; become fully job-ready</text>
 
-                {/* Banner 04 Text (Right) - 2 CLEAN LINES */}
-                <text x="815" y="600" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>UI/UX PRODUCT DESIGN</text>
-                <text x="815" y="625" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Master Figma, Product Design</text>
-                <text x="815" y="645" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; daily follow-up sessions</text>
+                {/* Banner 04 Text (Right) */}
+                <text x="815" y="600" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>UI/UX Product Design</text>
+                <text x="815" y="625" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Master Figma, Product Design</text>
+                <text x="815" y="645" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; daily follow-up sessions</text>
                 <line x1="1235" y1="585" x2="1235" y2="645" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
                 <text x="1255" y="630" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>04</text>
 
@@ -235,7 +235,7 @@ export const CareerReadiness = () => {
               </g>
 
               {/* -------------------------------------------------------------
-                  BAND 3: GREEN RIBBON (05 KIDS TECH CAMP -> OVER PENCIL -> 06 LIVE SESSIONS)
+                  BAND 3: GREEN RIBBON (05 Kids Tech Camp -> OVER PENCIL -> 06 Live Sessions)
               ------------------------------------------------------------- */}
               <g id="GreenRibbonBand" filter="url(#ribbonGlowShadow)">
                 {/* Ribbon 05 Left Banner */}
@@ -255,17 +255,17 @@ export const CareerReadiness = () => {
                 {/* Ribbon 06 Right Banner */}
                 <path d="M 775 850 L 1370 850 L 1320 895 L 1370 940 L 775 940 Z" fill="url(#greenRibbonFront)" />
 
-                {/* Banner 05 Text (Left) - 2 CLEAN LINES */}
+                {/* Banner 05 Text (Left) */}
                 <text x="150" y="800" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>05</text>
                 <line x1="220" y1="755" x2="220" y2="815" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
-                <text x="240" y="770" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>KIDS TECH PHYSICAL CAMP</text>
-                <text x="240" y="795" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Weekend physical classes for</text>
-                <text x="240" y="815" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Grade 4–11 at Derartu Tower</text>
+                <text x="240" y="770" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Kids Tech Physical Camp</text>
+                <text x="240" y="795" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Weekend physical classes for</text>
+                <text x="240" y="815" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Grade 4–11 at Derartu Tower</text>
 
-                {/* Banner 06 Text (Right) - 2 CLEAN LINES */}
-                <text x="815" y="880" fill="#FFFFFF" fontSize="24" fontWeight="900" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>LIVE SESSIONS &amp; INTERNSHIPS</text>
-                <text x="815" y="905" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Live group sessions, scholarships</text>
-                <text x="815" y="925" fill="#FFFFFF" fontSize="16" fontWeight="700" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; paid team placements</text>
+                {/* Banner 06 Text (Right) */}
+                <text x="815" y="880" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Live Sessions &amp; Internships</text>
+                <text x="815" y="905" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Live group sessions, scholarships</text>
+                <text x="815" y="925" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>&amp; paid team placements</text>
                 <line x1="1235" y1="865" x2="1235" y2="925" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
                 <text x="1255" y="910" fill="#FFFFFF" fontSize="36" fontWeight="900" fontFamily="monospace" pointerEvents="auto" style={{ userSelect: 'text' }}>06</text>
 
@@ -279,7 +279,7 @@ export const CareerReadiness = () => {
             </svg>
           </div>
 
-          {/* Bottom 6 Course Cards (100% COPYABLE TEXT) */}
+          {/* Bottom 6 Course Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 pt-6 sm:pt-8 border-t-2 border-slate-200/80 mt-2 w-full select-text cursor-text">
             {summaryColumns.map((col) => (
               <div 
@@ -289,10 +289,10 @@ export const CareerReadiness = () => {
                 <div className={`text-5xl font-mono font-black ${col.color} select-text`}>
                   {col.num}
                 </div>
-                <h4 className="text-sm sm:text-base font-black text-slate-800 uppercase tracking-wider leading-tight select-text">
+                <h4 className="text-sm sm:text-base font-bold text-slate-800 tracking-wide leading-tight select-text">
                   {col.title}
                 </h4>
-                <p className="text-xs sm:text-sm text-slate-600 font-bold leading-relaxed select-text">
+                <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed select-text">
                   {col.desc}
                 </p>
               </div>

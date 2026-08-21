@@ -2,14 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Terminal, GitPullRequest, Rocket } from 'lucide-react';
 
-/* ─── 4-COLUMN HORIZONTAL CHEVRON GRID (EXPANDED HERO SIZES) ─── */
+/* ─── 4-COLUMN HORIZONTAL CHEVRON GRID (TITLE CASE HEADERS) ─── */
 const TRANSFORMATION_STEPS = [
   {
     id: '01',
     step: '01',
-    optionText: 'STEP',
-    title: 'THEORY & COMPUTER SCIENCE',
-    subtitle: 'PHASE 01 • CORE WABISKILLS PRINCIPLES',
+    optionText: 'Step',
+    title: 'Theory & Computer Science',
+    subtitle: 'Phase 01 • Core WabiSkills Principles',
     description: 'WabiSkills learners master production algorithms, data structures, system design, microservices architecture, and clean code principles.',
     icon: BookOpen,
     chevronBg: 'bg-[#0EA5E9]', // Cyan Blue
@@ -20,9 +20,9 @@ const TRANSFORMATION_STEPS = [
   {
     id: '02',
     step: '02',
-    optionText: 'STEP',
-    title: 'SIMULATED PRODUCTION',
-    subtitle: 'PHASE 02 • WABISKILLS SIMULATED REPOS',
+    optionText: 'Step',
+    title: 'Simulated Production',
+    subtitle: 'Phase 02 • WabiSkills Simulated Repos',
     description: 'Students architect multi-tenant fullstack web, mobile, and AI applications inside live WabiSkills enterprise git repositories.',
     icon: Terminal,
     chevronBg: 'bg-[#F59E0B]', // Amber Yellow
@@ -33,9 +33,9 @@ const TRANSFORMATION_STEPS = [
   {
     id: '03',
     step: '03',
-    optionText: 'STEP',
-    title: 'LIVE CODE REVIEWS',
-    subtitle: 'PHASE 03 • SENIOR MENTORSHIP',
+    optionText: 'Step',
+    title: 'Live Code Reviews',
+    subtitle: 'Phase 03 • Senior Mentorship',
     description: 'Undergo thorough line-by-line pull request reviews, performance bottleneck refactoring, and security audits from senior mentors.',
     icon: GitPullRequest,
     chevronBg: 'bg-[#A855F7]', // Purple
@@ -46,9 +46,9 @@ const TRANSFORMATION_STEPS = [
   {
     id: '04',
     step: '04',
-    optionText: 'STEP',
-    title: 'CLOUD DEPLOYMENT & IMPACT',
-    subtitle: 'PHASE 04 • WABISKILLS CAREER ROLLOUT',
+    optionText: 'Step',
+    title: 'Cloud Deployment & Impact',
+    subtitle: 'Phase 04 • WabiSkills Career Rollout',
     description: 'Deploy production applications to AWS/GCP with automated CI/CD pipelines, followed by direct hiring recommendations.',
     icon: Rocket,
     chevronBg: 'bg-[#10B981]', // Emerald Green
@@ -84,9 +84,9 @@ export const ClassroomToRealWorld = () => {
         {/* Left-Aligned Header Section */}
         <div className="text-left space-y-5 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-              <span>WABISKILLS PRACTICAL APPLICATION</span>
+              <span>WabiSkills Practical Application</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
             <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
@@ -101,7 +101,7 @@ export const ClassroomToRealWorld = () => {
           </p>
         </div>
 
-        {/* 4-COLUMN HORIZONTAL CHEVRON CARDS GRID (PROMINENT EXPANDED SIZES) */}
+        {/* 4-COLUMN HORIZONTAL CHEVRON CARDS GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 max-w-[90rem] mx-auto pt-4 relative z-10">
           {TRANSFORMATION_STEPS.map((step, idx) => {
             const IconComp = step.icon;
@@ -126,7 +126,7 @@ export const ClassroomToRealWorld = () => {
                         style={{ clipPath: 'polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%)' }}
                       >
                         <div className="flex items-center gap-3 pl-3">
-                          <span className="text-xs font-mono font-black uppercase tracking-widest opacity-95">
+                          <span className="text-xs font-mono font-bold tracking-widest opacity-95">
                             {step.optionText}
                           </span>
                           <span className="text-2xl sm:text-3xl font-black font-mono leading-none">
@@ -138,17 +138,17 @@ export const ClassroomToRealWorld = () => {
 
                     {/* Subtitle Badge */}
                     <div className="pt-3">
-                      <span className={`text-xs font-mono font-black uppercase px-3.5 py-1.5 rounded-lg bg-slate-100 ${step.themeText}`}>
+                      <span className={`text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-slate-100 ${step.themeText}`}>
                         {step.subtitle}
                       </span>
                     </div>
 
                     {/* Middle Text Content */}
                     <div className="space-y-3 pt-2 text-left">
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                         {step.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                      <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
                         {step.description}
                       </p>
                     </div>
@@ -165,17 +165,17 @@ export const ClassroomToRealWorld = () => {
 
                     {/* Subtitle Badge */}
                     <div>
-                      <span className={`text-xs font-mono font-black uppercase px-3.5 py-1.5 rounded-lg bg-slate-100 ${step.themeText}`}>
+                      <span className={`text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-slate-100 ${step.themeText}`}>
                         {step.subtitle}
                       </span>
                     </div>
 
                     {/* Middle Text Content */}
                     <div className="space-y-3 pt-2">
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                         {step.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
+                      <p className="text-sm sm:text-base text-slate-600 font-normal leading-relaxed">
                         {step.description}
                       </p>
                     </div>
@@ -199,7 +199,7 @@ export const ClassroomToRealWorld = () => {
                         style={{ clipPath: 'polygon(0 0, 82% 0, 100% 50%, 82% 100%, 0 100%)' }}
                       >
                         <div className="flex items-center gap-3 pl-3">
-                          <span className="text-xs font-mono font-black uppercase tracking-widest opacity-95">
+                          <span className="text-xs font-mono font-bold tracking-widest opacity-95">
                             {step.optionText}
                           </span>
                           <span className="text-2xl sm:text-3xl font-black font-mono leading-none">

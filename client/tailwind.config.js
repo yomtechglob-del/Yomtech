@@ -22,11 +22,11 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['"Roboto"', '"Outfit"', '"Plus Jakarta Sans"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Roboto"', '"Outfit"', '"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+        sans: ['"Roboto"', 'sans-serif'],
+        display: ['"Roboto"', 'sans-serif'],
         roboto: ['"Roboto"', 'sans-serif'],
-        outfit: ['"Outfit"', 'sans-serif'],
-        sora: ['"Sora"', '"Outfit"', 'sans-serif']
+        outfit: ['"Roboto"', 'sans-serif'],
+        sora: ['"Roboto"', 'sans-serif']
       },
       boxShadow: {
         'dodger-glow': '0 4px 20px rgba(30, 144, 255, 0.25)',

@@ -2,13 +2,13 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Code2, RefreshCw } from 'lucide-react';
 
-/* ─── 3-STEP SEQUENTIAL BUSINESS INFOGRAPHIC FLOW (MAXIMUM HERO SIZES) ─── */
+/* ─── 3-STEP SEQUENTIAL BUSINESS INFOGRAPHIC FLOW (TITLE CASE HEADERS) ─── */
 const PRINCIPLES = [
   {
     id: '01',
     step: '01',
-    label: 'UNDERSTAND',
-    subtitle: 'BUILD STRONG FOUNDATIONS',
+    label: 'Understand',
+    subtitle: 'Build Strong Foundations',
     description: 'Master software engineering concepts, system design principles, and clean code practices from the ground up.',
     icon: BookOpen,
     accentColor: '#0EA5E9',
@@ -22,8 +22,8 @@ const PRINCIPLES = [
   {
     id: '02',
     step: '02',
-    label: 'APPLY',
-    subtitle: 'PRACTICAL SOLUTIONS',
+    label: 'Apply',
+    subtitle: 'Practical Solutions',
     description: 'Architect production web, mobile, and AI software applications with hands-on coding and real repositories.',
     icon: Code2,
     accentColor: '#F59E0B',
@@ -37,8 +37,8 @@ const PRINCIPLES = [
   {
     id: '03',
     step: '03',
-    label: 'IMPROVE',
-    subtitle: 'FEEDBACK & ITERATION',
+    label: 'Improve',
+    subtitle: 'Feedback & Iteration',
     description: 'Refine software quality continuously through senior mentor code reviews, pull requests, and performance tuning.',
     icon: RefreshCw,
     accentColor: '#A855F7',
@@ -77,9 +77,9 @@ export const PracticalLearning = () => {
         {/* Left-Aligned Section Header */}
         <div className="text-left space-y-5 max-w-full relative">
           <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-              <span>PRACTICAL LEARNING PHILOSOPHY</span>
+              <span>Practical Learning Philosophy</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
             <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
@@ -94,7 +94,7 @@ export const PracticalLearning = () => {
           </p>
         </div>
 
-        {/* 3-STEP SEQUENTIAL INFOGRAPHIC FLOW (MAXIMUM HERO PROMINENCE) */}
+        {/* 3-STEP SEQUENTIAL INFOGRAPHIC FLOW */}
         <div className="relative max-w-[90rem] mx-auto pt-4">
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 relative z-10 items-stretch">
@@ -105,7 +105,7 @@ export const PracticalLearning = () => {
               return (
                 <div key={principle.id} className="relative flex flex-col items-center group">
                   
-                  {/* Outer Dotted Frame with Hero Scale */}
+                  {/* Outer Dotted Frame */}
                   <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -116,32 +116,32 @@ export const PracticalLearning = () => {
                     {/* Inner Background Color Block Plate */}
                     <div className={`${principle.cardBg} rounded-[2.5rem] p-2 relative flex flex-col justify-between h-full overflow-hidden shadow-inner`}>
                       
-                      {/* Pure White Card Body with Giant Padding */}
+                      {/* Pure White Card Body */}
                       <div className="bg-white rounded-3xl p-8 sm:p-11 shadow-xl space-y-8 flex flex-col justify-between h-full relative z-10 text-left border border-slate-100 min-h-[440px]">
                         
-                        {/* Top Row: Giant Icon Box & Subtitle Badge */}
+                        {/* Top Row: Icon Box & Subtitle Badge */}
                         <div className="flex items-center justify-between">
                           <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center ${principle.themeText} shadow-md group-hover:scale-110 transition-transform`}>
                             <IconComp size={34} strokeWidth={2.4} />
                           </div>
-                          <span className={`text-xs sm:text-sm font-mono font-black uppercase px-4 py-2 rounded-xl border ${principle.badgeBg} shadow-2xs`}>
+                          <span className={`text-xs sm:text-sm font-semibold px-4 py-2 rounded-xl border ${principle.badgeBg} shadow-2xs`}>
                             {principle.subtitle}
                           </span>
                         </div>
 
                         {/* Title & Description */}
                         <div className="space-y-4 text-left pt-2">
-                          <h3 className="text-3xl sm:text-4xl font-black text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors leading-tight">
+                          <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors leading-tight">
                             {principle.label}
                           </h3>
-                          <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                          <p className="text-base sm:text-lg text-slate-600 font-normal leading-relaxed">
                             {principle.description}
                           </p>
                         </div>
 
                         {/* Bottom Step Number */}
-                        <div className="pt-6 border-t border-slate-100 flex justify-between items-center text-slate-400 font-mono font-bold text-sm sm:text-base">
-                          <span className="tracking-widest font-black">STEP</span>
+                        <div className="pt-6 border-t border-slate-100 flex justify-between items-center text-slate-400 font-mono font-semibold text-sm sm:text-base">
+                          <span className="tracking-widest font-bold">Step</span>
                           <span className={`text-2xl sm:text-3xl font-black font-mono ${principle.themeText}`}>
                             {principle.step}
                           </span>
