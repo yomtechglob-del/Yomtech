@@ -117,7 +117,7 @@ const INDUSTRIES_LIST = [
     accent: 'indigo',
     img: erpImg,
     tag: 'COMMERCIAL ENTERPRISES',
-    description: 'Delivering tailored operational software for commercial businesses across Africa — including 10+ premier hotels & resort chains, Nova Printing & Advertising, and digital media houses like Fana Media Corporation SC and Balageru TV Network.',
+    description: 'Delivering tailored operational software for commercial businesses across Africa, including 10+ premier hotels & resort chains, Nova Printing & Advertising, and digital media houses like Fana Media Corporation SC and Balageru TV Network.',
     features: [
       'Hotel & Hospitality Management Systems',
       'Publishing, Printing & Media Workflows',
@@ -294,7 +294,7 @@ export const IndustriesPage = () => {
             </div>
 
             <p className="text-cyan-50 text-base md:text-lg leading-relaxed font-normal max-w-2xl font-sans">
-              Yomtech Global delivers specialized digital solutions across 9 key industry domains — from public sector ministries and top research institutions to universities, banking corporations, hotels, non-profits, and startups.
+              Yomtech Global delivers specialized digital solutions across 9 key industry domains, from public sector ministries and top research institutions to universities, banking corporations, hotels, non-profits, and startups.
             </p>
 
             {/* Action Buttons */}

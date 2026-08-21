@@ -180,7 +180,7 @@ export const ServicesChallengeToImpact = () => {
                 <div className={`w-full h-full ${item.baseGradient} rounded-[2.8rem] p-3 sm:p-4 shadow-2xl ${item.tiltBase} group-hover:rotate-0 group-hover:scale-[1.02] transition-all duration-500`}>
                   
                   {/* Inner Counter-Tilted White Stitched Patch Card */}
-                  <div className={`bg-white rounded-[2.3rem] p-7 sm:p-9 shadow-inner border-2 border-dashed border-slate-300 relative ${item.tiltCard} group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between space-y-6 h-full overflow-hidden`}>
+                  <div className={`bg-white rounded-[2.3rem] p-7 sm:p-9 shadow-inner border-2 border-solid border-slate-300 relative ${item.tiltCard} group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between space-y-6 h-full overflow-hidden`}>
                     
                     {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
                     <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">

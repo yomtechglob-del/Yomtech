@@ -453,8 +453,8 @@ const InterlockingProductRow = ({ left, right, idx, onProductSelect }) => {
               </div>
               <p className={`text-xs ${style.leftTaglineColor} font-black uppercase tracking-wider`}>{left.tagline}</p>
               <ul className="space-y-1 text-xs text-white/90 pt-1">
-                <li>• <strong>Focus:</strong> {left.shortDesc}</li>
-                <li>• <strong>System:</strong> {left.fullDesc}</li>
+                <li><strong>Focus:</strong> {left.shortDesc}</li>
+                <li><strong>System:</strong> {left.fullDesc}</li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-3">
                 {left.highlights.map((item, hIdx) => (
@@ -491,8 +491,8 @@ const InterlockingProductRow = ({ left, right, idx, onProductSelect }) => {
               </div>
               <p className={`text-xs ${style.rightTaglineColor} font-black uppercase tracking-wider`}>{right.tagline}</p>
               <ul className="space-y-1 text-xs text-white/90 pt-1">
-                <li>• <strong>Focus:</strong> {right.shortDesc}</li>
-                <li>• <strong>System:</strong> {right.fullDesc}</li>
+                <li><strong>Focus:</strong> {right.shortDesc}</li>
+                <li><strong>System:</strong> {right.fullDesc}</li>
               </ul>
               <div className="flex flex-wrap gap-2 pt-3">
                 {right.highlights.map((item, hIdx) => (

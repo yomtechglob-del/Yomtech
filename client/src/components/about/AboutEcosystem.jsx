@@ -5,6 +5,7 @@ import {
   BookOpen, Layers, ShieldCheck, Zap, Users, GraduationCap, Quote
 } from 'lucide-react';
 import yomtechLogo from '../../assets/logos/logo.png';
+import ermiTwoImg from '../../assets/ermi-two.jpg';
 
 // 6 Core Values matching exact User Image Content & Rotating Geometry
 const ECOSYSTEM_HEXAGONS = [
@@ -311,16 +312,36 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
               {customDescription || "Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide."}
             </p>
 
-            {/* CEO Quote Card (If showCeoQuote is true for Homepage) OR 7 Core Values Pill Buttons */}
+            {/* CEO Quote Card with Expert Profile Photo */}
             {showCeoQuote ? (
-              <div className="p-6 rounded-2xl bg-cyan-50/70 border-l-4 border-[#0284C7] space-y-3 w-full shadow-sm">
-                <Quote size={24} className="text-[#0284C7]" />
-                <p className="text-sm font-bold text-slate-800 italic leading-relaxed">
-                  "Technology is not merely a tool; it is the foundation for innovation, opportunity, and sustainable growth."
-                </p>
-                <div className="pt-1">
-                  <p className="text-xs font-black text-slate-900">Ermias Alemayehu</p>
-                  <p className="text-[10px] font-bold text-[#0284C7] uppercase">Founder &amp; Chief Executive Officer</p>
+              <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-cyan-50/95 via-sky-50/80 to-blue-50/60 border-l-4 border-[#0284C7] border-y border-r border-cyan-200/60 shadow-md flex flex-col sm:flex-row items-start sm:items-center gap-4.5 w-full transition-all duration-300 hover:shadow-lg">
+                {/* Profile Avatar Badge */}
+                <div className="relative shrink-0">
+                  <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-2 border-white shadow-[0_0_20px_rgba(2,132,199,0.3)] overflow-hidden bg-slate-900">
+                    <img src={ermiTwoImg} alt="Ermias Alemayehu" className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-500" />
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 border-2 border-white shadow-[0_4px_12px_rgba(16,185,129,0.55)] flex items-center justify-center text-white shrink-0 z-20" title="Active CEO & Founder">
+                    <CheckCircle2 className="w-4 h-4 text-white fill-emerald-500" />
+                  </div>
+                </div>
+
+                {/* Quote & Credentials */}
+                <div className="space-y-2.5 flex-1">
+                  <div className="flex items-start gap-2">
+                    <Quote size={20} className="text-[#0284C7] shrink-0 mt-0.5" />
+                    <p className="text-xs sm:text-sm font-bold text-slate-800 italic leading-relaxed font-sans">
+                      "Technology is not merely a tool; it is the foundation for innovation, opportunity, and sustainable growth."
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-cyan-200/70 flex items-center justify-between flex-wrap gap-2">
+                    <div>
+                      <p className="text-sm font-black text-slate-900 tracking-tight">Ermias Alemayehu</p>
+                      <p className="text-[11px] font-extrabold text-[#0284C7] uppercase tracking-wider">Founder &amp; Chief Executive Officer</p>
+                    </div>
+                    <span className="px-3 py-1 rounded-full bg-cyan-100/90 border border-cyan-300 text-[#0284C7] text-[10px] font-black tracking-wider uppercase">
+                      YomTech Global
+                    </span>
+                  </div>
                 </div>
               </div>
             ) : (

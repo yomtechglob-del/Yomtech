@@ -19,7 +19,7 @@ export const Navbar = () => {
 
   const links = [
     { name: 'Home', path: '/', hasDropdown: false },
-    { name: 'Services', path: '/services', hasDropdown: true },
+    { name: 'Services', path: '/services', hasDropdown: false },
     { name: 'Academy', path: '/academy', hasDropdown: false },
     { name: 'Products', path: '/products', hasDropdown: false },
     { name: 'About Us', path: '/about', hasDropdown: false },
@@ -33,7 +33,6 @@ export const Navbar = () => {
       targetId: 'explore-our-services',
       desc: 'Browse full capabilities & enterprise solutions',
       icon: LayoutGrid,
-      badge: 'FULL SUITE',
     },
     {
       name: 'IT Solutions',
@@ -41,7 +40,6 @@ export const Navbar = () => {
       targetId: 'it-solutions',
       desc: 'ERP, CRM, WMS & Security Systems',
       icon: Cpu,
-      badge: 'ENTERPRISE',
     },
     {
       name: 'Software Development',
@@ -49,7 +47,6 @@ export const Navbar = () => {
       targetId: 'software-development',
       desc: 'Custom Web, Mobile Apps & Platforms',
       icon: Code,
-      badge: 'CUSTOM CODE',
     },
     {
       name: 'Education & Training',
@@ -57,7 +54,6 @@ export const Navbar = () => {
       targetId: 'education-training',
       desc: 'Cybersecurity, Cloud & Professional Coaching',
       icon: GraduationCap,
-      badge: 'WABISKILLS',
     },
   ];
 
@@ -160,11 +156,6 @@ export const Navbar = () => {
                                   <div className="flex items-center justify-between gap-2">
                                     <span className="text-base font-extrabold text-white tracking-tight group-hover:text-cyan-100 transition-colors truncate">
                                       {cat.name}
-                                    </span>
-
-                                    {/* Solid White Pill Badge */}
-                                    <span className="text-[10px] font-black uppercase tracking-wider px-3 py-0.5 rounded-full bg-white text-[#03045E] shadow-sm shrink-0">
-                                      {cat.badge}
                                     </span>
                                   </div>
 

@@ -123,14 +123,14 @@ export const CenterEcosystemVideo = () => {
             </h3>
 
             <p className="text-xs sm:text-sm text-slate-300 font-medium leading-relaxed">
-              Watch our official video overview showcasing how YomTech Global powers <strong className="text-cyan-300 font-bold">talent development (WabiSkills)</strong>, <strong className="text-cyan-300 font-bold">recruitment (WabiJob)</strong>, <strong className="text-cyan-300 font-bold">enterprise ERP (Yomnex)</strong>, and digital innovation platforms across Africa — empowering organizations, professionals, and institutions with custom software automation, digital skills training, and next-generation ecosystem tools built for scalable growth.
+              Watch our official video overview showcasing how Yomtech Global powers <strong className="text-cyan-300 font-bold">talent development (WabiSkills)</strong>, <strong className="text-cyan-300 font-bold">recruitment (WabiJob)</strong>, <strong className="text-cyan-300 font-bold">enterprise ERP (Yomnex)</strong>, and digital innovation platforms across Africa, empowering organizations, professionals, and institutions with custom software automation, digital skills training, and next-generation ecosystem tools built for scalable growth.
             </p>
 
             {/* Two Key Highlight Feature Lines */}
             <div className="space-y-2 pt-2 border-t border-cyan-400/20 text-xs sm:text-sm text-cyan-100 font-medium">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
-                <span>Unified single-sign-on integration across all YomTech digital platforms.</span>
+                <span>Unified single-sign-on integration across all Yomtech digital platforms.</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />

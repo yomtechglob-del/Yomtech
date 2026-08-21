@@ -10,7 +10,7 @@ export const CareerReadiness = () => {
     { num: '02', title: 'AI & Python', desc: 'Master AI & Python with hands-on Machine Learning labs.', color: 'text-[#D97706]', bg: 'bg-amber-50', border: 'border-amber-200/90' },
     { num: '03', title: 'Cybersecurity', desc: 'Learn Cyber Security in 3 months & become job-ready.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
     { num: '04', title: 'UI/UX Design', desc: 'Master Figma, Product Design & daily follow-up sessions.', color: 'text-[#0284C7]', bg: 'bg-sky-50', border: 'border-sky-200/90' },
-    { num: '05', title: 'Kids Tech Camp', desc: 'Physical weekend classes for Grade 4–11 at Derartu Tower.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
+    { num: '05', title: 'Kids Tech Camp', desc: 'Physical weekend classes for Grade 4 to 11 at Derartu Tower.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
     { num: '06', title: 'Live Trainings', desc: 'Live group sessions, scholarships & paid internship placements.', color: 'text-[#059669]', bg: 'bg-emerald-50', border: 'border-emerald-200/90' },
   ];
 
@@ -54,7 +54,7 @@ export const CareerReadiness = () => {
           </h2>
 
           <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl relative z-10 font-sans select-text cursor-text">
-            Our mission is to help people find the best tech courses online &amp; physical camps to learn with experts anytime, anywhere — powered by WabiSkills (Yomtech Global's Educational Platform).
+            Our mission is to help people find the best tech courses online &amp; physical camps to learn with experts anytime, anywhere, powered by WabiSkills (Yomtech Global's Educational Platform).
           </p>
         </div>
 
@@ -230,7 +230,7 @@ export const CareerReadiness = () => {
                 <line x1="220" y1="755" x2="220" y2="815" stroke="#FFFFFF" strokeWidth="4" opacity="0.8" />
                 <text x="240" y="770" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Kids Tech Physical Camp</text>
                 <text x="240" y="795" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Weekend physical classes for</text>
-                <text x="240" y="815" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Grade 4–11 at Derartu Tower</text>
+                <text x="240" y="815" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Grade 4 to 11 at Derartu Tower</text>
 
                 <text x="815" y="880" fill="#FFFFFF" fontSize="24" fontWeight="800" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Live Sessions &amp; Internships</text>
                 <text x="815" y="905" fill="#FFFFFF" fontSize="16" fontWeight="600" opacity="0.95" fontFamily="sans-serif" pointerEvents="auto" style={{ userSelect: 'text' }}>Live group sessions, scholarships</text>

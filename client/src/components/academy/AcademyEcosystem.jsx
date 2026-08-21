@@ -38,8 +38,8 @@ const ECOSYSTEM_STEPS = [
     id: 'mentor',
     step: '03',
     title: 'MENTOR',
-    tagline: '1-ON-1 GUIDANCE',
-    description: 'Receive direct 1-on-1 code reviews, pull request feedback, and expert architectural guidance.',
+    tagline: '1 ON 1 GUIDANCE',
+    description: 'Receive direct 1 on 1 code reviews, pull request feedback, and expert architectural guidance.',
     icon: Users,
     ringBorder: 'border-[#9D4EDD]',
     ringBg: 'bg-[#7B2CBF]',
@@ -104,7 +104,7 @@ export const AcademyEcosystem = () => {
           <div className="flex items-center gap-0 w-full relative z-10">
             <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-              <span>GLOBAL INTEGRATION</span>
+              <span>Global Integration</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
             <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
@@ -129,11 +129,11 @@ export const AcademyEcosystem = () => {
 
               <div className="space-y-0.5 text-left">
                 <div className="flex items-center gap-2">
-                  <span className="text-[9px] font-mono font-black uppercase tracking-widest text-cyan-600">
-                    CENTRAL CORE NUCLEUS
+                  <span className="text-[9px] font-mono font-black tracking-widest text-cyan-600">
+                    Central Core Nucleus
                   </span>
-                  <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[8px] font-black uppercase">
-                    LIVE
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[8px] font-black">
+                    Live
                   </span>
                 </div>
 
@@ -204,41 +204,23 @@ export const AcademyEcosystem = () => {
                 fill="none"
               />
 
-              {/* 3. Primary Animated Water Liquid Flow Stream */}
+              {/* 3. Primary Animated Water Liquid Flow Stream (Solid Continuous Stream) */}
               <motion.path
                 d="M 500 70 L 500 850"
                 stroke="url(#waterFlowGradient)"
-                strokeWidth="4"
+                strokeWidth="5"
                 strokeLinecap="round"
-                strokeDasharray="16 16"
                 fill="none"
-                animate={{
-                  strokeDashoffset: [0, -128],
-                }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
               />
 
-              {/* 4. Secondary Fast Water Bubble Pulsing Stream */}
+              {/* 4. Secondary Water Core Glow Stream */}
               <motion.path
                 d="M 500 70 L 500 850"
                 stroke="#FFFFFF"
                 strokeWidth="2.5"
                 strokeLinecap="round"
-                strokeDasharray="6 24"
                 fill="none"
                 opacity="0.9"
-                animate={{
-                  strokeDashoffset: [0, -120],
-                }}
-                transition={{
-                  duration: 1.6,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
               />
 
               {/* 5. Cascading Water Droplets */}

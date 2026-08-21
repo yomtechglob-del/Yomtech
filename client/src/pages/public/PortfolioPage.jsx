@@ -134,7 +134,7 @@ const PROJECTS_CATALOGUE = [
     badge: 'LIVE PLATFORM',
     accent: 'amber',
     challenge: 'Traditional university CS curricula lacked practical, industry-ready software engineering projects, resulting in a gap between graduates and corporate hiring needs.',
-    solution: 'Built WabiSkills platform — a comprehensive digital learning ecosystem providing hands-on software development bootcamps, automated coding assessments, and live mentor sessions.',
+    solution: 'Built WabiSkills platform, a comprehensive digital learning ecosystem providing hands-on software development bootcamps, automated coding assessments, and live mentor sessions.',
     technologies: ['React', 'Node.js', 'MongoDB', 'AWS S3', 'WebSockets', 'Tailwind'],
     features: [
       'Interactive Video & Curriculum Modules',
@@ -161,7 +161,7 @@ const PROJECTS_CATALOGUE = [
     badge: 'TALENT NETWORK',
     accent: 'sky',
     challenge: 'Enterprise companies struggled to find verified, high-performing African software developers, while skilled graduates lacked direct access to international projects.',
-    solution: 'Engineered WabiJob talent platform — matching vetted software engineers, UI/UX designers, and data analysts with enterprise opportunities through skill-matching algorithms.',
+    solution: 'Engineered WabiJob talent platform, matching vetted software engineers, UI/UX designers, and data analysts with enterprise opportunities through skill-matching algorithms.',
     technologies: ['Next.js', 'GraphQL', 'PostgreSQL', 'ElasticSearch', 'Tailwind'],
     features: [
       'Developer Skill Matrix & Verified Portfolio Pages',
@@ -383,7 +383,7 @@ export const PortfolioPage = () => {
                   </div>
                 </div>
                 <p className="text-xs text-white/80 leading-relaxed font-medium">
-                  Every project is built from scratch on real client needs — delivering zero-downtime performance, scalability, and long-term digital sovereignty.
+                  Every project is built from scratch on real client needs, delivering zero-downtime performance, scalability, and long-term digital sovereignty.
                 </p>
               </div>
             </div>

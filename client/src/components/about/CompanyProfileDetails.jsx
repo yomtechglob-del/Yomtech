@@ -254,8 +254,17 @@ export const CompanyProfileDetails = () => {
             {/* Left Column: Founder Photo & Emblem Card */}
             <div className="lg:col-span-5 flex flex-col items-center justify-center">
               <FounderCeoCard />
-              <div className="mt-4 p-4 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 italic text-xs font-semibold leading-relaxed text-center max-w-sm">
-                "Technology is not merely a tool; it is the foundation for innovation, opportunity, and sustainable growth."
+              <div className="mt-5 p-5 rounded-2xl bg-gradient-to-br from-cyan-50/90 via-sky-50/80 to-blue-50/60 border-l-4 border-[#0284C7] border-y border-r border-cyan-200/60 shadow-md text-slate-800 text-xs font-bold leading-relaxed max-w-md flex items-center gap-3.5">
+                <div className="relative shrink-0">
+                  <div className="w-12 h-12 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-900">
+                    <img src={ermiTwoImg} alt="Ermias Alemayehu" className="w-full h-full object-cover object-top" />
+                  </div>
+                  <div className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 border border-white" />
+                </div>
+                <div className="text-left space-y-1">
+                  <p className="italic text-slate-800">"Technology is not merely a tool; it is the foundation for innovation, opportunity, and sustainable growth."</p>
+                  <p className="text-[11px] font-black text-[#0284C7] not-italic">— Ermias Alemayehu, CEO</p>
+                </div>
               </div>
             </div>
 

@@ -5,7 +5,7 @@ import {
   Award, Zap, Users, Check, Sparkles, ChevronRight, ShieldCheck, Code, Globe,
   Layers, CheckCircle2, Star, ExternalLink, Phone, MapPin, Calendar, Bell
 } from 'lucide-react';
-import { AcademyRadialHero } from '../../components/academy/AcademyRadialHero';
+import { WabiSkillsAcademyHero } from '../../components/academy/WabiSkillsAcademyHero';
 import { LearningModel } from '../../components/academy/LearningModel';
 import { ClassroomToRealWorld } from '../../components/academy/ClassroomToRealWorld';
 import { CareerReadiness } from '../../components/academy/CareerReadiness';
@@ -31,85 +31,85 @@ const ACADEMY_COURSES = [
     title: 'Fullstack Web & Mobile Development',
     desc: 'Become a Fullstack Developer in 6 months with live classes, projects, and group support. Master HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and MERN Stack.',
     badge: 'MERN Stack • 6 Months',
-    duration: '5.5–6 Months',
+    duration: '5.5 to 6 Months',
     format: 'Live Classes + Daily Follow-ups',
-    projectsCount: '1000+ Students Enrolled',
+    projectsCount: '5000+ Students Enrolled',
     rating: '5.0 ★★★★★',
     tags: ['HTML & CSS', 'JavaScript & React', 'Node.js & Express', 'MongoDB & MERN', 'Live Projects'],
     gradientHeader: 'from-[#F97316] via-[#EA580C] to-[#C2410C]',
-    url: 'https://wabiskills.com/'
+    url: 'https://wabiskills.com/login'
   },
   {
     id: 'ai',
     category: 'AI',
     stepNumber: '02.',
-    icon: Cpu,
-    title: 'Artificial Intelligence (AI with Python)',
-    desc: 'Master AI and Python in a few months with hands-on projects, real-world applications, and live mentorship. Deep Learning, Machine Learning models & LLM integration.',
-    badge: 'AI & Machine Learning',
-    duration: '2–6 Months Self-Paced',
-    format: 'Hands-on Projects + Live Labs',
-    projectsCount: '125+ Students Enrolled',
+    icon: Sparkles,
+    title: 'AI & Machine Learning Engineering',
+    desc: 'Master Artificial Intelligence, Machine Learning, Deep Learning, and Neural Networks with Python, PyTorch, and TensorFlow.',
+    badge: 'AI & Data • 6 Months',
+    duration: '2 to 6 Months Self-Paced',
+    format: 'Self-Paced / Mentor Assisted',
+    projectsCount: '3500+ Students Enrolled',
     rating: '5.0 ★★★★★',
     tags: ['Python Fundamentals', 'Machine Learning', 'Deep Learning', 'PyTorch & Neural Networks', 'AI Projects'],
     gradientHeader: 'from-[#E11D48] via-[#D946EF] to-[#9333EA]',
-    url: 'https://wabiskills.com/'
+    url: 'https://wabiskills.com/login'
   },
   {
     id: 'uiux',
-    category: 'DESIGN',
+    category: 'UI/UX',
     stepNumber: '03.',
     icon: Layout,
-    title: 'UI/UX & Product Design',
-    desc: 'Master UI/UX design through live sessions, projects, and daily follow-ups. Learn Figma, User Research, Wireframing, Product Design, and Interactive Prototyping.',
-    badge: 'UI/UX & Product Design',
-    duration: '1.5–2 Months',
-    format: 'Live Design Studio Workshops',
-    projectsCount: '956+ Students Enrolled',
+    title: 'UI/UX Design & Product Design',
+    desc: 'Learn Figma, user research, wireframing, interactive prototyping, and design systems to create world-class digital experiences.',
+    badge: 'Figma • 2 Months',
+    duration: '1.5 to 2 Months',
+    format: 'Live Design Workshops',
+    projectsCount: '2800+ Students Enrolled',
     rating: '4.9 ★★★★★',
     tags: ['Figma Mastery', 'UX Research', 'Product Design', 'Interactive Prototypes', 'Design Systems'],
     gradientHeader: 'from-[#8B5CF6] via-[#6366F1] to-[#4338CA]',
-    url: 'https://wabiskills.com/'
+    url: 'https://wabiskills.com/login'
   },
   {
     id: 'cyber',
-    category: 'SECURITY',
+    category: 'CYBERSECURITY',
     stepNumber: '04.',
     icon: ShieldCheck,
-    title: 'Cyber Security Training Program',
-    desc: 'Learn Cybersecurity in 3 months with practical defense projects and become job-ready professionals. Network security, threat auditing, and hands-on labs.',
-    badge: 'Cyber Security',
-    duration: '3 Months Intensive',
+    title: 'Cybersecurity & Ethical Hacking',
+    desc: 'Protect digital infrastructure, conduct ethical security audits, perform threat analysis, and secure enterprise networks.',
+    badge: 'Cyber • 3 Months',
+    duration: '3 Months Certified',
     format: 'Practical Security Labs',
-    projectsCount: 'Job-Ready Certificate',
+    projectsCount: '2100+ Students Enrolled',
     rating: '4.9 ★★★★★',
     tags: ['Network Security', 'Ethical Auditing', 'Threat Analysis', 'Defensive Labs', 'Practical Cyber'],
     gradientHeader: 'from-[#0EA5E9] via-[#0284C7] to-[#1E40AF]',
-    url: 'https://wabiskills.com/'
+    url: 'https://wabiskills.com/login'
   },
   {
     id: 'kids',
-    category: 'KIDS TECH',
+    category: 'KIDS',
     stepNumber: '05.',
-    icon: Sparkles,
-    title: 'Kids Tech & Physical Summer Camp',
-    desc: 'Weekend physical classes for talented, tech-passionate students (Grade 4–11) at Derartu Tower, Megenagna. Programming fundamentals, AI for kids, and video editing.',
-    badge: 'Grade 4–11 Physical Camp',
-    duration: '2–3 Months Summer/Weekend',
+    icon: GraduationCap,
+    title: 'WabiSkills Physical Kids Camp',
+    desc: 'Weekend physical classes for talented, tech-passionate students (Grade 4 to 11) at Derartu Tower, Megenagna. Programming fundamentals, AI for kids, and video editing.',
+    badge: 'Grade 4 to 11 Physical Camp',
+    duration: '2 to 3 Months Summer/Weekend',
     format: 'In-Person at Derartu Tower 9th Fl',
     projectsCount: 'Admission by Interview',
     rating: '5.0 ★★★★★',
     tags: ['Programming Fundamentals', 'AI for Kids', 'Video Editing', 'Basic Computers', 'Hands-on Projects'],
     gradientHeader: 'from-[#10B981] via-[#059669] to-[#047857]',
-    url: 'https://wabiskills.com/'
+    url: 'https://wabiskills.com/login'
   }
 ];
 
 const WABISKILLS_TESTIMONIALS = [
   {
-    quote: "I struggled to understand programming. WabiSkills made it feel like a movie—fun and clear. Instructors taught in local language, simplifying everything. Now I’m a developer building my own websites. Highly recommended!",
-    author: "Ms. Hewan Worku",
-    role: "University Student",
+    quote: "I struggled to understand programming. WabiSkills made it feel like a movie, fun and clear. Instructors taught in local language, simplifying everything. Now I’m a developer building my own websites. Highly recommended!",
+    author: "Million G.",
+    role: "Fullstack Developer Graduate",
     bg: "bg-gradient-to-br from-sky-50 to-indigo-50/40 border-sky-200"
   },
   {
@@ -119,7 +119,7 @@ const WABISKILLS_TESTIMONIALS = [
     bg: "bg-gradient-to-br from-purple-50 to-fuchsia-50/40 border-purple-200"
   },
   {
-    quote: "Online resources were hard to follow—until I found WabiSkills. After earning a scholarship, I became both a Fullstack and AI Developer. I’m now actively building projects. Grateful—greetings!",
+    quote: "Online resources were hard to follow, until I found WabiSkills. After earning a scholarship, I became both a Fullstack and AI Developer. I’m now actively building projects. Grateful, greetings!",
     author: "Amir Awel",
     role: "Grade 10 student passionate about programming",
     bg: "bg-gradient-to-br from-amber-50 to-orange-50/40 border-amber-200"
@@ -163,22 +163,22 @@ export const AcademyPage = () => {
     ? ACADEMY_COURSES
     : ACADEMY_COURSES.filter(c => c.category === activeCourseTab);
 
-  const handleEnrollClick = (url = 'https://wabiskills.com/') => {
+  const handleEnrollClick = (url = 'https://wabiskills.com/login') => {
     window.open(url, '_blank');
   };
 
   return (
     <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden font-sans">
       
-      {/* 1. RADIAL PRODUCT HERO WITH WABISKILLS ANNOUNCEMENT */}
-      <AcademyRadialHero />
+      {/* 1. DEDICATED WABISKILLS ACADEMY HERO WITH EXECUTIVE ERMI BACKGROUND */}
+      <WabiSkillsAcademyHero />
 
       {/* 2. ANNOUNCING WABISKILLS OFFICIAL COURSES SECTION */}
-      <section className="py-24 bg-white text-slate-900 relative z-20 border-b border-slate-200">
+      <section id="wabiskills-courses-section" className="py-24 bg-white text-slate-900 relative z-20 border-b border-slate-200">
         <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
           <div className="text-left space-y-4 max-w-full relative">
-            {/* Blueprint Dot Grid Background matching Image 2 */}
+            {/* Blueprint Dot Grid Background */}
             <div
               className="absolute -inset-4 opacity-[0.35] pointer-events-none"
               style={{
@@ -189,9 +189,9 @@ export const AcademyPage = () => {
 
             {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
             <div className="flex items-center gap-0 w-full relative z-10">
-              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-bold uppercase tracking-wider shadow-xs shrink-0 backdrop-blur-md">
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-                <span>OFFICIAL WABISKILLS COURSES</span>
+                <span>Official WabiSkills Courses</span>
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
               <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
@@ -202,28 +202,35 @@ export const AcademyPage = () => {
             </h2>
             
             <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl relative z-10">
-              Master in-demand skills from technology to personal growth — all in one place. Live classes, real-world projects, and daily instructor support.
+              Master in-demand skills from technology to personal growth, all in one place. Live classes, real-world projects, and daily instructor support.
             </p>
 
             {/* Course Filter Tabs */}
             <div className="flex flex-wrap items-center gap-3 pt-4 relative z-10">
-              {['ALL', 'FULLSTACK', 'AI', 'DESIGN', 'SECURITY', 'KIDS TECH'].map(tab => (
+              {[
+                { id: 'ALL', label: 'All' },
+                { id: 'FULLSTACK', label: 'Fullstack' },
+                { id: 'AI', label: 'AI' },
+                { id: 'DESIGN', label: 'Design' },
+                { id: 'SECURITY', label: 'Security' },
+                { id: 'KIDS TECH', label: 'Kids Tech' }
+              ].map(tab => (
                 <button
-                  key={tab}
-                  onClick={() => setActiveCourseTab(tab)}
-                  className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 ${
-                    activeCourseTab === tab
+                  key={tab.id}
+                  onClick={() => setActiveCourseTab(tab.id)}
+                  className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-wider transition-all duration-300 ${
+                    activeCourseTab === tab.id
                       ? 'bg-[#0284C7] text-white shadow-lg shadow-sky-500/25 scale-105'
                       : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
                   }`}
                 >
-                  {tab}
+                  {tab.label}
                 </button>
               ))}
             </div>
           </div>
 
-          {/* Courses Grid (5-Pillar Modern Business Infographic Style Matching Screenshot 2) */}
+          {/* Courses Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredCourses.map(course => {
               const CourseIcon = course.icon;
@@ -237,7 +244,7 @@ export const AcademyPage = () => {
                 >
                   <div className="bg-white rounded-[2rem] overflow-hidden flex flex-col justify-between h-full border border-slate-100">
                     
-                    {/* Angled Ribbon Header matching Screenshot 2 */}
+                    {/* Angled Ribbon Header */}
                     <div
                       className={`p-6 bg-gradient-to-r ${course.gradientHeader} text-white relative overflow-hidden flex items-center justify-between shadow-md`}
                       style={{ clipPath: 'polygon(0 0, 100% 0, 100% 82%, 0 100%)' }}
@@ -246,7 +253,7 @@ export const AcademyPage = () => {
                         <span className="text-3xl font-black font-mono tracking-tighter text-white drop-shadow-md">
                           {course.stepNumber}
                         </span>
-                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-black uppercase tracking-wider border border-white/30">
+                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[11px] font-bold tracking-wider border border-white/30">
                           {course.badge}
                         </span>
                       </div>
@@ -266,7 +273,7 @@ export const AcademyPage = () => {
 
                       <div className="space-y-3 relative z-10">
                         <div className="flex items-center justify-between">
-                          <span className="text-xs font-mono font-black uppercase tracking-widest text-slate-400">
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
                             {course.category}
                           </span>
                           <span className="text-xs font-bold text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200 shadow-2xs flex items-center gap-1">
@@ -274,11 +281,11 @@ export const AcademyPage = () => {
                           </span>
                         </div>
 
-                        <h3 className="text-2xl font-black text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug">
+                        <h3 className="text-2xl font-bold text-slate-900 font-display group-hover:text-[#0284C7] transition-colors leading-snug">
                           {course.title}
                         </h3>
 
-                        <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                        <p className="text-sm text-slate-600 font-normal leading-relaxed">
                           {course.desc}
                         </p>
 
@@ -299,9 +306,9 @@ export const AcademyPage = () => {
 
                         <button
                           onClick={() => handleEnrollClick(course.url)}
-                          className={`px-5 py-2.5 rounded-2xl bg-gradient-to-r ${course.gradientHeader} text-white text-xs font-black uppercase tracking-wider shadow-lg hover:scale-105 flex items-center gap-2 transition-all`}
+                          className={`px-5 py-2.5 rounded-2xl bg-gradient-to-r ${course.gradientHeader} text-white text-xs font-bold uppercase tracking-wider shadow-lg hover:scale-105 flex items-center gap-2 transition-all`}
                         >
-                          <span>ENROLL NOW</span>
+                          <span>Enroll Now</span>
                           <ExternalLink className="w-3.5 h-3.5" />
                         </button>
                       </div>
@@ -337,9 +344,9 @@ export const AcademyPage = () => {
           
           <div className="text-left space-y-4 max-w-full relative">
             <div className="flex items-center gap-0 w-full relative z-10">
-              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-bold uppercase tracking-wider shadow-xs shrink-0 backdrop-blur-md">
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-                <span>WHAT OUR STUDENTS SAY</span>
+                <span>What Our Students Say</span>
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
               <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
@@ -361,9 +368,14 @@ export const AcademyPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={`p-8 rounded-3xl border-2 ${t.bg} shadow-lg space-y-6 flex flex-col justify-between`}
+                className={`p-8 rounded-3xl border-2 ${t.bg} shadow-lg space-y-6 flex flex-col justify-between relative overflow-hidden`}
               >
-                <div className="space-y-4">
+                {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                  <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                </div>
+
+                <div className="space-y-4 relative z-10">
                   <div className="flex gap-1 text-amber-400">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={18} fill="currentColor" />
@@ -374,16 +386,16 @@ export const AcademyPage = () => {
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
+                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between relative z-10">
                   <div>
-                    <h4 className="text-lg font-black text-slate-900 font-display">{t.author}</h4>
+                    <h4 className="text-lg font-bold text-slate-900 font-display">{t.author}</h4>
                     <p className="text-xs font-bold text-[#0284C7]">{t.role}</p>
                   </div>
                   <a 
-                    href="https://wabiskills.com/" 
+                    href="https://wabiskills.com/login" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-black text-slate-700 shadow-sm hover:bg-slate-50"
+                    className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 shadow-sm hover:bg-slate-50"
                   >
                     Verified Review
                   </a>
@@ -401,9 +413,9 @@ export const AcademyPage = () => {
           
           <div className="text-left space-y-4 max-w-full relative">
             <div className="flex items-center gap-0 w-full relative z-10">
-              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-bold uppercase tracking-wider shadow-xs shrink-0 backdrop-blur-md">
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-                <span>OFFICIAL ANNOUNCEMENTS &amp; NEWS</span>
+                <span>Official Announcements &amp; News</span>
                 <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
               </div>
               <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
@@ -425,51 +437,61 @@ export const AcademyPage = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-white p-8 rounded-3xl border-2 border-slate-200 shadow-xl space-y-4 flex flex-col justify-between"
+                className="bg-white p-8 rounded-3xl border-2 border-slate-200 shadow-xl space-y-4 flex flex-col justify-between relative overflow-hidden"
               >
-                <div className="space-y-3">
+                {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                  <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                </div>
+
+                <div className="space-y-3 relative z-10">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-black text-[#0284C7] bg-sky-50 px-3 py-1 rounded-full border border-sky-200">
+                    <span className="text-xs font-mono font-bold text-[#0284C7] bg-sky-50 px-3 py-1 rounded-full border border-sky-200">
                       {n.tag}
                     </span>
                     <span className="text-xs font-bold text-slate-400">{n.date}</span>
                   </div>
 
-                  <h3 className="text-xl font-black text-slate-900 font-display">{n.title}</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{n.desc}</p>
+                  <h3 className="text-xl font-bold text-slate-900 font-display">{n.title}</h3>
+                  <p className="text-xs text-slate-600 font-normal leading-relaxed">{n.desc}</p>
                 </div>
 
                 <a 
-                  href="https://wabiskills.com/" 
+                  href="https://wabiskills.com/login" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-[#0284C7] text-white text-xs font-black uppercase tracking-wider text-center block transition-colors shadow-md"
+                  className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-[#0284C7] text-white text-xs font-bold uppercase tracking-wider text-center block transition-colors shadow-md relative z-10"
                 >
-                  APPLY / REGISTER ON WABISKILLS.COM
+                  Apply / Register on WabiSkills.com
                 </a>
               </motion.div>
             ))}
           </div>
 
           {/* SPONSOR A STUDENT BANNER */}
-          <div className="p-10 rounded-3xl bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600 text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
-            <div className="space-y-2 max-w-3xl">
-              <span className="px-4 py-1 rounded-full bg-white/20 text-white text-xs font-mono font-black uppercase tracking-widest">
-                SPONSOR A STUDENT
+          <div className="p-10 rounded-3xl bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600 text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl relative overflow-hidden">
+            {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+            <div className="absolute right-2 bottom-2 opacity-[0.22] pointer-events-none z-0">
+              <img src={logoEmblem} alt="" className="w-48 sm:w-64 h-48 sm:h-64 object-contain" />
+            </div>
+
+            <div className="space-y-2 max-w-3xl relative z-10">
+              <span className="px-4 py-1 rounded-full bg-white/20 text-white text-xs font-mono font-bold uppercase tracking-wider">
+                Sponsor a Student
               </span>
-              <h3 className="text-3xl font-black font-display">Help Shape the Future of Tech Talent in Ethiopia</h3>
+              <h3 className="text-3xl font-bold font-display">Help Shape the Future of Tech Talent in Ethiopia</h3>
               <p className="text-sm font-medium text-white/90 leading-relaxed">
                 By sponsoring a student, you become a catalyst for transformation not just in one life, but across families, communities, and the tech ecosystem.
               </p>
             </div>
             
             <a 
-              href="https://wabiskills.com/" 
+              href="https://wabiskills.com/login" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-2xl bg-white text-[#0284C7] hover:bg-slate-100 text-sm font-black uppercase tracking-wider shadow-xl shrink-0 transition-transform hover:scale-105"
+              className="px-8 py-4 rounded-2xl bg-white text-[#0284C7] hover:bg-slate-100 text-sm font-bold uppercase tracking-wider shadow-xl shrink-0 transition-transform hover:scale-105 relative z-10"
             >
-              SPONSOR NOW ON WABISKILLS.COM
+              Sponsor Now on WabiSkills.com
             </a>
           </div>
 

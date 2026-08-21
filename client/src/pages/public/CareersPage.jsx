@@ -723,7 +723,7 @@ export const CareersPage = () => {
                     {attachedFile ? (
                       <div className="space-y-1">
                         <span className="text-xs font-black text-slate-900 block">✓ Attached: {attachedFile.name}</span>
-                        <span className="text-[10px] text-emerald-700 font-bold">{(attachedFile.size / 1024).toFixed(1)} KB — Ready to submit</span>
+                        <span className="text-[10px] text-emerald-700 font-bold">{(attachedFile.size / 1024).toFixed(1)} KB, Ready to submit</span>
                       </div>
                     ) : (
                       <div>
@@ -980,10 +980,10 @@ export const CareersPage = () => {
                   onChange={(e) => setSchedTime(e.target.value)}
                   className="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs md:text-sm text-slate-900 focus:outline-none focus:border-[#0284C7]"
                 >
-                  <option>09:00 AM - 10:00 AM (EAT)</option>
-                  <option>10:00 AM - 11:00 AM (EAT)</option>
-                  <option>02:00 PM - 03:00 PM (EAT)</option>
-                  <option>04:00 PM - 05:00 PM (EAT)</option>
+                  <option>09:00 AM to 10:00 AM (EAT)</option>
+                  <option>10:00 AM to 11:00 AM (EAT)</option>
+                  <option>02:00 PM to 03:00 PM (EAT)</option>
+                  <option>04:00 PM to 05:00 PM (EAT)</option>
                 </select>
               </div>
 

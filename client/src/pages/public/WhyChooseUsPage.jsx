@@ -14,14 +14,14 @@ const ADVANTAGE_PAIRS = [
   {
     left: {
       num: '01',
-      title: 'End-to-End Expertise',
+      title: 'End to End Expertise',
       desc: 'Full lifecycle delivery from initial architectural design to deployment, security hardening, and continuous 24/7 technical support.',
       icon: Layers,
     },
     right: {
       num: '02',
-      title: '100% Custom-Built Systems',
-      desc: 'Every system is engineered from scratch based on exact client workflows — zero reliance on rigid third-party templates.',
+      title: '100% Custom Built Systems',
+      desc: 'Every system is engineered from scratch based on exact client workflows, zero reliance on rigid third-party templates.',
       icon: Code,
     },
   },
@@ -29,7 +29,7 @@ const ADVANTAGE_PAIRS = [
     left: {
       num: '03',
       title: 'Government & Enterprise Experience',
-      desc: 'Proven track record delivering mission-critical platforms for federal ministries, security administrations, and banks.',
+      desc: 'Proven track record delivering mission critical platforms for federal ministries, security administrations, and banks.',
       icon: Building2,
     },
     right: {
@@ -42,14 +42,14 @@ const ADVANTAGE_PAIRS = [
   {
     left: {
       num: '05',
-      title: 'AI & Next-Gen Innovation',
+      title: 'AI & Next Gen Innovation',
       desc: 'Deep integration of artificial intelligence, automated surveillance vision, predictive analytics, and cloud microservices.',
       icon: Cpu,
     },
     right: {
       num: '06',
-      title: 'Long-Term Partnership Mindset',
-      desc: 'We focus on sustainable collaboration, system evolution, and dedicated SLA maintenance rather than one-time delivery.',
+      title: 'Long Term Partnership Mindset',
+      desc: 'We focus on sustainable collaboration, system evolution, and dedicated SLA maintenance rather than one time delivery.',
       icon: ShieldCheck,
     },
   },
@@ -191,7 +191,7 @@ export const WhyChooseUsPage = () => {
             </h1>
 
             <p className="text-cyan-50 text-base md:text-lg leading-relaxed font-normal max-w-2xl">
-              We go beyond software development — we build complete digital ecosystems that combine technology, talent development, and media to drive real digital transformation.
+              We go beyond software development, we build complete digital ecosystems that combine technology, talent development, and media to drive real digital transformation.
             </p>
 
             <div className="flex flex-wrap items-center gap-5 pt-3">

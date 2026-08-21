@@ -44,17 +44,6 @@ export const Footer = () => {
             Building digital enterprise solutions, powering ERP &amp; cloud systems, and training the next generation of workforce tech leaders via <a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="text-[#0ED3DD] hover:text-white font-semibold transition-colors">WabiSkills Academy</a>.
           </p>
 
-          {/* Prominent Professional Admin Sign In Button in Footer */}
-          <div className="pt-1">
-            <Link
-              to="/admin/login"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-500/25 border border-purple-400/50 text-purple-200 hover:text-white hover:bg-purple-500/40 text-xs font-extrabold transition-all shadow-sm group"
-            >
-              <ShieldCheck size={15} className="text-purple-300 group-hover:scale-110 transition-transform" />
-              <span>Admin Portal Sign In</span>
-            </Link>
-          </div>
-
           {/* Social Badges */}
           <div className="flex items-center gap-3 pt-1">
             <a href="#" aria-label="LinkedIn profile" className="w-8 h-8 rounded-full bg-white/10 border border-white/20 hover:border-cyan-300 text-white flex items-center justify-center transition-all hover:scale-110"><Linkedin size={15} /></a>
@@ -138,12 +127,6 @@ export const Footer = () => {
             <li><a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> WabiSkills Academy ↗</a></li>
             <li><Link to="/about" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> About Us</Link></li>
             <li><Link to="/contact" className="hover:text-[#38BDF8] transition-colors flex items-center gap-1.5"><ArrowRight size={12} className="text-[#0ED3DD]" /> Contact Us</Link></li>
-            <li>
-              <Link to="/admin/login" className="hover:text-purple-300 transition-colors flex items-center gap-1.5 text-purple-300 font-bold">
-                <ShieldCheck size={14} />
-                <span>Admin Gateway</span>
-              </Link>
-            </li>
           </ul>
         </div>
 

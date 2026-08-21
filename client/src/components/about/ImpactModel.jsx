@@ -95,8 +95,8 @@ export const ImpactModel = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-[#0284C7] font-display">
-                YOMTECH GLOBAL NUCLEUS
+              <span className="text-xs sm:text-sm font-black tracking-widest text-[#0284C7] font-display">
+                YomTech Global Nucleus
               </span>
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0ED3DD] opacity-75" />

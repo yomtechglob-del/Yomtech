@@ -35,8 +35,8 @@ export const TechnologyEcosystem = () => {
           <div className="hidden lg:flex items-center justify-center my-12 relative z-20">
             <div className="px-8 py-3.5 rounded-full bg-white border-2 border-[#1DA1F2] text-slate-900 shadow-xl flex items-center gap-3">
               <Cpu size={20} className="text-[#1DA1F2]" />
-              <span className="text-xs font-black uppercase tracking-widest font-display text-slate-900">
-                YOMTECH GLOBAL NUCLEUS
+              <span className="text-xs font-black tracking-widest font-display text-slate-900">
+                YomTech Global Nucleus
               </span>
             </div>
           </div>

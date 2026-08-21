@@ -35,7 +35,7 @@ const PRODUCTS = [
     features: [
       { icon: GraduationCap, title: 'Hands-On Bootcamps', desc: 'Intensive, project-based programs in full-stack development, cybersecurity, and cloud.' },
       { icon: Users, title: '1-on-1 Mentorship', desc: 'Personalized guidance from senior YomTech engineers and industry veterans.' },
-      { icon: Code, title: 'Live Coding Labs', desc: 'Real development environments — students build deployable production applications.' },
+      { icon: Code, title: 'Live Coding Labs', desc: 'Real development environments, students build deployable production applications.' },
       { icon: ShieldCheck, title: 'Industry Certifications', desc: 'Co-validated certifications with partner universities and hiring organizations.' },
     ],
     techStack: ['React.js', 'Node.js', 'PostgreSQL', 'AWS', 'Python', 'Docker'],
@@ -43,7 +43,7 @@ const PRODUCTS = [
     stats: [{ value: '2K+', label: 'Graduates' }, { value: '15+', label: 'Courses' }, { value: '95%', label: 'Job Rate' }, { value: '50+', label: 'Mentors' }],
     video: {
       youtubeId: 'uolNutZDGSs',
-      title: 'WabiSkills — ደግሜ ብፈጠርም ይሄን ነው ምሆነው',
+      title: 'WabiSkills | ደግሜ ብፈጠርም ይሄን ነው ምሆነው',
       type: 'STUDENT STORY',
       duration: '6:15',
       thumbnail: 'https://img.youtube.com/vi/uolNutZDGSs/maxresdefault.jpg',
@@ -82,7 +82,7 @@ const PRODUCTS = [
     stats: [{ value: '500+', label: 'Jobs Listed' }, { value: '50+', label: 'Employers' }, { value: 'Pan-African', label: 'Reach' }, { value: '48hr', label: 'Match Time' }],
     video: {
       youtubeId: 'C3Cev-IohUc',
-      title: 'WabiJob — ትልቅ ለውጥ ይመጣል ብለን ተስፋ እናደርጋለን!',
+      title: 'WabiJob | ትልቅ ለውጥ ይመጣል ብለን ተስፋ እናደርጋለን!',
       type: 'PLATFORM DEMO',
       duration: '5:20',
       thumbnail: 'https://img.youtube.com/vi/C3Cev-IohUc/maxresdefault.jpg',
@@ -109,10 +109,10 @@ const PRODUCTS = [
     heroGrad: 'from-cyan-900 via-sky-800 to-cyan-950',
     glowColor: 'rgba(2,132,199,0.6)',
     sectionBg: 'bg-white',
-    fullDesc: 'Yomnex ERP is YomTech Global\'s flagship enterprise system — built entirely from scratch for maximum flexibility. Serving government institutions, universities, and private enterprises with a fully modular, scalable architecture.',
+    fullDesc: 'Yomnex ERP is YomTech Global\'s flagship enterprise system, built entirely from scratch for maximum flexibility. Serving government institutions, universities, and private enterprises with a fully modular, scalable architecture.',
     features: [
       { icon: Layers, title: 'Finance & Accounting', desc: 'Full general ledger, payroll, budgeting, and real-time financial analytics.' },
-      { icon: Users, title: 'HR Management', desc: 'Complete HR lifecycle — recruitment, performance, leave, and org structures.' },
+      { icon: Users, title: 'HR Management', desc: 'Complete HR lifecycle: recruitment, performance, leave, and org structures.' },
       { icon: Server, title: 'Inventory & WMS', desc: 'Warehouse management, multi-location stock tracking, and procurement workflows.' },
       { icon: ShieldCheck, title: 'Gate & Asset Control', desc: 'Physical access control, asset tracking, maintenance scheduling, and monitoring.' },
     ],
@@ -121,7 +121,7 @@ const PRODUCTS = [
     stats: [{ value: '25+', label: 'Deployments' }, { value: '12+', label: 'Modules' }, { value: '65%', label: 'Faster Ops' }, { value: '100%', label: 'Custom Built' }],
     video: {
       youtubeId: 'PQ00Vons-ms',
-      title: 'Yomnex ERP — የወደፊቱ የ AI አለም | Yomtech on Fana TV',
+      title: 'Yomnex ERP | የወደፊቱ የ AI አለም | Yomtech on Fana TV',
       type: 'ENTERPRISE DEMO',
       duration: '12:40',
       thumbnail: 'https://img.youtube.com/vi/PQ00Vons-ms/maxresdefault.jpg',
@@ -148,19 +148,19 @@ const PRODUCTS = [
     heroGrad: 'from-purple-900 via-violet-800 to-purple-950',
     glowColor: 'rgba(147,51,234,0.6)',
     sectionBg: 'bg-[#F4F9FF]',
-    fullDesc: 'WabiX is a purpose-built virtual collaboration platform for enterprise team coordination, online bootcamps, and live educational webinars — combining HD video with real-time collaboration tools optimized for African networks.',
+    fullDesc: 'WabiX is a purpose-built virtual collaboration platform for enterprise team coordination, online bootcamps, and live educational webinars, combining HD video with real-time collaboration tools optimized for African networks.',
     features: [
       { icon: Video, title: 'HD Video Conferencing', desc: 'Crystal-clear communication optimized for low-bandwidth African environments.' },
       { icon: Layers, title: 'Collaborative Workspaces', desc: 'Shared whiteboards, document co-editing, and real-time collaboration tools.' },
       { icon: GraduationCap, title: 'Online Bootcamp Rooms', desc: 'Dedicated classrooms for live coding sessions and instructor-led training.' },
-      { icon: ShieldCheck, title: 'End-to-End Encryption', desc: 'Bank-grade encryption ensuring enterprise privacy and data security.' },
+      { icon: ShieldCheck, title: 'End to End Encryption', desc: 'Bank-grade encryption ensuring enterprise privacy and data security.' },
     ],
     techStack: ['WebRTC', 'Node.js', 'React.js', 'React Native', 'Socket.io', 'AWS'],
     targetUsers: ['Remote enterprise teams and distributed organizations', 'Online bootcamp instructors and students', 'Government departments for virtual meetings', 'Corporate HR for remote onboarding'],
     stats: [{ value: 'HD', label: 'Video Quality' }, { value: '∞', label: 'Participants' }, { value: 'E2E', label: 'Encrypted' }, { value: 'Multi-Platform', label: 'Access' }],
     video: {
       youtubeId: 'CL5Otcr_ywI',
-      title: 'WabiX — Drone Technology | የድሮን ቴክኖሎጂ',
+      title: 'WabiX | Drone Technology | የድሮን ቴክኖሎጂ',
       type: 'FUTURE TECH',
       duration: '8:15',
       thumbnail: 'https://img.youtube.com/vi/CL5Otcr_ywI/maxresdefault.jpg',
@@ -188,7 +188,7 @@ const PRODUCTS = [
     heroGrad: 'from-sky-900 via-blue-800 to-sky-950',
     glowColor: 'rgba(2,132,199,0.5)',
     sectionBg: 'bg-white',
-    fullDesc: 'Mari is a locally-engineered social media application connecting digital communities, tech innovators, and entrepreneurs across Ethiopia — built with a deep understanding of African social dynamics and digital culture.',
+    fullDesc: 'Mari is a locally-engineered social media application connecting digital communities, tech innovators, and entrepreneurs across Ethiopia, built with a deep understanding of African social dynamics and digital culture.',
     features: [
       { icon: Globe, title: 'Local Community Focus', desc: 'Hyper-local spaces for tech innovators and digital creators in Ethiopian cities.' },
       { icon: Cpu, title: 'AI-Powered Feed', desc: 'Intelligent content curation powered by ML algorithms for Ethiopian users.' },
@@ -200,7 +200,7 @@ const PRODUCTS = [
     stats: [{ value: 'Local', label: 'First' }, { value: 'AI', label: 'Powered' }, { value: 'Cross-Platform', label: 'Access' }, { value: 'Privacy', label: 'First' }],
     video: {
       youtubeId: 'szeeGAP6SKg',
-      title: 'Mari — የWabiskills ተማሪ ምስክርነት',
+      title: 'Mari | የWabiskills ተማሪ ምስክርነት',
       type: 'COMMUNITY DEMO',
       duration: '4:45',
       thumbnail: 'https://img.youtube.com/vi/szeeGAP6SKg/maxresdefault.jpg',
@@ -228,7 +228,7 @@ const PRODUCTS = [
     heroGrad: 'from-indigo-900 via-violet-800 to-indigo-950',
     glowColor: 'rgba(79,70,229,0.6)',
     sectionBg: 'bg-[#F4F9FF]',
-    fullDesc: 'Yomtech Media is YomTech Global\'s technology storytelling and documentary production platform — amplifying Pan-African innovation stories and digital transformation narratives for broadcast television and online streaming.',
+    fullDesc: 'Yomtech Media is YomTech Global\'s technology storytelling and documentary production platform, amplifying Pan-African innovation stories and digital transformation narratives for broadcast television and online streaming.',
     features: [
       { icon: Video, title: 'Technology Documentaries', desc: 'High-production documentary films showcasing Ethiopian and Pan-African tech innovation.' },
       { icon: Building2, title: 'Enterprise Content', desc: 'Professional corporate video, product showcases, and institutional storytelling.' },
@@ -240,7 +240,7 @@ const PRODUCTS = [
     stats: [{ value: '10+', label: 'Productions' }, { value: 'TV Broadcast', label: 'Distribution' }, { value: 'Pan-African', label: 'Stories' }, { value: '4K', label: 'Quality' }],
     video: {
       youtubeId: '0FapnBKx-e4',
-      title: 'Yomtech Media — ዮምቴክ በፋና ክፍል 1 | Yomtech With Ermias on Fana TV Ep1',
+      title: 'Yomtech Media | ዮምቴክ በፋና ክፍል 1 | Yomtech With Ermias on Fana TV Ep1',
       type: 'DOCUMENTARY',
       duration: '18:40',
       thumbnail: 'https://img.youtube.com/vi/0FapnBKx-e4/maxresdefault.jpg',
@@ -331,7 +331,7 @@ const VideoModal = ({ video, product, onClose }) => {
                   <Video size={32} className="text-white/70" />
                 </div>
                 <p className="text-white font-black text-2xl">{video.title}</p>
-                <p className="text-white/50 text-sm">Video coming soon — request a private live demo</p>
+                <p className="text-white/50 text-sm">Video coming soon: request a private live demo</p>
                 <Link to="/contact" onClick={onClose} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/15 border border-white/25 text-white font-black text-xs uppercase tracking-widest hover:bg-white/25 transition-all">
                   <span>Request Demo</span><ArrowRight size={13} />
                 </Link>
@@ -802,7 +802,7 @@ export const ProductsDedicatedPages = () => (
           Every Product. <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">One Story.</span>
         </h2>
         <p className="text-slate-500 text-base font-medium max-w-3xl">
-          Each YomTech platform has its own feature set, target users, technology stack, and video demonstration — explored in full detail below.
+          Each YomTech platform has its own feature set, target users, technology stack, and video demonstration: explored in full detail below.
         </p>
       </div>
     </div>

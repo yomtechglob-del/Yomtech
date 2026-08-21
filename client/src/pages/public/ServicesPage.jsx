@@ -251,20 +251,20 @@ export const ServicesPage = () => {
     };
   }, [updateRealCoordinates, selectedCategory]);
 
-  // 12 Quick Service Icon Grid Cards (Matching Screenshot 1 Grid with Images Below Titles)
+  // 12 Quick Service Icon Grid Cards with Direct Navigation Page Links
   const quickServices = [
-    { title: 'ERP Software Solution', icon: Cpu, img: erpImg },
-    { title: 'WMS Software Solution', icon: LayoutGrid, img: wmsImg },
-    { title: 'SFA Software Solution', icon: Monitor, img: sfaImg },
-    { title: 'Online Tech Education', icon: GraduationCap, img: educationImg },
-    { title: 'Tech Documentary', icon: Video, img: documentaryImg },
-    { title: 'Cybersecurity & IT Consulting', icon: ShieldCheck, img: cybersecurityImg },
-    { title: 'Mobile App Development', icon: Smartphone, img: mobileImg },
-    { title: 'Web App Development', icon: Globe, img: webImg },
-    { title: 'Build Custom Software', icon: Code, img: customImg },
-    { title: 'Give Tech Related Coach', icon: UserCheck, img: coachingImg },
-    { title: 'Cloud Service & Deployment', icon: Cloud, img: cloudImg },
-    { title: 'Surveillance & Security', icon: Camera, img: securityImg }
+    { title: 'ERP Software Solution', icon: Cpu, img: erpImg, path: '/solutions' },
+    { title: 'WMS Software Solution', icon: LayoutGrid, img: wmsImg, path: '/solutions' },
+    { title: 'SFA Software Solution', icon: Monitor, img: sfaImg, path: '/solutions' },
+    { title: 'Online Tech Education', icon: GraduationCap, img: educationImg, path: '/academy' },
+    { title: 'Tech Documentary', icon: Video, img: documentaryImg, path: '/documentaries' },
+    { title: 'Cybersecurity & IT Consulting', icon: ShieldCheck, img: cybersecurityImg, path: '/solutions' },
+    { title: 'Mobile App Development', icon: Smartphone, img: mobileImg, path: '/services' },
+    { title: 'Web App Development', icon: Globe, img: webImg, path: '/services' },
+    { title: 'Build Custom Software', icon: Code, img: customImg, path: '/services' },
+    { title: 'Give Tech Related Coach', icon: UserCheck, img: coachingImg, path: '/academy' },
+    { title: 'Cloud Service & Deployment', icon: Cloud, img: cloudImg, path: '/solutions' },
+    { title: 'Surveillance & Security', icon: Camera, img: securityImg, path: '/solutions' }
   ];
 
   const serviceCategories = [
@@ -400,82 +400,94 @@ export const ServicesPage = () => {
             <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-2xl mx-auto">
               We help businesses and individuals leverage cutting-edge technology to solve complex problems. From enterprise software to cloud architectures and high-impact bootcamps, engineered for real-world impact.
             </p>
-          </div>
-
-          {/* 12 Quick Service Icon Grid Glass Canopy Bento Container */}
-          <div className="max-w-7xl mx-auto bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[3rem] p-6 sm:p-10 md:p-14 shadow-[0_30px_70px_rgba(0,0,0,0.35)] relative overflow-hidden space-y-12">
+          </div>          {/* 12 Quick Service Icon Horizontal Water Flow Stream Container */}
+          <div className="w-full relative overflow-hidden py-6">
             
-            {/* Background Shimmer Flare inside Glass Canopy */}
+            {/* Background Shimmer Flare */}
             <div className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-[#0ED3DD]/20 blur-[100px] pointer-events-none" />
             <div className="absolute -bottom-24 -right-24 w-80 h-80 rounded-full bg-[#0284C7]/25 blur-[100px] pointer-events-none" />
 
-            {/* Header Block inside Glass Canopy */}
-            <div className="text-center space-y-4 relative z-10">
-              <span className="text-[11px] font-black uppercase tracking-[0.25em] text-white px-6 py-2.5 rounded-full bg-white/20 border border-white/40 inline-block shadow-lg backdrop-blur-md">
-                EXPLORE OUR CAPABILITIES
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-white tracking-tight">
-                13+ Total Services Across <span className="bg-gradient-to-r from-amber-300 via-[#0ED3DD] to-sky-300 bg-clip-text text-transparent">3 Pillars</span>
-              </h2>
-            </div>
+            {/* Left & Right Edge Fade Gradient Masks */}
+            <div className="absolute top-0 bottom-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#0369a1] via-[#0369a1]/70 to-transparent z-20 pointer-events-none" />
+            <div className="absolute top-0 bottom-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#0369a1] via-[#0369a1]/70 to-transparent z-20 pointer-events-none" />
 
-            {/* 12 Quick Service Cards Array */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 relative z-10">
-              {quickServices.map((service, index) => {
-                const Icon = service.icon;
-                const isHovered = hoveredServiceTitle === service.title;
-                const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
-                return (
-                  <motion.div
-                    key={`${service.title}-${index}`}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: (index % quickServices.length) * 0.04 }}
-                    onClick={() => {
-                      handleCategoryFilter('all');
-                      const targetId = slugify(service.title);
-                      setTimeout(() => {
-                        const el = document.getElementById(targetId);
-                        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                      }, 150);
-                    }}
-                    className={`group relative flex flex-col items-center text-center cursor-pointer p-4 rounded-2xl bg-white/10 hover:bg-white/25 border border-white/15 hover:border-[#0ED3DD]/70 shadow-lg hover:shadow-[0_15px_30px_rgba(14,211,221,0.25)] transition-all duration-300 hover:-translate-y-1.5 ${
-                      isDimmed ? 'blur-[2.5px] opacity-35 scale-[0.97]' : 'blur-0 opacity-100 scale-100'
-                    }`}
-                    onMouseEnter={() => setHoveredServiceTitle(service.title)}
-                    onMouseLeave={() => setHoveredServiceTitle(null)}
-                  >
-                    <div
-                      className="relative z-10 mb-3.5 flex h-[96px] w-[96px] items-center justify-center rounded-full border-2 transition-all duration-300 group-hover:scale-105"
-                      style={{
-                        borderColor: isHovered ? '#38bdf8' : 'rgba(59, 130, 246, 0.95)',
-                        background: isHovered
-                          ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.22), rgba(5,23,90,0.95) 72%)'
-                          : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.16), rgba(4,23,96,0.95) 72%)',
-                        boxShadow: isHovered
-                          ? '0 0 28px rgba(56, 189, 248, 0.75), inset 0 0 24px rgba(56, 189, 248, 0.18)'
-                          : '0 0 18px rgba(37, 99, 235, 0.65), inset 0 0 18px rgba(56, 189, 248, 0.12)'
+            {/* Infinite Horizontal Water Flow Track */}
+            <div className="relative z-10 w-full overflow-hidden">
+              <motion.div
+                className="flex items-center gap-6 sm:gap-8 w-max"
+                animate={{ x: ['0%', '-33.333333%'] }}
+                transition={{
+                  x: {
+                    repeat: Infinity,
+                    repeatType: 'loop',
+                    duration: 35,
+                    ease: 'linear',
+                  },
+                }}
+              >
+                {[...quickServices, ...quickServices, ...quickServices].map((service, index) => {
+                  const Icon = service.icon;
+                  const isHovered = hoveredServiceTitle === service.title;
+                  const isDimmed = Boolean(hoveredServiceTitle && !isHovered);
+
+                  return (
+                    <motion.div
+                      key={`${service.title}-${index}`}
+                      animate={{ y: (index % 2 === 0) ? [0, -8, 0] : [0, 8, 0] }}
+                      transition={{ duration: 4 + (index % 3) * 0.8, repeat: Infinity, ease: "easeInOut" }}
+                      onClick={() => {
+                        if (service.path && service.path !== '/services') {
+                          navigate(service.path);
+                        } else {
+                          handleCategoryFilter('all');
+                          const targetId = slugify(service.title);
+                          setTimeout(() => {
+                            const el = document.getElementById(targetId);
+                            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                          }, 150);
+                        }
                       }}
+                      className={`group/card relative flex flex-col items-center text-center cursor-pointer p-4 w-40 sm:w-44 shrink-0 transition-all duration-300 hover:scale-110 ${
+                        isDimmed ? 'blur-[2px] opacity-40' : 'blur-0 opacity-100'
+                      }`}
+                      onMouseEnter={() => setHoveredServiceTitle(service.title)}
+                      onMouseLeave={() => setHoveredServiceTitle(null)}
                     >
-                      <div className="absolute inset-2 rounded-full border border-sky-300/35" />
-                      <div className="absolute -bottom-2.5 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+                      {/* Water Flow Liquid Orb Icon Container */}
                       <div
-                        className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover:scale-105"
-                        style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.2) 0%, rgba(2,132,199,0.28) 100%)' }}
+                        className="relative z-10 mb-3 flex h-[88px] w-[88px] sm:h-[96px] sm:w-[96px] items-center justify-center rounded-full border-2 transition-all duration-500 group-hover/card:scale-110 shadow-lg"
+                        style={{
+                          borderColor: isHovered ? '#38bdf8' : 'rgba(56, 189, 248, 0.75)',
+                          background: isHovered
+                            ? 'radial-gradient(circle at 50% 40%, rgba(14,211,221,0.35), rgba(5,23,90,0.95) 75%)'
+                            : 'radial-gradient(circle at 50% 40%, rgba(56,189,248,0.2), rgba(4,23,96,0.92) 75%)',
+                          boxShadow: isHovered
+                            ? '0 0 30px rgba(56, 189, 248, 0.85), inset 0 0 25px rgba(56, 189, 248, 0.25)'
+                            : '0 0 18px rgba(37, 99, 235, 0.5), inset 0 0 18px rgba(56, 189, 248, 0.15)'
+                        }}
                       >
-                        <Icon size={22} className="text-white" />
+                        <div className="absolute inset-2 rounded-full border border-sky-300/40" />
+                        <div className="absolute -bottom-2 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full border border-cyan-300 bg-[#22d3ee] shadow-[0_0_14px_rgba(34,211,238,0.9)] animate-pulse" />
+                        <div
+                          className="relative z-10 flex h-13 w-13 sm:h-14 sm:w-14 items-center justify-center rounded-full text-white transition-transform duration-300 group-hover/card:scale-110"
+                          style={{ background: 'linear-gradient(135deg, rgba(8,145,178,0.3) 0%, rgba(2,132,199,0.38) 100%)' }}
+                        >
+                          <Icon size={24} className="text-white filter drop-shadow-sm" />
+                        </div>
                       </div>
-                    </div>
 
-                    <div className="relative z-10 px-1 w-full">
-                      <h3 className="text-xs font-bold leading-snug text-white group-hover:text-[#0ED3DD] transition-colors">
-                        {service.title}
-                      </h3>
-                    </div>
-                  </motion.div>
-                );
-              })}
+                      {/* Service Title */}
+                      <div className="relative z-10 px-1 w-full">
+                        <h3 className="text-xs font-extrabold leading-snug text-white group-hover/card:text-[#0ED3DD] transition-colors whitespace-normal">
+                          {service.title}
+                        </h3>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
             </div>
+          </div>
 
             {/* Explore Button */}
             <motion.div
@@ -494,7 +506,6 @@ export const ServicesPage = () => {
                 </a>
               </div>
             </motion.div>
-          </div>
 
         </div>
       </section>
@@ -925,16 +936,14 @@ export const ServicesPage = () => {
                     vectorEffect="non-scaling-stroke"
                   />
 
-                  {/* Double Line Track - Dashed Continuous Flow Stream */}
+                  {/* Double Line Track - Solid Continuous Flow Stream */}
                   <path
                     d={pathD}
                     fill="none"
                     stroke={`url(#neonZigzag_${slugify(catGroup.categoryTitle)})`}
-                    strokeWidth="1.6"
-                    strokeDasharray="8 8"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="animate-zigzag-dash"
                     vectorEffect="non-scaling-stroke"
                   />
 

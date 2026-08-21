@@ -22,7 +22,7 @@ const WABISKILLS_VIDEOS = [
 ];
 
 const YOMTECH_VIDEOS = [
-  { id: '4xtWSlr_q14', title: 'Google IO — Episode 7', channel: 'Yomtech', channelHandle: '@yomtech' },
+  { id: '4xtWSlr_q14', title: 'Google IO: Episode 7', channel: 'Yomtech', channelHandle: '@yomtech' },
   { id: 'PQ00Vons-ms', title: 'የወደፊቱ የ AI አለም | Yomtech on Fana TV | Episode 4', channel: 'Yomtech', channelHandle: '@yomtech' },
   { id: 'CL5Otcr_ywI', title: 'Drone Technology | የድሮን ቴክኖሎጂ', channel: 'Yomtech', channelHandle: '@yomtech' },
   { id: 'NgaFdNw8NV0', title: 'የወደፊቱ አስፈሪው ቴክኖሎጂ | Yomtech on Fana TV | Episode 3', channel: 'Yomtech', channelHandle: '@yomtech' },
@@ -472,7 +472,7 @@ export const ProductsVideoShowcase = () => {
               </span>
             </h2>
             <p className="text-slate-500 text-base sm:text-lg font-medium leading-relaxed max-w-3xl">
-              Every video below is sourced directly from the official <strong className="text-red-600">@WabiSkills</strong> and <strong className="text-red-600">@yomtech</strong> YouTube channels — real content, real stories, real technology.
+              Every video below is sourced directly from the official <strong className="text-red-600">@WabiSkills</strong> and <strong className="text-red-600">@yomtech</strong> YouTube channels: real content, real stories, real technology.
             </p>
             {/* Channel pills */}
             <div className="flex flex-wrap gap-3">
@@ -497,7 +497,7 @@ export const ProductsVideoShowcase = () => {
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Sparkles size={14} className="text-indigo-500" />
-              <span className="text-xs font-black uppercase tracking-widest text-slate-500">Featured Video — @yomtech</span>
+              <span className="text-xs font-black uppercase tracking-widest text-slate-500">Featured Video: @yomtech</span>
             </div>
             <HeroFeaturedVideo onPlay={(v) => openPlay(v, { glowColor: v.glowColor, logo: v.logo })} />
           </div>
@@ -533,7 +533,7 @@ export const ProductsVideoShowcase = () => {
           <div className="space-y-3 pt-6">
             <div className="flex items-center gap-2">
               <Sparkles size={14} className="text-amber-500" />
-              <span className="text-xs font-black uppercase tracking-widest text-slate-500">Featured Video — @WabiSkills</span>
+              <span className="text-xs font-black uppercase tracking-widest text-slate-500">Featured Video: @WabiSkills</span>
             </div>
             <BottomFeaturedVideo onPlay={(v) => openPlay(v, { glowColor: v.glowColor, logo: v.logo })} />
           </div>

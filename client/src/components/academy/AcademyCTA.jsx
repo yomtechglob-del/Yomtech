@@ -40,7 +40,7 @@ export const AcademyCTA = () => {
                     <img src={logoImg} alt="WabiSkills Logo" className="w-full h-full object-cover" />
                   </div>
                   <span className="text-[10px] font-bold tracking-wider text-[#0284C7] font-display">
-                    🎓 WabiSkills — YomTech Global's Educational Platform
+                    🎓 WabiSkills | Yomtech Global's Educational Platform
                   </span>
                 </div>
               </div>
@@ -55,7 +55,7 @@ export const AcademyCTA = () => {
               </h2>
 
               <p className="text-slate-600 text-sm sm:text-base md:text-lg font-medium leading-relaxed max-w-2xl mx-auto">
-                Our mission is to help people to find the best course online and learn with experts anytime, anywhere — live, focused, human, and accessible.
+                Our mission is to help people to find the best course online and learn with experts anytime, anywhere, live, focused, human, and accessible.
               </p>
             </div>
 

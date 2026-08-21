@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BriefcaseBusiness, ChevronRight, GraduationCap, HeartHandshake } from 'lucide-react';
+import { BriefcaseBusiness, ChevronRight, GraduationCap, HeartHandshake, Video } from 'lucide-react';
 
 import { AboutHeroBackground } from '../common/AboutHeroBackground';
 import wabiSkillsLogo from '../../assets/logos/wabi skills logo.png';
@@ -11,7 +11,7 @@ import logoImg from '../../assets/logos/logo.png';
 const ACADEMY_PRODUCTS = [
   {
     id: 'wabiskills',
-    label: 'WABISKILLS',
+    label: 'WabiSkills',
     logo: wabiSkillsLogo,
     url: 'https://wabiskills.com/',
     external: true,
@@ -19,7 +19,7 @@ const ACADEMY_PRODUCTS = [
   },
   {
     id: 'wabijob',
-    label: 'WABIJOB',
+    label: 'WabiJob',
     logo: wabiJobsLogo,
     url: 'https://wabijob.com/',
     external: true,
@@ -28,15 +28,23 @@ const ACADEMY_PRODUCTS = [
   },
   {
     id: 'yomnex',
-    label: 'YOMNEX',
+    label: 'YomNex',
     logo: yomnexLogo,
     url: '#yomnex',
     external: false,
     iconTint: 'bg-[#2563EB]',
   },
   {
+    id: 'yomtechmedia',
+    label: 'YomTech Media',
+    url: '/media',
+    external: false,
+    fallbackIcon: Video,
+    iconTint: 'bg-[#0284C7]',
+  },
+  {
     id: 'wabx',
-    label: 'WABX',
+    label: 'WabX',
     url: '#wabx',
     external: false,
     monogram: 'W',
@@ -44,7 +52,7 @@ const ACADEMY_PRODUCTS = [
   },
   {
     id: 'meri',
-    label: 'MERI',
+    label: 'Meri',
     url: '#mari',
     external: false,
     fallbackIcon: HeartHandshake,
@@ -132,7 +140,7 @@ export const AcademyRadialHero = () => {
       ========================================================= */}
       <div className="relative z-10 mx-auto max-w-[1450px]">
 
-        <div className="relative min-h-[780px] lg:min-h-[820px]">
+        <div className="relative min-h-[880px] lg:min-h-[920px]">
 
 
           {/* =====================================================
@@ -140,7 +148,7 @@ export const AcademyRadialHero = () => {
           ===================================================== */}
           <svg
             className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-            viewBox="0 0 1450 820"
+            viewBox="0 0 1450 920"
             fill="none"
             preserveAspectRatio="none"
           >
@@ -183,11 +191,12 @@ export const AcademyRadialHero = () => {
             ================================================= */}
 
             {[
-              "M590 180 C 650 175, 690 125, 750 105",
-              "M610 285 C 675 280, 700 240, 750 235",
-              "M620 405 C 680 405, 710 405, 750 405",
-              "M610 525 C 675 530, 700 575, 750 575",
-              "M590 645 C 650 650, 690 700, 750 705",
+              "M487 192 C 680 120, 890 72, 1100 72",
+              "M530 264 C 710 220, 900 192, 1100 192",
+              "M550 336 C 730 325, 910 312, 1100 312",
+              "M550 408 C 730 419, 910 432, 1100 432",
+              "M530 480 C 710 514, 900 552, 1100 552",
+              "M487 552 C 680 620, 890 672, 1100 672",
             ].map((path, index) => (
               <g key={index}>
 
@@ -227,11 +236,12 @@ export const AcademyRadialHero = () => {
             ================================================= */}
 
             {[
-              { x: 590, y: 180 },
-              { x: 610, y: 285 },
-              { x: 620, y: 405 },
-              { x: 610, y: 525 },
-              { x: 590, y: 645 },
+              { x: 487, y: 192 },
+              { x: 530, y: 264 },
+              { x: 550, y: 336 },
+              { x: 550, y: 408 },
+              { x: 530, y: 480 },
+              { x: 487, y: 552 },
             ].map((node, index) => (
               <g key={index}>
 
@@ -269,11 +279,12 @@ export const AcademyRadialHero = () => {
 
             {/* Small blue connection points */}
             {[
-              { x: 750, y: 105 },
-              { x: 750, y: 235 },
-              { x: 750, y: 405 },
-              { x: 750, y: 575 },
-              { x: 750, y: 705 },
+              { x: 1100, y: 72 },
+              { x: 1100, y: 192 },
+              { x: 1100, y: 312 },
+              { x: 1100, y: 432 },
+              { x: 1100, y: 552 },
+              { x: 1100, y: 672 },
             ].map((node, index) => (
               <motion.circle
                 key={index}
@@ -314,7 +325,7 @@ export const AcademyRadialHero = () => {
                 duration: 0.8,
                 ease: "easeOut",
               }}
-              className="relative lg:absolute lg:left-[20px] lg:top-[115px]"
+              className="relative lg:absolute lg:left-[20px] lg:top-[122px]"
             >
 
               <div className="relative h-[min(82vw,520px)] w-[min(82vw,520px)] sm:h-[500px] sm:w-[500px]">
@@ -324,10 +335,23 @@ export const AcademyRadialHero = () => {
                 <div className="absolute -inset-8 rounded-full bg-blue-500/20 blur-3xl" />
 
 
-                {/* Outer rotating ring */}
+                {/* Outermost border circle line */}
                 <motion.div
                   animate={{
                     rotate: 360,
+                  }}
+                  transition={{
+                    duration: 32,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  className="absolute -inset-[32px] rounded-full border-2 border-[#0ED3DD]/60 border-dashed shadow-[0_0_20px_rgba(14,211,221,0.3)]"
+                />
+
+                {/* Outer rotating ring */}
+                <motion.div
+                  animate={{
+                    rotate: -360,
                   }}
                   transition={{
                     duration: 25,
@@ -369,12 +393,12 @@ export const AcademyRadialHero = () => {
                     }}
                   />
                 
-                  <h2 className="text-[2.7rem] font-black uppercase leading-none tracking-tight text-[#173B78] sm:text-[3.3rem]">
-                    OUR
+                  <h2 className="text-[2.7rem] font-black capitalize leading-none tracking-tight text-[#173B78] sm:text-[3.3rem]">
+                    Our
                   </h2>
 
-                  <h3 className="mt-2 text-[3.1rem] font-black uppercase leading-none tracking-tight text-[#07acc9] sm:text-[4rem]">
-                    PRODUCTS
+                  <h3 className="mt-2 text-[3.1rem] font-black capitalize leading-none tracking-tight text-[#07acc9] sm:text-[4rem]">
+                    Products
                   </h3>
 
 
@@ -398,9 +422,9 @@ export const AcademyRadialHero = () => {
 
             </motion.div>
 
-            <div className="w-full lg:absolute lg:right-0 lg:top-[45px] lg:w-[720px]">
+            <div className="w-full lg:absolute lg:right-[-165px] lg:top-[20px] lg:w-[525px]">
 
-              <div className="space-y-6 sm:space-y-7">
+              <div className="space-y-4">
 
                 {ACADEMY_PRODUCTS.map((product, index) => (
 
@@ -429,60 +453,80 @@ export const AcademyRadialHero = () => {
                     className="group relative flex items-center"
                   >
 
-                    <div className="relative z-20 flex h-[112px] w-[112px] shrink-0 items-center justify-center">
+                    {/* 3D Planetary Orbit Logo Circle */}
+                    <motion.div
+                      animate={{
+                        y: [0, -6, 0, 6, 0],
+                        x: [0, 3, 0, -3, 0],
+                      }}
+                      transition={{
+                        duration: 5 + index * 0.8,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className="relative z-20 flex h-[112px] w-[112px] shrink-0 items-center justify-center [perspective:1000px]"
+                    >
 
-
+                      {/* Outer Rotating Planet Orbit Ring 1 */}
                       <motion.div
                         animate={{
                           rotate: 360,
                         }}
                         transition={{
-                          duration: 9 + index,
+                          duration: 8 + index,
                           repeat: Infinity,
                           ease: "linear",
                         }}
-                        className="absolute inset-0 rounded-full border-[2px] border-dashed border-[#2563EB]/80"
+                        className="absolute inset-0 rounded-full border-[2px] border-dashed border-[#0ED3DD] shadow-[0_0_15px_rgba(14,211,221,0.4)]"
                       />
 
-
+                      {/* Outer Rotating Planet Orbit Ring 2 */}
                       <motion.div
                         animate={{
                           rotate: -360,
                         }}
                         transition={{
-                          duration: 7 + index,
+                          duration: 6 + index,
                           repeat: Infinity,
                           ease: "linear",
                         }}
-                        className="absolute inset-[7px] rounded-full border-[2px] border-cyan-400/70"
+                        className="absolute inset-[7px] rounded-full border-[2px] border-blue-400/80 border-dashed"
                       />
 
-
+                      {/* 3D Glow Atmosphere */}
                       <motion.div
                         animate={{
-                          scale: [1, 1.08, 1],
-                          opacity: [0.25, 0.55, 0.25],
+                          scale: [1, 1.12, 1],
+                          opacity: [0.3, 0.7, 0.3],
                         }}
                         transition={{
-                          duration: 2.4,
+                          duration: 2.2,
                           repeat: Infinity,
-                          delay: index * 0.2,
+                          delay: index * 0.25,
                         }}
-                        className="absolute inset-[12px] rounded-full bg-cyan-400/20 blur-md"
+                        className="absolute inset-[12px] rounded-full bg-cyan-400/30 blur-md"
                       />
 
+                      {/* Main 3D Planet Logo Sphere */}
+                      <motion.div
+                        animate={{
+                          rotateY: [0, 360],
+                        }}
+                        transition={{
+                          duration: 16 + index * 2,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="relative flex h-[94px] w-[94px] items-center justify-center rounded-full border-[3px] border-white bg-gradient-to-br from-slate-100 via-white to-cyan-100 shadow-[0_0_35px_rgba(14,211,221,0.5)] transition-all duration-500 group-hover:scale-115 group-hover:shadow-[0_0_50px_rgba(14,211,221,0.85)] [transform-style:preserve-3d]"
+                      >
 
-                      {/* Main white circle */}
-                      <div className="relative flex h-[94px] w-[94px] items-center justify-center rounded-full border-[3px] border-white bg-[#D5DEEF] shadow-[0_0_30px_rgba(14,165,233,0.35)] transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_45px_rgba(14,211,221,0.65)]">
-
-
-                        {/* Inner circle */}
-                        <div className="flex h-[82px] w-[82px] items-center justify-center overflow-hidden rounded-full border border-blue-200 bg-white">
+                        {/* Inner 3D Lens Frame */}
+                        <div className="flex h-[82px] w-[82px] items-center justify-center overflow-hidden rounded-full border border-blue-200/80 bg-white shadow-inner">
 
                           <motion.div
                             whileHover={{
-                              scale: 1.1,
-                              rotate: 5,
+                              scale: 1.15,
+                              rotate: 8,
                             }}
                             transition={{
                               duration: 0.3,
@@ -494,9 +538,9 @@ export const AcademyRadialHero = () => {
 
                         </div>
 
-                      </div>
+                      </motion.div>
 
-                    </div>
+                    </motion.div>
 
                     <motion.div
                       whileHover={{

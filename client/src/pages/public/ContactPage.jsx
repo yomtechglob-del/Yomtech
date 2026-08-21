@@ -232,7 +232,7 @@ export const ContactPage = () => {
                 </div>
                 <div className="text-[10px] font-black uppercase text-purple-700 tracking-widest">OFFICE HOURS</div>
                 <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
-                  Mon – Sat: 8:30 AM – 5:30 PM
+                  Mon to Sat: 8:30 AM to 5:30 PM
                 </div>
                 <div className="text-xs font-semibold text-slate-500">Sunday: Closed</div>
               </div>

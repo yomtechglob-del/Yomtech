@@ -112,7 +112,7 @@ export const PracticalLearning = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.45, delay: idx * 0.12 }}
-                    className={`w-full border-3 border-dashed ${principle.borderDash} rounded-[3rem] p-5 sm:p-7 relative bg-white/60 backdrop-blur-xs hover:bg-white/90 transition-all duration-300 hover:-translate-y-3 shadow-lg hover:shadow-2xl flex flex-col justify-between h-full min-h-[480px]`}
+                    className={`w-full border-3 border-solid ${principle.borderDash} rounded-[3rem] p-5 sm:p-7 relative bg-white/60 backdrop-blur-xs hover:bg-white/90 transition-all duration-300 hover:-translate-y-3 shadow-lg hover:shadow-2xl flex flex-col justify-between h-full min-h-[480px]`}
                   >
                     {/* Inner Background Color Block Plate */}
                     <div className={`${principle.cardBg} rounded-[2.5rem] p-2 relative flex flex-col justify-between h-full overflow-hidden shadow-inner`}>

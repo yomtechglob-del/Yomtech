@@ -512,7 +512,7 @@ export const Globe3DCard = () => {
               />
               <text className="text-[18px] sm:text-[20px] md:text-[22px] font-black uppercase tracking-[0.25em] fill-white drop-shadow-[0_4px_20px_rgba(56,189,248,1.0)]">
                 <textPath href="#logoTextPath" startOffset="0%">
-                  YOMTECH GLOBAL • DIGITAL PLATFORM •
+                  YomTech Global • Digital Platform •
                 </textPath>
               </text>
             </svg>

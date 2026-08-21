@@ -123,14 +123,14 @@ const METHODOLOGY_STEPS = [
 /* ─── WHY CHOOSE US / COMPETITIVE ADVANTAGES ─── */
 const WHY_CHOOSE_US = [
   {
-    title: 'End-to-End Expertise',
+    title: 'End to End Expertise',
     desc: 'Full lifecycle delivery from initial architectural design to deployment, security hardening, and continuous 24/7 technical support.',
     icon: Layers,
     accent: 'cyan'
   },
   {
-    title: '100% Custom-Built Systems',
-    desc: 'Every system is engineered from scratch based on exact client workflows — zero reliance on rigid third-party templates or monthly licensing fees.',
+    title: '100% Custom Built Systems',
+    desc: 'Every system is engineered from scratch based on exact client workflows, zero reliance on rigid third-party templates or monthly licensing fees.',
     icon: Code,
     accent: 'emerald'
   },
@@ -454,7 +454,7 @@ export const MethodologyPage = () => {
               Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Yomtech Global</span>
             </h2>
             <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl">
-              We go beyond software development — we build complete digital ecosystems that combine technology engineering, talent development, and media storytelling to drive real transformation.
+              We go beyond software development, we build complete digital ecosystems that combine technology engineering, talent development, and media storytelling to drive real transformation.
             </p>
           </div>
 

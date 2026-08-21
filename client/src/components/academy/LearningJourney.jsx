@@ -67,7 +67,7 @@ export const LearningJourney = () => {
       ],
       deliverable: 'Configured Dev Environment & Engineering Roadmap',
       techPills: ['Git & GitHub', 'VS Code', 'CLI Mastery', 'System Architecture'],
-      duration: 'Weeks 1 - 2',
+      duration: 'Weeks 1 to 2',
       terminalCmd: 'yomtech --init-stage 01 --track tvet-curriculum'
     },
     {
@@ -93,7 +93,7 @@ export const LearningJourney = () => {
       ],
       deliverable: '10+ Verified Lab Submissions & Suite Tests',
       techPills: ['TypeScript', 'Jest / Vitest', 'Docker Labs', 'Live Pair Code'],
-      duration: 'Weeks 3 - 6',
+      duration: 'Weeks 3 to 6',
       terminalCmd: 'yomtech --run-labs --coverage 100%'
     },
     {
@@ -119,7 +119,7 @@ export const LearningJourney = () => {
       ],
       deliverable: 'Production Code Review Certification',
       techPills: ['Code Audit', 'Performance Tuning', 'Clean Architecture', 'Security'],
-      duration: 'Weeks 7 - 9',
+      duration: 'Weeks 7 to 9',
       terminalCmd: 'yomtech --code-review --senior-mentor'
     },
     {
@@ -145,7 +145,7 @@ export const LearningJourney = () => {
       ],
       deliverable: 'Full Stack Blueprint & Comprehensive Spec',
       techPills: ['Next.js App', 'Express / Nest API', 'MongoDB / Postgres', 'AWS Cloud'],
-      duration: 'Weeks 10 - 13',
+      duration: 'Weeks 10 to 13',
       terminalCmd: 'yomtech --deploy production --env cloud'
     },
     {
@@ -171,7 +171,7 @@ export const LearningJourney = () => {
       ],
       deliverable: 'Verified Placement & Enterprise Handoff',
       techPills: ['Portfolio Site', 'Interview Prep', 'Direct Hiring', 'Career Match'],
-      duration: 'Weeks 14 - 16',
+      duration: 'Weeks 14 to 16',
       terminalCmd: 'yomtech --accelerate-career --connect-network'
     },
     {
@@ -436,13 +436,12 @@ export const LearningJourney = () => {
                     />
                   )}
 
-                  {/* 3. Inner White Dashed Core Track (Exact pattern from reference screenshot) */}
+                  {/* 3. Inner White Solid Core Track */}
                   {linePathD && (
                     <path
                       d={linePathD}
                       stroke="#FFFFFF"
                       strokeWidth="2.5"
-                      strokeDasharray="6 6"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       opacity="0.95"
@@ -1013,7 +1012,7 @@ export const LearningJourney = () => {
                 Ready to Build <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-indigo-600 bg-clip-text text-transparent">Production-Grade Applications?</span>
               </h4>
               <p className="text-slate-600 text-xs sm:text-sm font-semibold leading-relaxed">
-                Master the full software development lifecycle with hands-on projects, 1-on-1 mentorship, and a job-ready engineering portfolio.
+                Master the full software development lifecycle with hands-on projects, 1 on 1 mentorship, and a job ready engineering portfolio.
               </p>
             </div>
 

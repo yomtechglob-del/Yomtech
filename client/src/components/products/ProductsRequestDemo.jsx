@@ -9,7 +9,7 @@ export const ProductsRequestDemo = () => {
     { icon: Zap, title: 'Instant Response', desc: 'Our solutions team responds to all demo requests within 24 business hours.', accent: 'text-amber-600', bg: 'bg-amber-50', border: 'border-amber-200' },
     { icon: ShieldCheck, title: 'No Obligation', desc: 'Free product demonstrations with zero commitment required from your organization.', accent: 'text-emerald-600', bg: 'bg-emerald-50', border: 'border-emerald-200' },
     { icon: TrendingUp, title: 'Custom Demos', desc: 'Every demonstration is tailored to your specific use case and organizational needs.', accent: 'text-cyan-600', bg: 'bg-cyan-50', border: 'border-cyan-200' },
-    { icon: Globe, title: 'Expert Consultants', desc: 'Senior YomTech engineers lead every demo — not sales representatives.', accent: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200' },
+    { icon: Globe, title: 'Expert Consultants', desc: 'Senior YomTech engineers lead every demo, not sales representatives.', accent: 'text-indigo-600', bg: 'bg-indigo-50', border: 'border-indigo-200' },
   ];
 
   return (

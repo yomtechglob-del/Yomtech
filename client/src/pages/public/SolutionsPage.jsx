@@ -249,7 +249,7 @@ export const SolutionsPage = () => {
             </div>
 
             <p className="text-cyan-50 text-base md:text-lg leading-relaxed font-normal max-w-2xl font-sans">
-              Yomtech Global delivers end-to-end digital solutions for public sector institutions, enterprises, academic organizations, and development partners — equipping clients with cutting-edge technology, intelligent automation, and sustainable digital impact.
+              Yomtech Global delivers end-to-end digital solutions for public sector institutions, enterprises, academic organizations, and development partners, equipping clients with cutting-edge technology, intelligent automation, and sustainable digital impact.
             </p>
 
             {/* Action Buttons */}
