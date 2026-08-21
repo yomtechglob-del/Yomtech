@@ -2,38 +2,42 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BriefcaseBusiness, ChevronRight, GraduationCap, HeartHandshake } from 'lucide-react';
 
-import backgroundImg from '../../assets/academy/product/background.png';
-import wabiskillsLogo from '../../assets/academy/product/wabiskills.jpg';
-import wabijobsLogo from '../../assets/academy/product/wabijobs.jpg';
-import yomnexLogo from '../../assets/academy/product/yomnex hoiziontal-04.png';
+import { AboutHeroBackground } from '../common/AboutHeroBackground';
+import wabiSkillsLogo from '../../assets/logos/wabi skills logo.png';
+import wabiJobsLogo from '../../assets/logos/wabijobs-logo.png';
+import yomnexLogo from '../../assets/logos/yomnex-logo.png';
 import logoImg from '../../assets/logos/logo.png';
 
 const ACADEMY_PRODUCTS = [
   {
     id: 'wabiskills',
     label: 'WABISKILLS',
-    logo: wabiskillsLogo,
+    logo: wabiSkillsLogo,
+    url: 'https://wabiskills.com/',
     external: true,
     iconTint: 'bg-[#26658C]',
   },
   {
     id: 'wabijob',
     label: 'WABIJOB',
-    logo: wabijobsLogo,
-    external: false,
+    logo: wabiJobsLogo,
+    url: 'https://wabijob.com/',
+    external: true,
     fallbackIcon: BriefcaseBusiness,
     iconTint: 'bg-[#0EA5E9]',
   },
   {
     id: 'yomnex',
     label: 'YOMNEX',
+    logo: yomnexLogo,
+    url: '#yomnex',
     external: false,
     iconTint: 'bg-[#2563EB]',
   },
   {
     id: 'wabx',
     label: 'WABX',
-   
+    url: '#wabx',
     external: false,
     monogram: 'W',
     iconTint: 'bg-[#1D5EF5]',
@@ -41,6 +45,7 @@ const ACADEMY_PRODUCTS = [
   {
     id: 'meri',
     label: 'MERI',
+    url: '#mari',
     external: false,
     fallbackIcon: HeartHandshake,
     iconTint: 'bg-[#D946EF]',
@@ -48,12 +53,15 @@ const ACADEMY_PRODUCTS = [
 ];
 
 const ProductIcon = ({ product }) => {
-  if (product.logo) {
+  const [hasError, setHasError] = React.useState(false);
+
+  if (product.logo && !hasError) {
     return (
       <img
         src={product.logo}
         alt={product.label}
-        className="h-[62px] w-[62px] rounded-full object-contain bg-white"
+        onError={() => setHasError(true)}
+        className="h-[62px] w-[62px] rounded-full object-contain bg-white p-1.5"
       />
     );
   }
@@ -77,21 +85,10 @@ const ProductIcon = ({ product }) => {
 
 export const AcademyRadialHero = () => {
   return (
-    <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-8 sm:pt-32 md:pt-36 md:pb-24">
+    <section className="relative overflow-hidden px-4 pb-20 pt-28 sm:px-8 sm:pt-32 md:pt-36 md:pb-24 hero-cyan-gradient text-white border-b border-cyan-400/30">
 
-   
-      <div className="absolute inset-0">
-        <img
-          src={backgroundImg}
-          alt=""
-          aria-hidden
-          className="h-full w-full object-cover scale-110"
-        />
-
-        <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.78)_8%,rgba(235,244,255,0.58)_42%,rgba(145,184,255,0.18)_100%)]" />
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_16%_46%,rgba(255,255,255,0.95),transparent_16%),radial-gradient(circle_at_72%_18%,rgba(29,94,245,0.18),transparent_22%),radial-gradient(circle_at_86%_74%,rgba(37,99,235,0.28),transparent_22%)] backdrop-blur-[6px]" />
-      </div>
+      {/* Shared Executive Ermi Flowing Background */}
+      <AboutHeroBackground />
 
 
       <div className="absolute left-7 top-8 grid grid-cols-4 gap-3 opacity-65 sm:left-10 sm:top-12">

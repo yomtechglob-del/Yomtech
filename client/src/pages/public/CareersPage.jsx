@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 
 // Background Assets & Logos
+import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 import ermiTwoImg from '../../assets/ermi-two.jpg';
 import erminOneImg from '../../assets/ermin-one.jpg';
 import logoEmblem from '../../assets/logos/logo.png';
@@ -282,15 +283,8 @@ export const CareersPage = () => {
       ════════════════════════════════════════════════════ */}
       <section className="w-full pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
         
-        {/* Background Image Layers */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
-          <img src={ermiTwoImg} alt="" className="w-full h-full object-cover opacity-55 mix-blend-overlay animate-river-flow-1 border-0" />
-        </div>
-        <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden z-0">
-          <img src={erminOneImg} alt="" className="w-full h-full object-cover opacity-60 mix-blend-soft-light animate-river-flow-2 border-0" />
-        </div>
-
-        <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/85 via-[#0077B6]/70 to-[#00B4D8]/80 pointer-events-none z-0" />
+        {/* Shared Executive Ermi Flowing Background */}
+        <AboutHeroBackground />
 
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
           
