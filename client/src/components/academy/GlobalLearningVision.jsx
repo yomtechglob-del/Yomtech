@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Users2, BookOpen, Cpu, TrendingUp } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
-/* ─── 4-STEP 3D PENCIL INFOGRAPHIC LAYOUT (TITLE CASE HEADERS) ─── */
+/* ─── 4-STEP 3D PENCIL INFOGRAPHIC LAYOUT (WATERMARK LOGO IN RIGHT BOTTOM CORNER) ─── */
 const CONNECTIONS = [
   { 
     id: '01',
@@ -108,7 +109,7 @@ export const GlobalLearningVision = () => {
         {/* 4-STEP 3D PENCIL INFOGRAPHIC TIMELINE LAYOUT */}
         <div className="relative max-w-[90rem] mx-auto py-8">
           
-          {/* Central 3D Wooden Pencil Vector Spine (Desktop Only) */}
+          {/* Central 3D Wooden Pencil Vector Spine */}
           <div className="hidden lg:flex flex-col items-center absolute inset-y-0 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
             {/* Pencil Shaft with 3D Wood Gradients & Facets */}
             <div className="w-10 sm:w-11 flex-1 bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#B45309] rounded-t-full shadow-2xl relative overflow-hidden border-x border-amber-600/40">
@@ -150,10 +151,15 @@ export const GlobalLearningVision = () => {
                 >
                   {/* Step Card Plate */}
                   <div className="w-full lg:w-[calc(50%-3rem)] group">
-                    <div className={`bg-white rounded-2xl p-6 sm:p-8 shadow-[0_12px_35px_rgba(0,0,0,0.07)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5 border border-slate-100 ${c.topBorder}`}>
+                    <div className={`bg-white rounded-2xl p-6 sm:p-8 shadow-[0_12px_35px_rgba(0,0,0,0.07)] hover:shadow-2xl transition-all duration-300 relative flex flex-col justify-between space-y-4 hover:-translate-y-1.5 border border-slate-100 ${c.topBorder} overflow-hidden`}>
                       
+                      {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                      <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                        <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                      </div>
+
                       {/* Top Row: Large Step Number + Subtitle Pill Badge + Top Right Icon */}
-                      <div className="flex items-start justify-between gap-4">
+                      <div className="flex items-start justify-between gap-4 relative z-10">
                         <div className="flex items-center gap-3">
                           <span className={`text-3xl sm:text-4xl font-black font-mono ${c.numberColor} leading-none`}>
                             {c.step}
@@ -170,7 +176,7 @@ export const GlobalLearningVision = () => {
                       </div>
 
                       {/* Middle Title & Description */}
-                      <div className="space-y-2 text-left pt-2">
+                      <div className="space-y-2 text-left pt-2 relative z-10">
                         <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors">
                           {c.title}
                         </h3>
@@ -180,7 +186,7 @@ export const GlobalLearningVision = () => {
                       </div>
 
                       {/* Bottom Arrow Pointer Tab */}
-                      <div className="pt-2 flex justify-start">
+                      <div className="pt-2 flex justify-start relative z-10">
                         <div 
                           className={`px-3.5 py-1.5 ${c.arrowBg} text-white font-mono font-bold text-xs shadow-xs rounded-sm flex items-center gap-1 -ml-6 -mb-6 rounded-r-md`}
                           style={{ clipPath: 'polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%)' }}

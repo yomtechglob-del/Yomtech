@@ -19,6 +19,7 @@ import academyHeroImg from '../../assets/academy/wabiskills.jpg';
 import academyCoursesImg from '../../assets/academy/wabiskills_courses.png';
 import academyBootcampImg from '../../assets/academy/wabiskills_bootcamp.png';
 import logoImg from '../../assets/academy/wabiskills-logo.jpg';
+import logoEmblem from '../../assets/logos/logo.png';
 import { AboutHeroBackground } from '../../components/common/AboutHeroBackground';
 
 const ACADEMY_COURSES = [
@@ -256,8 +257,14 @@ export const AcademyPage = () => {
                     </div>
 
                     {/* Body Content */}
-                    <div className="p-7 space-y-5 flex-1 flex flex-col justify-between">
-                      <div className="space-y-3">
+                    <div className="p-7 space-y-5 flex-1 flex flex-col justify-between relative overflow-hidden">
+                      
+                      {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                      <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                        <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                      </div>
+
+                      <div className="space-y-3 relative z-10">
                         <div className="flex items-center justify-between">
                           <span className="text-xs font-mono font-black uppercase tracking-widest text-slate-400">
                             {course.category}
@@ -284,7 +291,7 @@ export const AcademyPage = () => {
                         </div>
                       </div>
 
-                      <div className="pt-5 border-t border-slate-100 flex items-center justify-between">
+                      <div className="pt-5 border-t border-slate-100 flex items-center justify-between relative z-10">
                         <div>
                           <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
                           <div className="text-xs font-black text-slate-800">{course.duration}</div>

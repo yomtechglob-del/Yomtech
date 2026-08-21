@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ExternalLink, GraduationCap, Phone, MapPin, CheckCircle2 } from 'lucide-react';
 import logoImg from '../../assets/logos/logo.png';
 
+/* ─── ACADEMY CTA CARD (WATERMARK LOGO IN RIGHT BOTTOM CORNER & TITLE CASE) ─── */
 export const AcademyCTA = () => {
   return (
     <section className="py-24 sm:py-32 w-full bg-gradient-to-b from-slate-50 via-cyan-50/40 to-slate-50 relative text-slate-900 overflow-hidden border-t border-slate-200/80 font-sans">
@@ -23,6 +24,11 @@ export const AcademyCTA = () => {
         >
           <div className="bg-white rounded-[3.1rem] p-10 sm:p-16 text-slate-900 text-center space-y-8 relative overflow-hidden shadow-inner">
             
+            {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+            <div className="absolute -right-6 -bottom-6 opacity-[0.20] pointer-events-none z-0">
+              <img src={logoImg} alt="" className="w-80 sm:w-96 h-80 sm:h-96 object-contain" />
+            </div>
+
             {/* Radial Aura Glow */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-[#0ED3DD]/20 via-cyan-100/30 to-sky-200/20 rounded-full blur-3xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
 
@@ -33,8 +39,8 @@ export const AcademyCTA = () => {
                   <div className="w-6 h-6 rounded-lg overflow-hidden border border-cyan-300 shrink-0">
                     <img src={logoImg} alt="WabiSkills Logo" className="w-full h-full object-cover" />
                   </div>
-                  <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] font-display">
-                    🎓 WABISKILLS — YOMTECH GLOBAL'S EDUCATIONAL PLATFORM
+                  <span className="text-[10px] font-bold tracking-wider text-[#0284C7] font-display">
+                    🎓 WabiSkills — YomTech Global's Educational Platform
                   </span>
                 </div>
               </div>
@@ -48,7 +54,7 @@ export const AcademyCTA = () => {
                 </span>
               </h2>
 
-              <p className="text-slate-600 text-sm sm:text-base md:text-lg font-semibold leading-relaxed max-w-2xl mx-auto">
+              <p className="text-slate-600 text-sm sm:text-base md:text-lg font-medium leading-relaxed max-w-2xl mx-auto">
                 Our mission is to help people to find the best course online and learn with experts anytime, anywhere — live, focused, human, and accessible.
               </p>
             </div>
@@ -59,15 +65,15 @@ export const AcademyCTA = () => {
                 href="https://wabiskills.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs sm:text-sm shadow-[0_10px_30px_rgba(2,132,199,0.35)] hover:shadow-[0_15px_40px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300"
+                className="group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-bold text-xs sm:text-sm shadow-[0_10px_30px_rgba(2,132,199,0.35)] hover:shadow-[0_15px_40px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300"
               >
-                <span>APPLY NOW ON WABISKILLS.COM</span>
+                <span>Apply Now on WabiSkills.com</span>
                 <ExternalLink size={16} />
               </a>
 
               <a
                 href="tel:+251977666699"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cyan-50 text-[#0284C7] border border-cyan-200 font-extrabold text-xs sm:text-sm shadow-md hover:bg-cyan-100 hover:border-cyan-300 hover:scale-105 transition-all duration-300"
+                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cyan-50 text-[#0284C7] border border-cyan-200 font-bold text-xs sm:text-sm shadow-md hover:bg-cyan-100 hover:border-cyan-300 hover:scale-105 transition-all duration-300"
               >
                 <Phone size={16} className="text-[#0284C7]" />
                 <span>+251 (977) 666-699 / +251 (906) 101-111</span>
@@ -75,7 +81,7 @@ export const AcademyCTA = () => {
             </div>
 
             {/* Contact Location & Trust Badges */}
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-slate-100 text-xs font-black text-slate-600 relative z-10">
+            <div className="flex flex-wrap items-center justify-center gap-6 pt-6 border-t border-slate-100 text-xs font-bold text-slate-600 relative z-10">
               <div className="flex items-center gap-2 text-[#0284C7]">
                 <MapPin size={16} />
                 <span>Megenagna, Derartu Tower, 9th Floor, Addis Ababa</span>

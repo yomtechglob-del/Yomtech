@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Terminal, Layers, Users, Zap, CheckCircle2, Award } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
+/* ─── 5-STAGE PROGRESSIVE SOFTWARE LEARNING METHODOLOGY (WATERMARK LOGO IN RIGHT BOTTOM CORNER) ─── */
 export const LearningModel = () => {
   const pillars = [
     {
       step: '01.',
-      stage: 'LEARN',
+      stage: 'Learn',
       title: 'Understand Concepts & Architecture',
       desc: 'Grasp fundamental computer science principles, modern software engineering patterns, and enterprise cloud architecture.',
       deliverables: ['System Patterns', 'Data Structures', 'Cloud Concepts'],
@@ -18,7 +20,7 @@ export const LearningModel = () => {
     },
     {
       step: '02.',
-      stage: 'PRACTICE',
+      stage: 'Practice',
       title: 'Apply Knowledge & Deep Code Labs',
       desc: 'Cement understanding through hands-on coding exercises, interactive sandbox labs, algorithm drills, and unit test suites.',
       deliverables: ['Interactive Labs', 'Algorithm Drills', 'Code Challenges'],
@@ -30,7 +32,7 @@ export const LearningModel = () => {
     },
     {
       step: '03.',
-      stage: 'BUILD',
+      stage: 'Build',
       title: 'Real-World Production Applications',
       desc: 'Architect and deploy production-ready web platforms, high-concurrency microservices, AI model endpoints, and apps.',
       deliverables: ['Production Apps', 'AI Endpoints', 'MERN & Mobile'],
@@ -42,7 +44,7 @@ export const LearningModel = () => {
     },
     {
       step: '04.',
-      stage: 'MENTOR',
+      stage: 'Mentor',
       title: 'Guidance, PR Audits & Career Growth',
       desc: 'Accelerate career trajectory with direct 1-on-1 code reviews, senior lead developer feedback, and portfolio validation.',
       deliverables: ['1-on-1 PR Audits', 'Lead Feedback', 'Code Standards'],
@@ -54,7 +56,7 @@ export const LearningModel = () => {
     },
     {
       step: '05.',
-      stage: 'DEPLOY',
+      stage: 'Deploy',
       title: 'Enterprise Release & Job Placement',
       desc: 'Deploy live client projects on Yomtech infrastructure and transition seamlessly into enterprise tech placements.',
       deliverables: ['Live Cloud Release', 'Vetted Portfolio', 'WabiJob Placement'],
@@ -80,12 +82,12 @@ export const LearningModel = () => {
 
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
 
-        {/* Section Header matching Image 2 */}
+        {/* Section Header */}
         <div className="text-left space-y-4 max-w-full">
           <div className="flex items-center gap-0 w-full">
-            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-black uppercase tracking-widest shadow-xs shrink-0 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2.5 px-6 py-2 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs font-bold shrink-0 backdrop-blur-md">
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
-              <span>DEVELOPMENT METHODOLOGY</span>
+              <span>Development Methodology</span>
               <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
             </div>
             <div className="h-[2.5px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_8px_rgba(14,165,233,0.5)]" />
@@ -99,7 +101,7 @@ export const LearningModel = () => {
           </p>
         </div>
 
-        {/* Modern 5-Column Business Infographic Layout (Matching Screenshot 2) */}
+        {/* Modern 5-Column Business Infographic Layout */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 pt-4">
           {pillars.map((pillar, idx) => {
             const IconComp = pillar.icon;
@@ -115,7 +117,7 @@ export const LearningModel = () => {
               >
                 <div className="bg-white rounded-[2rem] overflow-hidden flex flex-col justify-between h-full border border-slate-100">
                   
-                  {/* Top Angled Gradient Ribbon Header Tab (Matching Screenshot 2) */}
+                  {/* Top Angled Gradient Ribbon Header Tab */}
                   <div
                     className={`p-6 bg-gradient-to-r ${pillar.gradient} text-white relative overflow-hidden flex items-center justify-between shadow-md`}
                     style={{ clipPath: 'polygon(0 0, 100% 0, 100% 78%, 0 100%)' }}
@@ -132,24 +134,30 @@ export const LearningModel = () => {
                   </div>
 
                   {/* Inner White Body Plate */}
-                  <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
-                    <div className="space-y-3">
-                      <span className={`inline-block px-3.5 py-1 rounded-full text-xs font-mono font-black uppercase tracking-widest ${pillar.lightBg} ${pillar.badgeText} border ${pillar.badgeBorder}`}>
+                  <div className="p-6 space-y-4 flex-1 flex flex-col justify-between relative overflow-hidden">
+                    
+                    {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                    <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                      <img src={logoEmblem} alt="" className="w-24 sm:w-28 h-24 sm:h-28 object-contain" />
+                    </div>
+
+                    <div className="space-y-3 relative z-10">
+                      <span className={`inline-block px-3.5 py-1 rounded-full text-xs font-mono font-bold tracking-wider ${pillar.lightBg} ${pillar.badgeText} border ${pillar.badgeBorder}`}>
                         {pillar.stage}
                       </span>
 
-                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                         {pillar.title}
                       </h3>
 
-                      <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                      <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
                         {pillar.desc}
                       </p>
                     </div>
 
                     {/* Key Deliverables Bullet Pills */}
-                    <div className="pt-4 border-t border-slate-100 space-y-2">
-                      <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 font-mono">Deliverables</div>
+                    <div className="pt-4 border-t border-slate-100 space-y-2 relative z-10">
+                      <div className="text-[10px] font-bold tracking-wider text-slate-400 font-mono">Deliverables</div>
                       <div className="space-y-1.5">
                         {pillar.deliverables.map((item, i) => (
                           <div key={i} className="flex items-center gap-2 text-xs font-bold text-slate-700">

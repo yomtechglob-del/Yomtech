@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Terminal, GitPullRequest, Rocket } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
-/* ─── 4-COLUMN HORIZONTAL CHEVRON GRID (TITLE CASE HEADERS) ─── */
+/* ─── 4-COLUMN HORIZONTAL CHEVRON GRID (WATERMARK LOGO IN RIGHT BOTTOM CORNER) ─── */
 const TRANSFORMATION_STEPS = [
   {
     id: '01',
@@ -116,9 +117,14 @@ export const ClassroomToRealWorld = () => {
                 transition={{ duration: 0.45, delay: idx * 0.1 }}
                 className="bg-white rounded-[2.5rem] shadow-[0_15px_40px_rgba(0,0,0,0.08)] hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between min-h-[480px] group hover:-translate-y-2.5 relative border border-slate-100/90"
               >
+                {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                  <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                </div>
+
                 {/* CHEVRON BANNER AT TOP (Step 01 & Step 03) */}
                 {isTopChevron ? (
-                  <div className="p-8 sm:p-9 pb-4 space-y-5">
+                  <div className="p-8 sm:p-9 pb-4 space-y-5 relative z-10">
                     {/* Arrow Chevron Header Tab */}
                     <div className="flex items-center justify-between -ml-8 sm:-ml-9 -mt-8 sm:-mt-9">
                       <div 
@@ -155,7 +161,7 @@ export const ClassroomToRealWorld = () => {
                   </div>
                 ) : (
                   /* ICON AT TOP (Step 02 & Step 04) */
-                  <div className="p-8 sm:p-9 pb-4 space-y-5 text-left">
+                  <div className="p-8 sm:p-9 pb-4 space-y-5 text-left relative z-10">
                     {/* Top Row: Icon Badge */}
                     <div className="flex items-center justify-between">
                       <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center ${step.iconColor} shadow-md group-hover:scale-110 transition-transform`}>
@@ -185,14 +191,14 @@ export const ClassroomToRealWorld = () => {
                 {/* BOTTOM ROW (Icon or Chevron Banner) */}
                 {isTopChevron ? (
                   /* Icon at Bottom (Step 01 & Step 03) */
-                  <div className="p-8 sm:p-9 pt-2 flex justify-start">
+                  <div className="p-8 sm:p-9 pt-2 flex justify-start relative z-10">
                     <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center ${step.iconColor} shadow-md group-hover:scale-110 transition-transform`}>
                       <IconComp size={28} strokeWidth={2.4} />
                     </div>
                   </div>
                 ) : (
                   /* CHEVRON BANNER AT BOTTOM (Step 02 & Step 04) */
-                  <div className="p-8 sm:p-9 pt-2">
+                  <div className="p-8 sm:p-9 pt-2 relative z-10">
                     <div className="-ml-8 sm:-ml-9 -mb-8 sm:-mb-9">
                       <div 
                         className={`w-[85%] px-6 py-4 ${step.chevronBg} text-white shadow-lg flex items-center justify-start rounded-r-md`}

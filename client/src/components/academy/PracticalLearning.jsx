@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { BookOpen, Code2, RefreshCw } from 'lucide-react';
+import logoEmblem from '../../assets/logos/logo.png';
 
-/* ─── 3-STEP SEQUENTIAL BUSINESS INFOGRAPHIC FLOW (TITLE CASE HEADERS) ─── */
+/* ─── 3-STEP SEQUENTIAL BUSINESS INFOGRAPHIC FLOW (WATERMARK LOGO IN RIGHT BOTTOM CORNER) ─── */
 const PRINCIPLES = [
   {
     id: '01',
@@ -117,10 +118,15 @@ export const PracticalLearning = () => {
                     <div className={`${principle.cardBg} rounded-[2.5rem] p-2 relative flex flex-col justify-between h-full overflow-hidden shadow-inner`}>
                       
                       {/* Pure White Card Body */}
-                      <div className="bg-white rounded-3xl p-8 sm:p-11 shadow-xl space-y-8 flex flex-col justify-between h-full relative z-10 text-left border border-slate-100 min-h-[440px]">
+                      <div className="bg-white rounded-3xl p-8 sm:p-11 shadow-xl space-y-8 flex flex-col justify-between h-full relative z-10 text-left border border-slate-100 min-h-[440px] overflow-hidden">
                         
+                        {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
+                        <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
+                          <img src={logoEmblem} alt="" className="w-28 sm:w-36 h-28 sm:h-36 object-contain" />
+                        </div>
+
                         {/* Top Row: Icon Box & Subtitle Badge */}
-                        <div className="flex items-center justify-between">
+                        <div className="flex items-center justify-between relative z-10">
                           <div className={`w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center ${principle.themeText} shadow-md group-hover:scale-110 transition-transform`}>
                             <IconComp size={34} strokeWidth={2.4} />
                           </div>
@@ -130,7 +136,7 @@ export const PracticalLearning = () => {
                         </div>
 
                         {/* Title & Description */}
-                        <div className="space-y-4 text-left pt-2">
+                        <div className="space-y-4 text-left pt-2 relative z-10">
                           <h3 className="text-3xl sm:text-4xl font-bold text-slate-900 font-display tracking-tight group-hover:text-[#0284C7] transition-colors leading-tight">
                             {principle.label}
                           </h3>
@@ -140,7 +146,7 @@ export const PracticalLearning = () => {
                         </div>
 
                         {/* Bottom Step Number */}
-                        <div className="pt-6 border-t border-slate-100 flex justify-between items-center text-slate-400 font-mono font-semibold text-sm sm:text-base">
+                        <div className="pt-6 border-t border-slate-100 flex justify-between items-center text-slate-400 font-mono font-semibold text-sm sm:text-base relative z-10">
                           <span className="tracking-widest font-bold">Step</span>
                           <span className={`text-2xl sm:text-3xl font-black font-mono ${principle.themeText}`}>
                             {principle.step}
