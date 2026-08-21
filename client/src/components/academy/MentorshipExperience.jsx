@@ -209,21 +209,21 @@ export const MentorshipExperience = () => {
              <div className="relative flex items-center gap-2 px-5 py-2 rounded-full bg-amber-50 border border-amber-200 shadow-sm transition-transform group-hover:scale-105 duration-300">
               <Users className="w-3.5 h-3.5 text-amber-500" />
               <span className="text-[10px] font-black tracking-[0.25em] uppercase text-amber-700">
-                1-On-1 Guidance
+                WABISKILLS LIVE-ONLY LEARNING
               </span>
             </div>
           </div>
           
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-            Learn With <br className="sm:hidden" />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-blue-600 relative inline-block">
-              Guidance
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight font-display">
+            Learn With Real <br className="sm:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600 relative inline-block">
+              Human Instructors Live
               <svg className="absolute w-full h-3 -bottom-1 left-0 text-cyan-200/50" viewBox="0 0 200 9" fill="none" preserveAspectRatio="none"><path d="M2 7.00002C45 -1.99998 120 -1.99998 198 7.00002" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/></svg>
             </span>
           </h2>
           
-          <p className="text-base md:text-lg text-slate-500 font-medium max-w-2xl leading-relaxed">
-            Practical technical mentorship bridging ambition with elite production software craftsmanship.
+          <p className="text-base md:text-lg text-slate-500 font-medium max-w-2xl leading-relaxed font-sans">
+            Live, Instructor-led Sessions that feel like a real classroom, not just a video library. No bots — our WabiSkills instructors are real humans teaching in real time with daily follow-ups.
           </p>
         </div>
 

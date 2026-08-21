@@ -1,313 +1,208 @@
-import React, { useState, useRef } from 'react';
-import { BookOpen, Terminal, Layers, Users, Zap, Atom, ArrowRight } from 'lucide-react';
-import logoImg from '../../assets/academy/wabiskills-logo.jpg';
-
-const PILLARS = [
-  {
-    id: '01',
-    label: 'LEARN',
-    title: 'Understand Concepts',
-    description: 'Grasp fundamental architecture, modern patterns, and production engineering principles with crystal clarity.',
-    icon: BookOpen,
-    colors: {
-      light: 'bg-violet-50',
-      border: 'border-violet-100',
-      text: 'text-violet-600',
-      gradient: 'from-violet-500 to-purple-600',
-      shadow: 'rgba(139, 92, 246, 0.25)',
-      glow: 'rgba(139, 92, 246, 0.15)'
-    },
-    delay: '0s'
-  },
-  {
-    id: '02',
-    label: 'PRACTICE',
-    title: 'Apply Knowledge',
-    description: 'Cement understanding through hands-on exercises, interactive sandbox labs, and elite coding challenges.',
-    icon: Terminal,
-    colors: {
-      light: 'bg-cyan-50',
-      border: 'border-cyan-100',
-      text: 'text-cyan-600',
-      gradient: 'from-cyan-400 to-blue-500',
-      shadow: 'rgba(6, 182, 212, 0.25)',
-      glow: 'rgba(6, 182, 212, 0.15)'
-    },
-    delay: '0.1s'
-  },
-  {
-    id: '03',
-    label: 'BUILD',
-    title: 'Real-World Projects',
-    description: 'Architect production-ready web applications, scalable microservices, and enterprise-grade interfaces.',
-    icon: Layers,
-    colors: {
-      light: 'bg-pink-50',
-      border: 'border-pink-100',
-      text: 'text-pink-600',
-      gradient: 'from-pink-500 to-rose-500',
-      shadow: 'rgba(236, 72, 153, 0.25)',
-      glow: 'rgba(236, 72, 153, 0.15)'
-    },
-    delay: '0.2s'
-  },
-  {
-    id: '04',
-    label: 'MENTOR',
-    title: 'Guidance & Feedback',
-    description: 'Accelerate growth with senior technical review, direct code coaching, and 1-on-1 career trajectory mapping.',
-    icon: Users,
-    colors: {
-      light: 'bg-emerald-50',
-      border: 'border-emerald-100',
-      text: 'text-emerald-600',
-      gradient: 'from-emerald-400 to-teal-500',
-      shadow: 'rgba(16, 185, 129, 0.25)',
-      glow: 'rgba(16, 185, 129, 0.15)'
-    },
-    delay: '0.3s'
-  }
-];
-
-const GlassCard = ({ pillar }) => {
-  const cardRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  // Advanced 3D Magnetic hover physics
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setMousePos({ x, y });
-  };
-
-  const Icon = pillar.icon;
-
-  return (
-    <div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      className="relative group h-full flex flex-col rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white/60 transition-all duration-700 ease-out cursor-pointer z-10"
-      style={{
-        transform: isHovered 
-          ? `perspective(1200px) rotateX(${(mousePos.y - 150) / -25}deg) rotateY(${(mousePos.x - 150) / 25}deg) scale3d(1.02, 1.02, 1.02)`
-          : 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
-        boxShadow: isHovered 
-          ? `0 30px 60px -12px ${pillar.colors.shadow}, 0 0 0 1px rgba(255,255,255,0.9) inset` 
-          : '0 10px 30px -10px rgba(0,0,0,0.05), 0 0 0 1px rgba(255,255,255,0.5) inset',
-        animation: `fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${pillar.delay} both`
-      }}
-    >
-      {/* Dynamic Cursor Spotlight (Follows mouse on hover) */}
-      <div 
-        className="absolute inset-0 rounded-[2.5rem] transition-opacity duration-300 pointer-events-none overflow-hidden"
-        style={{ opacity: isHovered ? 1 : 0 }}
-      >
-        <div 
-          className="absolute w-[300px] h-[300px] rounded-full blur-[60px] transition-transform duration-75 ease-out"
-          style={{
-            background: pillar.colors.glow,
-            transform: `translate(${mousePos.x - 150}px, ${mousePos.y - 150}px)`,
-          }}
-        />
-      </div>
-
-      {/* Internal Content Container */}
-      <div className="relative z-10 p-8 flex flex-col h-full bg-gradient-to-b from-white/40 to-transparent rounded-[2.5rem]">
-        
-        {/* Header Row: Badge & Floating Icon */}
-        <div className="flex justify-between items-start mb-10">
-          <span className={`px-4 py-1.5 rounded-full bg-white/80 ${pillar.colors.text} text-[10px] font-black uppercase tracking-[0.25em] border border-white shadow-sm transition-colors duration-300 group-hover:bg-white`}>
-            Pillar {pillar.id}
-          </span>
-          
-          <div className={`w-12 h-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center ${pillar.colors.text} transition-all duration-500 group-hover:scale-110 group-hover:-rotate-6 relative`}>
-            <div className="absolute inset-0 bg-current opacity-5 rounded-2xl group-hover:opacity-10 transition-opacity" />
-            <Icon className="w-5 h-5 relative z-10 animate-float" strokeWidth={2} />
-          </div>
-        </div>
-
-        <div className="mt-auto">
-          <h4 className={`text-[10px] font-extrabold ${pillar.colors.text} uppercase tracking-widest mb-3 opacity-80 group-hover:opacity-100 transition-opacity`}>
-            {pillar.label}
-          </h4>
-          <h3 className="text-2xl font-black text-slate-900 mb-4 tracking-tight group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-slate-900 group-hover:to-slate-600 transition-all duration-300">
-            {pillar.title}
-          </h3>
-          <p className="text-sm text-slate-500 leading-relaxed font-medium mb-6 group-hover:text-slate-700 transition-colors duration-300">
-            {pillar.description}
-          </p>
-        </div>
-
-        {/* Animated Sweep Line at bottom */}
-        <div className="mt-auto w-full h-1 bg-slate-100 rounded-full overflow-hidden">
-          <div 
-            className={`h-full w-full bg-gradient-to-r ${pillar.colors.gradient} origin-left transition-transform duration-700 ease-out`}
-            style={{ transform: isHovered ? 'scaleX(1)' : 'scaleX(0)' }}
-          />
-        </div>
-      </div>
-
-      {/* Giant Parallax Watermark Number */}
-      <div 
-        className="absolute -bottom-4 -right-2 text-[140px] font-black text-slate-900/[0.03] pointer-events-none select-none transition-transform duration-700 ease-out z-0"
-        style={{
-          transform: isHovered ? 'translate(-10px, -10px) scale(1.05)' : 'translate(0px, 0px) scale(1)'
-        }}
-      >
-        {pillar.id}
-      </div>
-    </div>
-  );
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import { BookOpen, Terminal, Layers, Users, Compass, Zap } from 'lucide-react';
 
 export const LearningModel = () => {
-  return (
-    <section className="relative min-h-screen py-24 bg-[#FAFCFF] overflow-hidden font-sans selection:bg-violet-500/20 selection:text-violet-900 border-b border-purple-200/80">
-      
-      {/* Ambient Background Layers */}
-      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {/* Soft Grid */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]" 
-          style={{ 
-            backgroundImage: 'linear-gradient(to right, #000 1px, transparent 1px), linear-gradient(to bottom, #000 1px, transparent 1px)',
-            backgroundSize: '40px 40px',
-            maskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%)',
-            WebkitMaskImage: 'radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%)'
-          }}
-        />
-        
-        {/* Moving Aurora Orbs */}
-        <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-violet-300/30 blur-[120px] mix-blend-multiply animate-blob" />
-        <div className="absolute top-[20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-cyan-300/30 blur-[100px] mix-blend-multiply animate-blob animation-delay-2000" />
-        <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-pink-200/30 blur-[120px] mix-blend-multiply animate-blob animation-delay-4000" />
-      </div>
+  const pillars = [
+    {
+      step: '01',
+      optionLabel: 'OPTION 01',
+      stage: 'LEARN',
+      title: 'Understand Concepts & Architecture',
+      desc: 'Grasp fundamental computer science principles, modern software engineering patterns, and enterprise cloud architecture with crystal clarity.',
+      icon: BookOpen,
+      align: 'left',
+      themeBg: 'bg-[#F97316]',
+      themeDarkBg: 'bg-[#EA580C]',
+      themeText: 'text-[#EA580C]',
+      themeBorder: 'border-[#F97316]',
+      themeLightBg: 'bg-orange-50',
+    },
+    {
+      step: '02',
+      optionLabel: 'OPTION 02',
+      stage: 'PRACTICE',
+      title: 'Apply Knowledge & Deep Code Labs',
+      desc: 'Cement understanding through hands-on coding exercises, interactive sandbox labs, algorithm drills, and elite test suites.',
+      icon: Terminal,
+      align: 'right',
+      themeBg: 'bg-[#0891B2]',
+      themeDarkBg: 'bg-[#0E7490]',
+      themeText: 'text-[#0E7490]',
+      themeBorder: 'border-[#0891B2]',
+      themeLightBg: 'bg-cyan-50',
+    },
+    {
+      step: '03',
+      optionLabel: 'OPTION 03',
+      stage: 'BUILD',
+      title: 'Real-World Production Applications',
+      desc: 'Architect and deploy production-ready web platforms, high-concurrency microservices, AI model endpoints, and mobile applications.',
+      icon: Layers,
+      align: 'left',
+      themeBg: 'bg-[#06B6D4]',
+      themeDarkBg: 'bg-[#0891B2]',
+      themeText: 'text-[#0891B2]',
+      themeBorder: 'border-[#06B6D4]',
+      themeLightBg: 'bg-sky-50',
+    },
+    {
+      step: '04',
+      optionLabel: 'OPTION 04',
+      stage: 'MENTOR',
+      title: 'Guidance, PR Audits & Career Growth',
+      desc: 'Accelerate career trajectory with direct 1-on-1 code reviews, senior lead developer feedback, pull request audits, and portfolio validation.',
+      icon: Users,
+      align: 'right',
+      themeBg: 'bg-[#F59E0B]',
+      themeDarkBg: 'bg-[#D97706]',
+      themeText: 'text-[#D97706]',
+      themeBorder: 'border-[#F59E0B]',
+      themeLightBg: 'bg-amber-50',
+    },
+  ];
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
-        
-        <div className="text-center max-w-4xl mx-auto mb-16 flex flex-col items-center animate-fade-in-up">
-          
-          {/* Animated Top Pill */}
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/60 backdrop-blur-md border border-white shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] mb-8 hover:bg-white hover:scale-105 transition-all duration-300 cursor-default group">
-            <Zap className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-            <span className="text-[10px] font-black tracking-[0.2em] uppercase text-slate-600 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-cyan-600 transition-all duration-300">
-              Four-Pillar Ecosystem
-            </span>
+  return (
+    <section className="relative py-28 lg:py-40 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+      {/* Background Dot Mesh Texture */}
+      <div
+        className="absolute inset-0 opacity-[0.5] pointer-events-none"
+        style={{
+          backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)',
+          backgroundSize: '28px 28px',
+        }}
+      />
+      <div className="absolute top-1/3 left-1/4 w-[800px] h-[600px] bg-cyan-400/10 rounded-full blur-[180px] pointer-events-none" />
+
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
+
+        {/* Section Header with Connected Horizontal Accent Line */}
+        <div className="text-left w-full space-y-4 max-w-full">
+          <div className="flex items-center gap-0 w-full">
+            <div className="h-[4px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_12px_rgba(14,211,221,0.7)]" />
+            <div className="inline-flex items-center gap-3 px-7 py-3 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs sm:text-sm font-black uppercase tracking-widest shadow-lg backdrop-blur-md shrink-0">
+              <Zap className="w-4 h-4 text-amber-500 animate-pulse" />
+              <span>WABISKILLS LEARNING METHODOLOGY</span>
+              <span className="text-[#0284C7] font-bold text-xs">◆</span>
+            </div>
           </div>
-          
-          {/* Advanced Main Typography */}
-          <h2 className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 mb-6 tracking-tight leading-[1.1]">
-            How We <br className="md:hidden"/>
-            <span className="relative inline-block">
-              <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#8b5cf6,45%,#06b6d4,55%,#8b5cf6)] bg-[length:200%_auto] animate-shimmer">
-                Help You Learn
-              </span>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
+            Architecting Your <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+              Software Engineering Future
             </span>
           </h2>
-          
-          <p className="text-lg md:text-xl text-slate-500 font-medium max-w-2xl leading-relaxed">
-            Four connected pillars radiating around our central WabiSkills educational hub, engineered to transform ambition into mastery.
+          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
+            Our 4-pillar progressive engineering methodology transforms developers into senior software architects through hands-on practice, production project builds, and direct lead mentorship.
           </p>
         </div>
 
-        {/* Central WabiSkills Button Link */}
-        <a 
-          href="https://wabiskills.com/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="relative flex justify-center mb-20 group cursor-pointer z-20"
-        >
-          {/* Background connecting lines */}
-          <div className="hidden lg:block absolute top-1/2 left-[-20vw] right-[-20vw] h-[1px] bg-gradient-to-r from-transparent via-slate-300 to-transparent -z-10" />
+        {/* Scaled 3D Central Pencil Pillar + Alternating Directional Arrow Banners (Matching Image 1 Reference) */}
+        <div className="relative max-w-[92rem] mx-auto py-8">
           
-          {/* Continuous Pulse Rings */}
-          <div className="absolute inset-0 rounded-full border-2 border-violet-400/30 animate-ping-slow scale-150 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute inset-0 rounded-full border-2 border-cyan-400/20 animate-ping-slower scale-[2] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-          {/* Main Button Surface */}
-          <div className="relative bg-white/80 backdrop-blur-xl border border-white px-8 py-4 rounded-full flex items-center gap-4 shadow-[0_10px_40px_-10px_rgba(139,92,246,0.2)] hover:shadow-[0_20px_50px_-10px_rgba(6,182,212,0.3)] hover:-translate-y-1 transition-all duration-500">
-            <div className="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center relative overflow-hidden p-0.5">
-              <img src={logoImg} alt="WabiSkills" className="w-full h-full object-contain rounded-full" />
+          {/* Scaled Central Vertical 3D Pencil Stem */}
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden md:flex flex-col items-center z-10 pointer-events-none">
+            {/* Top Pencil Cap / Eraser */}
+            <div className="w-16 sm:w-20 lg:w-22 h-14 sm:h-16 bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#B45309] rounded-t-3xl shadow-2xl flex items-center justify-center border-b-4 border-amber-800">
+              <Compass size={28} className="text-white" />
             </div>
-            <span className="text-xs sm:text-sm font-black tracking-[0.2em] uppercase bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-slate-900 group-hover:from-violet-600 group-hover:to-cyan-600 transition-all duration-300">
-              WabiSkills Central Nucleus
-            </span>
-            <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-cyan-500 group-hover:translate-x-1 transition-all duration-300" />
-          </div>
-        </a>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-8 w-full z-10">
-          {PILLARS.map((pillar) => (
-            <GlassCard key={pillar.id} pillar={pillar} />
-          ))}
+            {/* Main Pencil Shaft Body */}
+            <div className="w-16 sm:w-20 lg:w-22 flex-1 bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#B45309] shadow-2xl relative border-x-2 border-amber-700/40">
+              <div className="absolute inset-y-0 left-4 w-3 bg-white/35 blur-[1px]" />
+            </div>
+
+            {/* Bottom Pencil Tip Cone */}
+            <div className="w-16 sm:w-20 lg:w-22 h-24 flex flex-col items-center justify-start overflow-hidden">
+              <div 
+                className="w-full h-16 bg-amber-200"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
+              />
+              <div 
+                className="w-7 h-7 bg-slate-900 -mt-7"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
+              />
+            </div>
+          </div>
+
+          {/* Alternating Directional Arrow Banner Cards Container */}
+          <div className="space-y-14 md:space-y-20 relative z-20">
+            {pillars.map((pillar, idx) => {
+              const IconComp = pillar.icon;
+              const isLeft = pillar.align === 'left';
+
+              return (
+                <motion.div
+                  key={pillar.step}
+                  initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.55, delay: idx * 0.1 }}
+                  className={`flex flex-col md:flex-row items-center w-full ${
+                    isLeft ? 'md:justify-start' : 'md:justify-end'
+                  }`}
+                >
+                  <div className={`w-full md:w-[48.5%] ${isLeft ? 'md:pr-10 lg:pr-14' : 'md:pl-10 lg:pl-14'} group`}>
+                    
+                    {/* Scaled Outer Directional Arrow Border Container */}
+                    <div 
+                      className={`p-4 sm:p-5 lg:p-6 ${pillar.themeBg} shadow-2xl transition-transform duration-300 hover:scale-[1.02] relative overflow-hidden`}
+                      style={{
+                        clipPath: isLeft 
+                          ? 'polygon(0% 50%, 10% 0%, 100% 0%, 100% 100%, 10% 100%)'
+                          : 'polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%)'
+                      }}
+                    >
+                      {/* Scaled Inner White Card Plate */}
+                      <div className={`bg-white p-7 sm:p-9 lg:p-11 relative flex flex-col justify-between space-y-5 shadow-inner ${
+                        isLeft ? 'pl-10 sm:pl-12 rounded-r-3xl' : 'pr-10 sm:pr-12 rounded-l-3xl'
+                      }`}>
+                        
+                        {/* Top Header: Step Number & Stage Tag */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <span className={`text-4xl sm:text-6xl font-black font-mono tracking-tight ${pillar.themeText}`}>
+                              {pillar.step}
+                            </span>
+                            <span className={`px-4 py-1.5 rounded-full text-xs font-mono font-black uppercase tracking-widest ${pillar.themeLightBg} ${pillar.themeText} border-2 ${pillar.themeBorder}`}>
+                              {pillar.stage}
+                            </span>
+                          </div>
+
+                          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${pillar.themeLightBg} ${pillar.themeText} border-2 ${pillar.themeBorder} flex items-center justify-center shadow-inner group-hover:scale-115 transition-transform duration-300`}>
+                            <IconComp size={28} strokeWidth={2.2} />
+                          </div>
+                        </div>
+
+                        {/* Title & Description */}
+                        <div className="space-y-3">
+                          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                            {pillar.title}
+                          </h3>
+
+                          <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                            {pillar.desc}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Floating Step Tag Label Outside */}
+                    <div className={`pt-3 flex items-center ${isLeft ? 'justify-start pl-6' : 'justify-end pr-6'}`}>
+                      <span className={`text-xs sm:text-sm font-mono font-black uppercase tracking-widest ${pillar.themeText}`}>
+                        ◆ {pillar.optionLabel}
+                      </span>
+                    </div>
+
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
         </div>
 
       </div>
-
-      <style dangerouslySetInnerHTML={{__html: `
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 15s infinite alternate ease-in-out;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-        
-        @keyframes shimmer {
-          0% { background-position: -200% center; }
-          100% { background-position: 200% center; }
-        }
-        .animate-shimmer {
-          animation: shimmer 6s linear infinite;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-4px); }
-        }
-        .animate-float {
-          animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes fadeInUp {
-          0% { opacity: 0; transform: translateY(30px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes ping-slow {
-          0% { transform: scale(1); opacity: 0.8; }
-          100% { transform: scale(1.5); opacity: 0; }
-        }
-        .animate-ping-slow {
-          animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
-        }
-
-        @keyframes ping-slower {
-          0% { transform: scale(1); opacity: 0.5; }
-          100% { transform: scale(2); opacity: 0; }
-        }
-        .animate-ping-slower {
-          animation: ping-slower 4s cubic-bezier(0, 0, 0.2, 1) infinite;
-          animation-delay: 1s;
-        }
-
-        .animate-spin-slow {
-          animation: spin 8s linear infinite;
-        }
-      `}} />
     </section>
   );
 };

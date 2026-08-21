@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Rocket, Cpu, Layout, Monitor, BarChart, GraduationCap, ArrowRight, BookOpen,
   Award, Zap, Users, Check, Sparkles, ChevronRight, ShieldCheck, Code, Globe,
-  Layers, CheckCircle2
+  Layers, CheckCircle2, Star, ExternalLink, Phone, MapPin, Calendar, Bell
 } from 'lucide-react';
 import { AcademyRadialHero } from '../../components/academy/AcademyRadialHero';
 import { LearningModel } from '../../components/academy/LearningModel';
@@ -27,57 +27,127 @@ const ACADEMY_COURSES = [
     id: 'fullstack',
     category: 'FULLSTACK',
     title: 'Fullstack Web & Mobile Development',
-    desc: 'Master frontend React, backend Node.js, Express, MongoDB/PostgreSQL, and mobile React Native development through end-to-end production software engineering.',
-    badge: 'Fullstack Engineering',
+    desc: 'Become a Fullstack Developer in 6 months with live classes, projects, and group support. Master HTML, CSS, JavaScript, React, Node.js, Express, MongoDB, and MERN Stack.',
+    badge: 'MERN Stack • 6 Months',
     badgeColor: 'bg-sky-50 text-sky-700 border-sky-200',
-    duration: '16 Weeks',
-    format: 'Live Bootcamps + Hands-on',
-    projectsCount: '6+ Apps',
-    rating: '4.9 ★★★★★',
-    tags: ['React & Next.js', 'Node.js & Express', 'React Native Mobile', 'PostgreSQL & MongoDB', 'Cloud Deployment'],
-    layout: 'left-image'
+    duration: '5.5–6 Months',
+    format: 'Live Classes + Daily Follow-ups',
+    projectsCount: '1000+ Students Enrolled',
+    rating: '5.0 ★★★★★',
+    tags: ['HTML & CSS', 'JavaScript & React', 'Node.js & Express', 'MongoDB & MERN', 'Live Projects'],
+    layout: 'left-image',
+    url: 'https://wabiskills.com/'
   },
   {
     id: 'ai',
     category: 'AI',
-    title: 'Artificial Intelligence & Machine Learning',
-    desc: 'Deep dive into PyTorch, neural network architectures, computer vision, natural language processing, and LLM fine-tuning built for production environments.',
-    badge: 'AI & Data Science',
+    title: 'Artificial Intelligence (AI with Python)',
+    desc: 'Master AI and Python in a few months with hands-on projects, real-world applications, and live mentorship. Deep Learning, Machine Learning models & LLM integration.',
+    badge: 'AI & Machine Learning',
     badgeColor: 'bg-purple-50 text-purple-700 border-purple-200',
-    duration: '20 Weeks',
-    format: 'Project Bootcamps',
-    projectsCount: '5+ AI Models',
+    duration: '2–6 Months Self-Paced',
+    format: 'Hands-on Projects + Live Labs',
+    projectsCount: '125+ Students Enrolled',
     rating: '5.0 ★★★★★',
-    tags: ['PyTorch & Python', 'Computer Vision (YOLO)', 'LLMs & Fine-Tuning', 'NLP & Vector DBs', 'Model Deployment'],
-    layout: 'right-image'
+    tags: ['Python Fundamentals', 'Machine Learning', 'Deep Learning', 'PyTorch & Neural Networks', 'AI Projects'],
+    layout: 'right-image',
+    url: 'https://wabiskills.com/'
   },
   {
     id: 'uiux',
     category: 'DESIGN',
-    title: 'UI/UX & Modern Product Design',
-    desc: 'Learn user research, wireframing, interactive prototyping in Figma, design systems creation, and usability testing with real startup client projects.',
-    badge: 'Product Design',
+    title: 'UI/UX & Product Design',
+    desc: 'Master UI/UX design through live sessions, projects, and daily follow-ups. Learn Figma, User Research, Wireframing, Product Design, and Interactive Prototyping.',
+    badge: 'UI/UX & Product Design',
     badgeColor: 'bg-pink-50 text-pink-700 border-pink-200',
-    duration: '12 Weeks',
-    format: 'Design Studio Workshops',
-    projectsCount: '4+ Portfolios',
+    duration: '1.5–2 Months',
+    format: 'Live Design Studio Workshops',
+    projectsCount: '956+ Students Enrolled',
     rating: '4.9 ★★★★★',
-    tags: ['Figma Mastery', 'User Research & Journey', 'Design Systems', 'Interactive Prototyping', 'Usability Audits'],
-    layout: 'left-image'
+    tags: ['Figma Mastery', 'UX Research', 'Product Design', 'Interactive Prototypes', 'Design Systems'],
+    layout: 'left-image',
+    url: 'https://wabiskills.com/'
   },
   {
-    id: 'data',
-    category: 'DATA',
-    title: 'Data Engineering & Business Intelligence',
-    desc: 'Build scalable data pipelines, automated ETL workflows, SQL analytical queries, and executive dashboards with Python, PostgreSQL, and PowerBI/Tableau.',
-    badge: 'Data Engineering',
+    id: 'cyber',
+    category: 'SECURITY',
+    title: 'Cyber Security Training Program',
+    desc: 'Learn Cybersecurity in 3 months with practical defense projects and become job-ready professionals. Network security, threat auditing, and hands-on labs.',
+    badge: 'Cyber Security',
+    badgeColor: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    duration: '3 Months Intensive',
+    format: 'Practical Security Labs',
+    projectsCount: 'Job-Ready Certificate',
+    rating: '4.9 ★★★★★',
+    tags: ['Network Security', 'Ethical Auditing', 'Threat Analysis', 'Defensive Labs', 'Practical Cyber'],
+    layout: 'right-image',
+    url: 'https://wabiskills.com/'
+  },
+  {
+    id: 'kids',
+    category: 'KIDS TECH',
+    title: 'Kids Tech & Physical Summer Camp',
+    desc: 'Weekend physical classes for talented, tech-passionate students (Grade 4–11) at Derartu Tower, Megenagna. Programming fundamentals, AI for kids, and video editing.',
+    badge: 'Grade 4–11 Physical Camp',
     badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
-    duration: '14 Weeks',
-    format: 'Data Lab Bootcamps',
-    projectsCount: '5+ Dashboards',
-    rating: '4.8 ★★★★★',
-    tags: ['Python & Pandas', 'Advanced SQL & Postgres', 'ETL Data Pipelines', 'PowerBI Dashboards', 'Data Warehouse'],
-    layout: 'right-image'
+    duration: '2–3 Months Summer/Weekend',
+    format: 'In-Person at Derartu Tower 9th Fl',
+    projectsCount: 'Admission by Interview',
+    rating: '5.0 ★★★★★',
+    tags: ['Programming Fundamentals', 'AI for Kids', 'Video Editing', 'Basic Computers', 'Hands-on Projects'],
+    layout: 'left-image',
+    url: 'https://wabiskills.com/'
+  }
+];
+
+const WABISKILLS_TESTIMONIALS = [
+  {
+    quote: "I struggled to understand programming. WabiSkills made it feel like a movie—fun and clear. Instructors taught in local language, simplifying everything. Now I’m a developer building my own websites. Highly recommended!",
+    author: "Ms. Hewan Worku",
+    role: "University Student",
+    bg: "bg-gradient-to-br from-sky-50 to-indigo-50/40 border-sky-200"
+  },
+  {
+    quote: "After joining WabiSkills' 4th round, I transformed into a Full stack Developer. The journey was incredible, and I truly wish I had joined earlier. I highly recommend it to everyone from Assosa Ethiopia.",
+    author: "Mr. Kassa Mamo",
+    role: "Non-tech background with zero experience",
+    bg: "bg-gradient-to-br from-purple-50 to-fuchsia-50/40 border-purple-200"
+  },
+  {
+    quote: "Online resources were hard to follow—until I found WabiSkills. After earning a scholarship, I became both a Fullstack and AI Developer. I’m now actively building projects. Grateful—greetings!",
+    author: "Amir Awel",
+    role: "Grade 10 student passionate about programming",
+    bg: "bg-gradient-to-br from-amber-50 to-orange-50/40 border-amber-200"
+  },
+  {
+    quote: "WabiSkills helped me understand real-world project structures and development. Thanks to their paid internship opportunity, I’m now part of the WabiSkills team. Grateful for the hands-on experience!",
+    author: "Natnael Mesfin",
+    role: "ECE Student at AASTU / WabiSkills Developer",
+    bg: "bg-gradient-to-br from-emerald-50 to-teal-50/40 border-emerald-200"
+  }
+];
+
+const WABISKILLS_NEWS = [
+  {
+    tag: "News • Until Apr 2026",
+    title: "Wabiskills Summer Physical Camp for Students",
+    desc: "A practical, engaging, and beginner-friendly program to help students build essential digital and personal skills at Megenagna, Derartu Tower, 9th Floor.",
+    date: "Summer 2026",
+    badge: "In-Person & Online"
+  },
+  {
+    tag: "Announcement • 9th Round",
+    title: "WabiSkills 9th Round MERN Stack Registration Open!",
+    desc: "A comprehensive MERN Stack program structured from complete beginner to advanced level with live classes 3 days/week and 2 days practice.",
+    date: "Registration Open",
+    badge: "MERN Stack"
+  },
+  {
+    tag: "Announcement • Cyber Security",
+    title: "WabiSkills Cyber Security Training Program",
+    desc: "Build strong, practical skills in cybersecurity and become a job-ready professional with 3-month intensive hands-on defense projects.",
+    date: "Ongoing",
+    badge: "Job Ready"
   }
 ];
 
@@ -88,572 +158,278 @@ export const AcademyPage = () => {
     ? ACADEMY_COURSES
     : ACADEMY_COURSES.filter(c => c.category === activeCourseTab);
 
-  const handleEnrollClick = (title) => {
-    window.open('https://wabiskills.com/', '_blank');
+  const handleEnrollClick = (url = 'https://wabiskills.com/') => {
+    window.open(url, '_blank');
   };
 
   return (
-    <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden">
-      {/* Architectural SVG Border Overlay */}
-      <svg className="absolute top-0 left-0 w-full h-[550px] pointer-events-none z-20 overflow-visible" preserveAspectRatio="none">
-        <path
-          d="M 0 340 Q 300 160 900 0"
-          fill="none"
-          stroke="url(#top-left-arch-gradient)"
-          strokeWidth="3.5"
-          className="opacity-80 drop-shadow-[0_0_12px_rgba(255,80,0,0.7)]"
-        />
-        <path
-          d="M 0 360 Q 320 180 950 0"
-          fill="none"
-          stroke="url(#top-left-arch-glow)"
-          strokeWidth="1.5"
-          className="opacity-40"
-        />
-        <defs>
-          <linearGradient id="top-left-arch-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FF5000" />
-            <stop offset="50%" stopColor="#0ED3DD" />
-            <stop offset="100%" stopColor="#1DA1F2" />
-          </linearGradient>
-          <linearGradient id="top-left-arch-glow" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
-            <stop offset="100%" stopColor="#0ED3DD" stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-      </svg>
+    <div className="hero-cyan-gradient text-white min-h-screen relative overflow-hidden font-sans">
+      
+      {/* 1. RADIAL PRODUCT HERO WITH WABISKILLS ANNOUNCEMENT */}
+      <AcademyRadialHero />
 
-      {/* 1. HERO SECTION */}
-      <section className="w-full pt-52 sm:pt-60 md:pt-64 pb-28 md:pb-36 relative z-10 hero-cyan-gradient text-white border-b border-cyan-400/30 overflow-hidden">
-        
-        {/* About Us Page Exact Hero Background */}
-        <AboutHeroBackground />
-
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative z-10">
-          {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 space-y-7"
-          >
-            <div className="inline-flex items-center gap-3.5 px-8 py-3 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 text-white text-xs font-black tracking-widest uppercase shadow-lg hover:border-white transition-all">
-              <div className="w-5.5 h-5.5 rounded-full bg-white/30 border border-white/60 flex items-center justify-center shrink-0">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#0ED3DD] animate-pulse" />
-              </div>
-              <span className="whitespace-nowrap">GLOBAL TECH ACADEMY | POWERED BY YOMTECH</span>
-            </div>
-
-            <div className="space-y-3 font-display font-black tracking-tight leading-[1.1]">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl text-white">
-                We have an Educational Platform called <br />
-                <a
-                  href="https://wabiskills.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-amber-300 via-emerald-300 to-[#0ED3DD] bg-clip-text text-transparent drop-shadow-md hover:underline decoration-amber-300 decoration-2 underline-offset-4 transition-all"
-                >
-                  WabiSkills.com ↗
-                </a>
-              </h1>
-            </div>
-
-            <p className="text-slate-100 text-base md:text-lg leading-relaxed font-normal max-w-2xl">
-              Unlock your potential with <span className="text-white font-bold">cutting-edge online bootcamps</span> in AI, UI/UX, Fullstack Development, and Data Engineering. Gain hands-on experience through interactive workshops, live mentorship, and real-world enterprise projects.
-            </p>
-
-            {/* Learn. Build. Grow. Tag Pill */}
-            <div className="inline-flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-white/20 backdrop-blur-xl border border-white/40 text-amber-300 font-black text-xs sm:text-sm shadow-lg hover:border-white transition-all">
-              <div className="w-6.5 h-6.5 rounded-full bg-amber-400/30 border border-amber-400/60 flex items-center justify-center text-amber-300 shrink-0">
-                <Rocket size={14} />
-              </div>
-              <div className="flex items-center gap-2.5 whitespace-nowrap">
-                <span className="text-amber-300 font-black">Learn. Build. Grow.</span>
-                <span className="text-white/40">|</span>
-                <span className="text-cyan-200 text-xs font-extrabold">Industry Ready Careers</span>
-              </div>
-            </div>
-
-            {/* Pill Badges Row */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white font-black text-xs xl:text-sm shadow-xl hover:border-white hover:bg-white/25 hover:scale-105 transition-all duration-300">
-                <div className="w-6.5 h-6.5 rounded-full bg-red-400/30 border border-red-300 flex items-center justify-center text-red-200 group-hover:scale-110 transition-transform shrink-0">
-                  <Cpu size={14} />
-                </div>
-                <span className="text-white font-extrabold whitespace-nowrap">AI &amp; Machine Learning</span>
-              </div>
-
-              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white font-black text-xs xl:text-sm shadow-xl hover:border-white hover:bg-white/25 hover:scale-105 transition-all duration-300">
-                <div className="w-6.5 h-6.5 rounded-full bg-emerald-400/30 border border-emerald-300 flex items-center justify-center text-emerald-200 group-hover:scale-110 transition-transform shrink-0">
-                  <Layout size={14} />
-                </div>
-                <span className="text-white font-extrabold whitespace-nowrap">UI/UX &amp; Product Design</span>
-              </div>
-
-              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white font-black text-xs xl:text-sm shadow-xl hover:border-white hover:bg-white/25 hover:scale-105 transition-all duration-300">
-                <div className="w-6.5 h-6.5 rounded-full bg-blue-400/30 border border-blue-300 flex items-center justify-center text-blue-200 group-hover:scale-110 transition-transform shrink-0">
-                  <Monitor size={14} />
-                </div>
-                <span className="text-white font-extrabold whitespace-nowrap">Fullstack Web &amp; Mobile</span>
-              </div>
-
-              <div className="group relative flex items-center gap-3.5 px-8 py-3.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-white font-black text-xs xl:text-sm shadow-xl hover:border-white hover:bg-white/25 hover:scale-105 transition-all duration-300">
-                <div className="w-6.5 h-6.5 rounded-full bg-amber-400/30 border border-amber-300 flex items-center justify-center text-amber-200 group-hover:scale-110 transition-transform shrink-0">
-                  <BarChart size={14} />
-                </div>
-                <span className="text-white font-extrabold whitespace-nowrap">Data &amp; Analytics</span>
-              </div>
-            </div>
-
-            {/* Explore Courses & External Visit Action Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-3">
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
-                href="#educational-courses"
-                className="px-9 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shadow-xl shadow-cyan-500/30 hover:shadow-cyan-400/50 transition-all duration-300 flex items-center gap-3 group/btn"
-              >
-                <GraduationCap size={18} />
-                <span>Explore Academy Bootcamps</span>
-                <ArrowRight size={16} className="group-hover/btn:translate-x-1 transition-transform" />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.96 }}
-                href="https://wabiskills.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border-2 border-[#0ED3DD]/80 text-white font-black text-xs uppercase tracking-widest backdrop-blur-md shadow-md transition-all duration-300 flex items-center gap-3"
-              >
-                <div className="w-6 h-6 rounded-full overflow-hidden border border-cyan-300 bg-white p-0.5 shrink-0">
-                  <img src={logoImg} alt="WabiSkills" className="w-full h-full object-contain rounded-full" />
-                </div>
-                <span>Visit WabiSkills.com ↗</span>
-              </motion.a>
-            </div>
-          </motion.div>
-
-          {/* Right Hero — Staggered WabiSkills card stack */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5 relative flex items-center justify-center h-[380px] lg:h-[440px]"
-          >
-            {/* Card 1 — WabiSkills Platform */}
-            <motion.a
-              href="https://wabiskills.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: -40, rotate: -4 }}
-              animate={{ opacity: 1, x: 0, rotate: -6 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              whileHover={{ rotate: -3, scale: 1.05, zIndex: 30 }}
-              className="absolute cursor-pointer"
-              style={{ left: '0%', top: '5%', width: '65%', zIndex: 10 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(14,211,221,0.35)] border-2 border-[#0ED3DD]/60 group">
-                <img src={academyHeroImg} alt="WabiSkills Platform" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-[#0284C7]/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-cyan-300/40 shadow-lg">
-                  <span className="text-base">🌐</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">WabiSkills.com</p>
-                    <p className="text-cyan-200 text-[9px] font-medium leading-none mt-0.5">Visit Platform ↗</p>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Card 2 — Online Courses */}
-            <motion.a
-              href="https://wabiskills.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ y: -6, scale: 1.05, zIndex: 30 }}
-              className="absolute cursor-pointer"
-              style={{ left: '20%', top: '0%', width: '65%', zIndex: 20 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_25px_70px_rgba(29,161,242,0.45)] border-2 border-[#1DA1F2]/70 group">
-                <img src={academyCoursesImg} alt="WabiSkills Courses" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-blue-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-blue-300/40 shadow-lg">
-                  <span className="text-base">🎓</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">Online Courses</p>
-                    <p className="text-blue-200 text-[9px] font-medium leading-none mt-0.5">AI · UI/UX · Fullstack · Data</p>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
-
-            {/* Card 3 — Bootcamp */}
-            <motion.a
-              href="https://wabiskills.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, x: 40, rotate: 4 }}
-              animate={{ opacity: 1, x: 0, rotate: 6 }}
-              transition={{ duration: 0.6, delay: 0.55 }}
-              whileHover={{ rotate: 3, scale: 1.05, zIndex: 30 }}
-              className="absolute cursor-pointer"
-              style={{ right: '0%', bottom: '0%', width: '65%', zIndex: 10 }}
-            >
-              <div className="rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(96,165,250,0.35)] border-2 border-violet-400/60 group">
-                <img src={academyBootcampImg} alt="WabiSkills Bootcamp" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute bottom-3 left-3 flex items-center gap-2 bg-violet-600/90 backdrop-blur-sm px-3 py-1.5 rounded-xl border border-violet-300/40 shadow-lg">
-                  <span className="text-base">💻</span>
-                  <div>
-                    <p className="text-white text-xs font-black leading-none">Live Bootcamp</p>
-                    <p className="text-violet-200 text-[9px] font-medium leading-none mt-0.5">Mentorship · Projects</p>
-                  </div>
-                </div>
-              </div>
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* 02. GLOBAL INTEGRATION & HIGH-TECH ECOSYSTEM — FIRST VISUAL ATTRACTION */}
-      <AcademyEcosystem />
-
-      {/* 03. FLAGSHIP EDUCATIONAL COURSES & BOOTCAMPS CATALOG */}
-      <section id="educational-courses" className="pt-20 pb-28 relative bg-gradient-to-b from-[#dff1ff] to-[#aeddfa] border-b border-sky-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      {/* 2. ANNOUNCING WABISKILLS OFFICIAL COURSES SECTION */}
+      <section className="py-24 bg-white text-slate-900 relative z-20 border-b border-slate-200">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           
-          {/* Header */}
-          <div className="text-center max-w-4xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-white text-sky-600 text-xs font-bold tracking-widest uppercase mb-6 shadow-sm">
-              <Sparkles size={14} className="text-[#0ea5e9] animate-pulse" />
-              <span>Upgraded to Premier Designs &amp; Styles for Advanced Customers</span>
+          <div className="text-center max-w-4xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-sm">
+              <Award className="w-4 h-4 text-[#0284C7]" />
+              <span>OFFICIAL WABISKILLS COURSES</span>
+              <span className="text-[#0284C7] font-bold">◆</span>
             </div>
             
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
-              Educational <span className="text-[#38bdf8]">Courses &amp;</span><br />
-              <span className="text-[#38bdf8]">Bootcamps</span>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display">
+              What You’ll Learn with <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                WabiSkills Courses
+              </span>
             </h2>
-            
-            <p className="text-base md:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto font-medium">
-              Industry-driven bootcamps designed to transform ambitious learners into lead engineers, AI specialists, product designers, and data strategists.
+            <p className="text-lg text-slate-500 font-semibold max-w-2xl mx-auto">
+              Master in-demand skills from technology to personal growth — all in one place. Live classes, real-world projects, and daily instructor support.
             </p>
 
-            {/* Premium Category Filter Pills */}
-            <div className="flex flex-wrap justify-center gap-1.5 mt-10 bg-white/40 backdrop-blur-md p-1.5 rounded-full border border-white/60 inline-flex shadow-sm">
-              {[
-                { id: 'ALL', label: 'All Bootcamps (4)', icon: Layers },
-                { id: 'FULLSTACK', label: 'Full Stack', icon: Monitor },
-                { id: 'AI', label: 'AI & ML', icon: Cpu },
-                { id: 'DESIGN', label: 'UI/UX Design', icon: Layout },
-                { id: 'DATA', label: 'Data Analytics', icon: BarChart }
-              ].map(tab => {
-                const TabIcon = tab.icon;
-                const isActive = activeCourseTab === tab.id;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => setActiveCourseTab(tab.id)}
-                    className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all flex items-center gap-2 cursor-pointer ${
-                      isActive
-                        ? 'bg-[#0ea5e9] text-white shadow-md hover:bg-[#0284c7]'
-                        : 'bg-transparent text-slate-600 hover:bg-white hover:shadow-sm'
-                    }`}
-                  >
-                    <TabIcon size={14} className={isActive ? 'text-white' : 'text-slate-400'} />
-                    <span>{tab.label}</span>
-                  </button>
-                );
-              })}
+            {/* Course Filter Tabs */}
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-6">
+              {['ALL', 'FULLSTACK', 'AI', 'DESIGN', 'SECURITY', 'KIDS TECH'].map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveCourseTab(tab)}
+                  className={`px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-300 ${
+                    activeCourseTab === tab
+                      ? 'bg-[#0284C7] text-white shadow-lg shadow-sky-500/25 scale-105'
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
             </div>
           </div>
 
-          <div className="space-y-12 max-w-6xl mx-auto">
-            <AnimatePresence mode="wait">
-              {filteredCourses.map((course) => {
-                const isLeftImage = course.layout === 'left-image';
+          {/* Courses Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredCourses.map(course => (
+              <motion.div
+                key={course.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-3xl p-8 border-2 border-slate-100 shadow-xl hover:shadow-2xl transition-all duration-300 flex flex-col justify-between space-y-6 group hover:-translate-y-1.5"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className={`px-3.5 py-1 rounded-full text-xs font-black uppercase tracking-wider border ${course.badgeColor}`}>
+                      {course.badge}
+                    </span>
+                    <span className="text-xs font-bold text-amber-500 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+                      {course.rating}
+                    </span>
+                  </div>
 
-                return (
-                  <motion.div
-                    key={course.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="bg-white rounded-[2.5rem] p-6 sm:p-8 flex flex-col lg:flex-row gap-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] hover:shadow-[0_30px_60px_-15px_rgba(14,165,233,0.15)] transition-all duration-500 border border-white group"
+                  <h3 className="text-2xl font-black text-slate-900 font-display group-hover:text-[#0284C7] transition-colors">
+                    {course.title}
+                  </h3>
+
+                  <p className="text-sm text-slate-600 font-medium leading-relaxed">
+                    {course.desc}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {course.tags.map(tag => (
+                      <span key={tag} className="text-[11px] font-bold bg-slate-50 text-slate-500 px-3 py-1 rounded-lg border border-slate-200">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-slate-100 flex items-center justify-between">
+                  <div>
+                    <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Duration</div>
+                    <div className="text-sm font-black text-slate-800">{course.duration}</div>
+                  </div>
+
+                  <button
+                    onClick={() => handleEnrollClick(course.url)}
+                    className="px-6 py-3 rounded-2xl bg-[#0284C7] hover:bg-sky-600 text-white text-xs font-black uppercase tracking-wider shadow-lg shadow-sky-500/20 flex items-center gap-2 transition-all hover:gap-3"
                   >
-                    
-                    {/* Mockup Side */}
-                    <div className={`w-full lg:w-[45%] flex flex-col gap-4 ${isLeftImage ? 'order-1' : 'order-1 lg:order-2'}`}>
-                      
-                      {/* Interactive Visual Canvas / Mockup Box */}
-                      {course.id === 'fullstack' && (
-                        <div className="w-full aspect-[4/3.2] bg-[#0f172a] rounded-3xl overflow-hidden relative flex border-[8px] border-slate-50 shadow-[0_0_40px_rgba(14,165,233,0.15)] group-hover:shadow-[0_0_50px_rgba(14,165,233,0.25)] transition-shadow duration-500">
-                          {/* Mobile Mockup */}
-                          <div className="w-[34%] h-[88%] bg-[#1e293b] absolute bottom-0 left-5 rounded-t-2xl border-x border-t border-slate-700 flex flex-col shadow-[10px_0_30px_rgba(0,0,0,0.5)] z-20 transition-transform duration-500 group-hover:-translate-y-2">
-                            <div className="h-6 w-full border-b border-slate-700 flex justify-center items-center">
-                              <div className="w-1/3 h-1 bg-slate-600 rounded-full" />
-                            </div>
-                            <div className="flex-1 p-3 flex flex-col gap-2.5">
-                              <div className="w-full h-8 bg-[#0ea5e9]/20 rounded border border-[#0ea5e9]/30 flex items-center px-2.5">
-                                <span className="text-[10px] text-[#38bdf8] font-bold">App Dashboard</span>
-                              </div>
-                              <div className="grid grid-cols-2 gap-1.5">
-                                <div className="h-10 bg-slate-700 rounded-lg" />
-                                <div className="h-10 bg-slate-700 rounded-lg" />
-                              </div>
-                              <div className="flex-1 bg-slate-700/60 rounded-lg" />
-                            </div>
-                          </div>
-
-                          {/* Code Editor Mockup */}
-                          <div className="w-[62%] h-[64%] bg-[#020617] absolute top-1/2 -translate-y-1/2 right-4 rounded-xl border border-slate-800 flex flex-col shadow-[0_20px_40px_rgba(0,0,0,0.6)] z-10 transition-transform duration-500 group-hover:translate-x-2">
-                            <div className="h-7 bg-[#0f172a] border-b border-slate-800 flex items-center px-3 gap-1.5">
-                              <div className="w-2.5 h-2.5 rounded-full bg-[#ef4444]" />
-                              <div className="w-2.5 h-2.5 rounded-full bg-[#eab308]" />
-                              <div className="w-2.5 h-2.5 rounded-full bg-[#22c55e]" />
-                            </div>
-                            <div className="p-4 font-mono text-[10px] text-slate-300 leading-relaxed">
-                              <span className="text-[#c084fc]">const</span> <span className="text-[#60a5fa]">app</span> = <span className="text-[#fcd34d]">express</span>();<br />
-                              <span className="text-[#60a5fa]">app</span>.<span className="text-[#34d399]">use</span>(cors());<br />
-                              <span className="text-[#60a5fa]">app</span>.<span className="text-[#34d399]">get</span>(<span className="text-[#fcd34d]">'/api'</span>, (req, res) =&gt; &#123;<br />
-                              &nbsp;&nbsp;res.<span className="text-[#34d399]">json</span>(&#123; status: <span className="text-[#fcd34d]">'success'</span> &#125;);<br />
-                              &#125;);<span className="animate-pulse font-bold text-[#38bdf8]">_</span>
-                            </div>
-                          </div>
-
-                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
-                            React &bull; Node &bull; React Native
-                          </div>
-                        </div>
-                      )}
-
-                      {course.id === 'ai' && (
-                        <div className="w-full aspect-[4/3.2] bg-[#09090b] rounded-3xl overflow-hidden relative flex items-center justify-center border-[8px] border-slate-50 shadow-[0_0_40px_rgba(139,92,246,0.15)] group-hover:shadow-[0_0_50px_rgba(139,92,246,0.25)] transition-shadow duration-500">
-                          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[#312e81] via-[#09090b] to-[#09090b]" />
-                          
-                          <div className="w-full h-full relative flex items-center justify-center z-10">
-                            <svg className="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M50 50 L150 50 L150 150 L50 150 Z" fill="none" stroke="#8b5cf6" strokeWidth="0.5" strokeDasharray="2 4" />
-                              <path d="M100 20 L180 100 L100 180 L20 100 Z" fill="none" stroke="#06b6d4" strokeWidth="0.5" strokeDasharray="2 4" />
-                              <line x1="50" y1="50" x2="150" y2="150" stroke="#f472b6" strokeWidth="1" opacity="0.5" />
-                              <line x1="150" y1="50" x2="50" y2="150" stroke="#f472b6" strokeWidth="1" opacity="0.5" />
-                            </svg>
-
-                            <div className="absolute top-[25%] left-[25%] w-3 h-3 rounded-full bg-[#22d3ee] shadow-[0_0_20px_#22d3ee] animate-pulse" />
-                            <div className="absolute bottom-[25%] right-[25%] w-3 h-3 rounded-full bg-[#a855f7] shadow-[0_0_20px_#a855f7] animate-pulse" />
-                            <div className="absolute top-[25%] right-[25%] w-2 h-2 rounded-full bg-[#f472b6] shadow-[0_0_15px_#f472b6]" />
-                            <div className="absolute bottom-[25%] left-[25%] w-2 h-2 rounded-full bg-[#34d399] shadow-[0_0_15px_#34d399]" />
-                            
-                            <div className="absolute w-[72%] bg-[#18181b]/90 border border-slate-700/50 rounded-xl backdrop-blur-md p-4 shadow-[0_20px_40px_rgba(0,0,0,0.8)] z-20 transition-transform duration-500 group-hover:scale-105">
-                              <div className="flex gap-1.5 mb-2.5 border-b border-slate-700 pb-2">
-                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                              </div>
-                              <div className="font-mono text-[10px] text-indigo-300 leading-relaxed">
-                                &gt; import torch<br />
-                                &gt; model = NeuralNet()<br />
-                                &gt; model.train(epochs=100)<br />
-                                <span className="text-[#34d399] mt-1.5 block">&gt; Epoch 100/100: Accuracy: 99.8%</span>
-                                &gt; <span className="animate-pulse font-bold text-white">_</span>
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
-                            AI Neural Models &bull; PyTorch
-                          </div>
-                        </div>
-                      )}
-
-                      {course.id === 'uiux' && (
-                        <div className="w-full aspect-[4/3.2] bg-[#1e1e1e] rounded-3xl overflow-hidden relative flex border-[8px] border-slate-50 shadow-[0_0_40px_rgba(236,72,153,0.15)] group-hover:shadow-[0_0_50px_rgba(236,72,153,0.25)] transition-shadow duration-500">
-                          <div className="w-[22%] h-full bg-[#2c2c2c] border-r border-[#3a3a3a] p-3 flex flex-col gap-2.5 z-20">
-                            <div className="flex items-center gap-1.5 mb-1">
-                              <div className="w-2 h-2 rounded-full bg-[#ff5f56]" />
-                              <div className="w-2 h-2 rounded-full bg-[#ffbd2e]" />
-                              <div className="w-2 h-2 rounded-full bg-[#27c93f]" />
-                            </div>
-                            <div className="w-full h-2 bg-[#4a4a4a] rounded-sm" />
-                            <div className="w-3/4 h-2 bg-[#4a4a4a] rounded-sm" />
-                            <div className="w-full h-2 bg-[#4a4a4a] rounded-sm mt-2" />
-                            <div className="w-1/2 h-2 bg-[#4a4a4a] rounded-sm" />
-                          </div>
-                          
-                          <div className="flex-1 bg-[#1e1e1e] relative p-4 flex items-center justify-center overflow-hidden">
-                            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '16px 16px' }} />
-                            <div className="flex gap-4 transition-transform duration-500 group-hover:scale-105 relative z-10 w-full h-full items-center justify-center">
-                              <div className="w-[45%] h-[85%] bg-[#0b0c10] rounded-xl shadow-2xl border border-[#2f3542] p-3 flex flex-col gap-2.5 relative overflow-hidden">
-                                <div className="w-full h-4 bg-[#2f3542] rounded-md" />
-                                <div className="flex-1 bg-pink-500/20 rounded-md border border-pink-500/40" />
-                                <div className="w-full h-8 bg-cyan-500/20 rounded-md border border-cyan-500/40" />
-                              </div>
-                              <div className="w-[45%] h-[85%] bg-[#0b0c10] rounded-xl shadow-2xl border border-[#2f3542] p-3 flex flex-col gap-2.5 relative">
-                                <div className="absolute -inset-1 border-[1.5px] border-[#0ea5e9] rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                                  <div className="absolute -top-3 -left-1 bg-[#0ea5e9] text-white text-[8px] font-bold px-1 rounded-sm">Component</div>
-                                </div>
-                                <div className="flex gap-2 h-8">
-                                  <div className="w-8 bg-[#2f3542] rounded-full" />
-                                  <div className="flex-1 bg-[#2f3542] rounded-md" />
-                                </div>
-                                <div className="flex-1 bg-[#2f3542] rounded-md" />
-                              </div>
-                            </div>
-                          </div>
-
-                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
-                            Figma &bull; Design Tokens &bull; Prototyping
-                          </div>
-                        </div>
-                      )}
-
-                      {course.id === 'data' && (
-                        <div className="w-full aspect-[4/3.2] bg-[#020617] rounded-3xl overflow-hidden relative flex border-[8px] border-slate-50 shadow-[0_0_40px_rgba(56,189,248,0.15)] group-hover:shadow-[0_0_50px_rgba(56,189,248,0.25)] transition-shadow duration-500 p-5 flex-col">
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] to-[#020617] z-0" />
-                          
-                          <div className="flex-1 w-full bg-[#1e293b] rounded-2xl border border-slate-700/50 p-3.5 shadow-2xl flex flex-col gap-3 relative z-10 transition-transform duration-500 group-hover:scale-[1.02]">
-                            <div className="w-1/2 h-2.5 bg-slate-600 rounded-md" />
-                            
-                            <div className="flex gap-2.5 h-16">
-                              <div className="flex-1 bg-[#0ea5e9]/10 border border-[#0ea5e9]/20 rounded-lg flex items-end p-2.5 gap-1.5 overflow-hidden">
-                                <div className="w-full bg-[#0ea5e9] h-[30%] rounded-t-sm group-hover:h-[60%] transition-all duration-500" />
-                                <div className="w-full bg-[#38bdf8] h-[50%] rounded-t-sm group-hover:h-[80%] transition-all duration-500 delay-75" />
-                                <div className="w-full bg-[#7dd3fc] h-[90%] rounded-t-sm group-hover:h-[40%] transition-all duration-500 delay-100" />
-                                <div className="w-full bg-[#0284c7] h-[60%] rounded-t-sm group-hover:h-[95%] transition-all duration-500 delay-150" />
-                              </div>
-                              <div className="w-16 bg-[#0f172a] rounded-lg border border-slate-700 flex flex-col justify-center items-center gap-1">
-                                <div className="text-[#34d399] font-bold text-sm">+24%</div>
-                                <div className="w-6 h-1 bg-slate-700 rounded-full" />
-                              </div>
-                            </div>
-                            
-                            <div className="flex-1 bg-[#0f172a] rounded-lg border border-slate-700/50 p-2.5 font-mono text-[9px] text-[#34d399] leading-relaxed overflow-hidden">
-                              <span className="text-[#c084fc]">SELECT</span> user_id, count(*)<br />
-                              <span className="text-[#c084fc]">FROM</span> activity_log<br />
-                              <span className="text-[#c084fc]">GROUP BY</span> user_id;
-                            </div>
-                          </div>
-
-                          <div className="absolute bottom-3 left-0 right-0 text-center font-mono text-[11px] text-slate-400 tracking-widest font-semibold z-30">
-                            Data Engine &bull; Python &bull; SQL
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Integrated Stats Grid */}
-                      <div className="grid grid-cols-4 gap-1 bg-slate-50/80 rounded-2xl p-1.5 border border-slate-100">
-                        <div className="text-center p-2">
-                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Duration</p>
-                          <p className="text-sm font-bold text-[#0ea5e9]">{course.duration}</p>
-                        </div>
-                        <div className="text-center p-2 border-l border-slate-200/60">
-                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Format</p>
-                          <p className="text-sm font-bold text-slate-700">{course.format.split('+')[0]}</p>
-                        </div>
-                        <div className="text-center p-2 border-l border-slate-200/60">
-                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Projects</p>
-                          <p className="text-sm font-bold text-slate-700">{course.projectsCount}</p>
-                        </div>
-                        <div className="text-center p-2 border-l border-slate-200/60">
-                          <p className="text-[9px] text-slate-400 uppercase font-extrabold tracking-widest mb-0.5">Rating</p>
-                          <p className="text-sm font-bold text-amber-500">{course.rating.split(' ')[0]}</p>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    {/* Content Side */}
-                    <div className={`w-full lg:w-[55%] flex flex-col justify-center py-2 ${isLeftImage ? 'lg:pl-6 order-2' : 'lg:pr-6 order-2 lg:order-1'}`}>
-                      
-                      {/* Badges Row */}
-                      <div className="flex flex-wrap items-center gap-2 mb-5">
-                        <span className="px-3.5 py-1 rounded-full bg-sky-50 text-[#0ea5e9] text-[10px] font-extrabold uppercase tracking-widest border border-sky-100">
-                          Educational Bootcamp
-                        </span>
-                        <span className={`px-3.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest border ${course.badgeColor}`}>
-                          {course.badge}
-                        </span>
-                        <span className="px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-600 text-[10px] font-extrabold uppercase tracking-widest border border-emerald-100 ml-auto hidden sm:block">
-                          Open Enrollment
-                        </span>
-                      </div>
-
-                      {/* Course Title */}
-                      <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 leading-tight tracking-tight">
-                        {course.title}
-                      </h3>
-
-                      {/* Course Description */}
-                      <p className="text-base text-slate-500 mb-8 leading-relaxed font-medium">
-                        {course.desc}
-                      </p>
-
-                      {/* Technology Stack Pills */}
-                      <div className="mb-8">
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">Key Skills &amp; Technology Stack:</p>
-                        <div className="flex flex-wrap gap-2.5">
-                          {course.tags.map((tag, tIdx) => (
-                            <span key={tIdx} className="px-4 py-2 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold flex items-center gap-2 bg-white shadow-sm hover:shadow-md transition-shadow">
-                              <CheckCircle2 size={15} className="text-[#0ea5e9]" />
-                              <span>{tag}</span>
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-
-                      {/* Action Buttons */}
-                      <div className="flex flex-wrap items-center gap-4 mt-auto">
-                        <motion.button
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.97 }}
-                          onClick={() => handleEnrollClick(course.title)}
-                          className="px-8 py-3.5 rounded-full bg-[#0ea5e9] text-white text-sm font-bold shadow-lg shadow-[#0ea5e9]/30 hover:bg-[#0284c7] transition-all flex items-center gap-2 cursor-pointer"
-                        >
-                          <span>Enroll / Apply Now</span>
-                          <ArrowRight size={16} />
-                        </motion.button>
-
-                        <a
-                          href="https://wabiskills.com/"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-8 py-3.5 rounded-full bg-white border border-slate-200 text-slate-600 text-sm font-bold hover:border-[#0ea5e9] hover:text-[#0284c7] transition-all flex items-center gap-2 shadow-sm cursor-pointer"
-                        >
-                          <span>View Syllabus ↗</span>
-                        </a>
-                      </div>
-
-                    </div>
-
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+                    <span>ENROLL NOW</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
           </div>
+
         </div>
       </section>
 
-      {/* 04. FOUR-PILLAR ECOSYSTEM (LEARNING MODEL) */}
+      {/* 3. WABISKILLS LEARNING METHODOLOGY */}
       <LearningModel />
 
-      {/* 05. PRACTICAL APPLICATION (CLASSROOM TO REAL WORLD) */}
+      {/* 4. CLASSROOM TO REAL WORLD */}
       <ClassroomToRealWorld />
 
-      {/* 06. 1-ON-1 GUIDANCE & SENIOR MENTORSHIP */}
+      {/* 5. MENTORSHIP & LIVE-ONLY EXPERIENCE */}
       <MentorshipExperience />
 
-      {/* 07. TECHNICAL PROGRESSION & CAREER ROADMAP */}
+      {/* 6. TECHNICAL PROGRESSION 3D PENCIL INFOGRAPHIC (EXACT WABISKILLS.COM COPY) */}
       <CareerReadiness />
 
-      {/* 08. EDITORIAL PHILOSOPHY (WHY PRACTICAL LEARNING MATTERS) */}
+      {/* 7. WABISKILLS ACADEMY CORE ECOSYSTEM */}
+      <AcademyEcosystem />
+
+      {/* 8. PRACTICAL HANDS-ON LEARNING */}
       <PracticalLearning />
 
-      {/* 09. GLOBAL VISION (LEARNING WITHOUT BORDERS) */}
+      {/* 9. WABISKILLS STUDENT TESTIMONIALS SECTION */}
+      <section className="py-24 bg-white text-slate-900 relative z-20 border-b border-slate-200">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          
+          <div className="text-center max-w-4xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-sm">
+              <Users className="w-4 h-4 text-[#0284C7]" />
+              <span>WHAT OUR STUDENTS SAY</span>
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display">
+              Nurturing Skills That <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                Shape Your Future
+              </span>
+            </h2>
+            <p className="text-lg text-slate-500 font-semibold max-w-2xl mx-auto">
+              We collect feedback from both our online and physical class students after every training round. Here are a few testimonials reflecting their transformation.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {WABISKILLS_TESTIMONIALS.map((t, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className={`p-8 rounded-3xl border-2 ${t.bg} shadow-lg space-y-6 flex flex-col justify-between`}
+              >
+                <div className="space-y-4">
+                  <div className="flex gap-1 text-amber-400">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={18} fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className="text-base text-slate-700 font-medium leading-relaxed italic">
+                    "{t.quote}"
+                  </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-200/80 flex items-center justify-between">
+                  <div>
+                    <h4 className="text-lg font-black text-slate-900 font-display">{t.author}</h4>
+                    <p className="text-xs font-bold text-[#0284C7]">{t.role}</p>
+                  </div>
+                  <a 
+                    href="https://wabiskills.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-black text-slate-700 shadow-sm hover:bg-slate-50"
+                  >
+                    Verified Review
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* 10. WABISKILLS SUMMER CAMP & NEWS ANNOUNCEMENTS */}
+      <section className="py-24 bg-slate-50 text-slate-900 relative z-20 border-b border-slate-200">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
+          
+          <div className="text-center max-w-4xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-cyan-50 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-sm">
+              <Bell className="w-4 h-4 text-[#0284C7]" />
+              <span>OFFICIAL ANNOUNCEMENTS &amp; NEWS</span>
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display">
+              Latest News &amp; Physical Camps
+            </h2>
+            <p className="text-lg text-slate-500 font-semibold max-w-2xl mx-auto">
+              Stay updated with WabiSkills training rounds, physical summer camps at Derartu Tower, Megenagna, and scholarship registrations.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {WABISKILLS_NEWS.map((n, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white p-8 rounded-3xl border-2 border-slate-200 shadow-xl space-y-4 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-black text-[#0284C7] bg-sky-50 px-3 py-1 rounded-full border border-sky-200">
+                      {n.tag}
+                    </span>
+                    <span className="text-xs font-bold text-slate-400">{n.date}</span>
+                  </div>
+
+                  <h3 className="text-xl font-black text-slate-900 font-display">{n.title}</h3>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{n.desc}</p>
+                </div>
+
+                <a 
+                  href="https://wabiskills.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-[#0284C7] text-white text-xs font-black uppercase tracking-wider text-center block transition-colors shadow-md"
+                >
+                  APPLY / REGISTER ON WABISKILLS.COM
+                </a>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* SPONSOR A STUDENT BANNER */}
+          <div className="p-10 rounded-3xl bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600 text-white flex flex-col lg:flex-row items-center justify-between gap-8 shadow-2xl">
+            <div className="space-y-2 max-w-3xl">
+              <span className="px-4 py-1 rounded-full bg-white/20 text-white text-xs font-mono font-black uppercase tracking-widest">
+                SPONSOR A STUDENT
+              </span>
+              <h3 className="text-3xl font-black font-display">Help Shape the Future of Tech Talent in Ethiopia</h3>
+              <p className="text-sm font-medium text-white/90 leading-relaxed">
+                By sponsoring a student, you become a catalyst for transformation not just in one life, but across families, communities, and the tech ecosystem.
+              </p>
+            </div>
+            
+            <a 
+              href="https://wabiskills.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-2xl bg-white text-[#0284C7] hover:bg-slate-100 text-sm font-black uppercase tracking-wider shadow-xl shrink-0 transition-transform hover:scale-105"
+            >
+              SPONSOR NOW ON WABISKILLS.COM
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      {/* 11. GLOBAL INCLUSIVE VISION */}
       <GlobalLearningVision />
 
-      {/* 10. FINAL CONVERSION CTA (START YOUR LEARNING JOURNEY) */}
+      {/* 12. ACADEMY CTA WITH DIRECT WABISKILLS CONTACT */}
       <AcademyCTA />
+
     </div>
   );
 };
+
+export default AcademyPage;

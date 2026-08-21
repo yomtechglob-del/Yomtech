@@ -27,7 +27,7 @@ export const ServicesCaseStudies = () => {
       icon: Landmark,
       metrics: '100,000+ Businesses Served',
       numColor: 'text-[#0284C7]',
-      gradientBg: 'bg-gradient-to-r from-[#38BDF8] via-[#0284C7] to-[#0369A1]',
+      gradientBg: 'bg-gradient-to-r from-[#0284C7] via-[#0369A1] to-[#075985]',
     },
     {
       step: '03',
@@ -38,8 +38,8 @@ export const ServicesCaseStudies = () => {
       impact: 'Deployed smart CCTV camera networks with automated motion detection, real-time analytics, and secure data center infrastructure for national research installations.',
       icon: Shield,
       metrics: '24/7 Real-Time Monitoring',
-      numColor: 'text-[#65A30D]',
-      gradientBg: 'bg-gradient-to-r from-[#84CC16] via-[#65A30D] to-[#4D7C0F]',
+      numColor: 'text-[#10B981]',
+      gradientBg: 'bg-gradient-to-r from-[#10B981] via-[#059669] to-[#047857]',
     },
   ];
 
@@ -69,55 +69,55 @@ export const ServicesCaseStudies = () => {
           </div>
         </div>
 
-        {/* Split Layout: Left 45-Degree Diamond Info Box + Right Stacked Swallowtail Ribbon Banners (Exact Reference Match) */}
+        {/* Split Layout: Left Scaled 45-Degree Diamond Info Box + Right Stacked Swallowtail Ribbon Banners */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center max-w-[94rem] mx-auto">
           
-          {/* Left 45-Degree Rotated 3D Diamond Card Container */}
-          <div className="lg:col-span-5 flex justify-center items-center py-6 sm:py-10 relative">
-            <div className="absolute inset-0 bg-cyan-400/15 blur-[100px] rounded-full pointer-events-none" />
+          {/* Left Scaled 45-Degree Rotated 3D Diamond Card Container */}
+          <div className="lg:col-span-5 flex justify-center items-center py-8 sm:py-12 relative">
+            <div className="absolute inset-0 bg-cyan-400/20 blur-[120px] rounded-full pointer-events-none" />
 
-            {/* Rotated 45-Degree White Diamond Base Frame */}
-            <div className="w-[320px] h-[320px] sm:w-[410px] sm:h-[410px] rounded-[3.5rem] bg-white shadow-[0_25px_60px_rgba(0,0,0,0.12)] border-4 border-slate-100/90 rotate-45 flex items-center justify-center relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+            {/* Scaled Rotated 45-Degree White Diamond Base Frame */}
+            <div className="w-[410px] h-[410px] sm:w-[510px] sm:h-[510px] lg:w-[560px] lg:h-[560px] rounded-[4rem] bg-white shadow-[0_30px_70px_rgba(0,0,0,0.14)] border-4 border-slate-100/90 rotate-45 flex items-center justify-center relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
               
-              {/* Inner Counter-Rotated Content (-45 Deg) */}
-              <div className="-rotate-45 w-[320px] sm:w-[390px] p-6 sm:p-8 space-y-4 text-left font-sans">
-                <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[11px] font-mono font-black uppercase tracking-widest inline-block">
+              {/* Scaled Inner Counter-Rotated Content (-45 Deg) */}
+              <div className="-rotate-45 w-[340px] sm:w-[420px] lg:w-[450px] p-6 sm:p-10 space-y-5 text-left font-sans">
+                <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-mono font-black uppercase tracking-widest inline-block">
                   PORTFOLIO IMPACT
                 </span>
 
-                <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight font-display">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight font-display">
                   Proven Results & <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                     Real Impact
                   </span>
                 </h2>
 
-                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                <p className="text-xs sm:text-sm lg:text-base text-slate-600 font-medium leading-relaxed">
                   Our portfolio reflects our engineering capability to deliver large-scale, mission-critical systems across public and private sectors.
                 </p>
 
-                {/* Key Performance Indicators */}
-                <div className="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100 text-center">
-                  <div className="p-2 rounded-xl bg-amber-50 border border-amber-200">
-                    <p className="text-lg font-black text-[#D97706] font-mono">65%</p>
-                    <p className="text-[9px] font-bold text-slate-500 uppercase">Faster Approval</p>
+                {/* Scaled Key Performance Indicators */}
+                <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-100 text-center">
+                  <div className="p-3 rounded-2xl bg-amber-50 border border-amber-200">
+                    <p className="text-xl sm:text-2xl font-black text-[#D97706] font-mono">65%</p>
+                    <p className="text-[10px] font-bold text-slate-500 uppercase">Faster Approval</p>
                   </div>
-                  <div className="p-2 rounded-xl bg-sky-50 border border-sky-200">
-                    <p className="text-lg font-black text-[#0284C7] font-mono">100K+</p>
-                    <p className="text-[9px] font-bold text-slate-500 uppercase">Licenses</p>
+                  <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200">
+                    <p className="text-xl sm:text-2xl font-black text-[#0284C7] font-mono">100K+</p>
+                    <p className="text-[10px] font-bold text-slate-500 uppercase">Licenses</p>
                   </div>
-                  <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200">
-                    <p className="text-lg font-black text-[#65A30D] font-mono">24/7</p>
-                    <p className="text-[9px] font-bold text-slate-500 uppercase">SLA Audits</p>
+                  <div className="p-3 rounded-2xl bg-emerald-50 border border-emerald-200">
+                    <p className="text-xl sm:text-2xl font-black text-[#10B981] font-mono">24/7</p>
+                    <p className="text-[10px] font-bold text-slate-500 uppercase">SLA Audits</p>
                   </div>
                 </div>
 
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#0284C7] text-white font-black text-[11px] uppercase tracking-widest shadow-lg shadow-sky-500/25 hover:bg-sky-700 transition-all mt-1"
+                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full bg-[#0284C7] text-white font-black text-xs sm:text-sm uppercase tracking-widest shadow-xl shadow-sky-500/30 hover:bg-sky-700 transition-all mt-2"
                 >
                   <span>Explore Case Studies</span>
-                  <ArrowRight size={13} />
+                  <ArrowRight size={14} />
                 </Link>
               </div>
 
@@ -146,24 +146,24 @@ export const ServicesCaseStudies = () => {
                     </span>
                   </div>
 
-                  {/* Right Gradient Swallowtail Ribbon Banner Body */}
+                  {/* Right Vibrant Swallowtail Ribbon Banner Body */}
                   <div 
                     className={`flex-1 ${cs.gradientBg} text-white p-6 sm:p-8 pr-12 relative flex flex-col justify-center space-y-2 z-0 overflow-hidden`}
                     style={{ clipPath: 'polygon(0 0, 100% 0, 93% 50%, 100% 100%, 0 100%)' }}
                   >
-                    {/* Metallic 3D Highlight Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/15 pointer-events-none" />
+                    {/* Vibrant Light Sheen Top Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-transparent pointer-events-none" />
 
                     <div className="flex flex-wrap items-center justify-between gap-2 pr-6 relative z-10">
-                      <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-mono font-black uppercase tracking-widest border border-white/30">
+                      <span className="px-3 py-1 rounded-full bg-white/25 backdrop-blur-md text-white text-[10px] font-mono font-black uppercase tracking-widest border border-white/40">
                         {cs.stage}
                       </span>
-                      <span className="px-3 py-1 rounded-full bg-white text-slate-900 text-[10px] font-black uppercase tracking-wider shadow-sm">
+                      <span className="px-3.5 py-1.5 rounded-full bg-white text-slate-900 text-[11px] font-black uppercase tracking-wider shadow-md">
                         ⚡ {cs.metrics}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-2xl font-black text-white font-display tracking-tight leading-snug drop-shadow-md relative z-10">
+                    <h3 className="text-xl sm:text-2xl font-black text-white font-display tracking-tight leading-snug drop-shadow-sm relative z-10">
                       {cs.title}
                     </h3>
 
@@ -171,7 +171,7 @@ export const ServicesCaseStudies = () => {
                       {cs.impact}
                     </p>
 
-                    <div className="text-[11px] font-extrabold uppercase text-white/80 tracking-wider pt-1 relative z-10">
+                    <div className="text-[11px] font-black uppercase text-white/90 tracking-wider pt-1 relative z-10">
                       {cs.client}
                     </div>
                   </div>

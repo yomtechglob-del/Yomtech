@@ -1,54 +1,69 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageSquare, Wrench, GraduationCap, TrendingUp, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { MessageSquare, Wrench, GraduationCap, TrendingUp, Compass } from 'lucide-react';
 
 export const ServicesPartnershipModel = () => {
   const pillars = [
     {
       step: '01',
-      optionLabel: 'OPTION',
+      optionLabel: 'OPTION 01',
       stage: 'UNDERSTAND',
       title: 'Active Listening & Operational Alignment',
       desc: 'We listen to the organization, its people, goals, workflows, and operational challenges to ensure complete strategic alignment.',
       icon: MessageSquare,
-      numColor: 'text-[#D97706]',
-      gradientBg: 'bg-gradient-to-r from-[#F59E0B] via-[#D97706] to-[#B45309]',
+      align: 'left',
+      themeBg: 'bg-[#F97316]',
+      themeDarkBg: 'bg-[#EA580C]',
+      themeText: 'text-[#EA580C]',
+      themeBorder: 'border-[#F97316]',
+      themeLightBg: 'bg-orange-50',
     },
     {
       step: '02',
-      optionLabel: 'OPTION',
+      optionLabel: 'OPTION 02',
       stage: 'BUILD',
       title: 'Practical Solution Delivery',
       desc: 'We transform client requirements into reliable, custom-built software, Yomnex ERP modules, and high-performance enterprise platforms.',
       icon: Wrench,
-      numColor: 'text-[#0284C7]',
-      gradientBg: 'bg-gradient-to-r from-[#38BDF8] via-[#0284C7] to-[#0369A1]',
+      align: 'right',
+      themeBg: 'bg-[#0891B2]',
+      themeDarkBg: 'bg-[#0E7490]',
+      themeText: 'text-[#0E7490]',
+      themeBorder: 'border-[#0891B2]',
+      themeLightBg: 'bg-cyan-50',
     },
     {
       step: '03',
-      optionLabel: 'OPTION',
+      optionLabel: 'OPTION 03',
       stage: 'ENABLE',
       title: 'Knowledge & Capability Transfer',
       desc: 'We train internal teams and individuals to work with technology effectively through dedicated WabiSkills mentorship and hands-on onboarding.',
       icon: GraduationCap,
-      numColor: 'text-[#65A30D]',
-      gradientBg: 'bg-gradient-to-r from-[#84CC16] via-[#65A30D] to-[#4D7C0F]',
+      align: 'left',
+      themeBg: 'bg-[#06B6D4]',
+      themeDarkBg: 'bg-[#0891B2]',
+      themeText: 'text-[#0891B2]',
+      themeBorder: 'border-[#06B6D4]',
+      themeLightBg: 'bg-sky-50',
     },
     {
       step: '04',
-      optionLabel: 'OPTION',
+      optionLabel: 'OPTION 04',
       stage: 'GROW',
       title: 'Continuous Infrastructure Evolution',
       desc: 'We continue evolving technology infrastructure, security protocols, and operational capabilities as new digital opportunities emerge.',
       icon: TrendingUp,
-      numColor: 'text-[#9333EA]',
-      gradientBg: 'bg-gradient-to-r from-[#A855F7] via-[#9333EA] to-[#6B21A8]',
+      align: 'right',
+      themeBg: 'bg-[#F59E0B]',
+      themeDarkBg: 'bg-[#D97706]',
+      themeText: 'text-[#D97706]',
+      themeBorder: 'border-[#F59E0B]',
+      themeLightBg: 'bg-amber-50',
     },
   ];
 
   return (
-    <section className="relative py-24 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-28 lg:py-40 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -57,9 +72,9 @@ export const ServicesPartnershipModel = () => {
           backgroundSize: '28px 28px',
         }}
       />
-      <div className="absolute top-1/3 left-1/4 w-[700px] h-[500px] bg-emerald-400/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[800px] h-[600px] bg-emerald-400/10 rounded-full blur-[180px] pointer-events-none" />
 
-      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
 
         {/* Section Header with Connected Horizontal Accent Line */}
         <div className="text-left w-full space-y-4 max-w-full">
@@ -71,106 +86,114 @@ export const ServicesPartnershipModel = () => {
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
+            More Than a <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+              Technology Provider
+            </span>
+          </h2>
+          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
+            YomTech Global aims to build meaningful technology relationships, working alongside organizations, teams, and ambitious individuals to understand challenges, create solutions, and support continuous growth.
+          </p>
         </div>
 
-        {/* Split Layout: Left 45-Degree Diamond Info Box + Right Stacked Swallowtail Ribbon Banners */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center max-w-[94rem] mx-auto">
+        {/* Scaled-Up 3D Central Pencil Pillar + Alternating Directional Arrow Banners */}
+        <div className="relative max-w-[92rem] mx-auto py-8">
           
-          {/* Left 45-Degree Rotated 3D Diamond Card Container */}
-          <div className="lg:col-span-5 flex justify-center items-center py-6 sm:py-10 relative">
-            <div className="absolute inset-0 bg-emerald-400/15 blur-[100px] rounded-full pointer-events-none" />
+          {/* Scaled Central Vertical 3D Pencil Stem */}
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 hidden md:flex flex-col items-center z-10 pointer-events-none">
+            {/* Top Pencil Cap / Eraser */}
+            <div className="w-16 sm:w-20 lg:w-22 h-14 sm:h-16 bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#B45309] rounded-t-3xl shadow-2xl flex items-center justify-center border-b-4 border-amber-800">
+              <Compass size={28} className="text-white" />
+            </div>
 
-            {/* Rotated 45-Degree White Diamond Base Frame */}
-            <div className="w-[320px] h-[320px] sm:w-[410px] sm:h-[410px] rounded-[3.5rem] bg-white shadow-[0_25px_60px_rgba(0,0,0,0.12)] border-4 border-slate-100/90 rotate-45 flex items-center justify-center relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
-              
-              {/* Inner Counter-Rotated Content (-45 Deg) */}
-              <div className="-rotate-45 w-[320px] sm:w-[390px] p-6 sm:p-8 space-y-4 text-left font-sans">
-                <span className="px-3.5 py-1 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[11px] font-mono font-black uppercase tracking-widest inline-block">
-                  PARTNERSHIP PILLARS
-                </span>
+            {/* Main Pencil Shaft Body */}
+            <div className="w-16 sm:w-20 lg:w-22 flex-1 bg-gradient-to-r from-[#D97706] via-[#F59E0B] to-[#B45309] shadow-2xl relative border-x-2 border-amber-700/40">
+              <div className="absolute inset-y-0 left-4 w-3 bg-white/35 blur-[1px]" />
+            </div>
 
-                <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-tight font-display">
-                  More Than a <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
-                    Technology Provider
-                  </span>
-                </h2>
-
-                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
-                  YomTech Global aims to build meaningful technology relationships, working alongside organizations, teams, and individuals.
-                </p>
-
-                {/* Key Pillars Grid */}
-                <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-100">
-                  <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-left">
-                    <p className="text-[10px] font-black text-[#D97706] uppercase tracking-wider">01. Understand</p>
-                    <p className="text-[10px] font-bold text-slate-600">Strategic Workflows</p>
-                  </div>
-                  <div className="p-2 rounded-xl bg-sky-50 border border-sky-200 text-left">
-                    <p className="text-[10px] font-black text-[#0284C7] uppercase tracking-wider">02. Build</p>
-                    <p className="text-[10px] font-bold text-slate-600">Custom Software & ERP</p>
-                  </div>
-                </div>
-
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#0284C7] text-white font-black text-[11px] uppercase tracking-widest shadow-lg shadow-sky-500/25 hover:bg-sky-700 transition-all mt-1"
-                >
-                  <span>Schedule Call</span>
-                  <ArrowRight size={13} />
-                </Link>
-              </div>
-
+            {/* Bottom Pencil Tip Cone */}
+            <div className="w-16 sm:w-20 lg:w-22 h-24 flex flex-col items-center justify-start overflow-hidden">
+              <div 
+                className="w-full h-16 bg-amber-200"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
+              />
+              <div 
+                className="w-7 h-7 bg-slate-900 -mt-7"
+                style={{ clipPath: 'polygon(0 0, 100% 0, 50% 100%)' }}
+              />
             </div>
           </div>
 
-          {/* Right Stacked Metallic Swallowtail Ribbon Banner Cards */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Alternating Directional Arrow Banner Cards Container */}
+          <div className="space-y-14 md:space-y-20 relative z-20">
             {pillars.map((pillar, idx) => {
               const IconComp = pillar.icon;
+              const isLeft = pillar.align === 'left';
+
               return (
                 <motion.div
                   key={pillar.step}
-                  initial={{ opacity: 0, x: 40 }}
+                  initial={{ opacity: 0, x: isLeft ? -60 : 60 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: idx * 0.08 }}
-                  className="flex items-stretch rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden bg-white border border-slate-100/90"
+                  transition={{ duration: 0.55, delay: idx * 0.1 }}
+                  className={`flex flex-col md:flex-row items-center w-full ${
+                    isLeft ? 'md:justify-start' : 'md:justify-end'
+                  }`}
                 >
-                  {/* Left White Number Box + 3D Shadow Fold Line */}
-                  <div className="w-24 sm:w-32 shrink-0 bg-white p-5 sm:p-7 flex flex-col justify-center items-center border-r-4 border-slate-200/80 shadow-[4px_0_15px_rgba(0,0,0,0.08)] z-10">
-                    <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${pillar.numColor} leading-none`}>
-                      {pillar.step}
-                    </span>
-                    <span className="text-[10px] font-mono font-black uppercase text-slate-400 tracking-widest mt-1">
-                      {pillar.optionLabel}
-                    </span>
-                  </div>
+                  <div className={`w-full md:w-[48.5%] ${isLeft ? 'md:pr-10 lg:pr-14' : 'md:pl-10 lg:pl-14'} group`}>
+                    
+                    {/* Scaled Outer Directional Arrow Border Container */}
+                    <div 
+                      className={`p-4 sm:p-5 lg:p-6 ${pillar.themeBg} shadow-2xl transition-transform duration-300 hover:scale-[1.02] relative overflow-hidden`}
+                      style={{
+                        clipPath: isLeft 
+                          ? 'polygon(0% 50%, 10% 0%, 100% 0%, 100% 100%, 10% 100%)'
+                          : 'polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%)'
+                      }}
+                    >
+                      {/* Scaled Inner White Card Plate */}
+                      <div className={`bg-white p-7 sm:p-9 lg:p-11 relative flex flex-col justify-between space-y-5 shadow-inner ${
+                        isLeft ? 'pl-10 sm:pl-12 rounded-r-3xl' : 'pr-10 sm:pr-12 rounded-l-3xl'
+                      }`}>
+                        
+                        {/* Top Header: Step Number & Stage Tag */}
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <span className={`text-4xl sm:text-6xl font-black font-mono tracking-tight ${pillar.themeText}`}>
+                              {pillar.step}
+                            </span>
+                            <span className={`px-4 py-1.5 rounded-full text-xs font-mono font-black uppercase tracking-widest ${pillar.themeLightBg} ${pillar.themeText} border-2 ${pillar.themeBorder}`}>
+                              {pillar.stage}
+                            </span>
+                          </div>
 
-                  {/* Right Gradient Swallowtail Ribbon Banner Body */}
-                  <div 
-                    className={`flex-1 ${pillar.gradientBg} text-white p-6 sm:p-7 pr-12 relative flex flex-col justify-center space-y-1.5 z-0 overflow-hidden`}
-                    style={{ clipPath: 'polygon(0 0, 100% 0, 93% 50%, 100% 100%, 0 100%)' }}
-                  >
-                    {/* Metallic 3D Highlight Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-black/15 pointer-events-none" />
+                          <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl ${pillar.themeLightBg} ${pillar.themeText} border-2 ${pillar.themeBorder} flex items-center justify-center shadow-inner group-hover:scale-115 transition-transform duration-300`}>
+                            <IconComp size={28} strokeWidth={2.2} />
+                          </div>
+                        </div>
 
-                    <div className="flex items-center justify-between gap-2 pr-6 relative z-10">
-                      <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-[10px] font-mono font-black uppercase tracking-widest border border-white/30">
-                        {pillar.stage}
-                      </span>
-                      <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white">
-                        <IconComp size={18} />
+                        {/* Title & Description */}
+                        <div className="space-y-3">
+                          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                            {pillar.title}
+                          </h3>
+
+                          <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                            {pillar.desc}
+                          </p>
+                        </div>
                       </div>
                     </div>
 
-                    <h3 className="text-lg sm:text-2xl font-black text-white font-display tracking-tight leading-snug drop-shadow-md relative z-10">
-                      {pillar.title}
-                    </h3>
+                    {/* Floating Step Tag Label Outside */}
+                    <div className={`pt-3 flex items-center ${isLeft ? 'justify-start pl-6' : 'justify-end pr-6'}`}>
+                      <span className={`text-xs sm:text-sm font-mono font-black uppercase tracking-widest ${pillar.themeText}`}>
+                        ◆ {pillar.optionLabel}
+                      </span>
+                    </div>
 
-                    <p className="text-xs sm:text-sm text-white/95 font-medium leading-relaxed max-w-xl relative z-10">
-                      {pillar.desc}
-                    </p>
                   </div>
                 </motion.div>
               );

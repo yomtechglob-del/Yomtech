@@ -198,22 +198,22 @@ export const PracticalLearning = () => {
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/60 backdrop-blur-md border border-amber-100 shadow-[0_4px_20px_-4px_rgba(245,158,11,0.1)] mb-8 hover:bg-white hover:scale-105 transition-all duration-300 cursor-default group relative">
             <div className="absolute inset-0 bg-amber-400 opacity-0 blur-md rounded-full group-hover:opacity-20 transition-opacity duration-500" />
             <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse relative z-10" />
-            <span className="text-[10px] font-black tracking-[0.25em] uppercase text-amber-700 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-orange-500 transition-all duration-300 relative z-10">
-              Editorial Philosophy
+            <span className="text-[10px] font-black tracking-[0.25em] uppercase text-amber-700 relative z-10 font-sans">
+              WABISKILLS PRACTICAL PHILOSOPHY
             </span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-8 tracking-tight">
-            Why Practical <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Learning Matters</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 mb-8 tracking-tight font-display">
+            Why WabiSkills <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Practical Learning Matters</span>
           </h2>
           
           {/* Hero Quote */}
           <div className="relative">
-             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] max-w-4xl mx-auto italic relative z-10">
-                "Knowledge becomes valuable when you can <br className="hidden md:block"/>
+             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] max-w-4xl mx-auto italic relative z-10 font-display">
+                "At WabiSkills, knowledge becomes valuable when you can <br className="hidden md:block"/>
                 <span className="relative inline-block mt-2 md:mt-0">
                   <span className="bg-clip-text text-transparent bg-[linear-gradient(110deg,#0ea5e9,45%,#f59e0b,55%,#0ea5e9)] bg-[length:200%_auto] animate-shimmer pr-2">
-                    apply it.
+                    apply it in real projects.
                   </span>
                   <svg className="absolute w-full h-3 -bottom-1 left-0 text-cyan-200/50" viewBox="0 0 200 9" fill="none" preserveAspectRatio="none">
                     <path d="M2 7.00002C45 -1.99998 120 -1.99998 198 7.00002" stroke="currentColor" strokeWidth="4" strokeLinecap="round"/>

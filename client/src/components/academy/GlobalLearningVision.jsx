@@ -203,17 +203,17 @@ export const GlobalLearningVision = () => {
           
           <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/80 backdrop-blur-md border border-indigo-200 shadow-[0_4px_20px_-4px_rgba(99,102,241,0.2)] mb-8 hover:bg-white hover:scale-105 transition-all duration-300 cursor-default group">
             <Globe className="w-4 h-4 text-indigo-600 animate-[spin_12s_linear_infinite]" />
-            <span className="text-[10px] font-black tracking-[0.25em] uppercase text-indigo-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-indigo-600 group-hover:to-cyan-500 transition-all duration-300">
-              Global Vision
+            <span className="text-[10px] font-black tracking-[0.25em] uppercase text-indigo-900 font-sans">
+              WABISKILLS INCLUSIVE VISION
             </span>
           </div>
           
-          <h2 className="text-5xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight leading-tight">
-            Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-sky-500">Without Borders</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-6 tracking-tight leading-tight font-display">
+            WabiSkills Learning <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-cyan-500 to-sky-500">Without Borders</span>
           </h2>
           
-          <p className="text-lg md:text-xl text-slate-600 font-medium max-w-2xl leading-relaxed">
-            Connecting technical passion with global software engineering standards, remote autonomy, and continuous craftsmanship.
+          <p className="text-lg md:text-xl text-slate-600 font-semibold max-w-2xl leading-relaxed font-sans">
+            At WabiSkills, we make quality tech education accessible, practical, and interactive. We offer 50% scholarships for all college students and full scholarships because talent has no limits.
           </p>
         </div>
 
