@@ -3290,14 +3290,139 @@ export const AdminDashboardPage = () => {
                 </div>
               </div>
               <div>
-                <label className="font-bold text-slate-500">Article Summary</label>
+                <label className="font-bold text-slate-500">Article Summary (Short Snippet)</label>
                 <textarea
-                  rows="3"
+                  rows="2"
                   placeholder="Summary text to display on news card..."
                   value={newArticleForm.summary}
                   onChange={(e) => setNewArticleForm({ ...newArticleForm, summary: e.target.value })}
                   className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
                 ></textarea>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <label className="font-bold text-slate-500">Full Article Story / Body Content</label>
+                  <span className="text-[10px] font-black text-[#1E90FF] bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200">
+                    {newArticleForm.readTime || '1 min read'}
+                  </span>
+                </div>
+                <textarea
+                  rows="5"
+                  placeholder="Write full article body text, press release details, or case study breakdown..."
+                  value={newArticleForm.fullContent || ''}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const words = val.trim() ? val.trim().split(/\s+/).length : 0;
+                    const mins = Math.max(1, Math.ceil(words / 200));
+                    setNewArticleForm({
+                      ...newArticleForm,
+                      fullContent: val,
+                      readTime: `${mins} min read`
+                    });
+                  }}
+                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                ></textarea>
+              </div>
+
+              {/* MEDIA ATTACHMENTS: IMAGE FILE PICKER */}
+              <div className="p-3 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-2">
+                <label className="font-black text-[#1E90FF] text-[11px] uppercase tracking-wider block">📷 Image / Photo Upload</label>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <label className="px-3.5 py-2 bg-white text-[#1E90FF] border border-blue-200 font-bold rounded-xl hover:bg-blue-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
+                    <Upload size={14} />
+                    <span>Upload Image File...</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const reader = new FileReader();
+                          reader.onload = (uploadEvent) => {
+                            setNewArticleForm({ ...newArticleForm, coverImage: uploadEvent.target.result });
+                            showNotice('Image file loaded successfully!');
+                          };
+                          reader.readAsDataURL(e.target.files[0]);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Or paste image URL (https://...)"
+                    value={newArticleForm.coverImage || ''}
+                    onChange={(e) => setNewArticleForm({ ...newArticleForm, coverImage: e.target.value })}
+                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF] text-xs"
+                  />
+                </div>
+                {newArticleForm.coverImage && (
+                  <div className="flex items-center gap-3 pt-1">
+                    <img src={newArticleForm.coverImage} alt="Preview" className="w-14 h-14 rounded-xl object-cover border border-blue-200 shadow-2xs" />
+                    <span className="text-[11px] font-bold text-emerald-600">✓ Image ready to publish</span>
+                  </div>
+                )}
+              </div>
+
+              {/* MEDIA ATTACHMENTS: VIDEO & YOUTUBE PICKER */}
+              <div className="p-3 bg-red-50/50 rounded-2xl border border-red-100 space-y-2">
+                <label className="font-black text-red-600 text-[11px] uppercase tracking-wider block">📹 Video File / YouTube Embed</label>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)"
+                    value={newArticleForm.youtubeId || ''}
+                    onChange={(e) => setNewArticleForm({ ...newArticleForm, youtubeId: e.target.value })}
+                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-red-500 text-xs"
+                  />
+                  <label className="px-3.5 py-2 bg-white text-red-600 border border-red-200 font-bold rounded-xl hover:bg-red-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
+                    <Upload size={14} />
+                    <span>Upload Video File...</span>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const reader = new FileReader();
+                          reader.onload = (uploadEvent) => {
+                            setNewArticleForm({ ...newArticleForm, coverImage: uploadEvent.target.result, readTime: 'HD Video File' });
+                            showNotice('Video file attached successfully!');
+                          };
+                          reader.readAsDataURL(e.target.files[0]);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              {/* MEDIA ATTACHMENTS: DOCUMENT / PDF FILE PICKER */}
+              <div className="p-3 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-2">
+                <label className="font-black text-emerald-700 text-[11px] uppercase tracking-wider block">📄 Document / PDF Attachment</label>
+                <div className="flex items-center gap-3">
+                  <label className="px-3.5 py-2 bg-white text-emerald-700 border border-emerald-200 font-bold rounded-xl hover:bg-emerald-50 cursor-pointer flex items-center gap-2 text-xs shadow-2xs">
+                    <FileText size={14} />
+                    <span>Attach Document (PDF, DOCX, ZIP)...</span>
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.zip,.ppt,.pptx"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const file = e.target.files[0];
+                          setNewArticleForm({ ...newArticleForm, documentName: file.name });
+                          showNotice(`Attached file "${file.name}" to entry.`);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                  {newArticleForm.documentName && (
+                    <span className="text-xs font-bold text-emerald-700 bg-white px-3 py-1.5 rounded-xl border border-emerald-200 shadow-2xs">
+                      📄 {newArticleForm.documentName}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
@@ -3387,13 +3512,138 @@ export const AdminDashboardPage = () => {
                 </div>
               </div>
               <div>
-                <label className="font-bold text-slate-500">Article Summary</label>
+                <label className="font-bold text-slate-500">Article Summary (Short Snippet)</label>
                 <textarea
-                  rows="3"
+                  rows="2"
                   value={editingArticle.summary || ''}
                   onChange={(e) => setEditingArticle({ ...editingArticle, summary: e.target.value })}
                   className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
                 ></textarea>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <label className="font-bold text-slate-500">Full Article Story / Body Content</label>
+                  <span className="text-[10px] font-black text-[#1E90FF] bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200">
+                    {editingArticle.readTime || '1 min read'}
+                  </span>
+                </div>
+                <textarea
+                  rows="5"
+                  placeholder="Full article body text..."
+                  value={editingArticle.fullContent || editingArticle.content || ''}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    const words = val.trim() ? val.trim().split(/\s+/).length : 0;
+                    const mins = Math.max(1, Math.ceil(words / 200));
+                    setEditingArticle({
+                      ...editingArticle,
+                      fullContent: val,
+                      readTime: `${mins} min read`
+                    });
+                  }}
+                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                ></textarea>
+              </div>
+
+              {/* MEDIA ATTACHMENTS: IMAGE FILE PICKER */}
+              <div className="p-3 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-2">
+                <label className="font-black text-[#1E90FF] text-[11px] uppercase tracking-wider block">📷 Image / Photo Upload</label>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <label className="px-3.5 py-2 bg-white text-[#1E90FF] border border-blue-200 font-bold rounded-xl hover:bg-blue-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
+                    <Upload size={14} />
+                    <span>Upload New Image...</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const reader = new FileReader();
+                          reader.onload = (uploadEvent) => {
+                            setEditingArticle({ ...editingArticle, coverImage: uploadEvent.target.result });
+                            showNotice('Updated image file successfully!');
+                          };
+                          reader.readAsDataURL(e.target.files[0]);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Or paste image URL (https://...)"
+                    value={editingArticle.coverImage || ''}
+                    onChange={(e) => setEditingArticle({ ...editingArticle, coverImage: e.target.value })}
+                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF] text-xs"
+                  />
+                </div>
+                {editingArticle.coverImage && (
+                  <div className="flex items-center gap-3 pt-1">
+                    <img src={editingArticle.coverImage} alt="Preview" className="w-14 h-14 rounded-xl object-cover border border-blue-200 shadow-2xs" />
+                    <span className="text-[11px] font-bold text-emerald-600">✓ Image ready</span>
+                  </div>
+                )}
+              </div>
+
+              {/* MEDIA ATTACHMENTS: VIDEO & YOUTUBE PICKER */}
+              <div className="p-3 bg-red-50/50 rounded-2xl border border-red-100 space-y-2">
+                <label className="font-black text-red-600 text-[11px] uppercase tracking-wider block">📹 Video File / YouTube Embed</label>
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <input
+                    type="text"
+                    placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)"
+                    value={editingArticle.youtubeId || ''}
+                    onChange={(e) => setEditingArticle({ ...editingArticle, youtubeId: e.target.value })}
+                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-red-500 text-xs"
+                  />
+                  <label className="px-3.5 py-2 bg-white text-red-600 border border-red-200 font-bold rounded-xl hover:bg-red-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
+                    <Upload size={14} />
+                    <span>Upload Video File...</span>
+                    <input
+                      type="file"
+                      accept="video/*"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const reader = new FileReader();
+                          reader.onload = (uploadEvent) => {
+                            setEditingArticle({ ...editingArticle, coverImage: uploadEvent.target.result, readTime: 'HD Video File' });
+                            showNotice('Updated video file successfully!');
+                          };
+                          reader.readAsDataURL(e.target.files[0]);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              {/* MEDIA ATTACHMENTS: DOCUMENT / PDF FILE PICKER */}
+              <div className="p-3 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-2">
+                <label className="font-black text-emerald-700 text-[11px] uppercase tracking-wider block">📄 Document / PDF Attachment</label>
+                <div className="flex items-center gap-3">
+                  <label className="px-3.5 py-2 bg-white text-emerald-700 border border-emerald-200 font-bold rounded-xl hover:bg-emerald-50 cursor-pointer flex items-center gap-2 text-xs shadow-2xs">
+                    <FileText size={14} />
+                    <span>Attach Document (PDF, DOCX, ZIP)...</span>
+                    <input
+                      type="file"
+                      accept=".pdf,.doc,.docx,.zip,.ppt,.pptx"
+                      onChange={(e) => {
+                        if (e.target.files && e.target.files[0]) {
+                          const file = e.target.files[0];
+                          setEditingArticle({ ...editingArticle, documentName: file.name });
+                          showNotice(`Attached file "${file.name}" to entry.`);
+                        }
+                      }}
+                      className="hidden"
+                    />
+                  </label>
+                  {editingArticle.documentName && (
+                    <span className="text-xs font-bold text-emerald-700 bg-white px-3 py-1.5 rounded-xl border border-emerald-200 shadow-2xs">
+                      📄 {editingArticle.documentName}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">

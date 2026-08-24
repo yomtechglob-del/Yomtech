@@ -1267,14 +1267,54 @@ export const InsightsMainPage = () => {
               </div>
             </div>
 
-            {readingArticle.coverImage && (
+            {/* MEDIA PREVIEW: YOUTUBE VIDEO OR COVER IMAGE */}
+            {readingArticle.youtubeId ? (
+              <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-md border border-slate-200">
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${readingArticle.youtubeId}?autoplay=1`}
+                  title={readingArticle.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
+            ) : readingArticle.coverImage ? (
               <img src={readingArticle.coverImage} alt={readingArticle.title} className="w-full h-72 sm:h-96 object-cover rounded-2xl shadow-sm" />
+            ) : null}
+
+            {/* DOCUMENT / PDF DOWNLOAD ATTACHMENT */}
+            {readingArticle.documentName && (
+              <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 bg-emerald-600 text-white rounded-xl">
+                    <FileText size={20} />
+                  </div>
+                  <div>
+                    <div className="font-extrabold text-xs text-slate-900">Attached Press Kit / Document</div>
+                    <div className="text-xs text-emerald-700 font-bold">{readingArticle.documentName}</div>
+                  </div>
+                </div>
+                <button
+                  onClick={() => handleShowToast(`Downloading attached document "${readingArticle.documentName}"...`)}
+                  className="px-4 py-2 bg-emerald-600 text-white font-black text-xs rounded-xl shadow hover:bg-emerald-700 flex items-center gap-1.5 shrink-0"
+                >
+                  <span>Download PDF</span>
+                </button>
+              </div>
             )}
 
             <div className="space-y-4 text-slate-700 text-sm leading-relaxed font-medium">
               <p className="font-semibold text-slate-900 text-base">{readingArticle.summary || readingArticle.excerpt}</p>
-              <p>YomTech Global is driving digital transformation across Africa by delivering enterprise-grade software solutions, high-concurrency microservices, and specialized tech talent academies. This article outlines key architectural principles, cloud deployments, and impact metrics recorded across our Pan-African projects.</p>
-              <p>Through robust partnerships with institutions such as the Space Science & Geospatial Institute (SSGI), Bunna Bank S.C., and the Ministry of Innovation & Technology (MInT), YomTech continues to elevate technological standards.</p>
+              {readingArticle.fullContent ? (
+                <div className="space-y-3 whitespace-pre-wrap text-slate-800 font-normal leading-relaxed">
+                  {readingArticle.fullContent}
+                </div>
+              ) : (
+                <>
+                  <p>YomTech Global is driving digital transformation across Africa by delivering enterprise-grade software solutions, high-concurrency microservices, and specialized tech talent academies. This article outlines key architectural principles, cloud deployments, and impact metrics recorded across our Pan-African projects.</p>
+                  <p>Through robust partnerships with institutions such as the Space Science &amp; Geospatial Institute (SSGI), Bunna Bank S.C., and the Ministry of Innovation &amp; Technology (MInT), YomTech continues to elevate technological standards.</p>
+                </>
+              )}
             </div>
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
