@@ -21,6 +21,7 @@ export const Navbar = () => {
     { name: 'Home', path: '/', hasDropdown: false },
     { name: 'Services', path: '/services', hasDropdown: false },
     { name: 'Academy', path: '/academy', hasDropdown: false },
+    { name: 'News', path: '/news', hasDropdown: false },
     { name: 'Products', path: '/products', hasDropdown: false },
     { name: 'About Us', path: '/about', hasDropdown: false },
     { name: 'Contact', path: '/contact', hasDropdown: false },
@@ -81,13 +82,16 @@ export const Navbar = () => {
         {/* Left Brand Logo Section */}
         <Link
           to="/"
-          className="flex items-center justify-center bg-white p-2 sm:p-2.5 rounded-xl border border-white/90 shadow-[0_4px_15px_rgba(0,0,0,0.15)] group shrink-0 mr-3 lg:mr-5 hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.6)] transition-all duration-300"
+          className="flex items-center group shrink-0 mr-3 lg:mr-5 hover:scale-105 transition-all duration-300"
+          title="YomTech Global Home"
         >
-          <img
-            src={logoImg}
-            alt="Yomtech Global Logo"
-            className="w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 object-contain"
-          />
+          <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] p-0.5 shadow-lg group-hover:shadow-[0_0_25px_rgba(14,211,221,0.6)] transition-all">
+            <img
+              src={logoImg}
+              alt="Yomtech Global Logo"
+              className="w-full h-full object-cover rounded-xl bg-white"
+            />
+          </div>
         </Link>
 
         {/* Center Nav Links - Clean Transparent Navigation */}

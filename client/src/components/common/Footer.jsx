@@ -24,11 +24,11 @@ export const Footer = () => {
       <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 relative z-10">
         {/* 1. Brand & About Column */}
         <div className="space-y-6">
-          <div className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 group cursor-pointer" title="Go to YomTech Global Home">
             <img
               src={logoImg}
               alt="Yomtech Global Logo"
-              className="w-12 h-12 object-cover rounded-full border-2 border-[#1E90FF] shadow-sm"
+              className="w-12 h-12 object-cover rounded-full border-2 border-[#1E90FF] shadow-sm group-hover:scale-105 transition-transform"
             />
             <div>
               <span className="font-extrabold font-display text-xl tracking-wider text-white">
@@ -38,7 +38,7 @@ export const Footer = () => {
                 Software &amp; Talent Platform
               </div>
             </div>
-          </div>
+          </Link>
 
           <p className="text-slate-200 text-sm leading-relaxed font-normal">
             Building digital enterprise solutions, powering ERP &amp; cloud systems, and training the next generation of workforce tech leaders via <a href="https://wabiskills.com/" target="_blank" rel="noopener noreferrer" className="text-[#0ED3DD] hover:text-white font-semibold transition-colors">WabiSkills Academy</a>.

@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, LogOut, Shield, ExternalLink, Globe } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Users, BarChart3, GraduationCap, ShieldAlert, Settings, LogOut, Shield, ExternalLink, Globe, ChevronLeft, ChevronRight, LayoutDashboard, Bell, FileText, Sparkles } from 'lucide-react';
 import { logoutAdminApi } from '../../services/api';
 import logoImg from '../../assets/logos/logo.png';
 
-export const AdminSidebar = ({ user }) => {
+export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollapsed, setIsCollapsed, isDarkMode = false }) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleLogout = async () => {
     try {
@@ -17,87 +16,194 @@ export const AdminSidebar = ({ user }) => {
     }
   };
 
-  const navItems = [
-    { label: 'Leads & Enquiries', path: '/admin/dashboard', icon: Users },
+  const mainNav = [
+    { id: 'dashboard', label: 'Admin Dashboard', icon: LayoutDashboard },
+    { id: 'leads', label: 'Leads & Inquiries', icon: Users },
+    { id: 'quotes', label: 'Quote & Consultations', icon: FileText },
+    { id: 'jobs', label: 'Job Applications & HR', icon: GraduationCap },
+  ];
+
+  const cmsNav = [
+    { id: 'cms-services', label: 'Services & Products', icon: Globe },
+    { id: 'cms-news', label: 'News & Press', icon: FileText },
+    { id: 'cms-articles', label: 'Articles & Blog', icon: FileText },
+    { id: 'cms-events', label: 'Events & Webinars', icon: GraduationCap },
+    { id: 'cms-announcements', label: 'Announcements', icon: ShieldAlert },
+    { id: 'cms-content', label: 'Projects & Case Studies', icon: FileText },
+    { id: 'cms-team', label: 'Team & Testimonials', icon: Users },
+  ];
+
+  const securityNav = [
+    { id: 'roles', label: 'User Roles & Permissions', icon: Shield },
+    { id: 'system', label: 'Security & Audit Logs', icon: ShieldAlert },
+    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 min-h-screen flex flex-col justify-between p-6 shadow-sm">
-      <div className="space-y-8">
-        {/* Brand Header */}
-        <div className="flex items-center gap-3">
-          <img
-            src={logoImg}
-            alt="Yomtech Global Logo"
-            className="w-10 h-10 object-cover rounded-full border border-[#1E90FF] shadow-sm"
-          />
-          <div>
-            <div className="font-extrabold text-base tracking-wider text-[#0F172A]">
-              Yomtech <span className="text-[#1E90FF]">Admin</span>
+    <aside className={`transition-all duration-300 flex flex-col justify-between border-r ${
+      isDarkMode ? 'bg-[#03045E] border-cyan-500/30 text-white' : 'bg-white border-blue-100 text-slate-900'
+    } ${isCollapsed ? 'w-20 p-4' : 'w-64 p-5'} shadow-[4px_0_24px_rgba(0,0,0,0.06)] relative z-20`}>
+      <div className="space-y-6">
+        
+        {/* Brand Header matching Yomtech Global design */}
+        <div className={`flex items-center justify-between pb-4 border-b ${isDarkMode ? 'border-cyan-500/30' : 'border-blue-100'}`}>
+          <Link to="/" className="flex items-center gap-3 overflow-hidden group cursor-pointer" title="Go to YomTech Global Home">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] p-0.5 shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
+              <img src={logoImg} alt="Yomtech Logo" className="w-full h-full object-cover rounded-xl bg-white" />
             </div>
-            <div className="text-[10px] text-slate-500 uppercase font-bold tracking-widest">
-              Control Gateway
-            </div>
-          </div>
+            {!isCollapsed && (
+              <div>
+                <div className={`font-black text-base tracking-tight leading-tight flex items-center gap-1.5 ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
+                  <span>Yomtech</span>
+                  <span className="text-[#0ED3DD] text-[10px] font-black px-1.5 py-0.5 rounded-full bg-blue-500/20 border border-cyan-400/40">GLOBAL</span>
+                </div>
+                <div className="text-[11px] font-bold text-cyan-300 dark:text-cyan-400">CMS &amp; Control Gateway</div>
+              </div>
+            )}
+          </Link>
+
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className={`p-1.5 rounded-xl border transition-all ${
+              isDarkMode
+                ? 'bg-blue-900/50 border-cyan-400/30 text-cyan-300 hover:text-white hover:bg-blue-800'
+                : 'bg-blue-50 border-blue-200 text-[#1E90FF] hover:bg-blue-100 shadow-sm'
+            }`}
+            title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+          >
+            {isCollapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+          </button>
         </div>
 
-        {/* User Card */}
-        {user && (
-          <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E90FF] font-bold text-sm">
+        {/* User Badge Card */}
+        {user && !isCollapsed && (
+          <div className={`p-3.5 rounded-2xl border flex items-center gap-3 shadow-sm ${
+            isDarkMode ? 'bg-blue-900/40 border-cyan-400/30 text-white' : 'bg-blue-50/70 border-blue-200 text-slate-900'
+          }`}>
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] flex items-center justify-center text-white font-bold flex-shrink-0 shadow-md">
               <Shield size={18} />
             </div>
             <div className="overflow-hidden">
-              <div className="text-xs font-bold text-[#0F172A] truncate">{user.fullName || user.email}</div>
-              <div className="text-[10px] text-[#1E90FF] font-semibold uppercase">{user.role || 'SUPER_ADMIN'}</div>
+              <div className="text-xs font-extrabold truncate">{user.fullName || 'Ermias Alemayehu'}</div>
+              <div className="text-[10px] text-[#0ED3DD] font-black uppercase tracking-wider">{user.role || 'SUPER_ADMIN'}</div>
             </div>
           </div>
         )}
 
-        {/* Navigation */}
-        <nav className="space-y-1">
-          <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400 px-3 mb-2">
-            Main Operations
-          </div>
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = location.pathname === item.path;
-            return (
-              <Link
-                key={item.path}
-                to={item.path}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-semibold text-sm transition-all ${
-                  isActive
-                    ? 'bg-[#1E90FF] text-white shadow-md'
-                    : 'text-slate-600 hover:text-[#0F172A] hover:bg-slate-100'
-                }`}
-              >
-                <Icon size={18} />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-        </nav>
+        {/* MAIN OPERATIONS */}
+        <div>
+          {!isCollapsed && (
+            <div className="text-[10px] uppercase font-black tracking-widest text-[#0ED3DD] px-3 mb-2.5">
+              Main Operations
+            </div>
+          )}
+          <nav className="space-y-1">
+            {mainNav.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab && setActiveTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-extrabold text-xs transition-all ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white shadow-lg shadow-blue-500/30 font-black'
+                      : isDarkMode
+                      ? 'text-slate-200 hover:bg-blue-900/40 hover:text-[#0ED3DD]'
+                      : 'text-slate-700 hover:bg-blue-50 hover:text-[#1E90FF]'
+                  }`}
+                >
+                  <Icon size={16} className={isActive ? 'text-white' : 'text-[#1E90FF]'} />
+                  {!isCollapsed && <span>{item.label}</span>}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* CONTENT MANAGEMENT SYSTEM (CMS) */}
+        <div>
+          {!isCollapsed && (
+            <div className="text-[10px] uppercase font-black tracking-widest text-[#0ED3DD] px-3 mb-2.5">
+              CMS Management
+            </div>
+          )}
+          <nav className="space-y-1">
+            {cmsNav.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab && setActiveTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-extrabold text-xs transition-all ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white shadow-lg shadow-blue-500/30 font-black'
+                      : isDarkMode
+                      ? 'text-slate-200 hover:bg-blue-900/40 hover:text-[#0ED3DD]'
+                      : 'text-slate-700 hover:bg-blue-50 hover:text-[#1E90FF]'
+                  }`}
+                >
+                  <Icon size={16} className={isActive ? 'text-white' : 'text-[#1E90FF]'} />
+                  {!isCollapsed && <span>{item.label}</span>}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
+
+        {/* ADMINISTRATION & SECURITY */}
+        <div>
+          {!isCollapsed && (
+            <div className="text-[10px] uppercase font-black tracking-widest text-[#0ED3DD] px-3 mb-2.5">
+              Admin &amp; Security
+            </div>
+          )}
+          <nav className="space-y-1">
+            {securityNav.map((item) => {
+              const Icon = item.icon;
+              const isActive = activeTab === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab && setActiveTab(item.id)}
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-extrabold text-xs transition-all ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white shadow-lg shadow-blue-500/30 font-black'
+                      : isDarkMode
+                      ? 'text-slate-200 hover:bg-blue-900/40 hover:text-[#0ED3DD]'
+                      : 'text-slate-700 hover:bg-blue-50 hover:text-[#1E90FF]'
+                  }`}
+                >
+                  <Icon size={16} className={isActive ? 'text-white' : 'text-[#1E90FF]'} />
+                  {!isCollapsed && <span>{item.label}</span>}
+                </button>
+              );
+            })}
+          </nav>
+        </div>
       </div>
 
       {/* Footer Section */}
-      <div className="space-y-3 pt-6 border-t border-slate-200">
+      <div className={`space-y-2 pt-4 border-t ${isDarkMode ? 'border-cyan-500/30' : 'border-blue-100'}`}>
         <Link
           to="/"
           target="_blank"
-          className="flex items-center gap-2 text-xs font-semibold text-slate-500 hover:text-[#1E90FF] transition-colors px-3 py-1.5"
+          className={`flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-xl transition-all ${
+            isDarkMode ? 'text-cyan-200 hover:text-white hover:bg-blue-900/50' : 'text-slate-600 hover:text-[#1E90FF] hover:bg-blue-50'
+          }`}
         >
-          <Globe size={14} />
-          <span>View Live Site</span>
-          <ExternalLink size={12} className="ml-auto" />
+          <Globe size={16} />
+          {!isCollapsed && <span>View Live Website</span>}
+          {!isCollapsed && <ExternalLink size={12} className="ml-auto opacity-70" />}
         </Link>
 
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-red-600 hover:bg-red-50 border border-red-200 font-semibold text-sm transition-all"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-red-600 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/60 border border-red-200 dark:border-red-800/60 font-bold text-xs transition-all"
         >
-          <LogOut size={18} />
-          <span>Sign Out</span>
+          <LogOut size={16} />
+          {!isCollapsed && <span>Sign Out</span>}
         </button>
       </div>
     </aside>
