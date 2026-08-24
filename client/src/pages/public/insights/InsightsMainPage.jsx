@@ -104,7 +104,12 @@ export const InsightsMainPage = () => {
       const saved = localStorage.getItem('yomtech_cms_articles');
       if (saved) {
         try {
-          setLiveArticles(JSON.parse(saved));
+          const parsed = JSON.parse(saved);
+          const activeNonExpired = parsed.filter((a) => {
+            const isPastExpiry = a.expiryDate && new Date(a.expiryDate) < new Date();
+            return a.visibility === 'VISIBLE' && a.status === 'Published' && !isPastExpiry;
+          });
+          setLiveArticles(activeNonExpired);
         } catch (e) {
           console.error(e);
         }

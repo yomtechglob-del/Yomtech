@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchLeadsApi, updateLeadStatusApi, deleteLeadApi, submitLeadApi, checkAuthApi, logoutAdminApi } from '../../services/api';
 import { AdminSidebar } from '../../components/admin/AdminSidebar';
+import logoImg from '../../assets/logos/logo.png';
 import {
   Search,
   Filter,
@@ -664,7 +665,8 @@ export const AdminDashboardPage = () => {
     summary: '',
     readTime: '5 min read',
     status: 'Published',
-    visibility: 'VISIBLE'
+    visibility: 'VISIBLE',
+    expiryDate: ''
   });
 
   // --- ADVANCED CMS STATE: BULK ACTIONS, EXPORT/IMPORT & LIGHTBOX ---
@@ -885,6 +887,16 @@ export const AdminDashboardPage = () => {
 
   useEffect(() => {
     loadAuthAndData();
+
+    const handleGlobalKeyDown = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        const searchInput = document.getElementById('header-search-input');
+        if (searchInput) searchInput.focus();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
   }, [navigate]);
 
   const showNotice = (msg) => {
@@ -1183,11 +1195,11 @@ export const AdminDashboardPage = () => {
   }
 
   return (
-    <div className={`min-h-screen flex transition-colors duration-300 font-sans ${
+    <div className={`h-screen w-full flex overflow-hidden transition-colors duration-300 font-sans ${
       isDarkMode ? 'bg-[#03045E] text-white' : 'bg-[#F8FAFC] text-slate-900'
     }`}>
       
-      {/* SIDEBAR NAVIGATION */}
+      {/* SIDEBAR NAVIGATION (FIXED POSITION) */}
       <AdminSidebar
         user={user}
         activeTab={activeTab}
@@ -1200,29 +1212,35 @@ export const AdminDashboardPage = () => {
       {/* MAIN CONTAINER */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         
-        {/* TOP HEADER BAR */}
-        <header className={`h-16 border-b px-6 flex items-center justify-between transition-colors z-20 ${
-          isDarkMode ? 'bg-[#03045E]/90 border-cyan-500/30 backdrop-blur-md text-white' : 'bg-white border-blue-100 backdrop-blur-md text-slate-900'
+        {/* TOP HEADER BAR (FIXED POSITION STICKY TOP WITH ELEGANT BORDER SHADOW) */}
+        <header className={`h-16 border-b px-6 flex items-center justify-between transition-colors z-30 shrink-0 sticky top-0 ${
+          isDarkMode
+            ? 'bg-[#03045E]/95 border-cyan-500/30 backdrop-blur-md text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)]'
+            : 'bg-white/95 border-slate-200/80 backdrop-blur-md text-slate-900 shadow-[0_4px_16px_rgba(0,0,0,0.03)]'
         }`}>
-          {/* Search bar */}
+          {/* Search bar matching screenshot pill input with Ctrl+K shortcut */}
           <div className="flex items-center gap-3 flex-1 max-w-md">
             <div className="relative w-full">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
               <input
+                id="header-search-input"
                 type="text"
-                placeholder="Search leads, proposals, CMS content, users..."
+                placeholder="Search courses, lessons, CMS content, leads..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className={`w-full pl-10 pr-4 py-2 text-xs rounded-full border transition-all focus:outline-none ${
+                className={`w-full pl-10 pr-14 py-2 text-xs rounded-full border transition-all focus:outline-none ${
                   isDarkMode
-                    ? 'bg-blue-950/60 border-cyan-400/40 text-white placeholder-slate-300 focus:border-[#0ED3DD]'
-                    : 'bg-slate-50 border-blue-200 text-slate-900 placeholder-slate-400 focus:border-[#1E90FF]'
+                    ? 'bg-blue-950/60 border-cyan-400/40 text-white placeholder-slate-400 focus:border-[#0ED3DD]'
+                    : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-[#1E90FF] focus:bg-white focus:ring-2 focus:ring-[#1E90FF]/20'
                 }`}
               />
+              <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 bg-slate-200/60 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md select-none pointer-events-none">
+                Ctrl K
+              </kbd>
             </div>
           </div>
 
-          {/* Right actions */}
+          {/* Right actions matching screenshot icons & profile */}
           <div className="flex items-center gap-3">
             {/* Quick Action Button */}
             <button
@@ -1235,51 +1253,51 @@ export const AdminDashboardPage = () => {
                 else if (activeTab === 'roles') setShowAddUserModal(true);
                 else setShowAddLeadModal(true);
               }}
-              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-95 hover:brightness-110"
+              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-extrabold text-xs rounded-xl shadow-xs transition-all active:scale-95 hover:brightness-110"
             >
               <Plus size={14} />
               <span className="hidden sm:inline">Add Entry</span>
             </button>
 
-            {/* Manual Refresh */}
+            {/* Manual Refresh Button */}
             <button
               onClick={() => {
                 loadAuthAndData();
                 showNotice('Refreshed active platform datasets.');
               }}
-              className={`p-2 rounded-full border transition-colors ${
-                isDarkMode ? 'border-cyan-400/40 hover:bg-blue-900/50 text-cyan-300' : 'border-blue-200 hover:bg-blue-50 text-[#1E90FF]'
+              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-colors ${
+                isDarkMode ? 'border-cyan-400/40 hover:bg-blue-900/50 text-cyan-300' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
               }`}
               title="Refresh Data"
             >
-              <RefreshCw size={16} />
+              <RefreshCw size={15} />
             </button>
 
-            {/* Dark Mode Toggle */}
+            {/* Dark Mode Toggle Matching Screenshot Moon Button */}
             <button
               onClick={() => setIsDarkMode(!isDarkMode)}
-              className={`p-2 rounded-full border transition-colors ${
-                isDarkMode ? 'border-cyan-400/40 hover:bg-blue-900/50 text-amber-300' : 'border-blue-200 hover:bg-blue-50 text-[#1E90FF]'
+              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-colors ${
+                isDarkMode ? 'border-cyan-400/40 hover:bg-blue-900/50 text-amber-300' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
               }`}
               title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             >
               {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
             </button>
 
-            {/* Notifications Dropdown */}
+            {/* Notifications Dropdown Matching Screenshot Bell Icon */}
             <div className="relative">
               <button
                 onClick={() => {
                   setShowNotifications(!showNotifications);
                   setUnreadNotificationsCount(0);
                 }}
-                className={`p-2 rounded-full border relative transition-colors ${
+                className={`w-9 h-9 rounded-full border relative flex items-center justify-center transition-colors ${
                   isDarkMode ? 'border-slate-700 hover:bg-slate-800 text-slate-300' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
                 }`}
               >
                 <Bell size={16} />
                 {unreadNotificationsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center animate-pulse">
+                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center animate-pulse">
                     {unreadNotificationsCount}
                   </span>
                 )}
@@ -1307,20 +1325,18 @@ export const AdminDashboardPage = () => {
               )}
             </div>
 
-            {/* User Profile Pill */}
-            <div className="relative">
+            {/* User Profile Badge Matching Screenshot (Avatar + Name + Role) */}
+            <div className="relative pl-2 border-l border-slate-200/80">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className={`flex items-center gap-2.5 pl-3 pr-1.5 py-1 rounded-full border shadow-sm transition-all ${
-                  isDarkMode ? 'bg-slate-800 border-slate-700 hover:border-blue-500' : 'bg-slate-50 border-slate-200 hover:border-blue-500'
-                }`}
+                className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
               >
                 <div className="text-right leading-tight hidden sm:block">
-                  <div className="font-black text-xs text-slate-900 dark:text-white">{user?.fullName || 'Ermias Alemayehu'}</div>
-                  <div className="text-[10px] font-extrabold text-[#1E90FF]">SUPER_ADMIN</div>
+                  <div className="font-black text-xs text-slate-900 dark:text-white">kenenisa</div>
+                  <div className="text-[10px] font-semibold text-slate-400">Super Admin</div>
                 </div>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-600 to-indigo-500 p-0.5 flex items-center justify-center font-bold text-white text-xs shadow-md">
-                  <User size={16} />
+                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] p-0.5 shadow-2xs overflow-hidden flex-shrink-0">
+                  <img src={logoImg} alt="User Avatar" className="w-full h-full object-cover rounded-full bg-white" />
                 </div>
               </button>
 
@@ -1349,7 +1365,9 @@ export const AdminDashboardPage = () => {
         </header>
 
         {/* MAIN CANVAS PANEL */}
-        <main className="flex-1 p-6 overflow-y-auto">
+        <main className={`flex-1 p-6 sm:p-8 overflow-y-auto transition-colors ${
+          isDarkMode ? 'bg-[#03045E]' : 'bg-[#F8FAFC]'
+        }`}>
           {/* Global Notice Toast */}
           {actionMessage && (
             <div className="mb-4 p-3.5 bg-blue-50 border border-blue-200 text-[#1E90FF] rounded-2xl text-xs font-bold flex items-center gap-2 shadow-sm animate-in fade-in">
@@ -1774,49 +1792,108 @@ export const AdminDashboardPage = () => {
             )}
 
             {/* TAB 6: CMS NEWS & ARTICLES MANAGEMENT CENTER */}
-            {(activeTab === 'cms-news' || activeTab === 'cms-articles') && (
+            {/* TAB 6: ALL 14 CMS CATEGORY MANAGEMENT HUB */}
+            {activeTab.startsWith('cms-') && (
               <div className="space-y-6 animate-in fade-in duration-300">
                 
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
-                    <h1 className="text-xl font-black text-slate-900">CMS: News, Articles &amp; Media Management Hub</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage, edit, update, delete, hide/show, and set expiration status for all news stories &amp; articles.</p>
+                    <h1 className="text-xl font-black text-slate-900">
+                      {({
+                        'cms-services': 'Services & Products Matrix Management',
+                        'cms-news': 'Corporate News & Articles Center',
+                        'cms-articles': 'Corporate News & Articles Center',
+                        'cms-blog': 'Tech Articles & Engineering Blog',
+                        'cms-events': 'Upcoming Events & Webinars Schedule',
+                        'cms-announcements': 'Official Corporate Announcements',
+                        'cms-projects': 'Featured Project Case Studies',
+                        'cms-team': 'Executive Team & Leadership Profiles',
+                        'cms-testimonials': 'Client & Learner Testimonials',
+                        'cms-gallery': 'Photo Gallery Showcase Hub',
+                        'cms-videos': 'Video & Documentary Hub',
+                        'cms-media': 'Media Appearances & Coverage',
+                        'cms-press': 'Press & Corporate Content Kit',
+                        'cms-faq': 'Support FAQ & Knowledge Base',
+                        'cms-partners': 'Trusted Institutional Partners'
+                      })[activeTab] || 'CMS Content Management Hub'}
+                    </h1>
+                    <p className="text-xs text-slate-500 font-semibold">
+                      {({
+                        'cms-services': 'Manage, edit, update, hide/show, and publish software products, ERP modules, and academy services.',
+                        'cms-news': 'Manage, edit, update, delete, hide/show, and set expiration status for all news stories & articles.',
+                        'cms-articles': 'Manage, edit, update, delete, hide/show, and set expiration status for all news stories & articles.',
+                        'cms-blog': 'Publish, update, hide/show, and manage technical architecture insights, AI benchmark papers, and engineering posts.',
+                        'cms-events': 'Schedule, manage, update, hide/show, and publish tech summits, demo days, and workshops.',
+                        'cms-announcements': 'Publish, edit, update, hide/show, and archive official company press statements and announcements.',
+                        'cms-projects': 'Manage, edit, update, hide/show, and feature client projects, SSGI satellite portals, and banking software.',
+                        'cms-team': 'Manage, edit, update, hide/show, and organize executive team members, roles, and profiles.',
+                        'cms-testimonials': 'Manage, edit, update, hide/show, and curate verified student and client feedback reviews.',
+                        'cms-gallery': 'Upload, manage, edit, update, hide/show photo albums, event photos, and office galleries.',
+                        'cms-videos': 'Upload, embed YouTube videos, edit, update, hide/show documentaries, interviews, and video showcases.',
+                        'cms-media': 'Track, edit, update, hide/show news appearances, TV interviews, and press features.',
+                        'cms-press': 'Publish, edit, update, hide/show press kits, brand assets, and corporate media releases.',
+                        'cms-faq': 'Manage, edit, update, hide/show, and organize customer support questions, answers, and help articles.',
+                        'cms-partners': 'Manage, edit, update, hide/show institutional partner logos, MoUs, and government collaborations.'
+                      })[activeTab] || 'Full visibility, editing, updating, and status controls for this category.'}
+                    </p>
                   </div>
                   <button
                     onClick={() => setShowAddArticleModal(true)}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
                     <Plus size={15} />
-                    <span>Create News Story / Article</span>
+                    <span>Create New Entry</span>
                   </button>
                 </div>
 
-                {/* 4 Stat Summary Cards */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="p-4 bg-white rounded-2xl border border-blue-100 shadow-2xs space-y-1">
-                    <span className="text-[10px] font-black text-slate-400 uppercase">Total News &amp; Articles</span>
-                    <div className="text-2xl font-black text-slate-900">{cmsArticles.length}</div>
-                  </div>
-                  <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/80 shadow-2xs space-y-1">
-                    <span className="text-[10px] font-black text-emerald-700 uppercase">Active &amp; Visible</span>
-                    <div className="text-2xl font-black text-emerald-700">
-                      {cmsArticles.filter((a) => a.visibility === 'VISIBLE' && a.status === 'Published').length}
+                {/* 4 Stat Summary Cards for Active Category */}
+                {(() => {
+                  const tabCategoryMap = {
+                    'cms-services': ['Services & Products Matrix', 'Enterprise Software', 'EdTech & Academy', 'Talent Network', 'Communication', 'Social Network', 'Tech Documentaries'],
+                    'cms-news': ['Corporate News & Articles', 'Corporate News'],
+                    'cms-articles': ['Corporate News & Articles', 'Corporate News'],
+                    'cms-blog': ['Tech Articles & Engineering'],
+                    'cms-events': ['Upcoming Events & Webinars'],
+                    'cms-announcements': ['Official Announcements'],
+                    'cms-projects': ['Featured Project Case Studies'],
+                    'cms-team': ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education'],
+                    'cms-testimonials': ['Client & Learner Testimonials'],
+                    'cms-gallery': ['Photo Gallery Showcase', 'Academy', 'Team', 'Partnerships', 'Events'],
+                    'cms-videos': ['Video & Documentary Hub', 'Documentary', 'Bootcamp'],
+                    'cms-media': ['Media Appearances & Coverage'],
+                    'cms-press': ['Press & Corporate Content'],
+                    'cms-faq': ['Support FAQ & Knowledge Base'],
+                    'cms-partners': ['Trusted Institutional Partners']
+                  };
+                  const targetCats = tabCategoryMap[activeTab];
+                  const categoryItems = cmsArticles.filter((art) => !targetCats || (Array.isArray(targetCats) ? targetCats.includes(art.category) : art.category === targetCats));
+                  const totalCount = categoryItems.length;
+                  const visibleCount = categoryItems.filter((a) => a.visibility === 'VISIBLE' && a.status === 'Published').length;
+                  const hiddenCount = categoryItems.filter((a) => a.visibility === 'HIDDEN' || a.status === 'Draft' || a.status === 'Hidden').length;
+                  const expiredCount = categoryItems.filter((a) => a.status === 'Expired' || a.status === 'Archived').length;
+
+                  return (
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                      <div className="p-4 bg-white rounded-2xl border border-blue-100 shadow-2xs space-y-1">
+                        <span className="text-[10px] font-black text-slate-400 uppercase">Total Items</span>
+                        <div className="text-2xl font-black text-slate-900">{totalCount}</div>
+                      </div>
+                      <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/80 shadow-2xs space-y-1">
+                        <span className="text-[10px] font-black text-emerald-700 uppercase">Active &amp; Visible</span>
+                        <div className="text-2xl font-black text-emerald-700">{visibleCount}</div>
+                      </div>
+                      <div className="p-4 bg-amber-50/60 rounded-2xl border border-amber-200/80 shadow-2xs space-y-1">
+                        <span className="text-[10px] font-black text-amber-700 uppercase">Hidden / Drafts</span>
+                        <div className="text-2xl font-black text-amber-700">{hiddenCount}</div>
+                      </div>
+                      <div className="p-4 bg-red-50/60 rounded-2xl border border-red-200/80 shadow-2xs space-y-1">
+                        <span className="text-[10px] font-black text-red-700 uppercase">Expired / Archived</span>
+                        <div className="text-2xl font-black text-red-700">{expiredCount}</div>
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-4 bg-amber-50/60 rounded-2xl border border-amber-200/80 shadow-2xs space-y-1">
-                    <span className="text-[10px] font-black text-amber-700 uppercase">Hidden / Drafts</span>
-                    <div className="text-2xl font-black text-amber-700">
-                      {cmsArticles.filter((a) => a.visibility === 'HIDDEN' || a.status === 'Draft' || a.status === 'Hidden').length}
-                    </div>
-                  </div>
-                  <div className="p-4 bg-red-50/60 rounded-2xl border border-red-200/80 shadow-2xs space-y-1">
-                    <span className="text-[10px] font-black text-red-700 uppercase">Expired / Archived</span>
-                    <div className="text-2xl font-black text-red-700">
-                      {cmsArticles.filter((a) => a.status === 'Expired' || a.status === 'Archived').length}
-                    </div>
-                  </div>
-                </div>
+                  );
+                })()}
 
                 {/* Search & Filter Controls + Export JSON */}
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white p-3.5 rounded-2xl border border-blue-100 shadow-2xs">
@@ -1824,7 +1901,7 @@ export const AdminDashboardPage = () => {
                     <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
                     <input
                       type="text"
-                      placeholder="Search by title, author or client..."
+                      placeholder="Search items by title, author or client..."
                       value={articleSearchQuery}
                       onChange={(e) => setArticleSearchQuery(e.target.value)}
                       className="w-full pl-10 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
@@ -1912,28 +1989,29 @@ export const AdminDashboardPage = () => {
                   </div>
                 )}
 
-                {/* News & Articles Admin Items Table List */}
+                {/* Category Items List with Full Visibility Toggle & Edit Controls */}
                 <div className="space-y-3">
                   {cmsArticles
                     .filter((art) => {
                       const tabCategoryMap = {
-                        'cms-news': 'Corporate News',
-                        'cms-articles': 'Corporate News',
-                        'cms-blog': 'Tech Articles & Engineering',
-                        'cms-events': 'Upcoming Events & Webinars',
-                        'cms-announcements': 'Official Announcements',
-                        'cms-projects': 'Featured Project Case Studies',
-                        'cms-team': 'Executive Team Members',
-                        'cms-testimonials': 'Client & Learner Testimonials',
-                        'cms-gallery': 'Photo Gallery Showcase',
-                        'cms-videos': 'Video & Documentary Hub',
-                        'cms-media': 'Media Appearances & Coverage',
-                        'cms-press': 'Press & Corporate Content',
-                        'cms-faq': 'Support FAQ & Knowledge Base',
-                        'cms-partners': 'Trusted Institutional Partners'
+                        'cms-services': ['Services & Products Matrix', 'Enterprise Software', 'EdTech & Academy', 'Talent Network', 'Communication', 'Social Network', 'Tech Documentaries'],
+                        'cms-news': ['Corporate News & Articles', 'Corporate News'],
+                        'cms-articles': ['Corporate News & Articles', 'Corporate News'],
+                        'cms-blog': ['Tech Articles & Engineering'],
+                        'cms-events': ['Upcoming Events & Webinars'],
+                        'cms-announcements': ['Official Announcements'],
+                        'cms-projects': ['Featured Project Case Studies'],
+                        'cms-team': ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education'],
+                        'cms-testimonials': ['Client & Learner Testimonials'],
+                        'cms-gallery': ['Photo Gallery Showcase', 'Academy', 'Team', 'Partnerships', 'Events'],
+                        'cms-videos': ['Video & Documentary Hub', 'Documentary', 'Bootcamp'],
+                        'cms-media': ['Media Appearances & Coverage'],
+                        'cms-press': ['Press & Corporate Content'],
+                        'cms-faq': ['Support FAQ & Knowledge Base'],
+                        'cms-partners': ['Trusted Institutional Partners']
                       };
-                      const targetCat = tabCategoryMap[activeTab];
-                      const matchesCategory = !targetCat || art.category === targetCat;
+                      const targetCats = tabCategoryMap[activeTab];
+                      const matchesCategory = !targetCats || (Array.isArray(targetCats) ? targetCats.includes(art.category) : art.category === targetCats);
 
                       const matchesStatus =
                         articleFilterStatus === 'ALL' ||
@@ -1952,7 +2030,7 @@ export const AdminDashboardPage = () => {
                     .sort((a, b) => {
                       if (cmsSortBy === 'TITLE') return (a.title || '').localeCompare(b.title || '');
                       if (cmsSortBy === 'STATUS') return (a.status || '').localeCompare(b.status || '');
-                      return 0; // LATEST default order
+                      return 0;
                     })
                     .map((art) => (
                       <div
@@ -1997,27 +2075,46 @@ export const AdminDashboardPage = () => {
                           )}
 
                           <div className="space-y-1.5 flex-1">
-                            <div className="flex items-center gap-2">
-                              <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded-md uppercase border border-blue-200">
-                                {art.category}
-                              </span>
-                              <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase border ${
-                                art.visibility === 'VISIBLE' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-600 border-slate-300'
-                              }`}>
-                                {art.visibility}
-                              </span>
-                              <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase border ${
-                                art.status === 'Published' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                                art.status === 'Expired' ? 'bg-red-50 text-red-700 border-red-200' :
-                                art.status === 'Draft' ? 'bg-blue-50 text-blue-700 border-blue-200' :
-                                'bg-amber-50 text-amber-700 border-amber-200'
-                              }`}>
-                                {art.status}
-                              </span>
-                            </div>
+                            {(() => {
+                              const isPastExpiry = art.expiryDate && new Date(art.expiryDate) < new Date();
+                              const effectiveStatus = isPastExpiry ? 'Expired' : art.status;
+                              const effectiveVis = isPastExpiry ? 'HIDDEN' : art.visibility;
+
+                              return (
+                                <div className="flex flex-wrap items-center gap-2">
+                                  <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded-md uppercase border border-blue-200">
+                                    {art.category}
+                                  </span>
+                                  <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase border ${
+                                    effectiveVis === 'VISIBLE' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-slate-100 text-slate-600 border-slate-300'
+                                  }`}>
+                                    {effectiveVis}
+                                  </span>
+                                  <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase border ${
+                                    effectiveStatus === 'Published' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                                    effectiveStatus === 'Expired' ? 'bg-red-50 text-red-700 border-red-200 animate-pulse' :
+                                    effectiveStatus === 'Draft' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                                    'bg-amber-50 text-amber-700 border-amber-200'
+                                  }`}>
+                                    {effectiveStatus}
+                                  </span>
+                                  {art.expiryDate ? (
+                                    <span className={`px-2 py-0.5 text-[9px] font-black rounded-md border ${
+                                      isPastExpiry ? 'bg-red-100 text-red-800 border-red-300' : 'bg-slate-100 text-slate-700 border-slate-300'
+                                    }`}>
+                                      📅 {isPastExpiry ? `Expired on ${art.expiryDate}` : `Expires: ${art.expiryDate}`}
+                                    </span>
+                                  ) : (
+                                    <span className="px-2 py-0.5 text-[9px] font-bold rounded-md bg-slate-50 text-slate-400 border border-slate-200">
+                                      📅 No Expiry
+                                    </span>
+                                  )}
+                                </div>
+                              );
+                            })()}
                             <div className="font-extrabold text-sm text-slate-900 line-clamp-1">{art.title}</div>
                             <div className="text-xs text-slate-500 font-medium flex flex-wrap gap-2">
-                              <span>Author: <strong>{art.author || 'Editorial'}</strong></span>
+                              <span>Author/Lead: <strong>{art.author || art.name || 'Editorial'}</strong></span>
                               <span>&bull;</span>
                               <span>Client: <strong>{art.client || 'YomTech Global'}</strong></span>
                               <span>&bull;</span>
@@ -2026,9 +2123,9 @@ export const AdminDashboardPage = () => {
                           </div>
                         </div>
 
-                        {/* Action Control Buttons */}
+                        {/* Action Control Buttons (Visibility Toggle + Edit + Delete) */}
                         <div className="flex items-center gap-2 shrink-0">
-                          {/* Toggle Visibility */}
+                          {/* Toggle Visibility (Show/Hide on Public Web) */}
                           <button
                             onClick={() => handleToggleArticleVisibility(art.id)}
                             className={`px-3 py-1.5 text-xs font-bold rounded-xl border flex items-center gap-1.5 transition-all ${
@@ -2036,6 +2133,7 @@ export const AdminDashboardPage = () => {
                                 ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100'
                                 : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
                             }`}
+                            title={art.visibility === 'VISIBLE' ? "Hide this item from live public website" : "Make this item visible on live public website"}
                           >
                             <Eye size={13} />
                             <span>{art.visibility === 'VISIBLE' ? 'Hide' : 'Make Visible'}</span>
@@ -2051,19 +2149,19 @@ export const AdminDashboardPage = () => {
                             </button>
                           )}
 
-                          {/* Edit Button */}
+                          {/* Full Edit Button */}
                           <button
                             onClick={() => handleStartEditArticle(art)}
-                            className="px-3 py-1.5 border border-slate-200 hover:border-[#1E90FF] text-slate-700 hover:text-[#1E90FF] text-xs font-bold rounded-xl transition-all"
+                            className="px-3.5 py-1.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white text-xs font-black rounded-xl shadow hover:brightness-110 transition-all"
                           >
-                            Edit
+                            Edit Item
                           </button>
 
                           {/* Delete Button */}
                           <button
                             onClick={() => handleDeleteArticle(art.id)}
                             className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-all"
-                            title="Delete Article"
+                            title="Delete Item"
                           >
                             <Trash2 size={16} />
                           </button>
@@ -2939,7 +3037,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 1: CREATE LEAD --- */}
       {showAddLeadModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <form onSubmit={handleCreateLead} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">Create Inbound Lead Entry</h3>
@@ -2953,7 +3051,7 @@ export const AdminDashboardPage = () => {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Abebe Bikila"
+                  placeholder="e.g. Ermias Alemayehu"
                   value={newLeadForm.fullName}
                   onChange={(e) => setNewLeadForm({ ...newLeadForm, fullName: e.target.value })}
                   className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
@@ -2965,7 +3063,7 @@ export const AdminDashboardPage = () => {
                   <input
                     type="email"
                     required
-                    placeholder="client@ethio-tech.com"
+                    placeholder="name@company.com"
                     value={newLeadForm.email}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, email: e.target.value })}
                     className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
@@ -2975,35 +3073,51 @@ export const AdminDashboardPage = () => {
                   <label className="font-bold text-slate-400">Phone Number</label>
                   <input
                     type="text"
-                    placeholder="+251911223344"
+                    placeholder="+251 911 000000"
                     value={newLeadForm.phone}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, phone: e.target.value })}
                     className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                   />
                 </div>
               </div>
-              <div>
-                <label className="font-bold text-slate-400">Inquiry Category</label>
-                <select
-                  value={newLeadForm.inquiryType}
-                  onChange={(e) => setNewLeadForm({ ...newLeadForm, inquiryType: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                >
-                  <option value="B2B_SOFTWARE">B2B Software Development</option>
-                  <option value="ERP_SOLUTION">Yomnex ERP Solution</option>
-                  <option value="ACADEMY_ENROLLMENT">WabiSkills Tech Academy</option>
-                  <option value="CYBER_SECURITY">CyberSecurity &amp; Audit</option>
-                  <option value="MEDIA_PARTNERSHIP">Yomtech Media Partnership</option>
-                </select>
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-400">Inquiry Category</label>
+                  <select
+                    value={newLeadForm.inquiryType}
+                    onChange={(e) => setNewLeadForm({ ...newLeadForm, inquiryType: e.target.value })}
+                    className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  >
+                    <option value="Enterprise ERP">Enterprise ERP</option>
+                    <option value="Geospatial & SSGI">Geospatial &amp; SSGI</option>
+                    <option value="Cybersecurity">Cybersecurity</option>
+                    <option value="WabiSkills Academy">WabiSkills Academy</option>
+                    <option value="GovTech Solution">GovTech Solution</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="font-bold text-slate-400">Lead Status</label>
+                  <select
+                    value={newLeadForm.status}
+                    onChange={(e) => setNewLeadForm({ ...newLeadForm, status: e.target.value })}
+                    className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  >
+                    <option value="NEW">NEW</option>
+                    <option value="CONTACTED">CONTACTED</option>
+                    <option value="QUALIFIED">QUALIFIED</option>
+                    <option value="CLOSED">CLOSED</option>
+                  </select>
+                </div>
               </div>
               <div>
-                <label className="font-bold text-slate-400">Request Message</label>
+                <label className="font-bold text-slate-400">Message / Consultation Details</label>
                 <textarea
                   rows="3"
-                  placeholder="Describe client requirements..."
+                  required
+                  placeholder="Inquiry message text..."
                   value={newLeadForm.message}
                   onChange={(e) => setNewLeadForm({ ...newLeadForm, message: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 font-medium focus:outline-none"
+                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                 ></textarea>
               </div>
             </div>
@@ -3012,7 +3126,7 @@ export const AdminDashboardPage = () => {
                 Cancel
               </button>
               <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
-                Submit Lead
+                Save Lead
               </button>
             </div>
           </form>
@@ -3021,17 +3135,17 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 2: ADD PROPOSAL --- */}
       {showAddProposalModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <form onSubmit={handleCreateProposal} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">New B2B Proposal Entry</h3>
+              <h3 className="font-black text-base">New B2B Proposal Request</h3>
               <button type="button" onClick={() => setShowAddProposalModal(false)} className="p-1 rounded-lg text-slate-400 hover:text-white">
                 <X size={18} />
               </button>
             </div>
             <div className="space-y-3 text-xs">
               <div>
-                <label className="font-bold text-slate-400">Client / Institution Name *</label>
+                <label className="font-bold text-slate-400">Enterprise Client Name *</label>
                 <input
                   type="text"
                   required
@@ -3042,11 +3156,11 @@ export const AdminDashboardPage = () => {
                 />
               </div>
               <div>
-                <label className="font-bold text-slate-400">Project Title *</label>
+                <label className="font-bold text-slate-400">Project / Engagement Title *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Core Financial ERP Module"
+                  placeholder="e.g. Core Financial Recon Automation Engine"
                   value={newProposalForm.projectTitle}
                   onChange={(e) => setNewProposalForm({ ...newProposalForm, projectTitle: e.target.value })}
                   className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
@@ -3060,17 +3174,18 @@ export const AdminDashboardPage = () => {
                     onChange={(e) => setNewProposalForm({ ...newProposalForm, servicePillar: e.target.value })}
                     className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                   >
-                    <option value="Custom Software Development">Custom Software Development</option>
-                    <option value="Digital Transformation">Digital Transformation</option>
-                    <option value="Yomnex ERP Integration">Yomnex ERP Integration</option>
-                    <option value="CyberSecurity Audit">CyberSecurity Audit</option>
+                    <option value="Yomnex ERP 4.0">Yomnex ERP 4.0</option>
+                    <option value="Software Engineering">Software Engineering</option>
+                    <option value="Geospatial Telemetry">Geospatial Telemetry</option>
+                    <option value="Cybersecurity Audit">Cybersecurity Audit</option>
+                    <option value="WabiSkills Bootcamp">WabiSkills Bootcamp</option>
                   </select>
                 </div>
                 <div>
-                  <label className="font-bold text-slate-400">Budget Range</label>
+                  <label className="font-bold text-slate-400">Est. Budget Range</label>
                   <input
                     type="text"
-                    placeholder="e.g. 2,500,000 ETB"
+                    placeholder="e.g. $50,000 - $120,000"
                     value={newProposalForm.budget}
                     onChange={(e) => setNewProposalForm({ ...newProposalForm, budget: e.target.value })}
                     className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
@@ -3083,7 +3198,7 @@ export const AdminDashboardPage = () => {
                 Cancel
               </button>
               <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
-                Save Proposal
+                Submit Proposal
               </button>
             </div>
           </form>
@@ -3092,7 +3207,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 3: ADD JOB VACANCY --- */}
       {showAddJobModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <form onSubmit={handleCreateJob} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">Post New Job Vacancy</h3>
@@ -3264,7 +3379,7 @@ export const AdminDashboardPage = () => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <div>
                   <label className="font-bold text-slate-500">Status</label>
                   <select
@@ -3287,6 +3402,31 @@ export const AdminDashboardPage = () => {
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, client: e.target.value })}
                     className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                   />
+                </div>
+                <div>
+                  <label className="font-bold text-slate-500 flex items-center justify-between">
+                    <span>Expiration Date</span>
+                  </label>
+                  <div className="flex gap-1.5 mt-1">
+                    <input
+                      type="date"
+                      value={newArticleForm.expiryDate || ''}
+                      onChange={(e) => setNewArticleForm({ ...newArticleForm, expiryDate: e.target.value })}
+                      className="flex-1 p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] text-xs"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const d = new Date();
+                        d.setDate(d.getDate() + 30);
+                        setNewArticleForm({ ...newArticleForm, expiryDate: d.toISOString().split('T')[0] });
+                      }}
+                      className="px-2 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 text-[10px] font-black rounded-lg hover:bg-blue-100 shrink-0"
+                      title="Set 30-Day Expiration"
+                    >
+                      +30d
+                    </button>
+                  </div>
                 </div>
               </div>
               <div>
@@ -3485,7 +3625,7 @@ export const AdminDashboardPage = () => {
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-3 gap-3">
                 <div>
                   <label className="font-bold text-slate-500">Status</label>
                   <select
@@ -3509,6 +3649,31 @@ export const AdminDashboardPage = () => {
                     <option value="VISIBLE">VISIBLE</option>
                     <option value="HIDDEN">HIDDEN</option>
                   </select>
+                </div>
+                <div>
+                  <label className="font-bold text-slate-500 flex items-center justify-between">
+                    <span>Expiration Date</span>
+                  </label>
+                  <div className="flex gap-1.5 mt-1">
+                    <input
+                      type="date"
+                      value={editingArticle.expiryDate || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, expiryDate: e.target.value })}
+                      className="flex-1 p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] text-xs"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const d = new Date();
+                        d.setDate(d.getDate() + 30);
+                        setEditingArticle({ ...editingArticle, expiryDate: d.toISOString().split('T')[0] });
+                      }}
+                      className="px-2 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 text-[10px] font-black rounded-lg hover:bg-blue-100 shrink-0"
+                      title="Set 30-Day Expiration"
+                    >
+                      +30d
+                    </button>
+                  </div>
                 </div>
               </div>
               <div>
@@ -3660,7 +3825,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 6: ADD TEAM MEMBER --- */}
       {showAddTeamModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <form onSubmit={handleCreateTeamMember} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">Add Executive / Team Member</h3>
@@ -3706,7 +3871,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 7: ADD SYSTEM USER (RBAC) --- */}
       {showAddUserModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <form onSubmit={handleCreateUser} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">Create System User &amp; Assign Role</h3>
@@ -3768,7 +3933,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 8: VIEW LEAD DETAILS --- */}
       {selectedLead && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">Inbound Lead Profile</h3>
@@ -3815,7 +3980,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 9: VIEW APPLICANT PROFILE --- */}
       {selectedApplicant && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
           <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">WabiJob Candidate Profile</h3>
@@ -3868,7 +4033,7 @@ export const AdminDashboardPage = () => {
             </div>
 
             {/* Media Content Box */}
-            <div className="relative aspect-video bg-black rounded-2xl overflow-hidden flex items-center justify-center border border-white/10">
+            <div className="relative aspect-video bg-[#002D54] rounded-2xl overflow-hidden flex items-center justify-center border border-white/10">
               {adminPreviewMedia.youtubeId ? (
                 <iframe
                   className="w-full h-full"
