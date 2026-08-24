@@ -73,6 +73,81 @@ export const InsightsMainPage = () => {
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  
+  // Advanced Interactive Modals & Toast State
+  const [readingArticle, setReadingArticle] = useState(null);
+  const [selectedEventForReg, setSelectedEventForReg] = useState(null);
+  const [regForm, setRegForm] = useState({ name: '', email: '', organization: '', ticketType: 'In-Person (Skylight Hotel)' });
+  const [regConfirmed, setRegConfirmed] = useState(false);
+  const [selectedCaseStudy, setSelectedCaseStudy] = useState(null);
+  const [selectedTeamMember, setSelectedTeamMember] = useState(null);
+  const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
+  const [toastNotice, setToastNotice] = useState(null);
+  const [likesMap, setLikesMap] = useState({ 'art-1': 450, 'art-2': 320, 'art-3': 510, 'art-4': 98, 'art-5': 182 });
+  const [bookmarksMap, setBookmarksMap] = useState({});
+
+  // Real-time synchronization with Admin Dashboard CMS
+  const [liveArticles, setLiveArticles] = useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_articles');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return null;
+  });
+
+  React.useEffect(() => {
+    const syncArticles = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          setLiveArticles(JSON.parse(saved));
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', syncArticles);
+    window.addEventListener('storage', syncArticles);
+    return () => {
+      window.removeEventListener('cmsArticlesUpdated', syncArticles);
+      window.removeEventListener('storage', syncArticles);
+    };
+  }, []);
+
+  const showToast = (msg) => {
+    setToastNotice(msg);
+    setTimeout(() => setToastNotice(null), 3500);
+  };
+
+  const handleToggleLike = (id) => {
+    setLikesMap((prev) => {
+      const current = prev[id] || 100;
+      const updated = current + 1;
+      showToast('Liked story! Count updated.');
+      return { ...prev, [id]: updated };
+    });
+  };
+
+  const handleToggleBookmark = (id, title) => {
+    setBookmarksMap((prev) => {
+      const isBookmarked = !prev[id];
+      showToast(isBookmarked ? `Saved "${title}" to your bookmarks!` : `Removed "${title}" from bookmarks.`);
+      return { ...prev, [id]: isBookmarked };
+    });
+  };
+
+  const handleCopyLink = (title) => {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(window.location.href);
+      showToast(`Link for "${title}" copied to clipboard!`);
+    } else {
+      showToast('Article link ready to share!');
+    }
+  };
 
   const categories = [
     { id: 'ALL', label: 'All News & Media' },
@@ -87,11 +162,23 @@ export const InsightsMainPage = () => {
     e.preventDefault();
     if (newsletterEmail) {
       setNewsletterSubscribed(true);
+      showToast('Thank you for subscribing to YomTech Global Insights!');
       setTimeout(() => {
         setNewsletterEmail('');
         setNewsletterSubscribed(false);
       }, 4000);
     }
+  };
+
+  const handleConfirmRegistration = (e) => {
+    e.preventDefault();
+    setRegConfirmed(true);
+    showToast(`Registration confirmed for ${selectedEventForReg?.title}! Confirmation sent to ${regForm.email}`);
+    setTimeout(() => {
+      setSelectedEventForReg(null);
+      setRegConfirmed(false);
+      setRegForm({ name: '', email: '', organization: '', ticketType: 'In-Person (Skylight Hotel)' });
+    }, 3000);
   };
 
   return (
@@ -1078,6 +1165,143 @@ export const InsightsMainPage = () => {
               <h4 className="font-black text-lg text-white">{selectedVideo.title}</h4>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* 15. EVENT REGISTRATION MODAL */}
+      {selectedEventForReg && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/90 backdrop-blur-xl flex items-center justify-center p-4">
+          <div className="relative max-w-lg w-full bg-white text-slate-900 rounded-3xl p-6 sm:p-8 space-y-5 shadow-2xl border border-blue-100 animate-in zoom-in-95">
+            <button onClick={() => setSelectedEventForReg(null)} className="absolute top-4 right-4 p-2 rounded-full bg-blue-50 text-[#1E90FF] hover:bg-blue-100">
+              <X size={18} />
+            </button>
+            <div className="space-y-1.5 border-b border-blue-100 pb-3">
+              <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded-md uppercase">Official Event Pass</span>
+              <h3 className="text-xl font-black text-slate-900 leading-snug">{selectedEventForReg.title}</h3>
+              <p className="text-xs text-slate-500 font-semibold">{selectedEventForReg.date} &bull; {selectedEventForReg.location}</p>
+            </div>
+
+            {regConfirmed ? (
+              <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-2">
+                <CheckCircle2 size={40} className="mx-auto text-emerald-600 animate-bounce" />
+                <h4 className="font-black text-base text-emerald-900">Registration Successful!</h4>
+                <p className="text-xs text-emerald-700 font-medium">Your event pass &amp; QR code invitation have been dispatched to <strong>{regForm.email}</strong>.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleConfirmRegistration} className="space-y-3 text-xs">
+                <div>
+                  <label className="font-extrabold text-slate-600">Full Name *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Abebe Bikila"
+                    value={regForm.name}
+                    onChange={(e) => setRegForm({ ...regForm, name: e.target.value })}
+                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  />
+                </div>
+                <div>
+                  <label className="font-extrabold text-slate-600">Official Email *</label>
+                  <input
+                    type="email"
+                    required
+                    placeholder="e.g. abebe@company.org"
+                    value={regForm.email}
+                    onChange={(e) => setRegForm({ ...regForm, email: e.target.value })}
+                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-extrabold text-slate-600">Organization</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Enterprise Client / University"
+                      value={regForm.organization}
+                      onChange={(e) => setRegForm({ ...regForm, organization: e.target.value })}
+                      className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-extrabold text-slate-600">Attendance Type</label>
+                    <select
+                      value={regForm.ticketType}
+                      onChange={(e) => setRegForm({ ...regForm, ticketType: e.target.value })}
+                      className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    >
+                      <option value="In-Person (Skylight Hotel)">In-Person (Skylight Hotel)</option>
+                      <option value="Virtual Hybrid (Zoom Live)">Virtual Hybrid (Zoom Live)</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="submit" className="w-full py-3.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-xl shadow hover:brightness-110">
+                  Confirm Event Registration &rarr;
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* 16. ARTICLE READER MODAL */}
+      {readingArticle && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/90 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto">
+          <div className="relative max-w-3xl w-full bg-white text-slate-900 rounded-3xl p-6 sm:p-10 space-y-6 shadow-2xl border border-blue-100 my-8">
+            <button onClick={() => setReadingArticle(null)} className="absolute top-4 right-4 p-2 rounded-full bg-blue-50 text-[#1E90FF] hover:bg-blue-100">
+              <X size={20} />
+            </button>
+            <div className="space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded-lg uppercase">{readingArticle.category}</span>
+                <span className="text-xs text-slate-400 font-bold">{readingArticle.publishedDate || 'Aug 20, 2026'} &bull; {readingArticle.readTime || '5 min read'}</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-black text-slate-900 leading-snug">{readingArticle.title}</h2>
+              <div className="flex items-center gap-3 pt-1 border-b border-slate-100 pb-4">
+                <div className="w-10 h-10 rounded-full bg-[#1E90FF] text-white font-black flex items-center justify-center text-sm">
+                  {readingArticle.author ? readingArticle.author[0] : 'Y'}
+                </div>
+                <div>
+                  <div className="font-extrabold text-sm text-slate-900">{readingArticle.author || 'YomTech Media Editorial'}</div>
+                  <div className="text-xs text-slate-500 font-medium">Published in YomTech Insights Hub</div>
+                </div>
+              </div>
+            </div>
+
+            {readingArticle.coverImage && (
+              <img src={readingArticle.coverImage} alt={readingArticle.title} className="w-full h-72 sm:h-96 object-cover rounded-2xl shadow-sm" />
+            )}
+
+            <div className="space-y-4 text-slate-700 text-sm leading-relaxed font-medium">
+              <p className="font-semibold text-slate-900 text-base">{readingArticle.summary || readingArticle.excerpt}</p>
+              <p>YomTech Global is driving digital transformation across Africa by delivering enterprise-grade software solutions, high-concurrency microservices, and specialized tech talent academies. This article outlines key architectural principles, cloud deployments, and impact metrics recorded across our Pan-African projects.</p>
+              <p>Through robust partnerships with institutions such as the Space Science & Geospatial Institute (SSGI), Bunna Bank S.C., and the Ministry of Innovation & Technology (MInT), YomTech continues to elevate technological standards.</p>
+            </div>
+
+            <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <button onClick={() => handleToggleLike(readingArticle.id)} className="px-4 py-2 bg-blue-50 text-[#1E90FF] font-black text-xs rounded-xl flex items-center gap-2 hover:bg-blue-100">
+                  <ThumbsUp size={15} />
+                  <span>{likesMap[readingArticle.id] || 450} Likes</span>
+                </button>
+                <button onClick={() => handleToggleBookmark(readingArticle.id, readingArticle.title)} className="px-4 py-2 border border-slate-200 text-slate-700 font-bold text-xs rounded-xl flex items-center gap-2 hover:border-[#1E90FF]">
+                  <Bookmark size={15} />
+                  <span>{bookmarksMap[readingArticle.id] ? 'Bookmarked' : 'Save'}</span>
+                </button>
+              </div>
+              <button onClick={() => handleCopyLink(readingArticle.title)} className="p-2.5 bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-[#1E90FF] rounded-xl text-xs font-bold flex items-center gap-1.5">
+                <Share2 size={15} />
+                <span className="hidden sm:inline">Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 17. FLOATING TOAST NOTIFICATION */}
+      {toastNotice && (
+        <div className="fixed bottom-6 right-6 z-50 px-5 py-3.5 bg-[#03045E] text-white font-extrabold text-xs rounded-2xl shadow-2xl border border-cyan-400/40 flex items-center gap-3 animate-in slide-in-from-bottom-5">
+          <Sparkles size={16} className="text-[#0ED3DD] animate-pulse shrink-0" />
+          <span>{toastNotice}</span>
         </div>
       )}
 

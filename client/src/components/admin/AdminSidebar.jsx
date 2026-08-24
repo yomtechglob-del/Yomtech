@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Users, BarChart3, GraduationCap, ShieldAlert, Settings, LogOut, Shield, ExternalLink, Globe, ChevronLeft, ChevronRight, LayoutDashboard, Bell, FileText, Sparkles } from 'lucide-react';
+import { Users, BarChart3, GraduationCap, ShieldAlert, Settings, LogOut, Shield, ExternalLink, Globe, ChevronLeft, ChevronRight, LayoutDashboard, Bell, FileText, Sparkles, Newspaper, Calendar, Megaphone, Briefcase, UserCheck, MessageSquareQuote, Image, Video, Tv, HelpCircle, Handshake } from 'lucide-react';
 import { logoutAdminApi } from '../../services/api';
 import logoImg from '../../assets/logos/logo.png';
 
@@ -24,13 +24,20 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
   ];
 
   const cmsNav = [
-    { id: 'cms-services', label: 'Services & Products', icon: Globe },
-    { id: 'cms-news', label: 'News & Press', icon: FileText },
-    { id: 'cms-articles', label: 'Articles & Blog', icon: FileText },
-    { id: 'cms-events', label: 'Events & Webinars', icon: GraduationCap },
-    { id: 'cms-announcements', label: 'Announcements', icon: ShieldAlert },
-    { id: 'cms-content', label: 'Projects & Case Studies', icon: FileText },
-    { id: 'cms-team', label: 'Team & Testimonials', icon: Users },
+    { id: 'cms-services', label: 'Services & Products Matrix', icon: Globe },
+    { id: 'cms-news', label: 'Corporate News & Articles', icon: Newspaper },
+    { id: 'cms-blog', label: 'Tech Articles & Engineering', icon: FileText },
+    { id: 'cms-events', label: 'Upcoming Events & Webinars', icon: Calendar },
+    { id: 'cms-announcements', label: 'Official Announcements', icon: Megaphone },
+    { id: 'cms-projects', label: 'Featured Project Case Studies', icon: Briefcase },
+    { id: 'cms-team', label: 'Executive Team Members', icon: UserCheck },
+    { id: 'cms-testimonials', label: 'Client & Learner Testimonials', icon: MessageSquareQuote },
+    { id: 'cms-gallery', label: 'Photo Gallery Showcase', icon: Image },
+    { id: 'cms-videos', label: 'Video & Documentary Hub', icon: Video },
+    { id: 'cms-media', label: 'Media Appearances & Coverage', icon: Tv },
+    { id: 'cms-press', label: 'Press & Corporate Content', icon: Sparkles },
+    { id: 'cms-faq', label: 'Support FAQ & Knowledge Base', icon: HelpCircle },
+    { id: 'cms-partners', label: 'Trusted Institutional Partners', icon: Handshake },
   ];
 
   const securityNav = [
