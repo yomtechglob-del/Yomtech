@@ -25,3 +25,51 @@ model Lead {
   status      String   @default("NEW")
   createdAt   DateTime @default(now())
 }
+
+model ContentItem {
+  id                 String    @id @default(uuid())
+  title              String
+  slug               String    @unique
+  excerpt            String?
+  content            String?
+  coverImage         String?
+  category           String
+  subCategory        String?
+  contentType        String    @default("ARTICLE")
+  status             String    @default("PUBLISHED")
+  visibility         String    @default("PUBLIC")
+  featured           Boolean   @default(false)
+  featuredOrder      Int       @default(0)
+  author             String?
+  client             String?
+  readTime           String?
+  priority           String?   
+  eventDate          String?
+  eventTime          String?
+  location           String?
+  videoUrl           String?
+  techStack          String?
+  impact             String?
+  quote              String?
+  role               String?
+  question           String?
+  answer             String?
+  views              Int       @default(0)
+  scheduledAt        DateTime?
+  publishedAt        DateTime? @default(now())
+  expiresAt          DateTime?
+  expirationEnabled  Boolean   @default(false)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  deletedAt          DateTime?
+}
+
+model AuditLog {
+  id          String   @id @default(uuid())
+  user        String   @default("Super Admin")
+  action      String
+  contentType String
+  title       String?
+  contentId   String?
+  timestamp   DateTime @default(now())
+}

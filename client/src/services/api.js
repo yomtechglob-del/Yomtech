@@ -16,6 +16,15 @@ export const checkAuthApi = () => API.get('/auth/me');
 
 // --- CMS NEWS & MEDIA REST API ENDPOINTS FOR ALL 14 CATEGORIES ---
 export const fetchCmsCategoryApi = (category) => API.get(`/cms/${category}`);
+export const fetchPublicCmsCategoryApi = (category) => API.get(`/cms/${category}?public=true`);
 export const createCmsCategoryItemApi = (category, itemData) => API.post(`/cms/${category}`, itemData);
 export const updateCmsCategoryItemApi = (category, id, itemData) => API.put(`/cms/${category}/${id}`, itemData);
 export const deleteCmsCategoryItemApi = (category, id) => API.delete(`/cms/${category}/${id}`);
+
+// --- ENTERPRISE CMS SPECIAL ENDPOINTS ---
+export const fetchCmsOverviewStatsApi = () => API.get('/cms/overview');
+export const fetchCmsTrashApi = () => API.get('/cms/trash');
+export const restoreCmsItemApi = (id) => API.post(`/cms/trash/restore/${id}`);
+export const permanentlyDeleteCmsItemApi = (id) => API.delete(`/cms/trash/permanent/${id}`);
+export const bulkCmsActionApi = (action, category, ids) => API.post('/cms/bulk', { action, category, ids });
+export const fetchCmsAuditLogsApi = () => API.get('/cms/audit-logs');

@@ -377,7 +377,7 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="bg-white text-slate-900 min-h-screen relative overflow-x-hidden font-sans">
+    <div className="bg-[#03045E] text-slate-900 min-h-screen relative overflow-x-hidden font-sans">
 
       {/* ════════════════════════════════════════════════════
           SECTION 01 — EXISTING HERO (Scaled Up & Grander)

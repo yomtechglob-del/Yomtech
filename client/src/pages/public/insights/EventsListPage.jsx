@@ -5,6 +5,53 @@ import { EVENTS } from '../../../data/insightsData';
 import { Calendar, Clock, MapPin, ArrowRight, User, Sparkles } from 'lucide-react';
 
 export const EventsListPage = () => {
+  const [liveEventsPool, setLiveEventsPool] = React.useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_articles');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        const filtered = parsed.filter((a) => a.category === 'Upcoming Events & Webinars' && a.visibility === 'VISIBLE' && a.status === 'Published');
+        if (filtered.length > 0) return filtered;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return EVENTS;
+  });
+
+  React.useEffect(() => {
+    const syncEvents = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const filtered = parsed.filter((a) => a.category === 'Upcoming Events & Webinars' && a.visibility === 'VISIBLE' && a.status === 'Published');
+          if (filtered.length > 0) setLiveEventsPool(filtered);
+          else setLiveEventsPool(EVENTS);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', syncEvents);
+    window.addEventListener('storage', syncEvents);
+    return () => {
+      window.removeEventListener('cmsArticlesUpdated', syncEvents);
+      window.removeEventListener('storage', syncEvents);
+    };
+  }, []);
+
+  const eventsToUse = liveEventsPool.map((evt, idx) => ({
+    id: evt.id || `evt-${idx}`,
+    title: evt.title,
+    dateMonth: evt.dateMonth || 'SEP',
+    dateDay: evt.dateDay || '15',
+    time: evt.time || evt.readTime || '09:00 AM EAT',
+    location: evt.location || evt.client || 'Hybrid (Addis Ababa)',
+    description: evt.description || evt.summary || 'YomTech Global tech event.',
+    speakers: evt.speakers || (evt.author ? [evt.author] : ['YomTech Leadership'])
+  }));
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans transition-colors">
       <section className="relative pt-36 pb-20 bg-[#03045E] text-white overflow-hidden">
@@ -31,7 +78,7 @@ export const EventsListPage = () => {
 
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="space-y-4">
-          {EVENTS.map((evt) => (
+          {eventsToUse.map((evt) => (
             <div key={evt.id} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-sm hover:border-[#1E90FF] hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-5">
                 <div className="w-18 h-18 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black p-3">

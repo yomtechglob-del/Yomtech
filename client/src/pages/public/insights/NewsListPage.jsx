@@ -4,14 +4,90 @@ import { AboutHeroBackground } from '../../../components/common/AboutHeroBackgro
 import { NEWS_ITEMS } from '../../../data/insightsData';
 import { Search, Filter, Calendar, User, ArrowRight, Tag, Sparkles } from 'lucide-react';
 
+import { fetchPublicCmsCategoryApi } from '../../../services/api';
+
 export const NewsListPage = () => {
   const [search, setSearch] = useState('');
   const [selectedCat, setSelectedCat] = useState('ALL');
+  const isArticleVisibleAndPublished = (a) => {
+    const isCat = ['Corporate News & Articles', 'Corporate News', 'Enterprise News', 'Services & Products Matrix'].includes(a.category);
+    const vis = (a.visibility || '').toUpperCase();
+    const stat = (a.status || '').toLowerCase();
+    const isVis = vis === 'VISIBLE' || vis === 'PUBLIC';
+    const isPub = stat === 'published';
+    return isCat && isVis && isPub;
+  };
 
-  const filteredNews = NEWS_ITEMS.filter((item) => {
-    const matchesCat = selectedCat === 'ALL' || item.category === selectedCat;
+  const [liveNewsPool, setLiveNewsPool] = useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_articles');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(isArticleVisibleAndPublished);
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return NEWS_ITEMS;
+  });
+
+  React.useEffect(() => {
+    const fetchFromApi = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('articles');
+        if (res.data?.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
+          const apiArticles = res.data.data.filter(isArticleVisibleAndPublished);
+          setLiveNewsPool(apiArticles);
+        }
+      } catch (err) {
+        console.error('Failed to fetch public articles from API:', err);
+      }
+    };
+
+    fetchFromApi();
+
+    const syncNews = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setLiveNewsPool(parsed.filter(isArticleVisibleAndPublished));
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', syncNews);
+    window.addEventListener('storage', syncNews);
+    return () => {
+      window.removeEventListener('cmsArticlesUpdated', syncNews);
+      window.removeEventListener('storage', syncNews);
+    };
+  }, []);
+
+  const newsItemsToUse = liveNewsPool.map((item, idx) => ({
+    id: item.id || `news-${idx}`,
+    title: item.title,
+    slug: item.id || item.slug || `news-${idx}`,
+    category: item.category || 'Corporate News',
+    publishedDate: item.publishedDate || item.date || 'AUG 2026',
+    author: item.author || 'YomTech Newsroom',
+    coverImage: item.coverImage || NEWS_ITEMS[idx % NEWS_ITEMS.length]?.coverImage,
+    summary: item.summary || item.excerpt || item.fullContent || 'YomTech Global corporate news release.',
+    client: item.client
+  }));
+
+  const filteredNews = newsItemsToUse.filter((item) => {
+    const matchesCat =
+      selectedCat === 'ALL' ||
+      (item.category && item.category.toLowerCase().includes(selectedCat.toLowerCase())) ||
+      (selectedCat.toLowerCase().includes('news') && (item.category || '').toLowerCase().includes('news'));
     const q = search.toLowerCase();
-    const matchesSearch = item.title.toLowerCase().includes(q) || item.summary.toLowerCase().includes(q);
+    const matchesSearch = (item.title || '').toLowerCase().includes(q) || (item.summary || '').toLowerCase().includes(q);
     return matchesCat && matchesSearch;
   });
 
@@ -51,9 +127,10 @@ export const NewsListPage = () => {
               className="px-4 py-3 text-xs font-bold rounded-2xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none"
             >
               <option value="ALL">All Categories</option>
-              <option value="ENTERPRISE NEWS">Enterprise News</option>
-              <option value="ACADEMY &amp; TALENT">Academy &amp; Talent</option>
-              <option value="GOVERNMENT TECH">Government Tech</option>
+              <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
+              <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+              <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
+              <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
             </select>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { fetchPublicCmsCategoryApi } from '../../../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AboutHeroBackground } from '../../../components/common/AboutHeroBackground';
 import {
@@ -100,6 +101,19 @@ export const InsightsMainPage = () => {
   });
 
   React.useEffect(() => {
+    const fetchFromApi = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data) && res.data.data.length > 0) {
+          setLiveArticles(res.data.data);
+        }
+      } catch (err) {
+        console.error('Failed to fetch CMS records from API:', err);
+      }
+    };
+
+    fetchFromApi();
+
     const syncArticles = () => {
       const saved = localStorage.getItem('yomtech_cms_articles');
       if (saved) {
@@ -107,7 +121,7 @@ export const InsightsMainPage = () => {
           const parsed = JSON.parse(saved);
           const activeNonExpired = parsed.filter((a) => {
             const isPastExpiry = a.expiryDate && new Date(a.expiryDate) < new Date();
-            return a.visibility === 'VISIBLE' && a.status === 'Published' && !isPastExpiry;
+            return (a.visibility === 'VISIBLE' || a.visibility === 'PUBLIC') && (a.status === 'Published' || a.status === 'PUBLISHED') && !isPastExpiry;
           });
           setLiveArticles(activeNonExpired);
         } catch (e) {
@@ -145,14 +159,155 @@ export const InsightsMainPage = () => {
     });
   };
 
-  const handleCopyLink = (title) => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      showToast(`Link for "${title}" copied to clipboard!`);
-    } else {
-      showToast('Article link ready to share!');
-    }
-  };
+  // Live dataset derivation from Admin Dashboard localStorage (cmsArticles)
+  const hasCustomCms = !!localStorage.getItem('yomtech_cms_articles');
+  const articlesPool = liveArticles && Array.isArray(liveArticles) ? liveArticles : [];
+
+  const displayNews = articlesPool.filter((a) => ['Corporate News & Articles', 'Corporate News', 'Enterprise News', 'Services & Products Matrix'].includes(a.category));
+  const activeNewsItems = displayNews.length > 0
+    ? displayNews.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        slug: a.id,
+        category: a.category,
+        date: a.publishedDate || 'AUG 2026',
+        readTime: a.readTime || '5 min read',
+        author: a.author || 'Editorial Team',
+        coverImage: a.coverImage || NEWS_ITEMS[idx % NEWS_ITEMS.length]?.coverImage,
+        excerpt: a.summary || a.fullContent || 'YomTech Global corporate news release.',
+        views: '1.2k',
+        commentsCount: 12,
+        client: a.client,
+        fullContent: a.fullContent
+      }))
+    : (hasCustomCms ? [] : NEWS_ITEMS);
+
+  const displayBlog = articlesPool.filter((a) => a.category === 'Tech Articles & Engineering');
+  const activeBlogArticles = displayBlog.length > 0
+    ? displayBlog.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        slug: a.id,
+        category: a.category,
+        date: a.publishedDate || 'AUG 2026',
+        readTime: a.readTime || '8 min read',
+        author: a.author || 'Engineering Team',
+        coverImage: a.coverImage || BLOG_ARTICLES[idx % BLOG_ARTICLES.length]?.coverImage,
+        excerpt: a.summary || a.fullContent || 'Engineering & technology paper.',
+        views: '2.4k',
+        client: a.client,
+        fullContent: a.fullContent
+      }))
+    : (hasCustomCms ? [] : BLOG_ARTICLES);
+
+  const displayEvents = articlesPool.filter((a) => a.category === 'Upcoming Events & Webinars');
+  const activeEvents = displayEvents.length > 0
+    ? displayEvents.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        date: a.publishedDate || 'SEP 15, 2026',
+        time: a.readTime || '09:00 AM EAT',
+        location: a.client || 'Hybrid (Addis Ababa)',
+        category: a.category,
+        description: a.summary || 'YomTech Global tech event.',
+        speakers: a.author ? [a.author] : ['YomTech Leadership']
+      }))
+    : (hasCustomCms ? [] : EVENTS);
+
+  const displayAnnouncements = articlesPool.filter((a) => a.category === 'Official Announcements');
+  const activeAnnouncements = displayAnnouncements.length > 0
+    ? displayAnnouncements.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        date: a.publishedDate || 'AUG 2026',
+        category: a.category,
+        summary: a.summary || 'Official corporate announcement.'
+      }))
+    : (hasCustomCms ? [] : ANNOUNCEMENTS);
+
+  const displayProjects = articlesPool.filter((a) => a.category === 'Featured Project Case Studies');
+  const activeProjects = displayProjects.length > 0
+    ? displayProjects.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        client: a.client || 'Enterprise Client',
+        summary: a.summary || 'Enterprise solution case study.',
+        techStack: a.readTime || 'React, Node.js, PostgreSQL'
+      }))
+    : (hasCustomCms ? [] : PROJECTS_CASE_STUDIES);
+
+  const displayTeam = articlesPool.filter((a) => ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education'].includes(a.category));
+  const activeTeamSpotlights = displayTeam.length > 0
+    ? displayTeam.map((a, idx) => ({
+        id: a.id,
+        name: a.title,
+        role: a.readTime || a.client || 'Executive Leadership',
+        quote: a.summary || 'Technology empowers sustainable growth.',
+        category: a.category
+      }))
+    : (hasCustomCms ? [] : TEAM_SPOTLIGHTS);
+
+  const displayTestimonials = articlesPool.filter((a) => a.category === 'Client & Learner Testimonials');
+  const activeTestimonials = displayTestimonials.length > 0
+    ? displayTestimonials.map((a, idx) => ({
+        id: a.id,
+        name: a.title,
+        role: a.client || 'WabiSkills Graduate',
+        quote: a.summary || 'WabiSkills transformed my career trajectory.',
+        category: a.category
+      }))
+    : (hasCustomCms ? [] : COMMUNITY_TESTIMONIALS);
+
+  const displayGallery = articlesPool.filter((a) => ['Photo Gallery Showcase', 'Academy', 'Team', 'Partnerships', 'Events'].includes(a.category));
+  const activeGallery = displayGallery.length > 0
+    ? displayGallery.map((a, idx) => ({
+        id: a.id,
+        caption: a.title,
+        category: a.readTime || 'Showcase',
+        image: a.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.image
+      }))
+    : (hasCustomCms ? [] : PHOTO_GALLERY);
+
+  const displayVideos = articlesPool.filter((a) => ['Video & Documentary Hub', 'Documentary', 'Bootcamp'].includes(a.category));
+  const activeVideos = displayVideos.length > 0
+    ? displayVideos.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        channel: a.client || '@yomtech',
+        duration: a.readTime || '10:00',
+        videoUrl: a.videoUrl || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.videoUrl
+      }))
+    : (hasCustomCms ? [] : VIDEO_GALLERY);
+
+  const displayMedia = articlesPool.filter((a) => a.category === 'Media Appearances & Coverage');
+  const activeMedia = displayMedia.length > 0
+    ? displayMedia.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        outlet: a.client || 'EBC Television',
+        date: a.publishedDate || 'August 2026',
+        type: a.readTime || 'TELEVISION INTERVIEW'
+      }))
+    : (hasCustomCms ? [] : MEDIA_APPEARANCES);
+
+  const displayPress = articlesPool.filter((a) => a.category === 'Press & Corporate Content');
+  const activePress = displayPress.length > 0
+    ? displayPress.map((a, idx) => ({
+        id: a.id,
+        title: a.title,
+        date: a.publishedDate || 'August 2026',
+        summary: a.summary || 'Corporate press release.'
+      }))
+    : (hasCustomCms ? [] : PRESS_RELEASES);
+
+  const displayFaqs = articlesPool.filter((a) => a.category === 'Support FAQ & Knowledge Base');
+  const activeFaqs = displayFaqs.length > 0
+    ? displayFaqs.map((a, idx) => ({
+        id: a.id,
+        question: a.title,
+        answer: a.summary || 'Official support response.'
+      }))
+    : (hasCustomCms ? [] : FAQS);
 
   const categories = [
     { id: 'ALL', label: 'All News & Media' },
@@ -321,69 +476,73 @@ export const InsightsMainPage = () => {
             </div>
           </div>
 
-          {/* Card 2: Enterprise ERP Bunna Bank */}
-          <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50">
-            <img src={NEWS_ITEMS[0].coverImage} alt={NEWS_ITEMS[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-            
-            <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg uppercase">Enterprise ERP</span>
-                <span className="flex items-center gap-2">
-                  <span>Aug 18, 2026</span>
-                  <span>&bull;</span>
-                  <span>4 mins read</span>
-                </span>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" />
-                  <span className="flex items-center gap-0.5"><Eye size={12} /> 320</span>
+          {/* Card 2: Enterprise ERP Bunna Bank / Dynamic News 1 */}
+          {activeNewsItems[0] && (
+            <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer" onClick={() => setReadingArticle(activeNewsItems[0])}>
+              <img src={activeNewsItems[0].coverImage || NEWS_ITEMS[0].coverImage} alt={activeNewsItems[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+              
+              <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
+                <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
+                  <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg uppercase">{activeNewsItems[0].category || 'Enterprise ERP'}</span>
+                  <span className="flex items-center gap-2">
+                    <span>{activeNewsItems[0].date || 'Aug 18, 2026'}</span>
+                    <span>&bull;</span>
+                    <span>{activeNewsItems[0].readTime || '4 mins read'}</span>
+                  </span>
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" onClick={(e) => { e.stopPropagation(); handleToggleBookmark(activeNewsItems[0].id, activeNewsItems[0].title); }} />
+                    <span className="flex items-center gap-0.5"><Eye size={12} /> 320</span>
+                  </div>
+                </div>
+
+                <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
+                  {activeNewsItems[0].title}
+                </h3>
+
+                <div className="flex justify-between items-center pt-1">
+                  <span className="text-[11px] font-bold text-slate-500">{activeNewsItems[0].author || 'YomTech Media Unit'}</span>
+                  <button onClick={() => setReadingArticle(activeNewsItems[0])} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
+                    <ArrowRight size={16} />
+                  </button>
                 </div>
               </div>
-
-              <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
-                {NEWS_ITEMS[0].title}
-              </h3>
-
-              <div className="flex justify-between items-center pt-1">
-                <span className="text-[11px] font-bold text-slate-500">YomTech Media Unit</span>
-                <Link to={`/news/articles/${NEWS_ITEMS[0].slug}`} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
             </div>
-          </div>
+          )}
 
-          {/* Card 3: WabiSkills Bootcamp Graduates */}
-          <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50">
-            <img src={NEWS_ITEMS[1].coverImage} alt={NEWS_ITEMS[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-            
-            <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                <span className="px-2.5 py-0.5 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-lg uppercase">Tech Talent</span>
-                <span className="flex items-center gap-2">
-                  <span>Aug 14, 2026</span>
-                  <span>&bull;</span>
-                  <span>5 mins read</span>
-                </span>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" />
-                  <span className="flex items-center gap-0.5"><Eye size={12} /> 510</span>
+          {/* Card 3: WabiSkills Bootcamp Graduates / Dynamic News 2 */}
+          {activeNewsItems[1] && (
+            <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer" onClick={() => setReadingArticle(activeNewsItems[1])}>
+              <img src={activeNewsItems[1].coverImage || NEWS_ITEMS[1].coverImage} alt={activeNewsItems[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
+              
+              <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
+                <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
+                  <span className="px-2.5 py-0.5 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-lg uppercase">{activeNewsItems[1].category || 'Tech Talent'}</span>
+                  <span className="flex items-center gap-2">
+                    <span>{activeNewsItems[1].date || 'Aug 14, 2026'}</span>
+                    <span>&bull;</span>
+                    <span>{activeNewsItems[1].readTime || '5 mins read'}</span>
+                  </span>
+                  <div className="flex items-center gap-2 text-slate-400">
+                    <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" onClick={(e) => { e.stopPropagation(); handleToggleBookmark(activeNewsItems[1].id, activeNewsItems[1].title); }} />
+                    <span className="flex items-center gap-0.5"><Eye size={12} /> 510</span>
+                  </div>
+                </div>
+
+                <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
+                  {activeNewsItems[1].title}
+                </h3>
+
+                <div className="flex justify-between items-center pt-1">
+                  <span className="text-[11px] font-bold text-slate-500">{activeNewsItems[1].author || 'WabiSkills Hub'}</span>
+                  <button onClick={() => setReadingArticle(activeNewsItems[1])} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
+                    <ArrowRight size={16} />
+                  </button>
                 </div>
               </div>
-
-              <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
-                {NEWS_ITEMS[1].title}
-              </h3>
-
-              <div className="flex justify-between items-center pt-1">
-                <span className="text-[11px] font-bold text-slate-500">WabiSkills Hub</span>
-                <Link to={`/news/articles/${NEWS_ITEMS[1].slug}`} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
             </div>
-          </div>
+          )}
 
         </div>
       </section>

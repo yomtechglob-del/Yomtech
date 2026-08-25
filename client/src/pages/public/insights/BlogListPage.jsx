@@ -7,11 +7,59 @@ import { Search, Filter, BookOpen, Clock, User, ArrowRight, Share2, Bookmark, Sp
 export const BlogListPage = () => {
   const [search, setSearch] = useState('');
   const [selectedCat, setSelectedCat] = useState('ALL');
+  const [liveBlogPool, setLiveBlogPool] = useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_articles');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        const filtered = parsed.filter((a) => a.category === 'Tech Articles & Engineering' && a.visibility === 'VISIBLE' && a.status === 'Published');
+        if (filtered.length > 0) return filtered;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return BLOG_ARTICLES;
+  });
 
-  const filtered = BLOG_ARTICLES.filter((art) => {
+  React.useEffect(() => {
+    const syncBlog = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const filtered = parsed.filter((a) => a.category === 'Tech Articles & Engineering' && a.visibility === 'VISIBLE' && a.status === 'Published');
+          if (filtered.length > 0) setLiveBlogPool(filtered);
+          else setLiveBlogPool(BLOG_ARTICLES);
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', syncBlog);
+    window.addEventListener('storage', syncBlog);
+    return () => {
+      window.removeEventListener('cmsArticlesUpdated', syncBlog);
+      window.removeEventListener('storage', syncBlog);
+    };
+  }, []);
+
+  const blogItemsToUse = liveBlogPool.map((item, idx) => ({
+    id: item.id || `blog-${idx}`,
+    title: item.title,
+    slug: item.id || item.slug || `blog-${idx}`,
+    category: item.category || 'Tech Articles & Engineering',
+    publishedDate: item.publishedDate || item.date || 'AUG 2026',
+    author: item.author || 'YomTech Engineering Team',
+    readTime: item.readTime || '8 min read',
+    coverImage: item.coverImage || BLOG_ARTICLES[idx % BLOG_ARTICLES.length]?.coverImage,
+    excerpt: item.summary || item.excerpt || item.fullContent || 'Engineering research paper by YomTech Global.',
+    views: '2.4k'
+  }));
+
+  const filtered = blogItemsToUse.filter((art) => {
     const matchesCat = selectedCat === 'ALL' || art.category === selectedCat;
     const q = search.toLowerCase();
-    const matchesSearch = art.title.toLowerCase().includes(q) || art.excerpt.toLowerCase().includes(q);
+    const matchesSearch = (art.title || '').toLowerCase().includes(q) || (art.excerpt || '').toLowerCase().includes(q);
     return matchesCat && matchesSearch;
   });
 

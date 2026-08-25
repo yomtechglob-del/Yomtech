@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { fetchLeadsApi, updateLeadStatusApi, deleteLeadApi, submitLeadApi, checkAuthApi, logoutAdminApi } from '../../services/api';
+import {
+  fetchLeadsApi,
+  updateLeadStatusApi,
+  deleteLeadApi,
+  submitLeadApi,
+  checkAuthApi,
+  logoutAdminApi,
+  fetchCmsCategoryApi,
+  createCmsCategoryItemApi,
+  updateCmsCategoryItemApi,
+  deleteCmsCategoryItemApi
+} from '../../services/api';
 import { AdminSidebar } from '../../components/admin/AdminSidebar';
 import logoImg from '../../assets/logos/logo.png';
 import {
@@ -17,11 +28,13 @@ import {
   Sun,
   Eye,
   X,
+  Image as ImageIcon,
   Sparkles,
   TrendingUp,
   User,
   Bell,
   Plus,
+  Play,
   ShieldCheck,
   ArrowUpRight,
   Zap,
@@ -43,6 +56,156 @@ import {
   ShieldAlert
 } from 'lucide-react';
 
+// --- STATIC INITIAL DATA DEFINITIONS (PLACED OUTSIDE COMPONENT FOR SAFE INITIALIZATION) ---
+const initialLeads = [
+  {
+    id: '1',
+    fullName: 'Abebe Bikila',
+    email: 'abebe@ethio-tech.com',
+    phone: '+251911223344',
+    inquiryType: 'B2B_SOFTWARE',
+    message: 'Interested in Yomnex ERP software solution for distribution and logistics.',
+    status: 'NEW',
+    createdAt: '2026-08-05T10:00:00.000Z'
+  },
+  {
+    id: '2',
+    fullName: 'Sara Tesfaye',
+    email: 'sara.t@wabiskills.org',
+    phone: '+251922556677',
+    inquiryType: 'ACADEMY_ENROLLMENT',
+    message: 'Looking for full-stack web & mobile development training program details.',
+    status: 'QUALIFIED',
+    createdAt: '2026-08-05T11:30:00.000Z'
+  },
+  {
+    id: '3',
+    fullName: 'Dawit Yohannes',
+    email: 'dawit@cyber-sec.io',
+    phone: '+251933689900',
+    inquiryType: 'MEDIA_PARTNERSHIP',
+    message: 'Requesting tech documentary collaboration with Yomtech Media team.',
+    status: 'CONTACTED',
+    createdAt: '2026-08-04T15:45:00.000Z'
+  }
+];
+
+const initialQuotes = [
+  {
+    id: 'q-101',
+    companyName: 'Bunna Bank S.C.',
+    contactPerson: 'Solomon Desta',
+    email: 'solomon.d@bunnabanket.com',
+    serviceCategory: 'Yomnex ERP & FinTech Module',
+    estimatedBudget: '$50,000 - $100,000',
+    status: 'PENDING_REVIEW',
+    submittedAt: '2026-08-05T09:15:00.000Z'
+  },
+  {
+    id: 'q-102',
+    companyName: 'Space Science & Geospatial Institute (SSGI)',
+    contactPerson: 'Dr. Getachew Assefa',
+    email: 'getachew.a@ssgi.gov.et',
+    serviceCategory: 'Satellite Data Management System',
+    estimatedBudget: '$100,000+',
+    status: 'PROPOSAL_SENT',
+    submittedAt: '2026-08-04T14:20:00.000Z'
+  }
+];
+
+const initialJobs = [
+  {
+    id: 'job-1',
+    title: 'Senior Full-Stack Cloud Engineer (React & Node.js)',
+    department: 'Software Engineering',
+    type: 'Full-time',
+    location: 'Addis Ababa (Megenagna)',
+    status: 'Active',
+    applicantsCount: 14
+  },
+  {
+    id: 'job-2',
+    title: 'EdTech Technical Lead & Curriculum Director',
+    department: 'WabiSkills Academy',
+    type: 'Full-time',
+    location: 'Addis Ababa (Megenagna)',
+    status: 'Active',
+    applicantsCount: 8
+  }
+];
+
+const initialApplicants = [
+  {
+    id: 'app-1',
+    fullName: 'Kenenisa Bekele',
+    email: 'kenenisa.b@devtech.org',
+    jobTitle: 'Senior Full-Stack Cloud Engineer',
+    experience: '5+ years',
+    skills: 'React, Node.js, PostgreSQL, Docker, AWS',
+    status: 'APPLIED'
+  },
+  {
+    id: 'app-2',
+    fullName: 'Helina Kebede',
+    email: 'helina.k@techinnovate.et',
+    jobTitle: 'EdTech Technical Lead',
+    experience: '4 years',
+    skills: 'Python, TypeScript, GraphQL, System Design',
+    status: 'SHORTLISTED'
+  }
+];
+
+const initialCmsProducts = [
+  {
+    id: 'prod-1',
+    name: 'Yomnex ERP',
+    category: 'Enterprise Software',
+    description: 'Unified cloud ERP solution for finance, inventory, HR, and supply chain management.',
+    status: 'Published',
+    views: '4,120'
+  },
+  {
+    id: 'prod-2',
+    name: 'WabiSkills Platform',
+    category: 'EdTech & Academy',
+    description: 'Pan-African digital learning platform empowering students with tech skills.',
+    status: 'Published',
+    views: '3,890'
+  },
+  {
+    id: 'prod-3',
+    name: 'WabiJob Recruitment',
+    category: 'Talent Network',
+    description: 'Recruitment portal connecting vetted tech graduates with enterprise employers.',
+    status: 'Published',
+    views: '1,980'
+  },
+  {
+    id: 'prod-4',
+    name: 'WabiX Virtual Meetings',
+    category: 'Communication',
+    description: 'Secure, high-definition video conferencing platform for African enterprises.',
+    status: 'Published',
+    views: '1,450'
+  },
+  {
+    id: 'prod-5',
+    name: 'Mari Social Media',
+    category: 'Social Network',
+    description: 'Next-generation social app designed for African creators and communities.',
+    status: 'Published',
+    views: '2,310'
+  },
+  {
+    id: 'prod-6',
+    name: 'Yomtech Media',
+    category: 'Tech Documentaries',
+    description: 'Documentary production showcasing digital innovation stories across East Africa.',
+    status: 'Published',
+    views: '3,100'
+  }
+];
+
 export const AdminDashboardPage = () => {
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
@@ -61,38 +224,6 @@ export const AdminDashboardPage = () => {
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState(3);
 
   // --- STATE 1: LEADS & INQUIRIES ---
-  const initialLeads = [
-    {
-      id: '1',
-      fullName: 'Abebe Bikila',
-      email: 'abebe@ethio-tech.com',
-      phone: '+251911223344',
-      inquiryType: 'B2B_SOFTWARE',
-      message: 'Interested in Yomnex ERP software solution for distribution and logistics.',
-      status: 'NEW',
-      createdAt: '2026-08-05T10:00:00.000Z'
-    },
-    {
-      id: '2',
-      fullName: 'Sara Tesfaye',
-      email: 'sara.t@wabiskills.org',
-      phone: '+251922556677',
-      inquiryType: 'ACADEMY_ENROLLMENT',
-      message: 'Looking for full-stack web & mobile development training program details.',
-      status: 'QUALIFIED',
-      createdAt: '2026-08-05T11:30:00.000Z'
-    },
-    {
-      id: '3',
-      fullName: 'Dawit Yohannes',
-      email: 'dawit@cyber-sec.io',
-      phone: '+251933689900',
-      inquiryType: 'MEDIA_PARTNERSHIP',
-      message: 'Proposal for tech media sponsorship and event collaboration.',
-      status: 'CONTACTED',
-      createdAt: '2026-08-05T14:15:00.000Z'
-    }
-  ];
   const [leads, setLeads] = useState(initialLeads);
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [selectedLead, setSelectedLead] = useState(null);
@@ -106,7 +237,7 @@ export const AdminDashboardPage = () => {
   });
 
   // --- STATE 2: B2B PROPOSALS & QUOTES ---
-  const initialProposals = [
+  const initialProposalsList = [
     {
       id: 'prop-1',
       clientName: 'Space Science & Geospatial Institute (SSGI)',
@@ -135,7 +266,8 @@ export const AdminDashboardPage = () => {
       date: '2026-08-03'
     }
   ];
-  const [proposals, setProposals] = useState(initialProposals);
+  const [proposals, setProposals] = useState(initialProposalsList);
+  const [quotes, setQuotes] = useState(initialQuotes);
   const [showAddProposalModal, setShowAddProposalModal] = useState(false);
   const [newProposalForm, setNewProposalForm] = useState({
     clientName: '',
@@ -144,59 +276,6 @@ export const AdminDashboardPage = () => {
     budget: '',
     status: 'Under Review'
   });
-
-  // --- STATE 3: JOB APPLICATIONS & HR ---
-  const initialJobs = [
-    {
-      id: 'job-1',
-      title: 'Full-Stack Software Engineer (React / Node.js)',
-      department: 'Software Engineering',
-      type: 'Full-time',
-      location: 'Addis Ababa (Megenagna)',
-      applicantsCount: 14,
-      status: 'Active'
-    },
-    {
-      id: 'job-2',
-      title: 'Senior DevOps & CyberSecurity Architect',
-      department: 'Infrastructure & Security',
-      type: 'Full-time',
-      location: 'Addis Ababa / Hybrid',
-      applicantsCount: 8,
-      status: 'Active'
-    },
-    {
-      id: 'job-3',
-      title: 'WabiSkills Technical Bootcamp Instructor',
-      department: 'Education & Academy',
-      type: 'Contract',
-      location: 'Addis Ababa',
-      applicantsCount: 19,
-      status: 'Active'
-    }
-  ];
-  const initialApplicants = [
-    {
-      id: 'app-1',
-      candidateName: 'Kenenisa Bekele',
-      email: 'kenenisa@dev.et',
-      jobTitle: 'Full-Stack Software Engineer (React / Node.js)',
-      experience: '4 Years',
-      skills: 'React, Node.js, PostgreSQL, Docker',
-      status: 'SHORTLISTED',
-      appliedDate: '2026-08-02'
-    },
-    {
-      id: 'app-2',
-      candidateName: 'Tigist Assefa',
-      email: 'tigist@cloudtech.et',
-      jobTitle: 'Senior DevOps & CyberSecurity Architect',
-      experience: '6 Years',
-      skills: 'AWS, Kubernetes, Terraform, CI/CD',
-      status: 'INTERVIEWED',
-      appliedDate: '2026-07-30'
-    }
-  ];
   const [jobs, setJobs] = useState(initialJobs);
   const [applicants, setApplicants] = useState(initialApplicants);
   const [showAddJobModal, setShowAddJobModal] = useState(false);
@@ -210,57 +289,23 @@ export const AdminDashboardPage = () => {
   });
 
   // --- STATE 4: CMS SERVICES & PRODUCTS ---
-  const initialCmsProducts = [
-    {
-      id: 'prod-1',
-      name: 'Yomnex ERP',
-      category: 'Enterprise Software',
-      description: 'Unified cloud ERP solution for finance, inventory, HR, and supply chain management.',
-      status: 'Published',
-      views: '4,120'
-    },
-    {
-      id: 'prod-2',
-      name: 'WabiSkills Platform',
-      category: 'EdTech & Academy',
-      description: 'Pan-African digital learning platform empowering students with tech skills.',
-      status: 'Published',
-      views: '3,890'
-    },
-    {
-      id: 'prod-3',
-      name: 'WabiJob Recruitment',
-      category: 'Talent Network',
-      description: 'Recruitment portal connecting vetted tech graduates with enterprise employers.',
-      status: 'Published',
-      views: '1,980'
-    },
-    {
-      id: 'prod-4',
-      name: 'WabiX Virtual Meetings',
-      category: 'Communication',
-      description: 'Secure, high-definition video conferencing platform for African enterprises.',
-      status: 'Published',
-      views: '1,450'
-    },
-    {
-      id: 'prod-5',
-      name: 'Mari Social Media',
-      category: 'Social Network',
-      description: 'Next-generation social app designed for African creators and communities.',
-      status: 'Published',
-      views: '2,310'
-    },
-    {
-      id: 'prod-6',
-      name: 'Yomtech Media',
-      category: 'Tech Documentaries',
-      description: 'Documentary production showcasing digital innovation stories across East Africa.',
-      status: 'Published',
-      views: '3,100'
+  const [cmsProducts, setCmsProducts] = useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_products');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) {
+        console.error(e);
+      }
     }
-  ];
-  const [cmsProducts, setCmsProducts] = useState(initialCmsProducts);
+    return initialCmsProducts;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('yomtech_cms_products', JSON.stringify(cmsProducts));
+  }, [cmsProducts]);
+
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [newProductForm, setNewProductForm] = useState({
     name: '',
@@ -272,6 +317,79 @@ export const AdminDashboardPage = () => {
   // --- STATE 5: CMS PROJECTS & ARTICLES ---
   // --- STATE 5: CMS NEWS, ARTICLES, CASE STUDIES & MEDIA ---
   const initialCmsArticles = [
+    // 0. Services & Products Matrix
+    {
+      id: 'art-prod-1',
+      title: 'Yomnex ERP Enterprise Cloud Module',
+      category: 'Services & Products Matrix',
+      client: 'Enterprise Software Division',
+      author: 'Product Management Team',
+      summary: 'Unified cloud ERP solution for finance, inventory, HR, and supply chain management across Pan-African enterprises.',
+      readTime: 'Enterprise Software',
+      publishedDate: '2026-08-24',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    },
+    {
+      id: 'art-prod-2',
+      title: 'WabiSkills EdTech & Academy Platform',
+      category: 'Services & Products Matrix',
+      client: 'WabiSkills Academy',
+      author: 'EdTech & Admissions Unit',
+      summary: 'Pan-African digital learning platform empowering students with tech skills, coding bootcamps, and career certification.',
+      readTime: 'EdTech & Academy',
+      publishedDate: '2026-08-24',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    },
+    {
+      id: 'art-prod-3',
+      title: 'WabiJob Recruitment & Talent Gateway',
+      category: 'Services & Products Matrix',
+      client: 'WabiJob Network',
+      author: 'Recruitment Gateway Team',
+      summary: 'Recruitment portal connecting vetted tech graduates with enterprise employers and international tech hubs.',
+      readTime: 'Talent Network',
+      publishedDate: '2026-08-24',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    },
+    {
+      id: 'art-prod-4',
+      title: 'WabiX HD Video & Cloud Gateway',
+      category: 'Services & Products Matrix',
+      client: 'Communication Division',
+      author: 'Cloud Infrastructure Team',
+      summary: 'Secure, high-definition video conferencing platform and zero-trust cloud gateway for African enterprises.',
+      readTime: 'Communication',
+      publishedDate: '2026-08-24',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    },
+    {
+      id: 'art-prod-5',
+      title: 'Mari Social Media & Creator Ecosystem',
+      category: 'Services & Products Matrix',
+      client: 'Social Network Division',
+      author: 'Creator Community Unit',
+      summary: 'Next-generation social app designed for African creators, digital communities, and youth tech networks.',
+      readTime: 'Social Network',
+      publishedDate: '2026-08-24',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    },
+    {
+      id: 'art-prod-6',
+      title: 'Yomtech Media Documentary Production Hub',
+      category: 'Services & Products Matrix',
+      client: 'Media & Production Unit',
+      author: 'YomTech Media Editorial',
+      summary: 'Documentary production showcasing digital innovation stories, tech summits, and developer spotlights across East Africa.',
+      readTime: 'Tech Documentaries',
+      publishedDate: '2026-08-24',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    },
     // 1. Corporate News & Articles
     {
       id: 'art-1',
@@ -724,6 +842,12 @@ export const AdminDashboardPage = () => {
   };
 
   const [cmsSortBy, setCmsSortBy] = useState('LATEST');
+  const [showTrashBinModal, setShowTrashBinModal] = useState(false);
+  const [trashItems, setTrashItems] = useState([]);
+  const [showAuditLogsModal, setShowAuditLogsModal] = useState(false);
+  const [showMediaLibraryModal, setShowMediaLibraryModal] = useState(false);
+  const [confirmDeleteTarget, setConfirmDeleteTarget] = useState(null);
+  const [previewingArticle, setPreviewingArticle] = useState(null);
 
   const handleImportCmsJson = (event) => {
     const fileReader = new FileReader();
@@ -743,6 +867,44 @@ export const AdminDashboardPage = () => {
         }
       };
     }
+  };
+
+  const handleOpenConfirmDelete = (item, type = 'article') => {
+    setConfirmDeleteTarget({ item, type });
+  };
+
+  const handleConfirmPermanentDelete = () => {
+    if (!confirmDeleteTarget) return;
+    const { item, type } = confirmDeleteTarget;
+
+    if (type === 'product') {
+      setCmsProducts((prev) => prev.filter((p) => p.id !== item.id));
+      setCmsArticles((prev) => prev.filter((a) => a.id !== item.id && !a.title.includes(item.name || '___')));
+      showNotice(`Permanently deleted product "${item.name}"`);
+    } else {
+      const deletedItem = { ...item, deletedAt: new Date().toISOString() };
+      setTrashItems((prev) => [deletedItem, ...prev]);
+      setCmsArticles((prev) => prev.filter((a) => a.id !== item.id));
+      showNotice(`Moved "${item.title}" to Trash Bin.`);
+    }
+
+    setConfirmDeleteTarget(null);
+  };
+
+  const handleRestoreFromTrash = (id) => {
+    const item = trashItems.find((i) => i.id === id);
+    if (item) {
+      const restored = { ...item };
+      delete restored.deletedAt;
+      setCmsArticles((prev) => [restored, ...prev]);
+      setTrashItems((prev) => prev.filter((i) => i.id !== id));
+      showNotice(`Restored "${item.title || item.name}" to active content!`);
+    }
+  };
+
+  const handlePermanentlyPurgeTrash = (id) => {
+    setTrashItems((prev) => prev.filter((i) => i.id !== id));
+    showNotice('Permanently purged item from Trash Bin.');
   };
 
   // --- STATE 6: CMS TEAM & PARTNERS ---
@@ -877,6 +1039,15 @@ export const AdminDashboardPage = () => {
       const leadsRes = await fetchLeadsApi();
       if (leadsRes.data?.success && Array.isArray(leadsRes.data.data) && leadsRes.data.data.length > 0) {
         setLeads(leadsRes.data.data);
+      }
+
+      try {
+        const cmsRes = await fetchCmsCategoryApi('articles');
+        if (cmsRes.data?.success && Array.isArray(cmsRes.data.data) && cmsRes.data.data.length > 0) {
+          setCmsArticles(cmsRes.data.data);
+        }
+      } catch (err) {
+        console.error('Failed to sync backend CMS data:', err);
       }
     } catch {
       setUser({ fullName: 'Ermias Alemayehu', email: 'admin@yomtechglobal.org', role: 'SUPER_ADMIN' });
@@ -1017,16 +1188,55 @@ export const AdminDashboardPage = () => {
       views: '0'
     };
     setCmsProducts((prev) => [newProd, ...prev]);
+
+    // Also sync entry to cmsArticles under Services & Products Matrix
+    const newArt = {
+      id: `art-prod-${Date.now()}`,
+      title: `${newProductForm.name} Solution Module`,
+      category: 'Services & Products Matrix',
+      client: newProductForm.category || 'YomTech Global Product',
+      author: 'Product Management Team',
+      summary: newProductForm.description || 'Enterprise platform service specification.',
+      readTime: newProductForm.category || 'Enterprise Software',
+      publishedDate: new Date().toISOString().split('T')[0],
+      status: newProductForm.status || 'Published',
+      visibility: 'VISIBLE'
+    };
+    setCmsArticles((prev) => [newArt, ...prev]);
+
     showNotice(`CMS Product published: ${newProductForm.name}`);
     setNewProductForm({ name: '', category: 'Enterprise Software', description: '', status: 'Published' });
     setShowAddProductModal(false);
   };
 
   const handleToggleProductPublish = (id) => {
+    const targetProd = cmsProducts.find((p) => p.id === id);
+    if (!targetProd) return;
+    const newStatus = targetProd.status === 'Published' ? 'Draft' : 'Published';
+    const newVis = newStatus === 'Published' ? 'VISIBLE' : 'HIDDEN';
+
     setCmsProducts((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, status: p.status === 'Published' ? 'Draft' : 'Published' } : p))
+      prev.map((p) => (p.id === id ? { ...p, status: newStatus } : p))
     );
-    showNotice('CMS Product status toggled');
+
+    setCmsArticles((prev) =>
+      prev.map((a) => {
+        if (a.id === id || a.title.includes(targetProd.name) || (targetProd.name && a.title.toLowerCase().includes(targetProd.name.toLowerCase()))) {
+          return { ...a, status: newStatus, visibility: newVis };
+        }
+        return a;
+      })
+    );
+    showNotice(`CMS Product status updated to ${newStatus}`);
+  };
+
+  const handleDeleteProduct = (prodId) => {
+    const target = cmsProducts.find((p) => p.id === prodId);
+    if (window.confirm(`Are you sure you want to delete product "${target?.name}"?`)) {
+      setCmsProducts((prev) => prev.filter((p) => p.id !== prodId));
+      setCmsArticles((prev) => prev.filter((a) => a.id !== prodId && !a.title.includes(target?.name || '___')));
+      showNotice(`Deleted product "${target?.name}"`);
+    }
   };
 
   // --- REAL HANDLERS: CMS ARTICLES (CRUD, VISIBILITY, EXPIRED, EDIT, DELETE) ---
@@ -1056,9 +1266,10 @@ export const AdminDashboardPage = () => {
     setCmsArticles((prev) =>
       prev.map((art) => {
         if (art.id === artId) {
-          const nextVis = art.visibility === 'VISIBLE' ? 'HIDDEN' : 'VISIBLE';
-          const nextStatus = nextVis === 'HIDDEN' && art.status === 'Published' ? 'Hidden' : (nextVis === 'VISIBLE' && art.status === 'Hidden' ? 'Published' : art.status);
-          showNotice(`Article "${art.title}" visibility changed to: ${nextVis}`);
+          const isCurrentlyVisible = art.visibility === 'VISIBLE' || art.visibility === 'PUBLIC';
+          const nextVis = isCurrentlyVisible ? 'HIDDEN' : 'VISIBLE';
+          const nextStatus = isCurrentlyVisible ? 'Hidden' : 'Published';
+          showNotice(`Article "${art.title}" is now ${nextStatus.toUpperCase()} & ${nextVis}`);
           return { ...art, visibility: nextVis, status: nextStatus };
         }
         return art;
@@ -1248,8 +1459,26 @@ export const AdminDashboardPage = () => {
                 if (activeTab === 'quotes') setShowAddProposalModal(true);
                 else if (activeTab === 'jobs') setShowAddJobModal(true);
                 else if (activeTab === 'cms-services') setShowAddProductModal(true);
-                else if (activeTab === 'cms-content') setShowAddArticleModal(true);
-                else if (activeTab === 'cms-team') setShowAddTeamModal(true);
+                else if (activeTab.startsWith('cms-')) {
+                  const targetCat = ({
+                    'cms-news': 'Corporate News & Articles',
+                    'cms-articles': 'Corporate News & Articles',
+                    'cms-blog': 'Tech Articles & Engineering',
+                    'cms-events': 'Upcoming Events & Webinars',
+                    'cms-announcements': 'Official Announcements',
+                    'cms-projects': 'Featured Project Case Studies',
+                    'cms-team': 'Executive Team Members',
+                    'cms-testimonials': 'Client & Learner Testimonials',
+                    'cms-gallery': 'Photo Gallery Showcase',
+                    'cms-videos': 'Video & Documentary Hub',
+                    'cms-media': 'Media Appearances & Coverage',
+                    'cms-press': 'Press & Corporate Content',
+                    'cms-faq': 'Support FAQ & Knowledge Base',
+                    'cms-partners': 'Trusted Institutional Partners'
+                  })[activeTab] || 'Corporate News';
+                  setNewArticleForm((prev) => ({ ...prev, category: targetCat }));
+                  setShowAddArticleModal(true);
+                }
                 else if (activeTab === 'roles') setShowAddUserModal(true);
                 else setShowAddLeadModal(true);
               }}
@@ -1778,12 +2007,21 @@ export const AdminDashboardPage = () => {
                       <p className="text-xs text-slate-600 font-medium leading-relaxed">{prod.description}</p>
                       <div className="pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
                         <span className="text-slate-500 font-bold">{prod.category}</span>
-                        <button
-                          onClick={() => handleToggleProductPublish(prod.id)}
-                          className="px-3 py-1.5 border border-blue-200 hover:border-[#1E90FF] bg-blue-50 text-[#1E90FF] font-black rounded-xl text-xs transition-all"
-                        >
-                          Toggle Status
-                        </button>
+                        <div className="flex items-center gap-2">
+                          <button
+                            onClick={() => handleToggleProductPublish(prod.id)}
+                            className="px-3 py-1.5 border border-blue-200 hover:border-[#1E90FF] bg-blue-50 text-[#1E90FF] font-black rounded-xl text-xs transition-all"
+                          >
+                            Toggle Status
+                          </button>
+                          <button
+                            onClick={() => handleDeleteProduct(prod.id)}
+                            className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-all"
+                            title="Delete Product"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -1839,7 +2077,27 @@ export const AdminDashboardPage = () => {
                     </p>
                   </div>
                   <button
-                    onClick={() => setShowAddArticleModal(true)}
+                    onClick={() => {
+                      const targetCat = ({
+                        'cms-services': 'Services & Products Matrix',
+                        'cms-news': 'Corporate News & Articles',
+                        'cms-articles': 'Corporate News & Articles',
+                        'cms-blog': 'Tech Articles & Engineering',
+                        'cms-events': 'Upcoming Events & Webinars',
+                        'cms-announcements': 'Official Announcements',
+                        'cms-projects': 'Featured Project Case Studies',
+                        'cms-team': 'Executive Team Members',
+                        'cms-testimonials': 'Client & Learner Testimonials',
+                        'cms-gallery': 'Photo Gallery Showcase',
+                        'cms-videos': 'Video & Documentary Hub',
+                        'cms-media': 'Media Appearances & Coverage',
+                        'cms-press': 'Press & Corporate Content',
+                        'cms-faq': 'Support FAQ & Knowledge Base',
+                        'cms-partners': 'Trusted Institutional Partners'
+                      })[activeTab] || 'Corporate News';
+                      setNewArticleForm((prev) => ({ ...prev, category: targetCat }));
+                      setShowAddArticleModal(true);
+                    }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
                     <Plus size={15} />
@@ -1941,6 +2199,36 @@ export const AdminDashboardPage = () => {
                     >
                       <Download size={14} />
                       <span>Export JSON</span>
+                    </button>
+
+                    {/* Trash Bin Modal Button */}
+                    <button
+                      onClick={() => setShowTrashBinModal(true)}
+                      className="px-3 py-2 bg-red-50 text-red-700 border border-red-200 font-black text-xs rounded-xl hover:bg-red-100 flex items-center gap-1.5 transition-all"
+                      title="View Trash Bin"
+                    >
+                      <Trash2 size={14} />
+                      <span>Trash Bin ({trashItems.length})</span>
+                    </button>
+
+                    {/* Audit Logs Button */}
+                    <button
+                      onClick={() => setShowAuditLogsModal(true)}
+                      className="px-3 py-2 bg-slate-100 text-slate-700 border border-slate-300 font-black text-xs rounded-xl hover:bg-slate-200 flex items-center gap-1.5 transition-all"
+                      title="View Audit Logs"
+                    >
+                      <Eye size={14} />
+                      <span>Audit Logs</span>
+                    </button>
+
+                    {/* Media Library Button */}
+                    <button
+                      onClick={() => setShowMediaLibraryModal(true)}
+                      className="px-3 py-2 bg-purple-50 text-purple-700 border border-purple-200 font-black text-xs rounded-xl hover:bg-purple-100 flex items-center gap-1.5 transition-all"
+                      title="Media Library Assets"
+                    >
+                      <ImageIcon size={14} />
+                      <span>Media Assets</span>
                     </button>
 
                     {/* Import Backup JSON File Upload */}
@@ -2149,6 +2437,16 @@ export const AdminDashboardPage = () => {
                             </button>
                           )}
 
+                          {/* Preview Button */}
+                          <button
+                            onClick={() => setAdminPreviewMedia(art)}
+                            className="px-3 py-1.5 bg-purple-50 text-purple-700 border border-purple-200 text-xs font-bold rounded-xl hover:bg-purple-100 transition-all flex items-center gap-1"
+                            title="Preview Content"
+                          >
+                            <Eye size={13} />
+                            <span>Preview</span>
+                          </button>
+
                           {/* Full Edit Button */}
                           <button
                             onClick={() => handleStartEditArticle(art)}
@@ -2157,9 +2455,9 @@ export const AdminDashboardPage = () => {
                             Edit Item
                           </button>
 
-                          {/* Delete Button */}
+                          {/* Delete Button with Confirmation Dialog */}
                           <button
-                            onClick={() => handleDeleteArticle(art.id)}
+                            onClick={() => handleOpenConfirmDelete(art, 'article')}
                             className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-all"
                             title="Delete Item"
                           >
@@ -3359,12 +3657,20 @@ export const AdminDashboardPage = () => {
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, category: e.target.value })}
                     className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                   >
-                    <option value="Enterprise News">Enterprise News</option>
-                    <option value="Case Study">Case Study</option>
-                    <option value="Academy & Talent">Academy &amp; Talent</option>
-                    <option value="Government Tech">Government Tech</option>
-                    <option value="Tech Blog">Tech Blog</option>
-                    <option value="Announcement">Announcement</option>
+                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
+                    <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+                    <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
+                    <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
+                    <option value="Official Announcements">Official Announcements</option>
+                    <option value="Featured Project Case Studies">Featured Project Case Studies</option>
+                    <option value="Executive Team Members">Executive Team Members</option>
+                    <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
+                    <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
+                    <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
+                    <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
+                    <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
+                    <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
+                    <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
                   </select>
                 </div>
                 <div>
@@ -3606,12 +3912,20 @@ export const AdminDashboardPage = () => {
                     onChange={(e) => setEditingArticle({ ...editingArticle, category: e.target.value })}
                     className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                   >
-                    <option value="Enterprise News">Enterprise News</option>
-                    <option value="Case Study">Case Study</option>
-                    <option value="Academy & Talent">Academy &amp; Talent</option>
-                    <option value="Government Tech">Government Tech</option>
-                    <option value="Tech Blog">Tech Blog</option>
-                    <option value="Announcement">Announcement</option>
+                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
+                    <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+                    <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
+                    <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
+                    <option value="Official Announcements">Official Announcements</option>
+                    <option value="Featured Project Case Studies">Featured Project Case Studies</option>
+                    <option value="Executive Team Members">Executive Team Members</option>
+                    <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
+                    <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
+                    <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
+                    <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
+                    <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
+                    <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
+                    <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
                   </select>
                 </div>
                 <div>
@@ -4069,6 +4383,158 @@ export const AdminDashboardPage = () => {
               >
                 Close Preview
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CONFIRMATION DELETION DIALOG */}
+      {confirmDeleteTarget && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 animate-in zoom-in-95 border border-red-100">
+            <div className="flex items-center gap-3 text-red-600">
+              <div className="p-3 bg-red-50 rounded-2xl border border-red-100">
+                <Trash2 size={24} />
+              </div>
+              <div>
+                <h3 className="font-black text-lg text-slate-900">Confirm Deletion</h3>
+                <p className="text-xs text-slate-500 font-medium">Permanent action confirmation</p>
+              </div>
+            </div>
+            <p className="text-xs text-slate-600 font-semibold leading-relaxed">
+              Are you sure you want to delete <strong className="text-slate-900">"{confirmDeleteTarget.item?.title || confirmDeleteTarget.item?.name}"</strong>?
+              This content will be moved to the Trash Bin where it can be restored or purged permanently.
+            </p>
+            <div className="flex justify-end gap-2 pt-2">
+              <button
+                onClick={() => setConfirmDeleteTarget(null)}
+                className="px-4 py-2 bg-slate-100 text-slate-700 font-black text-xs rounded-xl hover:bg-slate-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmPermanentDelete}
+                className="px-5 py-2 bg-red-600 hover:bg-red-700 text-white font-black text-xs rounded-xl shadow"
+              >
+                Delete Permanently
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* TRASH BIN OVERLAY MODAL */}
+      {showTrashBinModal && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 animate-in zoom-in-95 border border-blue-100 max-h-[85vh] flex flex-col">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2 text-slate-900 font-black">
+                <Trash2 size={20} className="text-red-500" />
+                <h3 className="text-lg">CMS Content Trash Bin ({trashItems.length})</h3>
+              </div>
+              <button onClick={() => setShowTrashBinModal(false)} className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+              {trashItems.length === 0 ? (
+                <div className="py-12 text-center text-slate-400 text-xs font-bold">
+                  Trash Bin is currently empty. No deleted content.
+                </div>
+              ) : (
+                trashItems.map((item) => (
+                  <div key={item.id} className="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between gap-3 text-xs">
+                    <div>
+                      <div className="font-black text-slate-900">{item.title || item.name}</div>
+                      <div className="text-[10px] text-slate-500 font-semibold">{item.category} &bull; Deleted {new Date(item.deletedAt).toLocaleDateString()}</div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleRestoreFromTrash(item.id)}
+                        className="px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 font-black rounded-xl hover:bg-emerald-100 text-[11px]"
+                      >
+                        Restore
+                      </button>
+                      <button
+                        onClick={() => handlePermanentlyPurgeTrash(item.id)}
+                        className="px-3 py-1.5 bg-red-50 text-red-700 border border-red-200 font-black rounded-xl hover:bg-red-100 text-[11px]"
+                      >
+                        Purge
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* AUDIT LOGS MODAL */}
+      {showAuditLogsModal && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 animate-in zoom-in-95 border border-blue-100 max-h-[85vh] flex flex-col">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2 text-slate-900 font-black">
+                <Eye size={20} className="text-[#1E90FF]" />
+                <h3 className="text-lg">CMS Administrative Audit Logs</h3>
+              </div>
+              <button onClick={() => setShowAuditLogsModal(false)} className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto space-y-2 text-xs">
+              <div className="p-3 bg-blue-50 border border-blue-100 rounded-xl text-blue-900 font-semibold">
+                Real-time tracking of administrator operations, status transitions, and publishing activity.
+              </div>
+              {[
+                { id: '1', user: 'Ermias Alemayehu (Super Admin)', action: 'PUBLISHED', target: 'Corporate News Story #4', time: 'Just now' },
+                { id: '2', user: 'Ermias Alemayehu (Super Admin)', action: 'UPDATED_VISIBILITY', target: 'SSGI Case Study', time: '10 mins ago' },
+                { id: '3', user: 'Editorial Manager', action: 'CREATED_DRAFT', target: 'WabiSkills Bootcamp Video', time: '1 hour ago' }
+              ].map((log) => (
+                <div key={log.id} className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex justify-between items-center">
+                  <div>
+                    <span className="font-black text-slate-900">{log.user}</span>
+                    <span className="mx-2 text-slate-400">&bull;</span>
+                    <span className="font-extrabold text-[#1E90FF]">{log.action}</span>
+                    <span className="mx-2 text-slate-400">&bull;</span>
+                    <span className="font-semibold text-slate-600">{log.target}</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-bold">{log.time}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MEDIA LIBRARY ASSETS MODAL */}
+      {showMediaLibraryModal && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <div className="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl space-y-4 animate-in zoom-in-95 border border-purple-100 max-h-[85vh] flex flex-col">
+            <div className="flex justify-between items-center border-b border-slate-100 pb-3">
+              <div className="flex items-center gap-2 text-slate-900 font-black">
+                <ImageIcon size={20} className="text-purple-600" />
+                <h3 className="text-lg">Enterprise Media Assets Library</h3>
+              </div>
+              <button onClick={() => setShowMediaLibraryModal(false)} className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 overflow-y-auto p-1">
+              {cmsArticles
+                .filter((a) => a.coverImage || a.photo || a.image)
+                .slice(0, 8)
+                .map((asset, idx) => (
+                  <div key={asset.id || idx} className="p-2 border border-slate-200 rounded-2xl bg-slate-50 space-y-1">
+                    <img src={asset.coverImage || asset.photo || asset.image} alt={asset.title} className="w-full h-24 object-cover rounded-xl" />
+                    <div className="text-[10px] font-black text-slate-900 truncate">{asset.title || asset.name}</div>
+                    <div className="text-[9px] text-slate-400 font-bold">{asset.category}</div>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
