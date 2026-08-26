@@ -4,7 +4,63 @@ import { AboutHeroBackground } from '../../../components/common/AboutHeroBackgro
 import { TEAM_SPOTLIGHTS, COMMUNITY_TESTIMONIALS } from '../../../data/insightsData';
 import { User, Award, Quote, Star, Sparkles } from 'lucide-react';
 
+import { fetchPublicCmsCategoryApi } from '../../../services/api';
+
 export const TeamSpotlightPage = () => {
+  const [teamPool, setTeamPool] = React.useState(TEAM_SPOTLIGHTS);
+
+  React.useEffect(() => {
+    const fetchTeam = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const dbTeam = res.data.data.filter((a) => ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education', 'Team'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbTeam.length > 0) {
+            const formatted = dbTeam.map((t, idx) => ({
+              id: t.id,
+              name: t.title,
+              role: t.readTime || t.client || 'Executive Leadership',
+              department: t.category,
+              bio: t.content || t.excerpt || 'YomTech Global team member.',
+              quote: t.summary || 'Technology empowers sustainable growth.',
+              photo: t.coverImage || TEAM_SPOTLIGHTS[idx % TEAM_SPOTLIGHTS.length]?.photo
+            }));
+            setTeamPool([...formatted, ...TEAM_SPOTLIGHTS]);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch team members:', err);
+      }
+    };
+    fetchTeam();
+
+    const sync = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const dbTeam = parsed.filter((a) => ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education', 'Team'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbTeam.length > 0) {
+            const formatted = dbTeam.map((t, idx) => ({
+              id: t.id,
+              name: t.title,
+              role: t.readTime || t.client || 'Executive Leadership',
+              department: t.category,
+              bio: t.content || t.excerpt || 'YomTech Global team member.',
+              quote: t.summary || 'Technology empowers sustainable growth.',
+              photo: t.coverImage || TEAM_SPOTLIGHTS[idx % TEAM_SPOTLIGHTS.length]?.photo
+            }));
+            setTeamPool([...formatted, ...TEAM_SPOTLIGHTS]);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', sync);
+    return () => window.removeEventListener('cmsArticlesUpdated', sync);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans transition-colors">
       <section className="relative pt-36 pb-20 bg-[#03045E] text-white overflow-hidden">
@@ -31,7 +87,7 @@ export const TeamSpotlightPage = () => {
 
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {TEAM_SPOTLIGHTS.map((t) => (
+          {teamPool.map((t) => (
             <div key={t.id} className="bg-white rounded-3xl border border-slate-200/90 p-8 space-y-5 shadow-sm hover:border-[#1E90FF] transition-all">
               <div className="flex items-center gap-6">
                 <img src={t.photo} alt={t.name} className="w-24 h-24 rounded-2xl object-cover shadow-md border border-slate-200 shrink-0" />
@@ -54,6 +110,55 @@ export const TeamSpotlightPage = () => {
 };
 
 export const CommunityPage = () => {
+  const [testimonialsPool, setTestimonialsPool] = React.useState(COMMUNITY_TESTIMONIALS);
+
+  React.useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const dbTestimonials = res.data.data.filter((a) => a.category === 'Client & Learner Testimonials' && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbTestimonials.length > 0) {
+            const formatted = dbTestimonials.map((t, idx) => ({
+              id: t.id,
+              name: t.title,
+              role: t.client || 'WabiSkills Graduate',
+              quote: t.summary || t.excerpt || 'WabiSkills transformed my career trajectory.',
+              avatar: t.coverImage || COMMUNITY_TESTIMONIALS[idx % COMMUNITY_TESTIMONIALS.length]?.avatar
+            }));
+            setTestimonialsPool([...formatted, ...COMMUNITY_TESTIMONIALS]);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch testimonials:', err);
+      }
+    };
+    fetchTestimonials();
+
+    const sync = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const dbTestimonials = parsed.filter((a) => a.category === 'Client & Learner Testimonials' && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbTestimonials.length > 0) {
+            const formatted = dbTestimonials.map((t, idx) => ({
+              id: t.id,
+              name: t.title,
+              role: t.client || 'WabiSkills Graduate',
+              quote: t.summary || t.excerpt || 'WabiSkills transformed my career trajectory.',
+              avatar: t.coverImage || COMMUNITY_TESTIMONIALS[idx % COMMUNITY_TESTIMONIALS.length]?.avatar
+            }));
+            setTestimonialsPool([...formatted, ...COMMUNITY_TESTIMONIALS]);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', sync);
+    return () => window.removeEventListener('cmsArticlesUpdated', sync);
+  }, []);
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans transition-colors">
       <section className="relative pt-36 pb-20 bg-[#03045E] text-white overflow-hidden">
@@ -80,10 +185,10 @@ export const CommunityPage = () => {
 
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {COMMUNITY_TESTIMONIALS.map((test) => (
+          {testimonialsPool.map((test) => (
             <div key={test.id} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-4 shadow-sm hover:border-[#0ED3DD] transition-all">
               <div className="flex items-center gap-1 text-amber-400">
-                {[...Array(test.rating)].map((_, idx) => (
+                {[...Array(test.rating || 5)].map((_, idx) => (
                   <Star key={idx} size={16} fill="currentColor" />
                 ))}
               </div>
@@ -91,7 +196,7 @@ export const CommunityPage = () => {
               <div className="pt-4 border-t border-slate-100 flex justify-between items-center">
                 <div>
                   <div className="font-extrabold text-sm text-slate-900">{test.name}</div>
-                  <div className="text-xs text-slate-400 font-bold">{test.org}</div>
+                  <div className="text-xs text-slate-400 font-bold">{test.org || test.role}</div>
                 </div>
                 <span className="px-3 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{test.category}</span>
               </div>

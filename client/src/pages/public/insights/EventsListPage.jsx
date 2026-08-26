@@ -4,13 +4,22 @@ import { AboutHeroBackground } from '../../../components/common/AboutHeroBackgro
 import { EVENTS } from '../../../data/insightsData';
 import { Calendar, Clock, MapPin, ArrowRight, User, Sparkles } from 'lucide-react';
 
+import { fetchPublicCmsCategoryApi } from '../../../services/api';
+
 export const EventsListPage = () => {
+  const isEventVisible = (a) => {
+    const isCat = a.category === 'Upcoming Events & Webinars';
+    const vis = (a.visibility || '').toUpperCase();
+    const stat = (a.status || '').toUpperCase();
+    return isCat && (vis === 'VISIBLE' || vis === 'PUBLIC') && (stat === 'PUBLISHED');
+  };
+
   const [liveEventsPool, setLiveEventsPool] = React.useState(() => {
     const saved = localStorage.getItem('yomtech_cms_articles');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        const filtered = parsed.filter((a) => a.category === 'Upcoming Events & Webinars' && a.visibility === 'VISIBLE' && a.status === 'Published');
+        const filtered = parsed.filter(isEventVisible);
         if (filtered.length > 0) return filtered;
       } catch (e) {
         console.error(e);
@@ -20,12 +29,26 @@ export const EventsListPage = () => {
   });
 
   React.useEffect(() => {
+    const fetchFromApi = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const apiEvents = res.data.data.filter(isEventVisible);
+          if (apiEvents.length > 0) setLiveEventsPool(apiEvents);
+        }
+      } catch (err) {
+        console.error('Failed to fetch events from API:', err);
+      }
+    };
+
+    fetchFromApi();
+
     const syncEvents = () => {
       const saved = localStorage.getItem('yomtech_cms_articles');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          const filtered = parsed.filter((a) => a.category === 'Upcoming Events & Webinars' && a.visibility === 'VISIBLE' && a.status === 'Published');
+          const filtered = parsed.filter(isEventVisible);
           if (filtered.length > 0) setLiveEventsPool(filtered);
           else setLiveEventsPool(EVENTS);
         } catch (e) {

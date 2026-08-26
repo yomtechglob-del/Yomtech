@@ -10,7 +10,13 @@ import {
   fetchCmsCategoryApi,
   createCmsCategoryItemApi,
   updateCmsCategoryItemApi,
-  deleteCmsCategoryItemApi
+  deleteCmsCategoryItemApi,
+  fetchCmsOverviewStatsApi,
+  fetchCmsTrashApi,
+  restoreCmsItemApi,
+  permanentlyDeleteCmsItemApi,
+  bulkCmsActionApi,
+  fetchCmsAuditLogsApi
 } from '../../services/api';
 import { AdminSidebar } from '../../components/admin/AdminSidebar';
 import logoImg from '../../assets/logos/logo.png';
@@ -48,6 +54,7 @@ import {
   ToggleRight,
   Database,
   Download,
+  Upload,
   Lock,
   UserPlus,
   Sliders,
@@ -303,7 +310,11 @@ export const AdminDashboardPage = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem('yomtech_cms_products', JSON.stringify(cmsProducts));
+    try {
+      localStorage.setItem('yomtech_cms_products', JSON.stringify(cmsProducts));
+    } catch (err) {
+      console.warn('localStorage quota exceeded for products:', err);
+    }
   }, [cmsProducts]);
 
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -757,7 +768,11 @@ export const AdminDashboardPage = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const existingIds = new Set(parsed.map((item) => item.id));
+          const missingDefaults = initialCmsArticles.filter((item) => !existingIds.has(item.id));
+          return [...parsed, ...missingDefaults];
+        }
       } catch (e) {
         console.error(e);
       }
@@ -766,7 +781,11 @@ export const AdminDashboardPage = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem('yomtech_cms_articles', JSON.stringify(cmsArticles));
+    try {
+      localStorage.setItem('yomtech_cms_articles', JSON.stringify(cmsArticles));
+    } catch (err) {
+      console.warn('localStorage quota exceeded for cmsArticles, skipping local storage cache sync:', err);
+    }
     window.dispatchEvent(new Event('cmsArticlesUpdated'));
   }, [cmsArticles]);
 
@@ -803,8 +822,13 @@ export const AdminDashboardPage = () => {
     setSelectedCmsIds((prev) => (prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]));
   };
 
-  const handleBulkVisibility = (nextVis) => {
+  const handleBulkVisibility = async (nextVis) => {
     if (!selectedCmsIds.length) return;
+    try {
+      await bulkCmsActionApi('visibility', 'all', selectedCmsIds);
+    } catch (err) {
+      console.error('API bulk visibility error:', err);
+    }
     setCmsArticles((prev) =>
       prev.map((art) => (selectedCmsIds.includes(art.id) ? { ...art, visibility: nextVis } : art))
     );
@@ -812,8 +836,13 @@ export const AdminDashboardPage = () => {
     setSelectedCmsIds([]);
   };
 
-  const handleBulkStatus = (nextStatus) => {
+  const handleBulkStatus = async (nextStatus) => {
     if (!selectedCmsIds.length) return;
+    try {
+      await bulkCmsActionApi('status', 'all', selectedCmsIds);
+    } catch (err) {
+      console.error('API bulk status error:', err);
+    }
     setCmsArticles((prev) =>
       prev.map((art) => (selectedCmsIds.includes(art.id) ? { ...art, status: nextStatus } : art))
     );
@@ -821,9 +850,14 @@ export const AdminDashboardPage = () => {
     setSelectedCmsIds([]);
   };
 
-  const handleBulkDeleteCms = () => {
+  const handleBulkDeleteCms = async () => {
     if (!selectedCmsIds.length) return;
     if (confirm(`Permanently delete ${selectedCmsIds.length} selected items?`)) {
+      try {
+        await bulkCmsActionApi('delete', 'all', selectedCmsIds);
+      } catch (err) {
+        console.error('API bulk delete error:', err);
+      }
       setCmsArticles((prev) => prev.filter((art) => !selectedCmsIds.includes(art.id)));
       showNotice(`Deleted ${selectedCmsIds.length} items.`);
       setSelectedCmsIds([]);
@@ -873,15 +907,25 @@ export const AdminDashboardPage = () => {
     setConfirmDeleteTarget({ item, type });
   };
 
-  const handleConfirmPermanentDelete = () => {
+  const handleConfirmPermanentDelete = async () => {
     if (!confirmDeleteTarget) return;
     const { item, type } = confirmDeleteTarget;
 
     if (type === 'product') {
+      try {
+        await deleteCmsCategoryItemApi('all', item.id);
+      } catch (err) {
+        console.error('API delete product error:', err);
+      }
       setCmsProducts((prev) => prev.filter((p) => p.id !== item.id));
       setCmsArticles((prev) => prev.filter((a) => a.id !== item.id && !a.title.includes(item.name || '___')));
       showNotice(`Permanently deleted product "${item.name}"`);
     } else {
+      try {
+        await deleteCmsCategoryItemApi('all', item.id);
+      } catch (err) {
+        console.error('API delete item error:', err);
+      }
       const deletedItem = { ...item, deletedAt: new Date().toISOString() };
       setTrashItems((prev) => [deletedItem, ...prev]);
       setCmsArticles((prev) => prev.filter((a) => a.id !== item.id));
@@ -891,9 +935,14 @@ export const AdminDashboardPage = () => {
     setConfirmDeleteTarget(null);
   };
 
-  const handleRestoreFromTrash = (id) => {
+  const handleRestoreFromTrash = async (id) => {
     const item = trashItems.find((i) => i.id === id);
     if (item) {
+      try {
+        await restoreCmsItemApi(id);
+      } catch (err) {
+        console.error('API restore item error:', err);
+      }
       const restored = { ...item };
       delete restored.deletedAt;
       setCmsArticles((prev) => [restored, ...prev]);
@@ -902,7 +951,12 @@ export const AdminDashboardPage = () => {
     }
   };
 
-  const handlePermanentlyPurgeTrash = (id) => {
+  const handlePermanentlyPurgeTrash = async (id) => {
+    try {
+      await permanentlyDeleteCmsItemApi(id);
+    } catch (err) {
+      console.error('API permanent delete item error:', err);
+    }
     setTrashItems((prev) => prev.filter((i) => i.id !== id));
     showNotice('Permanently purged item from Trash Bin.');
   };
@@ -1042,9 +1096,24 @@ export const AdminDashboardPage = () => {
       }
 
       try {
-        const cmsRes = await fetchCmsCategoryApi('articles');
+        const cmsRes = await fetchCmsCategoryApi('all');
         if (cmsRes.data?.success && Array.isArray(cmsRes.data.data) && cmsRes.data.data.length > 0) {
-          setCmsArticles(cmsRes.data.data);
+          const formatted = cmsRes.data.data.map((i) => ({
+            id: i.id,
+            title: i.title,
+            category: i.category,
+            client: i.client || i.outlet || '',
+            author: i.author || 'Editorial Team',
+            summary: i.excerpt || i.summary || i.content || '',
+            readTime: i.readTime || '5 min read',
+            publishedDate: i.createdAt ? new Date(i.createdAt).toISOString().split('T')[0] : '2026-08-24',
+            status: i.status === 'PUBLISHED' ? 'Published' : i.status === 'DRAFT' ? 'Draft' : i.status === 'ARCHIVED' ? 'Archived' : i.status,
+            visibility: i.visibility || 'VISIBLE',
+            expiryDate: i.expiresAt ? new Date(i.expiresAt).toISOString().split('T')[0] : '',
+            coverImage: i.coverImage,
+            content: i.content
+          }));
+          setCmsArticles(formatted);
         }
       } catch (err) {
         console.error('Failed to sync backend CMS data:', err);
@@ -1180,7 +1249,7 @@ export const AdminDashboardPage = () => {
   };
 
   // --- REAL HANDLERS: CMS PRODUCTS ---
-  const handleCreateCmsProduct = (e) => {
+  const handleCreateCmsProduct = async (e) => {
     e.preventDefault();
     const newProd = {
       id: `prod-${Date.now()}`,
@@ -1189,7 +1258,6 @@ export const AdminDashboardPage = () => {
     };
     setCmsProducts((prev) => [newProd, ...prev]);
 
-    // Also sync entry to cmsArticles under Services & Products Matrix
     const newArt = {
       id: `art-prod-${Date.now()}`,
       title: `${newProductForm.name} Solution Module`,
@@ -1202,6 +1270,21 @@ export const AdminDashboardPage = () => {
       status: newProductForm.status || 'Published',
       visibility: 'VISIBLE'
     };
+
+    try {
+      await createCmsCategoryItemApi('services', {
+        title: `${newProductForm.name} Solution Module`,
+        category: 'Services & Products Matrix',
+        summary: newProductForm.description,
+        client: newProductForm.category,
+        author: 'Product Management Team',
+        status: 'PUBLISHED',
+        visibility: 'VISIBLE'
+      });
+    } catch (err) {
+      console.error('API create product error:', err);
+    }
+
     setCmsArticles((prev) => [newArt, ...prev]);
 
     showNotice(`CMS Product published: ${newProductForm.name}`);
@@ -1209,7 +1292,7 @@ export const AdminDashboardPage = () => {
     setShowAddProductModal(false);
   };
 
-  const handleToggleProductPublish = (id) => {
+  const handleToggleProductPublish = async (id) => {
     const targetProd = cmsProducts.find((p) => p.id === id);
     if (!targetProd) return;
     const newStatus = targetProd.status === 'Published' ? 'Draft' : 'Published';
@@ -1218,6 +1301,12 @@ export const AdminDashboardPage = () => {
     setCmsProducts((prev) =>
       prev.map((p) => (p.id === id ? { ...p, status: newStatus } : p))
     );
+
+    try {
+      await updateCmsCategoryItemApi('all', id, { status: newStatus === 'Published' ? 'PUBLISHED' : 'DRAFT', visibility: newVis });
+    } catch (err) {
+      console.error('API toggle product publish error:', err);
+    }
 
     setCmsArticles((prev) =>
       prev.map((a) => {
@@ -1230,9 +1319,14 @@ export const AdminDashboardPage = () => {
     showNotice(`CMS Product status updated to ${newStatus}`);
   };
 
-  const handleDeleteProduct = (prodId) => {
+  const handleDeleteProduct = async (prodId) => {
     const target = cmsProducts.find((p) => p.id === prodId);
     if (window.confirm(`Are you sure you want to delete product "${target?.name}"?`)) {
+      try {
+        await deleteCmsCategoryItemApi('all', prodId);
+      } catch (err) {
+        console.error('API delete product error:', err);
+      }
       setCmsProducts((prev) => prev.filter((p) => p.id !== prodId));
       setCmsArticles((prev) => prev.filter((a) => a.id !== prodId && !a.title.includes(target?.name || '___')));
       showNotice(`Deleted product "${target?.name}"`);
@@ -1240,21 +1334,77 @@ export const AdminDashboardPage = () => {
   };
 
   // --- REAL HANDLERS: CMS ARTICLES (CRUD, VISIBILITY, EXPIRED, EDIT, DELETE) ---
-  const handleCreateArticle = (e) => {
+  const handleCreateArticle = async (e) => {
     e.preventDefault();
-    const newArt = {
-      id: `art-${Date.now()}`,
-      ...newArticleForm,
-      publishedDate: new Date().toISOString().split('T')[0]
+    const catName = newArticleForm.category || 'Corporate News & Articles';
+    const computedVideoUrl = newArticleForm.videoUrl || (newArticleForm.youtubeId ? `https://www.youtube.com/watch?v=${newArticleForm.youtubeId}` : null);
+    const payload = {
+      title: newArticleForm.title,
+      category: catName,
+      client: newArticleForm.client,
+      author: newArticleForm.author || 'Editorial Team',
+      summary: newArticleForm.summary,
+      fullContent: newArticleForm.fullContent || newArticleForm.summary,
+      content: newArticleForm.fullContent || newArticleForm.summary,
+      coverImage: newArticleForm.coverImage,
+      videoUrl: computedVideoUrl,
+      readTime: newArticleForm.readTime || '5 min read',
+      status: newArticleForm.status === 'Published' ? 'PUBLISHED' : 'DRAFT',
+      visibility: newArticleForm.visibility || 'VISIBLE'
     };
-    setCmsArticles((prev) => [newArt, ...prev]);
+
+    try {
+      const res = await createCmsCategoryItemApi('all', payload);
+      if (res.data?.success && res.data.data) {
+        const dbItem = res.data.data;
+        const formatted = {
+          id: dbItem.id,
+          title: dbItem.title,
+          category: dbItem.category,
+          client: dbItem.client || newArticleForm.client,
+          author: dbItem.author || newArticleForm.author,
+          summary: dbItem.excerpt || newArticleForm.summary,
+          fullContent: newArticleForm.fullContent || dbItem.content,
+          content: newArticleForm.fullContent || dbItem.content,
+          coverImage: newArticleForm.coverImage || dbItem.coverImage,
+          videoUrl: computedVideoUrl || dbItem.videoUrl,
+          readTime: dbItem.readTime || newArticleForm.readTime,
+          publishedDate: new Date().toISOString().split('T')[0],
+          status: newArticleForm.status,
+          visibility: newArticleForm.visibility
+        };
+        setCmsArticles((prev) => [formatted, ...prev]);
+      } else {
+        const newArt = {
+          id: `art-${Date.now()}`,
+          ...newArticleForm,
+          videoUrl: computedVideoUrl,
+          publishedDate: new Date().toISOString().split('T')[0]
+        };
+        setCmsArticles((prev) => [newArt, ...prev]);
+      }
+    } catch (err) {
+      console.error('API create article error:', err);
+      const newArt = {
+        id: `art-${Date.now()}`,
+        ...newArticleForm,
+        videoUrl: computedVideoUrl,
+        publishedDate: new Date().toISOString().split('T')[0]
+      };
+      setCmsArticles((prev) => [newArt, ...prev]);
+    }
+
     showNotice(`CMS News / Article added: "${newArticleForm.title}"`);
     setNewArticleForm({
       title: '',
-      category: 'Enterprise News',
+      category: 'Corporate News & Articles',
       client: '',
       author: 'Editorial Team',
       summary: '',
+      fullContent: '',
+      coverImage: null,
+      videoUrl: null,
+      youtubeId: '',
       readTime: '5 min read',
       status: 'Published',
       visibility: 'VISIBLE'
@@ -1262,13 +1412,24 @@ export const AdminDashboardPage = () => {
     setShowAddArticleModal(false);
   };
 
-  const handleToggleArticleVisibility = (artId) => {
+  const handleToggleArticleVisibility = async (artId) => {
+    const targetArt = cmsArticles.find((a) => a.id === artId);
+    const isCurrentlyVisible = targetArt ? (targetArt.visibility === 'VISIBLE' || targetArt.visibility === 'PUBLIC') : true;
+    const nextVis = isCurrentlyVisible ? 'HIDDEN' : 'VISIBLE';
+    const nextStatus = isCurrentlyVisible ? 'Hidden' : 'Published';
+
+    try {
+      await updateCmsCategoryItemApi('all', artId, {
+        visibility: nextVis,
+        status: nextStatus === 'Published' ? 'PUBLISHED' : 'DRAFT'
+      });
+    } catch (err) {
+      console.error('API toggle visibility error:', err);
+    }
+
     setCmsArticles((prev) =>
       prev.map((art) => {
         if (art.id === artId) {
-          const isCurrentlyVisible = art.visibility === 'VISIBLE' || art.visibility === 'PUBLIC';
-          const nextVis = isCurrentlyVisible ? 'HIDDEN' : 'VISIBLE';
-          const nextStatus = isCurrentlyVisible ? 'Hidden' : 'Published';
           showNotice(`Article "${art.title}" is now ${nextStatus.toUpperCase()} & ${nextVis}`);
           return { ...art, visibility: nextVis, status: nextStatus };
         }
@@ -1277,11 +1438,19 @@ export const AdminDashboardPage = () => {
     );
   };
 
-  const handleSetArticleStatus = (artId, newStatus) => {
+  const handleSetArticleStatus = async (artId, newStatus) => {
+    const nextVis = (newStatus === 'Hidden' || newStatus === 'Expired' || newStatus === 'Draft') ? 'HIDDEN' : 'VISIBLE';
+    const dbStatus = newStatus === 'Published' ? 'PUBLISHED' : newStatus === 'Draft' ? 'DRAFT' : 'EXPIRED';
+
+    try {
+      await updateCmsCategoryItemApi('all', artId, { status: dbStatus, visibility: nextVis });
+    } catch (err) {
+      console.error('API set status error:', err);
+    }
+
     setCmsArticles((prev) =>
       prev.map((art) => {
         if (art.id === artId) {
-          const nextVis = (newStatus === 'Hidden' || newStatus === 'Expired' || newStatus === 'Draft') ? 'HIDDEN' : 'VISIBLE';
           showNotice(`Article "${art.title}" status set to: ${newStatus.toUpperCase()}`);
           return { ...art, status: newStatus, visibility: nextVis };
         }
@@ -1290,9 +1459,14 @@ export const AdminDashboardPage = () => {
     );
   };
 
-  const handleDeleteArticle = (artId) => {
+  const handleDeleteArticle = async (artId) => {
     const target = cmsArticles.find((a) => a.id === artId);
-    if (window.confirm(`Are you sure you want to permanently delete news item "${target?.title}"?`)) {
+    if (window.confirm(`Are you sure you want to delete news item "${target?.title}"?`)) {
+      try {
+        await deleteCmsCategoryItemApi('all', artId);
+      } catch (err) {
+        console.error('API delete article error:', err);
+      }
       setCmsArticles((prev) => prev.filter((a) => a.id !== artId));
       showNotice(`News item "${target?.title}" deleted successfully.`);
     }
@@ -1303,9 +1477,30 @@ export const AdminDashboardPage = () => {
     setShowEditArticleModal(true);
   };
 
-  const handleSaveEditArticle = (e) => {
+  const handleSaveEditArticle = async (e) => {
     e.preventDefault();
     if (!editingArticle) return;
+
+    try {
+      const computedVideoUrl = editingArticle.videoUrl || (editingArticle.youtubeId ? `https://www.youtube.com/watch?v=${editingArticle.youtubeId}` : null);
+      await updateCmsCategoryItemApi('all', editingArticle.id, {
+        title: editingArticle.title,
+        category: editingArticle.category,
+        client: editingArticle.client,
+        author: editingArticle.author,
+        summary: editingArticle.summary,
+        fullContent: editingArticle.fullContent || editingArticle.content,
+        content: editingArticle.fullContent || editingArticle.content,
+        coverImage: editingArticle.coverImage,
+        videoUrl: computedVideoUrl,
+        readTime: editingArticle.readTime,
+        status: editingArticle.status === 'Published' ? 'PUBLISHED' : 'DRAFT',
+        visibility: editingArticle.visibility
+      });
+    } catch (err) {
+      console.error('API save edit article error:', err);
+    }
+
     setCmsArticles((prev) =>
       prev.map((art) => (art.id === editingArticle.id ? { ...editingArticle } : art))
     );
@@ -2541,16 +2736,21 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Upcoming Events &amp; Webinars Schedule</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage, publish, edit, cancel, or hide upcoming tech summits, graduation demo days, and workshops.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage, publish, edit, cancel, or hide upcoming tech summits, graduation demo days, and workshops in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      const title = prompt("Enter Event Title:");
-                      if (title) {
-                        const newEvt = { id: `evt-${Date.now()}`, title, date: 'NOV 20, 2026', time: '10:00 AM', location: 'Skylight Hotel & Hybrid', category: 'Conference', status: 'Upcoming', visibility: 'VISIBLE' };
-                        setCmsEvents((prev) => [newEvt, ...prev]);
-                        showNotice(`Event "${title}" published!`);
-                      }
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Upcoming Events & Webinars',
+                        client: 'Hybrid (Addis Ababa)',
+                        author: 'YomTech Leadership',
+                        summary: '',
+                        readTime: '09:00 AM EAT',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
@@ -2560,7 +2760,7 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsEvents.map((evt) => (
+                  {cmsArticles.filter((a) => a.category === 'Upcoming Events & Webinars').map((evt) => (
                     <div key={evt.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
@@ -2571,49 +2771,25 @@ export const AdminDashboardPage = () => {
                           <span className="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-black rounded uppercase border border-slate-200">{evt.visibility || 'VISIBLE'}</span>
                         </div>
                         <div className="font-extrabold text-sm text-slate-900">{evt.title}</div>
-                        <div className="text-xs text-slate-500 font-medium">{evt.date} &bull; {evt.time} &bull; {evt.location}</div>
+                        <div className="text-xs text-slate-500 font-medium">{evt.publishedDate || 'SEP 15, 2026'} &bull; {evt.readTime || '09:00 AM'} &bull; {evt.client || 'Addis Ababa'}</div>
+                        <p className="text-xs text-slate-600 font-medium">{evt.summary}</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        {/* Edit Event */}
                         <button
-                          onClick={() => {
-                            const newTitle = prompt("Update Event Title:", evt.title);
-                            if (newTitle) setCmsEvents((prev) => prev.map((e) => (e.id === evt.id ? { ...e, title: newTitle } : e)));
-                          }}
+                          onClick={() => handleStartEditArticle(evt)}
                           className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
                         >
                           Edit
                         </button>
-                        {/* Cancel Event */}
                         <button
-                          onClick={() => {
-                            const nextStatus = evt.status === 'Cancelled' ? 'Upcoming' : 'Cancelled';
-                            setCmsEvents((prev) => prev.map((e) => (e.id === evt.id ? { ...e, status: nextStatus } : e)));
-                            showNotice(`Event status set to ${nextStatus}`);
-                          }}
-                          className={`px-3 py-1.5 text-xs font-bold rounded-xl border ${
-                            evt.status === 'Cancelled' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-red-50 text-red-700 border-red-200'
-                          }`}
-                        >
-                          {evt.status === 'Cancelled' ? 'Reactivate' : 'Cancel Event'}
-                        </button>
-                        {/* Toggle Visibility */}
-                        <button
-                          onClick={() => {
-                            const nextVis = evt.visibility === 'HIDDEN' ? 'VISIBLE' : 'HIDDEN';
-                            setCmsEvents((prev) => prev.map((e) => (e.id === evt.id ? { ...e, visibility: nextVis } : e)));
-                            showNotice(`Event visibility set to ${nextVis}`);
-                          }}
+                          onClick={() => handleToggleArticleVisibility(evt.id)}
                           className="p-1.5 text-slate-500 hover:text-[#1E90FF] rounded-lg hover:bg-blue-50"
                           title="Toggle Visibility"
                         >
                           <Eye size={16} />
                         </button>
-                        {/* Delete Event */}
                         <button
-                          onClick={() => {
-                            if (confirm(`Permanently delete event "${evt.title}"?`)) setCmsEvents((prev) => prev.filter((e) => e.id !== evt.id));
-                          }}
+                          onClick={() => handleDeleteArticle(evt.id)}
                           className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
                           title="Delete Event"
                         >
@@ -2632,16 +2808,21 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Official Announcements &amp; Bulletins</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Publish platform releases, ERP version updates, set priority, hide/show, and delete bulletins.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Publish platform releases, ERP version updates, set priority, hide/show, and delete bulletins in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      const title = prompt("Enter Announcement Title:");
-                      if (title) {
-                        const newAnn = { id: `ann-${Date.now()}`, title, priority: 'FEATURED', date: 'August 24, 2026', summary: 'Official announcement release update.', visibility: 'VISIBLE' };
-                        setCmsAnnouncements((prev) => [newAnn, ...prev]);
-                        showNotice(`Announcement "${title}" posted!`);
-                      }
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Official Announcements',
+                        client: 'Corporate Bulletin',
+                        author: 'Executive Office',
+                        summary: '',
+                        readTime: '5 min read',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
@@ -2651,14 +2832,12 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsAnnouncements.map((ann) => (
+                  {cmsArticles.filter((a) => a.category === 'Official Announcements').map((ann) => (
                     <div key={ann.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
-                          <span className={`px-2.5 py-0.5 text-[10px] font-black rounded uppercase border ${
-                            ann.priority === 'FEATURED' ? 'bg-purple-50 text-purple-700 border-purple-200' : 'bg-blue-50 text-[#1E90FF] border-blue-200'
-                          }`}>{ann.priority}</span>
-                          <span className="text-xs text-slate-400 font-bold">{ann.date}</span>
+                          <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{ann.category}</span>
+                          <span className="text-xs text-slate-400 font-bold">{ann.publishedDate}</span>
                           <span className="px-2 py-0.5 bg-slate-100 text-slate-600 text-[10px] font-black rounded uppercase border border-slate-200">{ann.visibility || 'VISIBLE'}</span>
                         </div>
                         <div className="font-extrabold text-sm text-slate-900">{ann.title}</div>
@@ -2666,28 +2845,19 @@ export const AdminDashboardPage = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => {
-                            const newSummary = prompt("Edit Announcement Summary:", ann.summary);
-                            if (newSummary) setCmsAnnouncements((prev) => prev.map((a) => (a.id === ann.id ? { ...a, summary: newSummary } : a)));
-                          }}
+                          onClick={() => handleStartEditArticle(ann)}
                           className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
                         >
                           Edit
                         </button>
                         <button
-                          onClick={() => {
-                            const nextVis = ann.visibility === 'HIDDEN' ? 'VISIBLE' : 'HIDDEN';
-                            setCmsAnnouncements((prev) => prev.map((a) => (a.id === ann.id ? { ...a, visibility: nextVis } : a)));
-                            showNotice(`Bulletin visibility set to ${nextVis}`);
-                          }}
+                          onClick={() => handleToggleArticleVisibility(ann.id)}
                           className="p-1.5 text-slate-500 hover:text-[#1E90FF] rounded-lg hover:bg-blue-50"
                         >
                           <Eye size={16} />
                         </button>
                         <button
-                          onClick={() => {
-                            if (confirm(`Delete bulletin "${ann.title}"?`)) setCmsAnnouncements((prev) => prev.filter((a) => a.id !== ann.id));
-                          }}
+                          onClick={() => handleDeleteArticle(ann.id)}
                           className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
                         >
                           <Trash2 size={16} />
@@ -2705,16 +2875,21 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Featured Project Case Studies</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage enterprise portfolio showcases (SSGI Satellite Portal, Bunna Bank ERP, MInT Blueprints).</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage enterprise portfolio showcases (SSGI Satellite Portal, Bunna Bank ERP, MInT Blueprints) in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      const title = prompt("Enter Case Study Title:");
-                      if (title) {
-                        const newPrj = { id: `prj-${Date.now()}`, title, client: 'Enterprise Client', category: 'Software Engineering', impact: 'Reduced operational overhead by 60%', techStack: 'React, Node.js, PostgreSQL' };
-                        setCmsProjects((prev) => [newPrj, ...prev]);
-                        showNotice(`Case study "${title}" added!`);
-                      }
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Featured Project Case Studies',
+                        client: 'Enterprise Client Partner',
+                        author: 'Engineering Directorate',
+                        summary: '',
+                        readTime: 'React, Node.js, PostgreSQL',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
@@ -2724,28 +2899,30 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsProjects.map((prj) => (
+                  {cmsArticles.filter((a) => a.category === 'Featured Project Case Studies').map((prj) => (
                     <div key={prj.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
                         <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{prj.category}</span>
                         <div className="font-extrabold text-sm text-slate-900">{prj.title}</div>
-                        <div className="text-xs text-slate-500 font-semibold">Client: {prj.client} &bull; Impact: {prj.impact}</div>
-                        <div className="text-[11px] text-[#1E90FF] font-bold">Tech Stack: {prj.techStack}</div>
+                        <div className="text-xs text-slate-500 font-semibold">Client: {prj.client || 'Enterprise Partner'}</div>
+                        <p className="text-xs text-slate-600 font-medium">{prj.summary}</p>
+                        <div className="text-[11px] text-[#1E90FF] font-bold">Tech Stack: {prj.readTime}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <button
-                          onClick={() => {
-                            const newImpact = prompt("Edit Case Study Impact:", prj.impact);
-                            if (newImpact) setCmsProjects((prev) => prev.map((p) => (p.id === prj.id ? { ...p, impact: newImpact } : p)));
-                          }}
+                          onClick={() => handleStartEditArticle(prj)}
                           className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
                         >
                           Edit
                         </button>
                         <button
-                          onClick={() => {
-                            if (confirm(`Remove project "${prj.title}"?`)) setCmsProjects((prev) => prev.filter((p) => p.id !== prj.id));
-                          }}
+                          onClick={() => handleToggleArticleVisibility(prj.id)}
+                          className="p-1.5 text-slate-500 hover:text-[#1E90FF] rounded-lg hover:bg-blue-50"
+                        >
+                          <Eye size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(prj.id)}
                           className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
                         >
                           <Trash2 size={16} />
@@ -2763,11 +2940,20 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Client &amp; Learner Testimonials</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Approve, add, or edit WabiSkills graduate feedback and enterprise client testimonials.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Approve, add, or edit WabiSkills graduate feedback and enterprise client testimonials in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      setNewArticleForm({ ...newArticleForm, category: 'Client & Learner Testimonials', title: '', author: 'Graduate / Partner', summary: '' });
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Client & Learner Testimonials',
+                        client: 'WabiSkills Academy Alumni / Partner',
+                        author: 'Graduate / Client',
+                        summary: '',
+                        readTime: '5 Stars Review',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
                       setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
@@ -2778,21 +2964,27 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsTestimonials.map((tst) => (
+                  {cmsArticles.filter((a) => a.category === 'Client & Learner Testimonials').map((tst) => (
                     <div key={tst.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{tst.type}</span>
-                        <div className="font-extrabold text-sm text-slate-900">{tst.name} &bull; <span className="text-xs text-slate-500">{tst.role}</span></div>
-                        <p className="text-xs text-slate-600 font-medium italic">&quot;{tst.quote}&quot;</p>
+                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{tst.category}</span>
+                        <div className="font-extrabold text-sm text-slate-900">{tst.title} &bull; <span className="text-xs text-slate-500">{tst.client}</span></div>
+                        <p className="text-xs text-slate-600 font-medium italic">&quot;{tst.summary}&quot;</p>
                       </div>
-                      <button
-                        onClick={() => {
-                          if (confirm(`Delete testimonial from ${tst.name}?`)) setCmsTestimonials((prev) => prev.filter((t) => t.id !== tst.id));
-                        }}
-                        className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleStartEditArticle(tst)}
+                          className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(tst.id)}
+                          className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -2805,11 +2997,20 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Photo Gallery Showcase Archive</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Upload &amp; organize classroom photos, MoU signing ceremonies, team photos, and workshops.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Upload &amp; organize classroom photos, MoU signing ceremonies, team photos, and workshops in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      setNewArticleForm({ ...newArticleForm, category: 'Photo Gallery Showcase', title: '', summary: '' });
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Photo Gallery Showcase',
+                        client: 'Media Unit Archive',
+                        author: 'Media Team',
+                        summary: '',
+                        readTime: 'Photo Showcase Item',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
                       setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
@@ -2819,18 +3020,23 @@ export const AdminDashboardPage = () => {
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                  {cmsGallery.map((gal) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {cmsArticles.filter((a) => ['Photo Gallery Showcase', 'Academy', 'Team', 'Partnerships', 'Events'].includes(a.category)).map((gal) => (
                     <div key={gal.id} className="p-4 bg-white rounded-2xl border border-blue-100 shadow-2xs space-y-2 flex flex-col justify-between">
                       <div className="space-y-1">
                         <span className="px-2 py-0.5 bg-blue-50 text-[#1E90FF] text-[9px] font-black rounded uppercase border border-blue-200">{gal.category}</span>
-                        <div className="font-extrabold text-xs text-slate-900">{gal.caption}</div>
+                        <div className="font-extrabold text-xs text-slate-900">{gal.title}</div>
+                        <p className="text-xs text-slate-500 font-medium">{gal.summary}</p>
                       </div>
-                      <div className="pt-2 border-t border-slate-100 flex justify-end">
+                      <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
                         <button
-                          onClick={() => {
-                            if (confirm(`Remove photo "${gal.caption}"?`)) setCmsGallery((prev) => prev.filter((g) => g.id !== gal.id));
-                          }}
+                          onClick={() => handleStartEditArticle(gal)}
+                          className="text-[11px] font-bold text-[#1E90FF] hover:underline"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(gal.id)}
                           className="p-1 text-slate-400 hover:text-red-600 rounded"
                         >
                           <Trash2 size={15} />
@@ -2848,11 +3054,20 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Video &amp; Documentary Hub</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage YouTube video embeds, channel broadcasts (@yomtech &amp; @WabiSkills), and demos.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage YouTube video embeds, channel broadcasts (@yomtech &amp; @WabiSkills), and demos in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      setNewArticleForm({ ...newArticleForm, category: 'Video & Documentary Hub', title: '', summary: '' });
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Video & Documentary Hub',
+                        client: '@yomtech',
+                        author: 'YomTech Media Unit',
+                        summary: '',
+                        readTime: 'YouTube HD 1080p',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
                       setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
@@ -2863,21 +3078,25 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {cmsVideos.map((vid) => (
+                  {cmsArticles.filter((a) => ['Video & Documentary Hub', 'Documentary', 'Bootcamp', 'Product Demos'].includes(a.category)).map((vid) => (
                     <div key={vid.id} className="p-5 bg-white rounded-2xl border border-blue-100 shadow-2xs space-y-2 flex flex-col justify-between">
                       <div className="space-y-1">
                         <div className="flex items-center gap-2">
                           <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{vid.category}</span>
-                          <span className="text-xs text-slate-400 font-bold">{vid.channel} &bull; {vid.duration}</span>
+                          <span className="text-xs text-slate-400 font-bold">{vid.client || '@yomtech'}</span>
                         </div>
                         <div className="font-extrabold text-sm text-slate-900">{vid.title}</div>
+                        <p className="text-xs text-slate-600 font-medium">{vid.summary}</p>
                       </div>
                       <div className="pt-2 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span className="text-slate-500 font-bold">{vid.views}</span>
                         <button
-                          onClick={() => {
-                            if (confirm(`Remove video "${vid.title}"?`)) setCmsVideos((prev) => prev.filter((v) => v.id !== vid.id));
-                          }}
+                          onClick={() => handleStartEditArticle(vid)}
+                          className="font-bold text-[#1E90FF] hover:underline"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(vid.id)}
                           className="p-1 text-slate-400 hover:text-red-600 rounded"
                         >
                           <Trash2 size={16} />
@@ -2895,11 +3114,20 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Media Appearances &amp; Interviews</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage television interviews (EBC), newspaper features, and international journal highlights.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage television interviews (EBC), newspaper features, and international journal highlights in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      setNewArticleForm({ ...newArticleForm, category: 'Media Appearances & Coverage', title: '', summary: '' });
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Media Appearances & Coverage',
+                        client: 'National Media Outlet',
+                        author: 'Editorial Unit',
+                        summary: '',
+                        readTime: 'Featured Broadcast',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
                       setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
@@ -2910,21 +3138,28 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsMedia.map((med) => (
+                  {cmsArticles.filter((a) => a.category === 'Media Appearances & Coverage').map((med) => (
                     <div key={med.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{med.type}</span>
+                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{med.category}</span>
                         <div className="font-extrabold text-sm text-slate-900">{med.title}</div>
-                        <div className="text-xs text-slate-500 font-semibold">Outlet: {med.outlet} &bull; Date: {med.date}</div>
+                        <div className="text-xs text-slate-500 font-semibold">Outlet: {med.client || 'Media Coverage'} &bull; Date: {med.publishedDate}</div>
+                        <p className="text-xs text-slate-600 font-medium">{med.summary}</p>
                       </div>
-                      <button
-                        onClick={() => {
-                          if (confirm(`Remove media item "${med.title}"?`)) setCmsMedia((prev) => prev.filter((m) => m.id !== med.id));
-                        }}
-                        className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleStartEditArticle(med)}
+                          className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(med.id)}
+                          className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -2937,16 +3172,21 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Press Releases &amp; Corporate Media</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Publish official corporate press releases and download links for media press kits.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Publish official corporate press releases and media kit announcements in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      const title = prompt("Enter Press Release Title:");
-                      if (title) {
-                        const newPrs = { id: `prs-${Date.now()}`, title, date: 'August 24, 2026', summary: 'Official press release release.' };
-                        setCmsPress((prev) => [newPrs, ...prev]);
-                        showNotice(`Press release "${title}" published!`);
-                      }
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Press & Corporate Content',
+                        client: 'YomTech Press Office',
+                        author: 'Corporate Communications',
+                        summary: '',
+                        readTime: 'Press Release PDF',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
@@ -2956,21 +3196,27 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsPress.map((prs) => (
+                  {cmsArticles.filter((a) => a.category === 'Press & Corporate Content').map((prs) => (
                     <div key={prs.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <span className="text-xs text-slate-400 font-bold">{prs.date}</span>
+                        <span className="text-xs text-slate-400 font-bold">{prs.publishedDate}</span>
                         <div className="font-extrabold text-sm text-slate-900">{prs.title}</div>
                         <p className="text-xs text-slate-600 font-medium">{prs.summary}</p>
                       </div>
-                      <button
-                        onClick={() => {
-                          if (confirm(`Remove press release "${prs.title}"?`)) setCmsPress((prev) => prev.filter((p) => p.id !== prs.id));
-                        }}
-                        className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleStartEditArticle(prs)}
+                          className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(prs.id)}
+                          className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -2983,17 +3229,21 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Support FAQ &amp; Knowledge Base</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage frequently asked questions, hotline contacts, and support answers for clients.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage frequently asked questions, hotline contacts, and support answers in Prisma DB.</p>
                   </div>
                   <button
                     onClick={() => {
-                      const question = prompt("Enter Question:");
-                      const answer = prompt("Enter Answer:");
-                      if (question && answer) {
-                        const newFaq = { id: `faq-${Date.now()}`, question, answer };
-                        setCmsFaqs((prev) => [newFaq, ...prev]);
-                        showNotice(`FAQ item added!`);
-                      }
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Support FAQ & Knowledge Base',
+                        client: 'Support Desk',
+                        author: 'Knowledge Base Team',
+                        summary: '',
+                        readTime: 'FAQ Item',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
                     }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
@@ -3003,20 +3253,26 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="space-y-3">
-                  {cmsFaqs.map((faq) => (
+                  {cmsArticles.filter((a) => a.category === 'Support FAQ & Knowledge Base').map((faq) => (
                     <div key={faq.id} className="p-5 rounded-2xl bg-white border border-blue-100 shadow-2xs hover:shadow-md transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                       <div className="space-y-1">
-                        <div className="font-extrabold text-sm text-[#1E90FF]">{faq.question}</div>
-                        <p className="text-xs text-slate-600 font-medium">{faq.answer}</p>
+                        <div className="font-extrabold text-sm text-[#1E90FF]">{faq.title}</div>
+                        <p className="text-xs text-slate-600 font-medium">{faq.summary}</p>
                       </div>
-                      <button
-                        onClick={() => {
-                          if (confirm(`Remove FAQ question?`)) setCmsFaqs((prev) => prev.filter((f) => f.id !== faq.id));
-                        }}
-                        className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleStartEditArticle(faq)}
+                          className="px-3 py-1.5 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(faq.id)}
+                          className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -3029,10 +3285,22 @@ export const AdminDashboardPage = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black text-slate-900">CMS: Institutional Partners Logo Wall</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage enterprise partner logos (SSGI, INSA, MInT, EAII, Bunna Bank, City Admin).</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage enterprise partner profiles (SSGI, INSA, MInT, EAII, Bunna Bank, City Admin) in Prisma DB.</p>
                   </div>
                   <button
-                    onClick={() => setShowAddPartnerModal(true)}
+                    onClick={() => {
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Trusted Institutional Partners',
+                        client: 'Government / Tech Alliance',
+                        author: 'Partner Alliance Unit',
+                        summary: '',
+                        readTime: 'Government Tech Partner',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
+                    }}
                     className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
                   >
                     <Plus size={15} />
@@ -3041,17 +3309,22 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {partners.map((part) => (
+                  {cmsArticles.filter((a) => a.category === 'Trusted Institutional Partners').map((part) => (
                     <div key={part.id} className="p-5 bg-white rounded-2xl border border-blue-100 shadow-2xs space-y-2 flex flex-col justify-between">
                       <div className="space-y-1">
-                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{part.type}</span>
-                        <div className="font-extrabold text-sm text-slate-900">{part.name}</div>
+                        <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded uppercase border border-blue-200">{part.readTime || 'Partner'}</span>
+                        <div className="font-extrabold text-sm text-slate-900">{part.title}</div>
+                        <p className="text-xs text-slate-500 font-medium">{part.summary}</p>
                       </div>
-                      <div className="pt-2 border-t border-slate-100 flex justify-end">
+                      <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
                         <button
-                          onClick={() => {
-                            if (confirm(`Remove partner "${part.name}"?`)) setPartners((prev) => prev.filter((p) => p.id !== part.id));
-                          }}
+                          onClick={() => handleStartEditArticle(part)}
+                          className="text-[11px] font-bold text-[#1E90FF] hover:underline"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(part.id)}
                           className="p-1 text-slate-400 hover:text-red-600 rounded"
                         >
                           <Trash2 size={16} />
@@ -3063,61 +3336,59 @@ export const AdminDashboardPage = () => {
               </div>
             )}
 
-            {/* TAB 7: CMS TEAM & PARTNERS */}
+            {/* TAB: CMS TEAM & EXECUTIVE MEMBERS */}
             {activeTab === 'cms-team' && (
               <div className="space-y-6 animate-in fade-in duration-300">
                 <div className="flex justify-between items-center border-b border-blue-100 pb-4">
                   <div>
                     <h1 className="text-xl font-black">CMS: Executive Team &amp; Institutional Partners</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage leadership profiles (Ermias Alemayehu - CEO) and institutional partner logos.</p>
+                    <p className="text-xs text-slate-500 font-semibold">Manage executive profiles (Ermias Alemayehu - CEO, Dr. Yared Worku - CTO) in Prisma DB.</p>
                   </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setShowAddTeamModal(true)}
-                      className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-1.5"
-                    >
-                      <Plus size={14} />
-                      <span>Add Team Member</span>
-                    </button>
-                    <button
-                      onClick={() => setShowAddPartnerModal(true)}
-                      className="px-4 py-2 border border-blue-200 bg-blue-50 text-[#1E90FF] font-black text-xs rounded-2xl shadow-sm hover:border-[#1E90FF]"
-                    >
-                      <Plus size={14} />
-                      <span>Add Partner</span>
-                    </button>
-                  </div>
+                  <button
+                    onClick={() => {
+                      setNewArticleForm({
+                        title: '',
+                        category: 'Executive Team Members',
+                        client: 'Executive Leadership',
+                        author: 'Executive Board',
+                        summary: '',
+                        readTime: 'Executive Profile',
+                        status: 'Published',
+                        visibility: 'VISIBLE'
+                      });
+                      setShowAddArticleModal(true);
+                    }}
+                    className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-1.5"
+                  >
+                    <Plus size={14} />
+                    <span>Add Team Member</span>
+                  </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Executive Team */}
-                  <div className="p-6 rounded-3xl border bg-white border-blue-100 shadow-sm hover:border-[#1E90FF] space-y-4">
-                    <h3 className="font-black text-sm text-[#1E90FF]">Executive Leadership Team</h3>
-                    <div className="space-y-2">
-                      {teamMembers.map((m) => (
-                        <div key={m.id} className="p-3 rounded-2xl bg-blue-50/50 border border-blue-100 flex justify-between items-center text-xs">
-                          <div>
-                            <div className="font-black text-slate-900">{m.name}</div>
-                            <div className="text-slate-500 font-bold">{m.role}</div>
-                          </div>
-                          <span className="px-3 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] font-black rounded-xl text-[10px]">{m.category}</span>
-                        </div>
-                      ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {cmsArticles.filter((a) => ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education'].includes(a.category)).map((m) => (
+                    <div key={m.id} className="p-4 rounded-2xl bg-white border border-blue-100 shadow-2xs flex justify-between items-center text-xs">
+                      <div className="space-y-1">
+                        <div className="font-black text-slate-900 text-sm">{m.title}</div>
+                        <div className="text-[#1E90FF] font-bold">{m.client || m.readTime}</div>
+                        <p className="text-xs text-slate-600 font-medium italic">&quot;{m.summary}&quot;</p>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => handleStartEditArticle(m)}
+                          className="px-2.5 py-1 border border-slate-200 text-xs font-bold rounded-xl hover:text-[#1E90FF]"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => handleDeleteArticle(m.id)}
+                          className="p-1 text-slate-400 hover:text-red-600 rounded"
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </div>
                     </div>
-                  </div>
-
-                  {/* Institutional Partners */}
-                  <div className="p-6 rounded-3xl border bg-white border-blue-100 shadow-sm hover:border-[#1E90FF] space-y-4">
-                    <h3 className="font-black text-sm text-[#1E90FF]">Institutional &amp; Enterprise Partners</h3>
-                    <div className="space-y-2">
-                      {partners.map((p) => (
-                        <div key={p.id} className="p-3 rounded-2xl bg-blue-50/50 border border-blue-100 flex justify-between items-center text-xs">
-                          <div className="font-black text-slate-900">{p.name}</div>
-                          <span className="text-[#1E90FF] font-black text-[10px]">{p.type}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             )}

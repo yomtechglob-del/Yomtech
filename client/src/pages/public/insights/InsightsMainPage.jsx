@@ -163,151 +163,156 @@ export const InsightsMainPage = () => {
   const hasCustomCms = !!localStorage.getItem('yomtech_cms_articles');
   const articlesPool = liveArticles && Array.isArray(liveArticles) ? liveArticles : [];
 
-  const displayNews = articlesPool.filter((a) => ['Corporate News & Articles', 'Corporate News', 'Enterprise News', 'Services & Products Matrix'].includes(a.category));
-  const activeNewsItems = displayNews.length > 0
-    ? displayNews.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        slug: a.id,
-        category: a.category,
-        date: a.publishedDate || 'AUG 2026',
-        readTime: a.readTime || '5 min read',
-        author: a.author || 'Editorial Team',
-        coverImage: a.coverImage || NEWS_ITEMS[idx % NEWS_ITEMS.length]?.coverImage,
-        excerpt: a.summary || a.fullContent || 'YomTech Global corporate news release.',
-        views: '1.2k',
-        commentsCount: 12,
-        client: a.client,
-        fullContent: a.fullContent
-      }))
-    : (hasCustomCms ? [] : NEWS_ITEMS);
+  const displayProductsMatrix = articlesPool.filter((a) => ['Services & Products Matrix', 'Services & Products', 'Products', 'cms-services'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customProductsMatrixFormatted = displayProductsMatrix.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    slug: a.id,
+    category: a.category || 'Services & Products Matrix',
+    date: a.publishedDate || '2026-08-26',
+    readTime: a.readTime || '1 min read',
+    author: a.author || 'Editorial Team',
+    coverImage: a.coverImage || NEWS_ITEMS[idx % NEWS_ITEMS.length]?.coverImage,
+    excerpt: a.summary || a.fullContent || 'YomTech Global service and product module.',
+    views: '510',
+    client: a.client,
+    fullContent: a.fullContent
+  }));
+  const activeProductsMatrix = customProductsMatrixFormatted;
 
-  const displayBlog = articlesPool.filter((a) => a.category === 'Tech Articles & Engineering');
-  const activeBlogArticles = displayBlog.length > 0
-    ? displayBlog.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        slug: a.id,
-        category: a.category,
-        date: a.publishedDate || 'AUG 2026',
-        readTime: a.readTime || '8 min read',
-        author: a.author || 'Engineering Team',
-        coverImage: a.coverImage || BLOG_ARTICLES[idx % BLOG_ARTICLES.length]?.coverImage,
-        excerpt: a.summary || a.fullContent || 'Engineering & technology paper.',
-        views: '2.4k',
-        client: a.client,
-        fullContent: a.fullContent
-      }))
-    : (hasCustomCms ? [] : BLOG_ARTICLES);
+  const displayNews = articlesPool.filter((a) => ['Corporate News & Articles', 'Corporate News', 'News', 'cms-news'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customNewsFormatted = displayNews.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    slug: a.id,
+    category: a.category || 'Corporate News & Articles',
+    date: a.publishedDate || 'AUG 2026',
+    readTime: a.readTime || '5 min read',
+    author: a.author || 'Editorial Team',
+    coverImage: a.coverImage || NEWS_ITEMS[idx % NEWS_ITEMS.length]?.coverImage,
+    excerpt: a.summary || a.fullContent || 'YomTech Global corporate news release.',
+    views: '1.2k',
+    commentsCount: 12,
+    client: a.client,
+    fullContent: a.fullContent
+  }));
+  const activeNewsItems = customNewsFormatted.length > 0 ? customNewsFormatted : NEWS_ITEMS;
 
-  const displayEvents = articlesPool.filter((a) => a.category === 'Upcoming Events & Webinars');
-  const activeEvents = displayEvents.length > 0
-    ? displayEvents.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        date: a.publishedDate || 'SEP 15, 2026',
-        time: a.readTime || '09:00 AM EAT',
-        location: a.client || 'Hybrid (Addis Ababa)',
-        category: a.category,
-        description: a.summary || 'YomTech Global tech event.',
-        speakers: a.author ? [a.author] : ['YomTech Leadership']
-      }))
-    : (hasCustomCms ? [] : EVENTS);
+  const displayBlog = articlesPool.filter((a) => ['Tech Articles & Engineering', 'Tech Articles', 'Engineering', 'Blog', 'cms-blog'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customBlogFormatted = displayBlog.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    slug: a.id,
+    category: a.category,
+    date: a.publishedDate || 'AUG 2026',
+    readTime: a.readTime || '8 min read',
+    author: a.author || 'Engineering Team',
+    coverImage: a.coverImage || BLOG_ARTICLES[idx % BLOG_ARTICLES.length]?.coverImage,
+    excerpt: a.summary || a.fullContent || 'Engineering & technology paper.',
+    views: '2.4k',
+    client: a.client,
+    fullContent: a.fullContent
+  }));
+  const activeBlogArticles = customBlogFormatted.length > 0 ? customBlogFormatted : BLOG_ARTICLES;
 
-  const displayAnnouncements = articlesPool.filter((a) => a.category === 'Official Announcements');
-  const activeAnnouncements = displayAnnouncements.length > 0
-    ? displayAnnouncements.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        date: a.publishedDate || 'AUG 2026',
-        category: a.category,
-        summary: a.summary || 'Official corporate announcement.'
-      }))
-    : (hasCustomCms ? [] : ANNOUNCEMENTS);
+  const displayEvents = articlesPool.filter((a) => ['Upcoming Events & Webinars', 'Events', 'Webinars', 'cms-events'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customEventsFormatted = displayEvents.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    date: a.publishedDate || 'SEP 15, 2026',
+    time: a.readTime || '09:00 AM EAT',
+    location: a.client || 'Hybrid (Addis Ababa)',
+    category: a.category,
+    description: a.summary || 'YomTech Global tech event.',
+    speakers: a.author ? [a.author] : ['YomTech Leadership']
+  }));
+  const activeEvents = customEventsFormatted.length > 0 ? customEventsFormatted : EVENTS;
 
-  const displayProjects = articlesPool.filter((a) => a.category === 'Featured Project Case Studies');
-  const activeProjects = displayProjects.length > 0
-    ? displayProjects.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        client: a.client || 'Enterprise Client',
-        summary: a.summary || 'Enterprise solution case study.',
-        techStack: a.readTime || 'React, Node.js, PostgreSQL'
-      }))
-    : (hasCustomCms ? [] : PROJECTS_CASE_STUDIES);
+  const displayAnnouncements = articlesPool.filter((a) => ['Official Announcements', 'Announcements', 'Bulletins', 'cms-announcements'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customAnnouncementsFormatted = displayAnnouncements.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    date: a.publishedDate || 'AUG 2026',
+    category: a.category,
+    summary: a.summary || 'Official corporate announcement.'
+  }));
+  const activeAnnouncements = customAnnouncementsFormatted.length > 0 ? customAnnouncementsFormatted : ANNOUNCEMENTS;
 
-  const displayTeam = articlesPool.filter((a) => ['Executive Team Members', 'Executive Leadership', 'Engineering', 'Education'].includes(a.category));
-  const activeTeamSpotlights = displayTeam.length > 0
-    ? displayTeam.map((a, idx) => ({
-        id: a.id,
-        name: a.title,
-        role: a.readTime || a.client || 'Executive Leadership',
-        quote: a.summary || 'Technology empowers sustainable growth.',
-        category: a.category
-      }))
-    : (hasCustomCms ? [] : TEAM_SPOTLIGHTS);
+  const displayProjects = articlesPool.filter((a) => ['Featured Project Case Studies', 'Case Studies', 'Projects', 'cms-projects'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customProjectsFormatted = displayProjects.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    client: a.client || 'Enterprise Client',
+    summary: a.summary || 'Enterprise solution case study.',
+    techStack: a.readTime || 'React, Node.js, PostgreSQL'
+  }));
+  const activeProjects = customProjectsFormatted.length > 0 ? customProjectsFormatted : PROJECTS_CASE_STUDIES;
 
-  const displayTestimonials = articlesPool.filter((a) => a.category === 'Client & Learner Testimonials');
-  const activeTestimonials = displayTestimonials.length > 0
-    ? displayTestimonials.map((a, idx) => ({
-        id: a.id,
-        name: a.title,
-        role: a.client || 'WabiSkills Graduate',
-        quote: a.summary || 'WabiSkills transformed my career trajectory.',
-        category: a.category
-      }))
-    : (hasCustomCms ? [] : COMMUNITY_TESTIMONIALS);
+  const displayTeam = articlesPool.filter((a) => ['Executive Team Members', 'Team', 'Executive Leadership', 'cms-team'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customTeamFormatted = displayTeam.map((a, idx) => ({
+    id: a.id,
+    name: a.title,
+    role: a.readTime || a.client || 'Executive Leadership',
+    quote: a.summary || 'Technology empowers sustainable growth.',
+    category: a.category
+  }));
+  const activeTeamSpotlights = customTeamFormatted.length > 0 ? customTeamFormatted : TEAM_SPOTLIGHTS;
 
-  const displayGallery = articlesPool.filter((a) => ['Photo Gallery Showcase', 'Academy', 'Team', 'Partnerships', 'Events'].includes(a.category));
-  const activeGallery = displayGallery.length > 0
-    ? displayGallery.map((a, idx) => ({
-        id: a.id,
-        caption: a.title,
-        category: a.readTime || 'Showcase',
-        image: a.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.image
-      }))
-    : (hasCustomCms ? [] : PHOTO_GALLERY);
+  const displayTestimonials = articlesPool.filter((a) => ['Client & Learner Testimonials', 'Testimonials', 'Reviews', 'cms-testimonials'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customTestimonialsFormatted = displayTestimonials.map((a, idx) => ({
+    id: a.id,
+    name: a.title,
+    role: a.client || 'WabiSkills Graduate',
+    quote: a.summary || 'WabiSkills transformed my career trajectory.',
+    category: a.category
+  }));
+  const activeTestimonials = customTestimonialsFormatted.length > 0 ? customTestimonialsFormatted : COMMUNITY_TESTIMONIALS;
 
-  const displayVideos = articlesPool.filter((a) => ['Video & Documentary Hub', 'Documentary', 'Bootcamp'].includes(a.category));
-  const activeVideos = displayVideos.length > 0
-    ? displayVideos.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        channel: a.client || '@yomtech',
-        duration: a.readTime || '10:00',
-        videoUrl: a.videoUrl || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.videoUrl
-      }))
-    : (hasCustomCms ? [] : VIDEO_GALLERY);
+  const displayGallery = articlesPool.filter((a) => ['Photo Gallery Showcase', 'Photo Gallery', 'Gallery', 'Photos', 'cms-gallery'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customGalleryFormatted = displayGallery.map((a, idx) => ({
+    id: a.id,
+    caption: a.title,
+    category: a.readTime || 'Showcase',
+    image: a.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.image
+  }));
+  const activeGallery = customGalleryFormatted.length > 0 ? customGalleryFormatted : PHOTO_GALLERY;
 
-  const displayMedia = articlesPool.filter((a) => a.category === 'Media Appearances & Coverage');
-  const activeMedia = displayMedia.length > 0
-    ? displayMedia.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        outlet: a.client || 'EBC Television',
-        date: a.publishedDate || 'August 2026',
-        type: a.readTime || 'TELEVISION INTERVIEW'
-      }))
-    : (hasCustomCms ? [] : MEDIA_APPEARANCES);
+  const displayVideos = articlesPool.filter((a) => ['Video & Documentary Hub', 'Videos', 'Documentary', 'cms-videos'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customVideosFormatted = displayVideos.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    channel: a.client || '@yomtech',
+    duration: a.readTime || '10:00',
+    videoUrl: a.videoUrl || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.videoUrl
+  }));
+  const activeVideos = customVideosFormatted.length > 0 ? customVideosFormatted : VIDEO_GALLERY;
 
-  const displayPress = articlesPool.filter((a) => a.category === 'Press & Corporate Content');
-  const activePress = displayPress.length > 0
-    ? displayPress.map((a, idx) => ({
-        id: a.id,
-        title: a.title,
-        date: a.publishedDate || 'August 2026',
-        summary: a.summary || 'Corporate press release.'
-      }))
-    : (hasCustomCms ? [] : PRESS_RELEASES);
+  const displayMedia = articlesPool.filter((a) => ['Media Appearances & Coverage', 'Media Appearances', 'Media', 'Interviews', 'cms-media'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customMediaFormatted = displayMedia.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    outlet: a.client || 'EBC Television',
+    date: a.publishedDate || 'August 2026',
+    type: a.readTime || 'TELEVISION INTERVIEW'
+  }));
+  const activeMedia = customMediaFormatted.length > 0 ? customMediaFormatted : MEDIA_APPEARANCES;
 
-  const displayFaqs = articlesPool.filter((a) => a.category === 'Support FAQ & Knowledge Base');
-  const activeFaqs = displayFaqs.length > 0
-    ? displayFaqs.map((a, idx) => ({
-        id: a.id,
-        question: a.title,
-        answer: a.summary || 'Official support response.'
-      }))
-    : (hasCustomCms ? [] : FAQS);
+  const displayPress = articlesPool.filter((a) => ['Press & Corporate Content', 'Press Center', 'Press Releases', 'Press', 'cms-press'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customPressFormatted = displayPress.map((a, idx) => ({
+    id: a.id,
+    title: a.title,
+    date: a.publishedDate || 'August 2026',
+    summary: a.summary || 'Corporate press release.'
+  }));
+  const activePress = customPressFormatted.length > 0 ? customPressFormatted : PRESS_RELEASES;
+
+  const displayFaqs = articlesPool.filter((a) => ['Support FAQ & Knowledge Base', 'Support FAQ', 'FAQ', 'Knowledge Base', 'cms-faq'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const customFaqsFormatted = displayFaqs.map((a, idx) => ({
+    id: a.id,
+    question: a.title,
+    answer: a.summary || 'Official support response.'
+  }));
+  const activeFaqs = customFaqsFormatted.length > 0 ? customFaqsFormatted : FAQS;
 
   const categories = [
     { id: 'ALL', label: 'All News & Media' },
@@ -443,23 +448,42 @@ export const InsightsMainPage = () => {
       <section className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          {/* Card 1: Geospatial SSGI */}
-          <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50">
+          {/* Card 1: Geospatial SSGI / Featured Hero Story */}
+          <div
+            onClick={() => {
+              const target = activeNewsItems.find((a) => a.id === FEATURED_STORY.id || a.title?.includes('SSGI') || a.title?.includes('Satellite')) || { ...FEATURED_STORY, id: 'featured-1' };
+              setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 450) + 1 }));
+              setReadingArticle(target);
+            }}
+            className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer"
+          >
             <img src={FEATURED_STORY.coverImage} alt={FEATURED_STORY.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
             
             {/* Frosted Glass Overlay Card */}
             <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
               <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-lg uppercase">Geospatial</span>
+                <span
+                  onClick={(e) => { e.stopPropagation(); setActiveTab('ALL'); setSearchQuery('Geospatial'); }}
+                  className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-lg uppercase cursor-pointer hover:bg-blue-100"
+                >
+                  Geospatial
+                </span>
                 <span className="flex items-center gap-2">
                   <span>Aug 20, 2026</span>
                   <span>&bull;</span>
                   <span>6 mins read</span>
                 </span>
                 <div className="flex items-center gap-2 text-slate-400">
-                  <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" />
-                  <span className="flex items-center gap-0.5"><Eye size={12} /> 450</span>
+                  <Bookmark
+                    size={14}
+                    className={`cursor-pointer transition-colors ${bookmarksMap['featured-1'] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleToggleBookmark('featured-1', FEATURED_STORY.title);
+                    }}
+                  />
+                  <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap['featured-1'] || 450}</span>
                 </div>
               </div>
 
@@ -469,30 +493,57 @@ export const InsightsMainPage = () => {
 
               <div className="flex justify-between items-center pt-1">
                 <span className="text-[11px] font-bold text-slate-500">By Ermias Alemayehu</span>
-                <Link to={`/news/blog/${FEATURED_STORY.slug}`} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const target = activeNewsItems.find((a) => a.id === FEATURED_STORY.id || a.title?.includes('SSGI') || a.title?.includes('Satellite')) || { ...FEATURED_STORY, id: 'featured-1' };
+                    setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 450) + 1 }));
+                    setReadingArticle(target);
+                  }}
+                  className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
+                >
                   <ArrowRight size={16} />
-                </Link>
+                </button>
               </div>
             </div>
           </div>
 
           {/* Card 2: Enterprise ERP Bunna Bank / Dynamic News 1 */}
           {activeNewsItems[0] && (
-            <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer" onClick={() => setReadingArticle(activeNewsItems[0])}>
+            <div
+              className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer"
+              onClick={() => {
+                const target = activeNewsItems[0];
+                setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 320) + 1 }));
+                setReadingArticle(target);
+              }}
+            >
               <img src={activeNewsItems[0].coverImage || NEWS_ITEMS[0].coverImage} alt={activeNewsItems[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
               
               <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
                 <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                  <span className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg uppercase">{activeNewsItems[0].category || 'Enterprise ERP'}</span>
+                  <span
+                    onClick={(e) => { e.stopPropagation(); setSearchQuery(activeNewsItems[0].category || 'Enterprise'); }}
+                    className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg uppercase cursor-pointer hover:bg-emerald-100"
+                  >
+                    {activeNewsItems[0].category || 'Enterprise ERP'}
+                  </span>
                   <span className="flex items-center gap-2">
                     <span>{activeNewsItems[0].date || 'Aug 18, 2026'}</span>
                     <span>&bull;</span>
                     <span>{activeNewsItems[0].readTime || '4 mins read'}</span>
                   </span>
                   <div className="flex items-center gap-2 text-slate-400">
-                    <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" onClick={(e) => { e.stopPropagation(); handleToggleBookmark(activeNewsItems[0].id, activeNewsItems[0].title); }} />
-                    <span className="flex items-center gap-0.5"><Eye size={12} /> 320</span>
+                    <Bookmark
+                      size={14}
+                      className={`cursor-pointer transition-colors ${bookmarksMap[activeNewsItems[0].id] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleBookmark(activeNewsItems[0].id, activeNewsItems[0].title);
+                      }}
+                    />
+                    <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap[activeNewsItems[0].id] || 320}</span>
                   </div>
                 </div>
 
@@ -502,7 +553,14 @@ export const InsightsMainPage = () => {
 
                 <div className="flex justify-between items-center pt-1">
                   <span className="text-[11px] font-bold text-slate-500">{activeNewsItems[0].author || 'YomTech Media Unit'}</span>
-                  <button onClick={() => setReadingArticle(activeNewsItems[0])} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLikesMap((prev) => ({ ...prev, [activeNewsItems[0].id]: (prev[activeNewsItems[0].id] || 320) + 1 }));
+                      setReadingArticle(activeNewsItems[0]);
+                    }}
+                    className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
+                  >
                     <ArrowRight size={16} />
                   </button>
                 </div>
@@ -512,21 +570,40 @@ export const InsightsMainPage = () => {
 
           {/* Card 3: WabiSkills Bootcamp Graduates / Dynamic News 2 */}
           {activeNewsItems[1] && (
-            <div className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer" onClick={() => setReadingArticle(activeNewsItems[1])}>
+            <div
+              className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer"
+              onClick={() => {
+                const target = activeNewsItems[1];
+                setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 510) + 1 }));
+                setReadingArticle(target);
+              }}
+            >
               <img src={activeNewsItems[1].coverImage || NEWS_ITEMS[1].coverImage} alt={activeNewsItems[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
               
               <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
                 <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                  <span className="px-2.5 py-0.5 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-lg uppercase">{activeNewsItems[1].category || 'Tech Talent'}</span>
+                  <span
+                    onClick={(e) => { e.stopPropagation(); setSearchQuery(activeNewsItems[1].category || 'Talent'); }}
+                    className="px-2.5 py-0.5 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-lg uppercase cursor-pointer hover:bg-cyan-100"
+                  >
+                    {activeNewsItems[1].category || 'Tech Talent'}
+                  </span>
                   <span className="flex items-center gap-2">
                     <span>{activeNewsItems[1].date || 'Aug 14, 2026'}</span>
                     <span>&bull;</span>
                     <span>{activeNewsItems[1].readTime || '5 mins read'}</span>
                   </span>
                   <div className="flex items-center gap-2 text-slate-400">
-                    <Bookmark size={13} className="hover:text-[#1E90FF] cursor-pointer" onClick={(e) => { e.stopPropagation(); handleToggleBookmark(activeNewsItems[1].id, activeNewsItems[1].title); }} />
-                    <span className="flex items-center gap-0.5"><Eye size={12} /> 510</span>
+                    <Bookmark
+                      size={14}
+                      className={`cursor-pointer transition-colors ${bookmarksMap[activeNewsItems[1].id] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleBookmark(activeNewsItems[1].id, activeNewsItems[1].title);
+                      }}
+                    />
+                    <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap[activeNewsItems[1].id] || 510}</span>
                   </div>
                 </div>
 
@@ -536,7 +613,14 @@ export const InsightsMainPage = () => {
 
                 <div className="flex justify-between items-center pt-1">
                   <span className="text-[11px] font-bold text-slate-500">{activeNewsItems[1].author || 'WabiSkills Hub'}</span>
-                  <button onClick={() => setReadingArticle(activeNewsItems[1])} className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLikesMap((prev) => ({ ...prev, [activeNewsItems[1].id]: (prev[activeNewsItems[1].id] || 510) + 1 }));
+                      setReadingArticle(activeNewsItems[1]);
+                    }}
+                    className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
+                  >
                     <ArrowRight size={16} />
                   </button>
                 </div>
@@ -562,7 +646,12 @@ export const InsightsMainPage = () => {
           ].map((cat, idx) => (
             <button
               key={idx}
-              className="px-4 py-2 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 text-slate-700 hover:text-[#1E90FF] rounded-2xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-2xs hover:scale-105"
+              onClick={() => {
+                setActiveTab('ALL');
+                setSearchQuery(cat.label);
+                showToast(`Filtered stories by "${cat.label}"`);
+              }}
+              className="px-4 py-2 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 text-slate-700 hover:text-[#1E90FF] rounded-2xl text-xs font-extrabold transition-all flex items-center gap-2 shadow-2xs hover:scale-105 cursor-pointer"
             >
               <span>{cat.label}</span>
               <span className="px-2 py-0.5 bg-slate-200 text-slate-700 text-[10px] font-black rounded-md">{cat.count}</span>
@@ -571,13 +660,78 @@ export const InsightsMainPage = () => {
         </div>
       </section>
 
+      {/* 03.5. SERVICES & PRODUCTS MATRIX SHOWCASE SECTION */}
+      {activeProductsMatrix.length > 0 && (
+        <section className="py-8 max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="bg-white p-5 rounded-3xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-3 h-8 bg-gradient-to-b from-[#1E90FF] to-[#0ED3DD] rounded-full" />
+              <div>
+                <span className="text-[10px] font-black uppercase text-[#1E90FF] tracking-widest">CMS MANAGEMENT</span>
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900">Services &amp; Products Matrix</h2>
+              </div>
+            </div>
+            <span className="px-4 py-1.5 bg-cyan-50 border border-cyan-200 text-[#1E90FF] text-xs font-black rounded-2xl shadow-2xs">
+              {activeProductsMatrix.length} Managed Product/Service Item(s)
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {activeProductsMatrix.map((item, idx) => (
+              <div
+                key={item.id || idx}
+                onClick={() => {
+                  setLikesMap((prev) => ({ ...prev, [item.id]: (prev[item.id] || 320) + 1 }));
+                  setReadingArticle(item);
+                }}
+                className="bg-white rounded-3xl border border-slate-200/90 p-6 space-y-4 shadow-sm hover:shadow-xl hover:border-[#1E90FF] transition-all duration-300 cursor-pointer flex flex-col justify-between group"
+              >
+                <div className="space-y-3">
+                  <div className="relative h-44 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100">
+                    <img src={item.coverImage} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <span className="absolute top-3 left-3 px-2.5 py-1 bg-white/90 backdrop-blur-md text-[#1E90FF] border border-white/90 text-[10px] font-black rounded-lg uppercase shadow-xs">
+                      {item.readTime || 'Services & Products Matrix'}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center text-[10px] font-black text-slate-400">
+                    <span className="text-[#1E90FF]">{item.date}</span>
+                    <span>&bull; {item.readTime || '1 min read'}</span>
+                  </div>
+
+                  <h3 className="font-black text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors leading-snug line-clamp-2">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-2">
+                    {item.excerpt}
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-500">
+                  <div className="flex items-center gap-1.5">
+                    <div className="w-6 h-6 rounded-full bg-[#1E90FF] text-white flex items-center justify-center font-black text-[10px]">
+                      {(item.author || 'E')[0]}
+                    </div>
+                    <span className="text-[11px] font-bold text-slate-700">{item.author || 'Editorial Team'}</span>
+                  </div>
+                  <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
+                    <ArrowRight size={14} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* 04. ASYMMETRIC MAGAZINE SHOWCASE GRID (MODULE 1 & 2: NEWS, BLOG & ARTICLES) */}
       <section className="py-8 max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-sm flex justify-between items-center">
           <div className="flex items-center gap-3">
             <div className="w-2.5 h-6 bg-gradient-to-b from-[#1E90FF] to-[#0ED3DD] rounded-full" />
             <h2 className="text-lg font-black text-slate-900 flex items-center gap-2">
-              <span>Latest News &amp; Engineering Articles</span>
+              <span>Corporate News &amp; Articles</span>
               <span className="text-xs font-medium text-slate-400 hidden sm:inline">&bull; Real-Time Updates That Matter</span>
             </h2>
           </div>
@@ -590,55 +744,81 @@ export const InsightsMainPage = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Left Large Showcase Card */}
-          <div className="lg:col-span-7 h-[440px] rounded-[32px] overflow-hidden relative group shadow-xl border border-slate-200/80">
-            <img src={NEWS_ITEMS[2].coverImage} alt={NEWS_ITEMS[2].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
+          {activeNewsItems[0] && (
+            <div
+              onClick={() => {
+                setLikesMap((prev) => ({ ...prev, [activeNewsItems[0].id]: (prev[activeNewsItems[0].id] || 450) + 1 }));
+                setReadingArticle(activeNewsItems[0]);
+              }}
+              className="lg:col-span-7 h-[440px] rounded-[32px] overflow-hidden relative group shadow-xl border border-slate-200/80 cursor-pointer"
+            >
+              <img src={activeNewsItems[0].coverImage || NEWS_ITEMS[0].coverImage} alt={activeNewsItems[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent" />
 
-            <div className="absolute bottom-5 left-5 right-5 bg-white/85 backdrop-blur-xl border border-white/90 p-6 rounded-3xl shadow-2xl space-y-3">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-xl uppercase">Government Tech</span>
-                <span>August 08, 2026 &bull; 6 mins read</span>
-              </div>
-
-              <h3 className="font-black text-xl text-slate-900 leading-snug">
-                {NEWS_ITEMS[2].title}
-              </h3>
-
-              <div className="flex justify-between items-center pt-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-full bg-[#1E90FF] text-white flex items-center justify-center text-xs font-black">Y</div>
-                  <span className="text-xs font-bold text-slate-700">MInT &amp; INSA Bureau</span>
+              <div className="absolute bottom-5 left-5 right-5 bg-white/85 backdrop-blur-xl border border-white/90 p-6 rounded-3xl shadow-2xl space-y-3">
+                <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
+                  <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-xl uppercase">
+                    {activeNewsItems[0].category || 'Corporate News & Articles'}
+                  </span>
+                  <span>{activeNewsItems[0].date || 'August 2026'} &bull; {activeNewsItems[0].readTime || '5 mins read'}</span>
                 </div>
-                <Link to={`/news/articles/${NEWS_ITEMS[2].slug}`} className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-slate-900 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110">
-                  <ArrowRight size={18} />
-                </Link>
+
+                <h3 className="font-black text-xl text-slate-900 leading-snug">
+                  {activeNewsItems[0].title}
+                </h3>
+
+                <div className="flex justify-between items-center pt-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-full bg-[#1E90FF] text-white flex items-center justify-center text-xs font-black">
+                      {(activeNewsItems[0].author || 'Y')[0]}
+                    </div>
+                    <span className="text-xs font-bold text-slate-700">{activeNewsItems[0].author || 'Editorial Team'}</span>
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLikesMap((prev) => ({ ...prev, [activeNewsItems[0].id]: (prev[activeNewsItems[0].id] || 450) + 1 }));
+                      setReadingArticle(activeNewsItems[0]);
+                    }}
+                    className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center text-slate-900 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
+                  >
+                    <ArrowRight size={18} />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           {/* Right Column (2 Small Horizontal Stacked Cards) */}
           <div className="lg:col-span-5 space-y-6 flex flex-col justify-between">
-            {BLOG_ARTICLES.slice(0, 2).map((art) => (
-              <div key={art.id} className="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-[#1E90FF]/60 transition-all flex items-center gap-5 group">
+            {(activeNewsItems.slice(1, 3).length > 0 ? activeNewsItems.slice(1, 3) : activeBlogArticles.slice(0, 2)).map((art, idx) => (
+              <div
+                key={art.id || idx}
+                onClick={() => {
+                  setLikesMap((prev) => ({ ...prev, [art.id]: (prev[art.id] || 102) + 1 }));
+                  setReadingArticle(art);
+                }}
+                className="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-sm hover:shadow-lg hover:border-[#1E90FF]/60 transition-all flex items-center gap-5 group cursor-pointer"
+              >
                 <div className="w-36 h-36 rounded-2xl overflow-hidden shrink-0 border border-slate-200">
                   <img src={art.coverImage} alt={art.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 </div>
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2 text-[10px] font-black text-slate-400">
                     <span className="px-2.5 py-0.5 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-md uppercase">{art.category}</span>
-                    <span>&bull; 5 mins read</span>
+                    <span>&bull; {art.readTime || '5 mins read'}</span>
                   </div>
                   <h4 className="font-black text-sm text-slate-900 leading-snug line-clamp-2 group-hover:text-[#1E90FF] transition-colors">
                     {art.title}
                   </h4>
                   <div className="flex justify-between items-center pt-2 text-[11px] font-bold text-slate-400">
                     <div className="flex items-center gap-3">
-                      <span className="flex items-center gap-1"><MessageCircle size={12} /> 98</span>
-                      <span className="flex items-center gap-1"><Eye size={12} /> 102</span>
+                      <span className="flex items-center gap-1"><MessageCircle size={12} /> {art.commentsCount || 12}</span>
+                      <span className="flex items-center gap-1"><Eye size={12} /> {likesMap[art.id] || 102}</span>
                     </div>
-                    <Link to={`/news/blog/${art.slug}`} className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
+                    <div className="w-8 h-8 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
                       <ArrowRight size={14} />
-                    </Link>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -653,89 +833,123 @@ export const InsightsMainPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           
           {/* Detailed Card 1 */}
-          <div className="bg-white rounded-3xl p-7 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all space-y-5 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-400">
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-xl uppercase">Software Engineering</span>
-                  <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-xl uppercase">Microservices</span>
-                  <span>&bull; 6 mins read</span>
+          {activeBlogArticles[0] && (
+            <div
+              onClick={() => {
+                setLikesMap((prev) => ({ ...prev, [activeBlogArticles[0].id]: (prev[activeBlogArticles[0].id] || 162) + 1 }));
+                setReadingArticle(activeBlogArticles[0]);
+              }}
+              className="bg-white rounded-3xl p-7 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all space-y-5 flex flex-col justify-between group cursor-pointer"
+            >
+              <div className="space-y-4">
+                <div className="flex justify-between items-center text-[10px] font-black text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-xl uppercase">{activeBlogArticles[0].category || 'Software Engineering'}</span>
+                    <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-xl uppercase">Architecture</span>
+                    <span>&bull; {activeBlogArticles[0].readTime || '6 mins read'}</span>
+                  </div>
+                  <Bookmark
+                    size={16}
+                    className={`cursor-pointer transition-colors ${bookmarksMap[activeBlogArticles[0].id] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleToggleBookmark(activeBlogArticles[0].id, activeBlogArticles[0].title);
+                    }}
+                  />
                 </div>
-                <Bookmark size={16} className="hover:text-[#1E90FF] cursor-pointer" />
+
+                <h3 className="text-xl font-black text-slate-900 leading-snug group-hover:text-[#1E90FF] transition-colors">
+                  {activeBlogArticles[0].title}
+                </h3>
+
+                <div className="relative h-60 rounded-2xl overflow-hidden border border-slate-200">
+                  <img src={activeBlogArticles[0].coverImage} alt={activeBlogArticles[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-md text-[#1E90FF] shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <Play size={22} className="ml-1" />
+                    </div>
+                  </div>
+                </div>
+
+                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                  {activeBlogArticles[0].excerpt}
+                </p>
               </div>
 
-              <h3 className="text-xl font-black text-slate-900 leading-snug group-hover:text-[#1E90FF] transition-colors">
-                {BLOG_ARTICLES[0].title}
-              </h3>
-
-              <div className="relative h-60 rounded-2xl overflow-hidden border border-slate-200">
-                <img src={BLOG_ARTICLES[0].coverImage} alt={BLOG_ARTICLES[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-                  <div className="w-14 h-14 rounded-full bg-white/90 backdrop-blur-md text-[#1E90FF] shadow-xl flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <Play size={22} className="ml-1" />
+              <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-500">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-[#1E90FF] text-white flex items-center justify-center font-black text-xs">
+                    {(activeBlogArticles[0].author || 'Y')[0]}
+                  </div>
+                  <span>{activeBlogArticles[0].author || 'Engineering Team'} &bull; {activeBlogArticles[0].date || 'Aug 20, 2026'}</span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-400">
+                  <span className="flex items-center gap-1"><MessageCircle size={13} /> 98</span>
+                  <span className="flex items-center gap-1"><Eye size={13} /> {likesMap[activeBlogArticles[0].id] || 162}</span>
+                  <div className="w-9 h-9 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
+                    <ArrowRight size={16} />
                   </div>
                 </div>
               </div>
-
-              <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
-                {BLOG_ARTICLES[0].excerpt}
-              </p>
             </div>
-
-            <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-500">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-[#1E90FF] text-white flex items-center justify-center font-black text-xs">Y</div>
-                <span>Dr. Yared Worku &bull; Aug 20, 2026</span>
-              </div>
-              <div className="flex items-center gap-4 text-slate-400">
-                <span className="flex items-center gap-1"><MessageCircle size={13} /> 98</span>
-                <span className="flex items-center gap-1"><Eye size={13} /> 162</span>
-                <Link to={`/news/blog/${BLOG_ARTICLES[0].slug}`} className="w-9 h-9 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-            </div>
-          </div>
+          )}
 
           {/* Detailed Card 2 */}
-          <div className="bg-white rounded-3xl p-7 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all space-y-5 flex flex-col justify-between group">
-            <div className="space-y-4">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-400">
-                <div className="flex items-center gap-2">
-                  <span className="px-3 py-1 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-xl uppercase">Artificial Intelligence</span>
-                  <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-xl uppercase">Geospatial</span>
-                  <span>&bull; 6 mins read</span>
+          {activeBlogArticles[1] && (
+            <div
+              onClick={() => {
+                setLikesMap((prev) => ({ ...prev, [activeBlogArticles[1].id]: (prev[activeBlogArticles[1].id] || 182) + 1 }));
+                setReadingArticle(activeBlogArticles[1]);
+              }}
+              className="bg-white rounded-3xl p-7 border border-slate-200/90 shadow-sm hover:shadow-xl transition-all space-y-5 flex flex-col justify-between group cursor-pointer"
+            >
+              <div className="space-y-4">
+                <div className="flex justify-between items-center text-[10px] font-black text-slate-400">
+                  <div className="flex items-center gap-2">
+                    <span className="px-3 py-1 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-xl uppercase">{activeBlogArticles[1].category || 'Artificial Intelligence'}</span>
+                    <span className="px-3 py-1 bg-slate-100 text-slate-600 rounded-xl uppercase">Geospatial</span>
+                    <span>&bull; {activeBlogArticles[1].readTime || '6 mins read'}</span>
+                  </div>
+                  <Bookmark
+                    size={16}
+                    className={`cursor-pointer transition-colors ${bookmarksMap[activeBlogArticles[1].id] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleToggleBookmark(activeBlogArticles[1].id, activeBlogArticles[1].title);
+                    }}
+                  />
                 </div>
-                <Bookmark size={16} className="hover:text-[#1E90FF] cursor-pointer" />
+
+                <h3 className="text-xl font-black text-slate-900 leading-snug group-hover:text-[#1E90FF] transition-colors">
+                  {activeBlogArticles[1].title}
+                </h3>
+
+                <div className="relative h-60 rounded-2xl overflow-hidden border border-slate-200">
+                  <img src={activeBlogArticles[1].coverImage} alt={activeBlogArticles[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                </div>
+
+                <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                  {activeBlogArticles[1].excerpt}
+                </p>
               </div>
 
-              <h3 className="text-xl font-black text-slate-900 leading-snug group-hover:text-[#1E90FF] transition-colors">
-                {BLOG_ARTICLES[1].title}
-              </h3>
-
-              <div className="relative h-60 rounded-2xl overflow-hidden border border-slate-200">
-                <img src={BLOG_ARTICLES[1].coverImage} alt={BLOG_ARTICLES[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-500">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-full bg-[#0ED3DD] text-white flex items-center justify-center font-black text-xs">
+                    {(activeBlogArticles[1].author || 'A')[0]}
+                  </div>
+                  <span>{activeBlogArticles[1].author || 'AI Research Unit'} &bull; {activeBlogArticles[1].date || 'Aug 18, 2026'}</span>
+                </div>
+                <div className="flex items-center gap-4 text-slate-400">
+                  <span className="flex items-center gap-1"><MessageCircle size={13} /> 55</span>
+                  <span className="flex items-center gap-1"><Eye size={13} /> {likesMap[activeBlogArticles[1].id] || 182}</span>
+                  <div className="w-9 h-9 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
+                    <ArrowRight size={16} />
+                  </div>
+                </div>
               </div>
-
-              <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
-                {BLOG_ARTICLES[1].excerpt}
-              </p>
             </div>
-
-            <div className="pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-bold text-slate-500">
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-[#0ED3DD] text-white flex items-center justify-center font-black text-xs">A</div>
-                <span>Addis AI Research Unit &bull; Aug 18, 2026</span>
-              </div>
-              <div className="flex items-center gap-4 text-slate-400">
-                <span className="flex items-center gap-1"><MessageCircle size={13} /> 55</span>
-                <span className="flex items-center gap-1"><Eye size={13} /> 182</span>
-                <Link to={`/news/blog/${BLOG_ARTICLES[1].slug}`} className="w-9 h-9 rounded-full bg-slate-100 group-hover:bg-[#1E90FF] group-hover:text-white flex items-center justify-center transition-all">
-                  <ArrowRight size={16} />
-                </Link>
-              </div>
-            </div>
-          </div>
+          )}
 
         </div>
       </section>
@@ -752,23 +966,26 @@ export const InsightsMainPage = () => {
             </div>
 
             <div className="space-y-4">
-              {EVENTS.map((evt) => (
-                <div key={evt.id} className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm hover:border-[#1E90FF] transition-all">
+              {activeEvents.map((evt, idx) => (
+                <div key={evt.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm hover:border-[#1E90FF] transition-all">
                   <div className="flex items-center gap-5">
                     <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black">
-                      <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth}</span>
-                      <span className="text-2xl leading-none">{evt.dateDay}</span>
+                      <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth || 'SEP'}</span>
+                      <span className="text-2xl leading-none">{evt.dateDay || '15'}</span>
                     </div>
                     <div className="space-y-1">
-                      <span className="px-2.5 py-0.5 bg-blue-100 text-[#1E90FF] text-[10px] font-black rounded-md">{evt.type}</span>
+                      <span className="px-2.5 py-0.5 bg-blue-100 text-[#1E90FF] text-[10px] font-black rounded-md">{evt.category || 'Hybrid Event'}</span>
                       <h3 className="font-extrabold text-sm text-slate-900">{evt.title}</h3>
-                      <div className="text-[11px] text-slate-400 font-medium">{evt.location} &bull; {evt.startTime}</div>
+                      <div className="text-[11px] text-slate-400 font-medium">{evt.location || 'Hybrid (Addis Ababa)'} &bull; {evt.time || '09:00 AM'}</div>
                     </div>
                   </div>
 
-                  <Link to={`/news/events/${evt.id}`} className="px-5 py-2.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-xl shadow hover:scale-[1.02] shrink-0">
+                  <button
+                    onClick={() => setSelectedEventForReg(evt)}
+                    className="px-5 py-2.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-xl shadow hover:scale-[1.02] shrink-0 cursor-pointer"
+                  >
                     Register Now &rarr;
-                  </Link>
+                  </button>
                 </div>
               ))}
             </div>
@@ -782,11 +999,11 @@ export const InsightsMainPage = () => {
             </div>
 
             <div className="space-y-4">
-              {ANNOUNCEMENTS.map((ann) => (
-                <div key={ann.id} className="bg-white rounded-3xl border border-slate-200/90 p-6 space-y-3 shadow-sm">
+              {activeAnnouncements.map((ann, idx) => (
+                <div key={ann.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 space-y-3 shadow-sm hover:border-cyan-300 transition-all">
                   <div className="flex justify-between items-center text-[10px] font-black">
-                    <span className="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-lg">{ann.priority}</span>
-                    <span className="text-slate-400">{ann.date}</span>
+                    <span className="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-lg">{ann.priority || 'FEATURED'}</span>
+                    <span className="text-slate-400">{ann.date || 'August 2026'}</span>
                   </div>
                   <h3 className="font-extrabold text-sm text-slate-900">{ann.title}</h3>
                   <p className="text-xs text-slate-600 font-medium leading-relaxed">{ann.summary}</p>
@@ -812,29 +1029,32 @@ export const InsightsMainPage = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {PROJECTS_CASE_STUDIES.map((proj) => (
-            <div key={proj.id} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-5 shadow-sm hover:shadow-xl hover:border-[#1E90FF]/60 transition-all duration-300 flex flex-col justify-between">
+          {activeProjects.map((proj, idx) => (
+            <div key={proj.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-5 shadow-sm hover:shadow-xl hover:border-[#1E90FF]/60 transition-all duration-300 flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="text-xs font-black text-[#1E90FF] uppercase tracking-wider">{proj.industry}</div>
-                <h3 className="text-xl font-black text-slate-900">{proj.name}</h3>
+                <div className="text-xs font-black text-[#1E90FF] uppercase tracking-wider">{proj.client || proj.industry || 'Enterprise Project'}</div>
+                <h3 className="text-xl font-black text-slate-900">{proj.name || proj.title}</h3>
                 <div className="space-y-1.5 text-xs text-slate-600 font-medium">
-                  <div><strong>Challenge:</strong> {proj.challenge}</div>
-                  <div className="text-emerald-600 font-bold"><strong>Impact:</strong> {proj.results}</div>
+                  <div><strong>Challenge:</strong> {proj.challenge || 'Scaling multi-department data workflows.'}</div>
+                  <div className="text-emerald-600 font-bold"><strong>Impact:</strong> {proj.results || 'Streamlined core operations by 95%.'}</div>
                 </div>
               </div>
 
               <div className="pt-4 border-t border-slate-100 flex justify-between items-center">
                 <div className="flex flex-wrap gap-1.5">
-                  {proj.technologies.map((t, idx) => (
-                    <span key={idx} className="px-2.5 py-1 bg-blue-50 text-[#1E90FF] text-[10px] font-bold rounded-md">
+                  {(typeof proj.techStack === 'string' ? proj.techStack.split(', ') : proj.technologies || ['React', 'Node.js', 'PostgreSQL']).map((t, tIdx) => (
+                    <span key={tIdx} className="px-2.5 py-1 bg-blue-50 text-[#1E90FF] text-[10px] font-bold rounded-md">
                       {t}
                     </span>
                   ))}
                 </div>
-                <Link to={`/news/projects/${proj.slug}`} className="text-xs font-black text-[#1E90FF] hover:underline flex items-center gap-1.5">
+                <button
+                  onClick={() => setReadingArticle({ id: proj.id, title: proj.title || proj.name, category: 'Case Study', summary: proj.summary, fullContent: `${proj.challenge || ''}\n\n${proj.results || ''}` })}
+                  className="text-xs font-black text-[#1E90FF] hover:underline flex items-center gap-1.5 cursor-pointer"
+                >
                   <span>Full Case Study</span>
                   <ArrowRight size={14} />
-                </Link>
+                </button>
               </div>
             </div>
           ))}
@@ -851,9 +1071,9 @@ export const InsightsMainPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {TEAM_SPOTLIGHTS.map((t) => (
-              <div key={t.id} className="bg-white rounded-3xl border border-slate-200/90 p-7 flex flex-col sm:flex-row items-center gap-6 shadow-sm">
-                <img src={t.photo} alt={t.name} className="w-24 h-24 rounded-2xl object-cover shadow-md border border-slate-200 shrink-0" />
+            {activeTeamSpotlights.map((t, idx) => (
+              <div key={t.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-7 flex flex-col sm:flex-row items-center gap-6 shadow-sm">
+                <img src={t.photo || t.image || TEAM_SPOTLIGHTS[idx % TEAM_SPOTLIGHTS.length]?.photo} alt={t.name} className="w-24 h-24 rounded-2xl object-cover shadow-md border border-slate-200 shrink-0" />
                 <div className="space-y-2">
                   <h3 className="font-black text-base text-slate-900">{t.name}</h3>
                   <div className="text-xs font-black text-[#1E90FF]">{t.role}</div>
@@ -872,17 +1092,17 @@ export const InsightsMainPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {COMMUNITY_TESTIMONIALS.map((test) => (
-              <div key={test.id} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-4 shadow-sm">
+            {activeTestimonials.map((test, idx) => (
+              <div key={test.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-4 shadow-sm">
                 <p className="text-xs text-slate-600 font-medium leading-relaxed">
                   "{test.quote}"
                 </p>
                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
                   <div>
                     <div className="font-extrabold text-xs text-slate-900">{test.name}</div>
-                    <div className="text-[10px] text-slate-400 font-bold">{test.org}</div>
+                    <div className="text-[10px] text-slate-400 font-bold">{test.role || test.org}</div>
                   </div>
-                  <span className="px-3 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{test.category}</span>
+                  <span className="px-3 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{test.category || 'TESTIMONIAL'}</span>
                 </div>
               </div>
             ))}
@@ -907,16 +1127,16 @@ export const InsightsMainPage = () => {
 
           {/* 4 Preview Photos Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {PHOTO_GALLERY.slice(0, 4).map((photo) => (
+            {activeGallery.slice(0, 4).map((photo, idx) => (
               <div
-                key={photo.id}
-                onClick={() => setSelectedPhoto(photo)}
+                key={photo.id || idx}
+                onClick={() => setSelectedPhoto({ src: photo.image || photo.src || photo.coverImage, caption: photo.caption || photo.title, description: photo.category })}
                 className="relative h-56 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 group cursor-pointer bg-white"
               >
-                <img src={photo.src} alt={photo.caption} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={photo.image || photo.src || photo.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.image} alt={photo.caption || photo.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white text-xs font-bold space-y-1">
-                  <span className="px-2 py-0.5 bg-[#1E90FF] text-white text-[9px] font-black rounded w-max uppercase">{photo.category}</span>
-                  <span className="line-clamp-2 leading-snug">{photo.caption}</span>
+                  <span className="px-2 py-0.5 bg-[#1E90FF] text-white text-[9px] font-black rounded w-max uppercase">{photo.category || 'Showcase'}</span>
+                  <span className="line-clamp-2 leading-snug">{photo.caption || photo.title}</span>
                 </div>
               </div>
             ))}
@@ -945,7 +1165,7 @@ export const InsightsMainPage = () => {
                 <Youtube size={14} className="text-red-500" />
                 <span>YomTech Media Productions</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Multimedia Video &amp; Documentary Hub</h2>
+              <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">Video &amp; Documentary Hub</h2>
               <p className="text-xs sm:text-sm text-slate-600 font-medium max-w-2xl leading-relaxed">
                 Sourced directly from our official @WabiSkills and @yomtech YouTube channels: real tech education, real documentaries, and enterprise product demos.
               </p>
@@ -975,24 +1195,24 @@ export const InsightsMainPage = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
-            {VIDEO_GALLERY.map((vid) => (
+            {activeVideos.map((vid, idx) => (
               <div
-                key={vid.id}
+                key={vid.id || idx}
                 className="bg-white rounded-[30px] border border-slate-200/90 overflow-hidden shadow-md hover:shadow-2xl hover:border-[#1E90FF]/60 transition-all duration-500 flex flex-col justify-between group"
               >
                 {/* Video Preview Frame */}
                 <div className="relative h-64 sm:h-72 bg-[#002D54] overflow-hidden flex items-center justify-center">
-                  <img src={vid.thumbnail} alt={vid.title} className="w-full h-full object-cover opacity-90 group-hover:scale-108 transition-transform duration-700" />
+                  <img src={vid.thumbnail || vid.coverImage || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.thumbnail} alt={vid.title} className="w-full h-full object-cover opacity-90 group-hover:scale-108 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#03045E]/80 via-transparent to-transparent" />
                   
                   {/* Top Glassmorphic Badges */}
                   <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10">
                     <span className="px-3 py-1 bg-white/85 backdrop-blur-xl text-[#1E90FF] border border-white/90 text-[10px] font-black rounded-xl uppercase shadow-md">
-                      {vid.category}
+                      {vid.category || 'Media Production'}
                     </span>
                     <span className="px-3 py-1 bg-[#03045E]/80 backdrop-blur-xl text-cyan-300 border border-cyan-400/30 text-[10px] font-black rounded-xl shadow-md flex items-center gap-1">
                       <Clock size={12} />
-                      <span>{vid.duration}</span>
+                      <span>{vid.duration || '10:00'}</span>
                     </span>
                   </div>
 
@@ -1027,7 +1247,7 @@ export const InsightsMainPage = () => {
                     <span className="text-xs font-bold text-slate-500">HD 1080p &bull; YomTech Media</span>
                     <button
                       onClick={() => setSelectedVideo(vid)}
-                      className="px-4 py-2 bg-slate-50 hover:bg-[#1E90FF] text-slate-700 hover:text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition-all"
+                      className="px-4 py-2 bg-slate-50 hover:bg-[#1E90FF] text-slate-700 hover:text-white rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer"
                     >
                       <span>Play Video</span>
                       <ArrowRight size={14} />
@@ -1046,18 +1266,18 @@ export const InsightsMainPage = () => {
         <div className="space-y-6">
           <div className="border-l-4 border-[#1E90FF] pl-4">
             <span className="text-xs font-black uppercase text-[#1E90FF] tracking-widest">External Coverage</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Media Appearances &amp; Interviews</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Media Appearances &amp; Coverage</h2>
           </div>
 
           <div className="space-y-4">
-            {MEDIA_APPEARANCES.map((m) => (
-              <div key={m.id} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex items-center justify-between shadow-sm hover:border-[#1E90FF] transition-all">
+            {activeMedia.map((m, idx) => (
+              <div key={m.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex items-center justify-between shadow-sm hover:border-[#1E90FF] transition-all">
                 <div className="space-y-1.5">
-                  <span className="px-3 py-1 bg-blue-50 border border-blue-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{m.type}</span>
+                  <span className="px-3 py-1 bg-blue-50 border border-blue-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{m.type || 'MEDIA INTERVIEW'}</span>
                   <h3 className="font-extrabold text-base text-slate-900">{m.title}</h3>
-                  <div className="text-xs text-slate-400 font-medium">{m.org} &bull; {m.date}</div>
+                  <div className="text-xs text-slate-400 font-medium">{m.outlet || 'Broadcasting'} &bull; {m.date || 'August 2026'}</div>
                 </div>
-                <a href={m.url} target="_blank" rel="noreferrer" className="p-3 text-[#1E90FF] hover:scale-110 transition-transform">
+                <a href={m.url || '#'} target="_blank" rel="noreferrer" className="p-3 text-[#1E90FF] hover:scale-110 transition-transform">
                   <ExternalLink size={20} />
                 </a>
               </div>
@@ -1069,17 +1289,17 @@ export const InsightsMainPage = () => {
         <div className="space-y-6">
           <div className="border-l-4 border-[#0ED3DD] pl-4">
             <span className="text-xs font-black uppercase text-[#1E90FF] tracking-widest">Press &amp; Corporate</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Press &amp; Corporate Media Content</h2>
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">Press &amp; Corporate Content</h2>
           </div>
 
           <div className="space-y-4">
-            {PRESS_RELEASES.map((pr) => (
-              <div key={pr.id} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex items-center justify-between shadow-sm hover:border-[#0ED3DD] transition-all">
+            {activePress.map((pr, idx) => (
+              <div key={pr.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex items-center justify-between shadow-sm hover:border-[#0ED3DD] transition-all">
                 <div className="space-y-1.5">
                   <h3 className="font-extrabold text-base text-slate-900">{pr.title}</h3>
                   <p className="text-xs text-slate-500 font-medium">{pr.summary}</p>
                 </div>
-                <span className="text-xs font-black text-[#1E90FF]">{pr.date}</span>
+                <span className="text-xs font-black text-[#1E90FF]">{pr.date || 'August 2026'}</span>
               </div>
             ))}
           </div>
@@ -1098,7 +1318,7 @@ export const InsightsMainPage = () => {
             <div className="space-y-4 relative z-10">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-[#0ED3DD] text-xs font-black tracking-widest uppercase backdrop-blur-md">
                 <HelpCircle size={15} className="text-[#0ED3DD]" />
-                <span>Support &amp; Knowledge Base</span>
+                <span>Support FAQ &amp; Knowledge Base</span>
               </div>
               <h2 className="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
                 Got Questions? <br />

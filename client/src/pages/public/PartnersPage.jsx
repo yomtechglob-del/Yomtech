@@ -306,6 +306,8 @@ const accentMap = {
   teal:    { bg: 'bg-teal-50',    border: 'border-teal-200',    text: 'text-teal-700',    gradient: 'from-teal-600 to-emerald-500' },
 };
 
+import { fetchPublicCmsCategoryApi } from '../../services/api';
+
 export const PartnersPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -314,11 +316,73 @@ export const PartnersPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activePartnerModal, setActivePartnerModal] = useState(null);
 
-  const filteredPartners = PARTNERS_DIRECTORY.filter(p => {
+  const [partnersPool, setPartnersPool] = useState(PARTNERS_DIRECTORY);
+
+  React.useEffect(() => {
+    const fetchPartners = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const dbPartners = res.data.data.filter((a) => a.category === 'Trusted Institutional Partners' && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbPartners.length > 0) {
+            const formatted = dbPartners.map((p, idx) => ({
+              id: p.id,
+              name: p.title,
+              category: p.role || 'Government',
+              subcategory: p.client || 'Strategic Partner',
+              logo: p.coverImage || PARTNERS_DIRECTORY[idx % PARTNERS_DIRECTORY.length]?.logo,
+              partnershipType: p.readTime || 'Strategic Enterprise Alliance',
+              website: p.videoUrl || '#',
+              accent: 'cyan',
+              profile: p.summary || p.excerpt || 'Official institutional partner of YomTech Global.',
+              relatedProjects: ['Digital Transformation', 'Enterprise Cloud ERP', 'Technology Systems Integration'],
+              location: 'Addis Ababa, Ethiopia'
+            }));
+            setPartnersPool([...formatted, ...PARTNERS_DIRECTORY]);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch partners:', err);
+      }
+    };
+    fetchPartners();
+
+    const sync = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const dbPartners = parsed.filter((a) => a.category === 'Trusted Institutional Partners' && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbPartners.length > 0) {
+            const formatted = dbPartners.map((p, idx) => ({
+              id: p.id,
+              name: p.title,
+              category: p.role || 'Government',
+              subcategory: p.client || 'Strategic Partner',
+              logo: p.coverImage || PARTNERS_DIRECTORY[idx % PARTNERS_DIRECTORY.length]?.logo,
+              partnershipType: p.readTime || 'Strategic Enterprise Alliance',
+              website: p.videoUrl || '#',
+              accent: 'cyan',
+              profile: p.summary || p.excerpt || 'Official institutional partner of YomTech Global.',
+              relatedProjects: ['Digital Transformation', 'Enterprise Cloud ERP', 'Technology Systems Integration'],
+              location: 'Addis Ababa, Ethiopia'
+            }));
+            setPartnersPool([...formatted, ...PARTNERS_DIRECTORY]);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', sync);
+    return () => window.removeEventListener('cmsArticlesUpdated', sync);
+  }, []);
+
+  const filteredPartners = partnersPool.filter(p => {
     const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          p.profile.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                          p.subcategory.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = (p.name || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          (p.profile || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          (p.subcategory || '').toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
 

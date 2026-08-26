@@ -4,7 +4,67 @@ import { AboutHeroBackground } from '../../../components/common/AboutHeroBackgro
 import { ANNOUNCEMENTS, PROJECTS_CASE_STUDIES } from '../../../data/insightsData';
 import { Bell, ArrowRight, Layers, CheckCircle2, Code2, Cpu, Sparkles } from 'lucide-react';
 
+import { fetchPublicCmsCategoryApi } from '../../../services/api';
+
 export const AnnouncementsPage = () => {
+  const [announcementsPool, setAnnouncementsPool] = React.useState(ANNOUNCEMENTS);
+
+  React.useEffect(() => {
+    const fetchFromApi = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const filtered = res.data.data.filter(
+            (a) => a.category === 'Official Announcements' &&
+            (a.visibility || '').toUpperCase() !== 'HIDDEN'
+          );
+          if (filtered.length > 0) {
+            setAnnouncementsPool(
+              filtered.map((a) => ({
+                id: a.id,
+                title: a.title,
+                priority: a.priority || 'FEATURED',
+                date: a.publishedDate || 'August 2026',
+                summary: a.summary || a.excerpt || 'Official bulletin.'
+              }))
+            );
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch announcements:', err);
+      }
+    };
+    fetchFromApi();
+
+    const sync = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const filtered = parsed.filter(
+            (a) => a.category === 'Official Announcements' &&
+            (a.visibility || '').toUpperCase() !== 'HIDDEN'
+          );
+          if (filtered.length > 0) {
+            setAnnouncementsPool(
+              filtered.map((a) => ({
+                id: a.id,
+                title: a.title,
+                priority: a.priority || 'FEATURED',
+                date: a.publishedDate || 'August 2026',
+                summary: a.summary || a.excerpt || 'Official bulletin.'
+              }))
+            );
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', sync);
+    return () => window.removeEventListener('cmsArticlesUpdated', sync);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans transition-colors">
       <section className="relative pt-36 pb-20 bg-[#03045E] text-white overflow-hidden">
@@ -30,7 +90,7 @@ export const AnnouncementsPage = () => {
       </section>
 
       <section className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-        {ANNOUNCEMENTS.map((ann) => (
+        {announcementsPool.map((ann) => (
           <div key={ann.id} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-3 shadow-sm hover:border-[#0ED3DD] transition-all">
             <div className="flex justify-between items-center text-xs font-black">
               <span className="px-3 py-1 bg-amber-50 text-amber-600 rounded-xl text-[10px] uppercase font-black">{ann.priority}</span>
@@ -46,6 +106,68 @@ export const AnnouncementsPage = () => {
 };
 
 export const ProjectsListPage = () => {
+  const [projectsPool, setProjectsPool] = React.useState(PROJECTS_CASE_STUDIES);
+
+  React.useEffect(() => {
+    const fetchFromApi = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const filtered = res.data.data.filter(
+            (a) => a.category === 'Featured Project Case Studies' &&
+            (a.visibility || '').toUpperCase() !== 'HIDDEN'
+          );
+          if (filtered.length > 0) {
+            setProjectsPool(
+              filtered.map((a) => ({
+                id: a.id,
+                name: a.title,
+                slug: a.id,
+                industry: a.client || 'Enterprise Case Study',
+                challenge: a.summary || 'Enterprise architectural challenge.',
+                results: a.impact || 'Automated multi-branch operation with 100% compliance auditing.',
+                technologies: (a.readTime || 'React, Node.js, PostgreSQL').split(', ')
+              }))
+            );
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch projects:', err);
+      }
+    };
+    fetchFromApi();
+
+    const sync = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const filtered = parsed.filter(
+            (a) => a.category === 'Featured Project Case Studies' &&
+            (a.visibility || '').toUpperCase() !== 'HIDDEN'
+          );
+          if (filtered.length > 0) {
+            setProjectsPool(
+              filtered.map((a) => ({
+                id: a.id,
+                name: a.title,
+                slug: a.id,
+                industry: a.client || 'Enterprise Case Study',
+                challenge: a.summary || 'Enterprise architectural challenge.',
+                results: a.impact || 'Automated multi-branch operation with 100% compliance auditing.',
+                technologies: (a.readTime || 'React, Node.js, PostgreSQL').split(', ')
+              }))
+            );
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', sync);
+    return () => window.removeEventListener('cmsArticlesUpdated', sync);
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans transition-colors">
       <section className="relative pt-36 pb-20 bg-[#03045E] text-white overflow-hidden">
@@ -72,7 +194,7 @@ export const ProjectsListPage = () => {
 
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {PROJECTS_CASE_STUDIES.map((proj) => (
+          {projectsPool.map((proj) => (
             <div key={proj.id} className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm p-7 space-y-5 flex flex-col justify-between hover:border-[#1E90FF] hover:shadow-xl transition-all duration-300">
               <div className="space-y-3">
                 <span className="px-3 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] text-[10px] font-black rounded-lg uppercase">{proj.industry}</span>
@@ -106,8 +228,64 @@ export const ProjectsListPage = () => {
   );
 };
 
+import { useParams } from 'react-router-dom';
+
 export const ProjectDetailPage = () => {
-  const proj = PROJECTS_CASE_STUDIES[0];
+  const { slug } = useParams();
+  const [projectItem, setProjectItem] = React.useState(null);
+
+  React.useEffect(() => {
+    const fetchProjectDetail = async () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const matched = parsed.find((a) => a.id === slug || a.slug === slug || a.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(slug?.toLowerCase()));
+          if (matched) {
+            setProjectItem({
+              name: matched.title,
+              client: matched.client || 'Enterprise Client',
+              industry: matched.category || 'Enterprise Case Study',
+              coverImage: matched.coverImage || PROJECTS_CASE_STUDIES[0].coverImage,
+              challenge: matched.summary || matched.excerpt || 'Enterprise architectural scaling challenge.',
+              solution: matched.fullContent || matched.content || 'Implemented high-performance microservices and cloud infrastructure.',
+              results: matched.impact || 'Automated multi-department data workflows with 100% reliability.'
+            });
+            return;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const found = res.data.data.find((a) => a.id === slug || a.slug === slug || a.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(slug?.toLowerCase()));
+          if (found) {
+            setProjectItem({
+              name: found.title,
+              client: found.client || 'Enterprise Client',
+              industry: found.category || 'Enterprise Case Study',
+              coverImage: found.coverImage || PROJECTS_CASE_STUDIES[0].coverImage,
+              challenge: found.summary || found.excerpt || 'Enterprise architectural scaling challenge.',
+              solution: found.fullContent || found.content || 'Implemented high-performance microservices and cloud infrastructure.',
+              results: found.impact || 'Automated multi-department data workflows with 100% reliability.'
+            });
+            return;
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+
+      const staticMatch = PROJECTS_CASE_STUDIES.find((p) => p.slug === slug || p.id === slug) || PROJECTS_CASE_STUDIES[0];
+      setProjectItem(staticMatch);
+    };
+    fetchProjectDetail();
+  }, [slug]);
+
+  const proj = projectItem || PROJECTS_CASE_STUDIES[0];
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans">
@@ -116,7 +294,9 @@ export const ProjectDetailPage = () => {
         <h1 className="text-3xl sm:text-5xl font-black leading-tight text-slate-900">{proj.name}</h1>
         <div className="text-xs text-slate-400 font-bold">Client: <span className="text-[#1E90FF] font-black">{proj.client}</span></div>
 
-        <img src={proj.coverImage} alt={proj.name} className="w-full h-96 object-cover rounded-3xl shadow-md border border-slate-200" />
+        {proj.coverImage && (
+          <img src={proj.coverImage} alt={proj.name} className="w-full h-96 object-cover rounded-3xl shadow-md border border-slate-200" />
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
           <div className="p-6 rounded-3xl bg-white border border-slate-200/90 space-y-2">
@@ -125,7 +305,7 @@ export const ProjectDetailPage = () => {
           </div>
           <div className="p-6 rounded-3xl bg-blue-50/60 border border-blue-200/80 space-y-2">
             <h3 className="font-extrabold text-sm text-[#1E90FF]">The Solution</h3>
-            <p className="text-xs text-slate-600 leading-relaxed font-medium">{proj.solution}</p>
+            <div className="text-xs text-slate-600 leading-relaxed font-medium whitespace-pre-line">{proj.solution}</div>
           </div>
         </div>
 

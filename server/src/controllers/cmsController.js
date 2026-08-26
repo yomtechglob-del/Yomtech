@@ -41,24 +41,41 @@ const logAuditActivity = async (user, action, contentType, title, id) => {
 
 // Map URL Category String to Official CMS Category Field
 const getCategoryString = (categoryParam) => {
+  if (!categoryParam) return 'Corporate News & Articles';
+  const param = categoryParam.toLowerCase();
   const map = {
     'services': 'Services & Products Matrix',
+    'cms-services': 'Services & Products Matrix',
     'news': 'Corporate News & Articles',
+    'cms-news': 'Corporate News & Articles',
     'articles': 'Corporate News & Articles',
+    'cms-articles': 'Corporate News & Articles',
     'blog': 'Tech Articles & Engineering',
+    'cms-blog': 'Tech Articles & Engineering',
     'events': 'Upcoming Events & Webinars',
+    'cms-events': 'Upcoming Events & Webinars',
     'announcements': 'Official Announcements',
+    'cms-announcements': 'Official Announcements',
     'projects': 'Featured Project Case Studies',
+    'cms-projects': 'Featured Project Case Studies',
     'team': 'Executive Team Members',
+    'cms-team': 'Executive Team Members',
     'testimonials': 'Client & Learner Testimonials',
+    'cms-testimonials': 'Client & Learner Testimonials',
     'gallery': 'Photo Gallery Showcase',
+    'cms-gallery': 'Photo Gallery Showcase',
     'videos': 'Video & Documentary Hub',
+    'cms-videos': 'Video & Documentary Hub',
     'media': 'Media Appearances & Coverage',
+    'cms-media': 'Media Appearances & Coverage',
     'press': 'Press & Corporate Content',
+    'cms-press': 'Press & Corporate Content',
     'faq': 'Support FAQ & Knowledge Base',
-    'partners': 'Trusted Institutional Partners'
+    'cms-faq': 'Support FAQ & Knowledge Base',
+    'partners': 'Trusted Institutional Partners',
+    'cms-partners': 'Trusted Institutional Partners'
   };
-  return map[categoryParam] || categoryParam;
+  return map[param] || categoryParam;
 };
 
 // 1. GET /api/v1/cms/:category (Public & Admin Fetch from Database)
@@ -77,8 +94,8 @@ const getCategoryItems = async (req, res) => {
     }
 
     if (isPublicQuery) {
-      whereClause.status = 'PUBLISHED';
-      whereClause.visibility = { in: ['PUBLIC', 'VISIBLE'] };
+      whereClause.status = { in: ['PUBLISHED', 'Published', 'published'] };
+      whereClause.visibility = { in: ['PUBLIC', 'PUBLIC', 'VISIBLE', 'Visible', 'visible'] };
     }
 
     const items = await prisma.contentItem.findMany({
@@ -104,8 +121,8 @@ const createCategoryItem = async (req, res) => {
     const baseSlug = (req.body.slug || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     const slug = `${baseSlug}-${Date.now().toString().slice(-4)}`;
 
-    const status = req.body.status || 'PUBLISHED';
-    const visibility = req.body.visibility || (status === 'PUBLISHED' ? 'PUBLIC' : 'HIDDEN');
+    const status = (req.body.status || 'PUBLISHED').toUpperCase();
+    const visibility = (req.body.visibility || (status === 'PUBLISHED' ? 'PUBLIC' : 'HIDDEN')).toUpperCase();
 
     const created = await prisma.contentItem.create({
       data: {
@@ -154,6 +171,9 @@ const updateCategoryItem = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Content item not found.' });
     }
 
+    const nextStatus = req.body.status ? req.body.status.toUpperCase() : existing.status;
+    const nextVis = req.body.visibility ? req.body.visibility.toUpperCase() : existing.visibility;
+
     const updated = await prisma.contentItem.update({
       where: { id },
       data: {
@@ -161,8 +181,19 @@ const updateCategoryItem = async (req, res) => {
         excerpt: req.body.summary !== undefined ? req.body.summary : (req.body.excerpt !== undefined ? req.body.excerpt : existing.excerpt),
         content: req.body.fullContent !== undefined ? req.body.fullContent : (req.body.content !== undefined ? req.body.content : existing.content),
         coverImage: req.body.coverImage !== undefined ? req.body.coverImage : existing.coverImage,
-        status: req.body.status || existing.status,
-        visibility: req.body.visibility || existing.visibility,
+        videoUrl: req.body.videoUrl !== undefined ? req.body.videoUrl : existing.videoUrl,
+        status: nextStatus,
+        visibility: nextVis,
+        featured: req.body.featured !== undefined ? Boolean(req.body.featured) : existing.featured,
+        author: req.body.author !== undefined ? req.body.author : existing.author,
+        client: req.body.client !== undefined ? req.body.client : existing.client,
+        readTime: req.body.readTime !== undefined ? req.body.readTime : existing.readTime,
+        priority: req.body.priority !== undefined ? req.body.priority : existing.priority,
+        eventDate: req.body.eventDate !== undefined ? req.body.eventDate : existing.eventDate,
+        expiresAt: req.body.expiryDate ? new Date(req.body.expiryDate) : existing.expiresAt,
+        expirationEnabled: req.body.expiryDate ? true : existing.expirationEnabled
+      }
+    });
         featured: req.body.featured !== undefined ? Boolean(req.body.featured) : existing.featured,
         author: req.body.author !== undefined ? req.body.author : existing.author,
         client: req.body.client !== undefined ? req.body.client : existing.client,

@@ -510,10 +510,96 @@ const InterlockingProductRow = ({ left, right, idx, onProductSelect }) => {
   );
 };
 
+import { fetchPublicCmsCategoryApi } from '../../services/api';
+
 export const ProductsCatalogue = ({ onProductSelect }) => {
   const [activeCategory, setActiveCategory] = useState('ALL');
+  const [pairsPool, setPairsPool] = useState(PRODUCTS_PAIRS);
 
-  const filteredPairs = PRODUCTS_PAIRS.filter((pair) => {
+  React.useEffect(() => {
+    const fetchServicesAndProducts = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const dbProducts = res.data.data.filter((a) => ['Services & Products Matrix', 'ENTERPRISE', 'EDUCATION', 'MEDIA'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbProducts.length > 0) {
+            // Group custom items into product pairs
+            const customItems = dbProducts.map((p, idx) => ({
+              id: p.id,
+              num: `0${idx + 7}`,
+              name: p.title,
+              tagline: p.role || p.client || 'Enterprise Digital Platform',
+              category: p.category === 'Services & Products Matrix' ? 'ENTERPRISE' : p.category,
+              badge: p.status === 'PUBLISHED' ? 'LIVE PLATFORM' : 'ACTIVE',
+              link: `/products#${p.id}`,
+              icon: Cpu,
+              logo: logoEmblem,
+              toy: p.coverImage || yomnexToy,
+              shortDesc: p.summary || p.excerpt || 'Enterprise platform engineered by YomTech Global.',
+              fullDesc: p.fullContent || p.content || 'Scalable technology module built for enterprise cloud operations.',
+              highlights: (p.readTime || 'Enterprise Security, Real-Time Analytics, API Integration').split(', '),
+              stat: 'Enterprise Grade'
+            }));
+
+            // Chunk custom items into pairs
+            const customPairs = [];
+            for (let i = 0; i < customItems.length; i += 2) {
+              customPairs.push({
+                left: customItems[i],
+                right: customItems[i + 1] || customItems[i]
+              });
+            }
+            setPairsPool([...customPairs, ...PRODUCTS_PAIRS]);
+          }
+        }
+      } catch (err) {
+        console.error('Failed to fetch product matrix:', err);
+      }
+    };
+    fetchServicesAndProducts();
+
+    const sync = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const dbProducts = parsed.filter((a) => ['Services & Products Matrix', 'ENTERPRISE', 'EDUCATION', 'MEDIA'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+          if (dbProducts.length > 0) {
+            const customItems = dbProducts.map((p, idx) => ({
+              id: p.id,
+              num: `0${idx + 7}`,
+              name: p.title,
+              tagline: p.role || p.client || 'Enterprise Digital Platform',
+              category: p.category === 'Services & Products Matrix' ? 'ENTERPRISE' : p.category,
+              badge: p.status === 'PUBLISHED' ? 'LIVE PLATFORM' : 'ACTIVE',
+              link: `/products#${p.id}`,
+              icon: Cpu,
+              logo: logoEmblem,
+              toy: p.coverImage || yomnexToy,
+              shortDesc: p.summary || p.excerpt || 'Enterprise platform engineered by YomTech Global.',
+              fullDesc: p.fullContent || p.content || 'Scalable technology module built for enterprise cloud operations.',
+              highlights: (p.readTime || 'Enterprise Security, Real-Time Analytics, API Integration').split(', '),
+              stat: 'Enterprise Grade'
+            }));
+            const customPairs = [];
+            for (let i = 0; i < customItems.length; i += 2) {
+              customPairs.push({
+                left: customItems[i],
+                right: customItems[i + 1] || customItems[i]
+              });
+            }
+            setPairsPool([...customPairs, ...PRODUCTS_PAIRS]);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', sync);
+    return () => window.removeEventListener('cmsArticlesUpdated', sync);
+  }, []);
+
+  const filteredPairs = pairsPool.filter((pair) => {
     if (activeCategory === 'ALL') return true;
     return pair.left.category === activeCategory || pair.right.category === activeCategory;
   });

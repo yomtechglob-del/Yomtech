@@ -4,16 +4,41 @@ import { AboutHeroBackground } from '../../../components/common/AboutHeroBackgro
 import { BLOG_ARTICLES } from '../../../data/insightsData';
 import { Search, Filter, BookOpen, Clock, User, ArrowRight, Share2, Bookmark, Sparkles } from 'lucide-react';
 
+import { fetchPublicCmsCategoryApi } from '../../../services/api';
+
 export const BlogListPage = () => {
   const [search, setSearch] = useState('');
   const [selectedCat, setSelectedCat] = useState('ALL');
+
+  const isBlogVisibleAndPublished = (a) => {
+    const isCat = ['Tech Articles & Engineering', 'Tech Articles', 'Engineering', 'Blog'].includes(a.category);
+    const vis = (a.visibility || 'VISIBLE').toUpperCase();
+    const stat = (a.status || 'PUBLISHED').toUpperCase();
+    return isCat && (vis === 'VISIBLE' || vis === 'PUBLIC') && stat === 'PUBLISHED';
+  };
+
+  const formatBlogItem = (item, idx) => ({
+    id: item.id || `blog-${idx}`,
+    title: item.title,
+    slug: item.id || item.slug || `blog-${idx}`,
+    category: item.category || 'Tech Articles & Engineering',
+    publishedDate: item.publishedDate || item.date || (item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'AUG 2026'),
+    author: item.author || 'YomTech Engineering Team',
+    readTime: item.readTime || '8 min read',
+    coverImage: item.coverImage || BLOG_ARTICLES[idx % BLOG_ARTICLES.length]?.coverImage,
+    excerpt: item.summary || item.excerpt || item.fullContent || 'Engineering research paper by YomTech Global.',
+    views: item.views || '2.4k'
+  });
+
   const [liveBlogPool, setLiveBlogPool] = useState(() => {
     const saved = localStorage.getItem('yomtech_cms_articles');
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        const filtered = parsed.filter((a) => a.category === 'Tech Articles & Engineering' && a.visibility === 'VISIBLE' && a.status === 'Published');
-        if (filtered.length > 0) return filtered;
+        if (Array.isArray(parsed)) {
+          const custom = parsed.filter(isBlogVisibleAndPublished).map(formatBlogItem);
+          if (custom.length > 0) return custom;
+        }
       } catch (e) {
         console.error(e);
       }
@@ -22,14 +47,29 @@ export const BlogListPage = () => {
   });
 
   React.useEffect(() => {
+    const fetchFromApi = async () => {
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const apiBlogs = res.data.data.filter(isBlogVisibleAndPublished).map(formatBlogItem);
+          setLiveBlogPool(apiBlogs.length > 0 ? apiBlogs : BLOG_ARTICLES);
+        }
+      } catch (err) {
+        console.error('Failed to fetch blog articles from API:', err);
+      }
+    };
+
+    fetchFromApi();
+
     const syncBlog = () => {
       const saved = localStorage.getItem('yomtech_cms_articles');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          const filtered = parsed.filter((a) => a.category === 'Tech Articles & Engineering' && a.visibility === 'VISIBLE' && a.status === 'Published');
-          if (filtered.length > 0) setLiveBlogPool(filtered);
-          else setLiveBlogPool(BLOG_ARTICLES);
+          if (Array.isArray(parsed)) {
+            const custom = parsed.filter(isBlogVisibleAndPublished).map(formatBlogItem);
+            setLiveBlogPool(custom.length > 0 ? [...custom, ...BLOG_ARTICLES] : BLOG_ARTICLES);
+          }
         } catch (e) {
           console.error(e);
         }
@@ -139,39 +179,86 @@ export const BlogListPage = () => {
   );
 };
 
+import { useParams } from 'react-router-dom';
+
 export const BlogDetailPage = () => {
-  const article = BLOG_ARTICLES[0];
+  const { slug } = useParams();
+  const [blog, setBlog] = useState(null);
+
+  React.useEffect(() => {
+    const fetchBlogDetail = async () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const matched = parsed.find((a) => a.id === slug || a.slug === slug || a.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(slug?.toLowerCase()));
+          if (matched) {
+            setBlog(matched);
+            return;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+
+      try {
+        const res = await fetchPublicCmsCategoryApi('all');
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          const found = res.data.data.find((a) => a.id === slug || a.slug === slug || a.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').includes(slug?.toLowerCase()));
+          if (found) {
+            setBlog(found);
+            return;
+          }
+        }
+      } catch (err) {
+        console.error(err);
+      }
+
+      const staticMatch = BLOG_ARTICLES.find((n) => n.slug === slug || n.id === slug) || BLOG_ARTICLES[0];
+      setBlog(staticMatch);
+    };
+    fetchBlogDetail();
+  }, [slug]);
+
+  const article = blog || BLOG_ARTICLES[0];
+  const coverImg = article.coverImage || article.image || BLOG_ARTICLES[0].coverImage;
+  const bodyText = article.fullContent || article.content || article.summary || article.excerpt || 'Engineering research paper by YomTech Global.';
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans">
-      <section className="pt-36 pb-16 max-w-4xl mx-auto px-4 space-y-6">
-        <span className="px-3.5 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] font-black text-xs rounded-xl">{article.category}</span>
+      <section className="pt-36 pb-16 max-w-4xl mx-auto px-4 sm:px-6 space-y-6">
+        <span className="px-3.5 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] font-black text-xs rounded-xl uppercase">
+          {article.category || 'Tech Articles & Engineering'}
+        </span>
         <h1 className="text-3xl sm:text-5xl font-black leading-tight text-slate-900">{article.title}</h1>
-        <p className="text-base text-slate-600 font-medium leading-relaxed">{article.excerpt}</p>
+        <p className="text-base text-slate-600 font-medium leading-relaxed">{article.summary || article.excerpt}</p>
 
         <div className="flex items-center justify-between border-y border-slate-200 py-3.5 text-xs font-bold text-slate-500">
-          <div>By <span className="text-[#1E90FF] font-black">{article.author}</span> ({article.authorRole})</div>
-          <div>{article.publishedDate} &bull; {article.readTime}</div>
+          <div>By <span className="text-[#1E90FF] font-black">{article.author || 'YomTech Engineering Team'}</span></div>
+          <div>{article.publishedDate || article.date || 'August 2026'} &bull; {article.readTime || '8 min read'}</div>
         </div>
 
-        <img src={article.coverImage} alt={article.title} className="w-full h-96 object-cover rounded-3xl shadow-md border border-slate-200" />
+        {article.videoUrl ? (
+          <div className="relative aspect-video w-full rounded-3xl overflow-hidden bg-black shadow-lg border border-slate-200">
+            {article.videoUrl.includes('youtube.com') ? (
+              <iframe
+                src={article.videoUrl.replace('watch?v=', 'embed/')}
+                title={article.title}
+                className="w-full h-full border-0"
+                allowFullScreen
+              />
+            ) : (
+              <video src={article.videoUrl} controls poster={coverImg} className="w-full h-full object-cover" />
+            )}
+          </div>
+        ) : (
+          <div className="relative rounded-3xl overflow-hidden shadow-md border border-slate-200 max-h-[500px]">
+            <img src={coverImg} alt={article.title} className="w-full h-full object-cover" />
+          </div>
+        )}
 
-        {/* Table of Contents */}
-        <div className="p-6 rounded-3xl bg-white border border-slate-200/90 space-y-3 shadow-sm">
-          <div className="font-black text-xs text-[#1E90FF] uppercase tracking-widest">Table of Contents</div>
-          <ul className="space-y-1.5 text-xs font-bold text-slate-700">
-            {article.tableOfContents?.map((toc) => (
-              <li key={toc.id}>&bull; <a href={`#${toc.id}`} className="hover:underline hover:text-[#1E90FF]">{toc.text}</a></li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="text-xs sm:text-sm leading-relaxed space-y-4 font-medium pt-4 text-slate-700">
-          <h2 id="intro" className="text-lg font-black text-slate-900">1. Introduction</h2>
-          <p>Building high-concurrency microservices requires strict separation of concerns, idempotent request handling, and low-latency database queries.</p>
-          
-          <h2 id="caching" className="text-lg font-black text-slate-900">2. Distributed Caching Strategy</h2>
-          <p>Using Redis in-memory key-value storage allows enterprise ERP pipelines to bypass database lookups for session validation and static catalogs.</p>
+        <div className="text-xs sm:text-sm leading-relaxed space-y-4 font-medium pt-4 text-slate-700 whitespace-pre-line">
+          {bodyText}
         </div>
 
         <div className="pt-8 border-t border-slate-200 flex justify-between items-center">
