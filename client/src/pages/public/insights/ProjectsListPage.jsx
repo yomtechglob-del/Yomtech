@@ -25,7 +25,8 @@ export const AnnouncementsPage = () => {
                 title: a.title,
                 priority: a.priority || 'FEATURED',
                 date: a.publishedDate || 'August 2026',
-                summary: a.summary || a.excerpt || 'Official bulletin.'
+                summary: a.summary || a.excerpt || 'Official bulletin.',
+                coverImage: a.coverImage
               }))
             );
           }
@@ -52,7 +53,8 @@ export const AnnouncementsPage = () => {
                 title: a.title,
                 priority: a.priority || 'FEATURED',
                 date: a.publishedDate || 'August 2026',
-                summary: a.summary || a.excerpt || 'Official bulletin.'
+                summary: a.summary || a.excerpt || 'Official bulletin.',
+                coverImage: a.coverImage
               }))
             );
           }
@@ -92,6 +94,11 @@ export const AnnouncementsPage = () => {
       <section className="py-16 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
         {announcementsPool.map((ann) => (
           <div key={ann.id} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-3 shadow-sm hover:border-[#0ED3DD] transition-all">
+            {ann.coverImage && (
+              <div className="relative h-40 rounded-2xl overflow-hidden border border-slate-200 mb-2">
+                <img src={ann.coverImage} alt={ann.title} className="w-full h-full object-cover" />
+              </div>
+            )}
             <div className="flex justify-between items-center text-xs font-black">
               <span className="px-3 py-1 bg-amber-50 text-amber-600 rounded-xl text-[10px] uppercase font-black">{ann.priority}</span>
               <span className="text-slate-400">{ann.date}</span>
@@ -126,7 +133,8 @@ export const ProjectsListPage = () => {
                 industry: a.client || 'Enterprise Case Study',
                 challenge: a.summary || 'Enterprise architectural challenge.',
                 results: a.impact || 'Automated multi-branch operation with 100% compliance auditing.',
-                technologies: (a.readTime || 'React, Node.js, PostgreSQL').split(', ')
+                technologies: (a.readTime || 'React, Node.js, PostgreSQL').split(', '),
+                coverImage: a.coverImage
               }))
             );
           }
@@ -155,7 +163,8 @@ export const ProjectsListPage = () => {
                 industry: a.client || 'Enterprise Case Study',
                 challenge: a.summary || 'Enterprise architectural challenge.',
                 results: a.impact || 'Automated multi-branch operation with 100% compliance auditing.',
-                technologies: (a.readTime || 'React, Node.js, PostgreSQL').split(', ')
+                technologies: (a.readTime || 'React, Node.js, PostgreSQL').split(', '),
+                coverImage: a.coverImage
               }))
             );
           }
@@ -195,10 +204,15 @@ export const ProjectsListPage = () => {
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projectsPool.map((proj) => (
-            <div key={proj.id} className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm p-7 space-y-5 flex flex-col justify-between hover:border-[#1E90FF] hover:shadow-xl transition-all duration-300">
+            <div key={proj.id} className="bg-white rounded-3xl border border-slate-200/90 overflow-hidden shadow-sm p-7 space-y-5 flex flex-col justify-between hover:border-[#1E90FF] hover:shadow-xl transition-all duration-300 group">
               <div className="space-y-3">
+                {proj.coverImage && (
+                  <div className="relative h-44 rounded-2xl overflow-hidden border border-slate-200 mb-3">
+                    <img src={proj.coverImage} alt={proj.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
                 <span className="px-3 py-1 bg-cyan-50 border border-cyan-200 text-[#1E90FF] text-[10px] font-black rounded-lg uppercase">{proj.industry}</span>
-                <h3 className="text-xl font-black text-slate-900">{proj.name}</h3>
+                <h3 className="text-xl font-black text-slate-900 group-hover:text-[#1E90FF] transition-colors">{proj.name}</h3>
                 <p className="text-xs text-slate-600 leading-relaxed font-medium">
                   <strong>Challenge:</strong> {proj.challenge}
                 </p>

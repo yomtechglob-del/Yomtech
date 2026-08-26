@@ -1046,30 +1046,40 @@ export const AdminDashboardPage = () => {
     e.preventDefault();
     if (!editingArticle) return;
 
+    const finalSummary = editingArticle.summary || editingArticle.fullContent || '';
+    const finalFullContent = editingArticle.fullContent || editingArticle.summary || '';
+    const updatedItem = {
+      ...editingArticle,
+      summary: finalSummary,
+      fullContent: finalFullContent,
+      content: finalFullContent
+    };
+
     try {
-      const computedVideoUrl = editingArticle.videoUrl || (editingArticle.youtubeId ? `https://www.youtube.com/watch?v=${editingArticle.youtubeId}` : null);
-      await updateCmsCategoryItemApi('all', editingArticle.id, {
-        title: editingArticle.title,
-        category: editingArticle.category,
-        client: editingArticle.client,
-        author: editingArticle.author,
-        summary: editingArticle.summary,
-        fullContent: editingArticle.fullContent || editingArticle.content,
-        content: editingArticle.fullContent || editingArticle.content,
-        coverImage: editingArticle.coverImage,
+      const computedVideoUrl = updatedItem.videoUrl || (updatedItem.youtubeId ? `https://www.youtube.com/watch?v=${updatedItem.youtubeId}` : null);
+      await updateCmsCategoryItemApi('all', updatedItem.id, {
+        title: updatedItem.title,
+        category: updatedItem.category,
+        client: updatedItem.client,
+        author: updatedItem.author,
+        publishedDate: updatedItem.publishedDate,
+        summary: updatedItem.summary,
+        fullContent: updatedItem.fullContent,
+        content: updatedItem.content,
+        coverImage: updatedItem.coverImage,
         videoUrl: computedVideoUrl,
-        readTime: editingArticle.readTime,
-        status: editingArticle.status === 'Published' ? 'PUBLISHED' : 'DRAFT',
-        visibility: editingArticle.visibility
+        readTime: updatedItem.readTime,
+        status: updatedItem.status === 'Published' ? 'PUBLISHED' : 'DRAFT',
+        visibility: updatedItem.visibility
       });
     } catch (err) {
       console.error('API save edit article error:', err);
     }
 
     setCmsArticles((prev) =>
-      prev.map((art) => (art.id === editingArticle.id ? { ...editingArticle } : art))
+      prev.map((art) => (art.id === updatedItem.id ? updatedItem : art))
     );
-    showNotice(`Article "${editingArticle.title}" updated successfully.`);
+    showNotice(`Article "${updatedItem.title}" updated successfully.`);
     setShowEditArticleModal(false);
     setEditingArticle(null);
   };
@@ -3719,274 +3729,319 @@ export const AdminDashboardPage = () => {
         </div>
       )}
 
-      {/* --- MODAL 5B: EDIT CMS ARTICLE / NEWS ITEM --- */}
+      {/* --- MODAL 5B: EXECUTIVE LIGHT-MODE CMS CONTENT STUDIO & ARTICLE EDITOR --- */}
       {showEditArticleModal && editingArticle && (
-        <div className="fixed inset-0 z-50 bg-[#03045E]/90 backdrop-blur-xl flex items-center justify-center p-4">
-          <form onSubmit={handleSaveEditArticle} className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 max-w-xl w-full space-y-4 shadow-2xl animate-in zoom-in-95 border border-blue-100">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <h3 className="font-black text-lg text-slate-900">Edit News Story / Article</h3>
-              <button type="button" onClick={() => { setShowEditArticleModal(false); setEditingArticle(null); }} className="p-2 rounded-full bg-blue-50 text-[#1E90FF] hover:bg-blue-100">
-                <X size={18} />
-              </button>
-            </div>
-            <div className="space-y-3 text-xs">
-              <div>
-                <label className="font-bold text-slate-500">News / Article Title *</label>
-                <input
-                  type="text"
-                  required
-                  value={editingArticle.title}
-                  onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
-                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                />
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="font-bold text-slate-500">Category</label>
-                  <select
-                    value={editingArticle.category}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, category: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                  >
-                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
-                    <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
-                    <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
-                    <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
-                    <option value="Official Announcements">Official Announcements</option>
-                    <option value="Featured Project Case Studies">Featured Project Case Studies</option>
-                    <option value="Executive Team Members">Executive Team Members</option>
-                    <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
-                    <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
-                    <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
-                    <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
-                    <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
-                    <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
-                    <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
-                  </select>
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <form onSubmit={handleSaveEditArticle} className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 max-w-4xl w-full space-y-6 shadow-2xl animate-in zoom-in-95 border border-blue-100 max-h-[90vh] overflow-y-auto">
+            
+            {/* Header */}
+            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] flex items-center justify-center text-white font-black shadow">
+                  <Sparkles size={20} />
                 </div>
                 <div>
-                  <label className="font-bold text-slate-500">Author / Lead / Speaker *</label>
+                  <h3 className="font-black text-lg sm:text-xl text-slate-900 tracking-tight">CMS Content Studio &amp; Master Editor</h3>
+                  <p className="text-xs text-slate-500 font-semibold">Configure metadata, event schedules, publishing status, and rich media assets.</p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => { setShowEditArticleModal(false); setEditingArticle(null); }}
+                className="p-2 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="space-y-5 text-xs">
+              {/* SECTION 1: PRIMARY METADATA */}
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                <div className="text-[11px] font-black uppercase text-[#1E90FF] tracking-wider">1. Core Entry Metadata</div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">News / Article / Event Title *</label>
                   <input
                     type="text"
                     required
-                    value={editingArticle.author || ''}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    value={editingArticle.title}
+                    onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                    className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] focus:ring-2 focus:ring-blue-100"
                   />
                 </div>
-              </div>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="font-bold text-slate-500">Client / Institution / Venue</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Skylight Hotel & Online Hybrid"
-                    value={editingArticle.client || ''}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Category Scope</label>
+                    <select
+                      value={editingArticle.category}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, category: e.target.value })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    >
+                      <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
+                      <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+                      <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
+                      <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
+                      <option value="Official Announcements">Official Announcements</option>
+                      <option value="Featured Project Case Studies">Featured Project Case Studies</option>
+                      <option value="Executive Team Members">Executive Team Members</option>
+                      <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
+                      <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
+                      <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
+                      <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
+                      <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
+                      <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
+                      <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Author / Lead / Speaker *</label>
+                    <input
+                      type="text"
+                      required
+                      value={editingArticle.author || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="font-bold text-slate-500">Publish Date / Event Date</label>
-                  <input
-                    type="date"
-                    value={editingArticle.publishedDate || ''}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, publishedDate: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                  />
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-3">
-                <div>
-                  <label className="font-bold text-slate-500">Status</label>
-                  <select
-                    value={editingArticle.status}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, status: e.target.value, visibility: (e.target.value === 'Hidden' || e.target.value === 'Expired' || e.target.value === 'Draft') ? 'HIDDEN' : 'VISIBLE' })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                  >
-                    <option value="Published">Published</option>
-                    <option value="Draft">Draft</option>
-                    <option value="Hidden">Hidden</option>
-                    <option value="Expired">Expired</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="font-bold text-slate-500">Visibility</label>
-                  <select
-                    value={editingArticle.visibility || 'VISIBLE'}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, visibility: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                  >
-                    <option value="VISIBLE">VISIBLE</option>
-                    <option value="HIDDEN">HIDDEN</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="font-bold text-slate-500 flex items-center justify-between">
-                    <span>Expiration Date</span>
-                  </label>
-                  <div className="flex gap-1.5 mt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Client / Institution / Venue Location</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Skylight Hotel & Online Hybrid (Addis Ababa)"
+                      value={editingArticle.client || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Publish Date / Event Date</label>
                     <input
                       type="date"
-                      value={editingArticle.expiryDate || ''}
-                      onChange={(e) => setEditingArticle({ ...editingArticle, expiryDate: e.target.value })}
-                      className="flex-1 p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] text-xs"
+                      value={editingArticle.publishedDate || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, publishedDate: e.target.value })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                     />
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const d = new Date();
-                        d.setDate(d.getDate() + 30);
-                        setEditingArticle({ ...editingArticle, expiryDate: d.toISOString().split('T')[0] });
-                      }}
-                      className="px-2 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 text-[10px] font-black rounded-lg hover:bg-blue-100 shrink-0"
-                      title="Set 30-Day Expiration"
+                  </div>
+                </div>
+              </div>
+
+              {/* SECTION 2: PUBLISHING CONTROL & TIMING */}
+              <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 space-y-4">
+                <div className="text-[11px] font-black uppercase text-[#1E90FF] tracking-wider">2. Publishing Controls &amp; Timing</div>
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Status</label>
+                    <select
+                      value={editingArticle.status}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, status: e.target.value, visibility: (e.target.value === 'Hidden' || e.target.value === 'Expired' || e.target.value === 'Draft') ? 'HIDDEN' : 'VISIBLE' })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
                     >
-                      +30d
-                    </button>
+                      <option value="Published">Published</option>
+                      <option value="Draft">Draft</option>
+                      <option value="Hidden">Hidden</option>
+                      <option value="Expired">Expired</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Visibility</label>
+                    <select
+                      value={editingArticle.visibility || 'VISIBLE'}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, visibility: e.target.value })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    >
+                      <option value="VISIBLE">VISIBLE</option>
+                      <option value="HIDDEN">HIDDEN</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Time / Schedule</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 09:00 AM EAT"
+                      value={editingArticle.readTime || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Expiration Date</label>
+                    <div className="flex items-center gap-1.5">
+                      <input
+                        type="date"
+                        value={editingArticle.expiryDate || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, expiryDate: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] text-xs"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const d = new Date();
+                          d.setDate(d.getDate() + 30);
+                          setEditingArticle({ ...editingArticle, expiryDate: d.toISOString().split('T')[0] });
+                        }}
+                        className="px-3 py-3 bg-[#1E90FF] hover:bg-blue-600 text-white text-[10px] font-black rounded-xl shrink-0 transition-colors shadow-2xs"
+                        title="Set 30-Day Expiration"
+                      >
+                        +30d
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div>
-                <label className="font-bold text-slate-500">Article Summary (Short Snippet)</label>
-                <textarea
-                  rows="2"
-                  value={editingArticle.summary || ''}
-                  onChange={(e) => setEditingArticle({ ...editingArticle, summary: e.target.value })}
-                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
-                ></textarea>
-              </div>
 
-              <div>
-                <div className="flex items-center justify-between">
-                  <label className="font-bold text-slate-500">Full Article Story / Body Content</label>
-                  <span className="text-[10px] font-black text-[#1E90FF] bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200">
-                    {editingArticle.readTime || '1 min read'}
-                  </span>
+              {/* SECTION 3: STORY & SUMMARY CONTENT */}
+              <div className="p-4 rounded-2xl bg-indigo-50/40 border border-indigo-100 space-y-4">
+                <div className="text-[11px] font-black uppercase text-indigo-700 tracking-wider">3. Story Snippet &amp; Full Content</div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Article Summary (Short Card Snippet)</label>
+                  <textarea
+                    rows="2"
+                    placeholder="Short summary displayed on public news cards..."
+                    value={editingArticle.summary || ''}
+                    onChange={(e) => setEditingArticle({ ...editingArticle, summary: e.target.value })}
+                    className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                  ></textarea>
                 </div>
-                <textarea
-                  rows="5"
-                  placeholder="Full article body text..."
-                  value={editingArticle.fullContent || editingArticle.content || ''}
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    const words = val.trim() ? val.trim().split(/\s+/).length : 0;
-                    const mins = Math.max(1, Math.ceil(words / 200));
-                    setEditingArticle({
-                      ...editingArticle,
-                      fullContent: val,
-                      readTime: `${mins} min read`
-                    });
-                  }}
-                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
-                ></textarea>
-              </div>
 
-              {/* MEDIA ATTACHMENTS: IMAGE FILE PICKER */}
-              <div className="p-3 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-2">
-                <label className="font-black text-[#1E90FF] text-[11px] uppercase tracking-wider block">📷 Image / Photo Upload</label>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                  <label className="px-3.5 py-2 bg-white text-[#1E90FF] border border-blue-200 font-bold rounded-xl hover:bg-blue-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
-                    <Upload size={14} />
-                    <span>Upload New Image...</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => {
-                        if (e.target.files && e.target.files[0]) {
-                          const reader = new FileReader();
-                          reader.onload = (uploadEvent) => {
-                            setEditingArticle({ ...editingArticle, coverImage: uploadEvent.target.result });
-                            showNotice('Updated image file successfully!');
-                          };
-                          reader.readAsDataURL(e.target.files[0]);
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Or paste image URL (https://...)"
-                    value={editingArticle.coverImage || ''}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, coverImage: e.target.value })}
-                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF] text-xs"
-                  />
-                </div>
-                {editingArticle.coverImage && (
-                  <div className="flex items-center gap-3 pt-1">
-                    <img src={editingArticle.coverImage} alt="Preview" className="w-14 h-14 rounded-xl object-cover border border-blue-200 shadow-2xs" />
-                    <span className="text-[11px] font-bold text-emerald-600">✓ Image ready</span>
-                  </div>
-                )}
-              </div>
-
-              {/* MEDIA ATTACHMENTS: VIDEO & YOUTUBE PICKER */}
-              <div className="p-3 bg-red-50/50 rounded-2xl border border-red-100 space-y-2">
-                <label className="font-black text-red-600 text-[11px] uppercase tracking-wider block">📹 Video File / YouTube Embed</label>
-                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                  <input
-                    type="text"
-                    placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)"
-                    value={editingArticle.youtubeId || ''}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, youtubeId: e.target.value })}
-                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-red-500 text-xs"
-                  />
-                  <label className="px-3.5 py-2 bg-white text-red-600 border border-red-200 font-bold rounded-xl hover:bg-red-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
-                    <Upload size={14} />
-                    <span>Upload Video File...</span>
-                    <input
-                      type="file"
-                      accept="video/*"
-                      onChange={(e) => {
-                        if (e.target.files && e.target.files[0]) {
-                          const reader = new FileReader();
-                          reader.onload = (uploadEvent) => {
-                            setEditingArticle({ ...editingArticle, coverImage: uploadEvent.target.result, readTime: 'HD Video File' });
-                            showNotice('Updated video file successfully!');
-                          };
-                          reader.readAsDataURL(e.target.files[0]);
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              </div>
-
-              {/* MEDIA ATTACHMENTS: DOCUMENT / PDF FILE PICKER */}
-              <div className="p-3 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-2">
-                <label className="font-black text-emerald-700 text-[11px] uppercase tracking-wider block">📄 Document / PDF Attachment</label>
-                <div className="flex items-center gap-3">
-                  <label className="px-3.5 py-2 bg-white text-emerald-700 border border-emerald-200 font-bold rounded-xl hover:bg-emerald-50 cursor-pointer flex items-center gap-2 text-xs shadow-2xs">
-                    <FileText size={14} />
-                    <span>Attach Document (PDF, DOCX, ZIP)...</span>
-                    <input
-                      type="file"
-                      accept=".pdf,.doc,.docx,.zip,.ppt,.pptx"
-                      onChange={(e) => {
-                        if (e.target.files && e.target.files[0]) {
-                          const file = e.target.files[0];
-                          setEditingArticle({ ...editingArticle, documentName: file.name });
-                          showNotice(`Attached file "${file.name}" to entry.`);
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
-                  {editingArticle.documentName && (
-                    <span className="text-xs font-bold text-emerald-700 bg-white px-3 py-1.5 rounded-xl border border-emerald-200 shadow-2xs">
-                      📄 {editingArticle.documentName}
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <label className="font-bold text-slate-700">Full Article Story / Body Content</label>
+                    <span className="text-[10px] font-black text-[#1E90FF] bg-blue-100/70 px-2.5 py-0.5 rounded-lg border border-blue-200">
+                      {editingArticle.readTime || 'Story Body'}
                     </span>
-                  )}
+                  </div>
+                  <textarea
+                    rows="5"
+                    placeholder="Full story text, detailed press release, or event description..."
+                    value={editingArticle.fullContent || editingArticle.content || ''}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setEditingArticle((prev) => ({
+                        ...prev,
+                        fullContent: val
+                      }));
+                    }}
+                    className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                  ></textarea>
+                </div>
+              </div>
+
+              {/* SECTION 4: MEDIA STUDIO & ATTACHMENTS */}
+              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
+                <div className="text-[11px] font-black uppercase text-slate-700 tracking-wider">4. Media Studio &amp; Attachments</div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {/* IMAGE UPLOADER */}
+                  <div className="p-3 bg-blue-50/60 rounded-2xl border border-blue-200/80 space-y-2">
+                    <label className="font-black text-[#1E90FF] text-[10px] uppercase tracking-wider block">📷 Cover Photo / Image</label>
+                    <label className="w-full py-2 bg-white text-[#1E90FF] border border-blue-300 hover:bg-blue-50 font-bold rounded-xl cursor-pointer flex items-center justify-center gap-2 text-xs transition-all shadow-2xs">
+                      <Upload size={14} />
+                      <span>Upload Image...</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = (uploadEvent) => {
+                              setEditingArticle({ ...editingArticle, coverImage: uploadEvent.target.result });
+                              showNotice('Updated image file successfully!');
+                            };
+                            reader.readAsDataURL(e.target.files[0]);
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Or image URL..."
+                      value={editingArticle.coverImage || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, coverImage: e.target.value })}
+                      className="w-full p-2 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF] text-xs"
+                    />
+                    {editingArticle.coverImage && (
+                      <div className="flex items-center gap-2 pt-1">
+                        <img src={editingArticle.coverImage} alt="Preview" className="w-10 h-10 rounded-lg object-cover border border-blue-300 shadow-2xs" />
+                        <span className="text-[10px] font-bold text-emerald-600">✓ Image ready</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* VIDEO / YOUTUBE EMBED */}
+                  <div className="p-3 bg-red-50/60 rounded-2xl border border-red-200/80 space-y-2">
+                    <label className="font-black text-red-600 text-[10px] uppercase tracking-wider block">📹 Video / YouTube</label>
+                    <input
+                      type="text"
+                      placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)"
+                      value={editingArticle.youtubeId || ''}
+                      onChange={(e) => setEditingArticle({ ...editingArticle, youtubeId: e.target.value })}
+                      className="w-full p-2 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium focus:outline-none focus:border-red-500 text-xs"
+                    />
+                    <label className="w-full py-2 bg-white text-red-600 border border-red-300 hover:bg-red-50 font-bold rounded-xl cursor-pointer flex items-center justify-center gap-2 text-xs transition-all shadow-2xs">
+                      <Upload size={14} />
+                      <span>Upload Video File...</span>
+                      <input
+                        type="file"
+                        accept="video/*"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            const reader = new FileReader();
+                            reader.onload = (uploadEvent) => {
+                              setEditingArticle({ ...editingArticle, coverImage: uploadEvent.target.result, readTime: 'HD Video File' });
+                              showNotice('Updated video file successfully!');
+                            };
+                            reader.readAsDataURL(e.target.files[0]);
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+
+                  {/* DOCUMENT / PDF ATTACHMENT */}
+                  <div className="p-3 bg-emerald-50/60 rounded-2xl border border-emerald-200/80 space-y-2">
+                    <label className="font-black text-emerald-700 text-[10px] uppercase tracking-wider block">📄 Document / PDF</label>
+                    <label className="w-full py-2 bg-white text-emerald-700 border border-emerald-300 hover:bg-emerald-50 font-bold rounded-xl cursor-pointer flex items-center justify-center gap-2 text-xs transition-all shadow-2xs">
+                      <FileText size={14} />
+                      <span>Attach Document...</span>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx,.zip,.ppt,.pptx"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files[0]) {
+                            const file = e.target.files[0];
+                            setEditingArticle({ ...editingArticle, documentName: file.name });
+                            showNotice(`Attached file "${file.name}" to entry.`);
+                          }
+                        }}
+                        className="hidden"
+                      />
+                    </label>
+                    {editingArticle.documentName && (
+                      <span className="text-[10px] font-bold text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-300 block truncate shadow-2xs">
+                        📄 {editingArticle.documentName}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => { setShowEditArticleModal(false); setEditingArticle(null); }} className="px-5 py-2.5 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50">
+
+            {/* Actions Footer */}
+            <div className="pt-3 border-t border-slate-200 flex flex-col sm:flex-row justify-end gap-3 text-xs font-bold">
+              <button
+                type="button"
+                onClick={() => { setShowEditArticleModal(false); setEditingArticle(null); }}
+                className="px-6 py-3 border border-slate-300 hover:bg-slate-100 text-slate-700 rounded-xl font-bold transition-all"
+              >
                 Cancel
               </button>
-              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white rounded-xl shadow hover:brightness-110 font-black">
+              <button
+                type="submit"
+                className="px-8 py-3 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] hover:brightness-110 text-white font-black rounded-xl shadow-md transition-all"
+              >
                 Save Article Changes
               </button>
             </div>

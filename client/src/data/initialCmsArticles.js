@@ -1,4 +1,11 @@
-// YomTech Global Master Editable CMS Articles Dataset
+import gallery01 from '../assets/gallery/gallery 01.jpg';
+import gallery02 from '../assets/gallery/gallery 02.jpg';
+import gallery03 from '../assets/gallery/gallery 03.jpg';
+import gallery04 from '../assets/gallery/gallery 04.jpg';
+import gallery05 from '../assets/gallery/gallery 05.jpg';
+import gallery06 from '../assets/gallery/gallery 06.jpg';
+import gallery07 from '../assets/gallery/gallery 07.jpg';
+import gallery08 from '../assets/gallery/gallery 08.jpg';
 
 export const INITIAL_CMS_ARTICLES = [
   // 0. Services & Products Matrix
@@ -304,7 +311,8 @@ export const INITIAL_CMS_ARTICLES = [
     readTime: 'Photo Item 01',
     publishedDate: '2026-08-14',
     status: 'Published',
-    visibility: 'VISIBLE'
+    visibility: 'VISIBLE',
+    coverImage: gallery01
   },
   {
     id: 'art-19',
@@ -316,30 +324,31 @@ export const INITIAL_CMS_ARTICLES = [
     readTime: 'Photo Item 03',
     publishedDate: '2026-08-08',
     status: 'Published',
-    visibility: 'VISIBLE'
+    visibility: 'VISIBLE',
+    coverImage: gallery03
   },
 
   // 9. Video & Documentary Hub
   {
     id: 'art-20',
-    title: 'Video Broadcast: YomTech Global Pan-African Tech Vision Documentary',
+    title: 'YomTech Global Pan-African Tech Vision Documentary',
     category: 'Video & Documentary Hub',
     client: 'YomTech Media Channel (@yomtech)',
     author: 'YomTech Media Productions',
-    summary: 'Official channel documentary detailing our tech vision, satellite software engineering, and software academies. (1.4k views • 12:45)',
-    readTime: 'YouTube HD 1080p',
+    summary: 'Official channel documentary detailing our tech vision, satellite software engineering, and software academies.',
+    readTime: '12:45',
     publishedDate: '2026-08-20',
     status: 'Published',
     visibility: 'VISIBLE'
   },
   {
     id: 'art-21',
-    title: 'Video Demo: Yomnex ERP Product Tour & Feature Walkthrough',
+    title: 'Yomnex ERP Product Tour & Feature Walkthrough',
     category: 'Video & Documentary Hub',
     client: 'WabiSkills Channel (@WabiSkills)',
     author: 'Software Engineering Unit',
-    summary: 'Comprehensive feature walkthrough of Yomnex ERP 4.0 financial reconciliation and inventory scanning. (1.4k views • 08:20)',
-    readTime: 'YouTube HD 1080p',
+    summary: 'Comprehensive feature walkthrough of Yomnex ERP 4.0 financial reconciliation and inventory scanning.',
+    readTime: '08:20',
     publishedDate: '2026-08-22',
     status: 'Published',
     visibility: 'VISIBLE'

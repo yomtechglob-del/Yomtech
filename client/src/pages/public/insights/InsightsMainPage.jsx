@@ -55,7 +55,8 @@ import {
   Briefcase,
   Layers,
   HelpCircle,
-  Newspaper
+  Newspaper,
+  Tv
 } from 'lucide-react';
 
 // Partner Logos for bottom logo showcase
@@ -244,7 +245,8 @@ export const InsightsMainPage = () => {
       location: a.client || 'Hybrid (Addis Ababa)',
       category: a.category || 'Upcoming Events & Webinars',
       description: a.summary || 'YomTech Global tech event.',
-      speakers: a.author ? [a.author] : ['YomTech Leadership']
+      speakers: a.author ? [a.author] : ['YomTech Leadership'],
+      coverImage: a.coverImage || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
     };
   });
   const activeEvents = customEventsFormatted.length > 0 ? customEventsFormatted : EVENTS;
@@ -255,7 +257,8 @@ export const InsightsMainPage = () => {
     title: a.title,
     date: a.publishedDate || 'AUG 2026',
     category: a.category,
-    summary: a.summary || 'Official corporate announcement.'
+    summary: a.summary || 'Official corporate announcement.',
+    coverImage: a.coverImage || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80'
   }));
   const activeAnnouncements = customAnnouncementsFormatted.length > 0 ? customAnnouncementsFormatted : ANNOUNCEMENTS;
 
@@ -265,7 +268,8 @@ export const InsightsMainPage = () => {
     title: a.title,
     client: a.client || 'Enterprise Client',
     summary: a.summary || 'Enterprise solution case study.',
-    techStack: a.readTime || 'React, Node.js, PostgreSQL'
+    techStack: a.readTime || 'React, Node.js, PostgreSQL',
+    coverImage: a.coverImage || 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'
   }));
   const activeProjects = customProjectsFormatted.length > 0 ? customProjectsFormatted : PROJECTS_CASE_STUDIES;
 
@@ -294,7 +298,8 @@ export const InsightsMainPage = () => {
     id: a.id,
     caption: a.title,
     category: a.readTime || 'Showcase',
-    image: a.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.image
+    src: a.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.src,
+    image: a.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.src
   }));
   const activeGallery = customGalleryFormatted.length > 0 ? customGalleryFormatted : PHOTO_GALLERY;
 
@@ -302,9 +307,12 @@ export const InsightsMainPage = () => {
   const customVideosFormatted = displayVideos.map((a, idx) => ({
     id: a.id,
     title: a.title,
+    category: a.category && !a.category.toLowerCase().includes('cms') ? a.category : 'Media Production',
     channel: a.client || '@yomtech',
-    duration: a.readTime || '10:00',
-    videoUrl: a.videoUrl || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.videoUrl
+    duration: (a.readTime && !a.readTime.toLowerCase().includes('read') && !a.readTime.toLowerCase().includes('hd')) ? a.readTime : (a.duration || '12:45'),
+    videoUrl: a.videoUrl || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.videoUrl,
+    youtubeId: a.youtubeId || (a.videoUrl ? (a.videoUrl.includes('v=') ? a.videoUrl.split('v=')[1] : a.videoUrl) : VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.youtubeId || 'dQw4w9WgXcQ'),
+    thumbnail: a.coverImage || VIDEO_GALLERY[idx % VIDEO_GALLERY.length]?.thumbnail
   }));
   const activeVideos = customVideosFormatted.length > 0 ? customVideosFormatted : VIDEO_GALLERY;
 
@@ -314,7 +322,8 @@ export const InsightsMainPage = () => {
     title: a.title,
     outlet: a.client || 'EBC Television',
     date: a.publishedDate || 'August 2026',
-    type: a.readTime || 'TELEVISION INTERVIEW'
+    type: a.readTime || 'TELEVISION INTERVIEW',
+    coverImage: a.coverImage
   }));
   const activeMedia = customMediaFormatted.length > 0 ? customMediaFormatted : MEDIA_APPEARANCES;
 
@@ -323,7 +332,8 @@ export const InsightsMainPage = () => {
     id: a.id,
     title: a.title,
     date: a.publishedDate || 'August 2026',
-    summary: a.summary || 'Corporate press release.'
+    summary: a.summary || 'Corporate press release.',
+    coverImage: a.coverImage
   }));
   const activePress = customPressFormatted.length > 0 ? customPressFormatted : PRESS_RELEASES;
 
@@ -988,15 +998,19 @@ export const InsightsMainPage = () => {
 
             <div className="space-y-4">
               {activeEvents.map((evt, idx) => (
-                <div key={evt.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm hover:border-[#1E90FF] transition-all">
+                <div key={evt.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm hover:border-[#1E90FF] transition-all group">
                   <div className="flex items-center gap-5">
-                    <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black">
-                      <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth || 'SEP'}</span>
-                      <span className="text-2xl leading-none">{evt.dateDay || '15'}</span>
-                    </div>
+                    {evt.coverImage ? (
+                      <img src={evt.coverImage} alt={evt.title} className="w-18 h-18 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs group-hover:scale-105 transition-transform" />
+                    ) : (
+                      <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black">
+                        <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth || 'SEP'}</span>
+                        <span className="text-2xl leading-none">{evt.dateDay || '15'}</span>
+                      </div>
+                    )}
                     <div className="space-y-1">
                       <span className="px-2.5 py-0.5 bg-blue-100 text-[#1E90FF] text-[10px] font-black rounded-md">{evt.category || 'Hybrid Event'}</span>
-                      <h3 className="font-extrabold text-sm text-slate-900">{evt.title}</h3>
+                      <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-[#1E90FF] transition-colors">{evt.title}</h3>
                       <div className="text-[11px] text-slate-400 font-medium">{evt.location || 'Hybrid (Addis Ababa)'} &bull; {evt.time || '09:00 AM'}</div>
                     </div>
                   </div>
@@ -1021,12 +1035,17 @@ export const InsightsMainPage = () => {
 
             <div className="space-y-4">
               {activeAnnouncements.map((ann, idx) => (
-                <div key={ann.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 space-y-3 shadow-sm hover:border-cyan-300 transition-all">
+                <div key={ann.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 space-y-3 shadow-sm hover:border-cyan-300 transition-all group">
+                  {ann.coverImage && (
+                    <div className="relative h-40 rounded-2xl overflow-hidden border border-slate-200 mb-2">
+                      <img src={ann.coverImage} alt={ann.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
+                  )}
                   <div className="flex justify-between items-center text-[10px] font-black">
                     <span className="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-lg">{ann.priority || 'FEATURED'}</span>
                     <span className="text-slate-400">{ann.date || 'August 2026'}</span>
                   </div>
-                  <h3 className="font-extrabold text-sm text-slate-900">{ann.title}</h3>
+                  <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-[#1E90FF] transition-colors">{ann.title}</h3>
                   <p className="text-xs text-slate-600 font-medium leading-relaxed">{ann.summary}</p>
                 </div>
               ))}
@@ -1051,10 +1070,15 @@ export const InsightsMainPage = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {activeProjects.map((proj, idx) => (
-            <div key={proj.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-5 shadow-sm hover:shadow-xl hover:border-[#1E90FF]/60 transition-all duration-300 flex flex-col justify-between">
+            <div key={proj.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-7 space-y-5 shadow-sm hover:shadow-xl hover:border-[#1E90FF]/60 transition-all duration-300 flex flex-col justify-between group">
               <div className="space-y-3">
+                {proj.coverImage && (
+                  <div className="relative h-44 rounded-2xl overflow-hidden border border-slate-200 mb-3">
+                    <img src={proj.coverImage} alt={proj.name || proj.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
                 <div className="text-xs font-black text-[#1E90FF] uppercase tracking-wider">{proj.client || proj.industry || 'Enterprise Project'}</div>
-                <h3 className="text-xl font-black text-slate-900">{proj.name || proj.title}</h3>
+                <h3 className="text-xl font-black text-slate-900 group-hover:text-[#1E90FF] transition-colors">{proj.name || proj.title}</h3>
                 <div className="space-y-1.5 text-xs text-slate-600 font-medium">
                   <div><strong>Challenge:</strong> {proj.challenge || 'Scaling multi-department data workflows.'}</div>
                   <div className="text-emerald-600 font-bold"><strong>Impact:</strong> {proj.results || 'Streamlined core operations by 95%.'}</div>
@@ -1146,15 +1170,15 @@ export const InsightsMainPage = () => {
             </Link>
           </div>
 
-          {/* 4 Preview Photos Grid */}
+          {/* 8 Photo Showcase Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {activeGallery.slice(0, 4).map((photo, idx) => (
+            {(activeGallery.length > 0 ? activeGallery : PHOTO_GALLERY).map((photo, idx) => (
               <div
                 key={photo.id || idx}
-                onClick={() => setSelectedPhoto({ src: photo.image || photo.src || photo.coverImage, caption: photo.caption || photo.title, description: photo.category })}
+                onClick={() => setSelectedPhoto({ src: photo.src || photo.image || photo.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.src, caption: photo.caption || photo.title, description: photo.category })}
                 className="relative h-56 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-200 group cursor-pointer bg-white"
               >
-                <img src={photo.image || photo.src || photo.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.image} alt={photo.caption || photo.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <img src={photo.src || photo.image || photo.coverImage || PHOTO_GALLERY[idx % PHOTO_GALLERY.length]?.src} alt={photo.caption || photo.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end text-white text-xs font-bold space-y-1">
                   <span className="px-2 py-0.5 bg-[#1E90FF] text-white text-[9px] font-black rounded w-max uppercase">{photo.category || 'Showcase'}</span>
                   <span className="line-clamp-2 leading-snug">{photo.caption || photo.title}</span>
@@ -1292,13 +1316,22 @@ export const InsightsMainPage = () => {
 
           <div className="space-y-4">
             {activeMedia.map((m, idx) => (
-              <div key={m.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex items-center justify-between shadow-sm hover:border-[#1E90FF] transition-all">
-                <div className="space-y-1.5">
-                  <span className="px-3 py-1 bg-blue-50 border border-blue-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{m.type || 'MEDIA INTERVIEW'}</span>
-                  <h3 className="font-extrabold text-base text-slate-900">{m.title}</h3>
-                  <div className="text-xs text-slate-400 font-medium">{m.outlet || 'Broadcasting'} &bull; {m.date || 'August 2026'}</div>
+              <div key={m.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm hover:border-[#1E90FF] transition-all group">
+                <div className="flex items-center gap-5">
+                  {m.coverImage ? (
+                    <img src={m.coverImage} alt={m.title} className="w-18 h-18 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs group-hover:scale-105 transition-transform" />
+                  ) : (
+                    <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E90FF] shrink-0 font-black">
+                      <Tv size={24} />
+                    </div>
+                  )}
+                  <div className="space-y-1.5">
+                    <span className="px-3 py-1 bg-blue-50 border border-blue-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{m.type || 'MEDIA INTERVIEW'}</span>
+                    <h3 className="font-extrabold text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors">{m.title}</h3>
+                    <div className="text-xs text-slate-400 font-medium">{m.outlet || 'Broadcasting'} &bull; {m.date || 'August 2026'}</div>
+                  </div>
                 </div>
-                <a href={m.url || '#'} target="_blank" rel="noreferrer" className="p-3 text-[#1E90FF] hover:scale-110 transition-transform">
+                <a href={m.url || '#'} target="_blank" rel="noreferrer" className="p-3 text-[#1E90FF] hover:scale-110 transition-transform shrink-0">
                   <ExternalLink size={20} />
                 </a>
               </div>
@@ -1315,12 +1348,17 @@ export const InsightsMainPage = () => {
 
           <div className="space-y-4">
             {activePress.map((pr, idx) => (
-              <div key={pr.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex items-center justify-between shadow-sm hover:border-[#0ED3DD] transition-all">
-                <div className="space-y-1.5">
-                  <h3 className="font-extrabold text-base text-slate-900">{pr.title}</h3>
-                  <p className="text-xs text-slate-500 font-medium">{pr.summary}</p>
+              <div key={pr.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm hover:border-[#0ED3DD] transition-all group">
+                <div className="flex items-center gap-5">
+                  {pr.coverImage && (
+                    <img src={pr.coverImage} alt={pr.title} className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs group-hover:scale-105 transition-transform" />
+                  )}
+                  <div className="space-y-1.5">
+                    <h3 className="font-extrabold text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors">{pr.title}</h3>
+                    <p className="text-xs text-slate-500 font-medium line-clamp-2">{pr.summary}</p>
+                  </div>
                 </div>
-                <span className="text-xs font-black text-[#1E90FF]">{pr.date || 'August 2026'}</span>
+                <span className="text-xs font-black text-[#1E90FF] shrink-0">{pr.date || 'August 2026'}</span>
               </div>
             ))}
           </div>
@@ -1742,7 +1780,26 @@ export const InsightsMainPage = () => {
         </div>
       )}
 
-      {/* 17. FLOATING TOAST NOTIFICATION */}
+      {/* 17. PHOTO LIGHTBOX MODAL */}
+      {selectedPhoto && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/90 backdrop-blur-xl flex items-center justify-center p-4" onClick={() => setSelectedPhoto(null)}>
+          <div className="relative max-w-4xl w-full bg-white text-slate-900 rounded-3xl p-6 sm:p-8 space-y-4 shadow-2xl border border-blue-100 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setSelectedPhoto(null)} className="absolute top-4 right-4 p-2.5 rounded-full bg-blue-50 text-[#1E90FF] hover:bg-blue-100 font-bold z-10">
+              <X size={20} />
+            </button>
+            <div className="relative h-96 sm:h-[500px] rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
+              <img src={selectedPhoto.src} alt={selectedPhoto.caption} className="w-full h-full object-contain" />
+            </div>
+            <div className="space-y-1">
+              <span className="px-3 py-1 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded-lg uppercase">{selectedPhoto.description || 'Corporate Event'}</span>
+              <h3 className="text-xl font-black text-slate-900">{selectedPhoto.caption}</h3>
+              <p className="text-xs text-slate-500 font-medium">YomTech Global Official Event Photography Archive</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 18. FLOATING TOAST NOTIFICATION */}
       {toastNotice && (
         <div className="fixed bottom-6 right-6 z-50 px-5 py-3.5 bg-[#03045E] text-white font-extrabold text-xs rounded-2xl shadow-2xl border border-cyan-400/40 flex items-center gap-3 animate-in slide-in-from-bottom-5">
           <Sparkles size={16} className="text-[#0ED3DD] animate-pulse shrink-0" />

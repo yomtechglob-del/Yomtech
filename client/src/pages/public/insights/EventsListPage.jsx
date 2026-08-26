@@ -85,7 +85,8 @@ export const EventsListPage = () => {
       time: (evt.readTime && !evt.readTime.toLowerCase().includes('read')) ? evt.readTime : (evt.time || '09:00 AM EAT'),
       location: evt.client || evt.location || 'Hybrid (Addis Ababa)',
       description: evt.summary || evt.description || 'YomTech Global tech event.',
-      speakers: evt.speakers || (evt.author ? [evt.author] : ['YomTech Leadership'])
+      speakers: evt.speakers || (evt.author ? [evt.author] : ['YomTech Leadership']),
+      coverImage: evt.coverImage
     };
   });
 
@@ -118,10 +119,14 @@ export const EventsListPage = () => {
           {eventsToUse.map((evt) => (
             <div key={evt.id} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 shadow-sm hover:border-[#1E90FF] hover:shadow-xl transition-all duration-300">
               <div className="flex items-center gap-5">
-                <div className="w-18 h-18 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black p-3">
-                  <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth}</span>
-                  <span className="text-2xl leading-none">{evt.dateDay}</span>
-                </div>
+                {evt.coverImage ? (
+                  <img src={evt.coverImage} alt={evt.title} className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs" />
+                ) : (
+                  <div className="w-18 h-18 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black p-3">
+                    <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth}</span>
+                    <span className="text-2xl leading-none">{evt.dateDay}</span>
+                  </div>
+                )}
                 <div className="space-y-1.5">
                   <span className="px-3 py-0.5 bg-blue-100 text-[#1E90FF] text-[10px] font-black rounded-md">{evt.type}</span>
                   <h3 className="font-extrabold text-base text-slate-900">{evt.title}</h3>
