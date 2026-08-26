@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { fetchPublicCmsCategoryApi } from '../../../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AboutHeroBackground } from '../../../components/common/AboutHeroBackground';
+import { INITIAL_CMS_ARTICLES } from '../../../data/initialCmsArticles';
 import {
   FEATURED_STORY,
   NEWS_ITEMS,
@@ -92,12 +93,18 @@ export const InsightsMainPage = () => {
     const saved = localStorage.getItem('yomtech_cms_articles');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
       } catch (e) {
         console.error(e);
       }
     }
-    return null;
+    try {
+      localStorage.setItem('yomtech_cms_articles', JSON.stringify(INITIAL_CMS_ARTICLES));
+    } catch (e) {
+      console.error(e);
+    }
+    return INITIAL_CMS_ARTICLES;
   });
 
   React.useEffect(() => {
@@ -119,11 +126,9 @@ export const InsightsMainPage = () => {
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          const activeNonExpired = parsed.filter((a) => {
-            const isPastExpiry = a.expiryDate && new Date(a.expiryDate) < new Date();
-            return (a.visibility === 'VISIBLE' || a.visibility === 'PUBLIC') && (a.status === 'Published' || a.status === 'PUBLISHED') && !isPastExpiry;
-          });
-          setLiveArticles(activeNonExpired);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setLiveArticles(parsed);
+          }
         } catch (e) {
           console.error(e);
         }
@@ -216,16 +221,32 @@ export const InsightsMainPage = () => {
   const activeBlogArticles = customBlogFormatted.length > 0 ? customBlogFormatted : BLOG_ARTICLES;
 
   const displayEvents = articlesPool.filter((a) => ['Upcoming Events & Webinars', 'Events', 'Webinars', 'cms-events'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
-  const customEventsFormatted = displayEvents.map((a, idx) => ({
-    id: a.id,
-    title: a.title,
-    date: a.publishedDate || 'SEP 15, 2026',
-    time: a.readTime || '09:00 AM EAT',
-    location: a.client || 'Hybrid (Addis Ababa)',
-    category: a.category,
-    description: a.summary || 'YomTech Global tech event.',
-    speakers: a.author ? [a.author] : ['YomTech Leadership']
-  }));
+  const customEventsFormatted = displayEvents.map((a, idx) => {
+    const rawDate = a.publishedDate || a.date || '2026-09-15';
+    let dateMonth = 'SEP';
+    let dateDay = '15';
+    try {
+      const d = new Date(rawDate);
+      if (!isNaN(d.getTime())) {
+        dateMonth = d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+        dateDay = d.getDate().toString();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return {
+      id: a.id,
+      title: a.title,
+      date: rawDate,
+      dateMonth,
+      dateDay,
+      time: (a.readTime && !a.readTime.toLowerCase().includes('read')) ? a.readTime : (a.eventTime || '09:00 AM EAT'),
+      location: a.client || 'Hybrid (Addis Ababa)',
+      category: a.category || 'Upcoming Events & Webinars',
+      description: a.summary || 'YomTech Global tech event.',
+      speakers: a.author ? [a.author] : ['YomTech Leadership']
+    };
+  });
   const activeEvents = customEventsFormatted.length > 0 ? customEventsFormatted : EVENTS;
 
   const displayAnnouncements = articlesPool.filter((a) => ['Official Announcements', 'Announcements', 'Bulletins', 'cms-announcements'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
@@ -635,14 +656,14 @@ export const InsightsMainPage = () => {
       <section className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 my-12">
         <div className="bg-white/80 backdrop-blur-md border border-slate-200/80 rounded-3xl p-4 flex flex-wrap justify-center items-center gap-3 shadow-sm">
           {[
-            { label: 'Enterprise Software', count: 68 },
-            { label: 'Artificial Intelligence', count: 116 },
-            { label: 'Financial Recon & ERP', count: 76 },
-            { label: 'Cybersecurity & INSA', count: 26 },
-            { label: 'WabiSkills Academy', count: 65 },
-            { label: 'Geospatial & SSGI', count: 120 },
-            { label: 'GovTech & MInT', count: 63 },
-            { label: 'Documentaries', count: 88 },
+            { label: 'Services & Products Matrix', count: activeProductsMatrix.length },
+            { label: 'Corporate News & Articles', count: activeNewsItems.length },
+            { label: 'Tech Articles & Engineering', count: activeBlogArticles.length },
+            { label: 'Upcoming Events & Webinars', count: activeEvents.length },
+            { label: 'Official Announcements', count: activeAnnouncements.length },
+            { label: 'Featured Project Case Studies', count: activeProjects.length },
+            { label: 'Executive Team Members', count: activeTeamSpotlights.length },
+            { label: 'Client & Learner Testimonials', count: activeTestimonials.length },
           ].map((cat, idx) => (
             <button
               key={idx}

@@ -64,16 +64,30 @@ export const EventsListPage = () => {
     };
   }, []);
 
-  const eventsToUse = liveEventsPool.map((evt, idx) => ({
-    id: evt.id || `evt-${idx}`,
-    title: evt.title,
-    dateMonth: evt.dateMonth || 'SEP',
-    dateDay: evt.dateDay || '15',
-    time: evt.time || evt.readTime || '09:00 AM EAT',
-    location: evt.location || evt.client || 'Hybrid (Addis Ababa)',
-    description: evt.description || evt.summary || 'YomTech Global tech event.',
-    speakers: evt.speakers || (evt.author ? [evt.author] : ['YomTech Leadership'])
-  }));
+  const eventsToUse = liveEventsPool.map((evt, idx) => {
+    const rawDate = evt.publishedDate || evt.date || '2026-09-15';
+    let dateMonth = 'SEP';
+    let dateDay = '15';
+    try {
+      const d = new Date(rawDate);
+      if (!isNaN(d.getTime())) {
+        dateMonth = d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
+        dateDay = d.getDate().toString();
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    return {
+      id: evt.id || `evt-${idx}`,
+      title: evt.title,
+      dateMonth,
+      dateDay,
+      time: (evt.readTime && !evt.readTime.toLowerCase().includes('read')) ? evt.readTime : (evt.time || '09:00 AM EAT'),
+      location: evt.client || evt.location || 'Hybrid (Addis Ababa)',
+      description: evt.summary || evt.description || 'YomTech Global tech event.',
+      speakers: evt.speakers || (evt.author ? [evt.author] : ['YomTech Leadership'])
+    };
+  });
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] text-slate-900 font-sans transition-colors">
