@@ -47,49 +47,49 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
   ];
 
   return (
-    <aside className={`transition-all duration-300 flex flex-col justify-between border-r h-screen sticky top-0 shrink-0 z-30 ${
-      isDarkMode
-        ? 'bg-[#03045E] border-cyan-500/30 text-white shadow-[6px_0_24px_rgba(0,0,0,0.25)]'
-        : 'bg-white border-slate-200/80 text-slate-900 shadow-[6px_0_20px_rgba(0,0,0,0.035)]'
-    } ${isCollapsed ? 'w-20 p-3.5' : 'w-64 p-5'}`}>
-      <div className="space-y-6 overflow-y-auto max-h-[calc(100vh-80px)] pr-1 scrollbar-none">
+    <aside className={`transition-all duration-300 flex flex-col justify-between border-r h-screen sticky top-0 shrink-0 z-30 bg-slate-50/90 border-slate-200 text-slate-800 ${
+      isCollapsed ? 'w-20 p-3' : 'w-64 p-4'
+    }`}>
+      <div className="space-y-5 overflow-y-auto max-h-[calc(100vh-70px)] pr-0 scrollbar-none">
         
-        {/* Brand Header matching screenshot design */}
-        <div className={`flex flex-col border-b pb-4 ${isDarkMode ? 'border-cyan-500/30' : 'border-slate-100'}`}>
+        {/* Top Brand Logo Box Matching Reference Layout */}
+        <div className="p-3.5 bg-white border border-slate-200/90 rounded-3xl shadow-xs space-y-2 relative">
           <div className="flex items-center justify-between">
-            <Link to="/" className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] p-0.5 shadow-xs flex items-center justify-center shrink-0" title="Go to YomTech Global Home">
-              <img src={logoImg} alt="Yomtech Logo" className="w-full h-full object-cover rounded-full bg-white" />
+            <Link
+              to="/"
+              className={`${isCollapsed ? 'w-10 h-10' : 'w-12 h-12'} rounded-full border border-slate-200/90 bg-white flex items-center justify-center p-1 shadow-xs hover:scale-105 transition-transform`}
+              title="Go to YomTech Global Home"
+            >
+              <img src={logoImg} alt="Yomtech Logo" className="w-full h-full object-cover rounded-full" />
             </Link>
+
             <button
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className={`p-1.5 rounded-lg border transition-all ${
-                isDarkMode
-                  ? 'bg-blue-900/50 border-cyan-400/30 text-cyan-300 hover:text-white'
-                  : 'bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100'
-              }`}
+              className="p-1.5 rounded-xl border border-slate-200/80 bg-slate-50 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
               title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
-              {isCollapsed ? <ChevronRight size={15} /> : <ChevronLeft size={15} />}
+              {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
             </button>
           </div>
 
           {!isCollapsed && (
-            <div className="mt-3">
-              <div className={`font-black text-sm tracking-tight leading-snug ${isDarkMode ? 'text-white' : 'text-slate-900'}`}>
-                YomTech Global
+            <div className="pt-1">
+              <div className="flex items-center gap-1.5 text-xs font-black text-slate-900">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shadow-xs shrink-0" />
+                <span className="truncate">YomTech Global</span>
               </div>
-              <div className="text-[11px] font-bold text-slate-500">
-                Admin Control Gateway
+              <div className="text-[10px] font-black text-blue-600 uppercase tracking-wider pl-3.5 pt-0.5">
+                ADMIN DASHBOARD
               </div>
             </div>
           )}
         </div>
 
-        {/* MAIN OPERATIONS */}
+        {/* DASHBOARD & MAIN */}
         <div>
           {!isCollapsed && (
             <div className="text-[10px] uppercase font-black tracking-widest text-slate-400 px-3 mb-2">
-              MAIN
+              DASHBOARD
             </div>
           )}
           <nav className="space-y-1">
@@ -100,22 +100,23 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
                 <button
                   key={item.id}
                   onClick={() => setActiveTab && setActiveTab(item.id)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-bold text-xs transition-all ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl font-bold text-xs transition-all relative cursor-pointer ${
                     isActive
-                      ? isDarkMode
-                        ? 'bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black shadow-md'
-                        : 'bg-emerald-50 text-emerald-900 border border-emerald-200/60 font-black'
-                      : isDarkMode
-                      ? 'text-slate-200 hover:bg-blue-900/40 hover:text-[#0ED3DD]'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-blue-50/90 text-blue-700 font-extrabold border border-blue-200/80 shadow-2xs'
+                      : 'text-slate-600 font-semibold hover:text-slate-900 hover:bg-slate-100/70'
                   }`}
                 >
+                  {isActive && (
+                    <div className="absolute left-0 top-2 bottom-2 w-1 bg-blue-600 rounded-r-full" />
+                  )}
                   <div className="flex items-center gap-3">
-                    <Icon size={16} className={isActive ? (isDarkMode ? 'text-white' : 'text-emerald-700') : 'text-slate-500'} />
-                    {!isCollapsed && <span>{item.label}</span>}
+                    <Icon size={16} className={isActive ? 'text-blue-600' : 'text-slate-400'} />
+                    {!isCollapsed && <span className="truncate">{item.label}</span>}
                   </div>
                   {!isCollapsed && item.badge && (
-                    <span className="px-2 py-0.5 text-[10px] font-black rounded-full bg-slate-200 text-slate-700">
+                    <span className={`px-2 py-0.5 text-[10px] font-extrabold rounded-full ${
+                      isActive ? 'bg-blue-600 text-white' : 'bg-slate-200 text-slate-700'
+                    }`}>
                       {item.badge}
                     </span>
                   )}
@@ -125,11 +126,11 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
           </nav>
         </div>
 
-        {/* CONTENT MANAGEMENT SYSTEM (CMS) */}
+        {/* CORE OPERATIONAL & CMS MODULES */}
         <div>
           {!isCollapsed && (
             <div className="text-[10px] uppercase font-black tracking-widest text-slate-400 px-3 mb-2">
-              CMS MANAGEMENT
+              CORE OPERATIONAL MODULES
             </div>
           )}
           <nav className="space-y-1">
@@ -140,17 +141,16 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
                 <button
                   key={item.id}
                   onClick={() => setActiveTab && setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs transition-all ${
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs transition-all relative cursor-pointer ${
                     isActive
-                      ? isDarkMode
-                        ? 'bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black shadow-md'
-                        : 'bg-emerald-50 text-emerald-900 border border-emerald-200/60 font-black'
-                      : isDarkMode
-                      ? 'text-slate-200 hover:bg-blue-900/40 hover:text-[#0ED3DD]'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-blue-50/90 text-blue-700 font-extrabold border border-blue-200/80 shadow-2xs'
+                      : 'text-slate-600 font-semibold hover:text-slate-900 hover:bg-slate-100/70'
                   }`}
                 >
-                  <Icon size={16} className={isActive ? (isDarkMode ? 'text-white' : 'text-emerald-700') : 'text-slate-500'} />
+                  {isActive && (
+                    <div className="absolute left-0 top-2 bottom-2 w-1 bg-blue-600 rounded-r-full" />
+                  )}
+                  <Icon size={16} className={isActive ? 'text-blue-600' : 'text-slate-400'} />
                   {!isCollapsed && <span className="truncate">{item.label}</span>}
                 </button>
               );
@@ -158,11 +158,11 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
           </nav>
         </div>
 
-        {/* ADMINISTRATION & SECURITY */}
+        {/* INSTITUTION MODULES & SECURITY */}
         <div>
           {!isCollapsed && (
             <div className="text-[10px] uppercase font-black tracking-widest text-slate-400 px-3 mb-2">
-              ADMIN &amp; SECURITY
+              INSTITUTION &amp; SECURITY
             </div>
           )}
           <nav className="space-y-1">
@@ -173,18 +173,17 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
                 <button
                   key={item.id}
                   onClick={() => setActiveTab && setActiveTab(item.id)}
-                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs transition-all ${
+                  className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-2xl font-bold text-xs transition-all relative cursor-pointer ${
                     isActive
-                      ? isDarkMode
-                        ? 'bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black shadow-md'
-                        : 'bg-emerald-50 text-emerald-900 border border-emerald-200/60 font-black'
-                      : isDarkMode
-                      ? 'text-slate-200 hover:bg-blue-900/40 hover:text-[#0ED3DD]'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-blue-50/90 text-blue-700 font-extrabold border border-blue-200/80 shadow-2xs'
+                      : 'text-slate-600 font-semibold hover:text-slate-900 hover:bg-slate-100/70'
                   }`}
                 >
-                  <Icon size={16} className={isActive ? (isDarkMode ? 'text-white' : 'text-emerald-700') : 'text-slate-500'} />
-                  {!isCollapsed && <span>{item.label}</span>}
+                  {isActive && (
+                    <div className="absolute left-0 top-2 bottom-2 w-1 bg-blue-600 rounded-r-full" />
+                  )}
+                  <Icon size={16} className={isActive ? 'text-blue-600' : 'text-slate-400'} />
+                  {!isCollapsed && <span className="truncate">{item.label}</span>}
                 </button>
               );
             })}
@@ -192,26 +191,24 @@ export const AdminSidebar = ({ user, activeTab = 'leads', setActiveTab, isCollap
         </div>
       </div>
 
-      {/* Footer Section */}
-      <div className={`space-y-2 pt-4 border-t ${isDarkMode ? 'border-cyan-500/30' : 'border-slate-100'}`}>
+      {/* Footer Logout Matching Reference Layout */}
+      <div className="pt-3 border-t border-slate-200/80 flex items-center justify-between">
         <Link
           to="/"
           target="_blank"
-          className={`flex items-center gap-2 px-3 py-2 text-xs font-bold rounded-xl transition-all ${
-            isDarkMode ? 'text-cyan-200 hover:text-white hover:bg-blue-900/50' : 'text-slate-600 hover:text-[#1E90FF] hover:bg-slate-100'
-          }`}
+          className="flex items-center gap-2 px-2.5 py-1.5 text-xs font-bold rounded-xl text-slate-600 hover:text-blue-600 transition-colors"
+          title="View Live Website"
         >
-          <Globe size={16} />
-          {!isCollapsed && <span>View Live Website</span>}
-          {!isCollapsed && <ExternalLink size={12} className="ml-auto opacity-70" />}
+          <Globe size={15} />
+          {!isCollapsed && <span>Live Site</span>}
         </Link>
 
         <button
           onClick={handleLogout}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-red-600 dark:text-red-300 hover:bg-red-50 dark:hover:bg-red-950/60 border border-red-200 dark:border-red-800/60 font-bold text-xs transition-all"
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl text-slate-600 hover:text-red-600 font-bold text-xs transition-colors cursor-pointer"
         >
-          <LogOut size={16} />
-          {!isCollapsed && <span>Sign Out</span>}
+          <LogOut size={15} />
+          {!isCollapsed && <span>Logout</span>}
         </button>
       </div>
     </aside>

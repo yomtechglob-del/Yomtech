@@ -56,7 +56,8 @@ import {
   Layers,
   HelpCircle,
   Newspaper,
-  Tv
+  Tv,
+  MapPin
 } from 'lucide-react';
 
 // Partner Logos for bottom logo showcase
@@ -478,186 +479,83 @@ export const InsightsMainPage = () => {
       {/* 02. TOP 3-COLUMN GLASSMORPHIC CARDS GRID (MODULE 1: NEWS & EDITORIAL SPOTLIGHT) */}
       <section className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* Card 1: Geospatial SSGI / Featured Hero Story */}
-          <div
-            onClick={() => {
-              const target = activeNewsItems.find((a) => a.id === FEATURED_STORY.id || a.title?.includes('SSGI') || a.title?.includes('Satellite')) || { ...FEATURED_STORY, id: 'featured-1' };
-              setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 450) + 1 }));
-              setReadingArticle(target);
-            }}
-            className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer"
-          >
-            <img src={FEATURED_STORY.coverImage} alt={FEATURED_STORY.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-            
-            {/* Frosted Glass Overlay Card */}
-            <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
-              <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                <span
-                  onClick={(e) => { e.stopPropagation(); setActiveTab('ALL'); setSearchQuery('Geospatial'); }}
-                  className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-lg uppercase cursor-pointer hover:bg-blue-100"
-                >
-                  Geospatial
-                </span>
-                <span className="flex items-center gap-2">
-                  <span>Aug 20, 2026</span>
-                  <span>&bull;</span>
-                  <span>6 mins read</span>
-                </span>
-                <div className="flex items-center gap-2 text-slate-400">
-                  <Bookmark
-                    size={14}
-                    className={`cursor-pointer transition-colors ${bookmarksMap['featured-1'] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleToggleBookmark('featured-1', FEATURED_STORY.title);
-                    }}
-                  />
-                  <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap['featured-1'] || 450}</span>
-                </div>
-              </div>
+          {(() => {
+            // Derive 3 distinct items for top spotlight cards
+            const card1 = activeNewsItems[0] || { ...FEATURED_STORY, id: 'featured-1' };
+            const card2 = activeNewsItems.find((a) => a.id !== card1.id) || activeNewsItems[1] || NEWS_ITEMS[1];
+            const card3 = activeNewsItems.find((a) => a.id !== card1.id && a.id !== card2.id) || activeBlogArticles[0] || NEWS_ITEMS[2];
 
-              <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
-                {FEATURED_STORY.title}
-              </h3>
+            const topCards = [card1, card2, card3];
 
-              <div className="flex justify-between items-center pt-1">
-                <span className="text-[11px] font-bold text-slate-500">By Ermias Alemayehu</span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const target = activeNewsItems.find((a) => a.id === FEATURED_STORY.id || a.title?.includes('SSGI') || a.title?.includes('Satellite')) || { ...FEATURED_STORY, id: 'featured-1' };
-                    setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 450) + 1 }));
-                    setReadingArticle(target);
+            return topCards.map((story, cardIdx) => {
+              const storyId = story.id || `spotlight-${cardIdx}`;
+              const category = story.category || (cardIdx === 0 ? 'Geospatial' : cardIdx === 1 ? 'Enterprise ERP' : 'Tech Talent');
+              const readTime = story.readTime || '5 mins read';
+              const date = story.date || story.publishedDate || 'AUG 2026';
+              const author = story.author || (cardIdx === 0 ? 'Ermias Alemayehu' : 'YomTech Editorial');
+              const coverImage = story.coverImage || (cardIdx === 0 ? FEATURED_STORY.coverImage : NEWS_ITEMS[cardIdx % NEWS_ITEMS.length]?.coverImage);
+
+              return (
+                <div
+                  key={storyId}
+                  onClick={() => {
+                    setLikesMap((prev) => ({ ...prev, [storyId]: (prev[storyId] || 450) + 1 }));
+                    setReadingArticle(story);
                   }}
-                  className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
+                  className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer bg-slate-900"
                 >
-                  <ArrowRight size={16} />
-                </button>
-              </div>
-            </div>
-          </div>
+                  <img src={coverImage} alt={story.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent" />
+                  
+                  {/* Frosted Glass Overlay Card */}
+                  <div className="absolute bottom-4 left-4 right-4 bg-white/85 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
+                    <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
+                      <span
+                        onClick={(e) => { e.stopPropagation(); setActiveTab('ALL'); setSearchQuery(category); }}
+                        className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-lg uppercase cursor-pointer hover:bg-blue-100"
+                      >
+                        {category}
+                      </span>
+                      <span className="flex items-center gap-2 font-bold text-slate-400">
+                        <span>{date}</span>
+                        <span>&bull;</span>
+                        <span>{readTime}</span>
+                      </span>
+                      <div className="flex items-center gap-2 text-slate-400">
+                        <Bookmark
+                          size={14}
+                          className={`cursor-pointer transition-colors ${bookmarksMap[storyId] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleBookmark(storyId, story.title);
+                          }}
+                        />
+                        <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap[storyId] || (450 - cardIdx * 45)}</span>
+                      </div>
+                    </div>
 
-          {/* Card 2: Enterprise ERP Bunna Bank / Dynamic News 1 */}
-          {activeNewsItems[0] && (
-            <div
-              className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer"
-              onClick={() => {
-                const target = activeNewsItems[0];
-                setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 320) + 1 }));
-                setReadingArticle(target);
-              }}
-            >
-              <img src={activeNewsItems[0].coverImage || NEWS_ITEMS[0].coverImage} alt={activeNewsItems[0].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-              
-              <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
-                <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                  <span
-                    onClick={(e) => { e.stopPropagation(); setSearchQuery(activeNewsItems[0].category || 'Enterprise'); }}
-                    className="px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg uppercase cursor-pointer hover:bg-emerald-100"
-                  >
-                    {activeNewsItems[0].category || 'Enterprise ERP'}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <span>{activeNewsItems[0].date || 'Aug 18, 2026'}</span>
-                    <span>&bull;</span>
-                    <span>{activeNewsItems[0].readTime || '4 mins read'}</span>
-                  </span>
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <Bookmark
-                      size={14}
-                      className={`cursor-pointer transition-colors ${bookmarksMap[activeNewsItems[0].id] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleBookmark(activeNewsItems[0].id, activeNewsItems[0].title);
-                      }}
-                    />
-                    <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap[activeNewsItems[0].id] || 320}</span>
+                    <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug group-hover:text-[#1E90FF] transition-colors">
+                      {story.title}
+                    </h3>
+
+                    <div className="flex justify-between items-center pt-1">
+                      <span className="text-[11px] font-bold text-slate-500">{author}</span>
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setLikesMap((prev) => ({ ...prev, [storyId]: (prev[storyId] || 450) + 1 }));
+                          setReadingArticle(story);
+                        }}
+                        className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110 cursor-pointer"
+                      >
+                        <ArrowRight size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
-
-                <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
-                  {activeNewsItems[0].title}
-                </h3>
-
-                <div className="flex justify-between items-center pt-1">
-                  <span className="text-[11px] font-bold text-slate-500">{activeNewsItems[0].author || 'YomTech Media Unit'}</span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setLikesMap((prev) => ({ ...prev, [activeNewsItems[0].id]: (prev[activeNewsItems[0].id] || 320) + 1 }));
-                      setReadingArticle(activeNewsItems[0]);
-                    }}
-                    className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
-                  >
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Card 3: WabiSkills Bootcamp Graduates / Dynamic News 2 */}
-          {activeNewsItems[1] && (
-            <div
-              className="h-[380px] rounded-[28px] overflow-hidden relative group shadow-xl border border-white/50 cursor-pointer"
-              onClick={() => {
-                const target = activeNewsItems[1];
-                setLikesMap((prev) => ({ ...prev, [target.id]: (prev[target.id] || 510) + 1 }));
-                setReadingArticle(target);
-              }}
-            >
-              <img src={activeNewsItems[1].coverImage || NEWS_ITEMS[1].coverImage} alt={activeNewsItems[1].title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent" />
-              
-              <div className="absolute bottom-4 left-4 right-4 bg-white/80 backdrop-blur-xl border border-white/90 rounded-2xl p-5 shadow-xl space-y-2">
-                <div className="flex justify-between items-center text-[10px] font-black text-slate-500">
-                  <span
-                    onClick={(e) => { e.stopPropagation(); setSearchQuery(activeNewsItems[1].category || 'Talent'); }}
-                    className="px-2.5 py-0.5 bg-cyan-50 text-[#1E90FF] border border-cyan-200 rounded-lg uppercase cursor-pointer hover:bg-cyan-100"
-                  >
-                    {activeNewsItems[1].category || 'Tech Talent'}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <span>{activeNewsItems[1].date || 'Aug 14, 2026'}</span>
-                    <span>&bull;</span>
-                    <span>{activeNewsItems[1].readTime || '5 mins read'}</span>
-                  </span>
-                  <div className="flex items-center gap-2 text-slate-400">
-                    <Bookmark
-                      size={14}
-                      className={`cursor-pointer transition-colors ${bookmarksMap[activeNewsItems[1].id] ? 'text-[#0ED3DD] fill-[#0ED3DD]' : 'hover:text-[#1E90FF]'}`}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleToggleBookmark(activeNewsItems[1].id, activeNewsItems[1].title);
-                      }}
-                    />
-                    <span className="flex items-center gap-0.5"><Eye size={12} /> {likesMap[activeNewsItems[1].id] || 510}</span>
-                  </div>
-                </div>
-
-                <h3 className="font-black text-base text-slate-900 line-clamp-2 leading-snug">
-                  {activeNewsItems[1].title}
-                </h3>
-
-                <div className="flex justify-between items-center pt-1">
-                  <span className="text-[11px] font-bold text-slate-500">{activeNewsItems[1].author || 'WabiSkills Hub'}</span>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setLikesMap((prev) => ({ ...prev, [activeNewsItems[1].id]: (prev[activeNewsItems[1].id] || 510) + 1 }));
-                      setReadingArticle(activeNewsItems[1]);
-                    }}
-                    className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110"
-                  >
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+              );
+            });
+          })()}
 
         </div>
       </section>
@@ -998,28 +896,43 @@ export const InsightsMainPage = () => {
 
             <div className="space-y-4">
               {activeEvents.map((evt, idx) => (
-                <div key={evt.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm hover:border-[#1E90FF] transition-all group">
-                  <div className="flex items-center gap-5">
+                <div
+                  key={evt.id || idx}
+                  className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 shadow-sm hover:shadow-xl hover:border-[#1E90FF]/60 transition-all duration-300 group relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 bottom-0 w-1.5 bg-gradient-to-b from-[#1E90FF] to-[#0ED3DD] opacity-0 group-hover:opacity-100 transition-opacity rounded-l-3xl" />
+
+                  <div className="flex items-center gap-5 min-w-0 flex-1">
                     {evt.coverImage ? (
-                      <img src={evt.coverImage} alt={evt.title} className="w-18 h-18 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs group-hover:scale-105 transition-transform" />
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-slate-200/80 shrink-0 shadow-sm relative bg-slate-100">
+                        <img src={evt.coverImage} alt={evt.title} className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500" />
+                      </div>
                     ) : (
-                      <div className="w-16 h-16 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black">
-                        <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth || 'SEP'}</span>
-                        <span className="text-2xl leading-none">{evt.dateDay || '15'}</span>
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-gradient-to-br from-blue-500/10 via-[#1E90FF]/10 to-[#0ED3DD]/10 border border-blue-200/80 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black shadow-inner p-2">
+                        <span className="text-[10px] tracking-widest uppercase font-black text-blue-600">{evt.dateMonth || 'SEP'}</span>
+                        <span className="text-2xl leading-none font-black text-slate-900 mt-0.5">{evt.dateDay || '15'}</span>
                       </div>
                     )}
-                    <div className="space-y-1">
-                      <span className="px-2.5 py-0.5 bg-blue-100 text-[#1E90FF] text-[10px] font-black rounded-md">{evt.category || 'Hybrid Event'}</span>
-                      <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-[#1E90FF] transition-colors">{evt.title}</h3>
-                      <div className="text-[11px] text-slate-400 font-medium">{evt.location || 'Hybrid (Addis Ababa)'} &bull; {evt.time || '09:00 AM'}</div>
+                    <div className="space-y-1.5 min-w-0 flex-1">
+                      <span className="px-3 py-0.5 bg-blue-50 border border-blue-200/70 text-[#1E90FF] text-[10px] font-black uppercase tracking-wider rounded-md inline-block">
+                        {evt.category || 'Hybrid Event'}
+                      </span>
+                      <h3 className="font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors leading-snug line-clamp-2">
+                        {evt.title}
+                      </h3>
+                      <div className="text-xs text-slate-500 font-medium flex flex-wrap items-center gap-3">
+                        <span className="flex items-center gap-1.5"><MapPin size={13} className="text-[#1E90FF] shrink-0" />{evt.location || 'Hybrid (Addis Ababa)'}</span>
+                        <span className="flex items-center gap-1.5"><Clock size={13} className="text-slate-400 shrink-0" />{evt.time || '09:00 AM EAT'}</span>
+                      </div>
                     </div>
                   </div>
 
                   <button
                     onClick={() => setSelectedEventForReg(evt)}
-                    className="px-5 py-2.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-xl shadow hover:scale-[1.02] shrink-0 cursor-pointer"
+                    className="px-5 py-2.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] hover:from-[#167ad8] hover:to-[#0bc1ca] text-white font-black text-xs rounded-xl shadow-md hover:shadow-lg shadow-blue-500/20 hover:scale-[1.03] transition-all cursor-pointer shrink-0 flex items-center justify-center gap-1.5 w-full sm:w-auto"
                   >
-                    Register Now &rarr;
+                    <span>Register Now</span>
+                    <ArrowRight size={14} />
                   </button>
                 </div>
               ))}
@@ -1035,18 +948,26 @@ export const InsightsMainPage = () => {
 
             <div className="space-y-4">
               {activeAnnouncements.map((ann, idx) => (
-                <div key={ann.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 space-y-3 shadow-sm hover:border-cyan-300 transition-all group">
+                <div
+                  key={ann.id || idx}
+                  className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 space-y-3.5 shadow-sm hover:shadow-xl hover:border-[#0ED3DD]/60 transition-all duration-300 group"
+                >
                   {ann.coverImage && (
-                    <div className="relative h-40 rounded-2xl overflow-hidden border border-slate-200 mb-2">
+                    <div className="relative h-44 rounded-2xl overflow-hidden border border-slate-200/80 mb-2 bg-slate-100">
                       <img src={ann.coverImage} alt={ann.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      {ann.category && (
+                        <div className="absolute top-3 left-3 px-3 py-1 bg-white/90 backdrop-blur-md border border-slate-200/80 text-[#1E90FF] text-[10px] font-black rounded-lg uppercase shadow-xs">
+                          {ann.category}
+                        </div>
+                      )}
                     </div>
                   )}
                   <div className="flex justify-between items-center text-[10px] font-black">
-                    <span className="px-2.5 py-1 bg-amber-50 text-amber-600 rounded-lg">{ann.priority || 'FEATURED'}</span>
-                    <span className="text-slate-400">{ann.date || 'August 2026'}</span>
+                    <span className="px-2.5 py-1 bg-amber-50 border border-amber-200/80 text-amber-600 rounded-lg uppercase tracking-wider">{ann.priority || 'FEATURED'}</span>
+                    <span className="text-slate-400 font-bold flex items-center gap-1"><Calendar size={12} /> {ann.date || 'August 2026'}</span>
                   </div>
-                  <h3 className="font-extrabold text-sm text-slate-900 group-hover:text-[#1E90FF] transition-colors">{ann.title}</h3>
-                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{ann.summary}</p>
+                  <h3 className="font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors leading-snug">{ann.title}</h3>
+                  <p className="text-xs text-slate-600 font-medium leading-relaxed line-clamp-3">{ann.summary}</p>
                 </div>
               ))}
             </div>
@@ -1316,23 +1237,42 @@ export const InsightsMainPage = () => {
 
           <div className="space-y-4">
             {activeMedia.map((m, idx) => (
-              <div key={m.id || idx} className="bg-white rounded-3xl border border-slate-200/90 p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm hover:border-[#1E90FF] transition-all group">
-                <div className="flex items-center gap-5">
+              <div
+                key={m.id || idx}
+                className="bg-white rounded-3xl border border-slate-200/90 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-sm hover:shadow-xl hover:border-[#1E90FF]/60 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-5 min-w-0 flex-1">
                   {m.coverImage ? (
-                    <img src={m.coverImage} alt={m.title} className="w-18 h-18 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs group-hover:scale-105 transition-transform" />
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border border-slate-200/80 shrink-0 shadow-sm relative bg-slate-100">
+                      <img src={m.coverImage} alt={m.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    </div>
                   ) : (
-                    <div className="w-14 h-14 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1E90FF] shrink-0 font-black">
-                      <Tv size={24} />
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-blue-50 border border-blue-200/80 flex items-center justify-center text-[#1E90FF] shrink-0 font-black shadow-inner">
+                      <Tv size={26} />
                     </div>
                   )}
-                  <div className="space-y-1.5">
-                    <span className="px-3 py-1 bg-blue-50 border border-blue-200 text-[#1E90FF] text-[10px] font-black rounded-lg">{m.type || 'MEDIA INTERVIEW'}</span>
-                    <h3 className="font-extrabold text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors">{m.title}</h3>
-                    <div className="text-xs text-slate-400 font-medium">{m.outlet || 'Broadcasting'} &bull; {m.date || 'August 2026'}</div>
+                  <div className="space-y-1.5 min-w-0 flex-1">
+                    <span className="px-3 py-0.5 bg-blue-50 border border-blue-200/80 text-[#1E90FF] text-[10px] font-black rounded-lg uppercase tracking-wider inline-block">
+                      {m.type || 'MEDIA INTERVIEW'}
+                    </span>
+                    <h3 className="font-extrabold text-sm sm:text-base text-slate-900 group-hover:text-[#1E90FF] transition-colors leading-snug line-clamp-2">
+                      {m.title}
+                    </h3>
+                    <div className="text-xs text-slate-400 font-medium flex items-center gap-2">
+                      <span>{m.outlet || 'Broadcasting'}</span>
+                      <span>&bull;</span>
+                      <span>{m.date || 'August 2026'}</span>
+                    </div>
                   </div>
                 </div>
-                <a href={m.url || '#'} target="_blank" rel="noreferrer" className="p-3 text-[#1E90FF] hover:scale-110 transition-transform shrink-0">
-                  <ExternalLink size={20} />
+                <a
+                  href={m.url || '#'}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="px-4 py-2.5 bg-blue-50 hover:bg-[#1E90FF] text-[#1E90FF] hover:text-white border border-blue-200 hover:border-[#1E90FF] rounded-xl text-xs font-black flex items-center gap-2 transition-all shrink-0 shadow-2xs cursor-pointer"
+                >
+                  <span>Watch Coverage</span>
+                  <ExternalLink size={15} />
                 </a>
               </div>
             ))}

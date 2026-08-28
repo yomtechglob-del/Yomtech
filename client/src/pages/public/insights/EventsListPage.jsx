@@ -122,7 +122,7 @@ export const EventsListPage = () => {
                 {evt.coverImage ? (
                   <img src={evt.coverImage} alt={evt.title} className="w-20 h-20 rounded-2xl object-cover border border-slate-200 shrink-0 shadow-2xs" />
                 ) : (
-                  <div className="w-18 h-18 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black p-3">
+                  <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-blue-50 border border-blue-200 flex flex-col items-center justify-center text-[#1E90FF] shrink-0 font-black p-3">
                     <span className="text-[10px] tracking-widest uppercase">{evt.dateMonth}</span>
                     <span className="text-2xl leading-none">{evt.dateDay}</span>
                   </div>

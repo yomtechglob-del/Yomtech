@@ -156,7 +156,7 @@ export default function App() {
 
           {/* Dedicated Admin Portal Routes */}
           <Route path="/admin/login" element={
-            <div className="relative min-h-screen bg-[#151515] text-white">
+            <div className="relative min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/60 to-indigo-50/80 text-slate-900 overflow-hidden">
               <ThreeDBackground />
               <div className="relative z-10"><AdminLoginPage /></div>
             </div>

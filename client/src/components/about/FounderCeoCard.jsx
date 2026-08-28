@@ -75,7 +75,7 @@ export const FounderCeoCard = ({ className = '' }) => {
                 <div className="absolute -inset-1 sm:-inset-1.5 rounded-full border-2 border-t-cyan-300 border-r-transparent border-b-[#1E90FF] border-l-transparent opacity-90 animate-[spin_6s_linear_infinite_reverse] pointer-events-none" />
 
                 {/* Main Circular Seal Container */}
-                <div className="relative w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#0B1528] border-2 border-[#1E90FF] p-1 flex flex-col items-center justify-center text-center shadow-2xl">
+                <div className="relative w-20 h-20 rounded-full bg-[#0B1528] border-2 border-[#1E90FF] p-1 flex flex-col items-center justify-center text-center shadow-2xl">
                   
                   {/* Inner Glowing Ring */}
                   <div className="absolute inset-0.5 rounded-full border border-[#1E90FF]/40 pointer-events-none" />

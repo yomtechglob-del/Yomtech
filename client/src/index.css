@@ -47,31 +47,29 @@ body {
 
 /* ─── ADVANCED ULTRA-SLEEK CUSTOM SCROLLBAR SYSTEM ─── */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(241, 245, 249, 0.6);
-  border-radius: 9999px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #1E90FF 0%, #0ED3DD 100%);
+  background: #2563EB;
   border-radius: 9999px;
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: none;
   transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #0ED3DD 0%, #1E90FF 100%);
-  box-shadow: 0 0 10px rgba(30, 144, 255, 0.6);
+  background: #1D4ED8;
 }
 
 /* Firefox Scrollbar Styling */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1E90FF transparent;
+  scrollbar-color: #2563EB transparent;
 }
 
 #root {

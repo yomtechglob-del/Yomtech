@@ -194,16 +194,6 @@ const updateCategoryItem = async (req, res) => {
         expirationEnabled: req.body.expiryDate ? true : existing.expirationEnabled
       }
     });
-        featured: req.body.featured !== undefined ? Boolean(req.body.featured) : existing.featured,
-        author: req.body.author !== undefined ? req.body.author : existing.author,
-        client: req.body.client !== undefined ? req.body.client : existing.client,
-        readTime: req.body.readTime !== undefined ? req.body.readTime : existing.readTime,
-        priority: req.body.priority !== undefined ? req.body.priority : existing.priority,
-        eventDate: req.body.eventDate !== undefined ? req.body.eventDate : existing.eventDate,
-        expiresAt: req.body.expiryDate ? new Date(req.body.expiryDate) : existing.expiresAt,
-        expirationEnabled: req.body.expiryDate ? true : existing.expirationEnabled
-      }
-    });
 
     await logAuditActivity(req.body.user, `UPDATED_${updated.status}`, updated.category, updated.title, id);
 

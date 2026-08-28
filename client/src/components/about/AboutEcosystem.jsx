@@ -317,7 +317,7 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
               <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-cyan-50/95 via-sky-50/80 to-blue-50/60 border-l-4 border-[#0284C7] border-y border-r border-cyan-200/60 shadow-md flex flex-col sm:flex-row items-start sm:items-center gap-4.5 w-full transition-all duration-300 hover:shadow-lg">
                 {/* Profile Avatar Badge */}
                 <div className="relative shrink-0">
-                  <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-2 border-white shadow-[0_0_20px_rgba(2,132,199,0.3)] overflow-hidden bg-slate-900">
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 border-white shadow-[0_0_20px_rgba(2,132,199,0.3)] overflow-hidden bg-slate-900">
                     <img src={ermiTwoImg} alt="Ermias Alemayehu" className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-500" />
                   </div>
                   <div className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 border-2 border-white shadow-[0_4px_12px_rgba(16,185,129,0.55)] flex items-center justify-center text-white shrink-0 z-20" title="Active CEO & Founder">

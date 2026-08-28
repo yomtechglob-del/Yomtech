@@ -156,7 +156,7 @@ export const WabiSkillsAcademyHero = () => {
                 onClick={scrollToCourses}
                 className="inline-flex items-center gap-4 sm:gap-5 text-white hover:text-cyan-200 font-black text-base sm:text-lg tracking-wide transition-all group"
               >
-                <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-white/20 backdrop-blur-2xl border-2 border-white/50 flex items-center justify-center text-white group-hover:scale-115 group-hover:bg-white group-hover:text-[#0284C7] transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 backdrop-blur-2xl border-2 border-white/50 flex items-center justify-center text-white group-hover:scale-115 group-hover:bg-white group-hover:text-[#0284C7] transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
                   <Play size={24} className="fill-current ml-1" />
                 </div>
                 <span className="drop-shadow-sm group-hover:translate-x-1 transition-transform">Explore Courses</span>

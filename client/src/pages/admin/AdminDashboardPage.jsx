@@ -39,6 +39,8 @@ import {
   Sparkles,
   TrendingUp,
   User,
+  Users,
+  Send,
   Bell,
   Plus,
   Play,
@@ -61,7 +63,11 @@ import {
   Sliders,
   Check,
   ExternalLink,
-  ShieldAlert
+  ShieldAlert,
+  Crown,
+  ChevronDown,
+  ChevronRight,
+  ChevronLeft
 } from 'lucide-react';
 
 // --- STATIC INITIAL DATA DEFINITIONS (PLACED OUTSIDE COMPONENT FOR SAFE INITIALIZATION) ---
@@ -1151,6 +1157,7 @@ export const AdminDashboardPage = () => {
   const safeLeads = Array.isArray(leads) ? leads : [];
   const totalLeads = safeLeads.length;
   const newCount = safeLeads.filter((l) => l && l.status === 'NEW').length;
+  const qualifiedCount = safeLeads.filter((l) => l && (l.status === 'QUALIFIED' || l.status === 'CONTACTED')).length;
 
   const filteredLeads = safeLeads.filter((lead) => {
     if (!lead) return false;
@@ -1194,285 +1201,251 @@ export const AdminDashboardPage = () => {
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         
         {/* TOP HEADER BAR (FIXED POSITION STICKY TOP WITH ELEGANT BORDER SHADOW) */}
-        <header className={`h-16 border-b px-6 flex items-center justify-between transition-colors z-30 shrink-0 sticky top-0 ${
-          isDarkMode
-            ? 'bg-[#03045E]/95 border-cyan-500/30 backdrop-blur-md text-white shadow-[0_4px_20px_rgba(0,0,0,0.2)]'
-            : 'bg-white/95 border-slate-200/80 backdrop-blur-md text-slate-900 shadow-[0_4px_16px_rgba(0,0,0,0.03)]'
-        }`}>
-          {/* Search bar matching screenshot pill input with Ctrl+K shortcut */}
+        <header className="h-16 border-b border-slate-200/90 px-6 flex items-center justify-between transition-colors z-30 shrink-0 sticky top-0 bg-white/95 backdrop-blur-md text-slate-800 shadow-2xs">
+          {/* Left Search Bar matching reference pill */}
           <div className="flex items-center gap-3 flex-1 max-w-md">
             <div className="relative w-full">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
               <input
                 id="header-search-input"
                 type="text"
-                placeholder="Search courses, lessons, CMS content, leads..."
+                placeholder="Search courses, trainees, instructors..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className={`w-full pl-10 pr-14 py-2 text-xs rounded-full border transition-all focus:outline-none ${
-                  isDarkMode
-                    ? 'bg-blue-950/60 border-cyan-400/40 text-white placeholder-slate-400 focus:border-[#0ED3DD]'
-                    : 'bg-slate-50 border-slate-200 text-slate-900 placeholder-slate-400 focus:border-[#1E90FF] focus:bg-white focus:ring-2 focus:ring-[#1E90FF]/20'
-                }`}
+                className="w-full pl-10 pr-4 py-2 text-xs font-semibold rounded-full border border-slate-200/90 bg-slate-50/70 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 shadow-2xs transition-all"
               />
-              <kbd className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[9px] font-bold text-slate-400 bg-slate-200/60 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-md select-none pointer-events-none">
-                Ctrl K
-              </kbd>
             </div>
           </div>
 
-          {/* Right actions matching screenshot icons & profile */}
+          {/* Right Top Header Pill Controls matching reference image */}
           <div className="flex items-center gap-3">
-            {/* Quick Action Button */}
-            <button
-              onClick={() => {
-                if (activeTab === 'quotes') setShowAddProposalModal(true);
-                else if (activeTab === 'jobs') setShowAddJobModal(true);
-                else if (activeTab === 'cms-services') setShowAddProductModal(true);
-                else if (activeTab.startsWith('cms-')) {
-                  const targetCat = ({
-                    'cms-news': 'Corporate News & Articles',
-                    'cms-articles': 'Corporate News & Articles',
-                    'cms-blog': 'Tech Articles & Engineering',
-                    'cms-events': 'Upcoming Events & Webinars',
-                    'cms-announcements': 'Official Announcements',
-                    'cms-projects': 'Featured Project Case Studies',
-                    'cms-team': 'Executive Team Members',
-                    'cms-testimonials': 'Client & Learner Testimonials',
-                    'cms-gallery': 'Photo Gallery Showcase',
-                    'cms-videos': 'Video & Documentary Hub',
-                    'cms-media': 'Media Appearances & Coverage',
-                    'cms-press': 'Press & Corporate Content',
-                    'cms-faq': 'Support FAQ & Knowledge Base',
-                    'cms-partners': 'Trusted Institutional Partners'
-                  })[activeTab] || 'Corporate News';
-                  setNewArticleForm((prev) => ({ ...prev, category: targetCat }));
-                  setShowAddArticleModal(true);
-                }
-                else if (activeTab === 'roles') setShowAddUserModal(true);
-                else setShowAddLeadModal(true);
-              }}
-              className="flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-extrabold text-xs rounded-xl shadow-xs transition-all active:scale-95 hover:brightness-110"
-            >
-              <Plus size={14} />
-              <span className="hidden sm:inline">Add Entry</span>
-            </button>
-
-            {/* Manual Refresh Button */}
-            <button
-              onClick={() => {
-                loadAuthAndData();
-                showNotice('Refreshed active platform datasets.');
-              }}
-              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-colors ${
-                isDarkMode ? 'border-cyan-400/40 hover:bg-blue-900/50 text-cyan-300' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
-              }`}
-              title="Refresh Data"
-            >
-              <RefreshCw size={15} />
-            </button>
-
-            {/* Dark Mode Toggle Matching Screenshot Moon Button */}
-            <button
-              onClick={() => setIsDarkMode(!isDarkMode)}
-              className={`w-9 h-9 rounded-full border flex items-center justify-center transition-colors ${
-                isDarkMode ? 'border-cyan-400/40 hover:bg-blue-900/50 text-amber-300' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
-              }`}
-              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            >
-              {isDarkMode ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-
-            {/* Notifications Dropdown Matching Screenshot Bell Icon */}
-            <div className="relative">
-              <button
-                onClick={() => {
-                  setShowNotifications(!showNotifications);
-                  setUnreadNotificationsCount(0);
-                }}
-                className={`w-9 h-9 rounded-full border relative flex items-center justify-center transition-colors ${
-                  isDarkMode ? 'border-slate-700 hover:bg-slate-800 text-slate-300' : 'border-slate-200 hover:bg-slate-100 text-slate-600'
-                }`}
-              >
-                <Bell size={16} />
-                {unreadNotificationsCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-red-500 text-white text-[9px] font-black rounded-full flex items-center justify-center animate-pulse">
-                    {unreadNotificationsCount}
-                  </span>
-                )}
-              </button>
-
-              {showNotifications && (
-                <div className={`absolute right-0 mt-3 w-80 rounded-2xl shadow-2xl border p-4 z-50 animate-in fade-in zoom-in-95 ${
-                  isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
-                }`}>
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-200/20 mb-2">
-                    <span className="font-extrabold text-xs">YomTech Control Notifications</span>
-                    <span className="text-[10px] text-[#1E90FF] font-bold">System Alerts</span>
-                  </div>
-                  <div className="space-y-2 text-xs">
-                    <div className="p-2.5 rounded-xl bg-blue-50/50 dark:bg-blue-950/40 border border-blue-100 dark:border-blue-900">
-                      <div className="font-bold text-[#1E90FF]">New B2B Lead Received</div>
-                      <div className="text-[10px] text-slate-500">SSGI requested custom GIS proposal.</div>
-                    </div>
-                    <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-700">
-                      <div className="font-bold">Database Backup Completed</div>
-                      <div className="text-[10px] text-slate-400">Daily snapshot saved at 00:00 UTC.</div>
-                    </div>
-                  </div>
-                </div>
-              )}
+            {/* Enterprise Tag Pill */}
+            <div className="hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-700 text-[11px] font-black tracking-wider uppercase">
+              <span>YOMTECH GLOBAL ENTERPRISE</span>
             </div>
 
-            {/* User Profile Badge Matching Screenshot (Avatar + Name + Role) */}
-            <div className="relative pl-2 border-l border-slate-200/80">
+            {/* Notification Bell Badge */}
+            <button className="w-9 h-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 shadow-2xs cursor-pointer relative">
+              <Bell size={15} />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+            </button>
+
+            {/* Language Selector Pill */}
+            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-extrabold shadow-2xs cursor-pointer hover:bg-blue-700 transition-colors">
+              <Globe size={13} />
+              <span>EN</span>
+            </div>
+
+            {/* User Profile Pill */}
+            <div className="relative pl-1">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="flex items-center gap-2.5 hover:opacity-90 transition-opacity"
+                className="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white shadow-2xs hover:bg-slate-50 transition-colors cursor-pointer"
               >
                 <div className="text-right leading-tight hidden sm:block">
-                  <div className="font-black text-xs text-slate-900 dark:text-white">kenenisa</div>
-                  <div className="text-[10px] font-semibold text-slate-400">Super Admin</div>
+                  <div className="font-extrabold text-xs text-slate-900">Administration</div>
+                  <div className="text-[10px] font-bold text-slate-400">Admin</div>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] p-0.5 shadow-2xs overflow-hidden flex-shrink-0">
-                  <img src={logoImg} alt="User Avatar" className="w-full h-full object-cover rounded-full bg-white" />
+                <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shadow-xs shrink-0">
+                  A
                 </div>
               </button>
 
               {showProfileMenu && (
-                <div className={`absolute right-0 mt-3 w-56 rounded-2xl shadow-2xl border p-2 z-50 ${
-                  isDarkMode ? 'bg-slate-800 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
-                }`}>
-                  <div className="px-3 py-2 border-b border-slate-200/20 mb-1">
-                    <div className="font-bold text-xs">{user?.fullName || 'Ermias Alemayehu'}</div>
+                <div className="absolute right-0 mt-3 w-56 rounded-2xl shadow-xl border border-slate-200 bg-white text-slate-800 p-2 z-50 animate-fadeIn">
+                  <div className="px-3 py-2 border-b border-slate-100 mb-1">
+                    <div className="font-extrabold text-xs text-slate-900">{user?.fullName || 'Ermias Alemayehu'}</div>
                     <div className="text-[10px] text-slate-400">Founder &amp; CEO &bull; YomTech Global</div>
                   </div>
-                  <button onClick={() => { setActiveTab('roles'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl hover:bg-blue-500/10 hover:text-[#1E90FF] transition-colors">
+                  <button onClick={() => { setActiveTab('roles'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-colors">
                     User Roles &amp; Permissions
                   </button>
-                  <button onClick={() => { setActiveTab('system'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl hover:bg-blue-500/10 hover:text-[#1E90FF] transition-colors">
+                  <button onClick={() => { setActiveTab('system'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-colors">
                     Security Logs &amp; Audit Trail
                   </button>
-                  <button onClick={handleSignOut} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors">
+                  <button onClick={handleSignOut} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl text-red-600 hover:bg-red-50 transition-colors">
                     Sign Out Gateway
                   </button>
                 </div>
               )}
             </div>
-
           </div>
         </header>
 
         {/* MAIN CANVAS PANEL */}
-        <main className={`flex-1 p-6 sm:p-8 overflow-y-auto transition-colors ${
-          isDarkMode ? 'bg-[#03045E]' : 'bg-[#F8FAFC]'
-        }`}>
+        <main className="flex-1 p-6 sm:p-8 overflow-y-auto bg-slate-50/50 transition-colors">
           {/* Global Notice Toast */}
           {actionMessage && (
-            <div className="mb-4 p-3.5 bg-blue-50 border border-blue-200 text-[#1E90FF] rounded-2xl text-xs font-bold flex items-center gap-2 shadow-sm animate-in fade-in">
-              <CheckCircle size={16} />
+            <div className="mb-4 p-3.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-sm animate-fadeIn">
+              <CheckCircle size={16} className="text-blue-600" />
               <span>{actionMessage}</span>
             </div>
           )}
 
-            {/* TAB 1: SECTION 9.1 ADMIN DASHBOARD OVERVIEW */}
+            {/* TAB 1: ADMIN DASHBOARD OVERVIEW MATCHING REFERENCE LAYOUT */}
             {activeTab === 'dashboard' && (
-              <div className="space-y-6 animate-in fade-in duration-300">
-                {/* Banner */}
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#1E90FF] via-blue-600 to-[#0ED3DD] text-white p-6 sm:p-8 shadow-md">
-                  <div className="relative z-10 max-w-3xl space-y-2">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-bold shadow-sm">
-                      <Sparkles size={14} className="text-amber-300" />
-                      <span>Yomtech Global Enterprise Administration &amp; CMS</span>
+              <div className="space-y-8 animate-fadeIn">
+                {/* Hero Banner Matching Reference Layout */}
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-900 text-white p-7 sm:p-9 shadow-sm border border-blue-600/30">
+                  <div className="relative z-10 space-y-3">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-wider uppercase text-amber-300">
+                      <Sparkles size={13} />
+                      <span>ADMINISTRATION PANEL &bull; YOMTECH GLOBAL</span>
                     </div>
-                    <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-                      Empowering Digital Innovation
+                    <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight text-white">
+                      Welcome, Administration! 👋
                     </h1>
-                    <p className="text-xs sm:text-sm text-blue-100 leading-relaxed max-w-2xl">
-                      Centralized Executive Dashboard for Website Traffic, Inbound Leads, Proposals, Talent Applications, CMS Publishing, and Security Audit Logs.
+                    <p className="text-xs sm:text-sm text-blue-100 font-medium leading-relaxed max-w-2xl">
+                      YomTech Global Enterprise - manage analytics, inbound leads, B2B quotes, CMS publishing, and audit logs below.
                     </p>
                   </div>
                 </div>
 
-                {/* 9.1 METRICS GRID */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+                {/* 4 METRIC CARDS ROW MATCHING REFERENCE LAYOUT */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                   {[
-                    { label: 'Website Visitors', value: '14,280', sub: '+18% this month' },
-                    { label: 'Leads & Inquiries', value: totalLeads, sub: `${newCount} NEW` },
-                    { label: 'Quote Requests', value: proposals.length, sub: 'B2B Software & ERP' },
-                    { label: 'Consultations', value: '9', sub: 'Digital Transformation' },
-                    { label: 'Job Applications', value: applicants.length, sub: 'WabiJob & Talent' },
-                    { label: 'Subscribers', value: '186', sub: 'Newsletter' },
-                    { label: 'Contact Messages', value: '45', sub: 'General Inquiries' },
-                  ].map((m, idx) => (
-                    <div key={idx} className={`p-4 rounded-2xl border shadow-sm ${
-                      isDarkMode ? 'bg-[#003049] border-cyan-400/30' : 'bg-blue-50/50 border-blue-100'
-                    }`}>
-                      <div className="text-[10px] font-black text-[#1E90FF] uppercase tracking-wider">{m.label}</div>
-                      <div className="text-xl font-black mt-1.5">{m.value}</div>
-                      <div className="text-[10px] text-[#1E90FF] font-extrabold mt-1">{m.sub}</div>
-                    </div>
-                  ))}
+                    { label: 'Super Admin & Admins', value: '2', icon: ShieldCheck, color: 'text-purple-600 bg-purple-50' },
+                    { label: 'Active Trainees / Leads', value: totalLeads || '3', icon: Users, color: 'text-emerald-600 bg-emerald-50' },
+                    { label: 'Instructors & Consultations', value: '9', icon: Globe, color: 'text-blue-600 bg-blue-50' },
+                    { label: 'Total Revenue / Quotes', value: `${proposals.length || 3} ETB`, icon: TrendingUp, color: 'text-amber-600 bg-amber-50' },
+                  ].map((m, idx) => {
+                    const IconComp = m.icon;
+                    return (
+                      <div
+                        key={idx}
+                        className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md transition-all flex flex-col items-center justify-center text-center space-y-3"
+                      >
+                        <div className={`w-10 h-10 rounded-2xl ${m.color} flex items-center justify-center`}>
+                          <IconComp size={20} />
+                        </div>
+                        <div className="text-3xl font-black text-slate-900 tracking-tight">{m.value}</div>
+                        <div className="text-xs font-semibold text-slate-500">{m.label}</div>
+                      </div>
+                    );
+                  })}
                 </div>
 
-                {/* Overview Analytics & Activity Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {/* Traffic Sources */}
-                  <div className={`p-5 rounded-2xl border space-y-3 shadow-sm ${
-                    isDarkMode ? 'bg-[#003049] border-cyan-400/30' : 'bg-white border-blue-100'
-                  }`}>
-                    <h3 className="font-extrabold text-sm flex items-center gap-2">
-                      <TrendingUp size={16} className="text-[#1E90FF]" />
-                      <span>Traffic Sources &amp; Conversion</span>
-                    </h3>
-                    <div className="space-y-2 text-xs font-semibold">
-                      <div className="flex justify-between"><span>Direct Traffic</span><span>42%</span></div>
-                      <div className="flex justify-between"><span>Search Engine (Organic)</span><span>35%</span></div>
-                      <div className="flex justify-between"><span>LinkedIn &amp; Media</span><span>15%</span></div>
-                      <div className="flex justify-between"><span>Partner Referrals</span><span>8%</span></div>
-                    </div>
-                    <div className="pt-2 border-t border-blue-100 flex justify-between text-xs font-bold">
-                      <span>Conversion Rate Indicator</span>
-                      <span className="text-[#1E90FF]">4.8% High</span>
-                    </div>
-                  </div>
-
-                  {/* Popular Products */}
-                  <div className={`p-5 rounded-2xl border space-y-3 shadow-sm ${
-                    isDarkMode ? 'bg-[#003049] border-cyan-400/30' : 'bg-white border-blue-100'
-                  }`}>
-                    <h3 className="font-extrabold text-sm flex items-center gap-2">
-                      <Globe size={16} className="text-[#1E90FF]" />
-                      <span>Popular Products &amp; Pages</span>
-                    </h3>
-                    <div className="space-y-2 text-xs">
-                      {cmsProducts.slice(0, 4).map((p, idx) => (
-                        <div key={idx} className="flex justify-between items-center font-medium">
-                          <span>{idx + 1}. {p.name}</span>
-                          <span className="font-bold text-[#1E90FF]">{p.views} views</span>
+                {/* 2 LOWER MAIN SECTIONS GRID MATCHING REFERENCE LAYOUT */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  {/* Left Column: Recent Inbound Leads Directory (Takes 2 Columns) */}
+                  <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-slate-200/90 space-y-4 shadow-2xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-extrabold text-base text-slate-900">Recent Admissions &amp; Directory</h3>
+                          <span className="text-[10px] font-black uppercase text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">LIVE EXTRACTED</span>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+                        <p className="text-xs text-slate-400 mt-0.5">Review recent registrations extracted across Super Admin, Admin, Instructor, and Trainee roles.</p>
+                      </div>
 
-                  {/* Recent Activity Audit Trail */}
-                  <div className={`p-5 rounded-2xl border space-y-3 shadow-sm ${
-                    isDarkMode ? 'bg-[#003049] border-cyan-400/30' : 'bg-white border-blue-100'
-                  }`}>
-                    <h3 className="font-extrabold text-sm flex items-center gap-2">
-                      <Clock size={16} className="text-[#1E90FF]" />
-                      <span>Recent Activities Audit Trail</span>
-                    </h3>
-                    <div className="space-y-2.5 text-xs">
-                      {auditLogs.slice(0, 3).map((log, idx) => (
-                        <div key={idx} className="p-2.5 rounded-xl bg-blue-50/70 border border-blue-100 leading-tight">
-                          <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#1E90FF]"></div>
-                            <span>{log.action}</span>
+                      {/* Filter Pills */}
+                      <div className="flex items-center gap-1.5 bg-slate-100/80 p-1 rounded-full text-xs font-bold shrink-0">
+                        <button className="px-3 py-1 bg-slate-900 text-white rounded-full text-[11px] font-extrabold">All {totalLeads}</button>
+                        <button className="px-3 py-1 text-slate-600 hover:text-slate-900 text-[11px]">Admins 2</button>
+                        <button className="px-3 py-1 text-slate-600 hover:text-slate-900 text-[11px]">Qualified {qualifiedCount}</button>
+                      </div>
+                    </div>
+
+                    {/* Search Input inside card */}
+                    <div className="flex items-center justify-between gap-3 text-xs">
+                      <input
+                        type="text"
+                        placeholder="Search admissions by name, email, or phone..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full bg-slate-50 border border-slate-200/90 rounded-2xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-500"
+                      />
+                      <span className="text-slate-400 text-xs font-semibold shrink-0">Showing {leads.length} of {totalLeads}</span>
+                    </div>
+
+                    {/* Directory Item Cards */}
+                    <div className="space-y-3 pt-1">
+                      {leads.slice(0, 4).map((lead) => (
+                        <div
+                          key={lead.id}
+                          className="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex items-center justify-between hover:bg-white hover:border-blue-300 transition-all"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-2xl bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center uppercase shadow-2xs">
+                              {lead.fullName ? lead.fullName.slice(0, 2) : 'LD'}
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className="font-extrabold text-slate-900 text-xs">{lead.fullName}</span>
+                                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200">{lead.status}</span>
+                              </div>
+                              <div className="text-[11px] text-slate-500 font-medium flex items-center gap-2 mt-0.5">
+                                <span>{lead.email}</span>
+                                <span>&bull;</span>
+                                <span>{lead.phone}</span>
+                              </div>
+                            </div>
                           </div>
-                          <div className="text-[10px] text-[#1E90FF] font-bold mt-0.5">{log.user} &bull; {log.time}</div>
+
+                          <button
+                            onClick={() => { setSelectedLead(lead); setShowLeadDetailsModal(true); }}
+                            className="px-3.5 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:text-blue-600 font-bold text-xs shadow-2xs cursor-pointer flex items-center gap-1"
+                          >
+                            <Eye size={13} />
+                            <span>Details</span>
+                          </button>
                         </div>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Right Column: Roles Snapshot & Quick Actions (1 Column) */}
+                  <div className="space-y-6">
+                    {/* Top Roles Snapshot Widget */}
+                    <div className="p-6 rounded-3xl bg-white border border-slate-200/90 space-y-4 shadow-2xs">
+                      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <h3 className="font-extrabold text-sm text-slate-900">Leads &amp; Role Snapshot</h3>
+                        <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">{totalLeads} Users</span>
+                      </div>
+
+                      <div className="space-y-3.5 text-xs font-bold">
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between items-center">
+                            <span className="text-blue-700 font-extrabold">Super Admin &amp; Admins</span>
+                            <span className="text-slate-500">2 (100%)</span>
+                          </div>
+                          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                            <div className="h-full bg-blue-600 rounded-full" style={{ width: '100%' }} />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between items-center">
+                            <span className="text-cyan-700 font-extrabold">Certified Consultants</span>
+                            <span className="text-slate-500">0 (0%)</span>
+                          </div>
+                          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                            <div className="h-full bg-cyan-500 rounded-full" style={{ width: '0%' }} />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between items-center">
+                            <span className="text-emerald-700 font-extrabold">Active Qualified Leads</span>
+                            <span className="text-slate-500">0 (0%)</span>
+                          </div>
+                          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
+                            <div className="h-full bg-emerald-500 rounded-full" style={{ width: '0%' }} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Bottom Quick Actions Widget */}
+                    <div className="p-6 rounded-3xl bg-white border border-slate-200/90 space-y-3 shadow-2xs">
+                      <h3 className="font-extrabold text-sm text-slate-900">Quick Actions</h3>
+                      <button
+                        onClick={() => setActiveTab('leads')}
+                        className="w-full p-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 hover:bg-white text-slate-800 font-bold text-xs flex items-center justify-between hover:border-blue-300 transition-all cursor-pointer"
+                      >
+                        <span>View Inbound Leads Portal</span>
+                        <ChevronRight size={15} className="text-slate-400" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -1481,28 +1454,26 @@ export const AdminDashboardPage = () => {
 
             {/* TAB 2: LEADS & INQUIRIES */}
             {activeTab === 'leads' && (
-              <div className="space-y-6 animate-in fade-in duration-300">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200/50 pb-4">
+              <div className="space-y-6 animate-fadeIn">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200/80 pb-4">
                   <div>
-                    <h1 className="text-xl font-black text-slate-900 dark:text-white">Section 9.1 Inbound Leads &amp; Consultations Roster</h1>
-                    <p className="text-xs text-slate-400">Track client inquiries, software consultation requests, and business contact submissions.</p>
+                    <h1 className="text-xl font-black text-slate-900">Inbound Leads &amp; Consultations Roster</h1>
+                    <p className="text-xs text-slate-500">Track client inquiries, software consultation requests, and business contact submissions.</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => setShowAddLeadModal(true)}
-                      className="px-4 py-2 bg-[#1E90FF] hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow flex items-center gap-2"
+                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <Plus size={15} />
                       <span>Create New Lead</span>
                     </button>
                     <div className="flex items-center gap-2">
-                      <Filter size={15} className="text-slate-500" />
+                      <Filter size={15} className="text-slate-400" />
                       <select
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
-                        className={`px-3 py-2 text-xs font-bold rounded-xl border focus:outline-none ${
-                          isDarkMode ? 'bg-slate-900 border-slate-700 text-white' : 'bg-white border-slate-200 text-slate-900'
-                        }`}
+                        className="px-3.5 py-2 text-xs font-bold rounded-full border border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-blue-500 shadow-2xs"
                       >
                         <option value="ALL">All Statuses</option>
                         <option value="NEW">New</option>
@@ -1515,17 +1486,15 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 {/* Table Data Card */}
-                <div className={`rounded-2xl border overflow-hidden shadow-sm ${
-                  isDarkMode ? 'bg-[#003049] border-cyan-400/30' : 'bg-white border-blue-100'
-                }`}>
-                  <div className="p-5 border-b border-blue-100 flex items-center justify-between">
-                    <h2 className="font-extrabold text-sm text-slate-900 dark:text-white">Inbound Client Leads Roster</h2>
-                    <span className="text-xs font-bold text-[#1E90FF]">Showing {filteredLeads.length} record(s)</span>
+                <div className="rounded-3xl border border-slate-200/90 bg-white shadow-2xs overflow-hidden">
+                  <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+                    <h2 className="font-extrabold text-sm text-slate-900">Inbound Client Leads Roster</h2>
+                    <span className="text-xs font-extrabold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Showing {filteredLeads.length} record(s)</span>
                   </div>
 
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] uppercase font-black tracking-wider text-white border-b border-cyan-300">
+                      <thead className="bg-slate-50 uppercase font-black tracking-widest text-[10px] text-slate-500 border-b border-slate-200/80">
                         <tr>
                           <th className="p-4">Client Details</th>
                           <th className="p-4">Inquiry Category</th>
@@ -3414,7 +3383,7 @@ export const AdminDashboardPage = () => {
 
       {/* --- MODAL 4: ADD CMS PRODUCT --- */}
       {showAddProductModal && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
           <form onSubmit={handleCreateCmsProduct} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
               <h3 className="font-black text-base">Add CMS Product / Service</h3>
