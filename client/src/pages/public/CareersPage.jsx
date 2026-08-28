@@ -221,11 +221,73 @@ export const CareersPage = () => {
   const [schedTime, setSchedTime] = useState('10:00 AM');
   const [schedConfirmed, setSchedConfirmed] = useState(false);
 
+  // Live Posted Job Vacancies Sync with Admin Dashboard
+  const [liveVacancies, setLiveVacancies] = useState(() => {
+    const saved = localStorage.getItem('yomtech_jobs');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const formatted = parsed.map((j, idx) => ({
+            id: j.id || `YOM-JOB-${idx + 200}`,
+            title: j.title,
+            department: j.department || 'Software Engineering',
+            type: j.type || 'Full-Time',
+            location: j.location || 'Addis Ababa (Megenagna)',
+            experience: '2+ Years',
+            salary: 'Competitive Salary',
+            tech: ['React', 'Node.js', 'PostgreSQL'],
+            overview: `Join YomTech Global as ${j.title} in our ${j.department} division.`,
+            responsibilities: ['Develop scalable software modules', 'Collaborate with cross-functional team'],
+            requirements: ['Proven technical experience', 'Bachelor degree or equivalent']
+          }));
+          return [...formatted, ...JOB_VACANCIES.filter(jv => !formatted.some(c => c.title === jv.title))];
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return JOB_VACANCIES;
+  });
+
+  React.useEffect(() => {
+    const syncJobs = () => {
+      const saved = localStorage.getItem('yomtech_jobs');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const formatted = parsed.map((j, idx) => ({
+              id: j.id || `YOM-JOB-${idx + 200}`,
+              title: j.title,
+              department: j.department || 'Software Engineering',
+              type: j.type || 'Full-Time',
+              location: j.location || 'Addis Ababa (Megenagna)',
+              experience: '2+ Years',
+              salary: 'Competitive Salary',
+              tech: ['React', 'Node.js', 'PostgreSQL'],
+              overview: `Join YomTech Global as ${j.title} in our ${j.department} division.`
+            }));
+            setLiveVacancies([...formatted, ...JOB_VACANCIES.filter(jv => !formatted.some(c => c.title === jv.title))]);
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('yomtechJobsUpdated', syncJobs);
+    window.addEventListener('storage', syncJobs);
+    return () => {
+      window.removeEventListener('yomtechJobsUpdated', syncJobs);
+      window.removeEventListener('storage', syncJobs);
+    };
+  }, []);
+
   const departments = ['All', 'Software Engineering', 'Enterprise Delivery', 'Product & Innovation (R&D)', 'Operations & Tech Support', 'Product Design'];
 
   const filteredJobs = selectedDept === 'All'
-    ? JOB_VACANCIES
-    : JOB_VACANCIES.filter(j => j.department === selectedDept);
+    ? liveVacancies
+    : liveVacancies.filter(j => j.department === selectedDept);
 
   // File Upload Handler
   const handleFileChange = (e) => {
@@ -234,13 +296,44 @@ export const CareersPage = () => {
     }
   };
 
-  // Submit Online Application
+  // Submit Online Application & Sync to Admin HR Dashboard
   const handleApplySubmit = (e) => {
     e.preventDefault();
     if (fullName && email && phone) {
       const generatedCode = `YOM-2025-${Math.floor(1000 + Math.random() * 9000)}`;
       setAppliedRefCode(generatedCode);
       setFormSubmitted(true);
+
+      const newApplicant = {
+        id: `app-${Date.now()}`,
+        candidateName: fullName,
+        email,
+        phone,
+        jobTitle: applicantRole,
+        experience: experienceYears,
+        skills: portfolioUrl ? `Portfolio: ${portfolioUrl}` : 'Fullstack Engineering & Solutions',
+        status: 'Under Review',
+        refCode: generatedCode,
+        appliedDate: new Date().toISOString().split('T')[0]
+      };
+
+      const existingSaved = localStorage.getItem('yomtech_applicants');
+      let currentApplicants = [];
+      if (existingSaved) {
+        try {
+          const parsed = JSON.parse(existingSaved);
+          if (Array.isArray(parsed)) currentApplicants = parsed;
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      const updatedApplicants = [newApplicant, ...currentApplicants];
+      try {
+        localStorage.setItem('yomtech_applicants', JSON.stringify(updatedApplicants));
+      } catch (err) {
+        console.error(err);
+      }
+      window.dispatchEvent(new Event('yomtechApplicantsUpdated'));
     }
   };
 

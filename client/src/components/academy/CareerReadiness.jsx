@@ -15,9 +15,9 @@ export const CareerReadiness = () => {
   ];
 
   return (
-    <section className="relative py-28 lg:py-44 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-14 sm:py-20 lg:py-44 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       
-      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 sm:space-y-16 lg:space-y-20">
 
         {/* Section Header */}
         <div className="text-left space-y-5 max-w-full relative">
@@ -31,9 +31,9 @@ export const CareerReadiness = () => {
           />
 
           {/* Pill Capsule Badge + Cyan Horizontal Line Extension */}
-          <div className="flex items-center gap-0 w-full relative z-10">
-            <div className="inline-flex items-center gap-3 px-7 py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-sm font-bold shrink-0 backdrop-blur-md">
-              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+          <div className="flex flex-wrap items-center gap-2 w-full relative z-10">
+            <div className="inline-flex flex-wrap items-center gap-2 sm:gap-3 px-4 sm:px-7 py-2 sm:py-2.5 rounded-full bg-white/90 border-2 border-[#0EA5E9] text-[#0EA5E9] text-xs sm:text-sm font-bold backdrop-blur-md">
+              <span className="text-[#0EA5E9] font-bold text-xs hidden sm:inline">◆</span>
               <span>Announcing WabiSkills Courses by</span>
               <a 
                 href="https://wabiskills.com/" 
@@ -42,18 +42,18 @@ export const CareerReadiness = () => {
                 className="inline-flex items-center gap-1 text-[#0EA5E9] hover:text-cyan-600 underline font-bold underline-offset-4 transition-colors"
               >
                 WabiSkills.com
-                <ExternalLink className="w-4 h-4" />
+                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
               </a>
-              <span className="text-[#0EA5E9] font-bold text-xs">◆</span>
+              <span className="text-[#0EA5E9] font-bold text-xs hidden sm:inline">◆</span>
             </div>
-            <div className="h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
+            <div className="hidden sm:block h-[3px] flex-1 bg-gradient-to-r from-[#0EA5E9] via-[#38BDF8]/60 to-transparent rounded-full shadow-[0_0_10px_rgba(14,165,233,0.5)]" />
           </div>
 
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10 select-text cursor-text">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 font-display leading-tight relative z-10 select-text cursor-text">
             Unlock Potential &amp; <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">Shape Tomorrow with WabiSkills</span>
           </h2>
 
-          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl relative z-10 font-sans select-text cursor-text">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl relative z-10 font-sans select-text cursor-text">
             Our mission is to help people find the best tech courses online &amp; physical camps to learn with experts anytime, anywhere, powered by WabiSkills (Yomtech Global's Educational Platform).
           </p>
         </div>
@@ -61,13 +61,17 @@ export const CareerReadiness = () => {
         {/* Scaled Vector Infographic: Central 3D Pencil + Ribbons */}
         <div className="relative max-w-[90rem] mx-auto flex flex-col items-center">
           
-          <div className="w-full relative flex justify-center overflow-x-auto">
+          {/* SVG Pencil Infographic — scales via viewBox on all screens */}
+          <div className="w-full relative flex justify-center" style={{ overflowX: 'hidden' }}>
             <svg 
-              className="w-full max-w-[1550px] h-auto min-w-[1100px] select-text cursor-text" 
+              width="100%"
+              height="auto"
+              className="block max-w-[1550px] select-text cursor-text" 
               viewBox="0 0 1450 1095" 
+              preserveAspectRatio="xMidYMid meet"
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
-              style={{ userSelect: 'text' }}
+              style={{ userSelect: 'text', display: 'block' }}
             >
               <defs>
                 {/* 3D Drop Shadow Filters */}
@@ -247,7 +251,7 @@ export const CareerReadiness = () => {
             </svg>
           </div>
 
-          {/* Bottom 6 Course Cards (With Right Bottom Corner Logo Watermark) */}
+          {/* Bottom 6 Course Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 pt-6 sm:pt-8 border-t-2 border-slate-200/80 mt-2 w-full select-text cursor-text">
             {summaryColumns.map((col) => (
               <div 

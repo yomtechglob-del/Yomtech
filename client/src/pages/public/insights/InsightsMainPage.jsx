@@ -57,8 +57,11 @@ import {
   HelpCircle,
   Newspaper,
   Tv,
-  MapPin
+  MapPin,
+  Plus,
+  QrCode
 } from 'lucide-react';
+import { QRCodeModal } from '../../../components/common/QRCodeModal';
 
 // Partner Logos for bottom logo showcase
 import ssgiLogo from '../../../assets/partners/ssgi.webp';
@@ -72,6 +75,7 @@ export const InsightsMainPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('ALL');
   const [searchQuery, setSearchQuery] = useState('');
+  const [qrModalData, setQrModalData] = useState({ isOpen: false, title: '', url: '', category: '' });
   const [activeFaqIdx, setActiveFaqIdx] = useState(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSubscribed, setNewsletterSubscribed] = useState(false);
@@ -89,6 +93,17 @@ export const InsightsMainPage = () => {
   const [toastNotice, setToastNotice] = useState(null);
   const [likesMap, setLikesMap] = useState({ 'art-1': 450, 'art-2': 320, 'art-3': 510, 'art-4': 98, 'art-5': 182 });
   const [bookmarksMap, setBookmarksMap] = useState({});
+  
+  // Instant News Entry Creation Modal State
+  const [showQuickCreateModal, setShowQuickCreateModal] = useState(false);
+  const [quickForm, setQuickForm] = useState({
+    title: '',
+    category: 'Corporate News & Articles',
+    author: 'Editorial Team',
+    summary: '',
+    fullContent: '',
+    coverImage: ''
+  });
 
   // Real-time synchronization with Admin Dashboard CMS
   const [liveArticles, setLiveArticles] = useState(() => {
@@ -166,11 +181,52 @@ export const InsightsMainPage = () => {
     });
   };
 
+  const handleQuickCreateSubmit = (e) => {
+    e.preventDefault();
+    if (!quickForm.title) return;
+
+    const newEntry = {
+      id: `art-pub-${Date.now()}`,
+      title: quickForm.title,
+      category: quickForm.category || 'Corporate News & Articles',
+      author: quickForm.author || 'Editorial Team',
+      summary: quickForm.summary,
+      fullContent: quickForm.fullContent || quickForm.summary,
+      coverImage: quickForm.coverImage,
+      publishedDate: new Date().toISOString().split('T')[0],
+      readTime: '5 min read',
+      status: 'Published',
+      visibility: 'VISIBLE'
+    };
+
+    const updated = [newEntry, ...liveArticles];
+    setLiveArticles(updated);
+    try {
+      localStorage.setItem('yomtech_cms_articles', JSON.stringify(updated));
+    } catch (err) {
+      console.error('localStorage sync error:', err);
+    }
+    window.dispatchEvent(new Event('cmsArticlesUpdated'));
+    showToast(`Published "${quickForm.title}" live onto News & Insights Hub!`);
+    setShowQuickCreateModal(false);
+    setQuickForm({
+      title: '',
+      category: 'Corporate News & Articles',
+      author: 'Editorial Team',
+      summary: '',
+      fullContent: '',
+      coverImage: ''
+    });
+  };
+
   // Live dataset derivation from Admin Dashboard localStorage (cmsArticles)
-  const hasCustomCms = !!localStorage.getItem('yomtech_cms_articles');
+  // Live dataset derivation from Admin Dashboard localStorage (cmsArticles)
   const articlesPool = liveArticles && Array.isArray(liveArticles) ? liveArticles : [];
 
-  const displayProductsMatrix = articlesPool.filter((a) => ['Services & Products Matrix', 'Services & Products', 'Products', 'cms-services'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const displayProductsMatrix = articlesPool.filter((a) =>
+    ['Services & Products Matrix', 'Services & Products', 'Products', 'cms-services'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+    (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+  );
   const customProductsMatrixFormatted = displayProductsMatrix.map((a, idx) => ({
     id: a.id,
     title: a.title,
@@ -187,7 +243,10 @@ export const InsightsMainPage = () => {
   }));
   const activeProductsMatrix = customProductsMatrixFormatted;
 
-  const displayNews = articlesPool.filter((a) => ['Corporate News & Articles', 'Corporate News', 'News', 'cms-news'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const displayNews = articlesPool.filter((a) =>
+    ['Corporate News & Articles', 'Corporate News', 'News', 'cms-news', 'Article'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+    (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+  );
   const customNewsFormatted = displayNews.map((a, idx) => ({
     id: a.id,
     title: a.title,
@@ -203,14 +262,19 @@ export const InsightsMainPage = () => {
     client: a.client,
     fullContent: a.fullContent
   }));
-  const activeNewsItems = customNewsFormatted.length > 0 ? customNewsFormatted : NEWS_ITEMS;
+  const activeNewsItems = customNewsFormatted.length > 0 
+    ? [...customNewsFormatted, ...NEWS_ITEMS.filter((item) => !customNewsFormatted.some((c) => c.id === item.id))]
+    : NEWS_ITEMS;
 
-  const displayBlog = articlesPool.filter((a) => ['Tech Articles & Engineering', 'Tech Articles', 'Engineering', 'Blog', 'cms-blog'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const displayBlog = articlesPool.filter((a) =>
+    ['Tech Articles & Engineering', 'Tech Articles', 'Engineering', 'Blog', 'cms-blog'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+    (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+  );
   const customBlogFormatted = displayBlog.map((a, idx) => ({
     id: a.id,
     title: a.title,
     slug: a.id,
-    category: a.category,
+    category: a.category || 'Tech Articles & Engineering',
     date: a.publishedDate || 'AUG 2026',
     readTime: a.readTime || '8 min read',
     author: a.author || 'Engineering Team',
@@ -220,9 +284,14 @@ export const InsightsMainPage = () => {
     client: a.client,
     fullContent: a.fullContent
   }));
-  const activeBlogArticles = customBlogFormatted.length > 0 ? customBlogFormatted : BLOG_ARTICLES;
+  const activeBlogArticles = customBlogFormatted.length > 0
+    ? [...customBlogFormatted, ...BLOG_ARTICLES.filter((item) => !customBlogFormatted.some((c) => c.id === item.id))]
+    : BLOG_ARTICLES;
 
-  const displayEvents = articlesPool.filter((a) => ['Upcoming Events & Webinars', 'Events', 'Webinars', 'cms-events'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const displayEvents = articlesPool.filter((a) =>
+    ['Upcoming Events & Webinars', 'Events', 'Webinars', 'cms-events'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+    (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+  );
   const customEventsFormatted = displayEvents.map((a, idx) => {
     const rawDate = a.publishedDate || a.date || '2026-09-15';
     let dateMonth = 'SEP';
@@ -250,9 +319,14 @@ export const InsightsMainPage = () => {
       coverImage: a.coverImage || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80'
     };
   });
-  const activeEvents = customEventsFormatted.length > 0 ? customEventsFormatted : EVENTS;
+  const activeEvents = customEventsFormatted.length > 0
+    ? [...customEventsFormatted, ...EVENTS.filter((item) => !customEventsFormatted.some((c) => c.id === item.id))]
+    : EVENTS;
 
-  const displayAnnouncements = articlesPool.filter((a) => ['Official Announcements', 'Announcements', 'Bulletins', 'cms-announcements'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
+  const displayAnnouncements = articlesPool.filter((a) =>
+    ['Official Announcements', 'Announcements', 'Bulletins', 'cms-announcements'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+    (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+  );
   const customAnnouncementsFormatted = displayAnnouncements.map((a, idx) => ({
     id: a.id,
     title: a.title,
@@ -261,7 +335,9 @@ export const InsightsMainPage = () => {
     summary: a.summary || 'Official corporate announcement.',
     coverImage: a.coverImage || 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80'
   }));
-  const activeAnnouncements = customAnnouncementsFormatted.length > 0 ? customAnnouncementsFormatted : ANNOUNCEMENTS;
+  const activeAnnouncements = customAnnouncementsFormatted.length > 0
+    ? [...customAnnouncementsFormatted, ...ANNOUNCEMENTS.filter((item) => !customAnnouncementsFormatted.some((c) => c.id === item.id))]
+    : ANNOUNCEMENTS;
 
   const displayProjects = articlesPool.filter((a) => ['Featured Project Case Studies', 'Case Studies', 'Projects', 'cms-projects'].includes(a.category) && (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN');
   const customProjectsFormatted = displayProjects.map((a, idx) => ({
@@ -456,8 +532,8 @@ export const InsightsMainPage = () => {
               </button>
             </div>
 
-            {/* Quick Filter Tabs */}
-            <div className="flex flex-wrap justify-center gap-2 pt-2">
+            {/* Quick Filter Tabs & Create New Entry Button */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
               {categories.map((cat) => (
                 <button
                   key={cat.id}
@@ -471,6 +547,14 @@ export const InsightsMainPage = () => {
                   {cat.label}
                 </button>
               ))}
+              <button
+                onClick={() => setShowQuickCreateModal(true)}
+                className="px-4 py-2 rounded-xl text-xs font-black bg-gradient-to-r from-sky-400 to-[#0ED3DD] hover:brightness-110 text-white shadow-dodger-glow flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105"
+                title="Create a new article or entry live"
+              >
+                <Plus size={15} />
+                <span>Create New Entry</span>
+              </button>
             </div>
           </motion.div>
         </div>
@@ -540,16 +624,33 @@ export const InsightsMainPage = () => {
 
                     <div className="flex justify-between items-center pt-1">
                       <span className="text-[11px] font-bold text-slate-500">{author}</span>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setLikesMap((prev) => ({ ...prev, [storyId]: (prev[storyId] || 450) + 1 }));
-                          setReadingArticle(story);
-                        }}
-                        className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110 cursor-pointer"
-                      >
-                        <ArrowRight size={16} />
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setQrModalData({
+                              isOpen: true,
+                              title: story.title,
+                              category: category,
+                              url: `${window.location.origin}/insights?id=${storyId}`
+                            });
+                          }}
+                          className="w-9 h-9 rounded-full bg-sky-50 border border-sky-200 shadow-sm flex items-center justify-center text-[#0077B6] hover:bg-[#0077B6] hover:text-white transition-all cursor-pointer"
+                          title="Generate QR Code"
+                        >
+                          <QrCode size={15} />
+                        </button>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setLikesMap((prev) => ({ ...prev, [storyId]: (prev[storyId] || 450) + 1 }));
+                            setReadingArticle(story);
+                          }}
+                          className="w-9 h-9 rounded-full bg-white shadow-md flex items-center justify-center text-slate-800 hover:bg-[#1E90FF] hover:text-white transition-all transform group-hover:scale-110 cursor-pointer"
+                        >
+                          <ArrowRight size={16} />
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -1746,6 +1847,125 @@ export const InsightsMainPage = () => {
           <span>{toastNotice}</span>
         </div>
       )}
+
+      {/* 19. QUICK ADD ENTRY MODAL */}
+      {showQuickCreateModal && (
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <form onSubmit={handleQuickCreateSubmit} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Create New Entry</h3>
+                <p className="text-xs text-slate-500 font-medium">Publish live news story directly onto News &amp; Media Hub</p>
+              </div>
+              <button type="button" onClick={() => setShowQuickCreateModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
+                <X size={18} />
+              </button>
+            </div>
+            
+            <div className="space-y-3.5 text-xs">
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Headline / News Title *</label>
+                <input
+                  type="text"
+                  required
+                  placeholder="e.g. YomTech Global Expands Pan-African Operations..."
+                  value={quickForm.title}
+                  onChange={(e) => setQuickForm({ ...quickForm, title: e.target.value })}
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Category</label>
+                  <select
+                    value={quickForm.category}
+                    onChange={(e) => setQuickForm({ ...quickForm, category: e.target.value })}
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
+                  >
+                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
+                    <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+                    <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
+                    <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
+                    <option value="Official Announcements">Official Announcements</option>
+                    <option value="Featured Project Case Studies">Featured Project Case Studies</option>
+                    <option value="Executive Team Members">Executive Team Members</option>
+                    <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
+                    <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
+                    <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
+                    <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
+                    <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
+                    <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
+                    <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="font-bold text-slate-700 block mb-1">Author / Organization *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Editorial Team"
+                    value={quickForm.author}
+                    onChange={(e) => setQuickForm({ ...quickForm, author: e.target.value })}
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Summary Teaser (Short Card Snippet)</label>
+                <textarea
+                  rows="2"
+                  placeholder="Short card teaser summary..."
+                  value={quickForm.summary}
+                  onChange={(e) => setQuickForm({ ...quickForm, summary: e.target.value })}
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500 text-xs placeholder:text-slate-400"
+                ></textarea>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Full Article Story Content</label>
+                <textarea
+                  rows="4"
+                  placeholder="Write full news story or press article body..."
+                  value={quickForm.fullContent}
+                  onChange={(e) => setQuickForm({ ...quickForm, fullContent: e.target.value })}
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500 text-xs placeholder:text-slate-400"
+                ></textarea>
+              </div>
+
+              <div>
+                <label className="font-bold text-slate-700 block mb-1">Cover Photo URL / Image</label>
+                <input
+                  type="text"
+                  placeholder="https://..."
+                  value={quickForm.coverImage}
+                  onChange={(e) => setQuickForm({ ...quickForm, coverImage: e.target.value })}
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
+                />
+              </div>
+            </div>
+
+            <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
+              <button type="button" onClick={() => setShowQuickCreateModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50 cursor-pointer transition-colors">
+                Cancel
+              </button>
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white rounded-xl shadow-dodger-glow font-black cursor-pointer transition-all">
+                Publish Entry Live
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {/* LIGHT SKY QR CODE MODAL FOR PUBLIC SCANNING */}
+      <QRCodeModal
+        isOpen={qrModalData.isOpen}
+        onClose={() => setQrModalData((prev) => ({ ...prev, isOpen: false }))}
+        title={qrModalData.title}
+        url={qrModalData.url}
+        category={qrModalData.category}
+      />
 
     </div>
   );

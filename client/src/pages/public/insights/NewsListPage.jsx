@@ -20,11 +20,13 @@ export const NewsListPage = () => {
     });
   };
   const isArticleVisibleAndPublished = (a) => {
+    const cat = (a.category || '').toLowerCase();
+    const isCatMatch = ['news', 'article', 'corporate', 'cms'].some(c => cat.includes(c)) || !a.category;
     const vis = (a.visibility || 'VISIBLE').toUpperCase();
     const stat = (a.status || 'PUBLISHED').toUpperCase();
-    const isVis = vis === 'VISIBLE' || vis === 'PUBLIC';
-    const isPub = stat === 'PUBLISHED';
-    return isVis && isPub;
+    const isVis = vis !== 'HIDDEN' && vis !== 'DELETED';
+    const isPub = stat !== 'EXPIRED' && stat !== 'DRAFT';
+    return isCatMatch && isVis && isPub;
   };
 
   const formatItemForNews = (a, idx) => ({

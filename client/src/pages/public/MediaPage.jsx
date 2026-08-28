@@ -74,6 +74,79 @@ const DOCUMENTARIES = [
 export const MediaPage = () => {
   const navigate = useNavigate();
 
+  const [liveMediaDocs, setLiveMediaDocs] = React.useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_articles');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const mediaItems = parsed.filter(
+            (a) => ['Media Appearances & Coverage', 'Press & Corporate Content', 'Media', 'Press', 'cms-media', 'cms-press'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+            (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+          );
+          if (mediaItems.length > 0) {
+            const customDocs = mediaItems.map((a, idx) => ({
+              id: a.id || `media-${idx}`,
+              title: a.title,
+              category: a.readTime || 'Media Coverage',
+              partner: a.client || 'YomTech Media Unit',
+              duration: a.publishedDate || '2026',
+              year: '2026',
+              img: a.coverImage || documentaryImg,
+              logo: logoEmblem,
+              desc: a.summary || a.excerpt || 'YomTech Global technology media coverage.',
+              highlights: ['Live Broadcast Coverage', 'Press & Corporate Release']
+            }));
+            return [...customDocs, ...DOCUMENTARIES];
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return DOCUMENTARIES;
+  });
+
+  React.useEffect(() => {
+    const syncMedia = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            const mediaItems = parsed.filter(
+              (a) => ['Media Appearances & Coverage', 'Press & Corporate Content', 'Media', 'Press', 'cms-media', 'cms-press'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+              (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+            );
+            if (mediaItems.length > 0) {
+              const customDocs = mediaItems.map((a, idx) => ({
+                id: a.id || `media-${idx}`,
+                title: a.title,
+                category: a.readTime || 'Media Coverage',
+                partner: a.client || 'YomTech Media Unit',
+                duration: a.publishedDate || '2026',
+                year: '2026',
+                img: a.coverImage || documentaryImg,
+                logo: logoEmblem,
+                desc: a.summary || a.excerpt || 'YomTech Global technology media coverage.',
+                highlights: ['Live Broadcast Coverage', 'Press & Corporate Release']
+              }));
+              setLiveMediaDocs([...customDocs, ...DOCUMENTARIES]);
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', syncMedia);
+    window.addEventListener('storage', syncMedia);
+    return () => {
+      window.removeEventListener('cmsArticlesUpdated', syncMedia);
+      window.removeEventListener('storage', syncMedia);
+    };
+  }, []);
+
   return (
     <div className="bg-white text-slate-900 min-h-screen relative overflow-hidden font-sans">
 
@@ -196,7 +269,7 @@ export const MediaPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {DOCUMENTARIES.map((doc) => (
+            {liveMediaDocs.map((doc) => (
               <motion.div
                 key={doc.id}
                 initial={{ opacity: 0, y: 20 }}

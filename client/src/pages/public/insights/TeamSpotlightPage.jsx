@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { AboutHeroBackground } from '../../../components/common/AboutHeroBackground';
 import { TEAM_SPOTLIGHTS, COMMUNITY_TESTIMONIALS } from '../../../data/insightsData';
-import { User, Award, Quote, Star, Sparkles } from 'lucide-react';
+import { User, Award, Quote, Star, Sparkles, QrCode } from 'lucide-react';
+import { QRCodeModal } from '../../../components/common/QRCodeModal';
 
 import { fetchPublicCmsCategoryApi } from '../../../services/api';
 
 export const TeamSpotlightPage = () => {
   const [teamPool, setTeamPool] = React.useState(TEAM_SPOTLIGHTS);
+  const [qrModalData, setQrModalData] = React.useState({ isOpen: false, title: '', url: '', category: '' });
 
   React.useEffect(() => {
     const fetchTeam = async () => {
@@ -88,16 +90,35 @@ export const TeamSpotlightPage = () => {
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {teamPool.map((t) => (
-            <div key={t.id} className="bg-white rounded-3xl border border-slate-200/90 p-8 space-y-5 shadow-sm hover:border-[#1E90FF] transition-all">
-              <div className="flex items-center gap-6">
-                <img src={t.photo} alt={t.name} className="w-24 h-24 rounded-2xl object-cover shadow-md border border-slate-200 shrink-0" />
-                <div>
-                  <h3 className="text-xl font-black text-slate-900">{t.name}</h3>
-                  <div className="text-xs font-black text-[#1E90FF]">{t.role}</div>
-                  <div className="text-[11px] text-slate-400 font-semibold">{t.department}</div>
+            <div key={t.id} className="bg-white rounded-3xl border border-slate-200/90 p-8 space-y-5 shadow-sm hover:border-[#1E90FF] transition-all flex flex-col justify-between">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <img src={t.photo} alt={t.name} className="w-20 h-20 rounded-2xl object-cover shadow-md border border-slate-200 shrink-0" />
+                    <div>
+                      <h3 className="text-xl font-black text-slate-900">{t.name}</h3>
+                      <div className="text-xs font-black text-[#1E90FF]">{t.role}</div>
+                      <div className="text-[11px] text-slate-400 font-semibold">{t.department}</div>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => setQrModalData({
+                      isOpen: true,
+                      title: `${t.name} (${t.role})`,
+                      category: 'Expert Professional Profile',
+                      url: `https://yomtechglobal.org/about`
+                    })}
+                    className="p-2.5 rounded-2xl bg-sky-50 border border-sky-200 text-[#0077B6] hover:bg-[#0077B6] hover:text-white transition-all cursor-pointer shadow-sm shrink-0"
+                    title="Scan Professional QR Code"
+                  >
+                    <QrCode size={18} />
+                  </button>
                 </div>
+
+                <p className="text-xs text-slate-600 leading-relaxed font-medium">{t.bio}</p>
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed font-medium">{t.bio}</p>
+
               <div className="p-4 rounded-2xl bg-cyan-50 border border-cyan-200 text-xs italic font-semibold text-[#1E90FF]">
                 "{t.quote}"
               </div>
@@ -105,6 +126,14 @@ export const TeamSpotlightPage = () => {
           ))}
         </div>
       </section>
+
+      <QRCodeModal
+        isOpen={qrModalData.isOpen}
+        onClose={() => setQrModalData((prev) => ({ ...prev, isOpen: false }))}
+        title={qrModalData.title}
+        url={qrModalData.url}
+        category={qrModalData.category}
+      />
     </div>
   );
 };

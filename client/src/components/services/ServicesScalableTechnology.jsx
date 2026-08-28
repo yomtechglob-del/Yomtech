@@ -69,7 +69,7 @@ export const ServicesScalableTechnology = () => {
   ];
 
   return (
-    <section className="relative py-24 lg:py-40 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-14 sm:py-20 lg:py-40 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -80,7 +80,7 @@ export const ServicesScalableTechnology = () => {
       />
       <div className="absolute top-1/4 left-1/3 w-[800px] h-[600px] bg-purple-400/10 rounded-full blur-[180px] pointer-events-none" />
 
-      <div className="max-w-[98rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[98rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-12 lg:space-y-16">
 
         {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
@@ -104,11 +104,11 @@ export const ServicesScalableTechnology = () => {
               return (
                 <motion.div
                   key={p.step}
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: idx * 0.08 }}
-                  className="bg-white rounded-3xl p-6 sm:p-7 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-slate-100/90 relative overflow-hidden group flex items-center justify-between gap-6"
+                  className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-7 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border-2 border-slate-100/90 relative overflow-hidden group flex items-center justify-between gap-4 sm:gap-6"
                 >
                   {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
                   <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">
@@ -129,7 +129,7 @@ export const ServicesScalableTechnology = () => {
                       </span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
+                    <h3 className="text-base sm:text-xl lg:text-2xl font-bold text-slate-900 font-display tracking-tight leading-snug group-hover:text-[#0284C7] transition-colors">
                       {p.title}
                     </h3>
 
@@ -151,32 +151,32 @@ export const ServicesScalableTechnology = () => {
           <div className="lg:col-span-6 flex justify-center items-center py-6 sm:py-10 relative order-1 lg:order-2">
             <div className="absolute inset-0 bg-cyan-400/25 blur-[140px] rounded-full pointer-events-none" />
 
-            {/* Donut Wheel Outer Container */}
-            <div className="relative w-[420px] h-[420px] sm:w-[560px] sm:h-[560px] lg:w-[640px] lg:h-[640px] xl:w-[680px] xl:h-[680px] rounded-full flex items-center justify-center shadow-2xl p-6 bg-white border-4 border-slate-100/90 group hover:scale-[1.02] transition-transform duration-500 overflow-hidden">
+            {/* Donut Wheel Outer Container — fluid width on mobile */}
+            <div className="relative w-full max-w-[340px] xs:max-w-[380px] sm:max-w-[520px] lg:max-w-[640px] xl:max-w-[680px] aspect-square rounded-full flex items-center justify-center shadow-2xl p-4 sm:p-6 bg-white border-4 border-slate-100/90 group hover:scale-[1.02] transition-transform duration-500 overflow-hidden mx-auto">
               
               {/* 5-Colored Conic Donut Ring */}
               <div 
-                className="w-full h-full rounded-full shadow-inner flex items-center justify-center p-12 sm:p-16 lg:p-20"
+                className="w-full h-full rounded-full shadow-inner flex items-center justify-center p-8 sm:p-12 lg:p-16 xl:p-20"
                 style={{
                   background: 'conic-gradient(#06B6D4 0deg 72deg, #F59E0B 72deg 144deg, #0EA5E9 144deg 216deg, #8B5CF6 216deg 288deg, #10B981 288deg 360deg)',
                 }}
               >
                 {/* Inner White Center Circle */}
-                <div className="w-full h-full rounded-full bg-white shadow-2xl p-8 sm:p-12 lg:p-16 flex flex-col justify-center items-center text-center font-sans border-4 border-slate-100 space-y-4 relative overflow-hidden">
+                <div className="w-full h-full rounded-full bg-white shadow-2xl p-4 sm:p-8 lg:p-12 xl:p-16 flex flex-col justify-center items-center text-center font-sans border-4 border-slate-100 space-y-2 sm:space-y-4 relative overflow-hidden">
                   
                   {/* Translucent YomTech Brand Logo Watermark Background */}
                   <div className="absolute right-4 bottom-4 opacity-[0.16] pointer-events-none z-0">
                     <img src={logoEmblem} alt="" className="w-44 sm:w-56 h-44 sm:h-56 object-contain" />
                   </div>
 
-                  <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display relative z-10">
+                  <h2 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display relative z-10">
                     Built for Today. <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                       Ready for Tomorrow.
                     </span>
                   </h2>
 
-                  <p className="text-sm sm:text-base lg:text-lg text-slate-500 font-normal leading-relaxed max-w-[280px] sm:max-w-[360px] relative z-10">
+                  <p className="text-[11px] sm:text-sm lg:text-base text-slate-500 font-normal leading-relaxed max-w-[200px] sm:max-w-[300px] lg:max-w-[360px] relative z-10">
                     Future-proof enterprise technology foundations.
                   </p>
                 </div>

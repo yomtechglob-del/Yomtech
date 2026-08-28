@@ -129,7 +129,7 @@ export const ServicesChallengeToImpact = () => {
   ];
 
   return (
-    <section className="relative py-24 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-14 sm:py-20 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -140,7 +140,7 @@ export const ServicesChallengeToImpact = () => {
       />
       <div className="absolute top-1/3 right-1/4 w-[700px] h-[500px] bg-emerald-400/10 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-20">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 sm:space-y-16 lg:space-y-20">
 
         {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
@@ -152,13 +152,13 @@ export const ServicesChallengeToImpact = () => {
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
             From Complex Challenges to <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
               Practical Solutions
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
             Technology creates value when it solves real problems. YomTech Global connects business challenges with software engineering, digital platforms, and practical tech talent.
           </p>
         </div>
@@ -177,10 +177,10 @@ export const ServicesChallengeToImpact = () => {
                 className="relative group cursor-pointer"
               >
                 {/* Tilted Outer Gradient Base Plate */}
-                <div className={`w-full h-full ${item.baseGradient} rounded-[2.8rem] p-3 sm:p-4 shadow-2xl ${item.tiltBase} group-hover:rotate-0 group-hover:scale-[1.02] transition-all duration-500`}>
+                <div className={`w-full h-full ${item.baseGradient} rounded-[2rem] sm:rounded-[2.8rem] p-2.5 sm:p-3 md:p-4 shadow-2xl ${item.tiltBase} group-hover:rotate-0 group-hover:scale-[1.02] transition-all duration-500`}>
                   
                   {/* Inner Counter-Tilted White Stitched Patch Card */}
-                  <div className={`bg-white rounded-[2.3rem] p-7 sm:p-9 shadow-inner border-2 border-solid border-slate-300 relative ${item.tiltCard} group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between space-y-6 h-full overflow-hidden`}>
+                  <div className={`bg-white rounded-[1.7rem] sm:rounded-[2.3rem] p-5 sm:p-7 md:p-9 shadow-inner border-2 border-solid border-slate-300 relative ${item.tiltCard} group-hover:rotate-0 transition-transform duration-500 flex flex-col justify-between space-y-4 sm:space-y-6 h-full overflow-hidden`}>
                     
                     {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
                     <div className="absolute right-2 bottom-2 opacity-[0.18] pointer-events-none z-0">

@@ -11,10 +11,13 @@ export const BlogListPage = () => {
   const [selectedCat, setSelectedCat] = useState('ALL');
 
   const isBlogVisibleAndPublished = (a) => {
-    const isCat = ['Tech Articles & Engineering', 'Tech Articles', 'Engineering', 'Blog'].includes(a.category);
+    const cat = (a.category || '').toLowerCase();
+    const isCatMatch = ['tech', 'article', 'engineering', 'blog', 'cms-blog'].some(c => cat.includes(c));
     const vis = (a.visibility || 'VISIBLE').toUpperCase();
     const stat = (a.status || 'PUBLISHED').toUpperCase();
-    return isCat && (vis === 'VISIBLE' || vis === 'PUBLIC') && stat === 'PUBLISHED';
+    const isVis = vis !== 'HIDDEN' && vis !== 'DELETED';
+    const isPub = stat !== 'EXPIRED' && stat !== 'DRAFT';
+    return isCatMatch && isVis && isPub;
   };
 
   const formatBlogItem = (item, idx) => ({
@@ -37,7 +40,7 @@ export const BlogListPage = () => {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed)) {
           const custom = parsed.filter(isBlogVisibleAndPublished).map(formatBlogItem);
-          if (custom.length > 0) return custom;
+          if (custom.length > 0) return [...custom, ...BLOG_ARTICLES.filter(b => !custom.some(c => c.id === b.id))];
         }
       } catch (e) {
         console.error(e);
@@ -52,7 +55,7 @@ export const BlogListPage = () => {
         const res = await fetchPublicCmsCategoryApi('all');
         if (res.data?.success && Array.isArray(res.data.data)) {
           const apiBlogs = res.data.data.filter(isBlogVisibleAndPublished).map(formatBlogItem);
-          setLiveBlogPool(apiBlogs.length > 0 ? apiBlogs : BLOG_ARTICLES);
+          setLiveBlogPool(apiBlogs.length > 0 ? [...apiBlogs, ...BLOG_ARTICLES.filter(b => !apiBlogs.some(c => c.id === b.id))] : BLOG_ARTICLES);
         }
       } catch (err) {
         console.error('Failed to fetch blog articles from API:', err);

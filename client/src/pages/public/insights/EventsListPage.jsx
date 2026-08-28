@@ -8,10 +8,13 @@ import { fetchPublicCmsCategoryApi } from '../../../services/api';
 
 export const EventsListPage = () => {
   const isEventVisible = (a) => {
-    const isCat = a.category === 'Upcoming Events & Webinars';
-    const vis = (a.visibility || '').toUpperCase();
-    const stat = (a.status || '').toUpperCase();
-    return isCat && (vis === 'VISIBLE' || vis === 'PUBLIC') && (stat === 'PUBLISHED');
+    const cat = (a.category || '').toLowerCase();
+    const isCatMatch = ['event', 'webinar', 'upcoming', 'cms-events'].some(c => cat.includes(c));
+    const vis = (a.visibility || 'VISIBLE').toUpperCase();
+    const stat = (a.status || 'PUBLISHED').toUpperCase();
+    const isVis = vis !== 'HIDDEN' && vis !== 'DELETED';
+    const isPub = stat !== 'EXPIRED' && stat !== 'DRAFT';
+    return isCatMatch && isVis && isPub;
   };
 
   const [liveEventsPool, setLiveEventsPool] = React.useState(() => {
@@ -20,7 +23,7 @@ export const EventsListPage = () => {
       try {
         const parsed = JSON.parse(saved);
         const filtered = parsed.filter(isEventVisible);
-        if (filtered.length > 0) return filtered;
+        if (filtered.length > 0) return [...filtered, ...EVENTS.filter(e => !filtered.some(f => f.id === e.id))];
       } catch (e) {
         console.error(e);
       }
@@ -34,7 +37,7 @@ export const EventsListPage = () => {
         const res = await fetchPublicCmsCategoryApi('all');
         if (res.data?.success && Array.isArray(res.data.data)) {
           const apiEvents = res.data.data.filter(isEventVisible);
-          if (apiEvents.length > 0) setLiveEventsPool(apiEvents);
+          if (apiEvents.length > 0) setLiveEventsPool([...apiEvents, ...EVENTS.filter(e => !apiEvents.some(f => f.id === e.id))]);
         }
       } catch (err) {
         console.error('Failed to fetch events from API:', err);
@@ -49,7 +52,7 @@ export const EventsListPage = () => {
         try {
           const parsed = JSON.parse(saved);
           const filtered = parsed.filter(isEventVisible);
-          if (filtered.length > 0) setLiveEventsPool(filtered);
+          if (filtered.length > 0) setLiveEventsPool([...filtered, ...EVENTS.filter(e => !filtered.some(f => f.id === e.id))]);
           else setLiveEventsPool(EVENTS);
         } catch (e) {
           console.error(e);

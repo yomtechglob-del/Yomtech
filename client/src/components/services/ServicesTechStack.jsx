@@ -170,7 +170,7 @@ export const ServicesTechStack = () => {
   const filteredItems = activeTab === 'ALL' ? techItems : techItems.filter(item => item.category === activeTab);
 
   return (
-    <section className="relative py-24 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-14 sm:py-20 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -181,7 +181,7 @@ export const ServicesTechStack = () => {
       />
       <div className="absolute top-1/3 left-1/4 w-[700px] h-[500px] bg-cyan-400/10 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-12 lg:space-y-16">
 
         {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
@@ -193,24 +193,24 @@ export const ServicesTechStack = () => {
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
             Engineered with <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
               Cutting-Edge Tech
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
             We leverage battle-tested open-source frameworks, high-performance cloud tools, and robust security protocols to build scalable enterprise solutions.
           </p>
         </div>
 
-        {/* Tab Filter Buttons */}
-        <div className="flex flex-wrap items-center gap-3">
+        {/* Tab Filter Buttons — 2-col grid on mobile */}
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 sm:gap-3">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setActiveTab(cat.id)}
-              className={`px-7 py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
+              className={`px-4 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 cursor-pointer ${
                 activeTab === cat.id
                   ? 'bg-[#0284C7] text-white shadow-xl shadow-sky-500/30 scale-105'
                   : 'bg-white text-slate-700 border-2 border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/50'
@@ -232,7 +232,7 @@ export const ServicesTechStack = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: idx * 0.06 }}
-                className="bg-white rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-2.5 transition-all duration-300 relative flex flex-col justify-between overflow-hidden group border border-slate-100/90 pt-8 p-7 space-y-6"
+                className="bg-white rounded-3xl shadow-xl hover:shadow-2xl hover:-translate-y-2.5 transition-all duration-300 relative flex flex-col justify-between overflow-hidden group border border-slate-100/90 pt-8 p-5 sm:p-7 space-y-4 sm:space-y-6"
               >
                 {/* Translucent YomTech Brand Logo Watermark Background at Bottom-Right Corner */}
                 <div className="absolute right-2 bottom-4 opacity-[0.18] pointer-events-none z-0">
@@ -271,7 +271,7 @@ export const ServicesTechStack = () => {
                 </div>
 
                 {/* Bottom Solid Colored Accent Strip */}
-                <div className={`h-2.5 w-full ${item.themeBg} rounded-b-3xl -mx-7 -mb-7 mt-4 relative z-10`} />
+                <div className={`h-2.5 w-full ${item.themeBg} rounded-b-3xl -mx-5 sm:-mx-7 -mb-5 sm:-mb-7 mt-3 sm:mt-4 relative z-10`} />
               </motion.div>
             );
           })}

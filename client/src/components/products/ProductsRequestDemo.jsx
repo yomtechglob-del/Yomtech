@@ -13,7 +13,7 @@ export const ProductsRequestDemo = () => {
   ];
 
   return (
-    <section className="relative py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-12 sm:py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Dot mesh */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -25,15 +25,15 @@ export const ProductsRequestDemo = () => {
 
         {/* Header with Connected Horizontal Accent Line */}
         <div className="text-left w-full space-y-4 max-w-full">
-          <div className="flex items-center gap-0 w-full">
-            <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-            <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
-              <span className="text-[#0284C7] font-bold text-xs">◆</span>
+          <div className="flex flex-wrap items-center gap-2 w-full">
+            <div className="hidden sm:block h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2.5 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-[10px] sm:text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md">
+              <span className="text-[#0284C7] font-bold text-xs hidden sm:inline">◆</span>
               <span>REQUEST DEMO / EXPLORE PRODUCTS</span>
-              <span className="text-[#0284C7] font-bold text-xs">◆</span>
+              <span className="text-[#0284C7] font-bold text-xs hidden sm:inline">◆</span>
             </div>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
             See Our Products <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
               In Action
@@ -95,29 +95,29 @@ export const ProductsRequestDemo = () => {
                 className="p-[1.5px] rounded-[2.5rem] shadow-2xl h-full"
                 style={{ background: 'linear-gradient(135deg, #0284C7, #0ED3DD, #1DA1F2)' }}
               >
-                <div className="bg-white rounded-[2.4rem] p-8 space-y-6 relative overflow-hidden h-full flex flex-col">
+                <div className="bg-white rounded-[1.8rem] sm:rounded-[2.4rem] p-5 sm:p-8 space-y-4 sm:space-y-6 relative overflow-hidden h-full flex flex-col">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-cyan-50/80 to-sky-100/60 rounded-full blur-3xl pointer-events-none" />
 
                   {/* Logo Watermark Background */}
                   <img
                     src={logoImg}
                     alt=""
-                    className="absolute -bottom-4 -right-4 w-48 h-48 object-contain opacity-[0.28] pointer-events-none select-none"
+                    className="absolute -bottom-4 -right-4 w-32 h-32 sm:w-48 sm:h-48 object-contain opacity-[0.10] pointer-events-none select-none"
                     aria-hidden="true"
                   />
 
                   {/* Logo badge */}
                   <div className="flex justify-start relative z-10">
-                    <div className="w-14 h-14 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] p-2.5 shadow-lg">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] p-2.5 shadow-lg">
                       <img src={logoImg} alt="YomTech" className="w-full h-full object-contain" />
                     </div>
                   </div>
 
                   <div className="relative z-10 flex-1">
-                    <h3 className="text-2xl font-black text-slate-900 leading-tight">
+                    <h3 className="text-xl sm:text-2xl font-black text-slate-900 leading-tight">
                       Ready to explore our products?
                     </h3>
-                    <p className="text-sm text-slate-600 font-medium mt-2 leading-relaxed">
+                    <p className="text-xs sm:text-sm text-slate-600 font-medium mt-2 leading-relaxed">
                       Schedule a free, tailored product demonstration. Our engineers are ready to show you exactly what our platforms can do for your organization.
                     </p>
 
@@ -130,25 +130,25 @@ export const ProductsRequestDemo = () => {
                       ].map((item, i) => (
                         <div key={i} className="flex items-center gap-2.5 text-xs text-slate-700 font-semibold">
                           <CheckCircle2 size={15} className="text-emerald-600 flex-shrink-0" />
-                          {item}
+                          <span>{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="flex flex-col gap-3 relative z-10">
+                  <div className="flex flex-col gap-2.5 sm:gap-3 relative z-10 pt-2">
                     <Link
                       to="/contact"
-                      className="w-full py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shadow-lg shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 group"
+                      className="w-full py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-xs uppercase tracking-widest shadow-lg shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-3 group"
                     >
                       <span>Request a Demo</span>
-                      <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
                         <ArrowRight size={13} />
                       </div>
                     </Link>
                     <a
                       href="tel:+251977666699"
-                      className="w-full py-3.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] font-black text-xs uppercase tracking-widest hover:bg-cyan-100 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+                      className="w-full py-3 sm:py-3.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] font-black text-xs uppercase tracking-widest hover:bg-cyan-100 hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
                     >
                       <span>Call +251 (977) 666-699</span>
                     </a>

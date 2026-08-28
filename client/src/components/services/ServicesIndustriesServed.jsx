@@ -87,7 +87,7 @@ export const ServicesIndustriesServed = () => {
   ];
 
   return (
-    <section className="relative py-24 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-14 sm:py-20 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -98,7 +98,7 @@ export const ServicesIndustriesServed = () => {
       />
       <div className="absolute top-1/4 right-1/4 w-[700px] h-[500px] bg-cyan-400/10 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-12 lg:space-y-16">
 
         {/* Section Header */}
         <div className="text-left w-full space-y-4 max-w-full">
@@ -110,13 +110,13 @@ export const ServicesIndustriesServed = () => {
               <span className="text-[#0284C7] font-bold text-xs">◆</span>
             </div>
           </div>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight font-display">
             Empowering Key Sectors <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
               Across Africa
             </span>
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
+          <p className="text-sm sm:text-lg md:text-xl text-slate-500 font-medium leading-relaxed max-w-4xl font-sans">
             Our software engineering, ERP solutions, tech bootcamps, and cybersecurity architectures serve mission-critical public and private organizations.
           </p>
         </div>
@@ -140,7 +140,7 @@ export const ServicesIndustriesServed = () => {
                 </div>
 
                 {/* Left Ribbon Tab with Embossed Circle Number */}
-                <div className={`w-24 sm:w-28 self-stretch shrink-0 ${sec.themeBg} text-white p-4 flex flex-col justify-center items-center relative overflow-hidden shadow-md z-10`}>
+                <div className={`w-16 sm:w-24 md:w-28 self-stretch shrink-0 ${sec.themeBg} text-white p-3 sm:p-4 flex flex-col justify-center items-center relative overflow-hidden shadow-md z-10`}>
                   <span className="text-xs font-mono font-bold tracking-widest text-white/90">
                     Step
                   </span>
@@ -152,7 +152,7 @@ export const ServicesIndustriesServed = () => {
                 </div>
 
                 {/* Middle Card Body */}
-                <div className="flex-1 p-6 sm:p-7 flex flex-col justify-center space-y-2 text-left relative z-10">
+                <div className="flex-1 p-4 sm:p-6 md:p-7 flex flex-col justify-center space-y-2 text-left relative z-10">
                   <span className={`text-xs font-mono font-bold tracking-wider ${sec.themeText}`}>
                     {sec.stageTag}
                   </span>

@@ -266,8 +266,7 @@ const HeroFeaturedVideo = ({ onPlay }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)] border-2 border-white/20"
-      style={{ aspectRatio: '21/8' }}
+      className="relative rounded-2xl sm:rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)] border-2 border-white/20 aspect-[16/9] sm:aspect-[21/8]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => onPlay(HERO_FEATURED_VIDEO)}
@@ -297,8 +296,8 @@ const HeroFeaturedVideo = ({ onPlay }) => {
                 className="absolute inset-0 rounded-full bg-red-500/20" />
             </>
           )}
-          <div className="relative w-24 h-24 rounded-full bg-red-600 border-4 border-white text-white flex items-center justify-center shadow-[0_0_60px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
-            <Play size={40} fill="white" className="text-white ml-2" />
+          <div className="relative w-14 h-14 sm:w-24 sm:h-24 rounded-full bg-red-600 border-2 sm:border-4 border-white text-white flex items-center justify-center shadow-[0_0_60px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
+            <Play size={24} fill="white" className="text-white ml-1 sm:ml-2 sm:w-10 sm:h-10" />
           </div>
         </motion.div>
       </div>
@@ -317,8 +316,7 @@ const BottomFeaturedVideo = ({ onPlay }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="relative rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)] border-2 border-white/20"
-      style={{ aspectRatio: '21/8' }}
+      className="relative rounded-2xl sm:rounded-[2.5rem] overflow-hidden cursor-pointer group shadow-[0_40px_100px_rgba(0,0,0,0.22)] border-2 border-white/20 aspect-[16/9] sm:aspect-[21/8]"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => onPlay(BOTTOM_FEATURED_VIDEO)}
@@ -339,8 +337,8 @@ const BottomFeaturedVideo = ({ onPlay }) => {
                 transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut', delay: 0.35 }} className="absolute inset-0 rounded-full bg-red-500/20" />
             </>
           )}
-          <div className="relative w-24 h-24 rounded-full bg-red-600 border-4 border-white text-white flex items-center justify-center shadow-[0_0_60px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
-            <Play size={40} fill="white" className="text-white ml-2" />
+          <div className="relative w-14 h-14 sm:w-24 sm:h-24 rounded-full bg-red-600 border-2 sm:border-4 border-white text-white flex items-center justify-center shadow-[0_0_60px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
+            <Play size={24} fill="white" className="text-white ml-1 sm:ml-2 sm:w-10 sm:h-10" />
           </div>
         </motion.div>
       </div>
@@ -349,7 +347,7 @@ const BottomFeaturedVideo = ({ onPlay }) => {
 };
 
 // ─── Small Video Card for Grid ────────────────────────────────────────────────
-const VideoCard = ({ video, product, onPlay, featured, isTopRight }) => {
+const VideoCard = ({ video, product, featured, isTopRight, onPlay }) => {
   const [hovered, setHovered] = useState(false);
   const thumb = `https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`;
 
@@ -359,8 +357,8 @@ const VideoCard = ({ video, product, onPlay, featured, isTopRight }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4 }}
-      className={`group relative rounded-2xl overflow-hidden cursor-pointer ${featured ? 'col-span-2' : ''} ${isTopRight ? 'h-full min-h-full' : ''}`}
-      style={{ aspectRatio: featured ? '16/7' : isTopRight ? '16/14' : '16/10' }}
+      className={`group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer ${featured ? 'col-span-1 sm:col-span-2' : ''} ${isTopRight ? 'h-full min-h-full' : ''}`}
+      style={{ aspectRatio: featured ? '16/9' : isTopRight ? '16/10' : '16/10' }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => onPlay(video, product)}
@@ -382,8 +380,8 @@ const VideoCard = ({ video, product, onPlay, featured, isTopRight }) => {
                 transition={{ duration: 1.1, repeat: Infinity, ease: 'easeOut', delay: 0.28 }} className="absolute inset-0 rounded-full bg-red-500/20" />
             </>
           )}
-          <div className="relative w-14 h-14 rounded-full bg-red-600 border-2 border-white text-white flex items-center justify-center shadow-[0_0_40px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
-            <Play size={22} fill="white" className="text-white ml-0.5" />
+          <div className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-red-600 border-2 border-white text-white flex items-center justify-center shadow-[0_0_40px_rgba(239,68,68,0.8)] hover:bg-red-700 transition-all">
+            <Play size={18} fill="white" className="text-white ml-0.5 sm:w-6 sm:h-6" />
           </div>
         </motion.div>
       </div>
@@ -398,22 +396,22 @@ const ProductVideoGrid = ({ product, onPlay }) => (
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -10 }}
     transition={{ duration: 0.35 }}
-    className="space-y-5"
+    className="space-y-4 sm:space-y-5"
   >
     {/* Product info bar */}
-    <div className="flex items-center justify-between flex-wrap gap-3 px-1">
-      <div className="flex items-center gap-3">
-        <div className={`w-10 h-10 rounded-xl ${product.bg} border ${product.border} p-1.5`}>
+    <div className="flex items-center justify-between flex-wrap gap-2.5 sm:gap-3 px-1">
+      <div className="flex items-center gap-2.5 sm:gap-3">
+        <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl ${product.bg} border ${product.border} p-1 sm:p-1.5`}>
           <img src={product.logo} alt={product.productName} className="w-full h-full object-contain" />
         </div>
         <div>
-          <h3 className="font-black text-slate-900 text-lg">{product.productName}</h3>
+          <h3 className="font-black text-slate-900 text-base sm:text-lg">{product.productName}</h3>
           <p className={`text-[9px] font-bold uppercase tracking-widest ${product.accent}`}>{product.productTagline}</p>
         </div>
       </div>
       <a href={product.channelUrl} target="_blank" rel="noopener noreferrer"
-        className="flex items-center gap-2 px-4 py-2 rounded-full border border-red-200 bg-red-50 text-red-600 text-[10px] font-black uppercase tracking-widest hover:bg-red-100 transition-all">
-        <Youtube size={13} />
+        className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-red-200 bg-red-50 text-red-600 text-[9px] sm:text-[10px] font-black uppercase tracking-widest hover:bg-red-100 transition-all">
+        <Youtube size={12} className="sm:w-3.5 sm:h-3.5" />
         <span>{product.channelHandle}</span>
         <span className="text-red-400">· {product.channelSubs}</span>
       </a>
@@ -445,7 +443,7 @@ export const ProductsVideoShowcase = () => {
 
   return (
     <>
-      <section id="product-videos" className="relative py-20 lg:py-28 bg-white overflow-hidden font-sans border-b border-slate-200/80">
+      <section id="product-videos" className="relative py-12 sm:py-20 lg:py-28 bg-white overflow-hidden font-sans border-b border-slate-200/80">
         {/* Dot mesh background */}
         <div className="absolute inset-0 opacity-[0.45] pointer-events-none"
           style={{ backgroundImage: 'radial-gradient(#38bdf8 1.5px, transparent 1.5px)', backgroundSize: '24px 24px' }}
@@ -456,16 +454,16 @@ export const ProductsVideoShowcase = () => {
 
           {/* Section Header with Connected Horizontal Accent Line (Matching User Reference) */}
           <div className="space-y-4 max-w-full text-left">
-            <div className="flex items-center gap-0 w-full">
-              <div className="h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
-              <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md shrink-0">
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+            <div className="flex flex-wrap items-center gap-2 w-full">
+              <div className="hidden sm:block h-[3.5px] flex-1 bg-gradient-to-r from-transparent via-[#0ED3DD] to-[#0284C7] rounded-l-full shadow-[0_0_10px_rgba(14,211,221,0.6)]" />
+              <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2.5 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-cyan-50/90 border-2 border-cyan-300 text-[#0284C7] text-[10px] sm:text-xs font-black uppercase tracking-widest shadow-md backdrop-blur-md">
+                <span className="text-[#0284C7] font-bold text-xs hidden sm:inline">◆</span>
                 <span>VIDEO SHOWCASE / @WABISKILLS · @YOMTECH</span>
-                <span className="text-[#0284C7] font-bold text-xs">◆</span>
+                <span className="text-[#0284C7] font-bold text-xs hidden sm:inline">◆</span>
               </div>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
               Watch Real Videos From <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                 Our Official Channels
@@ -503,16 +501,16 @@ export const ProductsVideoShowcase = () => {
           </div>
 
           {/* ─── PRODUCT TAB SELECTOR ─── */}
-          <div className="flex flex-wrap gap-3 pt-2">
+          <div className="flex flex-wrap gap-2 sm:gap-3 pt-2">
             {PRODUCT_VIDEOS.map((p, idx) => (
               <motion.button key={p.productId} onClick={() => setActiveIdx(idx)}
                 whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-black transition-all duration-300 overflow-hidden ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-black transition-all duration-300 overflow-hidden ${
                   activeIdx === idx ? 'text-white shadow-lg scale-105' : 'bg-white text-slate-700 border border-slate-200 hover:border-cyan-300 hover:bg-cyan-50/50'
                 }`}
                 style={activeIdx === idx ? { background: `linear-gradient(135deg, ${p.accentHex}dd, ${p.accentHex}99)`, boxShadow: `0 8px 24px ${p.glowColor}` } : {}}
               >
-                <div className={`w-5 h-5 rounded-lg overflow-hidden flex-shrink-0 ${activeIdx === idx ? 'bg-white/20' : 'bg-slate-100'} p-0.5`}>
+                <div className={`w-4 h-4 sm:w-5 sm:h-5 rounded-lg overflow-hidden flex-shrink-0 ${activeIdx === idx ? 'bg-white/20' : 'bg-slate-100'} p-0.5`}>
                   <img src={p.logo} alt={p.productName} className="w-full h-full object-contain" />
                 </div>
                 <span>{p.productName}</span>

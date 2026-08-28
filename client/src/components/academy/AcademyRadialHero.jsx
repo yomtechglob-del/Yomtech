@@ -140,7 +140,7 @@ export const AcademyRadialHero = () => {
       ========================================================= */}
       <div className="relative z-10 mx-auto max-w-[1450px]">
 
-        <div className="relative min-h-[880px] lg:min-h-[920px]">
+        <div className="relative min-h-[auto] sm:min-h-[880px] lg:min-h-[920px]">
 
 
           {/* =====================================================
@@ -312,7 +312,7 @@ export const AcademyRadialHero = () => {
           {/* =====================================================
               CONTENT
           ===================================================== */}
-          <div className="relative flex min-h-[780px] flex-col items-center justify-center gap-14 lg:block">
+          <div className="relative flex min-h-[auto] sm:min-h-[780px] flex-col items-center justify-center gap-8 sm:gap-14 lg:block">
 
 
             {/* ===================================================
@@ -328,7 +328,7 @@ export const AcademyRadialHero = () => {
               className="relative lg:absolute lg:left-[20px] lg:top-[122px]"
             >
 
-              <div className="relative h-[min(82vw,520px)] w-[min(82vw,520px)] sm:h-[500px] sm:w-[500px]">
+              <div className="relative h-[min(80vw,480px)] w-[min(80vw,480px)] sm:h-[500px] sm:w-[500px]">
 
 
                 {/* Outer glow */}
@@ -375,16 +375,16 @@ export const AcademyRadialHero = () => {
                   className="absolute -inset-[7px] rounded-full border-[2px] border-[#0ED3DD]/70"
                 />
 
-                <div className="absolute inset-[43px] rounded-full bg-[#D5DEEF] shadow-inner" />
+                <div className="absolute inset-[24px] sm:inset-[43px] rounded-full bg-[#D5DEEF] shadow-inner" />
 
-                <div className="absolute inset-[60px] flex flex-col items-center justify-center rounded-full border border-white bg-white/80 px-8 text-center shadow-[0_20px_60px_rgba(15,23,42,0.15)]">
+                <div className="absolute inset-[34px] sm:inset-[60px] flex flex-col items-center justify-center rounded-full border border-white bg-white/80 px-3 sm:px-8 text-center shadow-[0_20px_60px_rgba(15,23,42,0.15)]">
                 
                   <motion.img
                     src={logoImg}
                     alt="Yomtech Global"
-                    className="mb-5 h-24 w-auto object-contain sm:h-28"
+                    className="mb-1.5 sm:mb-4 h-12 sm:h-20 lg:h-28 w-auto object-contain"
                     animate={{
-                      y: [0, -5, 0],
+                      y: [0, -4, 0],
                     }}
                     transition={{
                       duration: 4,
@@ -393,22 +393,21 @@ export const AcademyRadialHero = () => {
                     }}
                   />
                 
-                  <h2 className="text-[2.7rem] font-black capitalize leading-none tracking-tight text-[#173B78] sm:text-[3.3rem]">
+                  <h2 className="text-lg sm:text-[2.5rem] lg:text-[3.3rem] font-black capitalize leading-none tracking-tight text-[#173B78]">
                     Our
                   </h2>
 
-                  <h3 className="mt-2 text-[3.1rem] font-black capitalize leading-none tracking-tight text-[#07acc9] sm:text-[4rem]">
+                  <h3 className="mt-0.5 sm:mt-1.5 text-xl sm:text-[2.8rem] lg:text-[4rem] font-black capitalize leading-none tracking-tight text-[#07acc9]">
                     Products
                   </h3>
 
-
-                  <div className="mt-7 flex items-center gap-2">
+                  <div className="mt-2 sm:mt-5 flex items-center gap-1.5 sm:gap-2 scale-75 sm:scale-100">
 
                     <span className="h-1 w-3 rounded-full bg-[#21396e]" />
 
                     <span className="h-2 w-2 rounded-full bg-[#0ED3DD]" />
 
-                    <span className="h-1 w-16 rounded-full bg-gradient-to-r from-[#213c76] to-[#0ED3DD]" />
+                    <span className="h-1 w-12 sm:w-16 rounded-full bg-gradient-to-r from-[#213c76] to-[#0ED3DD]" />
 
                     <span className="h-2 w-2 rounded-full bg-[#0ED3DD]" />
 
@@ -422,7 +421,7 @@ export const AcademyRadialHero = () => {
 
             </motion.div>
 
-            <div className="w-full lg:absolute lg:right-[-165px] lg:top-[20px] lg:w-[525px]">
+            <div className="w-full px-2 sm:px-0 lg:absolute lg:right-[-165px] lg:top-[20px] lg:w-[525px]">
 
               <div className="space-y-4">
 
@@ -436,12 +435,12 @@ export const AcademyRadialHero = () => {
 
                     initial={{
                       opacity: 0,
-                      x: 50,
+                      y: 20,
                     }}
 
                     animate={{
                       opacity: 1,
-                      x: 0,
+                      y: 0,
                     }}
 
                     transition={{
@@ -464,7 +463,7 @@ export const AcademyRadialHero = () => {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      className="relative z-20 flex h-[112px] w-[112px] shrink-0 items-center justify-center [perspective:1000px]"
+                      className="relative z-20 flex h-[88px] w-[88px] sm:h-[112px] sm:w-[112px] shrink-0 items-center justify-center [perspective:1000px]"
                     >
 
                       {/* Outer Rotating Planet Orbit Ring 1 */}
@@ -550,7 +549,7 @@ export const AcademyRadialHero = () => {
                         duration: 0.3,
                       }}
 
-                      className="relative -ml-5 flex min-h-[100px] w-[45%] items-center justify-between overflow-hidden border-[0.5px] blue-300/50 bg-white/10 pl-10 pr-8 text-white shadow-[0_12px_35px_rgba(15,23,42,0.15)] backdrop-blur-md"
+                      className="relative -ml-4 sm:-ml-5 flex min-h-[80px] sm:min-h-[100px] flex-1 items-center justify-between overflow-hidden border border-white/60 bg-white/90 pl-8 sm:pl-10 pr-5 sm:pr-8 text-white shadow-[0_12px_35px_rgba(15,23,42,0.2)] backdrop-blur-xl"
                       
                       style={{
                         clipPath:
@@ -559,7 +558,7 @@ export const AcademyRadialHero = () => {
                     >
 
          
-                      <div className="absolute inset-0 bg-white/30 backdrop-blur-xl border border-white/50" />
+                      <div className="absolute inset-0 bg-white/80 backdrop-blur-xl border border-white/70" />
 
 
                       <motion.div
@@ -580,7 +579,7 @@ export const AcademyRadialHero = () => {
 
 
                         
-                        <h3 className="text-[1.15rem] font-black uppercase tracking-wide text-[#123B73] sm:text-[1.3rem]">
+                        <h3 className="text-[1rem] sm:text-[1.15rem] lg:text-[1.3rem] font-black uppercase tracking-wide text-[#123B73]">
                           {product.label}
                         </h3>                 
                       </div>
@@ -602,7 +601,7 @@ export const AcademyRadialHero = () => {
                           ease: "easeInOut",
                         }}
 
-                        className="relative z-10 ml-5 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/70 bg-white/5 text-white"
+                        className="relative z-10 ml-3 sm:ml-5 flex h-10 w-10 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full border-2 border-[#0284C7]/40 bg-[#0284C7]/15 text-[#123B73]"
                       >
                         <ChevronRight size={25} strokeWidth={2.5} />
                       </motion.div>

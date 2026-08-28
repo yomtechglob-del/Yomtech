@@ -6,14 +6,14 @@ import logoImg from '../../assets/logos/logo.png';
 
 export const ServicesRequestQuoteCTA = () => {
   return (
-    <section className="py-24 sm:py-32 w-full bg-gradient-to-b from-slate-50 via-cyan-50/40 to-slate-50 relative text-slate-900 overflow-hidden border-t border-slate-200/80">
+    <section className="py-14 sm:py-20 md:py-32 w-full bg-gradient-to-b from-slate-50 via-cyan-50/40 to-slate-50 relative text-slate-900 overflow-hidden border-t border-slate-200/80">
       {/* Background Subtle Accent Matrix */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-[0.04]"
         style={{ backgroundImage: 'radial-gradient(circle, #0284C7 1.2px, transparent 1.2px)', backgroundSize: '28px 28px' }} 
       />
 
-      <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
+      <div className="max-w-[1720px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 relative z-10">
         
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -22,7 +22,7 @@ export const ServicesRequestQuoteCTA = () => {
           transition={{ duration: 0.6 }}
           className="p-[1.5px] rounded-[3.2rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-2xl max-w-5xl mx-auto group"
         >
-          <div className="bg-white rounded-[3.1rem] p-10 sm:p-16 text-slate-900 text-center space-y-8 relative overflow-hidden shadow-inner">
+          <div className="bg-white rounded-[2.5rem] sm:rounded-[3.1rem] p-6 sm:p-10 md:p-16 text-slate-900 text-center space-y-6 sm:space-y-8 relative overflow-hidden shadow-inner">
             
             {/* Translucent YomTech Brand Logo Watermark Background */}
             <div className="absolute -right-6 -bottom-6 opacity-[0.20] pointer-events-none z-0">
@@ -60,10 +60,10 @@ export const ServicesRequestQuoteCTA = () => {
             </div>
 
             {/* Action Buttons & Hotline Capsule */}
-            <div className="flex flex-wrap items-center justify-center gap-4 pt-2 relative z-10">
+            <div className="flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 sm:gap-4 pt-2 relative z-10">
               <Link
                 to="/contact"
-                className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-bold text-xs sm:text-sm shadow-[0_10px_30px_rgba(2,132,199,0.35)] hover:shadow-[0_15px_40px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300"
+                className="group relative w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-bold text-xs sm:text-sm shadow-[0_10px_30px_rgba(2,132,199,0.35)] hover:shadow-[0_15px_40px_rgba(14,211,221,0.5)] hover:scale-105 transition-all duration-300"
               >
                 <span>Request a Custom Quote</span>
                 <div className="w-6 h-6 rounded-full bg-white text-[#0284C7] flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -73,7 +73,7 @@ export const ServicesRequestQuoteCTA = () => {
 
               <a
                 href="tel:+251977666699"
-                className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-cyan-50 text-[#0284C7] border border-cyan-200 font-bold text-xs sm:text-sm shadow-md hover:bg-cyan-100 hover:border-cyan-300 hover:scale-105 transition-all duration-300"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-full bg-cyan-50 text-[#0284C7] border border-cyan-200 font-bold text-xs sm:text-sm shadow-md hover:bg-cyan-100 hover:border-cyan-300 hover:scale-105 transition-all duration-300"
               >
                 <Phone size={16} className="text-[#0284C7]" />
                 <span>Call +251 (977) 666-699</span>

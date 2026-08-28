@@ -10,25 +10,28 @@ export const AnnouncementsPage = () => {
   const [announcementsPool, setAnnouncementsPool] = React.useState(ANNOUNCEMENTS);
 
   React.useEffect(() => {
+    const isAnnouncementMatch = (a) => {
+      const cat = (a.category || '').toLowerCase();
+      const isCat = ['announcement', 'bulletin', 'cms-announcements'].some(c => cat.includes(c));
+      const vis = (a.visibility || 'VISIBLE').toUpperCase();
+      return isCat && vis !== 'HIDDEN' && vis !== 'DELETED';
+    };
+
     const fetchFromApi = async () => {
       try {
         const res = await fetchPublicCmsCategoryApi('all');
         if (res.data?.success && Array.isArray(res.data.data)) {
-          const filtered = res.data.data.filter(
-            (a) => a.category === 'Official Announcements' &&
-            (a.visibility || '').toUpperCase() !== 'HIDDEN'
-          );
+          const filtered = res.data.data.filter(isAnnouncementMatch);
           if (filtered.length > 0) {
-            setAnnouncementsPool(
-              filtered.map((a) => ({
-                id: a.id,
-                title: a.title,
-                priority: a.priority || 'FEATURED',
-                date: a.publishedDate || 'August 2026',
-                summary: a.summary || a.excerpt || 'Official bulletin.',
-                coverImage: a.coverImage
-              }))
-            );
+            const mapped = filtered.map((a) => ({
+              id: a.id,
+              title: a.title,
+              priority: a.priority || 'FEATURED',
+              date: a.publishedDate || 'August 2026',
+              summary: a.summary || a.excerpt || 'Official bulletin.',
+              coverImage: a.coverImage
+            }));
+            setAnnouncementsPool([...mapped, ...ANNOUNCEMENTS.filter(ann => !mapped.some(m => m.id === ann.id))]);
           }
         }
       } catch (err) {
@@ -42,21 +45,17 @@ export const AnnouncementsPage = () => {
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          const filtered = parsed.filter(
-            (a) => a.category === 'Official Announcements' &&
-            (a.visibility || '').toUpperCase() !== 'HIDDEN'
-          );
+          const filtered = parsed.filter(isAnnouncementMatch);
           if (filtered.length > 0) {
-            setAnnouncementsPool(
-              filtered.map((a) => ({
-                id: a.id,
-                title: a.title,
-                priority: a.priority || 'FEATURED',
-                date: a.publishedDate || 'August 2026',
-                summary: a.summary || a.excerpt || 'Official bulletin.',
-                coverImage: a.coverImage
-              }))
-            );
+            const mapped = filtered.map((a) => ({
+              id: a.id,
+              title: a.title,
+              priority: a.priority || 'FEATURED',
+              date: a.publishedDate || 'August 2026',
+              summary: a.summary || a.excerpt || 'Official bulletin.',
+              coverImage: a.coverImage
+            }));
+            setAnnouncementsPool([...mapped, ...ANNOUNCEMENTS.filter(ann => !mapped.some(m => m.id === ann.id))]);
           }
         } catch (e) {
           console.error(e);

@@ -49,7 +49,7 @@ export const ServicesCaseStudies = () => {
   ];
 
   return (
-    <section className="relative py-24 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-14 sm:py-20 lg:py-36 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       {/* Background Dot Mesh Texture */}
       <div
         className="absolute inset-0 opacity-[0.5] pointer-events-none"
@@ -60,7 +60,7 @@ export const ServicesCaseStudies = () => {
       />
       <div className="absolute top-1/4 left-1/4 w-[700px] h-[500px] bg-cyan-400/10 rounded-full blur-[160px] pointer-events-none" />
 
-      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-12 lg:space-y-16">
 
         {/* Section Header with Connected Horizontal Accent Line */}
         <div className="text-left w-full space-y-4 max-w-full">
@@ -77,12 +77,59 @@ export const ServicesCaseStudies = () => {
         {/* Split Layout: Left Scaled 45-Degree Diamond Info Box + Right Stacked Swallowtail Ribbon Banners */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center max-w-[94rem] mx-auto">
           
-          {/* Left Scaled 45-Degree Rotated 3D Diamond Card Container */}
-          <div className="lg:col-span-5 flex justify-center items-center py-8 sm:py-12 relative">
+          {/* ── MOBILE: Flat card (no rotation, no clipping) ── */}
+          <div className="sm:hidden w-full bg-white rounded-3xl shadow-xl border border-slate-100 p-6 space-y-5 relative overflow-hidden">
+            {/* Logo watermark */}
+            <div className="absolute right-3 bottom-3 opacity-[0.12] pointer-events-none">
+              <img src={logoEmblem} alt="" className="w-24 h-24 object-contain" />
+            </div>
+
+            <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-mono font-bold inline-block">
+              Portfolio Impact
+            </span>
+
+            <h2 className="text-2xl font-black text-slate-900 tracking-tight leading-tight font-display">
+              Proven Results &amp; <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
+                Real Impact
+              </span>
+            </h2>
+
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
+              Our portfolio reflects our engineering capability to deliver large-scale, mission-critical systems across public and private sectors.
+            </p>
+
+            {/* KPI stats */}
+            <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-100 text-center">
+              <div className="p-3 rounded-2xl bg-cyan-50 border border-cyan-200">
+                <p className="text-xl font-black text-[#0EA5E9] font-mono">65%</p>
+                <p className="text-[10px] font-bold text-slate-500">Faster Approval</p>
+              </div>
+              <div className="p-3 rounded-2xl bg-sky-50 border border-sky-200">
+                <p className="text-xl font-black text-[#06B6D4] font-mono">100K+</p>
+                <p className="text-[10px] font-bold text-slate-500">Licenses</p>
+              </div>
+              <div className="p-3 rounded-2xl bg-purple-50 border border-purple-200">
+                <p className="text-xl font-black text-[#8B5CF6] font-mono">24/7</p>
+                <p className="text-[10px] font-bold text-slate-500">SLA Audits</p>
+              </div>
+            </div>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#0284C7] text-white font-bold text-xs tracking-wider shadow-xl shadow-sky-500/30 hover:bg-sky-700 transition-all"
+            >
+              <span>Explore Case Studies</span>
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          {/* ── SM+: Rotated Diamond Card ── */}
+          <div className="hidden sm:flex lg:col-span-5 justify-center items-center py-6 sm:py-12 relative">
             <div className="absolute inset-0 bg-cyan-400/20 blur-[120px] rounded-full pointer-events-none" />
 
             {/* Scaled Rotated 45-Degree White Diamond Base Frame */}
-            <div className="w-[410px] h-[410px] sm:w-[510px] sm:h-[510px] lg:w-[560px] lg:h-[560px] rounded-[4rem] bg-white shadow-[0_30px_70px_rgba(0,0,0,0.14)] border-4 border-slate-100/90 rotate-45 flex items-center justify-center relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
+            <div className="w-[440px] h-[440px] lg:w-[560px] lg:h-[560px] rounded-[4rem] bg-white shadow-[0_30px_70px_rgba(0,0,0,0.14)] border-4 border-slate-100/90 rotate-45 flex items-center justify-center relative overflow-hidden group hover:scale-[1.02] transition-transform duration-500">
               
               {/* Translucent YomTech Brand Logo Watermark Background */}
               <div className="absolute right-4 bottom-4 opacity-[0.20] pointer-events-none z-0">
@@ -90,19 +137,19 @@ export const ServicesCaseStudies = () => {
               </div>
 
               {/* Scaled Inner Counter-Rotated Content (-45 Deg) */}
-              <div className="-rotate-45 w-[340px] sm:w-[420px] lg:w-[450px] p-6 sm:p-10 space-y-5 text-left font-sans relative z-10">
+              <div className="-rotate-45 w-[360px] lg:w-[450px] p-8 lg:p-10 space-y-5 text-left font-sans relative z-10">
                 <span className="px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-mono font-bold inline-block">
                   Portfolio Impact
                 </span>
 
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight font-display">
+                <h2 className="text-3xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight font-display">
                   Proven Results &amp; <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
                     Real Impact
                   </span>
                 </h2>
 
-                <p className="text-xs sm:text-sm lg:text-base text-slate-600 font-medium leading-relaxed">
+                <p className="text-sm lg:text-base text-slate-600 font-medium leading-relaxed">
                   Our portfolio reflects our engineering capability to deliver large-scale, mission-critical systems across public and private sectors.
                 </p>
 
@@ -134,6 +181,7 @@ export const ServicesCaseStudies = () => {
             </div>
           </div>
 
+
           {/* Right Stacked Metallic Swallowtail Ribbon Banner Cards with Black "V" Notch Cutout */}
           <div className="lg:col-span-7 space-y-6">
             {caseStudies.map((cs, idx) => {
@@ -142,15 +190,15 @@ export const ServicesCaseStudies = () => {
               return (
                 <motion.div
                   key={cs.step}
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.45, delay: idx * 0.08 }}
                   className="flex items-stretch rounded-3xl shadow-2xl hover:shadow-[0_25px_60px_rgba(0,0,0,0.3)] hover:-translate-y-1.5 transition-all duration-300 relative group overflow-hidden bg-[#0A0F1D] border border-slate-800"
                 >
                   {/* Left White Number Box + 3D Shadow Fold Line */}
-                  <div className="w-24 sm:w-32 shrink-0 bg-white p-5 sm:p-7 flex flex-col justify-center items-center border-r-4 border-slate-200/80 shadow-[4px_0_15px_rgba(0,0,0,0.08)] z-10">
-                    <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${cs.numColor} leading-none`}>
+                  <div className="w-16 sm:w-24 md:w-32 shrink-0 bg-white p-3 sm:p-5 md:p-7 flex flex-col justify-center items-center border-r-4 border-slate-200/80 shadow-[4px_0_15px_rgba(0,0,0,0.08)] z-10">
+                    <span className={`text-3xl sm:text-4xl md:text-5xl font-black font-mono tracking-tight ${cs.numColor} leading-none`}>
                       {cs.step}
                     </span>
                     <span className="text-[10px] font-mono font-bold text-slate-400 tracking-wider mt-1">
@@ -160,7 +208,7 @@ export const ServicesCaseStudies = () => {
 
                   {/* Right Vibrant Swallowtail Ribbon Banner Body */}
                   <div 
-                    className={`flex-1 ${cs.gradientBg} text-white p-6 sm:p-8 pr-12 relative flex flex-col justify-center space-y-2 z-0 overflow-hidden`}
+                    className={`flex-1 ${cs.gradientBg} text-white p-4 sm:p-6 md:p-8 pr-8 sm:pr-12 relative flex flex-col justify-center space-y-2 z-0 overflow-hidden`}
                     style={{ clipPath: 'polygon(0 0, 100% 0, 93% 50%, 100% 100%, 0 100%)' }}
                   >
                     {/* Translucent YomTech Brand Logo Watermark Background at Right-Bottom Corner */}

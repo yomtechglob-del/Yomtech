@@ -63,7 +63,7 @@ const COMPANY_STATS = [
 
 export const AboutAtGlance = () => {
   return (
-    <section className="relative py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
+    <section className="relative py-12 sm:py-20 lg:py-28 bg-[#F4F9FF] overflow-hidden font-sans border-b border-slate-200/80">
       
       {/* Background Dot Mesh Texture */}
       <div 
@@ -74,79 +74,79 @@ export const AboutAtGlance = () => {
         }}
       />
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 sm:space-y-16">
         
         {/* Section Header */}
-        <div className="text-left w-full space-y-4 max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-xs font-black uppercase tracking-widest">
-            <Building2 className="w-4 h-4 text-[#0284C7]" />
+        <div className="text-left w-full space-y-3 sm:space-y-4 max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 rounded-full bg-cyan-50 border border-cyan-200 text-[#0284C7] text-[10px] sm:text-xs font-black uppercase tracking-widest">
+            <Building2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#0284C7]" />
             <span>YomTech Global / Executive Overview</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight font-display">
             Company Overview &amp; <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284C7] via-cyan-600 to-indigo-600">
               Digital Transformation Ecosystem
             </span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl font-sans">
+          <p className="text-sm sm:text-lg text-slate-500 font-medium leading-relaxed max-w-3xl font-sans">
             YomTech Global is a multi-dimensional technology powerhouse bridging enterprise software engineering, public sector digital transformation, technical talent development, and technology media storytelling.
           </p>
         </div>
 
         {/* 2-Column Overview Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-stretch">
           
           {/* Left Column: Official Profile Card */}
           <div 
             style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-            className="lg:col-span-5 rounded-3xl p-8 sm:p-10 border-2 border-indigo-200/80 shadow-xl text-left flex flex-col justify-between space-y-8 relative overflow-hidden"
+            className="lg:col-span-5 rounded-3xl p-5 sm:p-8 border-2 border-indigo-200/80 shadow-xl text-left flex flex-col justify-between space-y-6 relative overflow-hidden"
           >
             {/* Logo Watermark Background */}
             <img
               src={logoEmblem}
               alt=""
-              className="absolute -bottom-6 -right-6 w-56 h-56 object-contain opacity-[0.28] pointer-events-none select-none"
+              className="absolute -bottom-6 -right-6 w-36 h-36 sm:w-56 sm:h-56 object-contain opacity-[0.10] pointer-events-none select-none"
               aria-hidden="true"
             />
-            <div className="space-y-6 relative z-10">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 rounded-2xl bg-slate-900 p-2 shadow-lg flex items-center justify-center flex-shrink-0">
+            <div className="space-y-5 relative z-10">
+              <div className="flex items-center gap-3.5">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-slate-900 p-2 shadow-lg flex items-center justify-center flex-shrink-0">
                   <img src={logoEmblem} alt="YomTech Emblem" className="w-full h-full object-contain" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-extrabold text-slate-900 font-display">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display">
                     YomTech Global
                   </h3>
-                  <p className="text-xs font-bold text-[#0284C7] uppercase tracking-wider">
+                  <p className="text-[10px] sm:text-xs font-bold text-[#0284C7] uppercase tracking-wider">
                     Empowering Digital Innovation · Est. 2015
                   </p>
                 </div>
               </div>
 
-              <p className="text-sm text-slate-600 font-medium leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
                 We design and build complete digital ecosystems completely from scratch. We combine technology, talent development, and innovation to deliver lasting digital sovereignty for governments, enterprises, and ambitious individuals.
               </p>
 
-              <div className="space-y-3 pt-2">
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <MapPin className="w-5 h-5 text-[#0284C7] flex-shrink-0" />
+              <div className="space-y-2.5 pt-1">
+                <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-slate-50 border border-slate-200">
+                  <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-[#0284C7] flex-shrink-0" />
                   <div className="text-xs">
                     <span className="font-bold text-slate-900 block">Headquarters Location:</span>
                     <span className="text-slate-600">Megenagna, Addis Ababa, Ethiopia</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <Phone className="w-5 h-5 text-[#0284C7] flex-shrink-0" />
+                <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-slate-50 border border-slate-200">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-[#0284C7] flex-shrink-0" />
                   <div className="text-xs">
                     <span className="font-bold text-slate-900 block">Direct Telephones:</span>
                     <span className="text-slate-600 font-mono">+251 11 668 7546 / +251 97 766 6699</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 p-3 rounded-2xl bg-slate-50 border border-slate-200">
-                  <Globe className="w-5 h-5 text-[#0284C7] flex-shrink-0" />
+                <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-2xl bg-slate-50 border border-slate-200">
+                  <Globe className="w-4 h-4 sm:w-5 sm:h-5 text-[#0284C7] flex-shrink-0" />
                   <div className="text-xs">
                     <span className="font-bold text-slate-900 block">Official Web Portal:</span>
                     <span className="text-[#0284C7] font-mono font-bold">www.yomtechglobal.org</span>
@@ -155,25 +155,25 @@ export const AboutAtGlance = () => {
               </div>
             </div>
 
-            <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold space-y-1 relative z-10">
+            <div className="p-3.5 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold space-y-1 relative z-10">
               <span className="font-bold uppercase tracking-wider text-[10px] text-[#0284C7] block">Core Business Areas:</span>
-              <span className="block text-slate-700">Custom ERP · Digital Transformation · AI &amp; Surveillance · WabiSkills Academy · Tech Media</span>
+              <span className="block text-slate-700 text-[11px] sm:text-xs">Custom ERP · Digital Transformation · AI &amp; Surveillance · WabiSkills Academy · Tech Media</span>
             </div>
           </div>
 
           {/* Right Column: 4 Stat Cards */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-left">
             {COMPANY_STATS.map((stat) => (
               <div 
                 key={stat.id}
                 style={{ background: 'linear-gradient(90deg, #E4E4F6 0%, #F7E6C8 50%, #E5E6FA 100%)' }}
-                className="rounded-3xl p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-4 group relative overflow-hidden"
+                className="rounded-3xl p-5 sm:p-7 border-2 border-indigo-200/80 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between space-y-3 sm:space-y-4 group relative overflow-hidden"
               >
                 {/* Logo Watermark Background */}
                 <img
                   src={logoEmblem}
                   alt=""
-                  className="absolute -bottom-2 -right-2 w-28 h-28 object-contain opacity-[0.28] pointer-events-none select-none"
+                  className="absolute -bottom-2 -right-2 w-20 h-20 sm:w-28 sm:h-28 object-contain opacity-[0.10] pointer-events-none select-none"
                   aria-hidden="true"
                 />
                 <div className="space-y-3 relative z-10">

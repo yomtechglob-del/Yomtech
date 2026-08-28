@@ -77,7 +77,7 @@ export const ServicesEngineeringApproach = () => {
   ];
 
   return (
-    <section className="relative py-28 lg:py-40 bg-[#03045E] overflow-hidden font-sans border-b border-cyan-500/20">
+    <section className="relative py-16 sm:py-24 lg:py-40 bg-[#03045E] overflow-hidden font-sans border-b border-cyan-500/20">
       {/* Photo Overlay Background */}
       <div className="absolute top-0 right-0 w-full lg:w-3/4 h-full pointer-events-none overflow-hidden z-0">
         <img src={erminOneImg} alt="" className="w-full h-full object-cover opacity-60 mix-blend-soft-light animate-river-flow-2 border-0" />
@@ -86,7 +86,7 @@ export const ServicesEngineeringApproach = () => {
       {/* Deep Blue Gradient Mask */}
       <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/90 via-[#0077B6]/75 to-[#00B4D8]/80 pointer-events-none z-0" />
 
-      <div className="max-w-[95rem] mx-auto px-6 sm:px-12 md:px-16 space-y-24 relative z-10">
+      <div className="max-w-[95rem] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 space-y-12 sm:space-y-20 lg:space-y-24 relative z-10">
 
         {/* Section Header */}
         <div className="space-y-6">
@@ -100,7 +100,7 @@ export const ServicesEngineeringApproach = () => {
           </div>
 
           <div className="text-left space-y-3 max-w-4xl">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black font-display text-white tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display text-white tracking-tight leading-tight">
               How We Engineer Technology
             </h2>
             <p className="text-cyan-100/90 text-base sm:text-lg lg:text-xl font-medium leading-relaxed max-w-3xl font-sans">
@@ -119,8 +119,8 @@ export const ServicesEngineeringApproach = () => {
               <div key={stage.num} className="relative flex flex-col">
                 {/* Card Row */}
                 <motion.div 
-                  initial={{ opacity: 0, x: isLeft ? -70 : 70, scale: 0.94 }}
-                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                  initial={{ opacity: 0, y: 30, scale: 0.94 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true, margin: '-40px' }}
                   transition={{ duration: 0.7, delay: idx * 0.13, ease: [0.22, 1, 0.36, 1] }}
                   className={`flex ${isLeft ? 'justify-start' : 'justify-end'} w-full`}
@@ -143,7 +143,7 @@ export const ServicesEngineeringApproach = () => {
                     </motion.div>
 
                     {/* Scaled Up Card */}
-                    <div className={`rounded-[3rem] p-9 sm:p-12 md:p-14 bg-white/95 border-2 border-slate-100/90 shadow-[0_30px_60px_rgba(0,0,0,0.09)] hover:shadow-[0_35px_80px_rgba(2,132,199,0.22)] ${stage.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-7 group cursor-pointer overflow-hidden`}>
+                    <div className={`rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-9 md:p-12 lg:p-14 bg-white/95 border-2 border-slate-100/90 shadow-[0_30px_60px_rgba(0,0,0,0.09)] hover:shadow-[0_35px_80px_rgba(2,132,199,0.22)] ${stage.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-5 sm:space-y-7 group cursor-pointer overflow-hidden`}>
                       
                       <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       
@@ -157,7 +157,7 @@ export const ServicesEngineeringApproach = () => {
 
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
-                          <span className={`text-5xl sm:text-6xl font-black font-mono tracking-tight ${stage.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
+                          <span className={`text-4xl sm:text-5xl lg:text-6xl font-black font-mono tracking-tight ${stage.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
                             {stage.num}
                           </span>
                           <span className={`px-4 py-1.5 rounded-full text-xs font-mono font-black uppercase tracking-widest ${stage.badgeBg} border-2`}>
@@ -171,7 +171,7 @@ export const ServicesEngineeringApproach = () => {
                       </div>
 
                       <div className="space-y-3">
-                        <h3 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-all duration-300 tracking-tight">
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-all duration-300 tracking-tight">
                           {stage.title}
                         </h3>
                         <h4 className={`text-base sm:text-lg font-extrabold ${stage.numColor}`}>

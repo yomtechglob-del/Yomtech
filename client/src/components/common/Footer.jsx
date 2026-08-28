@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Send, ArrowRight, ShieldCheck, Linkedin, Twitter, Github, Facebook } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowRight, ShieldCheck, Linkedin, Twitter, Github, Facebook, QrCode } from 'lucide-react';
 import logoImg from '../../assets/logos/logo.png';
+import { QRCodeModal } from './QRCodeModal';
 
 export const Footer = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [showQrModal, setShowQrModal] = useState(false);
 
   const handleSubscribe = (e) => {
     e.preventDefault();
@@ -143,6 +145,25 @@ export const Footer = () => {
             <li className="hover:text-white transition-colors">Cloud DevOps &amp; Migration</li>
             <li className="hover:text-white transition-colors">Data Analytics &amp; BI</li>
           </ul>
+
+          {/* Dedicated QR CODE Capsule Pill Button matching design specification */}
+          <button
+            onClick={() => setShowQrModal(true)}
+            className="w-full mt-4 group relative flex items-center justify-between px-4 py-2.5 rounded-full bg-gradient-to-r from-[#0077B6]/30 via-[#0096C7]/30 to-[#0ED3DD]/30 hover:from-[#0077B6]/50 hover:to-[#0ED3DD]/50 backdrop-blur-xl border-2 border-white/50 hover:border-white text-white shadow-lg transition-all duration-300 cursor-pointer"
+            title="Open Yomtech Global QR Code"
+          >
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-[#0077B6] to-[#0ED3DD] flex items-center justify-center text-white shadow-sm shrink-0">
+                <QrCode size={15} />
+              </div>
+              <span className="font-extrabold text-xs tracking-widest text-white uppercase font-sans">
+                QR CODE
+              </span>
+            </div>
+            <span className="text-[9px] font-black text-cyan-200 uppercase bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
+              yomtechglobal.org
+            </span>
+          </button>
         </div>
       </div>
 
@@ -160,6 +181,14 @@ export const Footer = () => {
           </Link>
         </div>
       </div>
+
+      <QRCodeModal
+        isOpen={showQrModal}
+        onClose={() => setShowQrModal(false)}
+        title="Yomtech Global - Enterprise Software & Tech Talent Platform"
+        url="https://yomtechglobal.org"
+        category="yomtechglobal.org"
+      />
     </footer>
   );
 };

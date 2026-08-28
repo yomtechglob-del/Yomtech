@@ -159,18 +159,18 @@ export const ContactPage = () => {
         badge="Get In Touch"
         breadcrumbs={[{ name: 'Contact Us', path: '/contact' }]}
       >
-        <div className="group relative flex items-center gap-3 px-6 py-3 rounded-full bg-white/15 backdrop-blur-2xl border border-white/30 text-white font-extrabold text-xs sm:text-sm shadow-xl hover:border-cyan-300 hover:bg-white/20 transition-all duration-300">
-          <div className="w-6 h-6 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center text-[#0ED3DD] shrink-0">
-            <MapPin size={13} />
+        <div className="group relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-6 py-2 sm:py-3 rounded-full bg-white/15 backdrop-blur-2xl border border-white/30 text-white font-extrabold text-[10px] sm:text-xs shadow-xl hover:border-cyan-300 hover:bg-white/20 transition-all duration-300 max-w-full">
+          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-[#0ED3DD]/20 border border-[#0ED3DD]/50 flex items-center justify-center text-[#0ED3DD] shrink-0">
+            <MapPin size={12} className="sm:w-3.5 sm:h-3.5" />
           </div>
-          <span className="text-white whitespace-nowrap">Addis Ababa, Ethiopia · Office 906</span>
+          <span className="text-white text-[10px] sm:text-xs">Addis Ababa, Ethiopia · Office 906</span>
         </div>
 
-        <div className="group relative flex items-center gap-3 px-6 py-3 rounded-full bg-white/15 backdrop-blur-2xl border border-white/30 text-white font-extrabold text-xs sm:text-sm shadow-xl hover:border-emerald-300 hover:bg-white/20 transition-all duration-300">
-          <div className="w-6 h-6 rounded-full bg-emerald-400/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0">
-            <Clock size={13} />
+        <div className="group relative flex items-center gap-2.5 sm:gap-3 px-3.5 sm:px-6 py-2 sm:py-3 rounded-full bg-white/15 backdrop-blur-2xl border border-white/30 text-white font-extrabold text-[10px] sm:text-xs shadow-xl hover:border-emerald-300 hover:bg-white/20 transition-all duration-300 max-w-full">
+          <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-emerald-400/20 border border-emerald-400/50 flex items-center justify-center text-emerald-300 shrink-0">
+            <Clock size={12} className="sm:w-3.5 sm:h-3.5" />
           </div>
-          <span className="text-emerald-200 whitespace-nowrap">24hr Response Guarantee</span>
+          <span className="text-emerald-200 text-[10px] sm:text-xs">24hr Response Guarantee</span>
         </div>
       </PageHeader>
 
@@ -179,15 +179,15 @@ export const ContactPage = () => {
         <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
           
           {/* TOP 4 FLOATING INFO CARDS (EXACT SCREENSHOT DESIGN) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-10 sm:mb-12">
             {/* Card 1: OUR LOCATION */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-emerald-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
-              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+            <div className="bg-white p-5 sm:p-7 rounded-[1.75rem] border border-emerald-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-20 h-20 sm:w-24 sm:h-24 object-contain opacity-[0.10] pointer-events-none select-none z-[1]" aria-hidden="true" />
               <div className="relative z-10">
-                <div className="w-14 h-14 mx-auto rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <MapPin size={24} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-full bg-emerald-100/80 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MapPin size={22} className="sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-[10px] font-black uppercase text-emerald-700 tracking-widest">OUR LOCATION</div>
+                <div className="text-[10px] font-black uppercase text-emerald-700 tracking-widest mt-2">OUR LOCATION</div>
                 <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
                   Megenagna Derartu Building, Office 906
                 </div>
@@ -196,26 +196,26 @@ export const ContactPage = () => {
             </div>
 
             {/* Card 2: PHONE NUMBERS */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-amber-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
-              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+            <div className="bg-white p-5 sm:p-7 rounded-[1.75rem] border border-amber-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-20 h-20 sm:w-24 sm:h-24 object-contain opacity-[0.10] pointer-events-none select-none z-[1]" aria-hidden="true" />
               <div className="relative z-10">
-                <div className="w-14 h-14 mx-auto rounded-full bg-amber-100/80 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Phone size={24} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-full bg-amber-100/80 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Phone size={22} className="sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-[10px] font-black uppercase text-amber-700 tracking-widest">PHONE NUMBERS</div>
+                <div className="text-[10px] font-black uppercase text-amber-700 tracking-widest mt-2">PHONE NUMBERS</div>
                 <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">+251 (977) 666-699</div>
                 <div className="text-xs font-semibold text-slate-500">+251 (912) 625-381</div>
               </div>
             </div>
 
             {/* Card 3: EMAIL ADDRESS */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-sky-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
-              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+            <div className="bg-white p-5 sm:p-7 rounded-[1.75rem] border border-sky-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-20 h-20 sm:w-24 sm:h-24 object-contain opacity-[0.10] pointer-events-none select-none z-[1]" aria-hidden="true" />
               <div className="relative z-10">
-                <div className="w-14 h-14 mx-auto rounded-full bg-sky-100/80 text-[#0284C7] flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Mail size={24} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-full bg-sky-100/80 text-[#0284C7] flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Mail size={22} className="sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-[10px] font-black uppercase text-[#0284C7] tracking-widest">EMAIL ADDRESS</div>
+                <div className="text-[10px] font-black uppercase text-[#0284C7] tracking-widest mt-2">EMAIL ADDRESS</div>
                 <div className="text-xs sm:text-sm font-black text-slate-900 break-all leading-snug">
                   contact@yomtechglobal.org
                 </div>
@@ -224,13 +224,13 @@ export const ContactPage = () => {
             </div>
 
             {/* Card 4: OFFICE HOURS */}
-            <div className="bg-white p-7 rounded-[1.75rem] border border-purple-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
-              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-24 h-24 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+            <div className="bg-white p-5 sm:p-7 rounded-[1.75rem] border border-purple-200/80 shadow-lg hover:shadow-xl transition-all duration-300 text-center space-y-3.5 group relative overflow-hidden">
+              <img src={logoEmblem} alt="" className="absolute -bottom-2 -right-2 w-20 h-20 sm:w-24 sm:h-24 object-contain opacity-[0.10] pointer-events-none select-none z-[1]" aria-hidden="true" />
               <div className="relative z-10">
-                <div className="w-14 h-14 mx-auto rounded-full bg-purple-100/80 text-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Clock size={24} />
+                <div className="w-12 h-12 sm:w-14 sm:h-14 mx-auto rounded-full bg-purple-100/80 text-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <Clock size={22} className="sm:w-6 sm:h-6" />
                 </div>
-                <div className="text-[10px] font-black uppercase text-purple-700 tracking-widest">OFFICE HOURS</div>
+                <div className="text-[10px] font-black uppercase text-purple-700 tracking-widest mt-2">OFFICE HOURS</div>
                 <div className="text-sm sm:text-base font-black text-slate-900 leading-snug">
                   Mon to Sat: 8:30 AM to 5:30 PM
                 </div>
@@ -246,31 +246,31 @@ export const ContactPage = () => {
             <div className="lg:col-span-5 space-y-6">
               
               {/* Social Platforms Card */}
-              <div className="bg-[#F5F3FF] p-7 sm:p-8 rounded-[2rem] border border-purple-200/70 shadow-md space-y-4 relative overflow-hidden">
-                <img src={logoEmblem} alt="" className="absolute -bottom-4 -right-4 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
-                <div className="relative z-10 space-y-4">
+              <div className="bg-[#F5F3FF] p-5 sm:p-8 rounded-[2rem] border border-purple-200/70 shadow-md space-y-4 relative overflow-hidden">
+                <img src={logoEmblem} alt="" className="absolute -bottom-4 -right-4 w-28 h-28 sm:w-40 sm:h-40 object-contain opacity-[0.10] pointer-events-none select-none z-[1]" aria-hidden="true" />
+                <div className="relative z-10 space-y-3">
                   <div className="text-[10px] font-black uppercase tracking-widest text-purple-600">
                     SOCIAL PLATFORMS
                   </div>
-                  <h4 className="text-2xl font-black font-display text-slate-900">Follow Us</h4>
+                  <h4 className="text-xl sm:text-2xl font-black font-display text-slate-900">Follow Us</h4>
                   <p className="text-slate-500 text-xs font-medium">Stay updated with our latest programs and news.</p>
                   
                   {/* 4 Social Action Buttons Grid */}
-                  <div className="grid grid-cols-4 gap-3 pt-2">
-                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-400 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                      <Facebook size={20} className="text-blue-600 group-hover:scale-110 transition-transform" />
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 pt-1">
+                    <a href="#" className="bg-white p-3 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-blue-400 flex flex-col items-center justify-center gap-1 transition-all group">
+                      <Facebook size={18} className="text-blue-600 group-hover:scale-110 transition-transform" />
                       <span className="text-[10px] font-bold text-slate-700">Facebook</span>
                     </a>
-                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-pink-400 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                      <Instagram size={20} className="text-pink-600 group-hover:scale-110 transition-transform" />
+                    <a href="#" className="bg-white p-3 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-pink-400 flex flex-col items-center justify-center gap-1 transition-all group">
+                      <Instagram size={18} className="text-pink-600 group-hover:scale-110 transition-transform" />
                       <span className="text-[10px] font-bold text-slate-700">Instagram</span>
                     </a>
-                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-800 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                      <Video size={20} className="text-slate-900 group-hover:scale-110 transition-transform" />
+                    <a href="#" className="bg-white p-3 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-slate-800 flex flex-col items-center justify-center gap-1 transition-all group">
+                      <Video size={18} className="text-slate-900 group-hover:scale-110 transition-transform" />
                       <span className="text-[10px] font-bold text-slate-700">TikTok</span>
                     </a>
-                    <a href="#" className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-red-500 flex flex-col items-center justify-center gap-1.5 transition-all group">
-                      <Youtube size={20} className="text-red-600 group-hover:scale-110 transition-transform" />
+                    <a href="#" className="bg-white p-3 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-red-500 flex flex-col items-center justify-center gap-1 transition-all group">
+                      <Youtube size={18} className="text-red-600 group-hover:scale-110 transition-transform" />
                       <span className="text-[10px] font-bold text-slate-700">YouTube</span>
                     </a>
                   </div>
@@ -283,12 +283,12 @@ export const ContactPage = () => {
                   href="https://maps.google.com/?q=Derartu+Building+Megenagna+Addis+Ababa"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute top-4 left-4 z-20 px-3.5 py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-slate-200 text-[#0284C7] text-xs font-bold flex items-center gap-1.5 hover:bg-white transition-all"
+                  className="absolute top-4 left-4 z-20 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md shadow-md border border-slate-200 text-[#0284C7] text-xs font-bold flex items-center gap-1.5 hover:bg-white transition-all"
                 >
                   <span>Open in Maps</span>
                   <span>↗</span>
                 </a>
-                <div className="w-full h-72 rounded-[2rem] overflow-hidden">
+                <div className="w-full h-64 sm:h-72 rounded-[2rem] overflow-hidden">
                   <iframe
                     title="YomTech Global Location Map"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.548777983637!2d38.7958!3d9.0142!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b850000000001%3A0x0!2zOcKwMDAnNTEuMSJOIDM4wrA0Nyc0NC45IkU!5e0!3m2!1sen!2set!4v1700000000000!5m2!1sen!2set"
@@ -306,19 +306,19 @@ export const ContactPage = () => {
 
             {/* Right Column (col-span-7): We'd Love to Hear From You Form */}
             <div className="lg:col-span-7">
-              <div className="bg-white p-8 sm:p-12 rounded-[2.2rem] border border-slate-200/90 shadow-xl space-y-7 relative overflow-hidden">
+              <div className="bg-white p-5 sm:p-10 lg:p-12 rounded-[2.2rem] border border-slate-200/90 shadow-xl space-y-6 relative overflow-hidden">
                 {/* Top accent line */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-emerald-500 via-[#0284C7] to-[#0ED3DD]" />
 
                 {/* Logo Watermark Background */}
-                <img src={logoEmblem} alt="" className="absolute -bottom-6 -right-6 w-64 h-64 object-contain opacity-[0.28] pointer-events-none select-none z-[1]" aria-hidden="true" />
+                <img src={logoEmblem} alt="" className="absolute -bottom-6 -right-6 w-44 h-44 sm:w-64 sm:h-64 object-contain opacity-[0.10] pointer-events-none select-none z-[1]" aria-hidden="true" />
 
                 <div className="space-y-2 relative z-10">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 inline-flex items-center gap-1.5">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-emerald-700 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 inline-flex items-center gap-1.5">
                     <Send size={12} />
                     <span>SEND A MESSAGE</span>
                   </span>
-                  <h3 className="text-3xl sm:text-4xl font-black font-display text-slate-900">
+                  <h3 className="text-2xl sm:text-4xl font-black font-display text-slate-900">
                     We'd Love to Hear From You
                   </h3>
                   <p className="text-slate-500 text-xs sm:text-sm font-medium">
@@ -444,7 +444,7 @@ export const ContactPage = () => {
               </p>
 
               {/* FAQ Category Filter Tabs */}
-              <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-3">
                 {[
                   { key: 'All', label: 'All Questions (5)' },
                   { key: 'Software', label: '🏢 Enterprise & ERP' },
@@ -455,7 +455,7 @@ export const ContactPage = () => {
                     key={tab.key}
                     type="button"
                     onClick={() => setActiveFaqCategory(tab.key)}
-                    className={`px-7 py-3 rounded-full text-xs font-black transition-all duration-300 border cursor-pointer whitespace-nowrap ${
+                    className={`px-4 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs font-black transition-all duration-300 border cursor-pointer whitespace-nowrap ${
                       activeFaqCategory === tab.key
                         ? 'bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white border-transparent shadow-lg shadow-cyan-500/30 scale-105'
                         : 'bg-white text-slate-700 border-slate-200/90 shadow-sm hover:border-[#0284C7] hover:bg-sky-50/70 hover:text-[#0284C7]'
@@ -475,12 +475,12 @@ export const ContactPage = () => {
             </div>
 
             {/* Bottom Executive Direct Support CTA Banner (Ultra-Wide Light Theme — No Black Background) */}
-            <div className="w-full max-w-[1720px] mx-auto mt-12 bg-gradient-to-r from-white via-sky-50/90 to-cyan-50/90 rounded-[2.2rem] p-8 sm:p-12 border-2 border-sky-300/80 text-slate-900 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
+            <div className="w-full max-w-[1720px] mx-auto mt-10 sm:mt-12 bg-gradient-to-r from-white via-sky-50/90 to-cyan-50/90 rounded-[2.2rem] p-5 sm:p-10 border-2 border-sky-300/80 text-slate-900 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
               <div className="space-y-2 text-center md:text-left relative z-10">
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#0284C7] px-3.5 py-1 rounded-full bg-sky-100 border border-sky-300 inline-block">
                   ⚡ NEED CUSTOM ARCHITECTURE?
                 </span>
-                <h4 className="text-2xl sm:text-3xl font-black font-display text-slate-900">
+                <h4 className="text-xl sm:text-3xl font-black font-display text-slate-900">
                   Still have custom technical requirements?
                 </h4>
                 <p className="text-slate-600 text-xs sm:text-sm font-medium max-w-xl">
@@ -488,17 +488,17 @@ export const ContactPage = () => {
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-4 shrink-0 relative z-10">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 shrink-0 relative z-10 w-full sm:w-auto">
                 <a
                   href="tel:+251977666699"
-                  className="px-7 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-xs shadow-xl shadow-sky-500/25 hover:scale-105 transition-all flex items-center gap-2.5"
+                  className="w-full sm:w-auto justify-center px-5 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0ED3DD] hover:from-[#0ED3DD] hover:to-[#0284C7] text-white font-black text-xs shadow-xl shadow-sky-500/25 hover:scale-105 transition-all flex items-center gap-2.5"
                 >
                   <Phone size={16} />
                   <span>Call Hotline</span>
                 </a>
                 <a
                   href="mailto:contact@yomtechglobal.org"
-                  className="px-7 py-4 rounded-2xl bg-white border border-slate-300 hover:border-[#0284C7] text-slate-900 hover:text-[#0284C7] font-black text-xs shadow-sm hover:shadow-md hover:scale-105 transition-all flex items-center gap-2.5"
+                  className="w-full sm:w-auto justify-center px-5 sm:px-7 py-3.5 sm:py-4 rounded-2xl bg-white border border-slate-300 hover:border-[#0284C7] text-slate-900 hover:text-[#0284C7] font-black text-xs shadow-sm hover:shadow-md hover:scale-105 transition-all flex items-center gap-2.5"
                 >
                   <Mail size={16} />
                   <span>Email Consultants</span>

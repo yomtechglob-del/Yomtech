@@ -16,7 +16,7 @@ export const WabiSkillsAcademyHero = () => {
   };
 
   return (
-    <section className="relative min-h-[92vh] py-20 lg:py-28 hero-cyan-gradient text-white overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-white border-b border-cyan-400/30">
+    <section className="relative min-h-[auto] py-24 sm:py-20 lg:py-28 hero-cyan-gradient text-white overflow-hidden font-sans selection:bg-cyan-500/20 selection:text-white border-b border-cyan-400/30">
       
       {/* Shared Executive Flowing Background */}
       <AboutHeroBackground />
@@ -42,7 +42,7 @@ export const WabiSkillsAcademyHero = () => {
 
       <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[720px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center min-h-[auto] lg:min-h-[720px]">
           
           {/* LEFT COLUMN: Holographic WabiSkills Brand Emblem & Value Proposition */}
           <div className="lg:col-span-6 space-y-8 text-left relative z-10 pr-0 lg:pr-4">
@@ -80,7 +80,7 @@ export const WabiSkillsAcademyHero = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-white font-display tracking-tight leading-[1.06]">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-white font-display tracking-tight leading-[1.06]">
                 Unlock Potential &amp; <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-cyan-200 to-sky-200 drop-shadow-[0_10px_20px_rgba(0,0,0,0.2)]">
                   Shape Tomorrow.
@@ -138,14 +138,14 @@ export const WabiSkillsAcademyHero = () => {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap items-center gap-6 sm:gap-8 pt-4"
+              className="flex flex-wrap items-center gap-3 sm:gap-6 md:gap-8 pt-4"
             >
               {/* 1. Large Apply Now Button */}
               <a
                 href="https://wabiskills.com/login"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-4 px-12 sm:px-14 py-5 sm:py-6 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-base sm:text-lg tracking-wider uppercase shadow-[0_16px_50px_rgba(2,132,199,0.55)] hover:shadow-[0_24px_70px_rgba(14,211,221,0.85)] transition-all duration-300 hover:scale-108 active:scale-98 border border-cyan-200/40"
+                className="group relative inline-flex items-center gap-2 sm:gap-4 px-7 sm:px-12 md:px-14 py-3.5 sm:py-5 md:py-6 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white font-black text-sm sm:text-base md:text-lg tracking-wider uppercase shadow-[0_16px_50px_rgba(2,132,199,0.55)] hover:shadow-[0_24px_70px_rgba(14,211,221,0.85)] transition-all duration-300 hover:scale-108 active:scale-98 border border-cyan-200/40"
               >
                 <span>Apply Now</span>
                 <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform duration-300" />
@@ -154,9 +154,9 @@ export const WabiSkillsAcademyHero = () => {
               {/* 2. Large Explore Courses Button */}
               <button
                 onClick={scrollToCourses}
-                className="inline-flex items-center gap-4 sm:gap-5 text-white hover:text-cyan-200 font-black text-base sm:text-lg tracking-wide transition-all group"
+                className="inline-flex items-center gap-3 sm:gap-4 md:gap-5 text-white hover:text-cyan-200 font-black text-sm sm:text-base md:text-lg tracking-wide transition-all group"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/20 backdrop-blur-2xl border-2 border-white/50 flex items-center justify-center text-white group-hover:scale-115 group-hover:bg-white group-hover:text-[#0284C7] transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-white/20 backdrop-blur-2xl border-2 border-white/50 flex items-center justify-center text-white group-hover:scale-115 group-hover:bg-white group-hover:text-[#0284C7] transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.2)]">
                   <Play size={24} className="fill-current ml-1" />
                 </div>
                 <span className="drop-shadow-sm group-hover:translate-x-1 transition-transform">Explore Courses</span>
@@ -182,7 +182,7 @@ export const WabiSkillsAcademyHero = () => {
               <motion.div 
                 whileHover={{ scale: 1.025, rotateY: 0, rotateX: 0 }}
                 transition={{ duration: 0.5 }}
-                className="relative rounded-[2.5rem] bg-white/20 backdrop-blur-2xl border-2 border-white/40 shadow-[0_30px_90px_rgba(0,196,238,0.35)] p-5 sm:p-7 space-y-5 overflow-hidden transition-all duration-500 hover:border-cyan-200 hover:shadow-[0_45px_110px_rgba(0,196,238,0.5)]"
+                className="relative rounded-[2rem] sm:rounded-[2.5rem] bg-white/20 backdrop-blur-2xl border-2 border-white/40 shadow-[0_30px_90px_rgba(0,196,238,0.35)] p-4 sm:p-5 md:p-7 space-y-4 sm:space-y-5 overflow-hidden transition-all duration-500 hover:border-cyan-200 hover:shadow-[0_45px_110px_rgba(0,196,238,0.5)]"
                 style={{
                   transform: 'perspective(1200px) rotateY(-5deg) rotateX(2deg)',
                   transformStyle: 'preserve-3d',
@@ -222,7 +222,7 @@ export const WabiSkillsAcademyHero = () => {
                   <img 
                     src={heroBannerImg} 
                     alt="WabiSkills Academy Hero Showcase" 
-                    className="w-full h-72 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
+                    className="w-full h-48 sm:h-72 md:h-80 lg:h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out" 
                   />
                   
                   {/* Top Glass Badge on Image */}
@@ -261,7 +261,7 @@ export const WabiSkillsAcademyHero = () => {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -bottom-6 left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-4 shadow-[0_25px_50px_rgba(0,0,0,0.18)] border-2 border-cyan-200 flex items-center gap-3.5 z-30 min-w-[260px] text-left text-slate-900"
+                className="hidden sm:flex absolute -bottom-6 left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-4 shadow-[0_25px_50px_rgba(0,0,0,0.18)] border-2 border-cyan-200 items-center gap-3.5 z-30 min-w-[260px] text-left text-slate-900"
               >
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 text-white flex items-center justify-center shrink-0 shadow-lg border-2 border-white">
                   <Check size={20} strokeWidth={3} />
@@ -282,7 +282,7 @@ export const WabiSkillsAcademyHero = () => {
               <motion.div
                 animate={{ y: [0, 6, 0] }}
                 transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
-                className="absolute -top-6 -left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-3.5 shadow-2xl border-2 border-cyan-200 flex items-center gap-3 z-30 text-slate-900"
+                className="hidden sm:flex absolute -top-6 -left-6 bg-white/95 backdrop-blur-xl rounded-2xl p-3.5 shadow-2xl border-2 border-cyan-200 items-center gap-3 z-30 text-slate-900"
               >
                 <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-md border-2 border-cyan-300 shrink-0">
                   <img src={wabiSkillsLogo} alt="WabiSkills Logo Badge" className="w-full h-full object-contain" />

@@ -67,6 +67,79 @@ const DOCUMENTARIES_LIST = [
 export const DocumentariesPage = () => {
   const navigate = useNavigate();
 
+  const [liveDocsPool, setLiveDocsPool] = React.useState(() => {
+    const saved = localStorage.getItem('yomtech_cms_articles');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          const videoItems = parsed.filter(
+            (a) => ['Video & Documentary Hub', 'Videos', 'Documentary', 'cms-videos'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+            (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+          );
+          if (videoItems.length > 0) {
+            const customDocs = videoItems.map((a, idx) => ({
+              id: a.id || `doc-${idx}`,
+              title: a.title,
+              category: a.readTime || 'Tech Documentary',
+              partner: a.client || 'YomTech Media Unit',
+              duration: (a.readTime && !a.readTime.toLowerCase().includes('read')) ? a.readTime : '40 Mins',
+              year: '2026',
+              img: a.coverImage || documentaryImg,
+              logo: logoEmblem,
+              desc: a.summary || a.excerpt || 'YomTech Global technology documentary.',
+              highlights: ['Live Broadcast Video', 'Tech Innovation Case Study']
+            }));
+            return [...customDocs, ...DOCUMENTARIES_LIST];
+          }
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return DOCUMENTARIES_LIST;
+  });
+
+  React.useEffect(() => {
+    const syncDocs = () => {
+      const saved = localStorage.getItem('yomtech_cms_articles');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            const videoItems = parsed.filter(
+              (a) => ['Video & Documentary Hub', 'Videos', 'Documentary', 'cms-videos'].some((c) => (a.category || '').toLowerCase().includes(c.toLowerCase())) &&
+              (a.visibility || 'VISIBLE').toUpperCase() !== 'HIDDEN'
+            );
+            if (videoItems.length > 0) {
+              const customDocs = videoItems.map((a, idx) => ({
+                id: a.id || `doc-${idx}`,
+                title: a.title,
+                category: a.readTime || 'Tech Documentary',
+                partner: a.client || 'YomTech Media Unit',
+                duration: (a.readTime && !a.readTime.toLowerCase().includes('read')) ? a.readTime : '40 Mins',
+                year: '2026',
+                img: a.coverImage || documentaryImg,
+                logo: logoEmblem,
+                desc: a.summary || a.excerpt || 'YomTech Global technology documentary.',
+                highlights: ['Live Broadcast Video', 'Tech Innovation Case Study']
+              }));
+              setLiveDocsPool([...customDocs, ...DOCUMENTARIES_LIST]);
+            }
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    };
+    window.addEventListener('cmsArticlesUpdated', syncDocs);
+    window.addEventListener('storage', syncDocs);
+    return () => {
+      window.removeEventListener('cmsArticlesUpdated', syncDocs);
+      window.removeEventListener('storage', syncDocs);
+    };
+  }, []);
+
   return (
     <div className="bg-white text-slate-900 min-h-screen relative overflow-hidden font-sans">
       <section className="w-full pt-32 sm:pt-36 md:pt-40 pb-24 md:pb-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30">
@@ -147,7 +220,7 @@ export const DocumentariesPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {DOCUMENTARIES_LIST.map((doc) => (
+            {liveDocsPool.map((doc) => (
               <motion.div
                 key={doc.id}
                 initial={{ opacity: 0, y: 20 }}

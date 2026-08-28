@@ -4,7 +4,6 @@ import { ZoomIn, X, CheckCircle2, ShieldCheck, Sparkles, Building2, Phone, Mail,
 
 import ermiTwoImg from '../../assets/ermi-two.jpg';
 import logoEmblem from '../../assets/logos/logo.png';
-
 export const FounderCeoCard = ({ className = '' }) => {
   const [showLightbox, setShowLightbox] = useState(false);
 

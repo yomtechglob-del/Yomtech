@@ -418,10 +418,10 @@ export const HomePage = () => {
               At Yomtech Global, we empower businesses, innovators, and learners to thrive in the digital era. From enterprise software and cloud solutions to WabiSkills training and WabiJob recruitment, we don't just deliver technology, we build the future.
             </p>
 
-            <div className="flex flex-wrap lg:flex-nowrap items-center gap-3 sm:gap-3.5 pt-3">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-3.5 pt-3 w-full">
               <button
                 onClick={() => navigate('/services')}
-                className="px-5 py-3 sm:px-6 sm:py-3.5 rounded-full bg-gradient-to-r from-[#00b4d8] via-[#0077b6] to-[#023e8a] hover:from-[#90e0ef] hover:to-[#0077b6] text-white font-black text-[11px] sm:text-xs uppercase tracking-wider shadow-xl shadow-cyan-500/30 hover:scale-105 transition-all duration-300 flex items-center gap-2.5 group border border-cyan-300/40 shrink-0"
+                className="w-full sm:w-auto px-5 py-3.5 sm:px-6 rounded-full bg-gradient-to-r from-[#00b4d8] via-[#0077b6] to-[#023e8a] hover:from-[#90e0ef] hover:to-[#0077b6] text-white font-black text-xs uppercase tracking-wider shadow-xl shadow-cyan-500/30 hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2.5 group border border-cyan-300/40 shrink-0"
               >
                 <span>Explore Services</span>
                 <div className="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-1 transition-transform">
@@ -431,7 +431,7 @@ export const HomePage = () => {
 
               <button
                 onClick={() => window.open('https://wabiskills.com/', '_blank')}
-                className="px-5 py-3 sm:px-6 sm:py-3.5 rounded-full bg-gradient-to-r from-cyan-500/25 via-blue-600/30 to-cyan-500/25 hover:from-cyan-400/40 hover:to-blue-500/40 border-2 border-cyan-300/70 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider backdrop-blur-xl hover:scale-105 transition-all duration-300 flex items-center gap-2.5 shadow-lg shadow-cyan-500/20 group shrink-0"
+                className="w-full sm:w-auto px-5 py-3.5 sm:px-6 rounded-full bg-gradient-to-r from-cyan-500/25 via-blue-600/30 to-cyan-500/25 hover:from-cyan-400/40 hover:to-blue-500/40 border-2 border-cyan-300/70 text-white font-black text-xs uppercase tracking-wider backdrop-blur-xl hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2.5 shadow-lg shadow-cyan-500/20 group shrink-0"
                 title="Visit WabiSkills Academy"
               >
                 <div className="w-6 h-6 rounded-full bg-white p-0.5 shadow-md flex items-center justify-center shrink-0 group-hover:rotate-12 transition-transform">
@@ -442,14 +442,14 @@ export const HomePage = () => {
 
               <a
                 href="tel:+251977666699"
-                className="px-4 py-2.5 sm:px-5 sm:py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-[11px] sm:text-xs uppercase tracking-wider backdrop-blur-md hover:scale-105 transition-all duration-300 flex items-center gap-2.5 shadow-md shrink-0"
+                className="w-full sm:w-auto px-4 py-3 sm:px-5 rounded-full bg-white/10 hover:bg-white/20 border border-white/30 text-white font-black text-xs uppercase tracking-wider backdrop-blur-md hover:scale-[1.02] transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md shrink-0"
               >
                 <div className="w-7 h-7 rounded-full bg-emerald-400 text-slate-950 flex items-center justify-center shadow-md shrink-0">
                   <Phone size={13} />
                 </div>
                 <div className="text-left leading-tight">
                   <div className="text-[9px] text-cyan-200 font-bold uppercase">Direct Desk</div>
-                  <div className="text-[11px] sm:text-xs font-black text-white">+251 (977) 666-699</div>
+                  <div className="text-xs font-black text-white">+251 (977) 666-699</div>
                 </div>
               </a>
             </div>
@@ -460,9 +460,9 @@ export const HomePage = () => {
             initial={{ opacity: 0, scale: 0.9, x: 40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="lg:col-span-5 flex justify-center lg:justify-end relative py-4 w-full min-h-[520px] xl:min-h-[600px]"
+            className="lg:col-span-5 flex justify-center lg:justify-end relative py-4 w-full min-h-[300px] sm:min-h-[450px] lg:min-h-[520px] xl:min-h-[600px]"
           >
-            <div className="relative w-full max-w-xl xl:max-w-[640px] aspect-square p-2 z-10 flex items-center justify-center">
+            <div className="relative w-full max-w-[280px] sm:max-w-xl xl:max-w-[640px] aspect-square p-2 z-10 flex items-center justify-center mx-auto">
 
               {/* Glowing Background Radial Halo */}
               <div className="absolute inset-2 rounded-full bg-gradient-to-tr from-cyan-500/35 via-blue-600/25 to-sky-400/45 blur-3xl" />
@@ -1339,8 +1339,8 @@ export const HomePage = () => {
 
             <div className="relative max-w-7xl mx-auto py-8">
 
-              {/* Single Continuous 1-Piece Snake Ribbon SVG Overlay (With Water Stream Flow Movements) */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-14 bottom-14 w-[420px] sm:w-[480px] pointer-events-none hidden md:block z-0">
+              {/* Single Continuous 1-Piece Snake Ribbon SVG Overlay (Fluid Responsive Water Stream) */}
+              <div className="absolute left-1/2 -translate-x-1/2 top-10 bottom-10 w-[140px] sm:w-[320px] md:w-[480px] pointer-events-none z-0">
                 <svg className="w-full h-full" viewBox="0 0 460 900" fill="none" preserveAspectRatio="none">
                   {/* Arc 1 (Purple - Left Loop) */}
                   <path d="M 230 0 A 140 140 0 0 0 230 180" stroke="#7C3AED" strokeWidth="48" strokeLinecap="round" fill="none" />
@@ -1369,7 +1369,8 @@ export const HomePage = () => {
                 </svg>
               </div>
 
-              <div className="flex flex-col justify-between min-h-[1050px] space-y-12 md:space-y-0">
+              {/* UNIFIED RESPONSIVE S-CURVE STEPS (PRESERVING EXACT DESIGN ON ALL DEVICES) */}
+              <div className="flex flex-col justify-between min-h-[750px] sm:min-h-[900px] md:min-h-[1050px] space-y-6 sm:space-y-10 md:space-y-0 relative z-10 w-full">
                 {[
                   {
                     step: '01',
@@ -1468,54 +1469,54 @@ export const HomePage = () => {
                   return (
                     <motion.div
                       key={item.step}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: idx * 0.12 }}
-                      className="relative flex items-center w-full z-10 py-6"
+                      transition={{ duration: 0.5, delay: idx * 0.1 }}
+                      className="relative flex items-center w-full z-10 py-2 sm:py-4 md:py-6"
                     >
                       {/* LEFT PANEL */}
-                      <div className="flex-1 flex justify-end pr-4 md:pr-12">
+                      <div className="flex-1 flex justify-end pr-1.5 sm:pr-4 md:pr-12 min-w-0">
                         {!isRight && (
-                          <div className="space-y-3 w-full max-w-xl text-left group">
+                          <div className="space-y-1 sm:space-y-2 md:space-y-3 w-full max-w-xl text-left group">
                             {/* Title + Far Left Icon Badge Row */}
-                            <div className="flex items-center justify-between gap-4">
+                            <div className="flex items-center justify-between gap-1.5 sm:gap-4">
                               <motion.div 
-                                whileHover={{ scale: 1.2, rotate: 360 }}
+                                whileHover={{ scale: 1.15, rotate: 360 }}
                                 transition={{ duration: 0.4 }}
-                                className={`w-20 h-20 sm:w-22 sm:h-22 rounded-full ${item.badgeBg} flex items-center justify-center shadow-2xl border-4 border-white shrink-0 z-10 cursor-pointer`}
+                                className={`w-8 h-8 sm:w-16 sm:h-16 md:w-22 md:h-22 rounded-full ${item.badgeBg} flex items-center justify-center shadow-lg border-2 sm:border-4 border-white shrink-0 z-10 cursor-pointer`}
                               >
-                                <StepIcon size={38} />
+                                <StepIcon className="w-4 h-4 sm:w-7 sm:h-7 md:w-9 md:h-9" />
                               </motion.div>
-                              <div className="text-right">
-                                <h4 className={`text-lg sm:text-xl md:text-2xl font-black font-display uppercase tracking-wider ${item.textColor} group-hover:translate-x-1 transition-transform`}>
+                              <div className="text-right min-w-0 flex-1">
+                                <h4 className={`text-[11px] sm:text-base md:text-2xl font-black font-display uppercase tracking-wider ${item.textColor} leading-tight truncate sm:whitespace-normal`}>
                                   {item.title}
                                 </h4>
                                 {item.subtitle && (
-                                  <p className="text-xs sm:text-sm font-extrabold text-slate-800 italic mt-0.5">{item.subtitle}</p>
+                                  <p className="text-[9px] sm:text-xs md:text-sm font-extrabold text-slate-800 italic mt-0.5 line-clamp-1">{item.subtitle}</p>
                                 )}
                               </div>
                             </div>
 
                             {/* Horizontal Colored Connector Line with Water Flow */}
-                            <div className={`h-[6px] w-full bg-gradient-to-r ${item.lineColor} rounded-full relative overflow-hidden shadow-sm`}>
+                            <div className={`h-[3px] sm:h-[5px] md:h-[6px] w-full bg-gradient-to-r ${item.lineColor} rounded-full relative overflow-hidden shadow-xs`}>
                               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent animate-water-flow-left" />
                             </div>
 
                             {/* Description Paragraph Below Line */}
-                            <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed pt-1 text-left max-w-md sm:max-w-lg">
+                            <p className="text-[9.5px] sm:text-xs md:text-base text-slate-700 font-medium leading-snug sm:leading-relaxed text-left max-w-md sm:max-w-lg line-clamp-3 sm:line-clamp-none">
                               {item.desc}
                             </p>
 
                             {/* Focus Areas List */}
                             {item.focusAreas && (
-                              <div className="pt-3 border-t border-slate-300/70 mt-3 space-y-2">
-                                <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900">Focus Areas:</p>
-                                <ul className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm font-semibold text-slate-700">
+                              <div className="pt-1.5 sm:pt-3 border-t border-slate-300/70 mt-1.5 sm:mt-3 space-y-1">
+                                <p className="text-[9px] sm:text-xs md:text-sm font-black uppercase tracking-wider text-slate-900 hidden sm:block">Focus Areas:</p>
+                                <ul className="grid grid-cols-1 gap-1 text-[8.5px] sm:text-xs md:text-sm font-semibold text-slate-700">
                                   {item.focusAreas.map((area, i) => (
-                                    <li key={i} className="flex items-center gap-2.5">
-                                      <span className="w-2 h-2 rounded-full shrink-0 shadow-xs" style={{ background: item.color }} />
-                                      <span>{area}</span>
+                                    <li key={i} className="flex items-center gap-1.5 sm:gap-2.5">
+                                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 shadow-2xs" style={{ background: item.color }} />
+                                      <span className="truncate">{area}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -1525,73 +1526,73 @@ export const HomePage = () => {
                         )}
                       </div>
 
-                      {/* CENTER PURE WHITE STEP CIRCLE BADGE */}
-                      <div className="relative shrink-0 z-20 mx-4 sm:mx-12 flex items-center justify-center" style={{ width: 210, height: 210 }}>
+                      {/* CENTER PURE WHITE STEP CIRCLE BADGE (FLUID RESPONSIVE SIZE) */}
+                      <div className="relative shrink-0 z-20 mx-1 sm:mx-6 md:mx-12 flex items-center justify-center">
                         {/* Rotating Conic Gradient Glow */}
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ repeat: Infinity, duration: 12, ease: 'linear' }}
-                          className="absolute -inset-4 rounded-full opacity-70 blur-lg pointer-events-none"
+                          className="absolute -inset-2 sm:-inset-4 rounded-full opacity-70 blur-xs sm:blur-lg pointer-events-none"
                           style={{ background: `conic-gradient(from 0deg, ${item.color}, transparent 60%, ${item.color})` }}
                         />
 
                         {/* Pure White Step Circle */}
                         <motion.div 
-                          whileHover={{ scale: 1.1, rotate: [0, -3, 3, 0] }}
+                          whileHover={{ scale: 1.08 }}
                           transition={{ duration: 0.3 }}
-                          className="w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-white shadow-[0_25px_60px_rgba(0,0,0,0.2)] border-4 border-white flex flex-col items-center justify-center relative z-10 cursor-pointer"
+                          className="w-16 h-16 sm:w-36 sm:h-36 md:w-52 md:h-52 rounded-full bg-white shadow-[0_10px_35px_rgba(0,0,0,0.15)] sm:shadow-[0_25px_60px_rgba(0,0,0,0.2)] border-2 sm:border-4 border-white flex flex-col items-center justify-center relative z-10 cursor-pointer"
                         >
-                          <span className="text-xs sm:text-sm font-black uppercase tracking-[0.3em] text-slate-400">
+                          <span className="text-[7px] sm:text-xs md:text-sm font-black uppercase tracking-[0.2em] sm:tracking-[0.3em] text-slate-400 leading-none">
                             STEP
                           </span>
-                          <span className="text-7xl sm:text-8xl font-black font-display tracking-tight leading-none mt-0.5" style={{ color: item.color }}>
+                          <span className="text-xl sm:text-5xl md:text-8xl font-black font-display tracking-tight leading-none mt-0.5" style={{ color: item.color }}>
                             {item.step}
                           </span>
                         </motion.div>
                       </div>
 
                       {/* RIGHT PANEL */}
-                      <div className="flex-1 flex justify-start pl-4 md:pl-12">
+                      <div className="flex-1 flex justify-start pl-1.5 sm:pl-4 md:pl-12 min-w-0">
                         {isRight && (
-                          <div className="space-y-3 w-full max-w-xl group text-left">
+                          <div className="space-y-1 sm:space-y-2 md:space-y-3 w-full max-w-xl group text-left">
                             {/* Title + Subtitle + Far End Icon Badge Row */}
-                            <div className="flex items-center justify-between gap-4">
-                              <div>
-                                <h4 className={`text-lg sm:text-xl md:text-2xl font-black font-display uppercase tracking-wider ${item.textColor} group-hover:-translate-x-1 transition-transform`}>
+                            <div className="flex items-center justify-between gap-1.5 sm:gap-4">
+                              <div className="min-w-0 flex-1">
+                                <h4 className={`text-[11px] sm:text-base md:text-2xl font-black font-display uppercase tracking-wider ${item.textColor} leading-tight truncate sm:whitespace-normal`}>
                                   {item.title}
                                 </h4>
                                 {item.subtitle && (
-                                  <p className="text-xs sm:text-sm font-extrabold text-slate-800 italic mt-0.5">{item.subtitle}</p>
+                                  <p className="text-[9px] sm:text-xs md:text-sm font-extrabold text-slate-800 italic mt-0.5 line-clamp-1">{item.subtitle}</p>
                                 )}
                               </div>
                               <motion.div 
-                                whileHover={{ scale: 1.2, rotate: 360 }}
+                                whileHover={{ scale: 1.15, rotate: 360 }}
                                 transition={{ duration: 0.4 }}
-                                className={`w-20 h-20 sm:w-22 sm:h-22 rounded-full ${item.badgeBg} flex items-center justify-center shadow-2xl border-4 border-white shrink-0 z-10 cursor-pointer`}
+                                className={`w-8 h-8 sm:w-16 sm:h-16 md:w-22 md:h-22 rounded-full ${item.badgeBg} flex items-center justify-center shadow-lg border-2 sm:border-4 border-white shrink-0 z-10 cursor-pointer`}
                               >
-                                <StepIcon size={38} />
+                                <StepIcon className="w-4 h-4 sm:w-7 sm:h-7 md:w-9 md:h-9" />
                               </motion.div>
                             </div>
 
                             {/* Horizontal Colored Connector Line with Water Flow */}
-                            <div className={`h-[6px] w-full bg-gradient-to-r ${item.lineColor} rounded-full relative overflow-hidden shadow-sm`}>
+                            <div className={`h-[3px] sm:h-[5px] md:h-[6px] w-full bg-gradient-to-r ${item.lineColor} rounded-full relative overflow-hidden shadow-xs`}>
                               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/80 to-transparent animate-water-flow-left" />
                             </div>
 
                             {/* Description Paragraph Below Line */}
-                            <p className="text-sm sm:text-base text-slate-700 font-medium leading-relaxed pt-1 text-left max-w-md sm:max-w-lg">
+                            <p className="text-[9.5px] sm:text-xs md:text-base text-slate-700 font-medium leading-snug sm:leading-relaxed text-left max-w-md sm:max-w-lg line-clamp-3 sm:line-clamp-none">
                               {item.desc}
                             </p>
 
                             {/* Focus Areas List */}
                             {item.focusAreas && (
-                              <div className="pt-3 border-t border-slate-300/70 mt-3 space-y-2">
-                                <p className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900">Focus Areas:</p>
-                                <ul className="grid grid-cols-1 gap-1.5 text-xs sm:text-sm font-semibold text-slate-700">
+                              <div className="pt-1.5 sm:pt-3 border-t border-slate-300/70 mt-1.5 sm:mt-3 space-y-1">
+                                <p className="text-[9px] sm:text-xs md:text-sm font-black uppercase tracking-wider text-slate-900 hidden sm:block">Focus Areas:</p>
+                                <ul className="grid grid-cols-1 gap-1 text-[8.5px] sm:text-xs md:text-sm font-semibold text-slate-700">
                                   {item.focusAreas.map((area, i) => (
-                                    <li key={i} className="flex items-center gap-2.5">
-                                      <span className="w-2 h-2 rounded-full shrink-0 shadow-xs" style={{ background: item.color }} />
-                                      <span>{area}</span>
+                                    <li key={i} className="flex items-center gap-1.5 sm:gap-2.5">
+                                      <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full shrink-0 shadow-2xs" style={{ background: item.color }} />
+                                      <span className="truncate">{area}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -1768,7 +1769,7 @@ export const HomePage = () => {
             {/* FOR ORGANIZATIONS */}
             <motion.div
               initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
-              className="bg-gradient-to-br from-[#EBF3FC] via-white to-[#DBEAFE] border-2 border-cyan-300 rounded-[2.5rem] p-9 sm:p-11 text-left space-y-6 shadow-2xl hover:border-cyan-500 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
+              className="bg-gradient-to-br from-[#EBF3FC] via-white to-[#DBEAFE] border-2 border-cyan-300 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-9 md:p-11 text-left space-y-5 sm:space-y-6 shadow-2xl hover:border-cyan-500 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
             >
               {/* Background Watermark YomTech Logo */}
               <div className="absolute -right-8 -bottom-8 w-56 h-56 opacity-[0.38] pointer-events-none z-0">
@@ -1776,20 +1777,20 @@ export const HomePage = () => {
               </div>
 
               <div className="relative z-10 space-y-6">
-                <div className="flex items-center justify-between">
-                  <span className="px-4 py-1.5 rounded-full bg-cyan-100/90 text-[#0284C7] border border-cyan-300 text-[10px] font-black uppercase tracking-[0.2em] inline-block shadow-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="px-3 py-1.5 rounded-full bg-cyan-100/90 text-[#0284C7] border border-cyan-300 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] inline-block shadow-xs">
                     FOR ORGANIZATIONS &amp; ENTERPRISE
                   </span>
-                  <span className="text-[10px] font-mono font-bold text-cyan-700 bg-white/90 px-3.5 py-1 rounded-full border border-cyan-200 shadow-xs">24-HOUR PROPOSAL DESK</span>
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold text-cyan-700 bg-white/90 px-2.5 sm:px-3.5 py-1 rounded-full border border-cyan-200 shadow-xs">24-HOUR PROPOSAL DESK</span>
                 </div>
 
-                <div className="flex items-center gap-5">
-                  <div className="w-20 h-20 rounded-2xl bg-white p-3 shadow-xl border-2 border-cyan-200/90 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <div className="flex items-center gap-3 sm:gap-5">
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white p-2 sm:p-3 shadow-xl border-2 border-cyan-200/90 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <img src={yomnexLogo} alt="YomNex Enterprise Platform" className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
                   </div>
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display leading-tight">Start a Technology Conversation</h3>
-                    <p className="text-xs text-[#0284C7] font-extrabold uppercase tracking-wider mt-1">YOMNEX ENTERPRISE &amp; CUSTOM SOFTWARE</p>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 font-display leading-tight">Start a Technology Conversation</h3>
+                    <p className="text-[10px] sm:text-xs text-[#0284C7] font-extrabold uppercase tracking-wider mt-1">YOMNEX ENTERPRISE &amp; CUSTOM SOFTWARE</p>
                   </div>
                 </div>
 
@@ -1815,7 +1816,7 @@ export const HomePage = () => {
 
                 <button
                   onClick={() => navigate('/contact')}
-                  className="w-full py-6 sm:py-6.5 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0077B6] to-[#0ED3DD] text-white hover:opacity-95 font-black text-sm sm:text-base uppercase tracking-[0.2em] shadow-xl shadow-cyan-600/30 hover:shadow-cyan-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3.5 cursor-pointer group/btn"
+                  className="w-full py-5 sm:py-6 rounded-2xl bg-gradient-to-r from-[#0284C7] via-[#0077B6] to-[#0ED3DD] text-white hover:opacity-95 font-black text-sm sm:text-base uppercase tracking-[0.15em] sm:tracking-[0.2em] shadow-xl shadow-cyan-600/30 hover:shadow-cyan-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3 cursor-pointer group/btn"
                 >
                   <span>Request Enterprise Proposal</span>
                   <ArrowRight size={22} strokeWidth={2.5} className="group-hover/btn:translate-x-2 transition-transform" />
@@ -1826,7 +1827,7 @@ export const HomePage = () => {
             {/* FOR INDIVIDUALS */}
             <motion.div
               initial={{ opacity: 0, y: 25 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}
-              className="bg-gradient-to-br from-[#E6F7F3] via-white to-[#D1FAE5] border-2 border-emerald-300 rounded-[2.5rem] p-9 sm:p-11 text-left space-y-6 shadow-2xl hover:border-emerald-500 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
+              className="bg-gradient-to-br from-[#E6F7F3] via-white to-[#D1FAE5] border-2 border-emerald-300 rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-9 md:p-11 text-left space-y-5 sm:space-y-6 shadow-2xl hover:border-emerald-500 hover:-translate-y-2 transition-all duration-300 relative overflow-hidden group"
             >
               {/* Background Watermark YomTech Logo */}
               <div className="absolute -right-8 -bottom-8 w-56 h-56 opacity-[0.38] pointer-events-none z-0">
@@ -1834,20 +1835,20 @@ export const HomePage = () => {
               </div>
 
               <div className="relative z-10 space-y-6">
-                <div className="flex items-center justify-between">
-                  <span className="px-4 py-1.5 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-300 text-[10px] font-black uppercase tracking-[0.2em] inline-block shadow-xs">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <span className="px-3 py-1.5 rounded-full bg-emerald-100/90 text-emerald-800 border border-emerald-300 text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] inline-block shadow-xs">
                     FOR INDIVIDUALS &amp; DEVELOPERS
                   </span>
-                  <span className="text-[10px] font-mono font-bold text-emerald-700 bg-white/90 px-3.5 py-1 rounded-full border border-emerald-200 shadow-xs">2,000+ ALUMNI NETWORK</span>
+                  <span className="text-[9px] sm:text-[10px] font-mono font-bold text-emerald-700 bg-white/90 px-2.5 sm:px-3.5 py-1 rounded-full border border-emerald-200 shadow-xs">2,000+ ALUMNI NETWORK</span>
                 </div>
 
-                <div className="flex items-center gap-5">
-                  <div className="w-20 h-20 rounded-2xl bg-white p-3 shadow-xl border-2 border-emerald-200/90 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                <div className="flex items-center gap-3 sm:gap-5">
+                  <div className="w-14 h-14 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl bg-white p-2 sm:p-3 shadow-xl border-2 border-emerald-200/90 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
                     <img src={wabiSkillsLogo} alt="WabiSkills Academy" className="max-w-full max-h-full object-contain filter drop-shadow-xs" />
                   </div>
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-black text-slate-900 font-display leading-tight">Start Building Your Future</h3>
-                    <p className="text-xs text-emerald-700 font-extrabold uppercase tracking-wider mt-1">WABISKILLS ACADEMY &amp; WABIJOBS NETWORK</p>
+                    <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 font-display leading-tight">Start Building Your Future</h3>
+                    <p className="text-[10px] sm:text-xs text-emerald-700 font-extrabold uppercase tracking-wider mt-1">WABISKILLS ACADEMY &amp; WABIJOBS NETWORK</p>
                   </div>
                 </div>
 
@@ -1873,7 +1874,7 @@ export const HomePage = () => {
 
                 <button
                   onClick={() => navigate('/academy')}
-                  className="w-full py-6 sm:py-6.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white hover:opacity-95 font-black text-sm sm:text-base uppercase tracking-[0.2em] shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3.5 cursor-pointer group/btn"
+                  className="w-full py-5 sm:py-6 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 text-white hover:opacity-95 font-black text-sm sm:text-base uppercase tracking-[0.15em] sm:tracking-[0.2em] shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 hover:scale-[1.01] transition-all flex items-center justify-center gap-3 cursor-pointer group/btn"
                 >
                   <span>Explore Academy Courses</span>
                   <ArrowRight size={22} strokeWidth={2.5} className="group-hover/btn:translate-x-2 transition-transform" />
@@ -1889,7 +1890,7 @@ export const HomePage = () => {
       {/* ════════════════════════════════════════════════════
           UNIFIED SECTION — THE FUTURE OF TECHNOLOGY & YOMTECH IN THE WORLD
       ════════════════════════════════════════════════════ */}
-      <section className="w-full py-24 md:py-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30 font-sans">
+      <section className="w-full py-16 sm:py-20 md:py-32 relative z-10 hero-cyan-gradient text-white overflow-hidden border-b border-cyan-400/30 font-sans">
         
         {/* Hero Section Animated Background Layers */}
         <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
@@ -1900,10 +1901,10 @@ export const HomePage = () => {
         </div>
         <div className="absolute inset-0 bg-gradient-to-r from-[#03045E]/85 via-[#0077B6]/70 to-[#00B4D8]/80 pointer-events-none z-0" />
 
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 space-y-28 md:space-y-36 relative z-10">
+        <div className="max-w-[1720px] mx-auto px-5 sm:px-12 md:px-16 space-y-16 sm:space-y-24 md:space-y-36 relative z-10">
 
           {/* ─── BLOCK 1: THE FUTURE OF TECHNOLOGY ─── */}
-          <div className="space-y-20">
+          <div className="space-y-10 sm:space-y-16 md:space-y-20">
             {/* Header Badge */}
             <div className="space-y-6">
               <div className="flex items-center justify-start w-full">
@@ -1926,7 +1927,7 @@ export const HomePage = () => {
             </div>
 
             {/* Zigzag Staircase Pushpin Roadmap Container */}
-            <div className="relative max-w-5xl mx-auto py-8 flex flex-col gap-0">
+            <div className="relative max-w-5xl mx-auto py-6 sm:py-8 flex flex-col gap-0">
               
               {[
                 { 
@@ -1993,16 +1994,16 @@ export const HomePage = () => {
                   <div key={pillar.num} className="relative flex flex-col">
                     {/* Card Row */}
                     <motion.div 
-                      initial={{ opacity: 0, x: isLeft ? -60 : 60, scale: 0.94 }}
-                      whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                      viewport={{ once: true, margin: '-40px' }}
-                      transition={{ duration: 0.7, delay: idx * 0.13, ease: [0.22, 1, 0.36, 1] }}
-                      className={`flex ${isLeft ? 'justify-start' : 'justify-end'} w-full`}
+                      initial={{ opacity: 0, y: 30, scale: 0.96 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                      viewport={{ once: true, margin: '-30px' }}
+                      transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                      className="flex w-full"
                     >
                       <motion.div
                         animate={{ y: [0, -7, 0] }}
                         transition={{ repeat: Infinity, duration: pillar.floatDuration, ease: 'easeInOut' }}
-                        className="relative w-full md:w-[68%]"
+                        className={`relative w-full md:w-[68%] ${isLeft ? 'md:mr-auto' : 'md:ml-auto'}`}
                       >
                         {/* Pushpin */}
                         <motion.div 
@@ -2017,7 +2018,7 @@ export const HomePage = () => {
                         </motion.div>
 
                         {/* Card */}
-                        <div className={`rounded-[2.5rem] p-8 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_25px_50px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] ${pillar.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-6 group cursor-pointer overflow-hidden`}>
+                        <div className={`rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-10 md:p-12 bg-white/95 border-2 border-slate-100/90 shadow-[0_20px_40px_rgba(0,0,0,0.07)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] md:${pillar.tilt} transition-all duration-500 hover:-translate-y-3 relative z-20 space-y-3 sm:space-y-6 group cursor-pointer overflow-hidden`}>
                           
                           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                           
@@ -2030,16 +2031,17 @@ export const HomePage = () => {
                           />
 
                           <div className="flex items-center justify-between">
-                            <span className={`text-4xl sm:text-5xl font-black font-mono tracking-tight ${pillar.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
+                            <span className={`text-3xl sm:text-4xl md:text-5xl font-black font-mono tracking-tight ${pillar.numColor} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 inline-block`}>
                               {pillar.num}
                             </span>
-                            <div className={`w-14 h-14 rounded-2xl ${pillar.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
-                              <PillarIcon size={26} className="group-hover:scale-110 transition-transform duration-300" />
+                            <div className={`w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl ${pillar.badgeBg} border-2 flex items-center justify-center shadow-sm group-hover:scale-115 group-hover:rotate-12 transition-all duration-500`}>
+                              <PillarIcon size={22} className="group-hover:scale-110 transition-transform duration-300 sm:hidden" />
+                              <PillarIcon size={26} className="group-hover:scale-110 transition-transform duration-300 hidden sm:block" />
                             </div>
                           </div>
 
-                          <div className="space-y-3">
-                            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-all duration-300 tracking-tight">
+                          <div className="space-y-2 sm:space-y-3">
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 font-display group-hover:text-[#0284C7] transition-all duration-300 tracking-tight">
                               {pillar.title}
                             </h3>
                             <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-800 transition-colors duration-300">
@@ -2091,7 +2093,7 @@ export const HomePage = () => {
 
 
           {/* ─── BLOCK 2: YOMTECH IN THE WORLD ─── */}
-          <div className="space-y-16 pt-8 border-t border-cyan-400/30">
+          <div className="space-y-10 sm:space-y-16 pt-6 sm:pt-8 border-t border-cyan-400/30">
             {/* Header Badge */}
             <div className="space-y-6">
               <div className="flex items-center justify-start w-full">
@@ -2117,7 +2119,7 @@ export const HomePage = () => {
             </div>
 
             {/* 3 Media Community Pushpin Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-6 md:gap-10">
               
               {/* YOUTUBE */}
               <motion.div 
@@ -2135,7 +2137,7 @@ export const HomePage = () => {
                   <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
                 </div>
 
-                <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-red-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(239,68,68,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                <div className="bg-white/95 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-8 md:p-10 border-2 border-slate-100/90 hover:border-red-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(239,68,68,0.18)] md:-rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-5 sm:space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
                   {/* Logo Watermark Background */}
                   <img src={logoEmblem} alt="" className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none" aria-hidden="true" />
                   <div className="space-y-4 pt-2">
@@ -2186,7 +2188,7 @@ export const HomePage = () => {
                   <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
                 </div>
 
-                <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                <div className="bg-white/95 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-8 md:p-10 border-2 border-slate-100/90 hover:border-cyan-400 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(2,132,199,0.18)] md:rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-5 sm:space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
                   {/* Logo Watermark Background */}
                   <img src={logoEmblem} alt="" className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none" aria-hidden="true" />
                   <div className="space-y-4 pt-2">
@@ -2237,7 +2239,7 @@ export const HomePage = () => {
                   <div className="w-1 h-3 bg-slate-400/90 shadow-xs" />
                 </div>
 
-                <div className="bg-white/95 rounded-[2.5rem] p-8 sm:p-10 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(37,99,235,0.18)] -rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
+                <div className="bg-white/95 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-8 md:p-10 border-2 border-slate-100/90 hover:border-blue-500 shadow-[0_20px_45px_rgba(0,0,0,0.06)] hover:shadow-[0_30px_70px_rgba(37,99,235,0.18)] md:-rotate-1 hover:rotate-0 transition-all duration-500 flex flex-col justify-between space-y-5 sm:space-y-8 group relative overflow-hidden hover:-translate-y-2 cursor-pointer">
                   {/* Logo Watermark Background */}
                   <img src={logoEmblem} alt="" className="absolute bottom-3 right-3 w-40 h-40 object-contain opacity-[0.28] pointer-events-none select-none" aria-hidden="true" />
                   <div className="space-y-4 pt-2">
@@ -2574,7 +2576,7 @@ export const HomePage = () => {
                       <div className="w-1 h-3.5 bg-gradient-to-b from-cyan-400 to-blue-600 shadow-sm" />
                     </div>
 
-                    <div className={`p-8 sm:p-10 rounded-[2.5rem] bg-gradient-to-br from-white/95 via-sky-50/70 to-cyan-50/80 border-2 ${isCenter ? 'border-[#0284C7] shadow-[0_30px_80px_rgba(2,132,199,0.25)]' : 'border-cyan-200/80 shadow-[0_20px_50px_rgba(2,132,199,0.08)]'} backdrop-blur-xl transition-all duration-500 flex flex-col justify-between space-y-6 group relative overflow-hidden cursor-pointer min-h-[340px]`}>
+                    <div className={`p-6 sm:p-8 md:p-10 rounded-[2.5rem] bg-gradient-to-br from-white/95 via-sky-50/70 to-cyan-50/80 border-2 ${isCenter ? 'border-[#0284C7] shadow-[0_30px_80px_rgba(2,132,199,0.25)]' : 'border-cyan-200/80 shadow-[0_20px_50px_rgba(2,132,199,0.08)]'} backdrop-blur-xl transition-all duration-500 flex flex-col justify-between space-y-6 group relative overflow-hidden cursor-pointer min-h-[300px] sm:min-h-[340px]`}>
                       
                       {/* Top Gradient Sheen Accent Line */}
                       <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-sky-400" />
@@ -2664,7 +2666,7 @@ export const HomePage = () => {
             transition={{ duration: 0.7 }}
             className="pt-10"
           >
-            <div className="relative rounded-[2.8rem] bg-gradient-to-r from-[#071328] via-[#0B2545] to-[#0284C7] p-8 sm:p-12 md:p-14 text-white border-2 border-cyan-400/40 shadow-[0_25px_70px_rgba(2,132,199,0.35)] overflow-hidden">
+            <div className="relative rounded-[2rem] sm:rounded-[2.8rem] bg-gradient-to-r from-[#071328] via-[#0B2545] to-[#0284C7] p-6 sm:p-10 md:p-14 text-white border-2 border-cyan-400/40 shadow-[0_25px_70px_rgba(2,132,199,0.35)] overflow-hidden">
               
               {/* Counter-Rotating Holographic Background Rings */}
               <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full border border-dashed border-cyan-400/30 animate-[spin_20s_linear_infinite] pointer-events-none" />

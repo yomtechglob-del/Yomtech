@@ -90,7 +90,24 @@ const getCategoryItems = async (req, res) => {
     };
 
     if (category !== 'all' && category !== 'ALL') {
-      whereClause.category = targetCat;
+      const categoryAliases = {
+        'Corporate News & Articles': ['Corporate News & Articles', 'Corporate News', 'News', 'Article', 'cms-news'],
+        'Services & Products Matrix': ['Services & Products Matrix', 'Services & Products', 'Products', 'Services', 'cms-services'],
+        'Tech Articles & Engineering': ['Tech Articles & Engineering', 'Tech Articles', 'Engineering', 'Blog', 'cms-blog'],
+        'Upcoming Events & Webinars': ['Upcoming Events & Webinars', 'Events', 'Webinars', 'cms-events'],
+        'Official Announcements': ['Official Announcements', 'Announcements', 'Bulletins', 'cms-announcements'],
+        'Featured Project Case Studies': ['Featured Project Case Studies', 'Case Studies', 'Projects', 'cms-projects'],
+        'Executive Team Members': ['Executive Team Members', 'Executive Leadership', 'Team', 'cms-team'],
+        'Client & Learner Testimonials': ['Client & Learner Testimonials', 'Testimonials', 'Reviews', 'cms-testimonials'],
+        'Photo Gallery Showcase': ['Photo Gallery Showcase', 'Photo Gallery', 'Gallery', 'cms-gallery'],
+        'Video & Documentary Hub': ['Video & Documentary Hub', 'Videos', 'Documentary', 'cms-videos'],
+        'Media Appearances & Coverage': ['Media Appearances & Coverage', 'Media Appearances', 'Media', 'cms-media'],
+        'Press & Corporate Content': ['Press & Corporate Content', 'Press Releases', 'Press', 'cms-press'],
+        'Support FAQ & Knowledge Base': ['Support FAQ & Knowledge Base', 'FAQ', 'Knowledge Base', 'cms-faq'],
+        'Trusted Institutional Partners': ['Trusted Institutional Partners', 'Partners', 'Partnerships', 'cms-partners']
+      };
+      const aliases = categoryAliases[targetCat] || [targetCat];
+      whereClause.category = { in: aliases };
     }
 
     if (isPublicQuery) {
@@ -116,7 +133,10 @@ const getCategoryItems = async (req, res) => {
 const createCategoryItem = async (req, res) => {
   try {
     const { category } = req.params;
-    const targetCat = getCategoryString(category);
+    let targetCat = req.body.category;
+    if (!targetCat || targetCat === 'all' || targetCat === 'ALL') {
+      targetCat = (category !== 'all' && category !== 'ALL') ? getCategoryString(category) : 'Corporate News & Articles';
+    }
     const title = req.body.title || req.body.name || `New ${targetCat} Entry`;
     const baseSlug = (req.body.slug || title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
     const slug = `${baseSlug}-${Date.now().toString().slice(-4)}`;
@@ -178,6 +198,7 @@ const updateCategoryItem = async (req, res) => {
       where: { id },
       data: {
         title: req.body.title || existing.title,
+        category: req.body.category || existing.category,
         excerpt: req.body.summary !== undefined ? req.body.summary : (req.body.excerpt !== undefined ? req.body.excerpt : existing.excerpt),
         content: req.body.fullContent !== undefined ? req.body.fullContent : (req.body.content !== undefined ? req.body.content : existing.content),
         coverImage: req.body.coverImage !== undefined ? req.body.coverImage : existing.coverImage,

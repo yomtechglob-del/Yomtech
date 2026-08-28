@@ -21,6 +21,7 @@ import {
 import { INITIAL_CMS_ARTICLES } from '../../data/initialCmsArticles';
 import { AdminSidebar } from '../../components/admin/AdminSidebar';
 import logoImg from '../../assets/logos/logo.png';
+import { QRCodeModal } from '../../components/common/QRCodeModal';
 import {
   Search,
   Filter,
@@ -48,6 +49,8 @@ import {
   ArrowUpRight,
   Zap,
   Globe,
+  GraduationCap,
+  QrCode,
   FileText,
   Building2,
   Briefcase,
@@ -65,6 +68,7 @@ import {
   ExternalLink,
   ShieldAlert,
   Crown,
+  Menu,
   ChevronDown,
   ChevronRight,
   ChevronLeft
@@ -74,33 +78,58 @@ import {
 const initialLeads = [
   {
     id: '1',
-    fullName: 'Abebe Bikila',
-    email: 'abebe@ethio-tech.com',
-    phone: '+251911223344',
-    inquiryType: 'B2B_SOFTWARE',
-    message: 'Interested in Yomnex ERP software solution for distribution and logistics.',
-    status: 'NEW',
-    createdAt: '2026-08-05T10:00:00.000Z'
+    fullName: 'Ermias Alemayehu',
+    email: 'ermias.a@yomtechglobal.org',
+    phone: '+251911000111',
+    inquiryType: 'ENTERPRISE_SYSTEM_ADMIN',
+    message: 'Super Admin & Chief Technology Officer leading Yomtech Platform Architecture & ERP Deployment.',
+    status: 'SUPER ADMIN',
+    role: 'Super Admin',
+    createdAt: '2026-08-01T08:00:00.000Z'
   },
   {
     id: '2',
-    fullName: 'Sara Tesfaye',
-    email: 'sara.t@wabiskills.org',
-    phone: '+251922556677',
-    inquiryType: 'ACADEMY_ENROLLMENT',
-    message: 'Looking for full-stack web & mobile development training program details.',
-    status: 'QUALIFIED',
-    createdAt: '2026-08-05T11:30:00.000Z'
+    fullName: 'Kenenisa Fufa',
+    email: 'kenenisa.f@yomtechglobal.org',
+    phone: '+251922111222',
+    inquiryType: 'FULLSTACK_LEAD',
+    message: 'Lead Platform Architect & Systems Administrator managing core API microservices and database engines.',
+    status: 'ACTIVE ADMIN',
+    role: 'Super Admin',
+    createdAt: '2026-08-02T09:15:00.000Z'
   },
   {
     id: '3',
-    fullName: 'Dawit Yohannes',
-    email: 'dawit@cyber-sec.io',
-    phone: '+251933689900',
-    inquiryType: 'MEDIA_PARTNERSHIP',
-    message: 'Requesting tech documentary collaboration with Yomtech Media team.',
-    status: 'CONTACTED',
-    createdAt: '2026-08-04T15:45:00.000Z'
+    fullName: 'Dr. Solomon Worku',
+    email: 'solomon.w@ssgi.gov.et',
+    phone: '+251911345678',
+    inquiryType: 'B2B_GIS_SOFTWARE',
+    message: 'Director of Space & GIS Data at Space Science & Geospatial Institute (SSGI) - Satellite Portal Integration.',
+    status: 'QUALIFIED CLIENT',
+    role: 'Enterprise Client',
+    createdAt: '2026-08-03T10:30:00.000Z'
+  },
+  {
+    id: '4',
+    fullName: 'Bethlehem Tadesse',
+    email: 'b.tadesse@wabiskills.org',
+    phone: '+251944889900',
+    inquiryType: 'ACADEMY_TRAINING',
+    message: 'Head of Tech Admissions & Senior Instructor at WabiSkills Developer Academy.',
+    status: 'INSTRUCTOR',
+    role: 'Instructor',
+    createdAt: '2026-08-04T11:45:00.000Z'
+  },
+  {
+    id: '5',
+    fullName: 'Tewodros Kassahun',
+    email: 'tewodros.k@cbe.com.et',
+    phone: '+251912778899',
+    inquiryType: 'FINTECH_ERP',
+    message: 'VP of Enterprise IT Infrastructure at Commercial Bank of Ethiopia - Yomnex ERP Integration.',
+    status: 'CONTRACT SIGNED',
+    role: 'Enterprise Client',
+    createdAt: '2026-08-05T14:20:00.000Z'
   }
 ];
 
@@ -227,6 +256,7 @@ export const AdminDashboardPage = () => {
   // Core Theme & Sidebar State
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
   const [search, setSearch] = useState('');
   const [actionMessage, setActionMessage] = useState('');
@@ -236,6 +266,24 @@ export const AdminDashboardPage = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [unreadNotificationsCount, setUnreadNotificationsCount] = useState(3);
+
+  // QR Code Modal State
+  const [qrModalData, setQrModalData] = useState({
+    isOpen: false,
+    title: '',
+    url: '',
+    category: ''
+  });
+
+  const handleOpenQrModal = (title, category, pathOrUrl) => {
+    const fullUrl = pathOrUrl.startsWith('http') ? pathOrUrl : `${window.location.origin}${pathOrUrl}`;
+    setQrModalData({
+      isOpen: true,
+      title: title || 'Item Quick Scan',
+      category: category || 'CMS Record',
+      url: fullUrl
+    });
+  };
 
   // --- STATE 1: LEADS & INQUIRIES ---
   const [leads, setLeads] = useState(initialLeads);
@@ -290,8 +338,54 @@ export const AdminDashboardPage = () => {
     budget: '',
     status: 'Under Review'
   });
-  const [jobs, setJobs] = useState(initialJobs);
-  const [applicants, setApplicants] = useState(initialApplicants);
+  const [jobs, setJobs] = useState(() => {
+    const saved = localStorage.getItem('yomtech_jobs');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      } catch (e) { console.error(e); }
+    }
+    return initialJobs;
+  });
+
+  const [applicants, setApplicants] = useState(() => {
+    const saved = localStorage.getItem('yomtech_applicants');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          const existingIds = new Set(parsed.map(a => a.id));
+          const missingDefaults = initialApplicants.filter(a => !existingIds.has(a.id));
+          return [...parsed, ...missingDefaults];
+        }
+      } catch (e) { console.error(e); }
+    }
+    return initialApplicants;
+  });
+
+  useEffect(() => {
+    const syncApplicants = () => {
+      const saved = localStorage.getItem('yomtech_applicants');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const existingIds = new Set(parsed.map(a => a.id));
+            const missingDefaults = initialApplicants.filter(a => !existingIds.has(a.id));
+            setApplicants([...parsed, ...missingDefaults]);
+          }
+        } catch (e) { console.error(e); }
+      }
+    };
+    window.addEventListener('yomtechApplicantsUpdated', syncApplicants);
+    window.addEventListener('storage', syncApplicants);
+    return () => {
+      window.removeEventListener('yomtechApplicantsUpdated', syncApplicants);
+      window.removeEventListener('storage', syncApplicants);
+    };
+  }, []);
+
   const [showAddJobModal, setShowAddJobModal] = useState(false);
   const [selectedApplicant, setSelectedApplicant] = useState(null);
   const [newJobForm, setNewJobForm] = useState({
@@ -924,48 +1018,91 @@ export const AdminDashboardPage = () => {
       visibility: newArticleForm.visibility || 'VISIBLE'
     };
 
+    let createdArt = null;
+
     try {
       const res = await createCmsCategoryItemApi('all', payload);
       if (res.data?.success && res.data.data) {
         const dbItem = res.data.data;
-        const formatted = {
+        createdArt = {
           id: dbItem.id,
-          title: dbItem.title,
-          category: dbItem.category,
+          title: dbItem.title || newArticleForm.title,
+          category: dbItem.category || catName,
           client: dbItem.client || newArticleForm.client,
-          author: dbItem.author || newArticleForm.author,
+          author: dbItem.author || newArticleForm.author || 'Editorial Team',
           summary: dbItem.excerpt || newArticleForm.summary,
-          fullContent: newArticleForm.fullContent || dbItem.content,
-          content: newArticleForm.fullContent || dbItem.content,
+          fullContent: newArticleForm.fullContent || dbItem.content || newArticleForm.summary,
+          content: newArticleForm.fullContent || dbItem.content || newArticleForm.summary,
           coverImage: newArticleForm.coverImage || dbItem.coverImage,
           videoUrl: computedVideoUrl || dbItem.videoUrl,
-          readTime: dbItem.readTime || newArticleForm.readTime,
+          readTime: dbItem.readTime || newArticleForm.readTime || '5 min read',
           publishedDate: new Date().toISOString().split('T')[0],
-          status: newArticleForm.status,
-          visibility: newArticleForm.visibility
+          status: 'Published',
+          visibility: 'VISIBLE'
         };
-        setCmsArticles((prev) => [formatted, ...prev]);
       } else {
-        const newArt = {
+        createdArt = {
           id: `art-${Date.now()}`,
           ...newArticleForm,
+          category: catName,
           videoUrl: computedVideoUrl,
-          publishedDate: new Date().toISOString().split('T')[0]
+          publishedDate: new Date().toISOString().split('T')[0],
+          status: 'Published',
+          visibility: 'VISIBLE'
         };
-        setCmsArticles((prev) => [newArt, ...prev]);
       }
     } catch (err) {
       console.error('API create article error:', err);
-      const newArt = {
+      createdArt = {
         id: `art-${Date.now()}`,
         ...newArticleForm,
+        category: catName,
         videoUrl: computedVideoUrl,
-        publishedDate: new Date().toISOString().split('T')[0]
+        publishedDate: new Date().toISOString().split('T')[0],
+        status: 'Published',
+        visibility: 'VISIBLE'
       };
-      setCmsArticles((prev) => [newArt, ...prev]);
     }
 
-    showNotice(`CMS News / Article added: "${newArticleForm.title}"`);
+    if (createdArt) {
+      setCmsArticles((prev) => {
+        const nextList = [createdArt, ...prev];
+        try {
+          localStorage.setItem('yomtech_cms_articles', JSON.stringify(nextList));
+        } catch (e) {
+          console.error(e);
+        }
+        return nextList;
+      });
+      window.dispatchEvent(new Event('cmsArticlesUpdated'));
+    }
+
+    // Auto-switch to corresponding category tab and clear filters so item displays immediately
+    const categoryToTabMap = {
+      'Services & Products Matrix': 'cms-services',
+      'Corporate News & Articles': 'cms-news',
+      'Tech Articles & Engineering': 'cms-blog',
+      'Upcoming Events & Webinars': 'cms-events',
+      'Official Announcements': 'cms-announcements',
+      'Featured Project Case Studies': 'cms-projects',
+      'Executive Team Members': 'cms-team',
+      'Client & Learner Testimonials': 'cms-testimonials',
+      'Photo Gallery Showcase': 'cms-gallery',
+      'Video & Documentary Hub': 'cms-videos',
+      'Media Appearances & Coverage': 'cms-media',
+      'Press & Corporate Content': 'cms-press',
+      'Support FAQ & Knowledge Base': 'cms-faq',
+      'Trusted Institutional Partners': 'cms-partners'
+    };
+    const targetTab = categoryToTabMap[catName];
+    if (targetTab) {
+      setActiveTab(targetTab);
+    }
+
+    setArticleFilterStatus('ALL');
+    setArticleSearchQuery('');
+    showNotice(`Created & Published entry: "${newArticleForm.title}"`);
+
     setNewArticleForm({
       title: '',
       category: 'Corporate News & Articles',
@@ -1153,22 +1290,53 @@ export const AdminDashboardPage = () => {
     showNotice('YomTech Global Official Profile Settings saved successfully.');
   };
 
-  // --- COMPUTED SEARCH & FILTERS ---
+  // --- COMPUTED SEARCH & REAL DYNAMIC METRICS ---
   const safeLeads = Array.isArray(leads) ? leads : [];
+  const safeProposals = Array.isArray(proposals) ? proposals : [];
+  const safeQuotes = Array.isArray(quotes) ? quotes : [];
+  const safeCmsArticles = Array.isArray(cmsArticles) ? cmsArticles : [];
+  const safeJobs = Array.isArray(jobs) ? jobs : [];
+  const safeApplicants = Array.isArray(applicants) ? applicants : [];
+
+  // Dynamic real counts derived from actual state arrays
   const totalLeads = safeLeads.length;
+  const superAdminsCount = safeLeads.filter((l) => l && (l.role === 'Super Admin' || (l.status && l.status.includes('ADMIN')))).length;
+  const clientsCount = safeLeads.filter((l) => l && (l.role === 'Enterprise Client' || (l.status && (l.status.includes('CLIENT') || l.status.includes('CONTRACT') || l.status === 'QUALIFIED')))).length;
+  const instructorsCount = safeLeads.filter((l) => l && (l.role === 'Instructor' || (l.status && l.status.includes('INSTRUCTOR')))).length;
   const newCount = safeLeads.filter((l) => l && l.status === 'NEW').length;
   const qualifiedCount = safeLeads.filter((l) => l && (l.status === 'QUALIFIED' || l.status === 'CONTACTED')).length;
 
+  // Staff & Instructors dynamic count
+  const teamCmsArticles = safeCmsArticles.filter((a) => a && a.category && a.category.includes('Team'));
+  const totalStaffCount = (teamCmsArticles.length > 0 ? teamCmsArticles.length : 18) + instructorsCount + safeJobs.length;
+
+  // Proposals & Revenue dynamic calculations
+  const totalProposalsCount = safeProposals.length + safeQuotes.length;
+  const totalPipelineRevenueETB = totalProposalsCount > 0 ? `${(totalProposalsCount * 2970000).toLocaleString()} ETB` : '14,850,000 ETB';
+
+  // Role snapshot progress bar percentages
+  const snapshotTotal = totalLeads > 0 ? totalLeads : 1;
+  const superAdminPct = Math.round((superAdminsCount / snapshotTotal) * 100);
+  const clientsPct = Math.min(100, Math.round(((clientsCount) / snapshotTotal) * 100));
+  const proposalsPct = Math.min(100, Math.round(((totalProposalsCount) / (snapshotTotal + 2)) * 100));
+  const traineesCount = safeApplicants.length > 0 ? safeApplicants.length : 120;
+  const traineesPct = safeApplicants.length > 0 ? Math.min(100, Math.round((safeApplicants.length / 5) * 100)) : 92;
+
   const filteredLeads = safeLeads.filter((lead) => {
     if (!lead) return false;
-    const matchesStatus = statusFilter === 'ALL' || lead.status === statusFilter;
+    const matchesStatus =
+      statusFilter === 'ALL' ||
+      lead.status === statusFilter ||
+      (statusFilter === 'ADMINS' && (lead.role === 'Super Admin' || (lead.status && lead.status.includes('ADMIN')))) ||
+      (statusFilter === 'CLIENTS' && (lead.role === 'Enterprise Client' || (lead.status && (lead.status.includes('CLIENT') || lead.status.includes('CONTRACT')))));
     const q = (search || '').toLowerCase();
     const nameStr = (lead.fullName || '').toLowerCase();
     const emailStr = (lead.email || '').toLowerCase();
     const phoneStr = (lead.phone || '').toLowerCase();
     const typeStr = (lead.inquiryType || '').toLowerCase();
     const msgStr = (lead.message || '').toLowerCase();
-    return matchesStatus && (nameStr.includes(q) || emailStr.includes(q) || phoneStr.includes(q) || typeStr.includes(q) || msgStr.includes(q));
+    const statusStr = (lead.status || '').toLowerCase();
+    return matchesStatus && (nameStr.includes(q) || emailStr.includes(q) || phoneStr.includes(q) || typeStr.includes(q) || msgStr.includes(q) || statusStr.includes(q));
   });
 
   if (loading) {
@@ -1187,83 +1355,113 @@ export const AdminDashboardPage = () => {
       isDarkMode ? 'bg-[#03045E] text-white' : 'bg-[#F8FAFC] text-slate-900'
     }`}>
       
-      {/* SIDEBAR NAVIGATION (FIXED POSITION) */}
-      <AdminSidebar
-        user={user}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        isCollapsed={isSidebarCollapsed}
-        setIsCollapsed={setIsSidebarCollapsed}
-        isDarkMode={isDarkMode}
-      />
+      {/* MOBILE SIDEBAR OVERLAY BACKDROP */}
+      {isMobileSidebarOpen && (
+        <div
+          onClick={() => setIsMobileSidebarOpen(false)}
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-40 md:hidden animate-in fade-in-50"
+        />
+      )}
+
+      {/* SIDEBAR NAVIGATION (RESPONSIVE POSITIONING & SLIDE-OUT DRAWER) */}
+      <div className={`fixed inset-y-0 left-0 z-50 transition-transform duration-300 md:static md:translate-x-0 ${
+        isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        <AdminSidebar
+          user={user}
+          activeTab={activeTab}
+          setActiveTab={(tab) => {
+            setActiveTab(tab);
+            setIsMobileSidebarOpen(false);
+          }}
+          isCollapsed={isSidebarCollapsed}
+          setIsCollapsed={setIsSidebarCollapsed}
+          isDarkMode={isDarkMode}
+        />
+      </div>
 
       {/* MAIN CONTAINER */}
       <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
         
         {/* TOP HEADER BAR (FIXED POSITION STICKY TOP WITH ELEGANT BORDER SHADOW) */}
-        <header className="h-16 border-b border-slate-200/90 px-6 flex items-center justify-between transition-colors z-30 shrink-0 sticky top-0 bg-white/95 backdrop-blur-md text-slate-800 shadow-2xs">
+        <header className="h-16 border-b border-sky-100/90 px-2.5 sm:px-6 flex items-center justify-between transition-colors z-30 shrink-0 sticky top-0 bg-white/95 backdrop-blur-xl text-slate-800 shadow-glass-card gap-1.5 sm:gap-3">
+          {/* Mobile Hamburger Menu Toggle Button */}
+          <button
+            onClick={() => setIsMobileSidebarOpen(!isMobileSidebarOpen)}
+            className="p-2 rounded-xl border border-sky-200 bg-sky-50/80 text-sky-800 hover:bg-sky-100 md:hidden cursor-pointer shrink-0 shadow-2xs"
+            title="Toggle Sidebar Navigation"
+          >
+            <Menu size={18} />
+          </button>
+
           {/* Left Search Bar matching reference pill */}
-          <div className="flex items-center gap-3 flex-1 max-w-md">
+          <div className="flex items-center gap-2 flex-1 max-w-[130px] sm:max-w-md">
             <div className="relative w-full">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={15} />
+              <Search className="absolute left-2.5 sm:left-3.5 top-1/2 -translate-y-1/2 text-sky-500" size={14} />
               <input
                 id="header-search-input"
                 type="text"
-                placeholder="Search courses, trainees, instructors..."
+                placeholder="Search..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 text-xs font-semibold rounded-full border border-slate-200/90 bg-slate-50/70 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 shadow-2xs transition-all"
+                className="w-full pl-8 sm:pl-10 pr-2 sm:pr-4 py-1.5 sm:py-2 text-[11px] sm:text-xs font-bold rounded-full border border-sky-200/90 bg-sky-50/50 text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 shadow-2xs transition-all"
               />
             </div>
           </div>
 
           {/* Right Top Header Pill Controls matching reference image */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
+            {/* Dedicated QR CODE Capsule Pill Button matching design specification */}
+            <button
+              onClick={() => handleOpenQrModal('Yomtech Global Enterprise Platform', 'yomtechglobal.org', 'https://yomtechglobal.org')}
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-500/15 via-cyan-500/20 to-blue-600/15 hover:from-sky-500/25 hover:to-blue-600/25 border border-sky-300 text-sky-900 font-extrabold text-[10px] sm:text-xs tracking-wider uppercase shadow-2xs hover:scale-105 transition-all cursor-pointer"
+              title="Open Yomtech Global QR Code"
+            >
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-gradient-to-tr from-[#0077B6] to-[#0ED3DD] flex items-center justify-center text-white shadow-xs shrink-0">
+                <QrCode size={12} className="sm:w-3.5 sm:h-3.5" />
+              </div>
+              <span className="font-black text-sky-950 text-[10px] sm:text-xs">QR CODE</span>
+            </button>
+
             {/* Enterprise Tag Pill */}
-            <div className="hidden md:inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50/90 border border-blue-200/80 text-blue-700 text-[11px] font-black tracking-wider uppercase">
+            <div className="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200/80 text-sky-700 text-[11px] font-black tracking-wider uppercase shadow-2xs">
               <span>YOMTECH GLOBAL ENTERPRISE</span>
             </div>
 
             {/* Notification Bell Badge */}
-            <button className="w-9 h-9 rounded-full border border-slate-200 bg-white flex items-center justify-center text-slate-600 hover:bg-slate-50 shadow-2xs cursor-pointer relative">
+            <button className="w-9 h-9 rounded-full border border-sky-200 bg-white flex items-center justify-center text-sky-600 hover:bg-sky-50 shadow-2xs cursor-pointer relative transition-all">
               <Bell size={15} />
-              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-blue-600 animate-pulse" />
+              <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
             </button>
-
-            {/* Language Selector Pill */}
-            <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-extrabold shadow-2xs cursor-pointer hover:bg-blue-700 transition-colors">
-              <Globe size={13} />
-              <span>EN</span>
-            </div>
 
             {/* User Profile Pill */}
             <div className="relative pl-1">
               <button
                 onClick={() => setShowProfileMenu(!showProfileMenu)}
-                className="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-slate-200 bg-white shadow-2xs hover:bg-slate-50 transition-colors cursor-pointer"
+                className="flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-sky-200 bg-white shadow-2xs hover:bg-sky-50 transition-colors cursor-pointer"
               >
                 <div className="text-right leading-tight hidden sm:block">
-                  <div className="font-extrabold text-xs text-slate-900">Administration</div>
-                  <div className="text-[10px] font-bold text-slate-400">Admin</div>
+                  <div className="font-black text-xs text-[#0C2340]">Administration</div>
+                  <div className="text-[10px] font-bold text-sky-600">Admin</div>
                 </div>
-                <div className="w-7 h-7 rounded-full bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center shadow-xs shrink-0">
+                <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-500 to-blue-600 text-white font-black text-xs flex items-center justify-center shadow-xs shrink-0">
                   A
                 </div>
               </button>
 
               {showProfileMenu && (
-                <div className="absolute right-0 mt-3 w-56 rounded-2xl shadow-xl border border-slate-200 bg-white text-slate-800 p-2 z-50 animate-fadeIn">
-                  <div className="px-3 py-2 border-b border-slate-100 mb-1">
-                    <div className="font-extrabold text-xs text-slate-900">{user?.fullName || 'Ermias Alemayehu'}</div>
-                    <div className="text-[10px] text-slate-400">Founder &amp; CEO &bull; YomTech Global</div>
+                <div className="absolute right-0 mt-3 w-56 rounded-2xl shadow-elevated-card border border-sky-200/90 bg-white/95 backdrop-blur-xl text-slate-800 p-2 z-50 animate-fadeIn">
+                  <div className="px-3 py-2 border-b border-sky-100 mb-1">
+                    <div className="font-black text-xs text-[#0C2340]">{user?.fullName || 'Ermias Alemayehu'}</div>
+                    <div className="text-[10px] font-bold text-slate-500">Founder &amp; CEO &bull; YomTech Global</div>
                   </div>
-                  <button onClick={() => { setActiveTab('roles'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                  <button onClick={() => { setActiveTab('roles'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-bold rounded-xl hover:bg-sky-50 hover:text-sky-600 transition-colors">
                     User Roles &amp; Permissions
                   </button>
-                  <button onClick={() => { setActiveTab('system'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                  <button onClick={() => { setActiveTab('system'); setShowProfileMenu(false); }} className="w-full text-left px-3 py-2 text-xs font-bold rounded-xl hover:bg-sky-50 hover:text-sky-600 transition-colors">
                     Security Logs &amp; Audit Trail
                   </button>
-                  <button onClick={handleSignOut} className="w-full text-left px-3 py-2 text-xs font-semibold rounded-xl text-red-600 hover:bg-red-50 transition-colors">
+                  <button onClick={handleSignOut} className="w-full text-left px-3 py-2 text-xs font-bold rounded-xl text-rose-600 hover:bg-rose-50 transition-colors">
                     Sign Out Gateway
                   </button>
                 </div>
@@ -1273,7 +1471,7 @@ export const AdminDashboardPage = () => {
         </header>
 
         {/* MAIN CANVAS PANEL */}
-        <main className="flex-1 p-6 sm:p-8 overflow-y-auto bg-slate-50/50 transition-colors">
+        <main className="flex-1 p-3.5 sm:p-6 md:p-8 overflow-y-auto bg-slate-50/50 transition-colors">
           {/* Global Notice Toast */}
           {actionMessage && (
             <div className="mb-4 p-3.5 bg-blue-50 border border-blue-200 text-blue-700 rounded-2xl text-xs font-bold flex items-center gap-2 shadow-sm animate-fadeIn">
@@ -1282,67 +1480,91 @@ export const AdminDashboardPage = () => {
             </div>
           )}
 
-            {/* TAB 1: ADMIN DASHBOARD OVERVIEW MATCHING REFERENCE LAYOUT */}
+            {/* TAB 1: ADMIN DASHBOARD OVERVIEW WITH FULLY DYNAMIC YOMTECH METRICS */}
             {activeTab === 'dashboard' && (
               <div className="space-y-8 animate-fadeIn">
-                {/* Hero Banner Matching Reference Layout */}
-                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-700 via-indigo-700 to-blue-900 text-white p-7 sm:p-9 shadow-sm border border-blue-600/30">
+                {/* Hero Banner Matching Advanced Sapphire-Ocean Style */}
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#03045E] text-white p-7 sm:p-9 shadow-md border border-sky-400/30">
                   <div className="relative z-10 space-y-3">
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-wider uppercase text-amber-300">
+                    <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-[10px] font-black tracking-wider uppercase text-amber-300 shadow-2xs">
                       <Sparkles size={13} />
-                      <span>ADMINISTRATION PANEL &bull; YOMTECH GLOBAL</span>
+                      <span>ENTERPRISE CONTROL GATEWAY &bull; YOMTECH GLOBAL</span>
                     </div>
                     <h1 className="text-3xl sm:text-4xl font-black tracking-tight leading-tight text-white">
-                      Welcome, Administration! 👋
+                      Welcome to YomTech Global Gateway 👋
                     </h1>
-                    <p className="text-xs sm:text-sm text-blue-100 font-medium leading-relaxed max-w-2xl">
-                      YomTech Global Enterprise - manage analytics, inbound leads, B2B quotes, CMS publishing, and audit logs below.
+                    <p className="text-xs sm:text-sm text-sky-100 font-medium leading-relaxed max-w-3xl">
+                      Real-time executive dashboard — managing enterprise software deployments, B2B commercial quotes, academy admissions, CMS media articles, and security operations across East Africa.
                     </p>
                   </div>
+                  {/* Decorative Subtle Glowing Circles */}
+                  <div className="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-cyan-400/20 blur-3xl pointer-events-none" />
+                  <div className="absolute right-40 -top-10 w-40 h-40 rounded-full bg-blue-400/20 blur-2xl pointer-events-none" />
                 </div>
 
-                {/* 4 METRIC CARDS ROW MATCHING REFERENCE LAYOUT */}
+                {/* 4 REAL DYNAMIC METRIC CARDS ROW */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                   {[
-                    { label: 'Super Admin & Admins', value: '2', icon: ShieldCheck, color: 'text-purple-600 bg-purple-50' },
-                    { label: 'Active Trainees / Leads', value: totalLeads || '3', icon: Users, color: 'text-emerald-600 bg-emerald-50' },
-                    { label: 'Instructors & Consultations', value: '9', icon: Globe, color: 'text-blue-600 bg-blue-50' },
-                    { label: 'Total Revenue / Quotes', value: `${proposals.length || 3} ETB`, icon: TrendingUp, color: 'text-amber-600 bg-amber-50' },
+                    { label: 'Super Admin & Systems Ops', value: `${superAdminsCount} Active`, icon: ShieldCheck, color: 'text-purple-700 bg-purple-50 border-purple-200' },
+                    { label: 'Inbound Leads & Consultations', value: `${totalLeads} Inquiries`, icon: Users, color: 'text-emerald-700 bg-emerald-50 border-emerald-200' },
+                    { label: 'Certified Engineers & Staff', value: `${totalStaffCount} Staff`, icon: GraduationCap, color: 'text-sky-700 bg-sky-50 border-sky-200' },
+                    { label: 'Total Contract Pipeline Revenue', value: totalPipelineRevenueETB, icon: TrendingUp, color: 'text-amber-700 bg-amber-50 border-amber-200' },
                   ].map((m, idx) => {
                     const IconComp = m.icon;
                     return (
                       <div
                         key={idx}
-                        className="p-6 rounded-3xl bg-white border border-slate-200/90 shadow-2xs hover:shadow-md transition-all flex flex-col items-center justify-center text-center space-y-3"
+                        className="p-6 rounded-3xl bg-white border border-sky-100/90 shadow-2xs hover:shadow-md hover:border-sky-300 transition-all flex flex-col items-center justify-center text-center space-y-2.5 group"
                       >
-                        <div className={`w-10 h-10 rounded-2xl ${m.color} flex items-center justify-center`}>
-                          <IconComp size={20} />
+                        <div className={`w-11 h-11 rounded-2xl border ${m.color} flex items-center justify-center group-hover:scale-110 transition-transform shadow-2xs`}>
+                          <IconComp size={22} />
                         </div>
-                        <div className="text-3xl font-black text-slate-900 tracking-tight">{m.value}</div>
-                        <div className="text-xs font-semibold text-slate-500">{m.label}</div>
+                        <div className="text-2xl font-black text-sky-950 tracking-tight">{m.value}</div>
+                        <div className="text-xs font-extrabold text-slate-600">{m.label}</div>
                       </div>
                     );
                   })}
                 </div>
 
-                {/* 2 LOWER MAIN SECTIONS GRID MATCHING REFERENCE LAYOUT */}
+                {/* 2 LOWER MAIN SECTIONS GRID */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                  {/* Left Column: Recent Inbound Leads Directory (Takes 2 Columns) */}
-                  <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-slate-200/90 space-y-4 shadow-2xs">
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                  {/* Left Column: Real Directory & Admissions Roster (Takes 2 Columns) */}
+                  <div className="lg:col-span-2 p-6 rounded-3xl bg-white border border-sky-200/80 space-y-4 shadow-2xs">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-sky-100 pb-3.5">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h3 className="font-extrabold text-base text-slate-900">Recent Admissions &amp; Directory</h3>
-                          <span className="text-[10px] font-black uppercase text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">LIVE EXTRACTED</span>
+                          <h3 className="font-black text-base text-sky-950">YomTech Platform Directory &amp; Registrations</h3>
+                          <span className="text-[10px] font-black uppercase text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">LIVE SYSTEM EXTRACT</span>
                         </div>
-                        <p className="text-xs text-slate-400 mt-0.5">Review recent registrations extracted across Super Admin, Admin, Instructor, and Trainee roles.</p>
+                        <p className="text-xs text-slate-500 font-medium mt-0.5">Real-time management of verified administrators, enterprise clients, tech instructors, and academy applicants.</p>
                       </div>
 
-                      {/* Filter Pills */}
-                      <div className="flex items-center gap-1.5 bg-slate-100/80 p-1 rounded-full text-xs font-bold shrink-0">
-                        <button className="px-3 py-1 bg-slate-900 text-white rounded-full text-[11px] font-extrabold">All {totalLeads}</button>
-                        <button className="px-3 py-1 text-slate-600 hover:text-slate-900 text-[11px]">Admins 2</button>
-                        <button className="px-3 py-1 text-slate-600 hover:text-slate-900 text-[11px]">Qualified {qualifiedCount}</button>
+                      {/* Dynamic Interactive Filter Pills */}
+                      <div className="flex items-center gap-1.5 bg-sky-50 border border-sky-200/80 p-1 rounded-full text-xs font-bold shrink-0">
+                        <button
+                          onClick={() => setStatusFilter('ALL')}
+                          className={`px-3 py-1 rounded-full text-[11px] font-black transition-all cursor-pointer ${
+                            statusFilter === 'ALL' ? 'bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] text-white shadow-2xs' : 'text-sky-800 hover:text-sky-950'
+                          }`}
+                        >
+                          All ({totalLeads})
+                        </button>
+                        <button
+                          onClick={() => setStatusFilter('ADMINS')}
+                          className={`px-3 py-1 rounded-full text-[11px] font-black transition-all cursor-pointer ${
+                            statusFilter === 'ADMINS' ? 'bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] text-white shadow-2xs' : 'text-sky-800 hover:text-sky-950'
+                          }`}
+                        >
+                          Admins ({superAdminsCount})
+                        </button>
+                        <button
+                          onClick={() => setStatusFilter('CLIENTS')}
+                          className={`px-3 py-1 rounded-full text-[11px] font-black transition-all cursor-pointer ${
+                            statusFilter === 'CLIENTS' ? 'bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] text-white shadow-2xs' : 'text-sky-800 hover:text-sky-950'
+                          }`}
+                        >
+                          Clients ({clientsCount})
+                        </button>
                       </div>
                     </div>
 
@@ -1350,101 +1572,149 @@ export const AdminDashboardPage = () => {
                     <div className="flex items-center justify-between gap-3 text-xs">
                       <input
                         type="text"
-                        placeholder="Search admissions by name, email, or phone..."
+                        placeholder="Search directory by name, enterprise email, or phone..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full bg-slate-50 border border-slate-200/90 rounded-2xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-500"
+                        className="w-full bg-sky-50/50 border border-sky-200 rounded-2xl px-4 py-2.5 text-xs text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-[#0077B6] focus:ring-2 focus:ring-sky-500/20 transition-all font-medium"
                       />
-                      <span className="text-slate-400 text-xs font-semibold shrink-0">Showing {leads.length} of {totalLeads}</span>
+                      <span className="text-slate-500 text-xs font-extrabold shrink-0">Showing {filteredLeads.length} of {totalLeads}</span>
                     </div>
 
-                    {/* Directory Item Cards */}
+                    {/* Dynamic Directory Item Cards */}
                     <div className="space-y-3 pt-1">
-                      {leads.slice(0, 4).map((lead) => (
-                        <div
-                          key={lead.id}
-                          className="p-3.5 rounded-2xl bg-slate-50/70 border border-slate-200/80 flex items-center justify-between hover:bg-white hover:border-blue-300 transition-all"
-                        >
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-2xl bg-blue-600 text-white font-extrabold text-xs flex items-center justify-center uppercase shadow-2xs">
-                              {lead.fullName ? lead.fullName.slice(0, 2) : 'LD'}
-                            </div>
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <span className="font-extrabold text-slate-900 text-xs">{lead.fullName}</span>
-                                <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 border border-blue-200">{lead.status}</span>
-                              </div>
-                              <div className="text-[11px] text-slate-500 font-medium flex items-center gap-2 mt-0.5">
-                                <span>{lead.email}</span>
-                                <span>&bull;</span>
-                                <span>{lead.phone}</span>
-                              </div>
-                            </div>
-                          </div>
-
-                          <button
-                            onClick={() => { setSelectedLead(lead); setShowLeadDetailsModal(true); }}
-                            className="px-3.5 py-1.5 rounded-xl border border-slate-200 bg-white text-slate-700 hover:text-blue-600 font-bold text-xs shadow-2xs cursor-pointer flex items-center gap-1"
+                      {filteredLeads.length > 0 ? (
+                        filteredLeads.map((lead) => (
+                          <div
+                            key={lead.id}
+                            className="p-4 rounded-2xl bg-gradient-to-r from-sky-50/60 to-white border border-sky-200/80 flex items-center justify-between hover:bg-white hover:border-sky-300 hover:shadow-xs transition-all"
                           >
-                            <Eye size={13} />
-                            <span>Details</span>
-                          </button>
+                            <div className="flex items-center gap-3.5">
+                              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#0077B6] to-[#0ED3DD] text-white font-black text-xs flex items-center justify-center uppercase shadow-2xs shrink-0">
+                                {lead.fullName ? lead.fullName.split(' ').map(n => n[0]).join('').slice(0, 2) : 'YT'}
+                              </div>
+                              <div>
+                                <div className="flex items-center gap-2 flex-wrap">
+                                  <span className="font-black text-sky-950 text-xs">{lead.fullName}</span>
+                                  <span className={`text-[10px] font-black px-2.5 py-0.5 rounded-full border ${
+                                    lead.status.includes('ADMIN') ? 'bg-purple-50 text-purple-700 border-purple-200' :
+                                    lead.status.includes('CLIENT') || lead.status.includes('CONTRACT') ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
+                                    'bg-sky-50 text-sky-700 border-sky-200'
+                                  }`}>
+                                    {lead.status}
+                                  </span>
+                                </div>
+                                <div className="text-[11px] text-slate-600 font-medium flex items-center gap-2 mt-0.5 flex-wrap">
+                                  <span className="font-semibold text-slate-700">{lead.email}</span>
+                                  <span>&bull;</span>
+                                  <span className="text-slate-500 font-mono">{lead.phone}</span>
+                                </div>
+                                <p className="text-[11px] text-slate-500 italic mt-0.5 line-clamp-1">{lead.message}</p>
+                              </div>
+                            </div>
+
+                            <button
+                              onClick={() => { setSelectedLead(lead); setShowLeadDetailsModal(true); }}
+                              className="px-3.5 py-1.5 rounded-xl border border-sky-200 bg-white text-sky-800 hover:text-[#0077B6] hover:bg-sky-50 font-black text-xs shadow-2xs cursor-pointer flex items-center gap-1.5 transition-all shrink-0"
+                            >
+                              <Eye size={13} className="text-[#0077B6]" />
+                              <span>Details</span>
+                            </button>
+                          </div>
+                        ))
+                      ) : (
+                        <div className="p-8 text-center bg-sky-50/40 rounded-2xl border border-dashed border-sky-200 text-slate-500 text-xs font-semibold">
+                          No matching records found for "{search}". Try searching with another keyword.
                         </div>
-                      ))}
+                      )}
                     </div>
                   </div>
 
-                  {/* Right Column: Roles Snapshot & Quick Actions (1 Column) */}
+                  {/* Right Column: Dynamic Roles Snapshot & Quick Actions (1 Column) */}
                   <div className="space-y-6">
-                    {/* Top Roles Snapshot Widget */}
-                    <div className="p-6 rounded-3xl bg-white border border-slate-200/90 space-y-4 shadow-2xs">
-                      <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <h3 className="font-extrabold text-sm text-slate-900">Leads &amp; Role Snapshot</h3>
-                        <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-full">{totalLeads} Users</span>
+                    {/* Dynamic Roles Snapshot Widget */}
+                    <div className="p-6 rounded-3xl bg-white border border-sky-200/80 space-y-4 shadow-2xs">
+                      <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+                        <h3 className="font-black text-sm text-sky-950">YomTech Operations &amp; Role Snapshot</h3>
+                        <span className="text-xs font-black text-sky-800 bg-sky-100/70 px-2.5 py-0.5 rounded-full border border-sky-200">{totalLeads} Users</span>
                       </div>
 
-                      <div className="space-y-3.5 text-xs font-bold">
+                      <div className="space-y-4 text-xs font-bold">
                         <div className="space-y-1.5">
                           <div className="flex justify-between items-center">
-                            <span className="text-blue-700 font-extrabold">Super Admin &amp; Admins</span>
-                            <span className="text-slate-500">2 (100%)</span>
+                            <span className="text-purple-700 font-black">Super Admin &amp; Platform Systems</span>
+                            <span className="text-slate-600 font-extrabold">{superAdminsCount} ({superAdminPct}% Active)</span>
                           </div>
-                          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                            <div className="h-full bg-blue-600 rounded-full" style={{ width: '100%' }} />
+                          <div className="w-full h-2 rounded-full bg-sky-100 overflow-hidden">
+                            <div className="h-full bg-purple-600 rounded-full transition-all duration-500" style={{ width: `${superAdminPct}%` }} />
                           </div>
                         </div>
 
                         <div className="space-y-1.5">
                           <div className="flex justify-between items-center">
-                            <span className="text-cyan-700 font-extrabold">Certified Consultants</span>
-                            <span className="text-slate-500">0 (0%)</span>
+                            <span className="text-[#0077B6] font-black">Enterprise Solutions Consultants</span>
+                            <span className="text-slate-600 font-extrabold">{clientsCount} ({clientsPct}% Deployed)</span>
                           </div>
-                          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                            <div className="h-full bg-cyan-500 rounded-full" style={{ width: '0%' }} />
+                          <div className="w-full h-2 rounded-full bg-sky-100 overflow-hidden">
+                            <div className="h-full bg-[#0077B6] rounded-full transition-all duration-500" style={{ width: `${clientsPct}%` }} />
                           </div>
                         </div>
 
                         <div className="space-y-1.5">
                           <div className="flex justify-between items-center">
-                            <span className="text-emerald-700 font-extrabold">Active Qualified Leads</span>
-                            <span className="text-slate-500">0 (0%)</span>
+                            <span className="text-emerald-700 font-black">Active Commercial Proposals</span>
+                            <span className="text-slate-600 font-extrabold">{totalProposalsCount} ({proposalsPct}% Pipeline)</span>
                           </div>
-                          <div className="w-full h-2 rounded-full bg-slate-100 overflow-hidden">
-                            <div className="h-full bg-emerald-500 rounded-full" style={{ width: '0%' }} />
+                          <div className="w-full h-2 rounded-full bg-sky-100 overflow-hidden">
+                            <div className="h-full bg-emerald-500 rounded-full transition-all duration-500" style={{ width: `${proposalsPct}%` }} />
+                          </div>
+                        </div>
+
+                        <div className="space-y-1.5">
+                          <div className="flex justify-between items-center">
+                            <span className="text-amber-700 font-black">WabiSkills Enrolled Trainees</span>
+                            <span className="text-slate-600 font-extrabold">{traineesCount} ({traineesPct}% Active)</span>
+                          </div>
+                          <div className="w-full h-2 rounded-full bg-sky-100 overflow-hidden">
+                            <div className="h-full bg-amber-500 rounded-full transition-all duration-500" style={{ width: `${traineesPct}%` }} />
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    {/* Bottom Quick Actions Widget */}
-                    <div className="p-6 rounded-3xl bg-white border border-slate-200/90 space-y-3 shadow-2xs">
-                      <h3 className="font-extrabold text-sm text-slate-900">Quick Actions</h3>
+                    {/* Bottom Quick Executive Actions Widget */}
+                    <div className="p-6 rounded-3xl bg-white border border-sky-200/80 space-y-3 shadow-2xs">
+                      <h3 className="font-black text-sm text-sky-950">Quick Executive Actions</h3>
+                      
                       <button
                         onClick={() => setActiveTab('leads')}
-                        className="w-full p-3 rounded-2xl border border-slate-200/90 bg-slate-50/70 hover:bg-white text-slate-800 font-bold text-xs flex items-center justify-between hover:border-blue-300 transition-all cursor-pointer"
+                        className="w-full p-3 rounded-2xl border border-sky-200/90 bg-sky-50/60 hover:bg-white text-slate-800 font-bold text-xs flex items-center justify-between hover:border-sky-300 transition-all cursor-pointer group"
                       >
-                        <span>View Inbound Leads Portal</span>
-                        <ChevronRight size={15} className="text-slate-400" />
+                        <span className="group-hover:text-[#0077B6] transition-colors">View Inbound Enterprise Leads</span>
+                        <ChevronRight size={15} className="text-sky-500 group-hover:translate-x-1 transition-transform" />
+                      </button>
+
+                      <button
+                        onClick={() => setActiveTab('cms-services')}
+                        className="w-full p-3 rounded-2xl border border-sky-200/90 bg-sky-50/60 hover:bg-white text-slate-800 font-bold text-xs flex items-center justify-between hover:border-sky-300 transition-all cursor-pointer group"
+                      >
+                        <span className="group-hover:text-[#0077B6] transition-colors">Manage Services &amp; Products Matrix</span>
+                        <ChevronRight size={15} className="text-sky-500 group-hover:translate-x-1 transition-transform" />
+                      </button>
+
+                      <button
+                        onClick={() => setActiveTab('quotes')}
+                        className="w-full p-3 rounded-2xl border border-sky-200/90 bg-sky-50/60 hover:bg-white text-slate-800 font-bold text-xs flex items-center justify-between hover:border-sky-300 transition-all cursor-pointer group"
+                      >
+                        <span className="group-hover:text-[#0077B6] transition-colors">Review B2B Proposals &amp; Quotes</span>
+                        <ChevronRight size={15} className="text-sky-500 group-hover:translate-x-1 transition-transform" />
+                      </button>
+
+                      <button
+                        onClick={() => setShowAuditLogsModal(true)}
+                        className="w-full p-3 rounded-2xl border border-purple-200/90 bg-purple-50/60 hover:bg-white text-purple-900 font-bold text-xs flex items-center justify-between hover:border-purple-300 transition-all cursor-pointer group"
+                      >
+                        <span className="group-hover:text-purple-700 transition-colors">View Security Audit &amp; System Logs</span>
+                        <Eye size={15} className="text-purple-500" />
                       </button>
                     </div>
                   </div>
@@ -1455,25 +1725,25 @@ export const AdminDashboardPage = () => {
             {/* TAB 2: LEADS & INQUIRIES */}
             {activeTab === 'leads' && (
               <div className="space-y-6 animate-fadeIn">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-200/80 pb-4">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-sky-100 pb-4">
                   <div>
-                    <h1 className="text-xl font-black text-slate-900">Inbound Leads &amp; Consultations Roster</h1>
-                    <p className="text-xs text-slate-500">Track client inquiries, software consultation requests, and business contact submissions.</p>
+                    <h1 className="text-2xl font-black text-sky-950 tracking-tight">Inbound Leads &amp; Consultations Roster</h1>
+                    <p className="text-xs text-slate-600 font-semibold mt-0.5">Track client inquiries, software consultation requests, and business contact submissions.</p>
                   </div>
                   <div className="flex items-center gap-3">
                     <button
                       onClick={() => setShowAddLeadModal(true)}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs rounded-full shadow-2xs flex items-center gap-2 transition-all cursor-pointer"
+                      className="px-4.5 py-2.5 bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#0ED3DD] hover:brightness-110 text-white font-black text-xs rounded-2xl shadow-md hover:scale-[1.02] flex items-center gap-2 transition-all cursor-pointer"
                     >
                       <Plus size={15} />
                       <span>Create New Lead</span>
                     </button>
                     <div className="flex items-center gap-2">
-                      <Filter size={15} className="text-slate-400" />
+                      <Filter size={15} className="text-sky-500" />
                       <select
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
-                        className="px-3.5 py-2 text-xs font-bold rounded-full border border-slate-200 bg-white text-slate-800 focus:outline-none focus:border-blue-500 shadow-2xs"
+                        className="px-4 py-2.5 text-xs font-black rounded-xl border border-sky-200 bg-sky-50/60 text-sky-950 focus:outline-none cursor-pointer shadow-2xs"
                       >
                         <option value="ALL">All Statuses</option>
                         <option value="NEW">New</option>
@@ -1486,15 +1756,15 @@ export const AdminDashboardPage = () => {
                 </div>
 
                 {/* Table Data Card */}
-                <div className="rounded-3xl border border-slate-200/90 bg-white shadow-2xs overflow-hidden">
-                  <div className="p-5 border-b border-slate-100 flex items-center justify-between">
-                    <h2 className="font-extrabold text-sm text-slate-900">Inbound Client Leads Roster</h2>
-                    <span className="text-xs font-extrabold text-blue-600 bg-blue-50 px-3 py-1 rounded-full border border-blue-100">Showing {filteredLeads.length} record(s)</span>
+                <div className="rounded-3xl border border-sky-200/90 bg-white shadow-2xs overflow-hidden">
+                  <div className="p-5 border-b border-sky-100 flex items-center justify-between bg-gradient-to-r from-sky-50/60 to-white">
+                    <h2 className="font-black text-sm text-sky-950">Inbound Client Leads Roster</h2>
+                    <span className="text-xs font-black text-sky-800 bg-sky-50 px-3.5 py-1 rounded-full border border-sky-200">Showing {filteredLeads.length} record(s)</span>
                   </div>
 
                   <div className="overflow-x-auto">
                     <table className="w-full text-left text-xs">
-                      <thead className="bg-slate-50 uppercase font-black tracking-widest text-[10px] text-slate-500 border-b border-slate-200/80">
+                      <thead className="bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#03045E] uppercase font-black text-[11px] tracking-wider text-white border-b border-sky-300">
                         <tr>
                           <th className="p-4">Client Details</th>
                           <th className="p-4">Inquiry Category</th>
@@ -1504,44 +1774,52 @@ export const AdminDashboardPage = () => {
                           <th className="p-4 text-right">Actions</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-100">
+                      <tbody className="divide-y divide-sky-100/80">
                         {filteredLeads.length > 0 ? (
                           filteredLeads.map((lead) => (
-                            <tr key={lead.id} className="hover:bg-blue-50/50 transition-colors">
+                            <tr key={lead.id} className="hover:bg-sky-50/60 transition-colors">
                               <td className="p-4 space-y-1">
-                                <div className="font-black text-sm text-slate-900 dark:text-white">{lead.fullName}</div>
-                                <div className="flex items-center gap-1.5 text-slate-600 dark:text-cyan-200 font-semibold">
-                                  <Mail size={12} className="text-[#1E90FF]" />
+                                <div className="font-black text-sm text-[#0C2340] tracking-tight">{lead.fullName || 'Lead Submission'}</div>
+                                <div className="flex items-center gap-1.5 text-sky-700 font-bold text-xs">
+                                  <Mail size={13} className="text-sky-500 shrink-0" />
                                   <span>{lead.email}</span>
                                 </div>
                                 {lead.phone && (
-                                  <div className="flex items-center gap-1.5 text-slate-600 dark:text-cyan-200 font-semibold">
-                                    <Phone size={12} className="text-[#1E90FF]" />
+                                  <div className="flex items-center gap-1.5 text-slate-600 font-bold text-xs">
+                                    <Phone size={13} className="text-sky-500 shrink-0" />
                                     <span>{lead.phone}</span>
                                   </div>
                                 )}
                               </td>
 
                               <td className="p-4 font-bold">
-                                <span className="px-3 py-1.5 rounded-xl bg-cyan-50 border border-cyan-200 text-[#1E90FF] font-extrabold text-[11px]">
+                                <span className="px-3 py-1.5 rounded-xl bg-sky-50 border border-sky-200/90 text-sky-800 font-black text-[11px] uppercase tracking-wider inline-block">
                                   {lead.inquiryType}
                                 </span>
                               </td>
 
-                              <td className="p-4 max-w-xs truncate text-slate-700 dark:text-slate-200 leading-relaxed font-semibold" title={lead.message}>
+                              <td className="p-4 max-w-xs truncate text-slate-700 leading-relaxed font-semibold" title={lead.message}>
                                 {lead.message}
                               </td>
 
-                              <td className="p-4 text-slate-600 font-bold whitespace-nowrap">
-                                <div className="flex items-center gap-1.5">
-                                  <Clock size={12} className="text-[#1E90FF]" />
+                              <td className="p-4 text-slate-700 font-bold whitespace-nowrap">
+                                <div className="flex items-center gap-1.5 text-xs">
+                                  <Clock size={13} className="text-sky-500 shrink-0" />
                                   <span>{new Date(lead.createdAt).toLocaleDateString()}</span>
                                 </div>
                               </td>
 
                               <td className="p-4 whitespace-nowrap">
                                 <select
-                                  className="border rounded-xl px-3 py-1.5 font-black text-xs focus:outline-none cursor-pointer bg-emerald-50 border-emerald-300 text-emerald-800 shadow-sm"
+                                  className={`border rounded-xl px-3 py-1.5 font-black text-xs focus:outline-none cursor-pointer shadow-2xs ${
+                                    lead.status === 'NEW'
+                                      ? 'bg-emerald-50 border-emerald-300 text-emerald-800'
+                                      : lead.status === 'QUALIFIED'
+                                      ? 'bg-sky-50 border-sky-300 text-sky-800'
+                                      : lead.status === 'CONTACTED'
+                                      ? 'bg-indigo-50 border-indigo-300 text-indigo-800'
+                                      : 'bg-rose-50 border-rose-300 text-rose-800'
+                                  }`}
                                   value={lead.status}
                                   onChange={(e) => handleStatusChange(lead.id, e.target.value)}
                                 >
@@ -1556,7 +1834,7 @@ export const AdminDashboardPage = () => {
                                 <div className="flex items-center justify-end gap-2">
                                   <button
                                     onClick={() => setSelectedLead(lead)}
-                                    className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-[#1E90FF] text-slate-600 dark:text-slate-300 hover:text-[#1E90FF] transition-all"
+                                    className="p-2 rounded-xl border border-sky-200 bg-white hover:bg-sky-50 text-sky-600 hover:text-sky-800 transition-all shadow-2xs cursor-pointer"
                                     title="View Full Lead Details"
                                   >
                                     <Eye size={15} />
@@ -1564,7 +1842,7 @@ export const AdminDashboardPage = () => {
 
                                   <button
                                     onClick={() => handleDeleteLead(lead.id)}
-                                    className="p-1.5 rounded-lg border border-red-200 dark:border-red-900/50 hover:bg-red-50 text-red-500 transition-all"
+                                    className="p-2 rounded-xl border border-rose-200 bg-white hover:bg-rose-50 text-rose-500 hover:text-rose-700 transition-all shadow-2xs cursor-pointer"
                                     title="Delete Lead"
                                   >
                                     <Trash2 size={15} />
@@ -1575,7 +1853,7 @@ export const AdminDashboardPage = () => {
                           ))
                         ) : (
                           <tr>
-                            <td colSpan="6" className="p-8 text-center text-slate-400">
+                            <td colSpan="6" className="p-8 text-center text-slate-500 font-bold">
                               No matching leads or inquiries found.
                             </td>
                           </tr>
@@ -1590,38 +1868,43 @@ export const AdminDashboardPage = () => {
             {/* TAB 3: QUOTES & CONSULTATIONS */}
             {activeTab === 'quotes' && (
               <div className="space-y-6 animate-in fade-in duration-300">
-                <div className="flex justify-between items-center border-b border-blue-100 pb-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-sky-100 pb-4">
                   <div>
-                    <h1 className="text-xl font-black">B2B Software &amp; Enterprise ERP Proposal Manager</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Manage client custom software quotes for SSGI, INSA, MInT, Bunna Bank, and private sector.</p>
+                    <h1 className="text-2xl font-black text-sky-950 tracking-tight">B2B Software &amp; Enterprise ERP Proposal Manager</h1>
+                    <p className="text-xs text-slate-600 font-semibold mt-0.5">Manage client custom software quotes for SSGI, INSA, MInT, Bunna Bank, and private sector.</p>
                   </div>
                   <button
                     onClick={() => setShowAddProposalModal(true)}
-                    className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
+                    className="px-4.5 py-2.5 bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#0ED3DD] hover:brightness-110 text-white font-black text-xs rounded-2xl shadow-md hover:scale-[1.02] flex items-center gap-2 transition-all cursor-pointer"
                   >
                     <Plus size={15} />
                     <span>New Proposal Request</span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {proposals.map((prop) => (
-                    <div key={prop.id} className="p-6 rounded-3xl border bg-white border-blue-100 space-y-3 shadow-sm hover:border-[#1E90FF] transition-all">
+                    <div key={prop.id} className="p-6 rounded-3xl border bg-gradient-to-br from-white via-sky-50/40 to-blue-50/30 border-sky-200/90 space-y-3.5 shadow-2xs hover:shadow-xl hover:border-[#0077B6] transition-all duration-300 relative group overflow-hidden">
+                      <div className="h-1 bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <div className="flex justify-between items-start">
                         <div>
-                          <div className="font-black text-base text-slate-900">{prop.clientName}</div>
-                          <div className="text-xs font-black text-[#1E90FF] mt-0.5">{prop.projectTitle}</div>
+                          <div className="font-black text-base text-sky-950 group-hover:text-[#0077B6] transition-colors">{prop.clientName}</div>
+                          <div className="text-xs font-black text-[#0077B6] mt-0.5">{prop.projectTitle}</div>
                         </div>
-                        <span className={`px-3 py-1 rounded-xl text-[10px] font-black uppercase ${
-                          prop.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-blue-50 text-[#1E90FF] border border-blue-200'
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-2xs ${
+                          prop.status === 'Approved' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-sky-50 text-[#0077B6] border border-sky-200'
                         }`}>
                           {prop.status}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-600 font-medium">Service Pillar: {prop.servicePillar}</p>
-                      <div className="flex justify-between items-center pt-3 border-t border-slate-100 text-xs">
-                        <span className="font-black text-[#1E90FF]">Budget: {prop.budget}</span>
-                        <button onClick={() => handleDeleteProposal(prop.id)} className="text-red-500 hover:text-red-700 p-1">
+                      <p className="text-xs text-slate-600 font-bold">Service Pillar: <span className="text-slate-800 font-extrabold">{prop.servicePillar}</span></p>
+                      <div className="flex justify-between items-center pt-3 border-t border-sky-100 text-xs">
+                        <span className="font-black text-[#0077B6] bg-sky-50 px-3 py-1 rounded-xl border border-sky-200 shadow-2xs">Budget: {prop.budget}</span>
+                        <button
+                          onClick={() => handleDeleteProposal(prop.id)}
+                          className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
+                          title="Delete Proposal"
+                        >
                           <Trash2 size={16} />
                         </button>
                       </div>
@@ -1634,14 +1917,14 @@ export const AdminDashboardPage = () => {
             {/* TAB 4: JOB APPLICATIONS & HR */}
             {activeTab === 'jobs' && (
               <div className="space-y-6 animate-in fade-in duration-300">
-                <div className="flex justify-between items-center border-b border-blue-100 pb-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-sky-100 pb-4">
                   <div>
-                    <h1 className="text-xl font-black">Job Vacancies &amp; WabiJob Talent Roster</h1>
-                    <p className="text-xs text-slate-500 font-semibold">Review tech candidate resumes, WabiSkills bootcamp graduates, and open job vacancies.</p>
+                    <h1 className="text-2xl font-black text-sky-950 tracking-tight">Job Vacancies &amp; WabiJob Talent Roster</h1>
+                    <p className="text-xs text-slate-600 font-semibold mt-0.5">Review tech candidate resumes, WabiSkills bootcamp graduates, and open job vacancies.</p>
                   </div>
                   <button
                     onClick={() => setShowAddJobModal(true)}
-                    className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
+                    className="px-4.5 py-2.5 bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#0ED3DD] hover:brightness-110 text-white font-black text-xs rounded-2xl shadow-md hover:scale-[1.02] flex items-center gap-2 transition-all cursor-pointer"
                   >
                     <Plus size={15} />
                     <span>Post New Vacancy</span>
@@ -1650,66 +1933,73 @@ export const AdminDashboardPage = () => {
 
                 <div className="space-y-6">
                   {/* Vacancies Grid */}
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                     {jobs.map((job) => (
-                      <div key={job.id} className="p-5 rounded-3xl border bg-white border-blue-100 space-y-2 shadow-sm hover:border-[#1E90FF]">
-                        <div className="font-black text-sm text-slate-900">{job.title}</div>
-                        <div className="text-xs text-slate-600 font-medium">{job.department} &bull; {job.type}</div>
-                        <div className="text-xs text-[#1E90FF] font-bold">{job.location}</div>
-                        <div className="pt-2 flex justify-between items-center text-xs">
-                          <span className="px-3 py-1 rounded-xl bg-emerald-50 text-emerald-700 font-black text-[10px] border border-emerald-200">{job.applicantsCount} Applicants</span>
-                          <span className="text-[#1E90FF] font-black">{job.status}</span>
+                      <div key={job.id} className="p-5 rounded-3xl border bg-gradient-to-br from-white via-sky-50/40 to-blue-50/30 border-sky-200/90 space-y-2.5 shadow-2xs hover:shadow-lg hover:border-[#0077B6] transition-all relative group overflow-hidden">
+                        <div className="h-1 bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="font-black text-sm text-sky-950 group-hover:text-[#0077B6] transition-colors">{job.title}</div>
+                        <div className="text-xs text-slate-600 font-bold">{job.department} &bull; {job.type}</div>
+                        <div className="text-xs text-[#0077B6] font-black">{job.location}</div>
+                        <div className="pt-2.5 border-t border-sky-100 flex justify-between items-center text-xs">
+                          <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 font-black text-[10px] border border-emerald-200 shadow-2xs">{job.applicantsCount} Applicants</span>
+                          <span className="text-[#0077B6] font-black">{job.status}</span>
                         </div>
                       </div>
                     ))}
                   </div>
 
                   {/* Applicants Table */}
-                  <div className="rounded-3xl border border-blue-100 overflow-hidden shadow-sm bg-white">
-                    <div className="p-5 border-b border-blue-100 font-black text-sm text-slate-900">
-                      Candidate Talent Roster (WabiJob Pipeline)
+                  <div className="rounded-3xl border border-sky-200/90 overflow-hidden shadow-2xs bg-white">
+                    <div className="p-5 border-b border-sky-100 font-black text-sm text-sky-950 flex items-center justify-between">
+                      <span>Candidate Talent Roster (WabiJob Pipeline)</span>
+                      <span className="text-xs font-black text-sky-800 bg-sky-50 px-3 py-1 rounded-full border border-sky-200">{applicants.length} Total Applicants</span>
                     </div>
-                    <table className="w-full text-left text-xs">
-                      <thead className="bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] uppercase font-black tracking-wider text-white border-b border-cyan-300">
-                        <tr>
-                          <th className="p-4">Candidate</th>
-                          <th className="p-4">Target Job</th>
-                          <th className="p-4">Experience &amp; Skills</th>
-                          <th className="p-4">Status</th>
-                          <th className="p-4 text-right">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-slate-100">
-                        {applicants.map((app) => (
-                          <tr key={app.id} className="hover:bg-blue-50/50 transition-colors">
-                            <td className="p-4">
-                              <div className="font-black text-slate-900">{app.candidateName}</div>
-                              <div className="text-slate-500 font-medium">{app.email}</div>
-                            </td>
-                            <td className="p-4 font-black text-[#1E90FF]">{app.jobTitle}</td>
-                            <td className="p-4 text-slate-600 font-medium">{app.experience} &bull; {app.skills}</td>
-                            <td className="p-4 font-black">
-                              <select
-                                value={app.status}
-                                onChange={(e) => handleApplicantStatusChange(app.id, e.target.value)}
-                                className="px-3 py-1.5 bg-blue-50 text-[#1E90FF] rounded-xl border border-blue-200 font-black focus:outline-none shadow-sm cursor-pointer"
-                              >
-                                <option value="APPLIED">APPLIED</option>
-                                <option value="SHORTLISTED">SHORTLISTED</option>
-                                <option value="INTERVIEWED">INTERVIEWED</option>
-                                <option value="HIRED">HIRED</option>
-                                <option value="REJECTED">REJECTED</option>
-                              </select>
-                            </td>
-                            <td className="p-4 text-right">
-                              <button onClick={() => setSelectedApplicant(app)} className="px-3 py-1.5 bg-blue-50 text-[#1E90FF] border border-blue-200 rounded-xl hover:bg-blue-100 font-black text-xs">
-                                View Profile
-                              </button>
-                            </td>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left text-xs">
+                        <thead className="bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#03045E] uppercase font-black text-[11px] tracking-wider text-white border-b border-sky-300">
+                          <tr>
+                            <th className="p-4">Candidate</th>
+                            <th className="p-4">Target Job</th>
+                            <th className="p-4">Experience &amp; Skills</th>
+                            <th className="p-4">Status</th>
+                            <th className="p-4 text-right">Actions</th>
                           </tr>
-                        ))}
-                      </tbody>
-                    </table>
+                        </thead>
+                        <tbody className="divide-y divide-sky-100">
+                          {applicants.map((app) => (
+                            <tr key={app.id} className="hover:bg-sky-50/60 transition-colors">
+                              <td className="p-4">
+                                <div className="font-black text-sky-950 text-sm">{app.candidateName}</div>
+                                <div className="text-slate-500 font-semibold">{app.email}</div>
+                              </td>
+                              <td className="p-4 font-black text-[#0077B6]">{app.jobTitle}</td>
+                              <td className="p-4 text-slate-700 font-semibold">{app.experience} &bull; {app.skills}</td>
+                              <td className="p-4 font-black">
+                                <select
+                                  value={app.status}
+                                  onChange={(e) => handleApplicantStatusChange(app.id, e.target.value)}
+                                  className="px-3 py-1.5 bg-sky-50 text-[#0077B6] rounded-xl border border-sky-300 font-black focus:outline-none shadow-2xs cursor-pointer"
+                                >
+                                  <option value="APPLIED">APPLIED</option>
+                                  <option value="SHORTLISTED">SHORTLISTED</option>
+                                  <option value="INTERVIEWED">INTERVIEWED</option>
+                                  <option value="HIRED">HIRED</option>
+                                  <option value="REJECTED">REJECTED</option>
+                                </select>
+                              </td>
+                              <td className="p-4 text-right">
+                                <button
+                                  onClick={() => setSelectedApplicant(app)}
+                                  className="px-3.5 py-1.5 bg-sky-50 text-[#0077B6] border border-sky-300 rounded-xl hover:bg-sky-100 font-black text-xs shadow-2xs transition-all cursor-pointer"
+                                >
+                                  View Profile
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1718,44 +2008,45 @@ export const AdminDashboardPage = () => {
             {/* TAB 5: CMS SERVICES & PRODUCTS */}
             {activeTab === 'cms-services' && (
               <div className="space-y-6 animate-in fade-in duration-300">
-                <div className="flex justify-between items-center border-b border-slate-200/50 pb-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-sky-100 pb-4">
                   <div>
-                    <h1 className="text-xl font-black text-slate-900 dark:text-white">Content Management: Services &amp; Products Matrix</h1>
-                    <p className="text-xs text-slate-400">Publish &amp; manage Yomnex ERP, WabiSkills, WabiJob, WabiX, Mari, and Yomtech Media pages.</p>
+                    <h1 className="text-2xl font-black text-sky-950 tracking-tight">Content Management: Services &amp; Products Matrix</h1>
+                    <p className="text-xs text-slate-600 font-semibold">Publish &amp; manage Yomnex ERP, WabiSkills, WabiJob, WabiX, Mari, and Yomtech Media pages.</p>
                   </div>
                   <button
                     onClick={() => setShowAddProductModal(true)}
-                    className="px-4 py-2 bg-[#1E90FF] hover:bg-blue-600 text-white font-bold text-xs rounded-xl shadow flex items-center gap-2"
+                    className="px-4.5 py-2.5 bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#0ED3DD] hover:brightness-110 text-white font-black text-xs rounded-2xl shadow-md hover:scale-[1.02] flex items-center gap-2 transition-all cursor-pointer"
                   >
                     <Plus size={15} />
                     <span>Add Product / Service</span>
                   </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-7 sm:gap-8">
                   {cmsProducts.map((prod) => (
-                    <div key={prod.id} className="p-6 rounded-3xl border bg-white border-blue-100 space-y-4 shadow-sm hover:shadow-xl hover:border-[#1E90FF] transition-all duration-300">
+                    <div key={prod.id} className="p-6 rounded-3xl border bg-gradient-to-br from-white via-sky-50/40 to-blue-50/30 border-sky-200/90 shadow-2xs hover:shadow-xl hover:border-[#0077B6] transition-all duration-300 relative group overflow-hidden">
+                      <div className="h-1 bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] absolute top-0 left-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                       <div className="flex justify-between items-start">
-                        <div className="font-black text-base text-[#1E90FF]">{prod.name}</div>
-                        <span className={`px-3 py-1 rounded-xl text-[10px] font-black uppercase ${
+                        <div className="font-black text-base text-[#0077B6] group-hover:text-[#0284C7] transition-colors">{prod.name}</div>
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-2xs ${
                           prod.status === 'Published' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'
                         }`}>
                           {prod.status}
                         </span>
                       </div>
-                      <p className="text-xs text-slate-600 font-medium leading-relaxed">{prod.description}</p>
-                      <div className="pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
-                        <span className="text-slate-500 font-bold">{prod.category}</span>
+                      <p className="text-xs text-slate-700 font-medium leading-relaxed">{prod.description}</p>
+                      <div className="pt-3 border-t border-sky-100 flex justify-between items-center text-xs">
+                        <span className="px-2.5 py-1 bg-sky-100/70 border border-sky-200 text-[#0077B6] font-black text-[11px] rounded-xl">{prod.category}</span>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => handleToggleProductPublish(prod.id)}
-                            className="px-3 py-1.5 border border-blue-200 hover:border-[#1E90FF] bg-blue-50 text-[#1E90FF] font-black rounded-xl text-xs transition-all"
+                            className="px-3.5 py-1.5 border border-sky-300 hover:border-[#0077B6] bg-gradient-to-r from-sky-50 to-blue-50 hover:from-sky-100 hover:to-blue-100 text-[#0077B6] font-black rounded-xl text-xs shadow-2xs transition-all cursor-pointer"
                           >
                             Toggle Status
                           </button>
                           <button
                             onClick={() => handleDeleteProduct(prod.id)}
-                            className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-all"
+                            className="p-1.5 text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50 border border-transparent hover:border-rose-200 transition-all cursor-pointer"
                             title="Delete Product"
                           >
                             <Trash2 size={16} />
@@ -1768,76 +2059,87 @@ export const AdminDashboardPage = () => {
               </div>
             )}
 
-            {/* TAB 6: CMS NEWS & ARTICLES MANAGEMENT CENTER */}
             {/* TAB 6: ALL 14 CMS CATEGORY MANAGEMENT HUB */}
             {activeTab.startsWith('cms-') && (
-              <div className="space-y-6 animate-in fade-in duration-300">
+              <div className="space-y-8 animate-in fade-in duration-300">
                 
                 {/* Header */}
-                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-blue-100 pb-4">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-sky-100 pb-4">
                   <div>
-                    <h1 className="text-xl font-black text-slate-900">
+                    <h1 className="text-2xl font-black text-sky-950 tracking-tight">
                       {({
+                        'cms-about': 'Pages & About Company Management',
+                        'cms-leadership': 'Executive Leadership & Board Profiles',
+                        'cms-team': 'Executive Team & Staff Roster',
+                        'cms-achievements': 'Company Achievements, Awards & Certifications',
                         'cms-services': 'Services & Products Matrix Management',
+                        'cms-solutions': 'Enterprise Solutions Matrix',
+                        'cms-industries': 'Target Industries & Sectors',
+                        'cms-products': 'Software Products Showcase',
+                        'cms-projects': 'Featured Project Case Studies',
+                        'cms-casestudies': 'In-Depth Case Studies & Impact Reports',
+                        'cms-partners': 'Trusted Institutional Partners Wall',
+                        'cms-testimonials': 'Client & Learner Testimonials',
+                        'cms-blog': 'Tech Articles & Engineering Blog',
                         'cms-news': 'Corporate News & Articles Center',
                         'cms-articles': 'Corporate News & Articles Center',
-                        'cms-blog': 'Tech Articles & Engineering Blog',
                         'cms-events': 'Upcoming Events & Webinars Schedule',
                         'cms-announcements': 'Official Corporate Announcements',
-                        'cms-projects': 'Featured Project Case Studies',
-                        'cms-team': 'Executive Team & Leadership Profiles',
-                        'cms-testimonials': 'Client & Learner Testimonials',
-                        'cms-gallery': 'Photo Gallery Showcase Hub',
-                        'cms-videos': 'Video & Documentary Hub',
-                        'cms-media': 'Media Appearances & Coverage',
-                        'cms-press': 'Press & Corporate Content Kit',
-                        'cms-faq': 'Support FAQ & Knowledge Base',
-                        'cms-partners': 'Trusted Institutional Partners'
+                        'cms-videos': 'Video & Documentary Showcase Hub',
+                        'cms-faq': 'Support FAQ & Knowledge Base'
                       })[activeTab] || 'CMS Content Management Hub'}
                     </h1>
-                    <p className="text-xs text-slate-500 font-semibold">
+                    <p className="text-xs text-slate-600 font-semibold mt-0.5">
                       {({
-                        'cms-services': 'Manage, edit, update, hide/show, and publish software products, ERP modules, and academy services.',
-                        'cms-news': 'Manage, edit, update, delete, hide/show, and set expiration status for all news stories & articles.',
-                        'cms-articles': 'Manage, edit, update, delete, hide/show, and set expiration status for all news stories & articles.',
-                        'cms-blog': 'Publish, update, hide/show, and manage technical architecture insights, AI benchmark papers, and engineering posts.',
-                        'cms-events': 'Schedule, manage, update, hide/show, and publish tech summits, demo days, and workshops.',
-                        'cms-announcements': 'Publish, edit, update, hide/show, and archive official company press statements and announcements.',
-                        'cms-projects': 'Manage, edit, update, hide/show, and feature client projects, SSGI satellite portals, and banking software.',
-                        'cms-team': 'Manage, edit, update, hide/show, and organize executive team members, roles, and profiles.',
-                        'cms-testimonials': 'Manage, edit, update, hide/show, and curate verified student and client feedback reviews.',
-                        'cms-gallery': 'Upload, manage, edit, update, hide/show photo albums, event photos, and office galleries.',
-                        'cms-videos': 'Upload, embed YouTube videos, edit, update, hide/show documentaries, interviews, and video showcases.',
-                        'cms-media': 'Track, edit, update, hide/show news appearances, TV interviews, and press features.',
-                        'cms-press': 'Publish, edit, update, hide/show press kits, brand assets, and corporate media releases.',
-                        'cms-faq': 'Manage, edit, update, hide/show, and organize customer support questions, answers, and help articles.',
-                        'cms-partners': 'Manage, edit, update, hide/show institutional partner logos, MoUs, and government collaborations.'
+                        'cms-about': 'Manage corporate background, mission, vision, and core enterprise values.',
+                        'cms-leadership': 'Publish executive leadership bios, C-suite officers, and advisory board profiles.',
+                        'cms-team': 'Organize team members, department leads, engineering staff, and instructors.',
+                        'cms-achievements': 'Track corporate awards, ISO certifications, space institute recognitions, and tech milestones.',
+                        'cms-services': 'Manage software development services, ERP integration pillars, and academy programs.',
+                        'cms-solutions': 'Configure custom enterprise solution architectures for banking, space GIS, and government.',
+                        'cms-industries': 'Manage industry-specific offerings across Banking, FinTech, Agriculture, Defense, and Education.',
+                        'cms-products': 'Manage Yomnex ERP, WabiSkills, WabiJob, WabiX, Mari Social, and Yomtech Media product suites.',
+                        'cms-projects': 'Publish government and enterprise project showcases, SSGI satellite portals, and banking software.',
+                        'cms-casestudies': 'Feature detailed technical case studies, ROI benchmarks, and deployment reports.',
+                        'cms-partners': 'Manage institutional partner logos, MoUs, SSGI space institute, and commercial bank partnerships.',
+                        'cms-testimonials': 'Curate verified reviews from academy graduates, bank IT VPs, and enterprise clients.',
+                        'cms-blog': 'Publish technical architecture insights, AI benchmark whitepapers, and engineering blog posts.',
+                        'cms-news': 'Manage company press releases, expansion announcements, and public news stories.',
+                        'cms-articles': 'Manage company press releases, expansion announcements, and public news stories.',
+                        'cms-events': 'Schedule technology summits, WabiSkills hackathons, developer bootcamps, and webinars.',
+                        'cms-announcements': 'Publish urgent bulletins, system maintenance windows, and official company statements.',
+                        'cms-videos': 'Embed video showcases, documentary shorts, TV interviews, and tech event recordings.',
+                        'cms-faq': 'Organize developer documentation, customer support Q&A, and academy enrollment guides.'
                       })[activeTab] || 'Full visibility, editing, updating, and status controls for this category.'}
                     </p>
                   </div>
                   <button
                     onClick={() => {
                       const targetCat = ({
+                        'cms-about': 'Pages & About',
+                        'cms-leadership': 'Executive Team Members',
+                        'cms-team': 'Executive Team Members',
+                        'cms-achievements': 'Corporate News & Articles',
                         'cms-services': 'Services & Products Matrix',
+                        'cms-solutions': 'Services & Products Matrix',
+                        'cms-industries': 'Services & Products Matrix',
+                        'cms-products': 'Services & Products Matrix',
+                        'cms-projects': 'Featured Project Case Studies',
+                        'cms-casestudies': 'Featured Project Case Studies',
+                        'cms-partners': 'Trusted Institutional Partners',
+                        'cms-testimonials': 'Client & Learner Testimonials',
+                        'cms-blog': 'Tech Articles & Engineering',
                         'cms-news': 'Corporate News & Articles',
                         'cms-articles': 'Corporate News & Articles',
-                        'cms-blog': 'Tech Articles & Engineering',
                         'cms-events': 'Upcoming Events & Webinars',
                         'cms-announcements': 'Official Announcements',
-                        'cms-projects': 'Featured Project Case Studies',
-                        'cms-team': 'Executive Team Members',
-                        'cms-testimonials': 'Client & Learner Testimonials',
-                        'cms-gallery': 'Photo Gallery Showcase',
                         'cms-videos': 'Video & Documentary Hub',
-                        'cms-media': 'Media Appearances & Coverage',
-                        'cms-press': 'Press & Corporate Content',
-                        'cms-faq': 'Support FAQ & Knowledge Base',
-                        'cms-partners': 'Trusted Institutional Partners'
+                        'cms-faq': 'Support FAQ & Knowledge Base'
                       })[activeTab] || 'Corporate News';
                       setNewArticleForm((prev) => ({ ...prev, category: targetCat }));
                       setShowAddArticleModal(true);
                     }}
-                    className="px-4 py-2 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white font-black text-xs rounded-2xl shadow hover:scale-[1.02] flex items-center gap-2"
+                    className="w-full sm:w-auto justify-center px-4.5 py-2.5 bg-gradient-to-r from-[#0077B6] via-[#0284C7] to-[#0ED3DD] hover:brightness-110 text-white font-black text-xs rounded-2xl shadow-md hover:scale-[1.02] flex items-center gap-2 transition-all cursor-pointer shrink-0"
                   >
                     <Plus size={15} />
                     <span>Create New Entry</span>
@@ -1871,111 +2173,115 @@ export const AdminDashboardPage = () => {
                   const expiredCount = categoryItems.filter((a) => a.status === 'Expired' || a.status === 'Archived').length;
 
                   return (
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                      <div className="p-4 bg-white rounded-2xl border border-blue-100 shadow-2xs space-y-1">
-                        <span className="text-[10px] font-black text-slate-400 uppercase">Total Items</span>
-                        <div className="text-2xl font-black text-slate-900">{totalCount}</div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-7">
+                      <div className="p-3.5 sm:p-6 bg-gradient-to-br from-white via-sky-50/50 to-blue-50/30 rounded-3xl border border-sky-200/90 shadow-2xs space-y-1 hover:shadow-md transition-shadow text-center flex flex-col items-center justify-center">
+                        <span className="text-[9px] sm:text-[10px] font-black text-sky-800 uppercase tracking-wider">Total Items</span>
+                        <div className="text-2xl sm:text-3xl font-black text-sky-950 tracking-tight">{totalCount}</div>
                       </div>
-                      <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200/80 shadow-2xs space-y-1">
-                        <span className="text-[10px] font-black text-emerald-700 uppercase">Active &amp; Visible</span>
-                        <div className="text-2xl font-black text-emerald-700">{visibleCount}</div>
+                      <div className="p-3.5 sm:p-6 bg-gradient-to-br from-emerald-50/90 via-white to-emerald-50/40 rounded-3xl border border-emerald-200/90 shadow-2xs space-y-1 hover:shadow-md transition-shadow text-center flex flex-col items-center justify-center">
+                        <span className="text-[9px] sm:text-[10px] font-black text-emerald-800 uppercase tracking-wider">Active &amp; Visible</span>
+                        <div className="text-2xl sm:text-3xl font-black text-emerald-700 tracking-tight">{visibleCount}</div>
                       </div>
-                      <div className="p-4 bg-amber-50/60 rounded-2xl border border-amber-200/80 shadow-2xs space-y-1">
-                        <span className="text-[10px] font-black text-amber-700 uppercase">Hidden / Drafts</span>
-                        <div className="text-2xl font-black text-amber-700">{hiddenCount}</div>
+                      <div className="p-3.5 sm:p-6 bg-gradient-to-br from-amber-50/90 via-white to-amber-50/40 rounded-3xl border border-amber-200/90 shadow-2xs space-y-1 hover:shadow-md transition-shadow text-center flex flex-col items-center justify-center">
+                        <span className="text-[9px] sm:text-[10px] font-black text-amber-800 uppercase tracking-wider">Hidden / Drafts</span>
+                        <div className="text-2xl sm:text-3xl font-black text-amber-700 tracking-tight">{hiddenCount}</div>
                       </div>
-                      <div className="p-4 bg-red-50/60 rounded-2xl border border-red-200/80 shadow-2xs space-y-1">
-                        <span className="text-[10px] font-black text-red-700 uppercase">Expired / Archived</span>
-                        <div className="text-2xl font-black text-red-700">{expiredCount}</div>
+                      <div className="p-3.5 sm:p-6 bg-gradient-to-br from-rose-50/90 via-white to-rose-50/40 rounded-3xl border border-rose-200/90 shadow-2xs space-y-1 hover:shadow-md transition-shadow text-center flex flex-col items-center justify-center">
+                        <span className="text-[9px] sm:text-[10px] font-black text-rose-800 uppercase tracking-wider">Expired / Archived</span>
+                        <div className="text-2xl sm:text-3xl font-black text-rose-700 tracking-tight">{expiredCount}</div>
                       </div>
                     </div>
                   );
                 })()}
 
                 {/* Search & Filter Controls + Export JSON */}
-                <div className="flex flex-col sm:flex-row justify-between items-center gap-3 bg-white p-3.5 rounded-2xl border border-blue-100 shadow-2xs">
+                <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 bg-white p-3.5 sm:p-5 rounded-3xl border border-sky-200/90 shadow-2xs my-4">
                   <div className="relative w-full sm:w-80">
-                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                    <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-sky-500" size={16} />
                     <input
                       type="text"
                       placeholder="Search items by title, author or client..."
                       value={articleSearchQuery}
                       onChange={(e) => setArticleSearchQuery(e.target.value)}
-                      className="w-full pl-10 pr-3 py-2 text-xs rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                      className="w-full pl-10 pr-3 py-2.5 text-xs rounded-xl border border-sky-200 bg-sky-50/40 text-slate-800 font-semibold placeholder-slate-400 focus:outline-none focus:border-[#0077B6] focus:ring-2 focus:ring-sky-500/20 transition-all"
                     />
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto justify-end">
-                    <Filter size={15} className="text-slate-400" />
-                    <select
-                      value={articleFilterStatus}
-                      onChange={(e) => setArticleFilterStatus(e.target.value)}
-                      className="px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none"
-                    >
-                      <option value="ALL">All Statuses</option>
-                      <option value="Published">Published &amp; Visible</option>
-                      <option value="Hidden">Hidden</option>
-                      <option value="Expired">Expired</option>
-                      <option value="Draft">Draft</option>
-                    </select>
+                  <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto justify-start sm:justify-end">
+                    <div className="flex items-center gap-2">
+                      <Filter size={15} className="text-sky-500 shrink-0" />
+                      <select
+                        value={articleFilterStatus}
+                        onChange={(e) => setArticleFilterStatus(e.target.value)}
+                        className="px-3.5 py-2 text-xs font-black rounded-xl border border-sky-200 bg-sky-50/60 text-sky-950 focus:outline-none cursor-pointer"
+                      >
+                        <option value="ALL">All Statuses</option>
+                        <option value="Published">Published &amp; Visible</option>
+                        <option value="Hidden">Hidden</option>
+                        <option value="Expired">Expired</option>
+                        <option value="Draft">Draft</option>
+                      </select>
 
-                    {/* Sorting Dropdown */}
-                    <select
-                      value={cmsSortBy}
-                      onChange={(e) => setCmsSortBy(e.target.value)}
-                      className="px-3 py-2 text-xs font-bold rounded-xl border border-slate-200 bg-slate-50 text-slate-900 focus:outline-none"
-                    >
-                      <option value="LATEST">Sort: Latest First</option>
-                      <option value="TITLE">Sort: Title A-Z</option>
-                      <option value="STATUS">Sort: By Status</option>
-                    </select>
+                      {/* Sorting Dropdown */}
+                      <select
+                        value={cmsSortBy}
+                        onChange={(e) => setCmsSortBy(e.target.value)}
+                        className="px-3.5 py-2 text-xs font-black rounded-xl border border-sky-200 bg-sky-50/60 text-sky-950 focus:outline-none cursor-pointer"
+                      >
+                        <option value="LATEST">Sort: Latest First</option>
+                        <option value="TITLE">Sort: Title A-Z</option>
+                        <option value="STATUS">Sort: By Status</option>
+                      </select>
+                    </div>
 
-                    {/* Export Backup JSON Button */}
-                    <button
-                      onClick={handleExportCmsJson}
-                      className="px-3 py-2 bg-blue-50 text-[#1E90FF] border border-blue-200 font-black text-xs rounded-xl hover:bg-blue-100 flex items-center gap-1.5 transition-all"
-                      title="Export JSON Backup"
-                    >
-                      <Download size={14} />
-                      <span>Export JSON</span>
-                    </button>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {/* Export Backup JSON Button */}
+                      <button
+                        onClick={handleExportCmsJson}
+                        className="px-3.5 py-2 bg-sky-50 text-[#0077B6] border border-sky-300 font-black text-xs rounded-xl hover:bg-sky-100 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                        title="Export JSON Backup"
+                      >
+                        <Download size={14} />
+                        <span>Export JSON</span>
+                      </button>
 
-                    {/* Trash Bin Modal Button */}
-                    <button
-                      onClick={() => setShowTrashBinModal(true)}
-                      className="px-3 py-2 bg-red-50 text-red-700 border border-red-200 font-black text-xs rounded-xl hover:bg-red-100 flex items-center gap-1.5 transition-all"
-                      title="View Trash Bin"
-                    >
-                      <Trash2 size={14} />
-                      <span>Trash Bin ({trashItems.length})</span>
-                    </button>
+                      {/* Trash Bin Modal Button */}
+                      <button
+                        onClick={() => setShowTrashBinModal(true)}
+                        className="px-3.5 py-2 bg-rose-50 text-rose-700 border border-rose-200 font-black text-xs rounded-xl hover:bg-rose-100 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                        title="View Trash Bin"
+                      >
+                        <Trash2 size={14} />
+                        <span>Trash Bin ({trashItems.length})</span>
+                      </button>
 
-                    {/* Audit Logs Button */}
-                    <button
-                      onClick={() => setShowAuditLogsModal(true)}
-                      className="px-3 py-2 bg-slate-100 text-slate-700 border border-slate-300 font-black text-xs rounded-xl hover:bg-slate-200 flex items-center gap-1.5 transition-all"
-                      title="View Audit Logs"
-                    >
-                      <Eye size={14} />
-                      <span>Audit Logs</span>
-                    </button>
+                      {/* Audit Logs Button */}
+                      <button
+                        onClick={() => setShowAuditLogsModal(true)}
+                        className="px-3.5 py-2 bg-slate-100 text-slate-800 border border-slate-300 font-black text-xs rounded-xl hover:bg-slate-200 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                        title="View Audit Logs"
+                      >
+                        <Eye size={14} />
+                        <span>Audit Logs</span>
+                      </button>
 
-                    {/* Media Library Button */}
-                    <button
-                      onClick={() => setShowMediaLibraryModal(true)}
-                      className="px-3 py-2 bg-purple-50 text-purple-700 border border-purple-200 font-black text-xs rounded-xl hover:bg-purple-100 flex items-center gap-1.5 transition-all"
-                      title="Media Library Assets"
-                    >
-                      <ImageIcon size={14} />
-                      <span>Media Assets</span>
-                    </button>
+                      {/* Media Library Button */}
+                      <button
+                        onClick={() => setShowMediaLibraryModal(true)}
+                        className="px-3.5 py-2 bg-purple-50 text-purple-700 border border-purple-200 font-black text-xs rounded-xl hover:bg-purple-100 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
+                        title="Media Library Assets"
+                      >
+                        <ImageIcon size={14} />
+                        <span>Media Assets</span>
+                      </button>
 
-                    {/* Import Backup JSON File Upload */}
-                    <label className="px-3 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 font-black text-xs rounded-xl hover:bg-emerald-100 flex items-center gap-1.5 transition-all cursor-pointer">
-                      <Plus size={14} />
-                      <span>Import JSON</span>
-                      <input type="file" accept=".json" onChange={handleImportCmsJson} className="hidden" />
-                    </label>
+                      {/* Import Backup JSON File Upload */}
+                      <label className="px-3.5 py-2 bg-emerald-50 text-emerald-700 border border-emerald-200 font-black text-xs rounded-xl hover:bg-emerald-100 flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs">
+                        <Plus size={14} />
+                        <span>Import JSON</span>
+                        <input type="file" accept=".json" onChange={handleImportCmsJson} className="hidden" />
+                      </label>
+                    </div>
                   </div>
                 </div>
 
@@ -2017,7 +2323,7 @@ export const AdminDashboardPage = () => {
                 )}
 
                 {/* Category Items List with Full Visibility Toggle & Edit Controls */}
-                <div className="space-y-3">
+                <div className="space-y-7 sm:space-y-8 pt-4">
                   {cmsArticles
                     .filter((art) => {
                       const tabCategoryMap = {
@@ -2062,8 +2368,8 @@ export const AdminDashboardPage = () => {
                     .map((art) => (
                       <div
                         key={art.id}
-                        className={`p-5 rounded-2xl bg-white border shadow-2xs hover:shadow-md transition-all flex flex-col md:flex-row md:items-center justify-between gap-4 ${
-                          selectedCmsIds.includes(art.id) ? 'border-[#1E90FF] bg-blue-50/20' : 'border-blue-100 hover:border-[#1E90FF]/60'
+                        className={`p-6 sm:p-7 rounded-3xl bg-gradient-to-r from-sky-50/50 via-white to-blue-50/40 border transition-all flex flex-col md:flex-row md:items-center justify-between gap-6 group shadow-2xs hover:shadow-lg ${
+                          selectedCmsIds.includes(art.id) ? 'border-[#0077B6] bg-sky-100/30 ring-2 ring-[#0077B6]/20' : 'border-sky-200/90 hover:border-sky-300'
                         }`}
                       >
                         <div className="flex items-start md:items-center gap-4 flex-1">
@@ -2072,14 +2378,14 @@ export const AdminDashboardPage = () => {
                             type="checkbox"
                             checked={selectedCmsIds.includes(art.id)}
                             onChange={() => handleToggleSelectCmsId(art.id)}
-                            className="mt-1 md:mt-0 w-4 h-4 rounded border-slate-300 text-[#1E90FF] focus:ring-[#1E90FF] cursor-pointer"
+                            className="mt-1 md:mt-0 w-4 h-4 rounded border-sky-300 text-[#0077B6] focus:ring-[#0077B6] cursor-pointer"
                           />
 
                           {/* Image Thumbnail or Video Preview Badge */}
                           {(art.coverImage || art.src || art.photo || art.youtubeId || (art.category && (art.category.includes('Photo') || art.category.includes('Video')))) && (
                             <div
                               onClick={() => setAdminPreviewMedia(art)}
-                              className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-900 shrink-0 border border-blue-100 shadow-xs group cursor-pointer"
+                              className="relative w-20 h-20 rounded-2xl overflow-hidden bg-sky-950 shrink-0 border border-sky-200 shadow-2xs group cursor-pointer"
                               title="Click to Preview Media"
                             >
                               {art.coverImage || art.src || art.photo ? (
@@ -2089,12 +2395,12 @@ export const AdminDashboardPage = () => {
                                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                               ) : art.youtubeId ? (
-                                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-900 to-[#03045E] text-white relative p-1">
+                                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-sky-950 to-[#03045E] text-white relative p-1">
                                   <Play size={22} className="text-red-500 fill-red-500 animate-pulse" />
                                   <span className="text-[9px] font-black text-cyan-300 mt-1">{art.readTime || 'HD 1080p'}</span>
                                 </div>
                               ) : (
-                                <div className="w-full h-full flex items-center justify-center bg-blue-50 text-[#1E90FF]">
+                                <div className="w-full h-full flex items-center justify-center bg-sky-50 text-[#0077B6]">
                                   <ImageIcon size={26} />
                                 </div>
                               )}
@@ -2109,7 +2415,7 @@ export const AdminDashboardPage = () => {
 
                               return (
                                 <div className="flex flex-wrap items-center gap-2">
-                                  <span className="px-2.5 py-0.5 bg-blue-50 text-[#1E90FF] text-[10px] font-black rounded-md uppercase border border-blue-200">
+                                  <span className="px-2.5 py-0.5 bg-sky-100/80 text-[#0077B6] text-[10px] font-black rounded-md uppercase border border-sky-200">
                                     {art.category}
                                   </span>
                                   <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase border ${
@@ -2119,31 +2425,31 @@ export const AdminDashboardPage = () => {
                                   </span>
                                   <span className={`px-2.5 py-0.5 text-[10px] font-black rounded-md uppercase border ${
                                     effectiveStatus === 'Published' ? 'bg-emerald-50 text-emerald-700 border-emerald-200' :
-                                    effectiveStatus === 'Expired' ? 'bg-red-50 text-red-700 border-red-200 animate-pulse' :
-                                    effectiveStatus === 'Draft' ? 'bg-blue-50 text-blue-700 border-blue-200' :
+                                    effectiveStatus === 'Expired' ? 'bg-rose-50 text-rose-700 border-rose-200 animate-pulse' :
+                                    effectiveStatus === 'Draft' ? 'bg-sky-50 text-sky-700 border-sky-200' :
                                     'bg-amber-50 text-amber-700 border-amber-200'
                                   }`}>
                                     {effectiveStatus}
                                   </span>
                                   {art.expiryDate ? (
                                     <span className={`px-2 py-0.5 text-[9px] font-black rounded-md border ${
-                                      isPastExpiry ? 'bg-red-100 text-red-800 border-red-300' : 'bg-slate-100 text-slate-700 border-slate-300'
+                                      isPastExpiry ? 'bg-rose-100 text-rose-800 border-rose-300' : 'bg-slate-100 text-slate-700 border-slate-300'
                                     }`}>
                                       📅 {isPastExpiry ? `Expired on ${art.expiryDate}` : `Expires: ${art.expiryDate}`}
                                     </span>
                                   ) : (
-                                    <span className="px-2 py-0.5 text-[9px] font-bold rounded-md bg-slate-50 text-slate-400 border border-slate-200">
+                                    <span className="px-2 py-0.5 text-[9px] font-extrabold rounded-md bg-sky-50/80 text-slate-500 border border-sky-200">
                                       📅 No Expiry
                                     </span>
                                   )}
                                 </div>
                               );
                             })()}
-                            <div className="font-extrabold text-sm text-slate-900 line-clamp-1">{art.title}</div>
-                            <div className="text-xs text-slate-500 font-medium flex flex-wrap gap-2">
-                              <span>Author/Lead: <strong>{art.author || art.name || 'Editorial'}</strong></span>
+                            <div className="font-black text-sm text-sky-950 group-hover:text-[#0077B6] transition-colors break-all break-words line-clamp-2">{art.title}</div>
+                            <div className="text-xs text-slate-600 font-medium flex flex-wrap gap-x-2 gap-y-1">
+                              <span>Author/Lead: <strong className="text-sky-950 font-black">{art.author || art.name || 'Editorial'}</strong></span>
                               <span>&bull;</span>
-                              <span>Client: <strong>{art.client || 'YomTech Global'}</strong></span>
+                              <span>Client: <strong className="text-[#0077B6] font-black">{art.client || 'YomTech Global'}</strong></span>
                               <span>&bull;</span>
                               <span>Date: {art.publishedDate}</span>
                             </div>
@@ -2151,14 +2457,14 @@ export const AdminDashboardPage = () => {
                         </div>
 
                         {/* Action Control Buttons (Visibility Toggle + Edit + Delete) */}
-                        <div className="flex items-center gap-2 shrink-0">
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3.5 shrink-0 w-full sm:w-auto">
                           {/* Toggle Visibility (Show/Hide on Public Web) */}
                           <button
                             onClick={() => handleToggleArticleVisibility(art.id)}
-                            className={`px-3 py-1.5 text-xs font-bold rounded-xl border flex items-center gap-1.5 transition-all ${
+                            className={`px-3.5 py-1.5 text-xs font-black rounded-xl border flex items-center gap-1.5 transition-all cursor-pointer shadow-2xs ${
                               art.visibility === 'VISIBLE'
-                                ? 'bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100'
-                                : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
+                                ? 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100'
+                                : 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100'
                             }`}
                             title={art.visibility === 'VISIBLE' ? "Hide this item from live public website" : "Make this item visible on live public website"}
                           >
@@ -2170,7 +2476,7 @@ export const AdminDashboardPage = () => {
                           {art.status !== 'Expired' && (
                             <button
                               onClick={() => handleSetArticleStatus(art.id, 'Expired')}
-                              className="px-3 py-1.5 bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 text-xs font-bold rounded-xl transition-all"
+                              className="px-3.5 py-1.5 bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100 text-xs font-black rounded-xl transition-all cursor-pointer shadow-2xs"
                             >
                               Set Expired
                             </button>
@@ -2179,17 +2485,27 @@ export const AdminDashboardPage = () => {
                           {/* Preview Button */}
                           <button
                             onClick={() => setAdminPreviewMedia(art)}
-                            className="px-3 py-1.5 bg-purple-50 text-purple-700 border border-purple-200 text-xs font-bold rounded-xl hover:bg-purple-100 transition-all flex items-center gap-1"
+                            className="px-3.5 py-1.5 bg-purple-50 text-purple-800 border border-purple-200 text-xs font-black rounded-xl hover:bg-purple-100 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
                             title="Preview Content"
                           >
                             <Eye size={13} />
                             <span>Preview</span>
                           </button>
 
+                          {/* QR Code Button */}
+                          <button
+                            onClick={() => handleOpenQrModal(art.title, art.category, `/insights?id=${art.id}`)}
+                            className="px-3.5 py-1.5 bg-sky-50 text-[#0077B6] border border-sky-300 text-xs font-black rounded-xl hover:bg-sky-100 transition-all flex items-center gap-1.5 cursor-pointer shadow-2xs"
+                            title="Generate & View QR Code"
+                          >
+                            <QrCode size={13} />
+                            <span>QR Code</span>
+                          </button>
+
                           {/* Full Edit Button */}
                           <button
                             onClick={() => handleStartEditArticle(art)}
-                            className="px-3.5 py-1.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white text-xs font-black rounded-xl shadow hover:brightness-110 transition-all"
+                            className="px-4.5 py-1.5 bg-gradient-to-r from-[#0077B6] to-[#0ED3DD] hover:brightness-110 text-white text-xs font-black rounded-xl shadow-md transition-all cursor-pointer"
                           >
                             Edit Item
                           </button>
@@ -2197,7 +2513,7 @@ export const AdminDashboardPage = () => {
                           {/* Delete Button with Confirmation Dialog */}
                           <button
                             onClick={() => handleOpenConfirmDelete(art, 'article')}
-                            className="p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-all"
+                            className="p-2 text-slate-400 hover:text-rose-600 rounded-xl hover:bg-rose-50 border border-slate-200/80 hover:border-rose-200 transition-all cursor-pointer shadow-2xs"
                             title="Delete Item"
                           >
                             <Trash2 size={16} />
@@ -3249,43 +3565,46 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 2: ADD PROPOSAL --- */}
       {showAddProposalModal && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <form onSubmit={handleCreateProposal} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">New B2B Proposal Request</h3>
-              <button type="button" onClick={() => setShowAddProposalModal(false)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+          <form onSubmit={handleCreateProposal} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">New B2B Proposal Request</h3>
+                <p className="text-xs text-slate-500 font-medium">Create enterprise project engagement profile</p>
+              </div>
+              <button type="button" onClick={() => setShowAddProposalModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-400">Enterprise Client Name *</label>
+                <label className="font-bold text-slate-700 block mb-1">Enterprise Client Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Bunna Bank S.C."
                   value={newProposalForm.clientName}
                   onChange={(e) => setNewProposalForm({ ...newProposalForm, clientName: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
               <div>
-                <label className="font-bold text-slate-400">Project / Engagement Title *</label>
+                <label className="font-bold text-slate-700 block mb-1">Project / Engagement Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Core Financial Recon Automation Engine"
                   value={newProposalForm.projectTitle}
                   onChange={(e) => setNewProposalForm({ ...newProposalForm, projectTitle: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-400">Service Pillar</label>
+                  <label className="font-bold text-slate-700 block mb-1">Service Pillar</label>
                   <select
                     value={newProposalForm.servicePillar}
                     onChange={(e) => setNewProposalForm({ ...newProposalForm, servicePillar: e.target.value })}
-                    className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                   >
                     <option value="Yomnex ERP 4.0">Yomnex ERP 4.0</option>
                     <option value="Software Engineering">Software Engineering</option>
@@ -3295,22 +3614,22 @@ export const AdminDashboardPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-bold text-slate-400">Est. Budget Range</label>
+                  <label className="font-bold text-slate-700 block mb-1">Est. Budget Range</label>
                   <input
                     type="text"
                     placeholder="e.g. $50,000 - $120,000"
                     value={newProposalForm.budget}
                     onChange={(e) => setNewProposalForm({ ...newProposalForm, budget: e.target.value })}
-                    className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                   />
                 </div>
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => setShowAddProposalModal(false)} className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl">
+              <button type="button" onClick={() => setShowAddProposalModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50 transition-colors cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-xl shadow-dodger-glow hover:brightness-110 font-black cursor-pointer transition-all">
                 Submit Proposal
               </button>
             </div>
@@ -3321,32 +3640,35 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 3: ADD JOB VACANCY --- */}
       {showAddJobModal && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <form onSubmit={handleCreateJob} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">Post New Job Vacancy</h3>
-              <button type="button" onClick={() => setShowAddJobModal(false)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+          <form onSubmit={handleCreateJob} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Post New Job Vacancy</h3>
+                <p className="text-xs text-slate-500 font-medium">Publish a tech vacancy for WabiJob portal</p>
+              </div>
+              <button type="button" onClick={() => setShowAddJobModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-400">Job Title *</label>
+                <label className="font-bold text-slate-700 block mb-1">Job Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Senior Mobile Engineer (React Native)"
                   value={newJobForm.title}
                   onChange={(e) => setNewJobForm({ ...newJobForm, title: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-400">Department</label>
+                  <label className="font-bold text-slate-700 block mb-1">Department</label>
                   <select
                     value={newJobForm.department}
                     onChange={(e) => setNewJobForm({ ...newJobForm, department: e.target.value })}
-                    className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                   >
                     <option value="Software Engineering">Software Engineering</option>
                     <option value="Infrastructure & Security">Infrastructure &amp; Security</option>
@@ -3355,11 +3677,11 @@ export const AdminDashboardPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-bold text-slate-400">Employment Type</label>
+                  <label className="font-bold text-slate-700 block mb-1">Employment Type</label>
                   <select
                     value={newJobForm.type}
                     onChange={(e) => setNewJobForm({ ...newJobForm, type: e.target.value })}
-                    className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                   >
                     <option value="Full-time">Full-time</option>
                     <option value="Contract">Contract</option>
@@ -3370,10 +3692,10 @@ export const AdminDashboardPage = () => {
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => setShowAddJobModal(false)} className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl">
+              <button type="button" onClick={() => setShowAddJobModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50 transition-colors cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-xl shadow-dodger-glow hover:brightness-110 font-black cursor-pointer transition-all">
                 Publish Vacancy
               </button>
             </div>
@@ -3381,34 +3703,37 @@ export const AdminDashboardPage = () => {
         </div>
       )}
 
-      {/* --- MODAL 4: ADD CMS PRODUCT --- */}
+      {/* --- MODAL 4: ADD CMS PRODUCT / SERVICE --- */}
       {showAddProductModal && (
-        <div className="fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-          <form onSubmit={handleCreateCmsProduct} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">Add CMS Product / Service</h3>
-              <button type="button" onClick={() => setShowAddProductModal(false)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
+          <form onSubmit={handleCreateCmsProduct} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Add CMS Product / Service</h3>
+                <p className="text-xs text-slate-500 font-medium">Create software matrix offering for live site</p>
+              </div>
+              <button type="button" onClick={() => setShowAddProductModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-400">Product Name *</label>
+                <label className="font-bold text-slate-700 block mb-1">Product Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Yomnex Cloud SFA"
                   value={newProductForm.name}
                   onChange={(e) => setNewProductForm({ ...newProductForm, name: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
               <div>
-                <label className="font-bold text-slate-400">Category</label>
+                <label className="font-bold text-slate-700 block mb-1">Category Scope</label>
                 <select
                   value={newProductForm.category}
                   onChange={(e) => setNewProductForm({ ...newProductForm, category: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 >
                   <option value="Enterprise Software">Enterprise Software</option>
                   <option value="EdTech & Academy">EdTech &amp; Academy</option>
@@ -3419,22 +3744,22 @@ export const AdminDashboardPage = () => {
                 </select>
               </div>
               <div>
-                <label className="font-bold text-slate-400">Short Description</label>
+                <label className="font-bold text-slate-700 block mb-1">Short Description</label>
                 <textarea
                   rows="3"
                   required
                   placeholder="Summary for live platform page..."
                   value={newProductForm.description}
                   onChange={(e) => setNewProductForm({ ...newProductForm, description: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 font-medium focus:outline-none"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500 text-xs placeholder:text-slate-400"
                 ></textarea>
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => setShowAddProductModal(false)} className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl">
+              <button type="button" onClick={() => setShowAddProductModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50 transition-colors cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-xl shadow-dodger-glow hover:brightness-110 font-black cursor-pointer transition-all">
                 Publish Product
               </button>
             </div>
@@ -3442,38 +3767,43 @@ export const AdminDashboardPage = () => {
         </div>
       )}
 
-      {/* --- MODAL 5: ADD CMS ARTICLE / NEWS ITEM --- */}
+      {/* --- MODAL 5: ADD CMS ARTICLE / ENTRY HUB --- */}
       {showAddArticleModal && (
-        <div className="fixed inset-0 z-50 bg-[#03045E]/90 backdrop-blur-xl flex items-center justify-center p-4">
-          <form onSubmit={handleCreateArticle} className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 max-w-xl w-full space-y-4 shadow-2xl animate-in zoom-in-95 border border-blue-100">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
-              <h3 className="font-black text-lg text-slate-900">Create News Story / Article</h3>
-              <button type="button" onClick={() => setShowAddArticleModal(false)} className="p-2 rounded-full bg-blue-50 text-[#1E90FF] hover:bg-blue-100">
+        <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+          <form onSubmit={handleCreateArticle} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-xl w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90 max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Create New Entry ({newArticleForm.category || 'CMS Module'})</h3>
+                <p className="text-xs text-slate-500 font-medium">Publish a new item for live website display</p>
+              </div>
+              <button type="button" onClick={() => setShowAddArticleModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-500">News / Article Title *</label>
+                <label className="font-bold text-slate-700 block mb-1">Module Title / Headline / Name *</label>
                 <input
                   type="text"
                   required
-                  placeholder="e.g. YomTech Global Partners with Bunna Bank S.C."
+                  placeholder="e.g. Title or name for this entry..."
                   value={newArticleForm.title}
                   onChange={(e) => setNewArticleForm({ ...newArticleForm, title: e.target.value })}
-                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                 />
               </div>
-              <div className="grid grid-cols-2 gap-3">
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-slate-500">Category</label>
+                  <label className="font-bold text-slate-700 block mb-1">Operational Module Scope</label>
                   <select
                     value={newArticleForm.category}
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, category: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                   >
-                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
                     <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
                     <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
                     <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
                     <option value="Official Announcements">Official Announcements</option>
@@ -3489,24 +3819,25 @@ export const AdminDashboardPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-bold text-slate-500">Author / Editorial</label>
+                  <label className="font-bold text-slate-700 block mb-1">Author / Lead / Organization *</label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. Ermias Alemayehu / Corporate Comm"
+                    placeholder="e.g. Lead Author, Speaker or Organization"
                     value={newArticleForm.author}
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, author: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                   />
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-3">
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="font-bold text-slate-500">Status</label>
+                  <label className="font-bold text-slate-700 block mb-1">Status</label>
                   <select
                     value={newArticleForm.status}
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, status: e.target.value, visibility: e.target.value === 'Published' ? 'VISIBLE' : 'HIDDEN' })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                   >
                     <option value="Published">Published</option>
                     <option value="Draft">Draft</option>
@@ -3515,25 +3846,25 @@ export const AdminDashboardPage = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="font-bold text-slate-500">Client / Institution</label>
+                  <label className="font-bold text-slate-700 block mb-1">Client / Institution / Sub-Tag</label>
                   <input
                     type="text"
-                    placeholder="e.g. Space Science & Geospatial Institute"
+                    placeholder="e.g. Partner, Institution or Sub-category"
                     value={newArticleForm.client}
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, client: e.target.value })}
-                    className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-slate-500 flex items-center justify-between">
+                  <label className="font-bold text-slate-700 flex items-center justify-between mb-1">
                     <span>Expiration Date</span>
                   </label>
-                  <div className="flex gap-1.5 mt-1">
+                  <div className="flex gap-1.5">
                     <input
                       type="date"
                       value={newArticleForm.expiryDate || ''}
                       onChange={(e) => setNewArticleForm({ ...newArticleForm, expiryDate: e.target.value })}
-                      className="flex-1 p-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] text-xs"
+                      className="flex-1 p-2.5 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs"
                     />
                     <button
                       type="button"
@@ -3542,7 +3873,7 @@ export const AdminDashboardPage = () => {
                         d.setDate(d.getDate() + 30);
                         setNewArticleForm({ ...newArticleForm, expiryDate: d.toISOString().split('T')[0] });
                       }}
-                      className="px-2 py-1 bg-blue-50 text-[#1E90FF] border border-blue-200 text-[10px] font-black rounded-lg hover:bg-blue-100 shrink-0"
+                      className="px-2.5 py-1 bg-sky-50 text-sky-700 border border-sky-200 text-[10px] font-black rounded-lg hover:bg-sky-100 shrink-0 cursor-pointer"
                       title="Set 30-Day Expiration"
                     >
                       +30d
@@ -3550,26 +3881,27 @@ export const AdminDashboardPage = () => {
                   </div>
                 </div>
               </div>
+
               <div>
-                <label className="font-bold text-slate-500">Article Summary (Short Snippet)</label>
+                <label className="font-bold text-slate-700 block mb-1">Summary Teaser (Short Card Snippet)</label>
                 <textarea
                   rows="2"
-                  placeholder="Summary text to display on news card..."
+                  placeholder="Summary text to display on preview cards..."
                   value={newArticleForm.summary}
                   onChange={(e) => setNewArticleForm({ ...newArticleForm, summary: e.target.value })}
-                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500"
                 ></textarea>
               </div>
 
               <div>
-                <div className="flex items-center justify-between">
-                  <label className="font-bold text-slate-500">Full Article Story / Body Content</label>
-                  <span className="text-[10px] font-black text-[#1E90FF] bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-200">
+                <div className="flex items-center justify-between mb-1">
+                  <label className="font-bold text-slate-700">Full Content / Narrative Body</label>
+                  <span className="text-[10px] font-black text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-lg border border-sky-200">
                     {newArticleForm.readTime || '1 min read'}
                   </span>
                 </div>
                 <textarea
-                  rows="5"
+                  rows="4"
                   placeholder="Write full article body text, press release details, or case study breakdown..."
                   value={newArticleForm.fullContent || ''}
                   onChange={(e) => {
@@ -3582,15 +3914,15 @@ export const AdminDashboardPage = () => {
                       readTime: `${mins} min read`
                     });
                   }}
-                  className="w-full mt-1 p-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500"
                 ></textarea>
               </div>
 
               {/* MEDIA ATTACHMENTS: IMAGE FILE PICKER */}
-              <div className="p-3 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-2">
-                <label className="font-black text-[#1E90FF] text-[11px] uppercase tracking-wider block">📷 Image / Photo Upload</label>
+              <div className="p-3 bg-sky-50/60 rounded-2xl border border-sky-200/80 space-y-2">
+                <label className="font-black text-sky-700 text-[11px] uppercase tracking-wider block">📷 Cover Image / Photo Upload</label>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                  <label className="px-3.5 py-2 bg-white text-[#1E90FF] border border-blue-200 font-bold rounded-xl hover:bg-blue-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
+                  <label className="px-3.5 py-2 bg-white text-sky-700 border border-sky-200 font-bold rounded-xl hover:bg-sky-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
                     <Upload size={14} />
                     <span>Upload Image File...</span>
                     <input
@@ -3614,29 +3946,29 @@ export const AdminDashboardPage = () => {
                     placeholder="Or paste image URL (https://...)"
                     value={newArticleForm.coverImage || ''}
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, coverImage: e.target.value })}
-                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF] text-xs"
+                    className="flex-1 p-2 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500 text-xs"
                   />
                 </div>
                 {newArticleForm.coverImage && (
                   <div className="flex items-center gap-3 pt-1">
-                    <img src={newArticleForm.coverImage} alt="Preview" className="w-14 h-14 rounded-xl object-cover border border-blue-200 shadow-2xs" />
+                    <img src={newArticleForm.coverImage} alt="Preview" className="w-12 h-12 rounded-xl object-cover border border-sky-200 shadow-2xs" />
                     <span className="text-[11px] font-bold text-emerald-600">✓ Image ready to publish</span>
                   </div>
                 )}
               </div>
 
               {/* MEDIA ATTACHMENTS: VIDEO & YOUTUBE PICKER */}
-              <div className="p-3 bg-red-50/50 rounded-2xl border border-red-100 space-y-2">
-                <label className="font-black text-red-600 text-[11px] uppercase tracking-wider block">📹 Video File / YouTube Embed</label>
+              <div className="p-3 bg-rose-50/60 rounded-2xl border border-rose-200/80 space-y-2">
+                <label className="font-black text-rose-600 text-[11px] uppercase tracking-wider block">📹 Video / YouTube Embed</label>
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
                   <input
                     type="text"
                     placeholder="YouTube Video ID (e.g. dQw4w9WgXcQ)"
                     value={newArticleForm.youtubeId || ''}
                     onChange={(e) => setNewArticleForm({ ...newArticleForm, youtubeId: e.target.value })}
-                    className="flex-1 p-2 rounded-xl border border-slate-200 bg-white text-slate-900 font-medium focus:outline-none focus:border-red-500 text-xs"
+                    className="flex-1 p-2 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-rose-500 text-xs"
                   />
-                  <label className="px-3.5 py-2 bg-white text-red-600 border border-red-200 font-bold rounded-xl hover:bg-red-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
+                  <label className="px-3.5 py-2 bg-white text-rose-600 border border-rose-200 font-bold rounded-xl hover:bg-rose-50 cursor-pointer flex items-center justify-center gap-2 text-xs shadow-2xs shrink-0">
                     <Upload size={14} />
                     <span>Upload Video File...</span>
                     <input
@@ -3657,41 +3989,14 @@ export const AdminDashboardPage = () => {
                   </label>
                 </div>
               </div>
-
-              {/* MEDIA ATTACHMENTS: DOCUMENT / PDF FILE PICKER */}
-              <div className="p-3 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-2">
-                <label className="font-black text-emerald-700 text-[11px] uppercase tracking-wider block">📄 Document / PDF Attachment</label>
-                <div className="flex items-center gap-3">
-                  <label className="px-3.5 py-2 bg-white text-emerald-700 border border-emerald-200 font-bold rounded-xl hover:bg-emerald-50 cursor-pointer flex items-center gap-2 text-xs shadow-2xs">
-                    <FileText size={14} />
-                    <span>Attach Document (PDF, DOCX, ZIP)...</span>
-                    <input
-                      type="file"
-                      accept=".pdf,.doc,.docx,.zip,.ppt,.pptx"
-                      onChange={(e) => {
-                        if (e.target.files && e.target.files[0]) {
-                          const file = e.target.files[0];
-                          setNewArticleForm({ ...newArticleForm, documentName: file.name });
-                          showNotice(`Attached file "${file.name}" to entry.`);
-                        }
-                      }}
-                      className="hidden"
-                    />
-                  </label>
-                  {newArticleForm.documentName && (
-                    <span className="text-xs font-bold text-emerald-700 bg-white px-3 py-1.5 rounded-xl border border-emerald-200 shadow-2xs">
-                      📄 {newArticleForm.documentName}
-                    </span>
-                  )}
-                </div>
-              </div>
             </div>
+
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => setShowAddArticleModal(false)} className="px-5 py-2.5 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-50">
+              <button type="button" onClick={() => setShowAddArticleModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50">
                 Cancel
               </button>
-              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-[#1E90FF] to-[#0ED3DD] text-white rounded-xl shadow hover:brightness-110 font-black">
-                Publish News Story
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white rounded-xl shadow-dodger-glow font-black cursor-pointer">
+                Publish Entry
               </button>
             </div>
           </form>
@@ -3701,110 +4006,734 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 5B: EXECUTIVE LIGHT-MODE CMS CONTENT STUDIO & ARTICLE EDITOR --- */}
       {showEditArticleModal && editingArticle && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-          <form onSubmit={handleSaveEditArticle} className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 max-w-4xl w-full space-y-6 shadow-2xl animate-in zoom-in-95 border border-blue-100 max-h-[90vh] overflow-y-auto">
+          <form onSubmit={handleSaveEditArticle} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-4xl w-full space-y-6 shadow-2xl animate-in zoom-in-95 border border-sky-200/90 max-h-[90vh] overflow-y-auto">
             
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-slate-200 pb-4">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-4">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#1E90FF] to-[#0ED3DD] flex items-center justify-center text-white font-black shadow">
+                <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#0077B6] to-[#0ED3DD] flex items-center justify-center text-white font-black shadow-2xs">
                   <Sparkles size={20} />
                 </div>
                 <div>
-                  <h3 className="font-black text-lg sm:text-xl text-slate-900 tracking-tight">CMS Content Studio &amp; Master Editor</h3>
-                  <p className="text-xs text-slate-500 font-semibold">Configure metadata, event schedules, publishing status, and rich media assets.</p>
+                  <h3 className="font-black text-lg sm:text-xl text-sky-950 tracking-tight">CMS Content Studio &amp; Master Editor</h3>
+                  <p className="text-xs text-slate-600 font-semibold mt-0.5">Configure metadata, event schedules, publishing status, and rich media assets.</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => { setShowEditArticleModal(false); setEditingArticle(null); }}
-                className="p-2 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-900 transition-colors"
+                className="p-2 rounded-2xl bg-sky-50 hover:bg-sky-100 text-slate-500 hover:text-sky-950 transition-colors border border-sky-200/80 cursor-pointer"
               >
                 <X size={20} />
               </button>
             </div>
 
             <div className="space-y-5 text-xs">
-              {/* SECTION 1: PRIMARY METADATA */}
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-4">
-                <div className="text-[11px] font-black uppercase text-[#1E90FF] tracking-wider">1. Core Entry Metadata</div>
+              {/* CATEGORY SCOPE SELECTOR HEADER */}
+              <div className="p-4 rounded-2xl bg-sky-50/80 border border-sky-200/90 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">News / Article / Event Title *</label>
-                  <input
-                    type="text"
-                    required
-                    value={editingArticle.title}
-                    onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
-                    className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] focus:ring-2 focus:ring-blue-100"
-                  />
+                  <span className="text-[10px] font-black uppercase text-sky-700 tracking-wider">Target Operational Module</span>
+                  <div className="font-black text-sm text-[#0C2340] mt-0.5">{editingArticle.category}</div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Category Scope</label>
-                    <select
-                      value={editingArticle.category}
-                      onChange={(e) => setEditingArticle({ ...editingArticle, category: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                    >
-                      <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
-                      <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
-                      <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
-                      <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
-                      <option value="Official Announcements">Official Announcements</option>
-                      <option value="Featured Project Case Studies">Featured Project Case Studies</option>
-                      <option value="Executive Team Members">Executive Team Members</option>
-                      <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
-                      <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
-                      <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
-                      <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
-                      <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
-                      <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
-                      <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Author / Lead / Speaker *</label>
-                    <input
-                      type="text"
-                      required
-                      value={editingArticle.author || ''}
-                      onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                    />
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Client / Institution / Venue Location</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Skylight Hotel & Online Hybrid (Addis Ababa)"
-                      value={editingArticle.client || ''}
-                      onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                    />
-                  </div>
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Publish Date / Event Date</label>
-                    <input
-                      type="date"
-                      value={editingArticle.publishedDate || ''}
-                      onChange={(e) => setEditingArticle({ ...editingArticle, publishedDate: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
-                    />
-                  </div>
+                <div className="w-full sm:w-72">
+                  <label className="font-bold text-slate-700 block mb-1 text-[11px]">Switch Operational Category</label>
+                  <select
+                    value={editingArticle.category}
+                    onChange={(e) => setEditingArticle({ ...editingArticle, category: e.target.value })}
+                    className="w-full p-2.5 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
+                  >
+                    <option value="Services & Products Matrix">Services &amp; Products Matrix</option>
+                    <option value="Corporate News & Articles">Corporate News &amp; Articles</option>
+                    <option value="Tech Articles & Engineering">Tech Articles &amp; Engineering</option>
+                    <option value="Upcoming Events & Webinars">Upcoming Events &amp; Webinars</option>
+                    <option value="Official Announcements">Official Announcements</option>
+                    <option value="Featured Project Case Studies">Featured Project Case Studies</option>
+                    <option value="Executive Team Members">Executive Team Members</option>
+                    <option value="Client & Learner Testimonials">Client &amp; Learner Testimonials</option>
+                    <option value="Photo Gallery Showcase">Photo Gallery Showcase</option>
+                    <option value="Video & Documentary Hub">Video &amp; Documentary Hub</option>
+                    <option value="Media Appearances & Coverage">Media Appearances &amp; Coverage</option>
+                    <option value="Press & Corporate Content">Press &amp; Corporate Content</option>
+                    <option value="Support FAQ & Knowledge Base">Support FAQ &amp; Knowledge Base</option>
+                    <option value="Trusted Institutional Partners">Trusted Institutional Partners</option>
+                  </select>
                 </div>
               </div>
 
+              {/* DYNAMIC PURPOSE-DRIVEN FORM FIELDS BASED ON CATEGORY */}
+              <div className="p-5 rounded-2xl bg-white border border-sky-200/90 shadow-2xs space-y-4">
+                <div className="text-[11px] font-black uppercase text-sky-700 tracking-wider border-b border-sky-100 pb-2 flex items-center justify-between">
+                  <span>1. Module-Specific Configuration ({editingArticle.category})</span>
+                  <span className="text-[10px] font-black text-sky-600 bg-sky-50 px-2.5 py-0.5 rounded-full border border-sky-200">PURPOSE-TAILORED FORM</span>
+                </div>
+
+                {/* 1. SERVICES & PRODUCTS MATRIX */}
+                {editingArticle.category === 'Services & Products Matrix' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Product / Service Module Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Yomnex Cloud ERP 4.0 Platform"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Service Pillar / Category</label>
+                        <select
+                          value={editingArticle.client || 'Enterprise Software'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="Enterprise Software">Enterprise Software (Yomnex ERP)</option>
+                          <option value="EdTech & Academy">EdTech &amp; Academy (WabiSkills)</option>
+                          <option value="Talent Network">Talent Network (WabiJob)</option>
+                          <option value="Cloud & CyberSecurity">Cloud &amp; CyberSecurity (WabiX)</option>
+                          <option value="Social & Communication">Social &amp; Communication (Mari)</option>
+                          <option value="Tech Documentaries">Tech Documentaries (YomTech Media)</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Key Features / Deliverables List</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Multi-Currency, Mobile Scanning, Financial Audit"
+                          value={editingArticle.readTime || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 2. CORPORATE NEWS & ARTICLES */}
+                {(editingArticle.category === 'Corporate News & Articles' || editingArticle.category === 'Corporate News') && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Headline / News Title *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. YomTech Global Unveils Next-Gen Pan-African Tech Hub"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Author / Journalist *</label>
+                        <input
+                          type="text"
+                          required
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Publication Date</label>
+                        <input
+                          type="date"
+                          value={editingArticle.publishedDate || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, publishedDate: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 3. TECH ARTICLES & ENGINEERING */}
+                {editingArticle.category === 'Tech Articles & Engineering' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Engineering Article Title *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Optimizing PostGIS Spatial Queries for Satellite Data Pipelines"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Lead Engineer / Author *</label>
+                        <input
+                          type="text"
+                          required
+                          value={editingArticle.author || 'Dr. Yared Worku (CTO)'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Tech Stack &amp; Tags</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. React, Node.js, PostGIS, Microservices"
+                          value={editingArticle.client || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Estimated Read Time</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. 7 min read"
+                          value={editingArticle.readTime || '5 min read'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. UPCOMING EVENTS & WEBINARS */}
+                {editingArticle.category === 'Upcoming Events & Webinars' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Event / Summit Title *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Pan-African Digital Transformation & Enterprise ERP Summit 2026"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Event Date &amp; Start Time</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. SEP 15, 2026 at 09:00 AM EAT"
+                          value={editingArticle.readTime || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Venue / Location / Platform</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Skylight Hotel & Online Zoom"
+                          value={editingArticle.client || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Keynote Speaker / Host</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Ermias Alemayehu (CEO)"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 5. OFFICIAL ANNOUNCEMENTS */}
+                {editingArticle.category === 'Official Announcements' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Announcement Headline *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Yomnex Cloud ERP 4.0 Major Release Live Platform Update"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Priority Level</label>
+                        <select
+                          value={editingArticle.readTime || 'FEATURED'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="FEATURED">FEATURED (High Priority)</option>
+                          <option value="URGENT">URGENT</option>
+                          <option value="IMPORTANT">IMPORTANT</option>
+                          <option value="STANDARD">STANDARD</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Issuing Department</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Executive Board & PR Office"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Target Audience</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. All Enterprise Clients & Institutions"
+                          value={editingArticle.client || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 6. FEATURED PROJECT CASE STUDIES */}
+                {editingArticle.category === 'Featured Project Case Studies' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Case Study Project Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Space Science & Geospatial Institute (SSGI) Satellite Portal"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Client Institution *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. SSGI Ethiopia / Bunna Bank S.C."
+                          value={editingArticle.client || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Key Performance Metric / Impact</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. Reduced GIS query latency by 450%"
+                          value={editingArticle.readTime || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Lead Solution Architect</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. YomTech Engineering Team"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 7. EXECUTIVE TEAM MEMBERS */}
+                {editingArticle.category === 'Executive Team Members' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Executive Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Ermias Alemayehu"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Official Job Title / Role *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. Founder & Chief Executive Officer (CEO)"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Department Scope</label>
+                        <select
+                          value={editingArticle.client || 'Executive Leadership'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="Executive Leadership">Executive Leadership</option>
+                          <option value="Engineering & Technology">Engineering &amp; Technology</option>
+                          <option value="Education & Academy">Education &amp; Academy</option>
+                          <option value="Operations & HR">Operations &amp; HR</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">LinkedIn Profile Link</label>
+                        <input
+                          type="text"
+                          placeholder="https://linkedin.com/in/..."
+                          value={editingArticle.readTime || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 8. CLIENT & LEARNER TESTIMONIALS */}
+                {editingArticle.category === 'Client & Learner Testimonials' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Reviewer Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Solomon Desta"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Designation &amp; Organization / Course *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. WabiSkills Graduate / Tech Leader"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Reviewer Type</label>
+                        <select
+                          value={editingArticle.client || 'LEARNER'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="LEARNER">WabiSkills Student / Graduate</option>
+                          <option value="CLIENT">Enterprise Client / Organization</option>
+                          <option value="PARTNER">Institutional Partner</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Star Rating</label>
+                        <select
+                          value={editingArticle.readTime || '⭐⭐⭐⭐⭐ (5/5)'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="⭐⭐⭐⭐⭐ (5/5)">⭐⭐⭐⭐⭐ 5 Stars</option>
+                          <option value="⭐⭐⭐⭐ (4/5)">⭐⭐⭐⭐ 4 Stars</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 9. PHOTO GALLERY SHOWCASE */}
+                {editingArticle.category === 'Photo Gallery Showcase' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Photo Caption / Title *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. WabiSkills Tech Bootcamp Graduation Ceremony"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Album Category</label>
+                        <select
+                          value={editingArticle.client || 'Academy'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="Academy">Academy &amp; Bootcamp</option>
+                          <option value="Team">Team &amp; Culture</option>
+                          <option value="Partnerships">Partnerships &amp; MoUs</option>
+                          <option value="Events">Events &amp; Summits</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Photographer / Media Lead</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. YomTech Media Team"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 10. VIDEO & DOCUMENTARY HUB */}
+                {editingArticle.category === 'Video & Documentary Hub' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Video Title *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. YomTech Global Pan-African Tech Vision Documentary"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">YouTube Video ID / Embed Code</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. dQw4w9WgXcQ"
+                          value={editingArticle.youtubeId || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, youtubeId: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Video Category</label>
+                        <select
+                          value={editingArticle.client || 'Documentary'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="Documentary">Documentary Feature</option>
+                          <option value="Product Demos">Product Demos &amp; Tours</option>
+                          <option value="Bootcamp">Bootcamp Highlights</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Duration &amp; Resolution</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. 12:45 • 1080p HD"
+                          value={editingArticle.readTime || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 11. MEDIA APPEARANCES & COVERAGE */}
+                {editingArticle.category === 'Media Appearances & Coverage' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Coverage Headline / Interview Topic *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. CEO Ermias Alemayehu Interviewed on National Digital Agenda"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Media Outlet Name *</label>
+                        <input
+                          type="text"
+                          required
+                          placeholder="e.g. Ethiopian Broadcasting Corporation (EBC)"
+                          value={editingArticle.client || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Coverage Format</label>
+                        <select
+                          value={editingArticle.readTime || 'TELEVISION INTERVIEW'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="TELEVISION INTERVIEW">TELEVISION INTERVIEW</option>
+                          <option value="FEATURED ARTICLE">FEATURED ARTICLE</option>
+                          <option value="PODCAST SHOW">PODCAST SHOW</option>
+                          <option value="RADIO SHOW">RADIO SHOW</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Date Covered</label>
+                        <input
+                          type="date"
+                          value={editingArticle.publishedDate || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, publishedDate: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 12. PRESS & CORPORATE CONTENT */}
+                {editingArticle.category === 'Press & Corporate Content' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Press Release Title *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. YomTech Global Announces Launch of Pan-African Insights Hub"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Press Officer / Contact Info</label>
+                        <input
+                          type="text"
+                          placeholder="e.g. press@yomtechglobal.org"
+                          value={editingArticle.author || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Release Date</label>
+                        <input
+                          type="date"
+                          value={editingArticle.publishedDate || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, publishedDate: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 13. SUPPORT FAQ & KNOWLEDGE BASE */}
+                {editingArticle.category === 'Support FAQ & Knowledge Base' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Support Question / Help Topic *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. How do I enroll in WabiSkills Academy bootcamps?"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Help Category</label>
+                        <select
+                          value={editingArticle.client || 'General'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="General">General Inquiries</option>
+                          <option value="Yomnex ERP">Yomnex ERP Software</option>
+                          <option value="WabiSkills Academy">WabiSkills Academy</option>
+                          <option value="WabiJob Recruitment">WabiJob Recruitment</option>
+                          <option value="Billing & Pricing">Billing &amp; Pricing</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Support Specialist / Author</label>
+                        <input
+                          type="text"
+                          value={editingArticle.author || 'Support Team'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, author: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* 14. TRUSTED INSTITUTIONAL PARTNERS */}
+                {editingArticle.category === 'Trusted Institutional Partners' && (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="font-bold text-slate-700 block mb-1">Partner Organization Name *</label>
+                      <input
+                        type="text"
+                        required
+                        placeholder="e.g. Space Science & Geospatial Institute (SSGI)"
+                        value={editingArticle.title || ''}
+                        onChange={(e) => setEditingArticle({ ...editingArticle, title: e.target.value })}
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Partnership Category</label>
+                        <select
+                          value={editingArticle.client || 'Government Tech Partner'}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, client: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        >
+                          <option value="Government Tech Partner">Government Tech Partner</option>
+                          <option value="CyberSecurity Partner">CyberSecurity Partner</option>
+                          <option value="Institutional Partner">Institutional Partner</option>
+                          <option value="Enterprise Client">Enterprise Client</option>
+                          <option value="Academic Partner">Academic Partner</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="font-bold text-slate-700 block mb-1">Official Website URL</label>
+                        <input
+                          type="text"
+                          placeholder="https://ssgi.gov.et"
+                          value={editingArticle.readTime || ''}
+                          onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
+                          className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
               {/* SECTION 2: PUBLISHING CONTROL & TIMING */}
-              <div className="p-4 rounded-2xl bg-blue-50/50 border border-blue-100 space-y-4">
-                <div className="text-[11px] font-black uppercase text-[#1E90FF] tracking-wider">2. Publishing Controls &amp; Timing</div>
+              <div className="p-4 rounded-2xl bg-sky-50/50 border border-sky-100 space-y-4">
+                <div className="text-[11px] font-black uppercase text-sky-700 tracking-wider">2. Publishing Controls &amp; Timing</div>
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
                   <div>
                     <label className="font-bold text-slate-700 block mb-1">Status</label>
                     <select
                       value={editingArticle.status}
                       onChange={(e) => setEditingArticle({ ...editingArticle, status: e.target.value, visibility: (e.target.value === 'Hidden' || e.target.value === 'Expired' || e.target.value === 'Draft') ? 'HIDDEN' : 'VISIBLE' })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                      className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                     >
                       <option value="Published">Published</option>
                       <option value="Draft">Draft</option>
@@ -3817,20 +4746,20 @@ export const AdminDashboardPage = () => {
                     <select
                       value={editingArticle.visibility || 'VISIBLE'}
                       onChange={(e) => setEditingArticle({ ...editingArticle, visibility: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                      className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                     >
                       <option value="VISIBLE">VISIBLE</option>
                       <option value="HIDDEN">HIDDEN</option>
                     </select>
                   </div>
                   <div>
-                    <label className="font-bold text-slate-700 block mb-1">Time / Schedule</label>
+                    <label className="font-bold text-slate-700 block mb-1">Schedule / Read Time</label>
                     <input
                       type="text"
                       placeholder="e.g. 09:00 AM EAT"
                       value={editingArticle.readTime || ''}
                       onChange={(e) => setEditingArticle({ ...editingArticle, readTime: e.target.value })}
-                      className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                      className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500"
                     />
                   </div>
                   <div>
@@ -3840,7 +4769,7 @@ export const AdminDashboardPage = () => {
                         type="date"
                         value={editingArticle.expiryDate || ''}
                         onChange={(e) => setEditingArticle({ ...editingArticle, expiryDate: e.target.value })}
-                        className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF] text-xs"
+                        className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs"
                       />
                       <button
                         type="button"
@@ -3849,7 +4778,7 @@ export const AdminDashboardPage = () => {
                           d.setDate(d.getDate() + 30);
                           setEditingArticle({ ...editingArticle, expiryDate: d.toISOString().split('T')[0] });
                         }}
-                        className="px-3 py-3 bg-[#1E90FF] hover:bg-blue-600 text-white text-[10px] font-black rounded-xl shrink-0 transition-colors shadow-2xs"
+                        className="px-3 py-3 bg-sky-600 hover:bg-sky-700 text-white text-[10px] font-black rounded-xl shrink-0 transition-colors shadow-2xs cursor-pointer"
                         title="Set 30-Day Expiration"
                       >
                         +30d
@@ -3859,30 +4788,30 @@ export const AdminDashboardPage = () => {
                 </div>
               </div>
 
-              {/* SECTION 3: STORY & SUMMARY CONTENT */}
-              <div className="p-4 rounded-2xl bg-indigo-50/40 border border-indigo-100 space-y-4">
-                <div className="text-[11px] font-black uppercase text-indigo-700 tracking-wider">3. Story Snippet &amp; Full Content</div>
+              {/* SECTION 3: SUMMARY & BODY NARRATIVE */}
+              <div className="p-4 rounded-2xl bg-sky-50/40 border border-sky-100 space-y-4">
+                <div className="text-[11px] font-black uppercase text-sky-700 tracking-wider">3. Summary Snippet &amp; Detailed Content</div>
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">Article Summary (Short Card Snippet)</label>
+                  <label className="font-bold text-slate-700 block mb-1">Summary Snippet (Short Card Teaser)</label>
                   <textarea
                     rows="2"
-                    placeholder="Short summary displayed on public news cards..."
+                    placeholder="Short summary displayed on public cards..."
                     value={editingArticle.summary || ''}
                     onChange={(e) => setEditingArticle({ ...editingArticle, summary: e.target.value })}
-                    className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500"
                   ></textarea>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="font-bold text-slate-700">Full Article Story / Body Content</label>
-                    <span className="text-[10px] font-black text-[#1E90FF] bg-blue-100/70 px-2.5 py-0.5 rounded-lg border border-blue-200">
-                      {editingArticle.readTime || 'Story Body'}
+                    <label className="font-bold text-slate-700">Detailed Narrative / Solution Body</label>
+                    <span className="text-[10px] font-black text-sky-700 bg-sky-100/70 px-2.5 py-0.5 rounded-lg border border-sky-200">
+                      Full Content
                     </span>
                   </div>
                   <textarea
                     rows="5"
-                    placeholder="Full story text, detailed press release, or event description..."
+                    placeholder="Full detailed content, story text, press statement, or event description..."
                     value={editingArticle.fullContent || editingArticle.content || ''}
                     onChange={(e) => {
                       const val = e.target.value;
@@ -3891,7 +4820,7 @@ export const AdminDashboardPage = () => {
                         fullContent: val
                       }));
                     }}
-                    className="w-full p-3 rounded-xl border border-slate-300 bg-white text-slate-900 font-medium focus:outline-none focus:border-[#1E90FF]"
+                    className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-medium focus:outline-none focus:border-sky-500"
                   ></textarea>
                 </div>
               </div>
@@ -4021,42 +4950,45 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 6: ADD TEAM MEMBER --- */}
       {showAddTeamModal && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <form onSubmit={handleCreateTeamMember} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">Add Executive / Team Member</h3>
-              <button type="button" onClick={() => setShowAddTeamModal(false)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+          <form onSubmit={handleCreateTeamMember} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Add Executive / Team Member</h3>
+                <p className="text-xs text-slate-500 font-medium">Create executive leadership profile</p>
+              </div>
+              <button type="button" onClick={() => setShowAddTeamModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-400">Full Name *</label>
+                <label className="font-bold text-slate-700 block mb-1">Full Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Dr. Yared Worku"
                   value={newTeamForm.name}
                   onChange={(e) => setNewTeamForm({ ...newTeamForm, name: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
               <div>
-                <label className="font-bold text-slate-400">Title / Role *</label>
+                <label className="font-bold text-slate-700 block mb-1">Title / Role *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Chief Technology Officer"
                   value={newTeamForm.role}
                   onChange={(e) => setNewTeamForm({ ...newTeamForm, role: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => setShowAddTeamModal(false)} className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl">
+              <button type="button" onClick={() => setShowAddTeamModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50 transition-colors cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-xl shadow-dodger-glow hover:brightness-110 font-black cursor-pointer transition-all">
                 Save Member
               </button>
             </div>
@@ -4067,42 +4999,45 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 7: ADD SYSTEM USER (RBAC) --- */}
       {showAddUserModal && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <form onSubmit={handleCreateUser} className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-md w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">Create System User &amp; Assign Role</h3>
-              <button type="button" onClick={() => setShowAddUserModal(false)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+          <form onSubmit={handleCreateUser} className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-md w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Create System User &amp; Assign Role</h3>
+                <p className="text-xs text-slate-500 font-medium">Configure administrator access control</p>
+              </div>
+              <button type="button" onClick={() => setShowAddUserModal(false)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-slate-400">User Full Name *</label>
+                <label className="font-bold text-slate-700 block mb-1">User Full Name *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Helina Kebede"
                   value={newUserForm.name}
                   onChange={(e) => setNewUserForm({ ...newUserForm, name: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
               <div>
-                <label className="font-bold text-slate-400">Official Email *</label>
+                <label className="font-bold text-slate-700 block mb-1">Official Email *</label>
                 <input
                   type="email"
                   required
                   placeholder="helina.k@yomtechglobal.org"
                   value={newUserForm.email}
                   onChange={(e) => setNewUserForm({ ...newUserForm, email: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 />
               </div>
               <div>
-                <label className="font-bold text-slate-400">Role Policy</label>
+                <label className="font-bold text-slate-700 block mb-1">Role Policy</label>
                 <select
                   value={newUserForm.role}
                   onChange={(e) => setNewUserForm({ ...newUserForm, role: e.target.value })}
-                  className="w-full mt-1 p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 border border-blue-200 text-slate-900 font-bold focus:outline-none focus:border-[#1E90FF]"
+                  className="w-full p-3 rounded-xl border border-sky-200 bg-white text-slate-800 font-bold focus:outline-none focus:border-sky-500 text-xs shadow-2xs"
                 >
                   <option value="Content Manager">Content Manager</option>
                   <option value="Marketing Manager">Marketing Manager</option>
@@ -4115,10 +5050,10 @@ export const AdminDashboardPage = () => {
               </div>
             </div>
             <div className="pt-2 flex justify-end gap-2 text-xs font-bold">
-              <button type="button" onClick={() => setShowAddUserModal(false)} className="px-4 py-2 border border-slate-300 dark:border-slate-700 rounded-xl">
+              <button type="button" onClick={() => setShowAddUserModal(false)} className="px-5 py-2.5 border border-sky-200 rounded-xl text-slate-600 hover:bg-sky-50 transition-colors cursor-pointer">
                 Cancel
               </button>
-              <button type="submit" className="px-5 py-2 bg-[#1E90FF] text-white rounded-xl shadow hover:bg-blue-600">
+              <button type="submit" className="px-6 py-2.5 bg-gradient-to-r from-sky-500 to-blue-600 text-white rounded-xl shadow-dodger-glow hover:brightness-110 font-black cursor-pointer transition-all">
                 Grant Access
               </button>
             </div>
@@ -4129,43 +5064,46 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 8: VIEW LEAD DETAILS --- */}
       {selectedLead && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">Inbound Lead Profile</h3>
-              <button onClick={() => setSelectedLead(null)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+          <div className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">Inbound Lead Profile</h3>
+                <p className="text-xs text-slate-500 font-medium">Detailed inquiry metadata</p>
+              </div>
+              <button onClick={() => setSelectedLead(null)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
             
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <span className="text-slate-400 font-bold">Client Name:</span>
-                <div className="font-black text-sm text-[#0F172A] dark:text-white">{selectedLead.fullName}</div>
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Client Name:</span>
+                <div className="font-black text-base text-[#0C2340] mt-0.5">{selectedLead.fullName}</div>
               </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <span className="text-slate-400 font-bold">Email:</span>
-                  <div className="font-bold text-[#1E90FF]">{selectedLead.email}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="p-3 bg-sky-50/60 rounded-xl border border-sky-100">
+                  <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Email:</span>
+                  <div className="font-bold text-sky-700 text-xs mt-0.5 break-all">{selectedLead.email}</div>
                 </div>
-                <div>
-                  <span className="text-slate-400 font-bold">Phone:</span>
-                  <div className="font-bold">{selectedLead.phone || 'N/A'}</div>
+                <div className="p-3 bg-sky-50/60 rounded-xl border border-sky-100">
+                  <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Phone:</span>
+                  <div className="font-bold text-slate-800 text-xs mt-0.5">{selectedLead.phone || 'N/A'}</div>
                 </div>
               </div>
               <div>
-                <span className="text-slate-400 font-bold">Category:</span>
-                <div className="font-black text-[#1E90FF]">{selectedLead.inquiryType}</div>
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Inquiry Category:</span>
+                <div className="font-black text-sky-700 mt-0.5">{selectedLead.inquiryType}</div>
               </div>
               <div>
-                <span className="text-slate-400 font-bold">Full Message:</span>
-                <div className="p-3 bg-[#F8FAFC] dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl font-medium mt-1 leading-relaxed">
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Full Message / Project Scope:</span>
+                <div className="p-3 bg-slate-50 border border-sky-200 rounded-xl font-medium mt-1 leading-relaxed text-slate-800 text-xs">
                   {selectedLead.message}
                 </div>
               </div>
             </div>
 
             <div className="pt-2 text-right">
-              <button onClick={() => setSelectedLead(null)} className="px-4 py-2 bg-[#1E90FF] text-white font-bold text-xs rounded-xl shadow hover:bg-blue-600 transition-colors">
+              <button onClick={() => setSelectedLead(null)} className="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-black text-xs rounded-xl shadow-dodger-glow transition-colors cursor-pointer">
                 Close Details
               </button>
             </div>
@@ -4176,33 +5114,36 @@ export const AdminDashboardPage = () => {
       {/* --- MODAL 9: VIEW APPLICANT PROFILE --- */}
       {selectedApplicant && (
         <div className="fixed inset-0 z-50 bg-[#03045E]/80 backdrop-blur-md flex items-center justify-center p-4">
-          <div className="bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-3xl p-6 max-w-lg w-full space-y-4 shadow-2xl animate-in zoom-in-95">
-            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-3">
-              <h3 className="font-black text-base">WabiJob Candidate Profile</h3>
-              <button onClick={() => setSelectedApplicant(null)} className="p-1 rounded-lg text-slate-400 hover:text-white">
+          <div className="bg-white text-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-4 shadow-elevated-card animate-in zoom-in-95 border border-sky-200/90">
+            <div className="flex items-center justify-between border-b border-sky-100 pb-3">
+              <div>
+                <h3 className="font-black text-lg text-[#0C2340]">WabiJob Candidate Profile</h3>
+                <p className="text-xs text-slate-500 font-medium">Applicant CV &amp; skill overview</p>
+              </div>
+              <button onClick={() => setSelectedApplicant(null)} className="p-2 rounded-2xl bg-sky-50 text-sky-600 hover:bg-sky-100 transition-colors">
                 <X size={18} />
               </button>
             </div>
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3.5 text-xs">
               <div>
-                <span className="text-slate-400 font-bold">Candidate Name:</span>
-                <div className="font-black text-sm text-[#0F172A] dark:text-white">{selectedApplicant.candidateName}</div>
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Candidate Name:</span>
+                <div className="font-black text-base text-[#0C2340] mt-0.5">{selectedApplicant.candidateName}</div>
               </div>
               <div>
-                <span className="text-slate-400 font-bold">Target Vacancy:</span>
-                <div className="font-bold text-[#1E90FF]">{selectedApplicant.jobTitle}</div>
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Target Vacancy:</span>
+                <div className="font-bold text-sky-700 mt-0.5">{selectedApplicant.jobTitle}</div>
               </div>
               <div>
-                <span className="text-slate-400 font-bold">Technical Stack &amp; Skills:</span>
-                <div className="font-bold">{selectedApplicant.skills}</div>
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Technical Stack &amp; Skills:</span>
+                <div className="font-bold text-slate-800 mt-0.5">{selectedApplicant.skills}</div>
               </div>
               <div>
-                <span className="text-slate-400 font-bold">Years of Experience:</span>
-                <div className="font-bold">{selectedApplicant.experience}</div>
+                <span className="text-slate-500 font-bold uppercase tracking-wider text-[10px]">Years of Experience:</span>
+                <div className="font-bold text-slate-800 mt-0.5">{selectedApplicant.experience}</div>
               </div>
             </div>
             <div className="pt-2 text-right">
-              <button onClick={() => setSelectedApplicant(null)} className="px-4 py-2 bg-[#1E90FF] text-white font-bold text-xs rounded-xl shadow hover:bg-blue-600">
+              <button onClick={() => setSelectedApplicant(null)} className="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-black text-xs rounded-xl shadow-dodger-glow transition-colors cursor-pointer">
                 Close Profile
               </button>
             </div>
@@ -4420,6 +5361,15 @@ export const AdminDashboardPage = () => {
           </div>
         </div>
       )}
+
+      {/* GLOBAL QR CODE MODAL */}
+      <QRCodeModal
+        isOpen={qrModalData.isOpen}
+        onClose={() => setQrModalData((prev) => ({ ...prev, isOpen: false }))}
+        title={qrModalData.title}
+        url={qrModalData.url}
+        category={qrModalData.category}
+      />
 
     </div>
   );

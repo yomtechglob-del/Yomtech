@@ -132,7 +132,7 @@ const EcosystemHexagonCard = ({ hex, isHovered, onHover, onClick }) => {
       onMouseEnter={() => onHover(hex.id)}
       onMouseLeave={() => onHover(null)}
       onClick={() => onClick(hex)}
-      className="relative w-[240px] sm:w-[260px] aspect-[1/1.13] flex items-center justify-center cursor-pointer group select-text transition-all duration-300 hover:scale-105 z-20 drop-shadow-lg hover:drop-shadow-2xl"
+      className="relative w-[180px] xs:w-[210px] sm:w-[240px] md:w-[260px] aspect-[1/1.13] flex items-center justify-center cursor-pointer group select-text transition-all duration-300 hover:scale-105 z-20 drop-shadow-lg hover:drop-shadow-2xl"
     >
       {/* SVG Vector Frame */}
       <svg viewBox="0 0 280 316" className="absolute inset-0 w-full h-full filter drop-shadow-sm pointer-events-none">
@@ -203,7 +203,7 @@ const EcosystemHexagonCard = ({ hex, isHovered, onHover, onClick }) => {
 
 // Center Hexagon Anchor (Excellence - Center Core Value from User Image)
 const EcosystemCenterHexagon = ({ logoSrc }) => (
-  <div className="relative w-[220px] sm:w-[240px] aspect-[1/1.13] flex items-center justify-center cursor-pointer group select-text drop-shadow-xl z-10">
+  <div className="relative w-[180px] xs:w-[200px] sm:w-[220px] md:w-[240px] aspect-[1/1.13] flex items-center justify-center cursor-pointer group select-text drop-shadow-xl z-10">
     {/* Subtle Cyan Radiant Pulsing Halo */}
     <div className="absolute inset-0 rounded-full border-2 border-cyan-400/50 animate-ping opacity-20 pointer-events-none" />
     <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-cyan-400/20 via-sky-300/15 to-blue-500/20 blur-xl pointer-events-none" />
@@ -276,7 +276,7 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
   const [selectedHex, setSelectedHex] = useState(null);
 
   return (
-    <section className="py-24 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden font-sans">
+    <section className="py-16 sm:py-20 md:py-32 bg-[#F4F9FF] text-slate-900 relative overflow-hidden font-sans">
       
       {/* Dotted Grid Mesh Texture Matching User Screenshot */}
       <div 
@@ -287,7 +287,7 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
         }}
       />
 
-      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6 sm:space-y-0">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* Left Column: Section Header */}
@@ -308,7 +308,7 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
               </div>
             )}
 
-            <p className="text-base sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
+            <p className="text-sm sm:text-lg md:text-xl font-medium text-slate-700 leading-relaxed font-sans tracking-normal">
               {customDescription || "Our core values shape how we innovate, engineer enterprise software, and empower tech talent worldwide."}
             </p>
 
@@ -437,8 +437,8 @@ export const AboutEcosystem = ({ customBadgeText, customHeading, customDescripti
         {/* ========================================================
             MOBILE & TABLET HONEYCOMB GRID VIEW
         ======================================================== */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 lg:hidden max-w-4xl mx-auto items-center">
-          <div className="sm:col-span-2 md:col-span-3 flex justify-center mb-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:hidden max-w-4xl mx-auto items-center">
+          <div className="col-span-2 sm:col-span-2 md:col-span-3 flex justify-center mb-2 sm:mb-4">
             <EcosystemCenterHexagon logoSrc={yomtechLogo} />
           </div>
           {ECOSYSTEM_HEXAGONS.map((hex) => (

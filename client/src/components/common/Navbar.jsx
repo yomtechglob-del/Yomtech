@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Phone, ArrowRight, ChevronDown, LayoutGrid, Cpu, Code, GraduationCap, Sparkles } from 'lucide-react';
+import { Menu, X, Phone, ArrowRight, ChevronDown, LayoutGrid, Cpu, Code, GraduationCap, Sparkles, QrCode } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import logoImg from '../../assets/logos/logo.png';
+import { QRCodeModal } from './QRCodeModal';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showQrModal, setShowQrModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -74,8 +76,8 @@ export const Navbar = () => {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 py-3 sm:py-3.5 md:py-3.5 ${scrolled
-        ? 'bg-[#03045E]/90 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.35)] border-b border-white/10'
-        : 'bg-transparent shadow-none border-b-0'
+        ? 'bg-[#03045E]/95 backdrop-blur-md shadow-[0_8px_32px_rgba(3,4,94,0.4)] border-b border-white/10'
+        : 'bg-[#03045E]/90 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none border-b border-white/10 sm:border-b-0 shadow-none'
       }`}>
       <div className="max-w-[1380px] mx-auto w-full px-4 sm:px-8 flex items-center justify-between">
 
@@ -270,50 +272,67 @@ export const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-black/80 backdrop-blur-2xl border-b border-white/20 px-6 py-7 space-y-5 shadow-2xl mt-4"
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="lg:hidden bg-gradient-to-b from-[#03045E]/95 via-[#003B6E]/95 to-[#002D54]/98 backdrop-blur-3xl border-b border-cyan-400/40 px-5 sm:px-8 py-6 sm:py-8 space-y-5 shadow-[0_30px_90px_rgba(0,0,0,0.8)] mt-2"
           >
+            {/* Top glowing cyan line accent */}
+            <div className="w-16 h-1 rounded-full bg-gradient-to-r from-[#0ED3DD] to-[#1DA1F2] mx-auto mb-2 opacity-80" />
+
             <div className="flex flex-col space-y-2">
-              {links.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`py-3 px-5 rounded-2xl font-black text-lg transition-all ${location.pathname === link.path
-                      ? 'bg-white/25 text-white border border-white/40 shadow-md'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+              {links.map((link) => {
+                const isActive = location.pathname === link.path;
+                return (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`py-3 px-5 rounded-2xl font-black text-base sm:text-lg transition-all duration-300 flex items-center justify-between ${
+                      isActive
+                        ? 'bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white shadow-lg shadow-cyan-500/30 border border-cyan-300/60 scale-[1.02]'
+                        : 'text-cyan-50/90 hover:text-white hover:bg-white/10 border border-transparent'
                     }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
+                  >
+                    <span>{link.name}</span>
+                    {isActive && <span className="w-2 h-2 rounded-full bg-white animate-pulse" />}
+                  </Link>
+                );
+              })}
             </div>
 
-            <div className="pt-4 border-t border-white/20 space-y-3.5">
+            <div className="pt-4 border-t border-cyan-400/30 space-y-3">
               <a
                 href="tel:+251977666699"
-                className="flex items-center justify-center gap-3 text-lg font-black text-white py-3.5 bg-white/10 border border-white/30 rounded-2xl shadow-md"
+                className="flex items-center justify-center gap-3 text-base sm:text-lg font-black text-white py-3.5 px-4 bg-gradient-to-r from-white/15 to-white/5 border border-cyan-300/40 rounded-2xl shadow-md backdrop-blur-xl hover:border-cyan-300 transition-all"
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1DA1F2] to-[#0ED3DD] flex items-center justify-center text-white">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-[#1DA1F2] to-[#0ED3DD] flex items-center justify-center text-white shadow-md shrink-0">
                   <Phone size={16} />
                 </div>
                 <div className="flex flex-col text-left">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-cyan-200/90 leading-none">24/7 Hotline</span>
-                  <span className="font-sans font-black text-base">+251 (977) 666-699</span>
+                  <span className="text-[10px] font-black uppercase tracking-widest text-cyan-200 leading-none mb-0.5">24/7 Hotline</span>
+                  <span className="font-sans font-black text-sm sm:text-base text-white">+251 (977) 666-699</span>
                 </div>
               </a>
 
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="w-full py-4 bg-white text-[#042B24] font-black rounded-2xl text-center flex items-center justify-center gap-2.5 shadow-xl text-base"
+                className="w-full py-3.5 sm:py-4 bg-gradient-to-r from-white via-cyan-50 to-white text-[#03045E] font-black rounded-2xl text-center flex items-center justify-center gap-2.5 shadow-xl text-base hover:scale-[1.02] active:scale-95 transition-all"
               >
                 <span>Get Started</span>
-                <ArrowRight size={20} className="text-[#042B24]" />
+                <ArrowRight size={18} className="text-[#03045E]" />
               </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <QRCodeModal
+        isOpen={showQrModal}
+        onClose={() => setShowQrModal(false)}
+        title="Yomtech Global Enterprise Software & Tech Talent"
+        url="https://yomtechglobal.org"
+        category="yomtechglobal.org"
+      />
     </header>
   );
 };

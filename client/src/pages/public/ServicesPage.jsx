@@ -385,12 +385,12 @@ export const ServicesPage = () => {
   return (
     <div className="bg-[#F8FAFC] text-slate-900 min-h-screen relative overflow-hidden">
       {/* 1. HERO HEADER SECTION — Executive Bento Glass Canopy Layout */}
-      <section className="w-full pt-40 sm:pt-48 md:pt-52 pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient text-white border-b border-cyan-400/30">
+      <section className="w-full pt-28 sm:pt-40 md:pt-48 lg:pt-52 pb-14 sm:pb-20 md:pb-28 relative z-10 overflow-hidden hero-cyan-gradient text-white border-b border-cyan-400/30">
         
         {/* About Us Page Exact Hero Background */}
         <AboutHeroBackground />
 
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10 space-y-16">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 relative z-10 space-y-10 sm:space-y-16">
           
           {/* Top Title & Hero Subtitle Block */}
           <div className="text-center max-w-4xl mx-auto space-y-6">
@@ -494,12 +494,12 @@ export const ServicesPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="pt-2 text-center relative z-10"
+              className="pt-2 text-center relative z-10 px-4"
             >
               <div className="p-[1.5px] rounded-full bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] inline-block shadow-2xl">
-                <a
+                  <a
                   href="#explore-our-services"
-                  className="inline-flex items-center gap-3 px-9 py-3.5 rounded-full bg-[#0284C7] hover:bg-[#0072B8] text-white font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-xl"
+                  className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-9 py-3 sm:py-3.5 rounded-full bg-[#0284C7] hover:bg-[#0072B8] text-white font-black text-xs uppercase tracking-wider transition-all duration-300 shadow-xl"
                 >
                   <span>Explore All Services</span>
                   <ArrowRight size={16} />
@@ -511,9 +511,9 @@ export const ServicesPage = () => {
       </section>
 
       {/* 2. THREE PILLARS — ULTIMATE PREMIUM */}
-      <section id="explore-our-services" className="pt-32 pb-0 relative text-slate-900 overflow-hidden bg-transparent">
+      <section id="explore-our-services" className="pt-16 sm:pt-20 md:pt-32 pb-0 relative text-slate-900 overflow-hidden bg-transparent">
 
-        <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 relative z-10">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 relative z-10">
 
           {/* Section Header */}
           <motion.div
@@ -527,7 +527,7 @@ export const ServicesPage = () => {
               <span className="w-1.5 h-1.5 rounded-full bg-[#0ED3DD] animate-pulse" />
               EXPLORE DETAILED CAPABILITIES
             </div>
-            <h2 className="text-5xl md:text-6xl font-black font-display text-slate-900 leading-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-display text-slate-900 leading-tight mb-4">
               Three Pillars of{' '}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] bg-clip-text text-transparent">Innovation</span>
@@ -540,7 +540,7 @@ export const ServicesPage = () => {
                 />
               </span>
             </h2>
-            <p className="text-slate-500 text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-slate-500 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Everything we build falls under three core domains, each meticulously engineered for real-world enterprise impact.
             </p>
           </motion.div>
@@ -551,7 +551,7 @@ export const ServicesPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex items-center justify-center gap-3 mb-14 flex-wrap"
+            className="grid grid-cols-2 sm:flex items-center justify-center gap-3 mb-8 sm:mb-14"
           >
             {[
               { value: '13+', label: 'Total Services', color: 'text-sky-600', bg: 'bg-sky-50 border-sky-200' },
@@ -565,10 +565,10 @@ export const ServicesPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.3 + idx * 0.07 }}
-                className={`flex items-center gap-2.5 px-5 py-2.5 rounded-2xl border ${stat.bg} shadow-sm`}
+                className={`flex items-center gap-2 sm:gap-2.5 px-3 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl border ${stat.bg} shadow-sm`}
               >
-                <span className={`text-xl font-black ${stat.color}`}>{stat.value}</span>
-                <span className="text-xs font-semibold text-slate-500">{stat.label}</span>
+                <span className={`text-base sm:text-xl font-black ${stat.color}`}>{stat.value}</span>
+                <span className="text-[10px] sm:text-xs font-semibold text-slate-500">{stat.label}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -693,7 +693,7 @@ export const ServicesPage = () => {
                   {/* Top gradient accent bar */}
                   <div className={`h-1.5 w-full bg-gradient-to-r ${cat.topBar}`} />
 
-                  <div className="p-7 pb-7 relative flex-1 flex flex-col justify-between">
+                  <div className="p-5 sm:p-7 relative flex-1 flex flex-col justify-between">
                     {/* Background bloom */}
                     <div className={`absolute top-0 right-0 w-52 h-52 bg-gradient-to-bl ${cat.bloom} to-transparent rounded-bl-[9rem] opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
 
@@ -779,8 +779,8 @@ export const ServicesPage = () => {
                       </div>
 
                       {/* Bottom CTA Action Row */}
-                      <div className="flex items-center justify-between pt-4 border-t border-slate-100 relative z-10">
-                        <div className={`inline-flex items-center gap-2 px-4.5 py-2.5 rounded-full border text-xs font-black tracking-widest uppercase transition-all duration-300 ${cat.exploreBg} ${cat.exploreColor} ${cat.ctaBtnHover}`}>
+                      <div className="flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-slate-100 relative z-10">
+                        <div className={`inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4.5 py-2 sm:py-2.5 rounded-full border text-xs font-black tracking-widest uppercase transition-all duration-300 ${cat.exploreBg} ${cat.exploreColor} ${cat.ctaBtnHover}`}>
                           <cat.Icon size={13} strokeWidth={2.5} />
                           <span>EXPLORE ALL</span>
                         </div>
@@ -879,7 +879,7 @@ export const ServicesPage = () => {
             ref={(el) => (categoryRefs.current[slug] = el)}
             className={`space-y-0 relative w-full ${catGroup.sectionBg || ''}`}
           >
-            <div className="max-w-[1720px] mx-auto px-6 sm:px-12 md:px-16 py-20 space-y-24 relative z-10">
+            <div className="max-w-[1720px] mx-auto px-4 sm:px-8 md:px-12 lg:px-16 py-10 sm:py-16 md:py-20 space-y-12 sm:space-y-20 md:space-y-24 relative z-10">
                 {/* Neon Zigzag Double Line Track (SVG covering entire Category Section including Header) */}
                 <svg
                   className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0"
@@ -962,7 +962,7 @@ export const ServicesPage = () => {
                 </svg>
 
                 {/* Category Header */}
-                <div className="text-center mb-20 flex flex-col items-center relative z-10">
+                <div className="text-center mb-8 sm:mb-14 md:mb-20 flex flex-col items-center relative z-10">
                   <div className="relative inline-block group cursor-default">
                     {/* SOLID GLOW BORDER - Cleanly styled inside the two lines */}
                     <div
@@ -988,8 +988,8 @@ export const ServicesPage = () => {
                       style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
                     />
 
-                    <div className={`relative px-10 py-4.5 bg-white/95 backdrop-blur-2xl border-2 min-w-[520px] flex items-center justify-center ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'} ${themeColors.headerBorder} ${themeColors.headerShadow}`}>
-                      <h2 className="text-3xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-none">
+                    <div className={`relative px-6 sm:px-10 py-3 sm:py-4 bg-white/95 backdrop-blur-2xl border-2 w-full sm:min-w-[520px] flex items-center justify-center ${catGroup.themeColor === 'violet' ? 'rounded-[2rem]' : 'rounded-full'} ${themeColors.headerBorder} ${themeColors.headerShadow}`}>
+                      <h2 className="text-xl sm:text-3xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-none">
                         {catGroup.categoryTitle}
                       </h2>
                     </div>
@@ -1009,30 +1009,30 @@ export const ServicesPage = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
-                        className={`flex flex-col lg:flex-row ${isLeftImage ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-between items-center relative z-10 w-full mb-36 last:mb-0`}
+                        className={`flex flex-col lg:flex-row ${isLeftImage ? 'lg:flex-row-reverse' : 'lg:flex-row'} justify-between items-center relative z-10 w-full mb-16 sm:mb-24 md:mb-36 last:mb-0`}
                       >
                         {/* TEXT CONTENT (Frameless Seamless Text directly on Section Body) */}
                         <div className="w-full lg:w-[44%]">
                           <div className="relative w-full p-2 sm:p-4 cursor-pointer group">
                             
-                            <div className="flex items-center gap-3 mb-6">
+                            <div className="flex items-center gap-3 mb-4 sm:mb-6">
                               <span className={`text-xs font-mono font-extrabold uppercase tracking-widest ${themeColors.pillText} px-4 py-1.5 rounded-full bg-white/60 backdrop-blur-sm border ${themeColors.pillBorder} shadow-xs`}>
                                 {catGroup.categoryTitle} • STEP 0{itemIdx + 1}
                               </span>
                             </div>
 
-                            <h3 className={`text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 ${themeColors.hoverText} transition-colors leading-tight mb-4`}>
+                            <h3 className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black font-display text-slate-900 ${themeColors.hoverText} transition-colors leading-tight mb-3 sm:mb-4`}>
                               {item.title}
                             </h3>
 
-                            <p className="text-slate-600 text-base leading-relaxed font-medium mb-8">
+                            <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium mb-6 sm:mb-8">
                               {item.desc}
                             </p>
 
                             <div>
                               <button
                                 onClick={() => handleContactClick(item.title)}
-                                className={`inline-flex items-center gap-3 px-7 py-3 rounded-full text-white font-black text-sm shadow-lg ${themeColors.shadowColor} hover:scale-105 transition-all duration-300`}
+                                className={`inline-flex items-center gap-2 sm:gap-3 px-5 sm:px-7 py-2.5 sm:py-3 rounded-full text-white font-black text-sm shadow-lg ${themeColors.shadowColor} hover:scale-105 transition-all duration-300`}
                                 style={{ background: `linear-gradient(to right, ${themeColors.primary}, ${themeColors.secondary})` }}
                               >
                                 <span>For More Contact us</span>
@@ -1101,7 +1101,7 @@ export const ServicesPage = () => {
       <ServicesRequestQuoteCTA />
 
       {/* ─── SUBSCRIBE TO NEWSLETTER SECTION (UPGRADED 3D DESIGN SYSTEM) ─── */}
-      <section className="py-28 bg-[#F4F9FF] relative text-slate-900 border-t border-slate-200/80 overflow-hidden font-sans">
+      <section className="py-14 sm:py-20 md:py-28 bg-[#F4F9FF] relative text-slate-900 border-t border-slate-200/80 overflow-hidden font-sans">
         {/* Precision Blueprint Dot Grid Background */}
         <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
           <div 
@@ -1122,7 +1122,7 @@ export const ServicesPage = () => {
             transition={{ duration: 0.5 }}
             className="p-[2px] rounded-[3.5rem] bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] shadow-[0_25px_60px_rgba(2,132,199,0.18)]"
           >
-            <div className="bg-white rounded-[3.4rem] p-10 sm:p-16 text-center space-y-8 relative overflow-hidden shadow-inner border border-slate-100">
+            <div className="bg-white rounded-[2.5rem] sm:rounded-[3.4rem] p-6 sm:p-10 md:p-16 text-center space-y-6 sm:space-y-8 relative overflow-hidden shadow-inner border border-slate-100">
               
               {/* Translucent YomTech Brand Logo Watermark Background */}
               <div className="absolute -right-6 -bottom-6 opacity-[0.22] pointer-events-none z-0">

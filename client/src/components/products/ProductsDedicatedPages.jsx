@@ -710,14 +710,14 @@ const ProductShowcaseRow = ({ product, idx }) => {
               </div>
 
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-3 pt-1">
+              <div className="flex flex-wrap gap-2.5 sm:gap-3 pt-1">
                 {product.externalLinks.map((link, i) => {
                   const ext = isExternal(link.url);
                   const Tag = ext ? 'a' : Link;
                   const props = ext ? { href: link.url, target: '_blank', rel: 'noopener noreferrer' } : { to: link.url };
                   return (
                     <Tag key={i} {...props}
-                      className={`inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 ${
+                      className={`inline-flex items-center gap-2 sm:gap-2.5 px-5 sm:px-7 py-3 sm:py-3.5 rounded-full font-black text-xs uppercase tracking-widest transition-all duration-300 hover:scale-105 ${
                         link.primary
                           ? 'bg-gradient-to-r from-[#0284C7] via-[#0ED3DD] to-[#1DA1F2] text-white shadow-lg shadow-cyan-500/25'
                           : 'bg-white border-2 border-cyan-300 text-[#0284C7] hover:bg-cyan-50'

@@ -428,79 +428,147 @@ const InterlockingProductRow = ({ left, right, idx, onProductSelect }) => {
         </div>
       </div>
 
-      {/* MOBILE STACKED LAYOUT */}
+      {/* MOBILE STACKED LAYOUT (Matches Desktop Design Exactly) */}
       <div className="md:hidden flex flex-col space-y-6 rounded-2xl overflow-hidden shadow-2xl">
+        {/* LEFT CARD */}
         <div
           onClick={() => onProductSelect && onProductSelect(left.id)}
-          className={`${style.leftMobileBg} text-white p-8 sm:p-10 rounded-2xl border-2 border-white/35 space-y-5 text-left relative cursor-pointer min-h-[300px] shadow-2xl backdrop-blur-xl`}
+          className={`${style.leftMobileBg} text-white p-5 sm:p-7 rounded-2xl border-2 border-white/35 space-y-4 text-left relative cursor-pointer min-h-[260px] shadow-2xl backdrop-blur-xl overflow-hidden`}
         >
-          <div className="flex items-center justify-between">
-            <div className="w-14 h-14 rounded-[18px] bg-white border-2 border-white/90 flex items-center justify-center text-slate-900 shadow-xl">
-              <img src={left.logo} alt={left.name} className="w-full h-full object-contain p-2 drop-shadow-xs" />
+          {/* Ermin Hero Texture Image Overlays */}
+          <img src={ermiTwoImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay pointer-events-none" />
+          <img src={erminOneImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-soft-light pointer-events-none" />
+
+          {/* Top Row: Logo & Number */}
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="w-14 h-14 rounded-[18px] bg-white border-2 border-white/90 flex items-center justify-center text-slate-900 shadow-xl ring-2 ring-white/30">
+              <img src={left.logo} alt={left.name} className="w-full h-full object-contain p-2.5 drop-shadow-xs" />
             </div>
-            <span className="text-white font-black text-6xl font-display">{left.num}</span>
+            <span className="text-white font-black text-5xl font-display opacity-90">{left.num}</span>
           </div>
-          <div className="flex items-start gap-4">
-            <div className="w-20 h-20 rounded-full border-2 border-white/90 shadow-lg shrink-0 overflow-hidden bg-white/10">
-              <img src={left.toy} alt="" className="w-full h-full object-cover object-top scale-110" />
-            </div>
-            <div className="space-y-2 flex-1">
-              <div className="flex items-center gap-2">
-                <h3 className="text-3xl font-black text-white font-display">{left.name}</h3>
-                <span className="text-[10px] font-mono font-bold uppercase px-3 py-0.5 rounded-full bg-white/20 text-white border border-white/30">
-                  {left.badge}
-                </span>
+
+          {/* Inner Content Card */}
+          <div className="relative z-10 rounded-xl bg-gradient-to-br from-white/20 via-white/10 to-transparent backdrop-blur-xl p-4 sm:p-5 border border-white/20 space-y-3">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              {/* Mascot Pedestal Avatar */}
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-white/90 shadow-xl ring-2 ring-white/30 bg-gradient-to-tr from-white/30 to-white/10 shrink-0 overflow-hidden">
+                <img src={left.toy} alt={left.name} className="w-full h-full object-cover object-top scale-110" />
               </div>
-              <p className={`text-xs ${style.leftTaglineColor} font-black uppercase tracking-wider`}>{left.tagline}</p>
-              <ul className="space-y-1 text-xs text-white/90 pt-1">
-                <li><strong>Focus:</strong> {left.shortDesc}</li>
-                <li><strong>System:</strong> {left.fullDesc}</li>
-              </ul>
-              <div className="flex flex-wrap gap-2 pt-3">
-                {left.highlights.map((item, hIdx) => (
-                  <span key={hIdx} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-2xl bg-white/20 border-2 border-white/30 text-xs font-extrabold text-white">
-                    <CheckCircle2 size={12} className={style.leftCheckColor} />
-                    {item}
+
+              {/* Text & Bullets */}
+              <div className="space-y-2 flex-1 min-w-0 w-full">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-2xl font-black text-white font-display tracking-tight break-words">{left.name}</h3>
+                  <span className={`text-[10px] font-mono font-black uppercase tracking-wider px-3 py-0.5 rounded-full border-2 ${style.leftBadgeStyle} shrink-0`}>
+                    {left.badge}
                   </span>
-                ))}
+                </div>
+
+                <p className={`text-xs font-black ${style.leftTaglineColor} uppercase tracking-widest font-sans break-words`}>
+                  {left.tagline}
+                </p>
+
+                <ul className="space-y-2 text-left text-white/95 font-sans pt-1">
+                  <li className="flex items-start gap-1.5">
+                    <span className="text-amber-300 font-bold text-base leading-none mt-0.5">•</span>
+                    <p className="text-xs font-bold text-white leading-snug break-words">
+                      <strong className="text-amber-200 uppercase font-black tracking-wider text-[10px] mr-1">Platform Focus:</strong>
+                      {left.shortDesc}
+                    </p>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <span className="text-cyan-300 font-bold text-base leading-none mt-0.5">•</span>
+                    <p className="text-xs font-medium text-white/95 leading-relaxed break-words">
+                      <strong className="text-cyan-200 uppercase font-bold tracking-wider text-[10px] mr-1">Architecture:</strong>
+                      {left.fullDesc}
+                    </p>
+                  </li>
+                </ul>
+
+                {/* Highlight Pills */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {left.highlights.map((item, hIdx) => (
+                    <span
+                      key={hIdx}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-white/20 border-2 border-white/35 text-[11px] font-extrabold text-white shadow-md backdrop-blur-xl break-words"
+                    >
+                      <CheckCircle2 size={12} className={`${style.leftCheckColor} shrink-0`} />
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
 
+        {/* RIGHT CARD */}
         <div
           onClick={() => onProductSelect && onProductSelect(right.id)}
-          className={`${style.rightMobileBg} text-white p-8 sm:p-10 rounded-2xl border-2 border-white/35 space-y-5 text-left relative cursor-pointer min-h-[300px] shadow-2xl backdrop-blur-xl`}
+          className={`${style.rightMobileBg} text-white p-5 sm:p-7 rounded-2xl border-2 border-white/35 space-y-4 text-left relative cursor-pointer min-h-[260px] shadow-2xl backdrop-blur-xl overflow-hidden`}
         >
-          <div className="flex items-center justify-between">
-            <div className="w-14 h-14 rounded-[18px] bg-white border-2 border-white/90 flex items-center justify-center text-slate-900 shadow-xl">
-              <img src={right.logo} alt={right.name} className="w-full h-full object-contain p-2 drop-shadow-xs" />
+          {/* Ermin Hero Texture Image Overlays */}
+          <img src={ermiTwoImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-25 mix-blend-overlay pointer-events-none" />
+          <img src={erminOneImg} alt="" className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-soft-light pointer-events-none" />
+
+          {/* Top Row: Logo & Number */}
+          <div className="relative z-10 flex items-center justify-between">
+            <div className="w-14 h-14 rounded-[18px] bg-white border-2 border-white/90 flex items-center justify-center text-slate-900 shadow-xl ring-2 ring-white/30">
+              <img src={right.logo} alt={right.name} className="w-full h-full object-contain p-2.5 drop-shadow-xs" />
             </div>
-            <span className="text-white font-black text-6xl font-display">{right.num}</span>
+            <span className="text-white font-black text-5xl font-display opacity-90">{right.num}</span>
           </div>
-          <div className="flex items-start gap-4">
-            <div className="w-20 h-20 rounded-full border-2 border-white/90 shadow-lg shrink-0 overflow-hidden bg-white/10">
-              <img src={right.toy} alt="" className="w-full h-full object-cover object-top scale-110" />
-            </div>
-            <div className="space-y-2 flex-1">
-              <div className="flex items-center gap-2">
-                <h3 className="text-3xl font-black text-white font-display">{right.name}</h3>
-                <span className="text-[10px] font-mono font-bold uppercase px-3 py-0.5 rounded-full bg-white/20 text-white border border-white/30">
-                  {right.badge}
-                </span>
+
+          {/* Inner Content Card */}
+          <div className="relative z-10 rounded-xl bg-gradient-to-br from-white/20 via-white/10 to-transparent backdrop-blur-xl p-4 sm:p-5 border border-white/20 space-y-3">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              {/* Mascot Pedestal Avatar */}
+              <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full border-4 border-white/90 shadow-xl ring-2 ring-white/30 bg-gradient-to-tr from-white/30 to-white/10 shrink-0 overflow-hidden">
+                <img src={right.toy} alt={right.name} className="w-full h-full object-cover object-top scale-110" />
               </div>
-              <p className={`text-xs ${style.rightTaglineColor} font-black uppercase tracking-wider`}>{right.tagline}</p>
-              <ul className="space-y-1 text-xs text-white/90 pt-1">
-                <li><strong>Focus:</strong> {right.shortDesc}</li>
-                <li><strong>System:</strong> {right.fullDesc}</li>
-              </ul>
-              <div className="flex flex-wrap gap-2 pt-3">
-                {right.highlights.map((item, hIdx) => (
-                  <span key={hIdx} className="inline-flex items-center gap-1 px-3 py-1.5 rounded-2xl bg-white/20 border-2 border-white/30 text-xs font-extrabold text-white">
-                    <CheckCircle2 size={12} className={style.rightCheckColor} />
-                    {item}
+
+              {/* Text & Bullets */}
+              <div className="space-y-2 flex-1 min-w-0 w-full">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h3 className="text-2xl font-black text-white font-display tracking-tight break-words">{right.name}</h3>
+                  <span className={`text-[10px] font-mono font-black uppercase tracking-wider px-3 py-0.5 rounded-full border-2 ${style.rightBadgeStyle} shrink-0`}>
+                    {right.badge}
                   </span>
-                ))}
+                </div>
+
+                <p className={`text-xs font-black ${style.rightTaglineColor} uppercase tracking-widest font-sans break-words`}>
+                  {right.tagline}
+                </p>
+
+                <ul className="space-y-2 text-left text-white/95 font-sans pt-1">
+                  <li className="flex items-start gap-1.5">
+                    <span className="text-amber-300 font-bold text-base leading-none mt-0.5">•</span>
+                    <p className="text-xs font-bold text-white leading-snug break-words">
+                      <strong className="text-amber-200 uppercase font-black tracking-wider text-[10px] mr-1">Platform Focus:</strong>
+                      {right.shortDesc}
+                    </p>
+                  </li>
+                  <li className="flex items-start gap-1.5">
+                    <span className="text-cyan-300 font-bold text-base leading-none mt-0.5">•</span>
+                    <p className="text-xs font-medium text-white/95 leading-relaxed break-words">
+                      <strong className="text-cyan-200 uppercase font-bold tracking-wider text-[10px] mr-1">Architecture:</strong>
+                      {right.fullDesc}
+                    </p>
+                  </li>
+                </ul>
+
+                {/* Highlight Pills */}
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {right.highlights.map((item, hIdx) => (
+                    <span
+                      key={hIdx}
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-2xl bg-white/20 border-2 border-white/35 text-[11px] font-extrabold text-white shadow-md backdrop-blur-xl break-words"
+                    >
+                      <CheckCircle2 size={12} className={`${style.rightCheckColor} shrink-0`} />
+                      {item}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -605,7 +673,7 @@ export const ProductsCatalogue = ({ onProductSelect }) => {
   });
 
   return (
-    <section id="products-catalogue" className="relative py-24 lg:py-32 bg-gradient-to-br from-[#02132B] via-[#003F64] to-[#005580] text-white overflow-hidden font-sans border-b border-cyan-900/40">
+    <section id="products-catalogue" className="relative py-12 sm:py-20 lg:py-32 bg-gradient-to-br from-[#02132B] via-[#003F64] to-[#005580] text-white overflow-hidden font-sans border-b border-cyan-900/40">
       {/* Background Dot Grid & Texture Overlays */}
       <div
         className="absolute inset-0 opacity-[0.35] pointer-events-none"
@@ -622,30 +690,30 @@ export const ProductsCatalogue = ({ onProductSelect }) => {
         {/* Section Header matching Reference Screenshot Style */}
         <div className="space-y-4 max-w-7xl text-left">
           {/* Badge with Bold Horizontal Cyan Accent Line Extension */}
-          <div className="flex items-center gap-0 w-full">
-            <div className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-[#03045E] border-2 border-[#0ED3DD] text-[#0ED3DD] text-xs sm:text-sm font-black uppercase tracking-widest shadow-[0_0_20px_rgba(14,211,221,0.35)] backdrop-blur-md shrink-0">
-              <span className="text-[#0ED3DD] font-bold text-sm">◆</span>
+          <div className="flex flex-wrap items-center gap-2 w-full">
+            <div className="inline-flex flex-wrap items-center gap-1.5 sm:gap-2.5 px-4 sm:px-6 py-2 sm:py-2.5 rounded-full bg-[#03045E] border-2 border-[#0ED3DD] text-[#0ED3DD] text-[10px] sm:text-xs font-black uppercase tracking-widest shadow-[0_0_20px_rgba(14,211,221,0.35)] backdrop-blur-md">
+              <span className="text-[#0ED3DD] font-bold text-xs hidden sm:inline">◆</span>
               <span>FULL DIGITAL PRODUCT ECOSYSTEM</span>
-              <span className="text-[#0ED3DD] font-bold text-sm">◆</span>
+              <span className="text-[#0ED3DD] font-bold text-xs hidden sm:inline">◆</span>
             </div>
-            <div className="h-[4px] flex-1 bg-gradient-to-r from-[#0ED3DD] via-[#00B4D8] via-50% to-transparent rounded-full shadow-[0_0_14px_rgba(14,211,221,0.85)]" />
+            <div className="hidden sm:block h-[4px] flex-1 bg-gradient-to-r from-[#0ED3DD] via-[#00B4D8] via-50% to-transparent rounded-full shadow-[0_0_14px_rgba(14,211,221,0.85)]" />
           </div>
 
-          <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-white tracking-tight font-display drop-shadow-md">
+          <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black text-white tracking-tight font-display drop-shadow-md">
             Our Digital Products
           </h2>
 
-          <p className="text-lg sm:text-xl lg:text-2xl text-cyan-100/90 font-medium leading-relaxed font-sans max-w-3xl">
+          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl text-cyan-100/90 font-medium leading-relaxed font-sans max-w-3xl">
             YomTech Global builds and operates scalable digital platforms spanning education, talent, enterprise operations, collaboration, and tech media.
           </p>
         </div>
 
         {/* Category Filter Pills with Animated Dashed Neon Orbit Ring (Reference Image Style) */}
-        <div className="flex flex-wrap justify-center gap-4 relative z-20">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4 relative z-20">
           {CATEGORIES.map(cat => {
             const isActive = activeCategory === cat.id;
             return (
-              <div key={cat.id} className="relative p-1.5 rounded-full group cursor-pointer">
+              <div key={cat.id} className="relative p-1 sm:p-1.5 rounded-full group cursor-pointer">
                 {/* Outer Glowing SVG Animated Dashed Capsule Orbit Ring */}
                 <svg className="absolute -inset-1 w-[calc(100%+8px)] h-[calc(100%+8px)] pointer-events-none overflow-visible z-20">
                   <motion.rect
@@ -679,7 +747,7 @@ export const ProductsCatalogue = ({ onProductSelect }) => {
                   whileTap={{ scale: 0.94, rotate: -2 }}
                   transition={{ type: 'spring', stiffness: 380, damping: 22 }}
                   style={{ transformStyle: 'preserve-3d', perspective: 1000 }}
-                  className={`relative px-7 py-3 rounded-full text-sm font-black transition-all duration-300 cursor-pointer overflow-hidden border-2 select-none z-10 ${
+                  className={`relative px-4 sm:px-7 py-2.5 sm:py-3 rounded-full text-xs sm:text-sm font-black transition-all duration-300 cursor-pointer overflow-hidden border-2 select-none z-10 ${
                     isActive
                       ? 'border-cyan-300 text-white shadow-2xl bg-[#004b75]'
                       : 'bg-white text-slate-800 border-slate-200 hover:border-cyan-400 hover:text-[#004b75] shadow-md'
